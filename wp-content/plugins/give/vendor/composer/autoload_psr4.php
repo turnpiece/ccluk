@@ -6,17 +6,18 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Symfony\\Polyfill\\Php70\\' => array($vendorDir . '/symfony/polyfill-php70'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Component\\HttpFoundation\\' => array($vendorDir . '/symfony/http-foundation'),
     'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
+    'StellarWP\\Validation\\' => array($vendorDir . '/stellarwp/validation/src'),
+    'StellarWP\\FieldConditions\\' => array($vendorDir . '/stellarwp/field-conditions/src'),
+    'StellarWP\\ContainerContract\\' => array($vendorDir . '/stellarwp/container-contract/src'),
     'Sample\\' => array($vendorDir . '/paypal/paypal-checkout-sdk/samples'),
     'PayPalHttp\\' => array($vendorDir . '/paypal/paypalhttp/lib/PayPalHttp'),
     'PayPalCheckoutSdk\\' => array($vendorDir . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk'),
-    'MyCLabs\\Enum\\' => array($vendorDir . '/myclabs/php-enum/src'),
     'Money\\' => array($vendorDir . '/moneyphp/money/src'),
     'Give\\' => array($baseDir . '/src'),
     'FormatObjectList\\' => array($vendorDir . '/kjohnson/format-object-list/src'),
-    'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
 );

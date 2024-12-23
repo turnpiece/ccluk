@@ -2,12 +2,14 @@
 /**
  * Dashboard template: Resources widget.
  *
- * @var array                           $membership_data Membership data.
- * @var WPMUDEV_Dashboard_Ui            $this            UI class.
- * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls            URLs class.
- * @var string                          $type            Membership type.
- *
  * @since   4.0.0
+ *
+ * @var WPMUDEV_Dashboard_Ui            $this                  UI class.
+ * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls                  URLs class.
+ * @var string                          $type                  Membership type.
+ * @var bool                            $has_hosted_access     Has hosted site access.
+ * @var bool                            $is_hosted_third_party Is hosting account on third party site.
+ * @var array                           $membership_data       Membership data.
  *
  * @package WPMUDEV_Dashboard
  */
@@ -23,7 +25,7 @@ $resources = array(
 		'title'      => __( 'Member Forums', 'wpmudev' ),
 		'icon'       => 'community-people',
 		'url'        => $urls->community_url,
-		'has_access' => WPMUDEV_Dashboard::$api->is_support_allowed(),
+		'has_access' => WPMUDEV_Dashboard::$api->is_support_allowed() || $has_hosted_access,
 	),
 	'blog'          => array(
 		'title'      => __( 'Blog', 'wpmudev' ),
@@ -45,7 +47,7 @@ $resources = array(
 	),
 );
 
-if ( 'free' === $type ) {
+if ( ( 'free' === $type || $is_hosted_third_party ) && ! $has_hosted_access ) {
 	unset( $resources['forums'] );
 }
 
@@ -95,7 +97,7 @@ if ( 'free' === $type ) {
 		</tbody>
 	</table>
 
-	<?php if ( 'free' !== $type ) : ?>
+	<?php if ( ( 'free' !== $type && ! $is_hosted_third_party ) || $has_hosted_access ) : ?>
 		<div class="sui-box-footer">
 			<p class="sui-block-content-center sui-p-small" style="width: 100%;">
 				<?php esc_html_e( 'Still stuck?', 'wpmudev' ); ?> <a href="https://wpmudev.com/hub/support/#wpmud-chat-pre-survey-modal" target="_blank"> <?php esc_html_e( 'Open a support ticket', 'wpmudev' ); ?> </a> <?php esc_html_e( "and we'll be happy to help you.", 'wpmudev' ); ?>

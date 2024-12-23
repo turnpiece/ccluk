@@ -69,6 +69,21 @@ settings_fields( 'nestedpages-posttypes' );
 						</div>
 					</div><!-- .row -->
 				</li>
+				<li>
+					<div class="row">
+						<div class="description">
+							<p><strong><?php _e('Maximum Nesting Depth', 'wp-nested-pages'); ?></strong><br>
+							<?php _e('By default, there is no maximum level of nesting for hierarchical posts. Value includes the primary level.', 'wp-nested-pages'); ?></p>
+						</div>
+						<div class="field">
+							<label><input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][enable_max_nesting]" value="true" <?php if ( $type->enable_max_nesting ) echo 'checked '; ?> data-nested-pages-enable-maximum-nesting/><?php printf(__('Enable Maximum Nesting Level %s', 'wp-nested-pages'), esc_html($type->label)); ?></label>
+							<div class="nestedpages-checklist-field" data-nested-pages-maximum-nesting style="padding-top: 5px;<?php if ( !$type->enable_max_nesting ) echo 'display:none;'; ?>">
+								<label><?php printf(__('Maximum Nesting Level for %s', 'wp-nested-pages'), esc_html($type->label)); ?></label>
+								<input type="number" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][maximum_nesting]" <?php if ( $type->maximum_nesting ) echo ' value="' . $type->maximum_nesting . '"'?>> 
+							</div>
+						</div>
+					</div><!-- .row -->
+				</li>
 				<?php endif; ?>
 				<li>
 					<div class="row">
@@ -341,6 +356,24 @@ settings_fields( 'nestedpages-posttypes' );
 							<?php endforeach; endif; ?>
 							
 						<!-- .nestedpages-sort-options-selection -->
+					</div><!-- .field -->
+				</div><!-- .row -->
+			</li>
+			<li>
+				<div class="row">
+					<div class="description">
+						<p><strong><?php _e('Bulk Edit Roles', 'wp-nested-pages'); ?></strong><br />
+						<?php _e('Limit bulk edit capabilities to specific roles. Note: Features within bulk edit will respect role-specific rules. This will remove bulk edit completely from deselected roles.', 'wp-nested-pages'); ?></p>
+					</div>
+					<div class="field">
+						<div class="nestedpages-sort-options-selection">
+							<?php foreach ( $this->user_repo->allRoles([]) as $role ) : ?>
+							<label>
+								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][bulk_edit_roles][]" value="<?php echo $role['name']; ?>" <?php if ( $this->post_type_repo->roleCanBulkEdit($type->name, $role['name']) ) echo 'checked'; ?> />
+								<?php echo esc_html($role['label']); ?>
+							</label>
+							<?php endforeach; ?>
+						</div><!-- .nestedpages-sort-options-selection -->
 					</div><!-- .field -->
 				</div><!-- .row -->
 			</li>

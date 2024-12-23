@@ -414,7 +414,7 @@ class Cli
 	function get_progress_bar($tables, $stage)
 	{
 
-        if(2 === $stage && $this->is_non_database_migration($this->profile)) {
+        if($this->is_non_database_migration($this->profile)) {
             return null;
         }
 
@@ -486,6 +486,9 @@ class Cli
 	 */
 	function migrate_tables()
 	{
+		if($this->is_non_database_migration($this->profile)) {
+			return [];
+		}
 		$tables_to_migrate                   = $this->get_tables_to_migrate();
 		$this->dynamic_properties->post_data = $this->post_data;
 
@@ -678,6 +681,9 @@ class Cli
 	 */
 	function  finalize_ajax($response, $post_data)
 	{
+		if (is_wp_error($response)) {
+			return $response;
+		}
 		// don't send redundant POST variables
 		$args = $this->http_helper->filter_post_elements($post_data, array('action', 'migration_state_id', 'prefix', 'tables', 'profileID', 'profileType'));
 		$_POST    = $args;
@@ -949,7 +955,7 @@ class Cli
 		);
 
 		$home        = preg_replace('/^https?:/', '', home_url());
-		$path        = esc_html(addslashes($this->util->get_absolute_root_file_path()));
+		$path        = esc_html(addslashes(Util::get_absolute_root_file_path()));
 
 		$old_profile = apply_filters('wpmdb_cli_filter_get_profile_data_from_args', $profile, $args, $assoc_args);
 

@@ -124,6 +124,9 @@ if ( ! class_exists( 'Give_Recurring_Stripe_Webhooks' ) ) {
 							$subscription->renew();
 						}
 
+						// Update Total Payments as new renewal might have added.
+						$total_payments = $subscription->get_total_payments();
+
 						// Check if this subscription is complete.
 						give_recurring_stripe_is_subscription_completed( $subscription, $total_payments, $bill_times );
 
@@ -138,7 +141,10 @@ if ( ! class_exists( 'Give_Recurring_Stripe_Webhooks' ) ) {
 			} else {
 				give_record_gateway_error(
 					__( 'Stripe Subscription Can Cancel Error', 'give-recurring' ),
-					__( 'The Stripe Gateway returned an error while canceling the subscription. Details: Subscription can\'t be canceled.', 'give-recurring' )
+					sprintf(
+						__( 'The Stripe Gateway returned an error while canceling the subscription. Details: %s', 'give-recurring' ),
+						$subscription
+					)
 				);
 			}
 

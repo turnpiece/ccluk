@@ -2,10 +2,10 @@
 /*
 Plugin Name: WP Migrate Lite
 Plugin URI: https://wordpress.org/plugins/wp-migrate-db/
-Description: Exports your database as a MySQL data dump (much like phpMyAdmin), does a find and replace on URLs and file paths, then allows you to save it to your computer.
-Author: Delicious Brains
-Version: 2.3.2
-Author URI: https://deliciousbrains.com/?utm_campaign=WP%2BMigrate%2BDB%2BPro%2BUpgrade&utm_source=wordpress.org&utm_medium=free%2Bplugin%2Blisting
+Description: Migrate your database. Export full sites including media, themes, and plugins. Find and replace content with support for serialized data.
+Author: WP Engine
+Version: 2.6.11
+Author URI: https://deliciousbrains.com/wp-migrate-db-pro/?utm_source=plugin-header&utm_medium=plugin&utm_campaign=plugin-author&utm_content=wp-migrate-author
 Network: True
 Text Domain: wp-migrate-db
 Domain Path: /languages/
@@ -24,9 +24,10 @@ Domain Path: /languages/
 
 defined( 'ABSPATH' ) || exit;
 
-$wpmdb_base_path                                   = dirname( __FILE__ );
+$wpmdb_base_path = dirname( __FILE__ );
 
-$GLOBALS['wpmdb_meta']['wp-migrate-db']['version'] = '2.3.2';
+require_once 'version-lite.php';
+
 
 
 $plugin_root = '/';
@@ -46,4 +47,8 @@ if ( version_compare( PHP_VERSION, WPMDB_MINIMUM_PHP_VERSION, '>=' ) ) {
 
 function wpmdb_remove_mu_plugin() {
 	do_action( 'wp_migrate_db_remove_compatibility_plugin' );
+}
+
+if (class_exists('\Deliciousbrains\MigrateDevTools\Launcher') && \DeliciousBrains\WPMDB\Common\Util\Util::is_dev_environment()) {
+    \Deliciousbrains\MigrateDevTools\Launcher::register($wpmdb_base_path);
 }

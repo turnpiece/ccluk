@@ -37,7 +37,7 @@ if ( ! class_exists( 'Give_Subscription_Cancelled_Admin_Email' ) ) :
 				'notification_status'   => 'disabled',
 				'form_metabox_setting'  => false,
 				'default_email_subject' => __( 'Subscription Donation Cancelled', 'give-recurring' ),
-				'default_email_message' => __( 'Hi there,', 'give-recurring' ) . "\n\n" . __( "This email is to inform you that subscription for {donation} has been successfully cancelled. Here are the subscription details for your records:\n\n<strong>Donar Name:</strong> {fullname}\n<strong>Subscription:</strong> {donation} - {amount}\n<strong>Subscription Frequency:</strong> {subscription_frequency} \n<strong>Completed Donations:</strong> {subscriptions_completed} \n<strong>Payment Method:</strong> {payment_method}\n<strong>Cancellation Date:</strong> {cancellation_date}\n\nSincerely,\n{sitename}", 'give-recurring' ),
+				'default_email_message' => __( 'Hi there,', 'give-recurring' ) . "\n\n" . __( "This email is to inform you that subscription for {donation} has been successfully cancelled. Here are the subscription details for your records:\n\n<strong>Donor Name:</strong> {fullname}\n<strong>Subscription:</strong> {donation} - {amount}\n<strong>Subscription Frequency:</strong> {subscription_frequency} \n<strong>Completed Donations:</strong> {subscriptions_completed} \n<strong>Payment Method:</strong> {payment_method}\n<strong>Cancellation Date:</strong> {cancellation_date}\n\nSincerely,\n{sitename}", 'give-recurring' ),
 				'default_email_header'  => __( 'Subscription Donation Cancelled', 'give-recurring' ),
 			) );
 

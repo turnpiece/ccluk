@@ -10,8 +10,10 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+use Give\Donations\ValueObjects\DonationMetaKeys;
+
+if (!defined('ABSPATH')) {
+    exit;
 }
 
 
@@ -80,6 +82,8 @@ class Give_Donor_Wall {
 	/**
 	 * Displays donors in a grid layout.
 	 *
+     * @since 3.7.0 Sanitize attributes
+     * @since 2.27.0 Moved AJAX nonce verification to ajax_handler method.
 	 * @since  2.2.0
 	 *
 	 * @param array $atts                {
@@ -111,18 +115,14 @@ class Give_Donor_Wall {
 	 * @return string|bool The markup of the form grid or false.
 	 */
 	public function render_shortcode( $atts ) {
-
-        /**
-         * @since 2.20.0 Check nonce for AJAX request to prevent scrapping.
-         * @link https://github.com/impress-org/givewp/issues/6374
-         */
-        if( wp_doing_ajax() ) {
-            check_ajax_referer( 'givewp-donor-wall-more', 'nonce' );
-        }
+        $atts = give_clean($atts);
 
 		$give_settings = give_get_settings();
 
 		$atts      = $this->parse_atts( $atts );
+
+        _give_redirect_form_id($atts['form_id']);
+
 		$donations = $this->get_donation_data( $atts );
 		$html      = '';
 
@@ -187,6 +187,7 @@ class Give_Donor_Wall {
 	/**
 	 * Parse shortcode attributes
 	 *
+	 * @since 2.30.0
 	 * @since  2.2.0
 	 * @access public
 	 *
@@ -224,7 +225,8 @@ class Give_Donor_Wall {
 				'only_donor_html'   => false, // Only for internal use.,
                 'show_time'         => true,
 			],
-			$atts
+			$atts,
+			'give_donor_wall'
 		);
 
 		// Validate boolean attributes.
@@ -306,8 +308,9 @@ class Give_Donor_Wall {
 
 
 	/**
-	 * Ajax handler
+	 * This function should return donor comment for ajax request.
 	 *
+     * @since 2.27.0 Check nonce for AJAX request to prevent scrapping, see https://github.com/impress-org/givewp/issues/6374.
 	 * @since  2.2.0
 	 * @access public
 	 */
@@ -317,6 +320,8 @@ class Give_Donor_Wall {
 		// Get next page donor comments.
 		$shortcode_atts['paged']           = $shortcode_atts['paged'] + 1;
 		$shortcode_atts['only_donor_html'] = true;
+
+        check_ajax_referer( 'givewp-donor-wall-more', 'nonce' );
 
 		$donors_comment_html = $this->render_shortcode( $shortcode_atts );
 
@@ -340,6 +345,7 @@ class Give_Donor_Wall {
 	/**
 	 * Get query params
 	 *
+     * @since 2.24.1
 	 * @since 2.3.0
 	 *
 	 * @param  array $atts
@@ -354,10 +360,10 @@ class Give_Donor_Wall {
 
 		$query_atts['order']         = in_array( $atts['order'], $valid_order ) ? $atts['order'] : 'DESC';
 		$query_atts['orderby']       = in_array( $atts['orderby'], $valid_orderby ) ? $atts['orderby'] : 'post_date';
-		$query_atts['limit']         = $atts['donors_per_page'];
-		$query_atts['offset']        = $atts['donors_per_page'] * ( $atts['paged'] - 1 );
-		$query_atts['form_id']       = implode( '\',\'', explode( ',', $atts['form_id'] ) );
-		$query_atts['ids']           = implode( '\',\'', explode( ',', $atts['ids'] ) );
+		$query_atts['limit']         = absint( $atts['donors_per_page'] );
+		$query_atts['offset']        = absint( $atts['donors_per_page'] * ( $atts['paged'] - 1 ) );
+        $query_atts['form_id']       = implode( '\',\'', array_map( 'absint', explode( ',', $atts['form_id'] ) ) );
+        $query_atts['ids']           = implode( '\',\'', array_map( 'absint', explode( ',', $atts['ids'] ) ) );
 		$query_atts['cats']          = $atts['cats'];
 		$query_atts['tags']          = $atts['tags'];
 		$query_atts['only_comments'] = ( true === $atts['only_comments'] );
@@ -366,15 +372,16 @@ class Give_Donor_Wall {
 		return $query_atts;
 	}
 
-	/**
-	 * Get donation data.
-	 *
-	 * @since 2.3.0
-	 *
-	 * @param array $atts
-	 *
-	 * @return array
-	 */
+    /**
+     * Get donation data.
+     *
+     * @since 2.27.0 Change to read comment from donations meta table
+     * @since 2.3.0
+     *
+     * @param  array  $atts
+     *
+     * @return array
+     */
 	private function get_donation_data( $atts = [] ) {
 		global $wpdb;
 
@@ -411,8 +418,6 @@ class Give_Donor_Wall {
 				}
 			}
 
-			$comments = $this->get_donor_comments( $temp );
-
 			if ( ! empty( $temp ) ) {
 				foreach ( $temp as $donation_id => $donation_data ) {
 					$temp[ $donation_id ]['donation_id'] = $donation_id;
@@ -424,7 +429,10 @@ class Give_Donor_Wall {
 						]
 					);
 
-					$temp[ $donation_id ]['donor_comment'] = ! empty( $comments[ $donation_id ] ) ? $comments[ $donation_id ] : '';
+					$temp[$donation_id]['donor_comment'] = give_get_payment_meta(
+                        $donation_id,
+                        DonationMetaKeys::COMMENT
+                    );
 				}
 			}
 
@@ -437,6 +445,7 @@ class Give_Donor_Wall {
 	/**
 	 * Get donation list for specific query
 	 *
+     * @since 3.17.2 fix - filter by only_comments attr
 	 * @since 2.3.0
 	 *
 	 * @param  array $atts
@@ -471,8 +480,8 @@ class Give_Donor_Wall {
 
 		// exclude donations which does not has donor comment.
 		if ( $query_params['only_comments'] ) {
-			$sql   .= " INNER JOIN {$wpdb->give_comments} as gc1 ON (p1.ID = gc1.comment_parent)";
-			$where .= " AND gc1.comment_type='donor_donation'";
+			$sql   .= " INNER JOIN {$wpdb->donationmeta} as m4 ON (p1.ID = m4.{$donation_id_col})";
+            $where .= " AND m4.meta_key='_give_donation_comment'";
 		}
 
 		// exclude anonymous donation form query based on query parameters.

@@ -198,6 +198,8 @@ class Give_Donation_Form_Grid_Block {
 
 	/**
 	 * Block render callback
+     *
+     * @since 3.1.0 Use static function on array_map callback to pass the id as reference for _give_redirect_form_id to prevent warnings on PHP 8.0.1 or plus
 	 *
 	 * @param array $attributes Block parameters.
 	 *
@@ -207,7 +209,16 @@ class Give_Donation_Form_Grid_Block {
 	public function render_block( $attributes ) {
 		$parameters = array(
 			'forms_per_page'      => absint( $attributes['formsPerPage'] ),
-			'ids'                 => implode(',', $this->getAsArray($attributes['formIDs'] ) ),
+			'ids'                 => implode(',',
+                array_map(
+                    static function ($id) {
+                        _give_redirect_form_id($id);
+
+                        return $id;
+                    },
+                    $this->getAsArray($attributes['formIDs'])
+                )
+            ),
 			'exclude'             => implode(',', $this->getAsArray($attributes['excludedFormIDs'] ) ),
 			'orderby'             => $attributes['orderBy'],
 			'order'               => $attributes['order'],
@@ -216,7 +227,6 @@ class Give_Donation_Form_Grid_Block {
 			'columns'             => $attributes['columns'],
 			'show_title'          => $attributes['showTitle'],
 			'show_goal'           => $attributes['showGoal'],
-			'show_bar'            => $attributes['showProgressBar'],
 			'show_excerpt'        => $attributes['showExcerpt'],
             'excerpt_length'      => $attributes['excerptLength'],
 			'show_featured_image' => $attributes['showFeaturedImage'],
@@ -239,7 +249,7 @@ class Give_Donation_Form_Grid_Block {
 	}
 
     /**
-     * @unreleased
+     * @since 2.25.0
      *
      * @param string|array $value
      * @return array

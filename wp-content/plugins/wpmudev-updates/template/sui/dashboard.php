@@ -46,8 +46,13 @@ $support_threads = $support_threads > 0 ? sprintf( '<span class="sui-tag sui-tag
 $update_plugins_html  = $update_plugins > 0 ? sprintf( '<span class="sui-tag sui-tag-sm sui-tag-warning"><a href="%s" style="color:#333">%s</a></span>', esc_url( $urls->plugins_url ), $update_plugins ) : $update_plugins;
 $total_active_plugins = isset( $active_projects['all'] ) ? absint( $active_projects['all'] ) : 0;
 
+$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
+$is_hosted_third_party = WPMUDEV_Dashboard::$api->is_hosted_third_party();
+$has_hosted_access     = $is_wpmudev_host && ! $is_standalone_hosting && 'free' === $type;
+
 ?>
-<?php if ( 'free' !== $type ) : ?>
+<?php if ( ( 'free' !== $type && ! $is_hosted_third_party ) || $has_hosted_access ) : ?>
 	<div class="sui-box sui-summary sui-summary-sm">
 		<div class="sui-summary-image-space" aria-hidden="true"></div>
 		<div class="sui-summary-segment">
@@ -77,10 +82,10 @@ $total_active_plugins = isset( $active_projects['all'] ) ? absint( $active_proje
 
 	<div class="sui-row dashui-table-widgets">
 		<div class="sui-col-md-6">
-			<?php $this->render( 'sui/dashboard-templates/plugins', compact( 'data', 'urls', 'update_plugins', 'free_plugins', 'membership_data', 'type' ) ); // BOX: Installed Plugins. ?>
+			<?php $this->render( 'sui/dashboard-templates/plugins', compact( 'data', 'urls', 'update_plugins', 'free_plugins', 'membership_data', 'type', 'has_hosted_access', 'is_hosted_third_party' ) ); // BOX: Installed Plugins. ?>
 			<?php $this->render( 'sui/dashboard-templates/services', compact( 'urls', 'expired_type', 'membership_data' ) ); // BOX: Services. ?>
-			<?php if ( 'free' !== $type ) : ?>
-				<?php $this->render( 'sui/dashboard-templates/support', compact( 'urls', 'member', 'staff_login', 'membership_data', 'tickets_hidden' ) ); // BOX: Support. ?>
+			<?php if ( ( 'free' !== $type && ! $is_hosted_third_party ) || $has_hosted_access ) : ?>
+				<?php $this->render( 'sui/dashboard-templates/support', compact( 'urls', 'member', 'staff_login', 'membership_data', 'tickets_hidden', 'has_hosted_access', 'is_hosted_third_party' ) ); // BOX: Support. ?>
 			<?php endif; ?>
 		</div>
 
@@ -92,10 +97,10 @@ $total_active_plugins = isset( $active_projects['all'] ) ? absint( $active_proje
 				<?php $this->render( 'sui/dashboard-templates/expired-membership-info', compact( 'urls', 'whitelabel_settings', 'analytics_enabled', 'total_visits', 'membership_data', 'type' ) ); // BOX: Expired Membership Info. ?>
 			<?php endif; ?>
 			<?php $this->render( 'sui/dashboard-templates/analytics', compact( 'urls', 'analytics_enabled', 'analytics_allowed', 'membership_data' ) ); // BOX: Analytics. ?>
-			<?php if ( 'free' !== $type ) : ?>
+			<?php if ( 'free' !== $type && ! $is_hosted_third_party ) : ?>
 				<?php $this->render( 'sui/dashboard-templates/whitelabel', compact( 'urls', 'whitelabel_settings', 'whitelabel_allowed', 'membership_data' ) ); // BOX: Whitelabel. ?>
 			<?php endif; ?>
-			<?php $this->render( 'sui/dashboard-templates/resources', compact( 'urls', 'type', 'membership_data' ) ); // BOX: Resources. ?>
+			<?php $this->render( 'sui/dashboard-templates/resources', compact( 'urls', 'type', 'membership_data', 'has_hosted_access', 'is_hosted_third_party' ) ); // BOX: Resources. ?>
 		</div>
 	</div>
 <?php

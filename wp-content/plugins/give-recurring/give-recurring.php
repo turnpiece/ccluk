@@ -3,7 +3,7 @@
  * Plugin Name: Give - Recurring Donations
  * Plugin URI:  https://givewp.com/addons/recurring-donations/
  * Description: Adds support for recurring (subscription) donations to the GiveWP donation plugin.
- * Version:     1.10.1
+ * Version:     1.10.7
  * Author:      GiveWP
  * Author URI:  https://givewp.com
  * Text Domain: give-recurring
@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants.
 if ( ! defined( 'GIVE_RECURRING_VERSION' ) ) {
-	define( 'GIVE_RECURRING_VERSION', '1.10.1' );
+	define( 'GIVE_RECURRING_VERSION', '1.10.7' );
 }
 if ( ! defined( 'GIVE_RECURRING_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_RECURRING_MIN_GIVE_VERSION', '2.5.5' );
+	define( 'GIVE_RECURRING_MIN_GIVE_VERSION', '2.7.0' );
 }
 if ( ! defined( 'GIVE_RECURRING_PLUGIN_FILE' ) ) {
 	define( 'GIVE_RECURRING_PLUGIN_FILE', __FILE__ );
@@ -186,15 +186,15 @@ final class Give_Recurring {
 	 */
 	public function init() {
 
-		self::includes_global();
+		$this->includes_global();
 
 		if ( is_admin() ) {
-			self::includes_admin();
+			$this->includes_admin();
 		}
 
-		self::load_textdomain();
-		self::actions();
-		self::filters();
+		$this->load_textdomain();
+		$this->actions();
+		$this->filters();
 
 		self::$instance->api               = new Give_Subscriptions_API();
 		self::$instance->emails            = new Give_Recurring_Emails();
@@ -240,6 +240,8 @@ final class Give_Recurring {
 		if ( ! class_exists( 'Give' ) ) {
 			return false;
 		}
+
+		require_once GIVE_RECURRING_PLUGIN_DIR . 'vendor/autoload.php';
 
 		require_once GIVE_RECURRING_PLUGIN_DIR . 'includes/give-subscriptions-db.php';
 		require_once GIVE_RECURRING_PLUGIN_DIR . 'includes/give-recurring-db-subscription-meta.php';
@@ -1579,7 +1581,7 @@ final class Give_Recurring {
 				$subscription         = give_recurring_get_subscription_by( 'payment', $payment_id );
 				$interval             = ! empty( $subscription->frequency ) ? $subscription->frequency : 1;
 				$progress             = $subscription->get_subscription_progress();
-				$times                = intval( $subscription->bill_times ) * intval( $interval );
+				$times                = (int) $subscription->bill_times;
 				$frequency            = give_recurring_pretty_subscription_frequency( $subscription->period, $times, false, $interval );
 				$expiration_timestamp = strtotime( $subscription->expiration );
 				$renewal_date         = date( give_date_format(), strtotime( $subscription->expiration ) );
@@ -1644,10 +1646,9 @@ final class Give_Recurring {
 
 		ob_start(); ?>
 
-		<?php if ( give_get_errors() ) : ?>
+		<?php if ( $errors = give_get_errors() ) : ?>
 			<div class="error settings-error">
 				<?php
-				$errors = give_get_errors();
 				Give_Notices::print_frontend_errors( $errors );
 				give_clear_errors();
 				?>
@@ -1698,6 +1699,16 @@ final class Give_Recurring {
 			$subscription_id = absint( $_GET['subscription_id'] );
 			$subscription  = new Give_Subscription( $subscription_id );
 
+			if ( ! $subscription->parent_payment_id ) {
+				Give_Notices::print_frontend_notice(
+					__( 'Subscription is not attached with a parent donation.', 'give-recurring' ),
+					true,
+					'warning'
+				);
+
+				return false;
+			}
+
 			// Show login form if subscription does not belongs to logged in donor.
 			if( ! Give_Recurring_Subscriber::doesSubscriptionBelongsTo( $subscription, $subscriber) ) {
 
@@ -1724,7 +1735,7 @@ final class Give_Recurring {
 					break;
 			}
 
-		} elseif ( give_is_setting_enabled( $email_access ) && ! Give_Recurring()->subscriber_has_email_access() ) {
+		} elseif ( give_is_setting_enabled( $email_access ) ) {
 			// Email Access Enabled & no valid token.
 			give_get_template_part( 'email-login-form' );
 

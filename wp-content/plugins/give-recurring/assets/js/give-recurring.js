@@ -435,14 +435,17 @@ jQuery( document ).ready( function( $ ) {
 
 				$.ajax( {
 					type: 'POST',
-					url: this_form.attr( 'action' ),
+					url: give_global_vars.ajaxurl,
 					data: this_form.serialize(),
-					success: function( data ) {
-						loading_animation.fadeOut();
-						this_form.find( '.give_errors' ).remove();
-						update_button.val( complete_purchase_val );
-						update_button.prop( 'disabled', false );
-						window.location.href = data;
+					success: function( response ) {
+						if ( response.success ) {
+							loading_animation.fadeOut();
+							this_form.find( '.give_errors' ).remove();
+							update_button.val( complete_purchase_val );
+							update_button.prop( 'disabled', false );
+						}
+
+						window.location.href = response.data.url;
 					}
 				} );
 
@@ -504,6 +507,8 @@ jQuery( document ).ready( function( $ ) {
 				Give.form.fn.disable( parent_form, false );
 			}
 
+			// Added this trigger so that we can extend the functionality.
+			doc.trigger( 'give_recurring_donation_amount_updated', [ parent_form, value_now ] );
 		},
 
 		/**

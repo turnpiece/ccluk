@@ -1,6 +1,7 @@
 <?php
-$membership_type = WPMUDEV_Dashboard::$api->get_membership_status();
-$hide_footer     = false;
+$membership_type       = WPMUDEV_Dashboard::$api->get_membership_status();
+$is_hosted_third_party = WPMUDEV_Dashboard::$api->is_hosted_third_party();
+$hide_footer           = false;
 // translators: %s heart icon.
 $footer_text         = sprintf( __( 'Made with %s by WPMU DEV', 'wpmudev' ), ' <i class="sui-icon-heart"></i>' );
 $whitelabel_settings = WPMUDEV_Dashboard::$whitelabel->get_settings();
@@ -34,7 +35,7 @@ $footer_nav_links = array(
 	),
 );
 
-if ( 'free' === $membership_type ) {
+if ( 'free' === $membership_type && $is_hosted_third_party ) {
 	$footer_nav_links = array(
 		array(
 			'href' => 'https://profiles.wordpress.org/wpmudev#content-plugins',

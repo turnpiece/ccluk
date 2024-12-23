@@ -55,7 +55,10 @@ function give_recurring_stripe_can_cancel( $default, $subscription ) {
 
 	if (
 		! empty( $subscription->profile_id ) &&
-		'active' === $subscription->status
+		(
+			'active' === $subscription->status ||
+			'completed' === $subscription->status // Cancel the existing completed subscription at Stripe end.
+		)
 	) {
 		$default = true;
 	}

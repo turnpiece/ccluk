@@ -12,7 +12,6 @@
  *
  * To prevent this would be to store the data in our own server,
  * rather than the user's server, but that is not an option.
- *
  */
 class SWP_Credential_Helper {
 
@@ -32,21 +31,19 @@ class SWP_Credential_Helper {
 	 * @param  string $network The host service that provided the token.
 	 * @param  string $field    The type of token to fetch. Usually 'access_token'.
 	 * @return mixed  A string token, if it exists, else `false`.
-	 *
 	 */
 	public static function get_token( $network, $field = 'access_token' ) {
 		$encoded_tokens = self::get_authorizations();
-		$encoded_key = base64_encode( $network );
-		$encoded_field = base64_encode( $field );
+		$encoded_key    = base64_encode( $network );
+		$encoded_field  = base64_encode( $field );
 
 		// We do not have any data for this network.
-		if ( empty ( $encoded_tokens[$encoded_key] ) ) {
+		if ( empty( $encoded_tokens[ $encoded_key ] ) ) {
 			return false;
 		}
 
-
-		if ( !empty( $encoded_tokens[$encoded_key][$encoded_field] ) ) {
-			$encoded_token = $encoded_tokens[$encoded_key][$encoded_field];
+		if ( ! empty( $encoded_tokens[ $encoded_key ][ $encoded_field ] ) ) {
+			$encoded_token = $encoded_tokens[ $encoded_key ][ $encoded_field ];
 			return base64_decode( $encoded_token );
 		}
 
@@ -62,7 +59,6 @@ class SWP_Credential_Helper {
 	 * @param  string $network The network with data to delete.
 	 * @param  string $field   The type of data to remove. Most often 'access_token'.
 	 * @return bool            True iff deleted, else false.
-	 *
 	 */
 	public static function delete_token( $network, $field = 'access_token' ) {
 		// No encoding/decoding necessary. It is handled in store_data.
@@ -80,22 +76,36 @@ class SWP_Credential_Helper {
 	 * https://warfareplugins.com/authorizations/${network}/return_token.php.
 	 *
 	 * @since 3.5.0 | 10 JAN 2018 | Created.
+	 * @since 4.4.6 | 21 FEB 2024 | Added nonce verification.
 	 * @param void
 	 * @return void
-	 *
 	 */
 	public static function options_page_scan_url() {
-		if ( empty( $_GET['network'] ) || empty( $_GET['access_token'] ) ) {
+		// Check for user authentication
+		if ( ! is_user_logged_in() ) {
 			return false;
 		}
 
-		// We have a new access_token.
-		$network = $_GET['network'];
-		self::store_data( $network, 'access_token', $_GET['access_token'] );
+		// Verify nonce for CSRF protection
+		$nonce = isset($_GET['_wpnonce']) ? sanitize_text_field($_GET['_wpnonce']) : '';
+		if ( ! wp_verify_nonce( $nonce, 'unique_action_identifier' ) ) {
+			return false;
+		}
 
-		// Not every network uses access_secret.
-		if ( isset( $_GET['access_secret'] ) ) {
-			self::store_data( $network, 'access_secret', $_GET['access_secret'] );
+		// Sanitize and validate inputs
+		$network       = sanitize_text_field( $_GET['network'] ?? '' );
+		$access_token  = sanitize_text_field( $_GET['access_token'] ?? '' );
+		$access_secret = sanitize_text_field( $_GET['access_secret'] ?? '' );
+
+		if ( empty( $network ) || empty( $access_token ) ) {
+			return false;
+		}
+
+		// Proceed with storing sanitized and validated data
+		self::store_data( $network, 'access_token', $access_token );
+
+		if ( ! empty( $access_secret ) ) {
+			self::store_data( $network, 'access_secret', $access_secret );
 		}
 	}
 
@@ -106,12 +116,11 @@ class SWP_Credential_Helper {
 	 * The encoding is not secure, but it obfuscates the data.
 	 *
 	 * @since 3.5.0 | 10 JAN 2018 | Created.
-	 * @param  array $authorizations	The data to store.
-	 * @return array  					The authorizations, or an empty array.
-	 *
+	 * @param  array $authorizations    The data to store.
+	 * @return array                    The authorizations, or an empty array.
 	 */
 	public static function get_authorizations() {
-		if ( !empty( self::$swp_authorizations ) ) {
+		if ( ! empty( self::$swp_authorizations ) ) {
 			return self::$swp_authorizations;
 		}
 
@@ -120,7 +129,7 @@ class SWP_Credential_Helper {
 			return array();
 		}
 
-		$encoded_tokens = json_decode( base64_decode( $encoded_json ), true );
+		$encoded_tokens           = json_decode( base64_decode( $encoded_json ), true );
 		self::$swp_authorizations = $encoded_tokens;
 
 		return $encoded_tokens;
@@ -136,16 +145,15 @@ class SWP_Credential_Helper {
 	 * This is not the same as hashing it like a password.
 	 *
 	 * @since 3.5.0 | 10 JAN 2018 | Created.
-	 * @param  string $network 	The host service that provided the token.
-	 * @param  string $field	The type of token to fetch. Usually 'access_token'.
+	 * @param  string $network  The host service that provided the token.
+	 * @param  string $field    The type of token to fetch. Usually 'access_token'.
 	 * @param  string $data     The value of the field.
-	 * @return bool  			True if updated, else false.
-	 *
+	 * @return bool             True if updated, else false.
 	 */
 	public static function store_data( $network, $field, $data ) {
-		$encoded_key = base64_encode( $network );
+		$encoded_key   = base64_encode( $network );
 		$encoded_field = base64_encode( $field );
-		$encoded_data = base64_encode( $data );
+		$encoded_data  = base64_encode( $data );
 
 		$encoded_tokens = self::get_authorizations();
 
@@ -153,13 +161,12 @@ class SWP_Credential_Helper {
 		 * A network may have both an access key and access secret.
 		 * Setting $tokens[$network_key] as an array keeps the network
 		 * open for arbitrary data storage.
-		 *
 		 */
-		if ( empty( $encoded_tokens[$encoded_key] ) ) {
-			$encoded_tokens[$encoded_key] = array();
+		if ( empty( $encoded_tokens[ $encoded_key ] ) ) {
+			$encoded_tokens[ $encoded_key ] = array();
 		}
 
-		$encoded_tokens[$encoded_key][$encoded_field] = $encoded_data;
+		$encoded_tokens[ $encoded_key ][ $encoded_field ] = $encoded_data;
 
 		return self::update_authorizations( $encoded_tokens );
 	}
@@ -171,17 +178,15 @@ class SWP_Credential_Helper {
 	 * The encoding is not secure, but it obfuscates the data.
 	 *
 	 * @since 3.5.0 | 10 JAN 2018 | Created.
-	 * @param  array $authorizations	The data to store.
-	 * @return bool  					True iff the options were successfully updated.
-	 *
+	 * @param  array $authorizations    The data to store.
+	 * @return bool                     True iff the options were successfully updated.
 	 */
 	public static function update_authorizations( $encoded_tokens ) {
-		if ( !is_array( $encoded_tokens ) ) {
-			error_log( 'SWP_Credential_Helper->update_options() requires parameter 1 to be an array.' );
-			return false;
-		}
+		if (!is_array($encoded_tokens)) {
+			throw new InvalidArgumentException('SWP_Credential_Helper->update_options() requires parameter 1 to be an array.');
+		}		
 
-		$encoded_json = base64_encode( json_encode( $encoded_tokens ) );
+		$encoded_json = base64_encode( wp_json_encode( $encoded_tokens ) );
 
 		self::$swp_authorizations = $encoded_tokens;
 		return update_option( 'swp_authorizations', $encoded_json );

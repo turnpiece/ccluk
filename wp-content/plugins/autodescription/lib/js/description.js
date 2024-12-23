@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2024 Sybre Waaijer, CyberWire B.V. (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -33,82 +33,135 @@
  * @since 4.0.0
  *
  * @constructor
- * @param {!jQuery} $ jQuery object.
  */
-window.tsfDescription = function( $ ) {
+window.tsfDescription = function () {
 
 	/**
-	 * Data property injected by WordPress l10n handler.
+	 * @since 4.1.0
+	 * @type {Map<string,Element>} The input element instances.
+	 */
+	const descriptionInputInstances = new Map();
+
+	/**
+	 * @since 4.1.0
+	 * @access private
+	 * @type {(Object<string,Object<string,*>)} the query state.
+	 */
+	const states = {};
+
+	/**
+	 * Sets input element for all listeners. Must be called prior interacting with this object.
+	 * Resets the state for the input ID.
 	 *
 	 * @since 4.0.0
-	 * @access private
-	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
-	 */
-	const l10n = 'undefined' !== typeof tsfDescriptionL10n && tsfDescriptionL10n;
-
-	/**
-	 * @since 4.0.0
-	 * @type {(void|Element)} The input element.
-	 */
-	let descriptionInput = void 0;
-
-	/**
-	 * @since 4.0.0
-	 * @access private
-	 * @type {(Object<string, *>)} the query state.
-	 */
-	let state = {
-		allowReferenceChange: true,
-		defaultDescription:   tsf.escapeString( l10n.states.defaultDescription.trim() ),
-	};
-
-	/**
-	 * Sets input element for all listeners.
-	 *
-	 * @since 4.0.0
+	 * @since 4.1.0 Now creates an instance in a map this object, and returns it.
 	 * @access public
 	 *
 	 * @param {Element} element
-	 * @return {undefined}
+	 * @return {Element}
 	 */
-	const setInputElement = ( element ) => {
-		descriptionInput = element;
+	function setInputElement( element ) {
+		descriptionInputInstances.set( element.id, element );
+		states[ element.id ] = {
+			allowReferenceChange: true,
+			defaultDescription:   '',
+			useDefaultDescription: true,
+		};
+		_loadDescriptionActions( element );
+		return getInputElement( element.id );
 	}
 
 	/**
-	 * Returns state.
+	 * Gets input element, if exists.
 	 *
-	 * @since 4.0.0
+	 * @since 4.1.0
 	 * @access public
 	 *
-	 * @param {(string|undefined)} part The part to return. Leave empty to return the whole state.
-	 * @return {(Object<string, *>)|*|undefined}
+	 * @param {string} id The element ID.
+	 * @return {Element}
 	 */
-	const getState = part => part ? ( part in state ? state[ part ] : void 0 ) : state;
+	function getInputElement( id ) {
+		return descriptionInputInstances.get( id );
+	}
 
 	/**
-	 * Updates state.
+	 * Returns state of ID.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 *
+	 * @param {string}             id The input element ID.
+	 * @param {(string|undefined)} part The part to return. Leave empty to return the whole state.
+	 * @return {(Object<string,*>)|*|null}
+	 */
+	function getStateOf( id, part ) {
+		return part ? states[ id ]?.[ part ] : states[ id ];
+	}
+
+	/**
+	 * Updates state of ID.
 	 *
 	 * There's no need to escape the input, it may be double-escaped if you do so.
 	 *
-	 * @since 4.0.0
+	 * @since 4.1.0
+	 * @since 4.1.2 Added part `useDefaultDescription`.
+	 * @since 4.2.0 Now remains intert on a non-change.
 	 * @access public
 	 *
-	 * @param {string} type  The state index to change.
+	 * @param {string} id The input element ID.
+	 * @param {string} part  The state index to change.
 	 * @param {*}      value The value to set the state to.
-	 * @return {undefined}
 	 */
-	const updateState = ( type, value ) => {
+	function updateStateOf( id, part, value ) {
 
-		state[ type ] = value;
+		if ( states[ id ][ part ] === value ) return;
 
-		switch ( type ) {
+		states[ id ][ part ] = value;
+
+		switch ( part ) {
 			case 'allowReferenceChange':
 			case 'defaultDescription':
+			case 'useDefaultDescription':
 			default:
-				enqueueTriggerInput();
+				enqueueTriggerInput( id );
 				break;
 		}
+	}
+
+	/**
+	 * Updates state of all elements.
+	 *
+	 * There's no need to escape the input, it may be double-escaped if you do so.
+	 *
+	 * @since 4.1.0
+	 * @since 4.2.0 Added a 3rd parameter, allowing you to exclude updates for certain elements.
+	 * @access public
+	 *
+	 * @param {string}          part   The state index to change.
+	 * @param {*}               value  The value to set the state to.
+	 * @param {string|string[]} except The input element IDs to exclude from updates.
+	 */
+	function updateStateAll( part, value, except ) {
+
+		except = Array.isArray( except ) ? except : [ except ];
+
+		descriptionInputInstances.forEach( element => {
+			if ( except.includes( element.id ) ) return;
+			updateStateOf( element.id, part, value );
+		} );
+	}
+
+	/**
+	 * Returns description references of ID.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 *
+	 * @param {string} id The input element ID.
+	 * @return {HTMLElement[]}
+	 */
+	function _getDescriptionReferences( id ) {
+		return [ document.getElementById( `tsf-description-reference_${id}` ) ];
 	}
 
 	/**
@@ -117,67 +170,75 @@ window.tsfDescription = function( $ ) {
 	 * Used by the character counters, pixel counters, and social meta inputs.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now supports multiple instances.
+	 * @since 4.1.2 Now listens to `useDefaultDescription` when reference isn't locked.
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _setReferenceDescription = ( event ) => {
-		let reference = document.getElementById( 'tsf-description-reference' ),
-			text      = state.allowReferenceChange && event.target.value || state.defaultDescription;
+	function _setReferenceDescription( event ) {
+		const references = _getDescriptionReferences( event.target.id );
 
-		if ( ! reference ) return;
+		if ( ! references[0] ) return;
 
-		text = text.trim();
+		const allowReferenceChange  = getStateOf( event.target.id, 'allowReferenceChange' ),
+			  useDefaultDescription = allowReferenceChange ? getStateOf( event.target.id, 'useDefaultDescription' ) : true;
 
-		if ( text.length < 1 || ! state.allowReferenceChange ) {
-			text = event.target.placeholder;
-		}
+		let text = tsf.coalesceStrlen( allowReferenceChange && event.target.value.trim() )
+			?? tsf.coalesceStrlen( useDefaultDescription && getStateOf( event.target.id, 'defaultDescription' ) )
+			?? '';
 
-		reference.innerHTML = tsf.escapeString( tsf.decodeEntities( tsf.sDoubleSpace( text.trim() ) ) );
+		const referenceValue = tsf.escapeString(
+			tsf.decodeEntities(
+				tsf.sDoubleSpace(
+					tsf.sTabs(
+						tsf.sSingleLine(
+							text
+						).trim()
+					)
+				)
+			) );
+		const changeEvent = new Event( 'change' );
 
-		// Fires change event. Defered.
-		setTimeout( () => { $( reference ).change() }, 0 );
+		references.forEach( reference => {
+			// We require the event below when adjusting some states... Don't uncomment this.
+			// if ( reference.innerHTML = referenceValue ) return;
+
+			reference.innerHTML = referenceValue;
+			// Fires change event. dispatchEvent is synchronous, so we defer it to another thread.
+			setTimeout( () => { reference.dispatchEvent( changeEvent ) } );
+		} );
 	}
 
 	/**
 	 * Updates the title placeholder.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now consistently sets a reliable placeholder.
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _updatePlaceholder = ( event ) => {
-
-		if ( ! state.allowReferenceChange
-		|| event.target.value // No need to update it if there's no value set.
-		) return;
-
-		event.target.placeholder = document.getElementById( 'tsf-description-reference' ).innerText;
+	function _updatePlaceholder( event ) {
+		event.target.placeholder = _getDescriptionReferences( event.target.id )[0].textContent;
 	}
 
 	/**
 	 * Updates used separator and all examples thereof.
 	 *
-	 * @since 3.0.4 : 1. Threshold "too long" has been increased from 155 to 300.
-	 *                2. Threshold "far too long" has been increased to 330 from 175.
+	 * @since 3.0.4 1. Threshold "too long" has been increased from 155 to 300.
+	 *              2. Threshold "far too long" has been increased to 330 from 175.
 	 * @since 3.1.0 Now uses the new guidelines via a filterable function in PHP.
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _updateCounter = ( event ) => {
-		let counter   = document.getElementById( event.target.id + '_chars' ),
-			reference = document.getElementById( 'tsf-description-reference' );
+	function _updateCounter( event ) {
+		const counter   = document.getElementById( `${event.target.id}_chars` ),
+			  reference = _getDescriptionReferences( event.target.id )[0];
 
-		if ( ! counter || ! tsfC ) return;
+		if ( ! counter ) return;
 
-		tsfC.updateCharacterCounter( {
+		tsfC?.updateCharacterCounter( {
 			e:     counter,
 			text:  reference.innerHTML,
 			field: 'description',
@@ -191,17 +252,15 @@ window.tsfDescription = function( $ ) {
 	 * @since 4.0.0
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _updatePixels = ( event ) => {
-		let pixels    = document.getElementById( event.target.id + '_pixels' ),
-			reference = document.getElementById( 'tsf-description-reference' );
+	function _updatePixels( event ) {
+		const pixels    = document.getElementById( `${event.target.id}_pixels` ),
+			  reference = _getDescriptionReferences( event.target.id )[0];
 
-		if ( ! pixels || ! tsfC ) return;
+		if ( ! pixels ) return;
 
-		tsfC.updatePixelCounter( {
+		tsfC?.updatePixelCounter( {
 			e:     pixels,
 			text:  reference.innerHTML,
 			field: 'description',
@@ -213,26 +272,36 @@ window.tsfDescription = function( $ ) {
 	 * Triggers meta description input.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now allows for a first parameter to be set.
 	 * @access public
 	 *
-	 * @function
-	 * @return {undefined}
+	 * @param {string} id The input id. When not set, all inputs will be triggered.
 	 */
-	const triggerInput = () => {
-		$( descriptionInput ).trigger( 'input.tsfUpdateDescriptions' );
+	function triggerInput( id ) {
+		if ( id ) {
+			getInputElement( id )?.dispatchEvent( new Event( 'input' ) );
+		} else {
+			// We don't want it to loop infinitely. Check element.id value first.
+			descriptionInputInstances.forEach( element => element.id && triggerInput( element.id ) );
+		}
 	}
 
 	/**
 	 * Triggers counter updates.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now allows for a first parameter to be set.
 	 * @access public
 	 *
-	 * @function
-	 * @return {undefined}
+	 * @param {string} id The input id. When not set, all inputs will be triggered.
 	 */
-	const triggerCounter = () => {
-		$( descriptionInput ).trigger( 'tsf-update-description-counter' );
+	function triggerCounter( id ) {
+		if ( id ) {
+			getInputElement( id )?.dispatchEvent( new CustomEvent( 'tsf-update-description-counter' ) );
+		} else {
+			// We don't want it to loop infinitely. Check element.id value first.
+			descriptionInputInstances.forEach( element => element.id && triggerCounter( element.id ) );
+		}
 	}
 
 	/**
@@ -241,13 +310,10 @@ window.tsfDescription = function( $ ) {
 	 * @since 4.0.0
 	 * @access private
 	 * @see triggerInput
-	 * @uses _onUpdateCounterTrigger
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _onUpdateDescriptionsTrigger = ( event ) => {
+	function _onUpdateDescriptionsTrigger( event ) {
 
 		_setReferenceDescription( event );
 		_updatePlaceholder( event );
@@ -262,66 +328,68 @@ window.tsfDescription = function( $ ) {
 	 * @access private
 	 * @see triggerCounter
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _onUpdateCounterTrigger = ( event ) => {
+	function _onUpdateCounterTrigger( event ) {
 		_updateCounter( event );
 		_updatePixels( event );
 	}
 
-	let _enqueueTriggerInputBuffer = 0;
+	let _enqueueTriggerInputBuffer = {};
 	/**
 	 * Triggers meta description input.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Added first parameter, id.
+	 * @since 4.1.1 Now passes the right parameter to the input event.
 	 * @access public
 	 *
-	 * @function
-	 * @return {undefined}
+	 * @param {string} id The input ID.
 	 */
-	const enqueueTriggerInput = () => {
-		clearTimeout( _enqueueTriggerInputBuffer );
-		_enqueueTriggerInputBuffer = setTimeout( triggerInput, 10 );
+	function enqueueTriggerInput( id ) {
+		( id in _enqueueTriggerInputBuffer ) && clearTimeout( _enqueueTriggerInputBuffer[ id ] );
+		_enqueueTriggerInputBuffer[ id ] = setTimeout( () => triggerInput( id ), 1000/60 ); // 60fps
 	}
 
 	/**
 	 * Triggers description update, without affecting tsfAys change listeners.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now allows for a first parameter to be set.
 	 * @access public
 	 *
-	 * @function
-	 * @param {!jQuery.Event}
-	 * @return {undefined}
+	 * @param {Event}
+	 * @param {string} id The input id. When not set, all inputs will be triggered.
 	 */
-	const triggerUnregisteredInput = () => {
-		if ( ! tsfAys ) {
-			triggerInput();
+	function triggerUnregisteredInput( id ) {
+		if ( 'tsfAys' in window ) {
+			let wereSettingsChanged = tsfAys.areSettingsChanged();
+
+			triggerInput( id );
+
+			// Only reset if we polluted the change listener, and only if a change wasn't already registered.
+			if ( ! wereSettingsChanged && tsfAys.areSettingsChanged() )
+				tsfAys.reset();
 		} else {
-			let settingsChangedCache = tsfAys.getChangedState;
-			triggerInput();
-			if ( ! settingsChangedCache ) tsfAys.reset();
+			triggerInput( id );
 		}
 	}
 
-	let unregisteredTriggerBuffer = 0;
+	let _unregisteredTriggerBuffer = {};
 	/**
 	 * Enqueues unregistered description input triggers.
 	 *
 	 * @since 4.0.0
+	 * @since 4.1.0 Now allows for a first parameter to be set.
 	 * @access public
 	 *
-	 * @function
-	 * @return {undefined}
+	 * @param {string} id The input id. When not set, all inputs will be triggered.
 	 */
-	const enqueueUnregisteredInputTrigger = () => {
-		clearTimeout( unregisteredTriggerBuffer );
-		unregisteredTriggerBuffer = setTimeout( triggerUnregisteredInput, 10 );
+	function enqueueUnregisteredInputTrigger( id ) {
+		( id in _unregisteredTriggerBuffer ) && clearTimeout( _unregisteredTriggerBuffer[ id ] );
+		_unregisteredTriggerBuffer[ id ] = setTimeout( () => triggerUnregisteredInput( id ), 1000/60 ); // 60 fps
 	}
 
-	let prevWidth = window.innerWidth;
 	/**
 	 * Triggers input event for descriptions in set intervals on window resize.
 	 *
@@ -333,61 +401,49 @@ window.tsfDescription = function( $ ) {
 	 * from Desktop to Mobile view at 782 pixels.
 	 *
 	 * @since 4.0.0
+	 * @since 5.1.0 Now always triggers unregistered input to support subpixel
+	 *              layout shifting calculations when zooming in or out.
+	 *              The title overflow boundaries may also be dynamically hit on
+	 *              different screen sizes, and this must be accounted for.
+	 * @todo rename this to "onResize"?
 	 * @access private
 	 * @see ...\wp-admin\js\common.js
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
-	const _doResize = () => {
-		let width = window.innerWidth;
-		if ( prevWidth < width ) {
-			if ( prevWidth <= 782 && width >= 782 ) {
-				triggerUnregisteredInput();
-			}
-		} else {
-			if ( prevWidth >= 782 && width <= 782 ) {
-				triggerUnregisteredInput();
-			}
-		}
-		prevWidth = width;
+	function _doResize() {
+		triggerUnregisteredInput();
+	}
+
+	/**
+	 * Reinitializes the description input action callbacks.
+	 *
+	 * @since 4.0.0
+	 * @access private
+	 *
+	 * @param {Element} descriptionInput
+	 */
+	function _loadDescriptionActions( descriptionInput ) {
+		if ( ! descriptionInput instanceof Element ) return;
+
+		descriptionInput.addEventListener( 'input', _onUpdateDescriptionsTrigger );
+		descriptionInput.addEventListener( 'tsf-update-description-counter', _onUpdateCounterTrigger );
+
+		enqueueUnregisteredInputTrigger( descriptionInput.id );
 	}
 
 	/**
 	 * Initializes the description environment.
 	 *
-	 * @since 4.0.0
+	 * @since 4.1.0
+	 * @since 4.1.1 No longer passes the event to the enqueueUnregisteredInputTrigger() callback.
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
-	const _initDescriptions = () => {
+	function _initAllDescriptionActions() {
 
 		// Triggers input changes on resize after hitting thresholds.
-		$( document ).on( 'wp-window-resized', _doResize );
+		window.addEventListener( 'tsf-resize', _doResize );
 
 		// When counters are updated, trigger an input; which will reassess them.
-		$( window ).on( 'tsf-counter-updated', enqueueTriggerInput );
-	}
-
-	/**
-	 * Initializes the description input action callbacks.
-	 *
-	 * @since 4.0.0
-	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
-	 */
-	const _loadDescriptionActions = () => {
-
-		if ( ! descriptionInput instanceof Element ) return;
-
-		$( descriptionInput ).on( 'input.tsfUpdateDescriptions', _onUpdateDescriptionsTrigger );
-		$( descriptionInput ).on( 'tsf-update-description-counter', _onUpdateCounterTrigger );
-
-		enqueueUnregisteredInputTrigger();
+		window.addEventListener( 'tsf-counter-updated', () => enqueueUnregisteredInputTrigger() );
 	}
 
 	return Object.assign( {
@@ -397,28 +453,21 @@ window.tsfDescription = function( $ ) {
 		 *
 		 * @since 4.0.0
 		 * @access protected
-		 *
-		 * @function
-		 * @return {undefined}
 		 */
 		load: () => {
-			// the setInputElement() must be called here.
-			$( document.body ).on( 'tsf-onload', _initDescriptions );
-
-			// the setInputElement() must've been called here.
-			$( document.body ).on( 'tsf-ready', _loadDescriptionActions );
-		}
+			document.body.addEventListener( 'tsf-onload', _initAllDescriptionActions );
+		},
 	}, {
 		setInputElement,
-		getState,
-		updateState,
+		getInputElement,
+		getStateOf,
+		updateStateOf,
+		updateStateAll,
 		triggerCounter,
 		triggerInput,
 		enqueueTriggerInput,
 		triggerUnregisteredInput,
-		enqueueUnregisteredInputTrigger,
-	}, {
-		l10n
+		enqueueUnregisteredInputTrigger, // FIXME: this should've been enqueueTriggerUnregisteredInput... deprecate in TSF 5.2
 	} );
-}( jQuery );
-jQuery( window.tsfDescription.load );
+}();
+window.tsfDescription.load();

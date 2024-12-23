@@ -6,122 +6,63 @@
 
 namespace The_SEO_Framework;
 
-defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() and $this instanceof $_this or die;
+\defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
+
+// At 9999 the user query should be registered (um\core\Rewrite::locate_user_profile). So, we use 9999+1 = 100000.
+\add_action( 'template_redirect', __NAMESPACE__ . '\\_um_reinstate_title_support', 100000 );
+\add_filter( 'the_seo_framework_query_supports_seo', __NAMESPACE__ . '\\_um_determine_support' );
 
 /**
- * Removes extraneous (therefore erroneous) Open Graph and meta functionality of Ultimate Member.
- * We're replacing it, using their API.
- */
-\remove_action( 'wp_head', 'um_profile_dynamic_meta_desc', 9999999 );
-
-\add_filter( 'the_seo_framework_title_from_generation', __NAMESPACE__ . '\\_um_filter_generated_title', 10, 2 );
-/**
- * Filters the custom title for UM.
+ * Reinstates title support if a UM-controlled profile page is detected.
  *
- * @since 3.1.0
- * @since 4.0.0 No longer overrules external queries.
+ * @hook template_redirect 100000
+ * @since 4.2.0
  * @access private
- *
- * @param string     $title The filter title.
- * @param array|null $args  The query arguments. Contains 'id' and 'taxonomy'.
- *                          Is null when query is autodetermined.
- * @return string The filtered title.
  */
-function _um_filter_generated_title( $title = '', $args = null ) {
+function _um_reinstate_title_support() {
 
-	if ( null === $args && \the_seo_framework()->can_i_use( [
+	if ( ! Helper\Compatibility::can_i_use( [
 		'functions' => [
 			'um_is_core_page',
 			'um_get_requested_user',
-			'um_fetch_user',
-			'um_reset_user',
-			'um_user',
-			'um_get_display_name',
+			'um_dynamic_user_profile_pagetitle',
 		],
-	] ) ) {
-		if ( \um_is_core_page( 'user' ) && \um_get_requested_user() ) {
-			\um_fetch_user( \um_get_requested_user() );
-			$user_id = \um_user( 'ID' );
-			\um_reset_user();
+	] ) ) return;
 
-			$title = \um_get_display_name( $user_id );
-		}
+	if ( \um_is_core_page( 'user' ) && \um_get_requested_user() ) {
+		// This number has nothing to do with the reasoning hereinbefore -- merely to reflect their API.
+		\add_filter( 'wp_title', 'um_dynamic_user_profile_pagetitle', 100000, 2 );
+		\add_filter( 'pre_get_document_title', 'um_dynamic_user_profile_pagetitle', 100000, 2 );
 	}
-
-	return $title;
 }
 
-\add_filter( 'the_seo_framework_ogurl_output', __NAMESPACE__ . '\\_um_filter_generated_url', 10, 1 );
-\add_filter( 'the_seo_framework_rel_canonical_output', __NAMESPACE__ . '\\_um_filter_generated_url', 10, 1 );
 /**
- * Filters the canonical URL for UM.
+ * Filters query support on UM pages.
  *
- * @since 3.1.0
+ * @hook the_seo_framework_query_supports_seo 10
+ * @since 4.2.0
  * @access private
  *
- * @param string $url The current URL.
- * @return string The filtered URL.
+ * @param bool $supported Whether the query supports SEO.
+ * @return bool Whether the query is supported.
  */
-function _um_filter_generated_url( $url = '' ) {
+function _um_determine_support( $supported = true ) {
 
-	if ( \the_seo_framework()->can_i_use( [
+	// No need to modify support if it's already not supported.
+	if ( ! $supported ) return $supported;
+
+	if ( ! Helper\Compatibility::can_i_use( [
 		'functions' => [
+			'um_queried_user',
 			'um_is_core_page',
-			'um_get_requested_user',
-			'um_fetch_user',
-			'um_reset_user',
-			'um_user_profile_url',
 		],
-	] ) ) {
-		if ( \um_is_core_page( 'user' ) && \um_get_requested_user() ) {
-			\um_fetch_user( \um_get_requested_user() );
-			$url = \um_user_profile_url();
-			\um_reset_user();
-		}
-	}
+	] ) ) return $supported;
 
-	return $url;
-}
-
-\add_filter( 'the_seo_framework_generated_description', __NAMESPACE__ . '\\_um_filter_generated_description', 10, 2 );
-/**
- * Filters the generated description for UM.
- *
- * @since 3.1.0
- * @since 4.0.0 No longer overrules external queries.
- * @access private
- *
- * @param string     $desc The generated description.
- * @param array|null $args The query arguments. Contains 'id' and 'taxonomy'.
- *                         Is null when query is autodetermined.
- * @return string The filtered description.
- */
-function _um_filter_generated_description( $desc = '', $args = null ) {
-
-	if ( null === $args && \the_seo_framework()->can_i_use( [
-		'functions' => [
-			'um_is_core_page',
-			'um_get_requested_user',
-			'um_fetch_user',
-			'um_reset_user',
-			'um_convert_tags',
-			'UM',
-		],
-	] ) ) {
-		if ( \um_is_core_page( 'user' ) && \um_get_requested_user() ) {
-			\um_fetch_user( \um_get_requested_user() );
-
-			//!! PHP 7 won't fail on the exception. On other versions, an is_callable() loop is too expensive.
-			//? However, their deprecated "um_get_option()" short API function tells us to use this.
-			try {
-				$_description = \um_convert_tags( \UM()->options()->get( 'profile_desc' ) );
-			} catch ( \Exception $e ) {
-				$_description = '';
-			}
-			$desc = $_description ?: $desc;
-			\um_reset_user();
-		}
-	}
-
-	return $desc;
+	/**
+	 * We do not test for 'um_get_requested_user()' -- but this is safe.
+	 * If `um_queried_user() && um_is_core_page( 'user' ) is true, UM forces um_get_requested_user()
+	 * to return something, or otherwise redirects the visitor. This means we
+	 * can safely hand over SEO-support to Ultimate Member.
+	 */
+	return ! ( \um_queried_user() && \um_is_core_page( 'user' ) );
 }

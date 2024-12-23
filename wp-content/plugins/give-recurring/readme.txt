@@ -2,9 +2,9 @@
 Contributors: givewp
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 4.8
-Tested up to: 5.4
-Stable tag: 1.10.0
-Requires Give: 2.5.5
+Tested up to: 5.5
+Stable tag: 1.10.7
+Requires Give: 2.7.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -38,6 +38,30 @@ The manual installation method involves downloading our donation plugin and uplo
 Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
 
 == Changelog ==
+
+= 1.10.7: August 24th, 2020 =
+* Fix: Resolved an issue with Quarterly payments incorrectly billing as Monthly for the PayPal Payflow gateway.
+
+= 1.10.6: July 16th, 2020 =
+* Fix: Resolved an issue with Authorize.net eCheck subscriptions not properly being created due to incorrect parameters passed for interval and length.
+
+= 1.10.5: July 16th, 2020 =
+* Fix: Renewal donations were displaying incorrect amounts when using the currency formatting of zero decimals and European style separator of decimal `.` for the thousands separator. The donor was charged the correct amount but the formatting displaying in GiveWP was incorrect and could cause confusion within donation receipts.
+
+= 1.10.4: July 1st, 2020 =
+* Fix: Removed HTML that was visible within PayPal receipts and Stripe charges when using a multi-level recurring donation form.
+
+= 1.10.3: June 29th, 2020 =
+* Important: This update requires version GiveWP 2.7+ for compatibility. Please ensure you update to the latest version before updating this add-on.
+* New: Added compatibility with GiveWP 2.7's new donation Form Template.
+* New: Added support for Multiple Stripe Accounts feature found in GiveWP 2.7 and the Stripe add-on 2.2.6+.
+* Fix: Prevent silent failures when updating subscription amounts so donors are more informed on an error if it occurs.
+* Fix: Donors are now able to update the amount of their subscriptions by visiting the Recurring Donations page directly.
+* Fix: Resolved a bug with Razorpay and using "Admin Defined" recurring donation functionality not properly working.
+* Fix: When GiveWP is deactivated this add-on will no longer deactivate itself but rather display a notice prompting the admin that it requires the plugin activated to work.
+
+= 1.10.2: May 7th, 2020 =
+* Fix: Resolved an issue with Stripe subscriptions that were set to cancel after a certain number of renewals not properly cancelling in Stripe if already set to a completed status in the plugin. We also improved the error handling so that the system will log more description about the subscription if an issue occurs.
 
 = 1.10.1: April 17th, 2020 =
 * Important: In this version we have patched an important security vulnerability. The fix prevents malicious actors from gaining unauthorized access to donor subscriptions where they would then be able to update subscription amounts or cancel the subscription. Please note: no credit card data or information was ever compromised as we never store card sensitive information to your database. Please update immediately and [contact our support](https://givewp.com/support/) if you have any issues or questions.

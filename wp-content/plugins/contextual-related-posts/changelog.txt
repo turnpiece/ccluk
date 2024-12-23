@@ -2,6 +2,297 @@
 
 This is an archive of older changelog entries. Most recent entries are maintained in readme.txt
 
+= 3.4.2 =
+
+Release post: [https://webberzone.com/announcements/contextual-related-posts-v3-4-0/](https://webberzone.com/announcements/contextual-related-posts-v3-4-0/)
+
+* Enhancements:
+    * Live Search in the Manual Related Posts field now searches by post ID if you enter a number
+    * Live Search will only search for posts titles and not content
+    * Include Words feature will now try to sort the posts by the number of words matched in the title, content and excerpt
+
+* Bug fix:
+    * Bug in Include Words functionality where all post types were incorrectly included
+    * Compatibility issue with PolyLang. Return the default post if pll_get_post returns false
+
+= 3.4.1 =
+
+* Bug fix:
+    * Fixed Request-URI Too Long error when searching for pages/posts
+    * Related Posts block threw an error when using on the widgets page
+
+= 3.4.0 =
+
+* Features:
+    * Bulk edit posts, pages and custom post types to add the manual relatd posts and/or exclude posts from the related posts list
+    * New argument `include_words` to include posts that match the words in the title and/or content.
+
+* Enhancements/Modifications:
+    * The Manual Related Posts field in the meta box allows a user to live search for related posts
+    * Caching of the entire HTML output is enabled by default. You can disable it in the settings page. This will reduce the number of database queries and improve performance. If you have customised the output, you will need to clear the cache for the changes to take effect. Applies to new installs and when you reset the settings
+    * The plugin no longer check for pre v2.5 settings key
+    * The Media Handler will check the title of the image in case the alt tag text is empty before defaulting to the post title
+    * All the inbuilt styles have been updated for the `a` tags to have `:focus-visible` declared for accessibility
+    * The `Heading of posts` setting will now use `<h2>` instead of `<h3>` for the heading by default
+
+* Bug Fixes:
+    * The post cache was not always cleared when a post was updated
+
+* Deprecated:
+    * `get_crp_posts_id` has been completed deprecated and will use `get_crp_posts` instead. The function will continue to work but will be removed in a future version
+
+= 3.3.4 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v3-3-0/](https://webberzone.com/blog/contextual-related-posts-v3-3-0/)
+
+* Enhancements/Modifications:
+	* When displaying the post thumbnail, the Media Handler will first use the image's alt tag set in the Media editor. If alt tag is empty, then it will use the post title as a fallback. Filter `crp_thumb_use_image_alt` and set it to false to not use the alt tag. Filter `crp_thumb_alt_fallback_post_title` and set it to false to disable the alt tag
+	* Orderby clause modified to ensure compatibility if any other plugin rewrites the WP_Query fields
+
+* Bug Fixes:
+    * Fix duplicate display of related posts when using reusable blocks or a plugin that inserts pages
+    * `meta_query` argument was ignored
+
+= 3.3.3 =
+
+* Fixes permission issues with HTML settings
+
+= 3.3.2 =
+
+* Clearing cache security fix
+
+= 3.3.1 =
+
+* Security fix in block
+
+= 3.3.0 =
+
+* Features:
+    * Related posts block allows you to set a custom header above the related posts. Leave blank to get the one from the main settings page.
+    * New option "Related Meta Keys" under the List Tuning tab. You can enter a comma-separted list of meta keys. Posts that match the same value of the meta key are displayed before the other related posts.
+
+* Enhancements/modifications:
+    * If the number of "Manual related posts" is greater than the number of related posts, then the database query is bypassed drastically improving perfomance
+    * Moved Related Posts Tools page under Tools menu
+    * Related Posts block is now wrapped in `Disabled` tags to prevent accidental clicking of links in the block editor
+
+* Bug fixes:
+    * Thumb width and height defaults to 150 in case the settings are missing
+    * Setting the style to be text_only didn't enforce no thumbnail
+
+* Developer:
+    * New filters: `crp_query_date_query`, `crp_query_meta_query`, `crp_query_meta_query_relation`
+	
+= 3.2.3 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v3-2-0/](https://webberzone.com/blog/contextual-related-posts-v3-2-0/)
+
+* Enhancements:
+    * Block shows a placeholder when used in non-Edit screens or when no content is generated
+
+* Bug fix:
+    * Missing text-only.min.css file
+    * Block settings were not saved
+
+= 3.2.2 =
+
+* Bug fix:
+    * Widget options were not saved properly
+    * Stylesheets and header styles have been fixed to be more specific
+
+= 3.2.1 =
+
+* Enhancements/modifications:
+    * If thumbnail is set as `text only`, then the style is also set as `text only` at runtime
+
+* Bug fix:
+    * PHP error thrown when using `get_crp_posts_id()`
+
+* Deprecated:
+    * `get_crp_posts_id()`. Use `get_crp_posts()` instead
+
+= 3.2.0 =
+
+* New feature:
+    * New option to limit posts to the primary category/term. The plugin checks if either Yoast, Rank Math, The SEO Framework or SEOPress are active. If none of these are active, the plugin will pick the first category provided by `get_the_terms()`
+    * New option to show the primary category/term
+    * New option in metabox to enter a comma-separated list of post IDs to exclude from the related posts
+    * New filter `crp_fill_random_posts` (default:false) which can be used to fill random posts if the number of related posts is less than the limit set
+
+* Enhancements/modifications:
+    * No widget is displayed if `get_crp()` is empty i.e. no related posts are found
+    * `post_title` and `post_content` fields are only used if *Use content* option is set
+    * Gutenberg block updated to the latest Blocks API
+    * The widget's "Only from categories" autocomplete replaced by ID list
+    * Wrapper `div` now always includes `crp_related` class name. Stylesheets have been updated to have more specific styles e.g. `.crp_related.crp-rounded-thumbs`
+    * *Exclude categories* and *Exclude on categories* renamed to *Exclude terms* and *Exclude on terms* as they now support all taxonomies and the accepted format has changed to "Term Name (taxonomy:term_taxonomy_id)"
+
+* Bug fixes:
+    * Current post was incorrectly being excluded in the translation functions
+
+= 3.1.1 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v3-1-0/](https://webberzone.com/blog/contextual-related-posts-v3-1-0/)
+
+* Enhancements:
+    * Don't clear cache when saving settings. The cache can be cleared in the Tools page
+    * Default thumbnail is now prioritized over the site icon
+
+* Bug fixes:
+    * Limiting of characters didn't work properly
+    * Fixed link to Tools menu under Settings. Tools button link is better displayed
+    * Fixed activation when new blog is created on multisite
+
+= 3.1.0 =
+
+* Features:
+    * REST API support - you can now fetch the related posts via the REST API. Fetch posts at `/contextual-related-posts/v1/posts/<id>`
+    * New setting in the metabox to exclude specific terms
+
+* Enhancements/modifications:
+    * Thumbnail function uses the size instead of exact array of sizes to better select the appropriate thumbnail image size
+    * Use site icon if no other thumbnail is found
+    * Use both `post_title` and `post_content` fields for matching even when match content setting is off
+    * Passing `post_type` and `posts_per_page` arguments will be respected instead of being overridden
+
+* Bug fixes:
+    * Don't enqueue wp-editor on widgets.php
+    * [WP_Query stopwords](https://developer.wordpress.org/reference/classes/wp_query/get_search_stopwords/) are stripped from content that is matched
+    * Manual posts are added after the automatic posts are shuffled
+
+= 3.0.7 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v3-0-0/](https://webberzone.com/blog/contextual-related-posts-v3-0-0/)
+
+* Bug fix:
+    * Replicate old style of exclusion checking of option set in meta. Using the shortcode, manual or block will ignore the meta option to "Disable Related Posts display"
+
+= 3.0.6 =
+
+* Enhancement:
+    * Defining `CRP_CACHE_TIME` to `false` will disable expiry
+    * Introduced wpml-config.xml file. Title and Custom text for blank output can now be translated with Polylang (and potentially WPML)
+
+* Bug fix:
+    * Exclude on categories did not work
+    * Posts would trigger a "SHOW FULL COLUMNS FROM" error if they had ' from' in the title
+    * Manual posts did not work properly - all post types and all posts are properly fetched now
+
+= 3.0.5 =
+
+* Bug fix:
+    * Certain posts would trigger a "SHOW FULL COLUMNS FROM" error
+    * Forced `.crp_related figure` margin to 0
+
+= 3.0.4 =
+
+* Enhancement/Modifications:
+    * `include_cat_ids` and `exclude_categories` will also accept custom taxonomy `term_taxonomy_id`s
+    * Thumbnail's `img` tag is wrapped in `<figure>`
+    * Remove extra checking for `exclude_categories` in `get_crp`
+    * Optimise deleting of cache entries when updating a post - post saving should be significantly faster
+
+= 3.0.3 =
+
+* Enhancement/Modifications:
+    * Grid style minimum width is now decided by the width of the thumbnail and long words are wrapped
+
+* Bug fixes:
+    * Selecting No style created a 404 error
+    * Fixed issue with $attachment_id not being declared in some cases
+
+= 3.0.2 =
+
+* Bug fixes:
+    * Fixed issue where Related Posts newer than was set to 0 caused no posts to display
+    * Use the original arguments when setting the cache key for CRP_Query
+    * Selecting "Blank Output" didn't work
+
+= 3.0.1 =
+
+* Bug fixes:
+    * Fixed issue with help tab that broke some sites
+
+= 3.0.0 =
+
+* Features:
+    * New CRP_Query class for fetching related posts. This replaces `get_crp_posts_id()` which will be deprecated in a future version
+    * CRP Thumbnails now include the `loading="lazy"` attribute added in WordPress 5.5
+    * New parameter `more_link_text` that can be passed to `get_crp()` which holds the "read more". Recommended option to customize the more link text using the filter `crp_excerpt_more_link_text` or the more link element using `crp_excerpt_more_link`
+    * Three new styles: "Masonry" (like Pinterest), "Grid" and "Rounded thumbnails with CSS grid". Might not work with older browsers
+    * Imported settings of [Related Posts by Categories and Tags](https://webberzone.com/downloads/crp-taxonomy/). That plugin is now deprecated with this release.
+
+* Enhancement/Modifications:
+    * If WPML or PolyLang are active, `get_crp_posts_id()` and `CRP_Query` will return the translated set of post IDs and external processing is no longer needed
+    * Use `wp_img_tag_add_srcset_and_sizes_attr()` to generate srcset and sizes attributes. The original code to display the srcset and sizes attributes will continue to be used
+    * Improved caching with inbuilt expiry. Use CRP_CACHE_TIME in your wp-config.php to set how long the cache should be set for. Default is one month
+    * CRP_MAX_WORDS has been reduced to 100
+    * Dropped the need for FULLTEXT index on post_content which should save some database space
+    * Deprecated the following filters: `get_crp_posts_id`, `crp_posts_now_date`, `crp_posts_from_date`, `crp_posts_fields`, `crp_posts_join`, `crp_posts_where`, `crp_posts_groupby`, `crp_posts_having`, `crp_posts_orderby`, `crp_posts_limits`, `get_crp_posts_id_short_circuit`
+
+* Bug fixes:
+    * In the settings page, only built-in taxonomies were being incorrectly displayed
+    * If "before list item" is empty, then the output was blanked out
+    * Settings help has been fixed
+    * `crp_get_option` would return an incorrect value if $crp_settings global variable was not set
+
+= 2.9.4 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-3/](https://webberzone.com/blog/contextual-related-posts-v2-9-3/)
+
+* Bugs:
+    * Fixed nonce verification not always done in Import/Export interface. Thanks to [Lenon Leite](https://github.com/lenonleite)
+
+= 2.9.3 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-3/](https://webberzone.com/blog/contextual-related-posts-v2-9-3/)
+
+* Features:
+    * New constant `CRP_VERSION` to hold the current version of the plugin
+    * New setting to delete FULLTEXT indices on deactivation
+
+* Enhancements:
+    * Added the `$args` attribute to the filters in main-query.php
+
+= 2.9.2 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+Bug fixes:
+    * Password protected posts will no longer show the excerpt
+
+= 2.9.1 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+Bug fixes:
+    * Custom CSS box would not save and get cleared out when saving settings
+	* `include_cat_ids` didn't work with the shortcode
+
+= 2.9.0 =
+
+Release post: [https://webberzone.com/blog/contextual-related-posts-v2-9-0/](https://webberzone.com/blog/contextual-related-posts-v2-9-0/)
+
+* Features:
+    * New section under Settings > Related Posts > Tools to export and import settings. Best option if you'd like the same configuration across multiple WordPress sites
+	* New shortcode setting `include_cat_ids` to limit top posts to selected categories/taxonomies. Use a comma separated list of [term_taxonomy_id](https://codex.wordpress.org/WordPress_Taxonomy#wp_term_taxonomy)
+	* New setting in widget to only include certain categories. Doesn't work with custom taxonomies
+
+* Enhancements:
+    * New function: `crp_get_thumb_size()` to get the correct size of the thumbnail
+    * Only run a get_post query if only the post ID is passed to `crp_get_the_post_thumbnail()`
+    * `$match_fields` parameter added to `crp_posts_match` filter
+    * Updated WPML functions to use latest filters
+	* Admin scripts are no longer loaded into the head - but using a separate JavaScript file
+	* Implemented CodeMirror to format custom styles box
+    * New filters `get_crp_short_circuit` and `get_crp_posts_id_short_circuit` to bypass outputs and queries
+    * `CRP_MAX_WORDS` has been reduced from 500 to 250 to avoid "Too many words" mySQL error
+    * The link to the Contextual Related Posts link is no longer a list item but a smaller text paragraph below the items. You can turn this on by enabling Show Credit.
+
+* Bug fixes:
+    * Fixed errors created when trying to fetch a featured image or scanned images with remote links
+    * Saving categories fields in the settings page uses `str_getcsv` and a custom function `crp_str_putcsv`
+
 = 2.8.0 =
 
 Release post: [https://webberzone.com/blog/contextual-related-posts-v2-8-0/](https://webberzone.com/blog/contextual-related-posts-v2-8-0/)

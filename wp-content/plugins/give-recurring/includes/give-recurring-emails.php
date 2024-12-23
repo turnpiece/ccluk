@@ -188,7 +188,7 @@ class Give_Recurring_Emails {
 						$content = str_replace( '{completion_date}', date_i18n( give_date_format(), $expiration_timestamp ), $content );
 						break;
 					case 'subscription_frequency':
-						$times = intval( $subscription->bill_times ) * intval( $interval );
+						$times = (int) $subscription->bill_times;
 						$content = str_replace( '{subscription_frequency}', give_recurring_pretty_subscription_frequency( $subscription->period, $times, false, $interval
 						), $content );
 						break;
@@ -256,7 +256,7 @@ class Give_Recurring_Emails {
 				break;
 
 			case 'subscription_frequency':
-				$times = intval( $subscription->bill_times ) * intval( $interval );
+				$times = (int) $subscription->bill_times;
 				$content = give_recurring_pretty_subscription_frequency( $subscription->period, $times, false, $interval );
 				break;
 

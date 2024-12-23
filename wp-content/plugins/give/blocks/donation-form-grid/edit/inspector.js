@@ -45,7 +45,6 @@ const Inspector = ({attributes, setAttributes}) => {
         showExcerpt,
         excerptLength,
         showGoal,
-        showProgressBar,
         showFeaturedImage,
         showDonateButton,
         tagBackgroundColor,
@@ -171,13 +170,6 @@ const Inspector = ({attributes, setAttributes}) => {
                     />
                     <ToggleControl
                         className="give-form-grid-inspector"
-                        name="showProgressBar"
-                        label={__('Show Progress Bar', 'give')}
-                        checked={!!showProgressBar}
-                        onChange={(value) => saveSetting('showProgressBar', value)}
-                    />
-                    <ToggleControl
-                        className="give-form-grid-inspector"
                         name="showDonateButton"
                         label={__('Show Donate Button', 'give')}
                         checked={!!showDonateButton}
@@ -221,7 +213,7 @@ const Inspector = ({attributes, setAttributes}) => {
                 </PanelBody>
             </Panel>
             <Panel>
-                <PanelBody title= {__('Grid Settings', 'give')} initialOpen={ true }>
+                <PanelBody className="give-donation-form-grid--grid-settings" title= {__('Grid Settings', 'give')} initialOpen={ true }>
                     <SelectControl
                         className="give-form-grid-inspector"
                         label={__('Order By', 'give')}
@@ -310,7 +302,7 @@ const Inspector = ({attributes, setAttributes}) => {
                 </PanelBody>
             </Panel>
             <PanelColorSettings
-                title={ __( 'Color Settings' ) }
+                title={ __( 'Color Settings', 'give' ) }
                 colorSettings={ [
                     {
                         value: tagBackgroundColor

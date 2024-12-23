@@ -4,7 +4,7 @@
  * Plugin URI:  https://wpmudev.com/project/wpmu-dev-dashboard/
  * Description: Brings the powers of WPMU DEV directly to you. It will revolutionize how you use WordPress. Activate now!
  * Author:      WPMU DEV
- * Version:     4.11.14
+ * Version:     4.11.28
  * Author URI:  https://wpmudev.com/
  * Text Domain: wpmudev
  * Domain Path: includes/languages/
@@ -44,7 +44,7 @@ class WPMUDEV_Dashboard {
 	 *
 	 * @var string (Version number)
 	 */
-	public static $version = '4.11.14';
+	public static $version = '4.11.28';
 
 	/**
 	 * The current SUI version.
@@ -55,7 +55,7 @@ class WPMUDEV_Dashboard {
 	 * Use sui followed by version number
 	 * Use dash instead of dots as number seperator
 	 */
-	public static $sui_version = 'sui-2-12-7';
+	public static $sui_version = 'sui-2-12-24';
 
 	/**
 	 * The current plugin base file name.
@@ -221,7 +221,6 @@ class WPMUDEV_Dashboard {
 		 * So it should stay the last module to create, so it can access the
 		 * other modules already in the constructor.
 		 */
-
 		self::$ui = new WPMUDEV_Dashboard_Ui();
 
 		// Register the plugin activation hook.
@@ -247,7 +246,8 @@ class WPMUDEV_Dashboard {
 		 * Custom code can be executed after Dashboard is initialized with the
 		 * default settings.
 		 *
-		 * @var  WPMUDEV_Dashboard The initialized dashboard object.
+		 * @param WPMUDEV_Dashboard $this The initialized dashboard object.
+		 *
 		 * @since  4.0.0
 		 */
 		do_action( 'wpmudev_dashboard_init', $this );

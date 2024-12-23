@@ -1,6 +1,8 @@
 <?php
 
+use Give\Framework\Support\Facades\Scripts\ScriptAsset;
 use Give\Helpers\EnqueueScript;
+use Give\Helpers\Language;
 
 /**
  * Loads the plugin's scripts and styles.
@@ -260,6 +262,8 @@ class Give_Scripts {
 
 	/**
 	 * Localize admin scripts.
+     *
+     * @since 2.25.3 Add nonce for payment note AJAX requests.
 	 */
 	public function admin_localize_scripts() {
 
@@ -386,7 +390,10 @@ class Give_Scripts {
 			'db_update_confirmation_msg'        => __( 'The following process will make updates to your site\'s database. Please create a database backup before proceeding with updates.', 'give' ),
 			'error_message'                     => __( 'Something went wrong kindly try again!', 'give' ),
 			'give_donation_import'              => 'give_donation_import',
+			'give_donation_import_nonce'        => wp_create_nonce('give_donation_import'),
 			'core_settings_import'              => 'give_core_settings_import',
+            'give_insert_payment_note_nonce'    => wp_create_nonce('give_insert_payment_note'),
+            'give_delete_payment_note_nonce'    => wp_create_nonce('give_delete_payment_note'),
 			'setting_not_save_message'          => __( 'Changes you made may not be saved.', 'give' ),
 			'give_donation_amounts'             => [
 				'minimum' => apply_filters( 'give_donation_minimum_limit', 1 ),
@@ -597,18 +604,13 @@ class Give_Scripts {
     /**
      * Gutenberg admin scripts.
      *
+     * @since 3.1.0 Use wp scripts to compile blocks
      * @since 2.19.0 Remove undefined gutenberg.css
      * @since 2.19.6 Load script with EnqueueScript.
      * @since 2.19.6 Load missing block styles
      */
     public function gutenberg_admin_scripts()
     {
-        // Enqueue the bundled block JS file
-        EnqueueScript::make('give-blocks-js', 'assets/dist/js/gutenberg.js')
-            ->dependencies(['give-admin-scripts'])
-            ->registerTranslations()
-            ->enqueue();
-
         wp_enqueue_style(
             'give-blocks-css',
             GIVE_PLUGIN_URL . 'assets/dist/css/admin-block-editor.css',
@@ -616,6 +618,17 @@ class Give_Scripts {
             GIVE_VERSION
         );
 
+        $scriptAsset = ScriptAsset::get(GIVE_PLUGIN_DIR . 'build/adminBlocks.asset.php');
 
+        $handle = 'give-blocks-js';
+        wp_enqueue_script(
+            $handle,
+            GIVE_PLUGIN_URL . 'build/adminBlocks.js',
+            array_merge(['give-admin-scripts'], $scriptAsset['dependencies']),
+            $scriptAsset['version'],
+            true
+        );
+
+        Language::setScriptTranslations($handle);
     }
 }

@@ -11,7 +11,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2024 Sybre Waaijer, CyberWire B.V. (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -40,28 +40,17 @@
  */
 window.tsfGBC = function( $ ) {
 
-	/**
-	 * Data property injected by our Scripts l10n handler.
-	 *
-	 * @since 4.0.0
-	 * @access public
-	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
-	 */
-	const l10n = 'undefined' !== typeof tsfGBCL10n && tsfGBCL10n;
-
 	const editor   = wp.data.select( 'core/editor' );
 	const editPost = wp.data.select( 'core/edit-post' );
-
-	const { debounce } = lodash;
 
 	/**
 	 * Post data holder.
 	 *
 	 * @since 3.2.0
 	 * @access private
-	 * @type {(Object<string, *>)|boolean|null} post data
+	 * @type {Map<string,string>} postData
 	 */
-	let postData;
+	const postData = new Map();
 
 	/**
 	 * Retrieves post attribute.
@@ -69,7 +58,6 @@ window.tsfGBC = function( $ ) {
 	 * @since 3.2.0
 	 * @access private
 	 *
-	 * @function
 	 * @param {String} attribute
 	 * @return {mixed|null}
 	 */
@@ -82,32 +70,20 @@ window.tsfGBC = function( $ ) {
 	 *
 	 * @since 3.2.0
 	 * @since 3.2.2 Now sets post visibility.
+	 * @since 5.0.3 Renamed from `setData()`.
+	 * @since 5.1.0 Now sets the 'slug', 'parent', 'date', and 'author'.
 	 * @access private
-	 *
-	 * @function
 	 */
-	function setData() {
-		postData = {
-			title:      getPostAttribute( 'title' ),
-			link:       editor.getPermalink(),
-			content:    getPostAttribute( 'content' ),
-			excerpt:    getPostAttribute( 'excerpt' ),
-			visibility: editor.getEditedPostVisibility(),
-		};
-	}
-
-	/**
-	 * Returns known editor data.
-	 *
-	 * @since 3.2.0
-	 * @access private
-	 *
-	 * @function
-	 * @param {String} type
-	 * @return {mixed|null}
-	 */
-	function getData( type ) {
-		return postData[ type ] || null;
+	function updateData() {
+		postData.set( 'title', getPostAttribute( 'title' ) )
+				.set( 'link', editor.getPermalink() )
+				.set( 'slug', getPostAttribute( 'slug' ) )
+				.set( 'parent', getPostAttribute( 'parent' ) )
+				.set( 'date', getPostAttribute( 'date' ) )
+				.set( 'author', getPostAttribute( 'author' ) )
+				.set( 'content', getPostAttribute( 'content' ) )
+				.set( 'excerpt', getPostAttribute( 'excerpt' ) )
+				.set( 'visibility', editor.getEditedPostVisibility() );
 	}
 
 	/**
@@ -116,42 +92,17 @@ window.tsfGBC = function( $ ) {
 	 * @since 3.2.0
 	 * @since 3.2.2 Now dispatches visibility changes.
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
 	function assessData() {
-		let oldData = postData;
-		setData();
-		if ( oldData.title !== postData.title ) {
-			triggerUpdate( 'title' );
-		}
-		if ( oldData.link !== postData.link ) {
-			triggerUpdate( 'link' );
-		}
-		if ( oldData.content !== postData.content ) {
-			triggerUpdate( 'content' );
-		}
-		if ( oldData.excerpt !== postData.excerpt ) {
-			triggerUpdate( 'excerpt' );
-		}
-		if ( oldData.visibility !== postData.visibility ) {
-			triggerUpdate( 'visibility' );
-		}
-	}
 
-	/**
-	 * Dispatches an event of a data type, also sends data of set type.
-	 *
-	 * @since 3.2.0
-	 * @access public
-	 *
-	 * @function
-	 * @param {String} type
-	 * @return {undefined}
-	 */
-	const triggerUpdate = ( type ) => {
-		$( document ).trigger( 'tsf-updated-gutenberg-' + type, [ getData( type ) ] );
+		const oldData = new Map( postData );
+
+		updateData();
+
+		postData.forEach( ( val, key ) => {
+			if ( val !== oldData.get( key ) )
+				triggerUpdate( key );
+		} );
 	}
 
 	/**
@@ -175,9 +126,6 @@ window.tsfGBC = function( $ ) {
 	 * @since 4.0.0 1. Now waits for 7 seconds for the saveDispatcher to resolve before canceling the process.
 	 *              2. Added `saveType` checking, to discern events with stale dirty content.
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
 	function saveDispatcher() {
 		if ( ! saved ) {
@@ -196,7 +144,7 @@ window.tsfGBC = function( $ ) {
 		} else {
 			if ( editor.didPostSaveRequestSucceed() ) {
 				dispatchSaveEventDebouncer();
-				revertSaveStateDebouncer() && revertSaveStateDebouncer().cancel();
+				revertSaveStateDebouncer().cancel();
 				revertSaveState();
 			} else {
 				revertSaveStateDebouncer();
@@ -204,21 +152,18 @@ window.tsfGBC = function( $ ) {
 		}
 	}
 
-	const revertSaveStateDebouncer = debounce( revertSaveState, 7000 );
+	const revertSaveStateDebouncer = tsfUtils.debounce( revertSaveState, 7000 ); // 7s: timeout for HTTP resolving
 	/**
 	 * Reverts save state.
 	 *
 	 * @since 4.0.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
 	function revertSaveState() {
 		saved = false;
 	}
 
-	const dispatchSaveEventDebouncer = debounce( dispatchSavedEvent, 500 );
+	const dispatchSaveEventDebouncer = tsfUtils.debounce( dispatchSavedEvent, 500 );
 	/**
 	 * Maintains retry states.
 	 * @since 4.0.0
@@ -233,9 +178,6 @@ window.tsfGBC = function( $ ) {
 	 * @since 4.0.0 1. Added `saveType` checking.
 	 *              2. Now forwards the `saveType` parameter in `tsf-gutenberg-saved-document`.
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
 	function dispatchSavedEvent() {
 		if ( editor.isPostSavingLocked() ) {
@@ -243,7 +185,7 @@ window.tsfGBC = function( $ ) {
 			if ( ++retryDispatch < 3 ) {
 				dispatchSaveEventDebouncer();
 			} else {
-				dispatchSaveEventDebouncer() && dispatchSaveEventDebouncer().cancel();
+				dispatchSaveEventDebouncer().cancel();
 				retryDispatch = 0;
 			}
 		} else {
@@ -255,10 +197,10 @@ window.tsfGBC = function( $ ) {
 
 			switch ( savedType ) {
 				case 'preview':
-					$( document ).trigger( 'tsf-gutenberg-onpreview' );
+					document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-onpreview' ) );
 					break;
 				case 'autosave':
-					$( document ).trigger( 'tsf-gutenberg-onautosave' );
+					document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-onautosave' ) );
 					break;
 				case 'save':
 					triggerOnSaveEvent = true;
@@ -266,10 +208,18 @@ window.tsfGBC = function( $ ) {
 			}
 
 			if ( triggerOnSaveEvent ) {
-				$( document ).trigger( 'tsf-gutenberg-onsave' );
+				document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-onsave' ) )
+					&& document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-onsave-completed' ) );
 			}
 
-			$( document ).trigger( 'tsf-gutenberg-saved-document', { savedType } );
+			document.dispatchEvent(
+				new CustomEvent(
+					'tsf-gutenberg-saved-document',
+					{
+						detail: { savedType },
+					}
+				)
+			);
 			savedType = '';
 		}
 	}
@@ -279,9 +229,9 @@ window.tsfGBC = function( $ ) {
 	 *
 	 * @since 4.0.0
 	 * @access private
-	 * @type {Object<string, *>}
+	 * @type {Object<string,*>}
 	 */
-	let lastSidebarState = {
+	const lastSidebarState = {
 		opened: false,
 	};
 	/**
@@ -289,22 +239,57 @@ window.tsfGBC = function( $ ) {
 	 *
 	 * @since 3.2.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
 	function sidebarDispatcher() {
 		if ( editPost.isEditorSidebarOpened() ) {
 			if ( ! lastSidebarState.opened ) {
 				lastSidebarState.opened = true;
-				$( document ).trigger( 'tsf-gutenberg-sidebar-opened' );
+				document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-sidebar-opened' ) );
 			}
 		} else {
 			if ( lastSidebarState.opened ) {
 				lastSidebarState.opened = false;
-				$( document ).trigger( 'tsf-gutenberg-sidebar-closed' );
+				document.dispatchEvent( new CustomEvent( 'tsf-gutenberg-sidebar-closed' ) );
 			}
 		}
+	}
+
+	/**
+	 * Dispatches an event of a data type, also sends data of set type.
+	 *
+	 * @since 3.2.0
+	 * @since 5.1.0 Added a non-jQuery event alternatives: `tsf-uppdated-block-editor` and `tsf-uppdated-block-editor-${type}`.
+	 * @access public
+	 *
+	 * @param {String} type
+	 */
+	function triggerUpdate( type ) {
+
+		const value = postData.get( type );
+
+		document.dispatchEvent( new CustomEvent(
+			`tsf-updated-block-editor`,
+			{ detail: { type, value, postData } },
+		) );
+
+		document.dispatchEvent( new CustomEvent(
+			`tsf-updated-block-editor-${type}`,
+			{ detail: { type, value } },
+		) );
+
+		$._data( document, 'events' )?.[ `tsf-updated-gutenberg-${type}` ]
+			&& tsf.deprecatedFunc(
+				'jQuery event "tsf-updated-gutenberg"',
+				'5.1.0',
+				`JS Event "tsf-updated-block-editor" or "tsf-updated-block-editor-${type}"`,
+			);
+
+		// Unfortunately, we still rely on jQuery here.
+		// We can't move away from this quickly, since the data sent is definitely used by other plugins (like our Focus extension was).
+		$( document ).trigger(
+			`tsf-updated-gutenberg-${type}`,
+			[ value ],
+		);
 	}
 
 	/**
@@ -313,28 +298,16 @@ window.tsfGBC = function( $ ) {
 	 * @since 3.2.0
 	 * @since 4.0.0 Now adds tooltip boundaries (moved from tt.js)
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
-	const _initCompat = () => {
+	function _initCompat() {
 
-		wp.data.subscribe( debounce( sidebarDispatcher, 500 ) );
-		wp.data.subscribe( debounce( assessData, 300 ) );
-		wp.data.subscribe( saveDispatcher );
+		const { subscribe } = wp.data;
 
-		// Set all values prior debouncing.
-		setTimeout( () => {
-			setData();
+		subscribe( tsfUtils.debounce( sidebarDispatcher, 500 ) );
+		subscribe( tsfUtils.debounce( assessData, 300 ) );
+		subscribe( saveDispatcher );
 
-			triggerUpdate( 'title' );
-			triggerUpdate( 'link' );
-			triggerUpdate( 'content' );
-			triggerUpdate( 'excerpt' );
-			triggerUpdate( 'visibility' );
-
-			$( document ).trigger( 'tsf-subscribed-to-gutenberg' );
-		} );
+		document.dispatchEvent( new CustomEvent( 'tsf-subscribed-to-gutenberg' ) );
 	}
 
 	return Object.assign( {
@@ -346,15 +319,12 @@ window.tsfGBC = function( $ ) {
 		 * @access protected
 		 *
 		 * @function
-		 * @return {undefined}
 		 */
 		load: () => {
-			$( document.body ).on( 'tsf-onload', _initCompat );
+			document.body.addEventListener( 'tsf-onload', _initCompat );
 		},
 	}, {
 		triggerUpdate,
-	}, {
-		l10n
 	} );
 }( jQuery );
-jQuery( window.tsfGBC.load );
+window.tsfGBC.load();

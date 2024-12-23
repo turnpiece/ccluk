@@ -56,6 +56,11 @@ class Give_Subscription {
 	public $recurring_amount = '';
 
 	/**
+	 * @var float
+	 */
+	public $recurring_fee_amount = 0;
+
+	/**
 	 * @var int
 	 */
 	public $bill_times = 0;
@@ -215,18 +220,19 @@ class Give_Subscription {
 		}
 
 		$defaults = array(
-			'customer_id'       => 0,
-			'period'            => '',
-			'frequency'         => 1,
-			'initial_amount'    => '',
-			'recurring_amount'  => '',
-			'bill_times'        => 0,
-			'parent_payment_id' => 0,
-			'form_id'           => 0,
-			'created'           => '',
-			'expiration'        => '',
-			'status'            => '',
-			'profile_id'        => '',
+			'customer_id'          => 0,
+			'period'               => '',
+			'frequency'            => 1,
+			'initial_amount'       => '',
+			'recurring_amount'     => '',
+			'recurring_fee_amount' => 0,
+			'bill_times'           => 0,
+			'parent_payment_id'    => 0,
+			'form_id'              => 0,
+			'created'              => '',
+			'expiration'           => '',
+			'status'               => '',
+			'profile_id'           => '',
 		);
 
 		$args = wp_parse_args( $data, $defaults );
@@ -444,7 +450,7 @@ class Give_Subscription {
 	 *
 	 * Records a new payment on the subscription.
 	 *
-	 * @param array $args Array of values for the payment, including amount and transaction ID.
+	 * @param  array  $args  Array of values for the payment, including amount and transaction ID.
 	 *
 	 * @return bool
 	 */
@@ -462,8 +468,13 @@ class Give_Subscription {
 			return false;
 		}
 
-		$payment                 = new Give_Payment();
-		$parent                  = new Give_Payment( $this->parent_payment_id );
+		$payment = new Give_Payment();
+		$parent  = new Give_Payment( $this->parent_payment_id );
+
+		// Sanitize donation amount.
+		$args['amount'] = $this->mayBeSanitizeWebhookResponseDonationAmount( $args['amount'], $parent->currency );
+
+
 		$payment->parent_payment = $this->parent_payment_id;
 		$payment->total          = $args['amount'];
 		$payment->form_title     = $parent->form_title;
@@ -484,13 +495,13 @@ class Give_Subscription {
 		/**
 		 * Get Correct Donation Level ID for renewal amount.
 		 *
-		 * @since 1.8
-		 *
-		 * @param integer       $price_id Price ID.
-		 * @param float         $amount   Renewal amount
-		 * @param \Give_Payment $payment  Renewal Payment
+		 * @param  integer  $price_id  Price ID.
+		 * @param  float  $amount  Renewal amount
+		 * @param  \Give_Payment  $payment  Renewal Payment
 		 *
 		 * @return integer $price_id
+		 * @since 1.8
+		 *
 		 */
 		$price_id = apply_filters( 'give_recurring_renewal_price_id', $price_id, $args['amount'], $parent );
 
@@ -1165,5 +1176,45 @@ class Give_Subscription {
 	 */
 	private function can_update_status( $status = '' ) {
 		return $status && ( $status !== $this->subs_db->get_column( 'status', $this->id ) );
+	}
+
+	/**
+	 * Return sanitized donation amount which comes from webhook and formatted with standard formatting setting. (number of decimal: "2", decimal separator: "." ).
+	 *
+	 * @param  float  $donationAmount
+	 * @param  string  $currencyCode
+	 *
+	 * @return float
+	 * @since 1.10.5
+	 */
+	private function mayBeSanitizeWebhookResponseDonationAmount( $donationAmount, $currencyCode ) {
+		// Is processing webhook for any payment gateway.
+		if ( empty( $_GET['give-listener'] ) ) {
+			return $donationAmount;
+		}
+
+		$donationAmountStr = (string) $donationAmount;
+		$numberOfDecimal   = give_get_price_decimals( $currencyCode );
+		$thousandSeparator = give_get_price_thousand_separator( $currencyCode );
+		$decimalSeparator  = give_get_price_decimal_separator( $currencyCode );
+		$amountPart        = explode( '.', $donationAmountStr );
+
+		// Sanitize donation amount only if
+		// 1. number of decimal is set to zero for give currency.
+		// 2. "." is thousand separator.
+		// 3. amount formatted with ".".
+		// 4. number of decimal for amount is two. like 10.25 or 40.00
+		if (
+			! $numberOfDecimal &&
+			'.' === $thousandSeparator &&
+			false !== strpos( $donationAmountStr, $thousandSeparator ) &&
+			false === strpos( $donationAmountStr, $decimalSeparator ) &&
+			2 === count( $amountPart ) &&
+			2 === strlen( $amountPart[1] )
+		) {
+			$donationAmount = number_format( (float) $donationAmount, 10 );
+		}
+
+		return $donationAmount;
 	}
 }

@@ -1,30 +1,56 @@
 <?php
 
 /**
-* A Class to create and filter the global $swp_user_options;
-*
-* This class ensures that if options have been added via updates or by installing
-* new addons that they are added to the user options array. Conversely, if
-* available options have disappeared from deactivating an addon, those options
-* will be removed from the global user options array.
-*
-* @package   SocialWarfare\Functions\Options
-* @copyright Copyright (c) 2018, Warfare Plugins, LLC
-* @license   GPL-3.0+
-* @since     3.3.0   | Created | 06 AUG 2018
-* @access    public
-*
-*/
+ * A Class to create and filter the global $swp_user_options;
+ *
+ * This class ensures that if options have been added via updates or by installing
+ * new addons that they are added to the user options array. Conversely, if
+ * available options have disappeared from deactivating an addon, those options
+ * will be removed from the global user options array.
+ *
+ * @package   SocialWarfare\Functions\Options
+ * @copyright Copyright (c) 2018, Warfare Plugins, LLC
+ * @license   GPL-3.0+
+ * @since     3.3.0   | Created | 06 AUG 2018
+ * @access    public
+ */
 class SWP_User_Options {
 
 
 	/**
 	 * SWP_Debug_Trait provides useful tool like error handling and a debug
 	 * method which outputs the contents of the current object.
-	 *
 	 */
 	use SWP_Debug_Trait;
 
+	/**
+	 * Declaration of the unfiltered_options property to prevent dynamic property creation.
+	 *
+	 * @var array
+	 */
+	public $unfiltered_options;
+
+	/**
+	 * Declaration of the registered_options property to prevent dynamic property creation.
+	 *
+	 * @var array
+	 */
+	protected $registered_options;
+
+	/**
+	 * Declaration of the user_options property to prevent dynamic property creation.
+	 *
+	 * @var array
+	 */
+	protected $user_options;
+
+	/**
+	 * Declaration of the user_icons property to prevent dynamic property creation.
+	 * This property is used to store filtered social network icons data.
+	 *
+	 * @var array
+	 */
+	protected $user_icons;
 
 	/**
 	 * The Constructor
@@ -37,7 +63,6 @@ class SWP_User_Options {
 	 * @since  3.4.0 | 19 SEP 2018 | Refactored, cleaned, formatted.
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function __construct() {
 
@@ -46,7 +71,7 @@ class SWP_User_Options {
 		$this->globalize_option_data();
 
 		// Defered to End of Cycle: Add all relevant option info to the database.
-		add_action( 'wp_loaded', array( $this , 'store_registered_options_data' ), 10000 );
+		add_action( 'wp_loaded', array( $this, 'store_registered_options_data' ), 10000 );
 		add_action( 'admin_footer', array( $this, 'debug' ) );
 		add_action( 'wp_footer', array( $this, 'debug' ) );
 	}
@@ -59,13 +84,12 @@ class SWP_User_Options {
 	 * @since  3.4.0 | 19 SEP 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	protected function establish_option_data() {
 		$this->unfiltered_options = get_option( 'social_warfare_settings', false );
 		$this->registered_options = get_option( 'swp_registered_options', false );
 
-		if( false == $this->unfiltered_options || empty( $this->unfiltered_options ) ) {
+		if ( false === $this->unfiltered_options || empty( $this->unfiltered_options ) ) {
 			$this->unfiltered_options = array();
 		}
 		$this->user_options = $this->unfiltered_options;
@@ -76,17 +100,14 @@ class SWP_User_Options {
 	 * Compares what the admin wants to what is available to the admin.
 	 *
 	 * @return void
-	 *
 	 */
 	protected function filter_option_data() {
-
 
 		/**
 		 * If we didn't find any registered options, just bail out and don't
 		 * run any of the filters.
-		 *
 		 */
-		if( false === $this->registered_options ) {
+		if ( false === $this->registered_options ) {
 			return;
 		}
 
@@ -103,7 +124,6 @@ class SWP_User_Options {
 	 * @since  3.4.0 | 19 SEP 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	protected function globalize_option_data() {
 		global $swp_user_options;
@@ -129,77 +149,64 @@ class SWP_User_Options {
 	 * @since  3.3.0 | 06 AUG 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function store_registered_options_data() {
-
 
 		/**
 		 * The whitelist ensures that certain options don't get filtered out.
 		 * Right now, this is more of a band aid, and in the future, we hope to
 		 * make sure that all options get properly registered so that they won't
 		 * need to be whitelisted.
-		 *
 		 */
 		$whitelist = $this->generate_whitelist();
-
 
 		/**
 		 * Each option should register it's default value and it's allowable
 		 * values via these two hooks. This is the only way for us to tell if an
 		 * option is currently available and if the value for this option is
 		 * indeed a valid value.
-		 *
 		 */
 		$new_registered_options = array(
-			'defaults'  => apply_filters( 'swp_options_page_defaults', array() ),
-			'values'    => apply_filters( 'swp_options_page_values', array() )
+			'defaults' => apply_filters( 'swp_options_page_defaults', array() ),
+			'values'   => apply_filters( 'swp_options_page_values', array() ),
 		);
-
 
 		/**
 		 * There is one registration item for each addon. This filter allows us
 		 * to fetch those. Those registration items will contain the registration
 		 * key and the registration timestamp. We want to ensure that these items
 		 * are not filtered out.
-		 *
 		 */
 		$registrations = apply_filters( 'swp_registrations', array() );
-
 
 		/**
 		 * We're going to loop through the whitelist and add them to the list of
 		 * registered options. This will make them available on the flip side
 		 * ensuring that these specific options do not get filtered out of the
 		 * options array.
-		 *
 		 */
-		foreach( $whitelist as $key ) {
-
+		foreach ( $whitelist as $key ) {
 
 			/**
 			 * If this option doesn't actually exist in the user options, then
 			 * we don't actually need to whitelist it.
-			 *
 			 */
-			if ( !isset( $this->unfiltered_options[$key] ) ) {
+			if ( ! isset( $this->unfiltered_options[ $key ] ) ) {
 				continue;
 			}
 
-			$new_registered_options['defaults'][$key] = $this->unfiltered_options[$key];
-			$new_registered_options['values'][$key]['type'] = 'none';
-			$new_registered_options['values'][$key]['values'] = $this->unfiltered_options[$key];
+			$new_registered_options['defaults'][ $key ]         = $this->unfiltered_options[ $key ];
+			$new_registered_options['values'][ $key ]['type']   = 'none';
+			$new_registered_options['values'][ $key ]['values'] = $this->unfiltered_options[ $key ];
 
 		}
-
 
 		/**
 		 * If the registered options have changed since the last update, we'll
 		 * need to go ahead and update them in the database so that they are
 		 * current.
-		 *
 		 */
-		if( $new_registered_options != $this->registered_options ) {
+		if ( $new_registered_options !== $this->registered_options ) {
 			update_option( 'swp_registered_options', $new_registered_options );
 		}
 	}
@@ -213,10 +220,8 @@ class SWP_User_Options {
 	 *         options page class.
 	 * @param  void
 	 * @return array An array of whitelisted option keys.
-	 *
 	 */
 	public function generate_whitelist() {
-
 
 		/**
 		 * The addons will contain the registration data items to ensure that
@@ -224,34 +229,29 @@ class SWP_User_Options {
 		 *
 		 * The whitelist is the list of items that don't necessarily get
 		 * registered from the options page, so we manually whitelist them.
-		 *
 		 */
 		$addons    = apply_filters( 'swp_registrations', array() );
 		$whitelist = array(
 			'last_migrated',
 			'bitly_access_token',
 			'bitly_access_login',
-			'bitly_authentication'
+			'bitly_authentication',
 		);
-
 
 		/**
 		 * If the user doesn't have any addons installed, we just bail and
 		 * return the existing whitelist from above.
-		 *
 		 */
-		if ( empty( $addons) ) {
+		if ( empty( $addons ) ) {
 			return $whitelist;
 		}
-
 
 		/**
 		 * If the user does have addons installed, we need to add the license
 		 * key and the license key timestamp to the whitelist array to ensure
 		 * that we don't filter it out.
-		 *
 		 */
-		foreach( $addons as $addon ) {
+		foreach ( $addons as $addon ) {
 			$whitelist[] = $addon->key . '_license_key';
 			$whitelist[] = $addon->key . '_license_key_timestamp';
 		}
@@ -273,24 +273,20 @@ class SWP_User_Options {
 	 * @since  3.3.0 | 06 AUG 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	private function remove_unavailable_options() {
 
 		/**
 		 * Compare the registered defaults to the options that the user has
 		 * saved in the database. Only save those keys that are registered.
-		 *
 		 */
 		$defaults = array_keys( $this->registered_options['defaults'] );
 		$options  = array_keys( $this->user_options );
 
-
 		/**
 		 * Bail out if either of the above checks failed to process properly.
-		 *
 		 */
-		if( false == $defaults || false == $options ) {
+		if ( false === $defaults || false === $options ) {
 			return;
 		}
 
@@ -299,30 +295,25 @@ class SWP_User_Options {
 		/**
 		 * Loop through each of the options in the users options and validate
 		 * that it is setup properly and doesn't need filtered out.
-		 *
 		 */
-		foreach( $this->user_options as $key => $value ) {
-
+		foreach ( $this->user_options as $key => $value ) {
 
 			/**
 			 * The order_of_icons options is a unique case so we've broken out
 			 * the logic that controls it's filtering to a separate method.
-			 *
 			 */
-			if ( $key == 'order_of_icons' ) {
-				$value = $this->filter_order_of_icons( $value );
-				$this->user_icons[$key] = $value;
+			if ( 'order_of_icons' === $key ) {
+				$value                    = $this->filter_order_of_icons( $value );
+				$this->user_icons[ $key ] = $value;
 				continue;
 			}
-
 
 			/**
 			 * If a given user option is not listed in the list of registered
 			 * options, we need to filter it out of the user options.
-			 *
 			 */
-			if ( !in_array( $key, $available_options ) ) {
-				unset( $this->user_options[$key] );
+			if ( ! in_array( $key, $available_options, true ) ) {
+				unset( $this->user_options[ $key ] );
 			}
 		}
 	}
@@ -337,41 +328,34 @@ class SWP_User_Options {
 	 * and control it's filtering.
 	 *
 	 * @since  3.3.0 | 01 JUL 2018 | Created
-	 * @param  array  $user_icons An array of social networks.
+	 * @param  array $user_icons An array of social networks.
 	 * @return array              The modified array of social networks.
-	 *
 	 */
 	private function filter_order_of_icons( $user_icons = array() ) {
-
 
 		/**
 		 * Fetch the available registered options and the user selected options
 		 * so that we can compare them to each other below.
-		 *
 		 */
 		$networks   = $this->registered_options['values']['order_of_icons']['values'];
 		$user_icons = $this->user_options['order_of_icons'];
-
 
 		/**
 		 * Loop through each of the user's selected networks and remove any that
 		 * are not available. For example, if they have pro networks selected,
 		 * but pro is not longer installed, these will need to be filtered out.
-		 *
 		 */
-		foreach( $user_icons as $network_key ) {
-			if ( empty( $networks[$network_key] ) ) {
-				unset( $user_icons[$network_key] );
+		foreach ( $user_icons as $network_key ) {
+			if ( empty( $networks[ $network_key ] ) ) {
+				unset( $user_icons[ $network_key ] );
 			}
 		}
-
 
 		/**
 		 * If the user does not have any networks selected (like on a fresh
 		 * install) then simply create some defaults for them and then return.
-		 *
 		 */
-		if ( empty ( $user_icons ) ) {
+		if ( empty( $user_icons ) ) {
 			$user_icons = $this->registered_options['defaults']['order_of_icons'];
 		}
 
@@ -385,40 +369,37 @@ class SWP_User_Options {
 	 * @since  3.3.0 | 06 AUG 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	private function correct_invalid_values() {
 		$defaults = $this->registered_options['defaults'];
 		$values   = $this->registered_options['values'];
 
-		foreach( $this->user_options as $key => $value ) {
+		foreach ( $this->user_options as $key => $value ) {
 
 			// For the Zero Day bug catch
-			if ( 'twitter_id' == $key ) {
+			if ( 'twitter_id' === $key ) {
 				if ( strpos( $value, '<' ) || strlen( $value ) > 15 ) {
 					$this->user_options['twitter_id'] = '';
-					SWP_Utility::update_option( 'twitter_id' , '' );
+					SWP_Utility::update_option( 'twitter_id', '' );
 				}
 			}
 
-			if ( is_string( $value ) && !is_numeric( $value ) ) {
+			if ( is_string( $value ) && ! is_numeric( $value ) ) {
 
 				// Looking for suspicious texts
 				if ( strpos( $value, 'script' )
 				|| ( strpos( $value, '(' ) && strpos( $value, '<' ) )
 				|| ( strpos( $value, 'fromCharCode' ) > -1 ) ) {
-					$this->user_options[$key] = '';
-					SWP_Utility::update_option( $key , '' );
-				}
-
-				else {
+					$this->user_options[ $key ] = '';
+					SWP_Utility::update_option( $key, '' );
+				} else {
 					// Sanitize string inputs before storing in the db.
-					$this->user_options[$key] = htmlspecialchars( $value );
+					$this->user_options[ $key ] = htmlspecialchars( $value );
 				}
 			}
 
-			if( $values[$key]['type'] == 'select' && !array_key_exists( $value, $values[$key]['values']) ) {
-				$this->user_options[$key] = $defaults[$key];
+			if ( 'select' === $values[ $key ]['type'] && ! array_key_exists( $value, $values[ $key ]['values'] ) ) {
+				$this->user_options[ $key ] = $defaults[ $key ];
 			}
 		}
 	}
@@ -433,15 +414,14 @@ class SWP_User_Options {
 	 * @since  3.3.0  | 06 AUG 2018 | Moved from database migration class.
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	private function add_option_defaults() {
 		$defaults = $this->registered_options['defaults'];
 
 		foreach ( $defaults as $key => $value ) {
-			 if ( !isset( $this->user_options[$key] ) ) {
-				 $this->user_options[$key] = $value;
-			 }
+			if ( ! isset( $this->user_options[ $key ] ) ) {
+				$this->user_options[ $key ] = $value;
+			}
 		}
 	}
 }

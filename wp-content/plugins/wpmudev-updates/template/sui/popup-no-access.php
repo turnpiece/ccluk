@@ -82,8 +82,8 @@ if( 'single' === $reason ){
 				</div>
 				<div class="sui-block-content-center">
 					<img
-						src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?>"
-						srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-dashboard-modal-upgrade.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-dashboard-modal-upgrade@2x.png' ); ?> 2x"
+						src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/upgrade.png' ); ?>"
+						srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/upgrade.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/upgrade@2x.png' ); ?> 2x"
 						alt="Upgrade"
 						aria-hidden="true"
 						style = "vertical-align: middle;"

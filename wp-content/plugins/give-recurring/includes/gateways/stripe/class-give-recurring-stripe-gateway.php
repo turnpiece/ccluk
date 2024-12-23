@@ -496,7 +496,7 @@ if ( ! class_exists( 'Give_Recurring_Stripe_Gateway' ) ) {
 						: $source;
 
 					// Get metadata.
-					$metadata = give_recurring_get_metadata( $this->purchase_data, $this->payment_id );
+					$metadata = give_stripe_prepare_metadata( $this->payment_id, $this->purchase_data );
 
 					$args = array(
 						'customer' => $stripe_customer->id,

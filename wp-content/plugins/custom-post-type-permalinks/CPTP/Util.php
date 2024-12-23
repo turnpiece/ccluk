@@ -57,8 +57,8 @@ class CPTP_Util {
 		 *
 		 * @param bool $support support CPTP.
 		 */
-		$support = apply_filters( "CPTP_is_rewrite_supported_by_${post_type}", $support );
-		$support = apply_filters( "cptp_is_rewrite_supported_by_${post_type}", $support );
+		$support = apply_filters( "CPTP_is_rewrite_supported_by_{$post_type}", $support );
+		$support = apply_filters( "cptp_is_rewrite_supported_by_{$post_type}", $support );
 
 		/**
 		 * Filters support CPTP for custom post type.
@@ -262,7 +262,7 @@ class CPTP_Util {
 				$front = '/date';
 				break;
 			}
-			$tok_index ++;
+			++$tok_index;
 		}
 
 		$front = apply_filters( 'CPTP_date_front', $front, $post_type, $structure );

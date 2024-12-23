@@ -45,7 +45,7 @@ class Properties
     public $temp_prefix = '_mig_';
     public $transient_timeout;
     public $transient_retry_timeout;
-    public $dbrains_api_status_url = 'http://s3.amazonaws.com/cdn.deliciousbrains.com/status.json';
+    public $dbrains_api_status_url = 'https://s3.amazonaws.com/cdn.deliciousbrains.com/status.json';
     public $multipart_boundary = 'bWH4JVmYCnf6GfXacrcc';
     public $invalid_content_verification_error;
     public $util;
@@ -72,7 +72,7 @@ class Properties
         $this->plugin_file_path = $is_pro ? realpath(dirname(__DIR__) . '/../../wp-migrate-db-pro.php') : realpath(dirname(__DIR__) . '/../../wp-migrate-db.php');
 
         if ($is_pro) {
-            $this->unhook_templates = ['exclude_post_revisions', 'wordpress_org_support', 'progress_upgrade', 'sidebar'];
+            $this->unhook_templates = ['wordpress_org_support', 'progress_upgrade', 'sidebar'];
         }
 
         $this->plugin_dir_path    = plugin_dir_path($this->plugin_file_path);

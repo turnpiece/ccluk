@@ -15,25 +15,23 @@
  * @license   GPL-3.0+
  * @since     3.1.0 | 20 JUN 2018 | Created
  * @access    public
- *
  */
 class SWP_Post_Cache_Loader {
 
 
-    /**
-    * Array of the currently loaded SWP_Post_Cache objects, indexed by post_id.
-    * These are meant to be accessed by the Buttons Panel, for example.
-    *
-    * Example Data:
-    * $post_caches = array(
-    * 	282 => post cache object for post 282
-    * 	983 => post cache object for post 983
-    * )
-    *
-    * @var array
-    *
-    */
-    public $post_caches = array();
+	/**
+	 * Array of the currently loaded SWP_Post_Cache objects, indexed by post_id.
+	 * These are meant to be accessed by the Buttons Panel, for example.
+	 *
+	 * Example Data:
+	 * $post_caches = array(
+	 *   282 => post cache object for post 282
+	 *   983 => post cache object for post 983
+	 * )
+	 *
+	 * @var array
+	 */
+	public $post_caches = array();
 
 
 	/**
@@ -42,12 +40,10 @@ class SWP_Post_Cache_Loader {
 	 *
 	 * @since  3.1.0 | 25 JUN 2018 | Created
 	 * @since  3.4.0 | 17 OCT 2018 | Removed legacy AJAX methods (hooked here).
-	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function __construct() {
-        add_action( 'save_post', array( $this, 'update_post' ) );
+		add_action( 'save_post', array( $this, 'update_post' ) );
 		add_action( 'publish_post', array( $this, 'update_post' ) );
 	}
 
@@ -64,15 +60,14 @@ class SWP_Post_Cache_Loader {
 	 * @since  3.1.0 | 20 JUNE 2018 | Created
 	 * @param  integer $post_id The ID of the post being requested.
 	 * @return object           The post_cache object for the post.
-	 *
 	 */
-    public function get_post_cache( $post_id ) {
+	public function get_post_cache( $post_id ) {
 
-		if ( empty( $this->post_caches[$post_id] ) ) {
-			$this->post_caches[$post_id] = new SWP_Post_Cache( $post_id );
+		if ( empty( $this->post_caches[ $post_id ] ) ) {
+			$this->post_caches[ $post_id ] = new SWP_Post_Cache( $post_id );
 		}
 
-		return $this->post_caches[$post_id];
+		return $this->post_caches[ $post_id ];
 	}
 
 
@@ -82,22 +77,18 @@ class SWP_Post_Cache_Loader {
 	 * @since  3.1.0 | 26 JUN 2018 | Created the method.
 	 * @since  3.4.0 | 17 OCT 2018 | Moved publish conditional from constructor
 	 *                               into this method.
-	 * @param  void
+	 * @param  int $post_id The ID of the post being updated.
 	 * @return void
-	 *
 	 */
 	public function update_post( $post_id ) {
-
 
 		/**
 		 * If the post isn't published, we don't need to do anything with the
 		 * post cache. Just ignore it.
-		 *
 		 */
 		if ( 'publish' !== get_post_status( $post_id ) ) {
 			return;
 		}
-
 
 		/**
 		 * Instantiate a post cache object for this post, and then call the
@@ -105,11 +96,9 @@ class SWP_Post_Cache_Loader {
 		 * time the post is loaded, we will not used cached data to populate
 		 * the cache object, but will rebuild the cache with fresh data. This
 		 * way the cache will reflect any changes that were made when the post
-		 * was updated. 
-		 *
+		 * was updated.
 		 */
-		$Post_Cache = new SWP_Post_Cache( $post_id );
-		$Post_Cache->delete_timestamp();
+		$post_cache = new SWP_Post_Cache( $post_id );
+		$post_cache->delete_timestamp();
 	}
-
 }

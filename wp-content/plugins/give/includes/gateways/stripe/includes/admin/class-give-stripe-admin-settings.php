@@ -200,6 +200,17 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 						'type' => 'checkbox',
 					];
 
+                    $settings['general'][] = [
+                        'name' => esc_html__( 'Stripe Receipt Emails', 'give' ),
+                        'desc' => sprintf(
+                        /* translators: 1. GiveWP Support URL */
+                            __( 'Check this option if you would like donors to receive receipt emails directly from Stripe. By default, donors will receive GiveWP generated <a href="%1$s" target="_blank">receipt emails</a>. Checking this option does not disable GiveWP emails.', 'give' ),
+                            admin_url( '/edit.php?post_type=give_forms&page=give-settings&tab=emails' )
+                        ),
+                        'id'   => 'stripe_receipt_emails',
+                        'type' => 'checkbox',
+                    ];
+
 					/**
 					 * This filter hook is used to add fields after Stripe General fields.
 					 *
@@ -208,17 +219,6 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 					 * @return array
 					 */
 					$settings = apply_filters( 'give_stripe_add_after_general_fields', $settings );
-
-					$settings['general'][] = [
-						'name' => esc_html__( 'Stripe Receipt Emails', 'give' ),
-						'desc' => sprintf(
-							/* translators: 1. GiveWP Support URL */
-							__( 'Check this option if you would like donors to receive receipt emails directly from Stripe. By default, donors will receive GiveWP generated <a href="%1$s" target="_blank">receipt emails</a>. Checking this option does not disable GiveWP emails.', 'give' ),
-							admin_url( '/edit.php?post_type=give_forms&page=give-settings&tab=emails' )
-						),
-						'id'   => 'stripe_receipt_emails',
-						'type' => 'checkbox',
-					];
 
 					$settings['general'][] = [
 						'name'  => esc_html__( 'Stripe Gateway Documentation', 'give' ),
@@ -301,7 +301,7 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 						'desc'          => sprintf(
 							'%1$s <a href="%2$s" target="_blank">%3$s</a> %4$s',
 							esc_html__( 'This option allows you to select from the two types of Stripe Checkout methods available for processing donations. The "Modal" option uses Stripe elements in a popup modal which does not take the donor off your website. The "Redirect" option uses Stripe\'s new off-site', 'give' ),
-							esc_url( 'https://stripe.com/docs/payments/checkout' ),
+							esc_url( 'https://docs.givewp.com/stripe-checkout-docs' ),
 							esc_html__( 'Checkout', 'give' ),
 							esc_html__( 'interface that provides donors an easy way to pay with Credit or Debit Cards, Apple, and Google Pay.', 'give' )
 						),
@@ -575,7 +575,7 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 
 					$settings[] = [
 						'name'    => __( 'Stripe Fonts', 'give' ),
-						'desc'    => __( 'Select the type of font you want to load in Stripe Credit Card fields including Card Number, CVC and Expiration. For more information on Styling Stripe CC fields please see this <a href="https://stripe.com/docs/stripe-js/reference#stripe-elements" target="_blank">article</a>.', 'give' ),
+						'desc'    => __( 'Select the type of font you want to load in Stripe Credit Card fields including Card Number, CVC and Expiration. For more information on Styling Stripe CC fields please see this <a href="https://docs.givewp.com/stripe-styles" target="_blank">article</a>.', 'give' ),
 						'id'      => 'stripe_fonts',
 						'type'    => 'radio_inline',
 						'default' => 'google_fonts',
@@ -667,7 +667,7 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 							echo sprintf(
 								/* translators: 1. Webhook settings page. */
 								__( ' You can  visit your <a href="%1$s" target="_blank">Stripe Account Dashboard</a> to add a new webhook. ', 'give' ),
-								esc_url_raw( 'https://dashboard.stripe.com/account/webhooks' )
+								esc_url_raw( 'https://docs.givewp.com/stripe-dashboard-webhooks' )
 							);
 							esc_html_e( 'Please add a new webhook endpoint for the following URL:', 'give' );
 							?>
@@ -734,7 +734,8 @@ if ( ! class_exists( 'Give_Stripe_Admin_Settings' ) ) {
 			<tr valign="top" <?php echo ! empty( $field_options['wrapper_class'] ) ? 'class="' . esc_attr( $field_options['wrapper_class'] ) . '"' : ''; ?>>
 				<th scope="row" class="titledesc">
 					<label for="<?php echo esc_html( $field_options['type'] ); ?>">
-						<?php echo esc_attr( $field_options['title'] ); ?>
+                        <?php
+                        echo wp_kses_post($field_options['title']); ?>
 					</label>
 				</th>
 				<td class="give-forminp give-forminp-<?php echo esc_html( $field_options['type'] ); ?>">

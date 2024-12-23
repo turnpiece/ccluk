@@ -9,15 +9,19 @@
  * @since       1.0
  */
 
+use Give\Donations\Models\Donation;
+use Give\Donations\ValueObjects\DonationMetaKeys;
+use Give\Donors\Models\Donor;
+
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-if ( ! current_user_can( 'view_give_payments' ) ) {
+if (!current_user_can('view_give_payments')) {
 	wp_die(
-		__( 'Sorry, you are not allowed to access this page.', 'give' ),
-		__( 'Error', 'give' ),
+		__('Sorry, you are not allowed to access this page.', 'give'),
+		__('Error', 'give'),
 		array(
 			'response' => 403,
 		)
@@ -27,6 +31,7 @@ if ( ! current_user_can( 'view_give_payments' ) ) {
 /**
  * View donation details page
  *
+ * @since 3.9.0 Add donor phone number to the view
  * @since 1.0
  * @return void
  */
@@ -59,6 +64,8 @@ $gateway        = $payment->gateway;
 $currency_code  = $payment->currency;
 $payment_mode   = $payment->mode;
 $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-history' );
+$donation_phone_number = Donation::find($payment_id)->phone;
+$donor_phone_number = Donor::find($donor_id)->phone;
 
 ?>
 <div class="wrap give-wrap">
@@ -638,6 +645,26 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 													);
 												?>
 											</p>
+                                            <p>
+                                                <?php
+                                                if ( ! empty($donation_phone_number)) {
+                                                    ?>
+                                                    <strong><?php
+                                                        esc_html_e('Donor Phone:', 'give'); ?></strong><br>
+                                                    <?php
+                                                    // Show Donor donation phone first and Primary phone on parenthesis if not match both phone.
+                                                    echo (empty($donor_phone_number) ||
+                                                          hash_equals($donor_phone_number, $donation_phone_number))
+                                                        ? $donation_phone_number :
+                                                        sprintf(
+                                                            '%1$s (<a href="%2$s" target="_blank">%3$s</a>)',
+                                                            $donation_phone_number,
+                                                            esc_url(admin_url("edit.php?post_type=give_forms&page=give-donors&view=overview&id={$donor_id}")),
+                                                            $donor_phone_number
+                                                        );
+                                                }
+                                                ?>
+                                            </p>
 										</div>
 										<div class="column">
 											<p>
@@ -909,9 +936,10 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 							/**
 							 * Fires on the donation details page, after the main area.
 							 *
+							 * @since 2.27.0 Change to read comment from donations meta table
 							 * @since 1.0
 							 *
-							 * @param int $payment_id Payment id.
+							 * @param  int  $payment_id  Payment id.
 							 */
 							do_action( 'give_view_donation_details_main_after', $payment_id );
 							?>
@@ -924,21 +952,10 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 										<div id="give-payment-donor-comment-inner">
 											<p>
 												<?php
-												$donor_comment = give_get_donor_donation_comment( $payment_id, $payment->donor_id );
-
-												echo sprintf(
-													'<input type="hidden" name="give_comment_id" value="%s">',
-													$donor_comment instanceof WP_Comment // Backward compatibility.
-														|| $donor_comment instanceof stdClass
-															? $donor_comment->comment_ID : 0
-												);
-
 												echo sprintf(
 													'<textarea name="give_comment" id="give_comment" placeholder="%s" class="large-text">%s</textarea>',
 													__( 'Add a comment', 'give' ),
-													$donor_comment instanceof WP_Comment // Backward compatibility.
-													|| $donor_comment instanceof stdClass
-														? $donor_comment->comment_content : ''
+													$payment->get_meta(DonationMetaKeys::COMMENT) ?? ''
 												);
 												?>
 											</p>

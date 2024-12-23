@@ -25,17 +25,21 @@ global $wp_version;
 
 // Render the page header section.
 $this->render_sui_header( __( 'Support', 'wpmudev' ), 'support' );
-$has_support_access = WPMUDEV_Dashboard::$api->is_support_allowed();
 
 // Is current membership type expired, free or paused?.
 $free_type = in_array( $membership_type, array( 'free', 'expired', 'paused' ), true );
+
+$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
+$has_hosted_access     = $is_wpmudev_host && ! $is_standalone_hosting && 'free' === $membership_type;
+$has_support_access    = WPMUDEV_Dashboard::$api->is_support_allowed() || $has_hosted_access;
 
 $url_grant       = wp_nonce_url( add_query_arg( 'action', 'remote-grant', $urls->support_url . '#access' ), 'remote-grant', 'hash' );
 $url_revoke      = wp_nonce_url( add_query_arg( 'action', 'remote-revoke', $urls->support_url . '#access' ), 'remote-revoke', 'hash' );
 $url_extend      = wp_nonce_url( add_query_arg( 'action', 'remote-extend', $urls->support_url . '#access' ), 'remote-extend', 'hash' );
 $url_all_tickets = $urls->remote_site . 'hub/support/';
 $url_search      = $urls->remote_site . 'forums/search.php';
-$url_open_ticket = 'https://wpmudev.com/hub/support/#wpmud-chat-pre-survey-modal';
+$url_open_ticket = WPMUDEV_Dashboard::$ui->page_urls->external_support_url;
 $hub_url         = $urls->hub_url;
 
 if ( $notes && ! empty( $_COOKIE['wpmudev_is_staff'] ) || ! empty( $_GET['staff'] ) ) {// wpcs csrf ok.
@@ -215,7 +219,7 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 	<div class="sui-box js-sidenav-content" id="ticket" style="display: block;">
 		<div class="sui-box-header">
 			<h2 class="sui-box-title"><?php esc_html_e( 'My Tickets', 'wpmudev' ); ?></h2>
-			<?php if ( $free_type ) : ?>
+			<?php if ( $free_type && ! $has_hosted_access ) : ?>
 				<div class="sui-actions-left">
 					<span class="sui-tag sui-tag-pro">
 						<?php esc_html_e( 'Pro', 'wpmudev' ); ?>
@@ -224,7 +228,7 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 			<?php endif; ?>
 			<div class="sui-actions-right">
 				<?php if ( ! empty( $open_threads['all'] ) ) : ?>
-					<?php if ( $free_type ) : ?>
+					<?php if ( $free_type && ! $has_hosted_access ) : ?>
 						<a
 							href="https://wpmudev.com/contact/#i-have-a-presales-question"
 							target="_blank"
@@ -287,14 +291,14 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 			<div class="sui-message sui-message-lg">
 
 				<img
-					src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?>"
-					srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new@2x.png' ); ?> 2x"
+					src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module.png' ); ?>"
+					srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module@2x.png' ); ?> 2x"
 					alt="Support"
 					aria-hidden="true"
 				/>
 
 				<div class="sui-message-content">
-					<?php if ( 'free' === $membership_type ) : ?>
+					<?php if ( 'free' === $membership_type && ! $has_hosted_access ) : ?>
 						<p><?php echo __( 'Our team is here to help you with any WordPress problem, anytime. Every WPMU DEV<br>membership comes with 24/7 expert live WordPress support, upgrade your membership to<br>gain access.', 'wpmudev' ); ?>
 						<p>
 							<a href="https://wpmudev.com/hub/account/?utm_source=wpmudev-dashboard&utm_medium=plugin&utm_campaign=dashboard_free_upgrade" class="sui-button sui-button-purple" style="margin-top: 10px;"><?php echo __( 'Upgrade Membership', 'wpmudev' ); ?></a>
@@ -396,7 +400,7 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 												<?php
 												$link_class   = '';
 												$tooltip_attr = '';
-												if ( $free_type ) :
+												if ( $free_type && ! $has_hosted_access ) :
 													$link_class   = ' sui-tooltip sui-tooltip-constrained sui-tooltip-top-right ';
 													$tooltip_attr = __( 'You can view old support tickets, but not create new ones', 'wpmudev' );
 												endif;
@@ -511,14 +515,14 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 				<?php if ( empty( $access_logs ) ) : ?>
 					<div class="sui-message">
 						<img
-							src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?>"
-							srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/graphic-support-new@2x.png' ); ?> 2x"
+							src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module.png' ); ?>"
+							srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/module@2x.png' ); ?> 2x"
 							alt="dev-man"
 							class="sui-image"
 						/>
 
 						<p><?php esc_html_e( 'Need help? Grant support access so our WPMU DEV Support Staff are able to log in and help troubleshoot issues with you. This is completely secure and only active for a time period of your choice.', 'wpmudev' ); ?></p>
-						<?php if ( 'free' === $membership_type ) : ?>
+						<?php if ( 'free' === $membership_type && ! $has_hosted_access ) : ?>
 							<a href="https://wpmudev.com/hub/account/?utm_source=wpmudev-dashboard&utm_medium=plugin&utm_campaign=dashboard_free_upgrade" class="sui-button sui-button-purple" style="margin-top: 10px;"><?php esc_html_e( 'Upgrade Membership', 'wpmudev' ); ?></a>
 						<?php elseif ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) : ?>
 							<a href="https://wpmudev.com/hub/account/?utm_source=wpmudev-dashboard&utm_medium=plugin&utm_campaign=dashboard_expired_modal_reactivate" class="sui-button sui-button-purple" style="margin-top: 10px;"><?php esc_html_e( 'Reactivate Membership', 'wpmudev' ); ?></a>
@@ -782,7 +786,7 @@ if ( in_array( $membership_type, array( 'expired', 'paused' ), true ) ) {
 
 				<h4 class="dashui-modal-header"><?php esc_html_e( 'How it works', 'wpmudev' ); ?></h4>
 				<p id="dialogDescription"
-				   class="sui-p-small"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 96 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
+				   class="sui-p-small"><?php esc_html_e( 'When you click the "Grant Access" button a random 64 character access token is generated that is only good for 120 hours (5 days) and saved in your Database. This token is sent to the WPMU DEV API over an SSL encrypted connection to prevent eavesdropping, and stored on our secure servers. This access token is in no way related to your password, and can only be used from our closed WPMU DEV API system for temporary access to this site.', 'wpmudev' ); ?></p>
 
 				<h4 class="dashui-modal-header"><?php esc_html_e( 'Who has access?', 'wpmudev' ); ?></h4>
 				<p class="sui-p-small"><?php echo wp_kses_post( __( 'Only current WPMU DEV support staff can use this token to login as your user account by submitting a special form that only they have access to. This will give them 1 hour of admin access to this site before their login cookie expires. Every support staff login during the 5 day period is logged locally and you can view the details on this page.', 'wpmudev' ) ); ?></p>

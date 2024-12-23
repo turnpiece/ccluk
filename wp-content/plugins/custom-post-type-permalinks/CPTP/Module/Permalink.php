@@ -403,6 +403,10 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			return $termlink;
 		}
 
+		if ( ! isset( $post_type_obj->rewrite['slug'] ) || ! isset( $post_type_obj->rewrite['with_front'] ) ) {
+			return $termlink;
+		}
+
 		$slug       = $post_type_obj->rewrite['slug'];
 		$with_front = $post_type_obj->rewrite['with_front'];
 
@@ -414,7 +418,7 @@ class CPTP_Module_Permalink extends CPTP_Module {
 			$termlink = str_replace( $wp_home, $wp_home . '/' . $slug, $termlink );
 		}
 
-		if ( ! $taxonomy->rewrite['hierarchical'] ) {
+		if ( false !== $taxonomy->rewrite && ! $taxonomy->rewrite['hierarchical'] ) {
 			$termlink = str_replace( $term->slug . '/', CPTP_Util::get_taxonomy_parents_slug( $term->term_id, $taxonomy->name, '/', true ), $termlink );
 		}
 

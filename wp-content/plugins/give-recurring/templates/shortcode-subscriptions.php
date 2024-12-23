@@ -189,6 +189,9 @@ if ( $subscriptions ) {
 						&nbsp;|&nbsp;
 						<a href="<?php echo esc_url( $subscription->get_update_url() ); ?>"><?php _e( 'Update Payment Info', 'give-recurring' ); ?></a>
 					<?php endif; ?>
+					<?php if ( give_get_option( 'subscriptions_page', 0 ) && $subscription->can_update_subscription() ): ?>
+						&nbsp;|&nbsp;<a class="give-recurring-edit-amount" href="<?php echo esc_url( $subscription->get_edit_subscription_url() ); ?>"><?php _e( 'Edit Amount', 'give-recurring' ); ?></a>
+					<?php endif; ?>
 					<?php
 					// Cancelling the subscription.
 					if ( $subscription->can_cancel() ) :

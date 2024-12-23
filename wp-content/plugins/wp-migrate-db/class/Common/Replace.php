@@ -310,7 +310,7 @@ class Replace
         ) {
             $standard_pairs = $migration_options['search_replace']['standard_search_replace'];
             foreach ($standard_pairs as $key => $pair) {
-                if (in_array($key, $migration_options['search_replace']['standard_options_enabled'], true)) {
+                if (!empty(trim($pair['replace'])) && in_array($key, $migration_options['search_replace']['standard_options_enabled'], true)) {
                     $tmp_find_replace_pairs[$pair['search']] = $pair['replace'];
                 }
             }
@@ -326,6 +326,10 @@ class Replace
             $i = 1;
             foreach ($custom_pairs as $pair) {
                 $index = $i + $standard_pairs_count;
+                if (empty($pair['replace_old']) && empty($pair['replace_new'])) {
+                    $i++;
+                    continue;
+                }
                 $tmp_find_replace_pairs[$pair['replace_old']] = $pair['replace_new'];
 
                 if(empty($migration_options['regex']) && isset($pair['regex'])) {
@@ -582,7 +586,12 @@ class Replace
         }
 
         if ('find_replace' === $this->intent) {
-            $this->diff_interpreter->compute(DiffEntity::create($original, $subject, $this->column, is_object($this->row) ? reset($this->row) : null));
+            $row = null;
+            if (is_object($this->row) ) {
+                $get_vars = function_exists('get_mangled_object_vars') ? get_mangled_object_vars($this->row) : $this->row;
+                $row      = reset($get_vars);
+            }
+            $this->diff_interpreter->compute(DiffEntity::create($original, $subject, $this->column, $row));
         }
 
         return $subject;
@@ -608,24 +617,38 @@ class Replace
             return $pre;
         }
 
-        //Check if find and replace needs be skipped for the current table
-        $skipped_tables = apply_filters('wpmdb_skip_search_replace_tables', []);
-        if (in_array($this->table, $skipped_tables, true)) {
-            return $data;
-        }
-
         //If the intent is find_replace we need to prefix the tables with the temp prefix and wp base table prefix.
-        $table_prefix = '';
+        global $wpdb;
+        $table_prefix = $wpdb->base_prefix;
         if ( 'find_replace' === $this->get_intent() ) {
-            global $wpdb;
-            $table_prefix = $this->properties->temp_prefix . $wpdb->base_prefix;
+
+            $table_prefix = $this->properties->temp_prefix . $table_prefix;
         }
 
-        // Some options contain serialized self-references which leads to memory exhaustion. Skip these.
-        if ( $this->table_is( 'options', $table_prefix ) && 'option_value' === $this->get_column() && is_serialized( $data ) ) {
-            if ( preg_match( '/r\:\d+;/i', $data ) ) {
+        //Check if find and replace needs be skipped for the current table
+        $skipped_tables = apply_filters('wpmdb_skip_search_replace_tables', ['eum_logs']);
+        foreach ($skipped_tables as $skipped_table) {
+            if ($this->table === $table_prefix . $skipped_table) {
                 return $data;
             }
+        }
+
+        if ($this->should_do_reference_check($table_prefix) && is_serialized( $data ) && preg_match('/r\:\d+;/i', $data)) {
+            $current_row   = $this->get_row();
+            $first_row_key = reset($current_row);
+            $skipped       = [
+                'table'          => str_replace('_mig_', '', $this->get_table()),
+                'primary_key'    => $first_row_key,
+                'column'         => $this->get_column(),
+                'contains_match' => $this->has_skipped_values($data)
+            ];
+
+            if (property_exists($this->get_row(), 'option_name') && $this->table_is('options', $table_prefix)) {
+                $skipped['option_name'] = $this->get_row()->option_name;
+            }
+
+            error_log('WPMDB Find & Replace skipped: ' . json_encode($skipped));
+            return $data;
         }
 
         $is_json           = false;
@@ -645,19 +668,14 @@ class Replace
             if (is_string($data) && ($unserialized = Util::unserialize($data, __METHOD__)) !== false) {
                 // PHP currently has a bug that doesn't allow you to clone the DateInterval / DatePeriod classes.
                 // We skip them here as they probably won't need data to be replaced anyway
-                if ('object' == gettype($unserialized)) {
-                    if ($unserialized instanceof \DateInterval || $unserialized instanceof \DatePeriod) {
-                        return $data;
-                    }
-                    if ($unserialized instanceof \__PHP_Incomplete_Class && defined('WP_DEBUG_LOG') && WP_DEBUG_LOG) {
-                        $objectName = array();
-                        preg_match('/O:\d+:\"([^\"]+)\"/', $data, $objectName);
-                        $objectName = $objectName[1] ? $objectName[1] : $data;
-                        $error      = sprintf(__("WP Migrate - Failed to instantiate object for replacement. If the serialized object's class is defined by a plugin, you should enable that plugin for migration requests. \nClass Name: %s", 'wp-migrate-db'), $objectName);
-                        error_log($error);
-
-                        return $data;
-                    }
+                if (
+                    'object' == gettype($unserialized) && 
+                    (
+                        $unserialized instanceof \DateInterval ||
+                        $unserialized instanceof \DatePeriod
+                    )
+                ) {
+                    return $data;
                 }
                 $data = $this->recursive_unserialize_replace($unserialized, true, true, $successive_filter);
             } elseif (is_array($data)) {
@@ -668,7 +686,8 @@ class Replace
 
                 $data = $_tmp;
                 unset($_tmp);
-            } elseif (is_object($data)) { // Submitted by Tina Matter
+            //is_object does not return true for __PHP_Incomplete_Class until 7.2 using gettype instead
+            } elseif ('object' == gettype($data)) { // Submitted by Tina Matter
                 if ($this->is_object_cloneable($data)) {
                     $_tmp = clone $data;
                     foreach ($data as $key => $value) {
@@ -723,6 +742,58 @@ class Replace
 
         return $data;
     }
+
+    /**
+     * Search unseralized string for potential match
+     *
+     * @param string $data
+     * @return bool
+     **/
+    protected function has_skipped_values($data)
+    {
+        foreach( $this->search as $search_string) {
+            if (false !== strpos($data, $search_string)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Table and cloumns to search for references
+     * @param string $table_prefix
+     * @return bool
+     **/
+    protected function should_do_reference_check($table_prefix)
+    {
+        if ( $this->table_is('options', $table_prefix) && 'option_value' === $this->get_column()) {
+            return true;
+        }
+        $table_column_for_check = [
+            [
+                'table' => $table_prefix . 'duplicator_packages',
+                'column' => 'package'
+            ],
+            [
+                'table' => $table_prefix . 'aiowps_audit_log',
+                'column' => 'stacktrace'
+            ]
+        ];
+        $table_column_for_check = apply_filters('wpmdb_check_table_column_for_reference', $table_column_for_check);
+        foreach($table_column_for_check as $table_column ) {
+            if (
+                array_key_exists('table', $table_column)
+                && $table_column['table'] === $this->get_table()
+                && array_key_exists('column', $table_column)
+                && $table_column['column'] === $this->get_column()
+                ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     /**
      * Getter for the $table class property.
@@ -811,7 +882,7 @@ class Replace
     {
         $prefix         = in_array($this->intent, ['find_replace', 'import']) ? '_mig_' . $prefix : $prefix;
         $default_tables = [
-            "${prefix}posts",
+            "{$prefix}posts",
         ];
 
         // Account for multisite subsites.
@@ -852,14 +923,19 @@ class Replace
      * @throws \DI\NotFoundException
      */
     public function validate_regex_pattern() {
-        $_POST = $this->http_helper->convert_json_body_to_post();
-
+       $_POST = $this->http_helper->convert_json_body_to_post();
+        if (isset($_POST['pattern'])) {
+            $pattern = Util::safe_wp_unslash($_POST['pattern']);
+            if (Util::is_regex_pattern_valid( $pattern ) === false) {
+                return $this->http->end_ajax(false);
+            }
+        }
         $key_rules = array(
-            'pattern' => 'string',
+            'pattern' => 'regex',
         );
 
         $state_data = $this->migration_state_manager->set_post_data( $key_rules );
-        return $this->http->end_ajax( Util::is_regex_pattern_valid( $state_data['pattern'] ) );
+        return $this->http->end_ajax(isset($state_data['pattern']) === true);
     }
 
     public function register_rest_routes() {

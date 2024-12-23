@@ -11,6 +11,7 @@
  */
 
 // Exit, if accessed directly.
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -18,21 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * This function is used to get a list of slug which are supported by payment gateways.
  *
+ * @since 2.27.0 add filter for the array of supported stripe gateways.
  * @since 2.5.5
  *
  * @return array
  */
-function give_stripe_supported_payment_methods() {
-	return [
-		'stripe',
-		'stripe_ach',
-		'stripe_ideal',
-		'stripe_google_pay',
-		'stripe_apple_pay',
-		'stripe_checkout',
-		'stripe_sepa',
-		'stripe_becs',
-	];
+function give_stripe_supported_payment_methods()
+{
+    return apply_filters('give_stripe_supported_payment_methods', [
+        'stripe',
+        'stripe_ach',
+        'stripe_ideal',
+        'stripe_google_pay',
+        'stripe_apple_pay',
+        'stripe_checkout',
+        'stripe_sepa',
+        'stripe_becs',
+    ]);
 }
 
 /**
@@ -42,23 +45,24 @@ function give_stripe_supported_payment_methods() {
  *
  * @return bool
  */
-function give_stripe_is_any_payment_method_active() {
-
-	// Get settings.
+function give_stripe_is_any_payment_method_active()
+{
 	$settings             = give_get_settings();
-	$gateways             = isset( $settings['gateways'] ) ? $settings['gateways'] : [];
-	$stripePaymentMethods = give_stripe_supported_payment_methods();
+    $gateways = $settings['gateways'] ?? [];
+    $stripePaymentMethods = give_stripe_supported_payment_methods();
 
-	// Loop through gateways list.
-	foreach ( array_keys( $gateways ) as $gateway ) {
-
+    $active = false;
+    foreach (array_keys($gateways) as $gateway) {
 		// Return true, if even single payment method is active.
 		if ( in_array( $gateway, $stripePaymentMethods, true ) ) {
-			return true;
+            $active = true;
 		}
 	}
 
-	return false;
+    /**
+     * @since 3.0.0
+     */
+    return apply_filters('give_stripe_is_any_payment_method_active', $active, $gateways, $stripePaymentMethods);
 }
 
 /**

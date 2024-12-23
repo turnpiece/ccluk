@@ -2,11 +2,13 @@
 /**
  * Template file for support section in main Dashboard page.
  *
- * @var array                           $member          Member data.
- * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls            Urls class.
- * @var array                           $membership_data Membership data.
- * @var object                          $staff_login     Staff login data.
- * @var bool                            $tickets_hidden  Is tickets hidden.
+ * @var array                           $member                Member data.
+ * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls                  Urls class.
+ * @var array                           $membership_data       Membership data.
+ * @var object                          $staff_login           Staff login data.
+ * @var bool                            $tickets_hidden        Is tickets hidden.
+ * @var bool                            $has_hosted_access     Has hosted site access.
+ * @var bool                            $is_hosted_third_party Is hosting account on third party site.
  *
  * @package WPMUDEV_Dashboard
  */
@@ -17,7 +19,7 @@ $url_revoke  = wp_nonce_url( add_query_arg( 'action', 'remote-revoke', $urls->su
 $url_extend  = wp_nonce_url( add_query_arg( 'action', 'remote-extend', $urls->support_url . '#access' ), 'remote-extend', 'hash' );
 
 // Is support allowed.
-$support_allowed = WPMUDEV_Dashboard::$api->is_support_allowed();
+$support_allowed = ( WPMUDEV_Dashboard::$api->is_support_allowed() || $has_hosted_access ) && ! $is_hosted_third_party;
 
 foreach ( $threads as $thread ) {
 	$total_thread = array();

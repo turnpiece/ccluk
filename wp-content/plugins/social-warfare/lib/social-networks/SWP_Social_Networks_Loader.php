@@ -8,7 +8,6 @@
  * that array.
  *
  * @since 3.0.0 | Created | 05 APR 2018
- *
  */
 class SWP_Social_Networks_Loader {
 
@@ -24,7 +23,6 @@ class SWP_Social_Networks_Loader {
 	 * @param  none
 	 * @return none
 	 * @access public
-	 *
 	 */
 	public function __construct() {
 
@@ -32,7 +30,7 @@ class SWP_Social_Networks_Loader {
 		global $swp_social_networks;
 		$swp_social_networks = array();
 
-		add_filter( 'plugins_loaded' , array( $this , 'instantiate_networks' ) , 999 );
+		add_filter( 'plugins_loaded', array( $this, 'instantiate_networks' ), 999 );
 	}
 
 
@@ -46,15 +44,15 @@ class SWP_Social_Networks_Loader {
 	 * @param  none
 	 * @return none
 	 * @access public
-	 *
 	 */
 	public function instantiate_networks() {
-			new SWP_Facebook();
-			new SWP_Linkedin();
-			new SWP_Mix();
-			new SWP_Pinterest();
-			new SWP_Stumble_Upon();
-			new SWP_Twitter();
-	}
+		new SWP_Facebook();
+		new SWP_Linkedin();
+		new SWP_Mix();
+		new SWP_Pinterest();
+		new SWP_Stumble_Upon();
+		new SWP_Twitter();
 
+		return true;
+	}
 }

@@ -78,25 +78,25 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		// Webhook support.
 		add_action( 'give_authorize_event_net.authorize.customer.subscription.cancelled', array(
 			$this,
-			'process_webhook_cancel'
+			'process_webhook_cancel',
 		), 10, 2 );
 		add_action( 'give_authorize_event_net.authorize.payment.authcapture.created', array(
 			$this,
-			'process_webhook_renewal'
+			'process_webhook_renewal',
 		), 1, 2 );
 		add_action( 'give_authorize_event_net.authorize.customer.subscription.suspended', array(
 			$this,
-			'process_webhook_subscription_suspended'
+			'process_webhook_subscription_suspended',
 		), 10, 2 );
 		add_action( 'give_authorize_event_net.authorize.customer.subscription.terminated', array(
 			$this,
-			'process_webhook_subscription_terminated'
+			'process_webhook_subscription_terminated',
 		), 10, 2 );
 		add_action( 'give_authorize_event_net.authorize.customer.subscription.expiring', array(
 			$this,
-			'process_webhook_subscription_expiring'
+			'process_webhook_subscription_expiring',
 		), 10, 2 );
-		
+
 		// Require last name.
 		add_filter( 'give_donation_form_before_personal_info', array( $this, 'maybe_require_last_name' ) );
 	}
@@ -105,8 +105,8 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Loads AuthorizeNet PHP SDK.
 	 *
-	 * @since 1.8
 	 * @return void
+	 * @since 1.8
 	 */
 	public function load_authnetxml_library() {
 		if ( file_exists( GIVE_RECURRING_PLUGIN_DIR . 'includes/gateways/authorize/AuthnetXML/AuthnetXML.class.php' ) ) {
@@ -117,8 +117,8 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Set API Login ID, Transaction Key and Mode.
 	 *
-	 * @since 1.8
 	 * @return void
+	 * @since 1.8
 	 */
 	public function define_authorize_values() {
 
@@ -139,8 +139,8 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Check that the necessary credentials are set.
 	 *
-	 * @since 1.8
 	 * @return bool
+	 * @since 1.8
 	 */
 	private function check_credentials() {
 		// Check credentials
@@ -157,10 +157,11 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Validates the form data.
 	 *
-	 * @since 1.8
-	 *
 	 * @param $data
 	 * @param $posted
+	 *
+	 * @since 1.8
+	 *
 	 */
 	public function validate_fields( $data, $posted ) {
 
@@ -175,9 +176,10 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 
 	/**
 	 * Creates subscription payment profiles and sets the IDs so they can be stored.
-	 * @since 1.8
 	 *
 	 * @return bool true on success and false on failure.
+	 * @since 1.8
+	 *
 	 */
 	public function create_payment_profiles() {
 
@@ -197,7 +199,8 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 
 			// If no sub ID mention it in logs.
 			if ( isset( $this->subscriptions['profile_id'] ) && empty( $this->subscriptions['profile_id'] ) ) {
-				give_record_gateway_error( 'Authorize.net eCheck Error', __( 'Could not generate a subscription ID from the API response. Please contact GiveWP support.', 'give-recurring' ) );
+				give_record_gateway_error( 'Authorize.net eCheck Error',
+					__( 'Could not generate a subscription ID from the API response. Please contact GiveWP support.', 'give-recurring' ) );
 			}
 
 			$is_success = true;
@@ -218,35 +221,35 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Creates a new Automated Recurring Billing (ARB) subscription.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  array $subscription
-	 * @param  array $bank_details
-	 * @param  array $user_info
+	 * @param array $subscription
+	 * @param array $bank_details
+	 * @param array $user_info
 	 *
 	 * @return AuthnetXML
+	 * @since 1.8
+	 *
 	 */
 	public function create_authorize_net_echeck_subscription( $subscription, $bank_details, $user_info ) {
 
 		$args = $this->generate_create_subscription_request_args( $subscription, $bank_details, $user_info );
-		
+
 		// Use AuthnetXML library to create a new subscription request.
 		$authnet_xml = new AuthnetXML( $this->api_login_id, $this->transaction_key, $this->is_sandbox_mode );
 		$authnet_xml->ARBCreateSubscriptionRequest( $args );
-		
+
 		return $authnet_xml;
 	}
 
 	/**
 	 * Generates args for making a ARB create subscription request.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  array $subscription
-	 * @param  array $bank_details
-	 * @param  array $user_info
+	 * @param array $subscription
+	 * @param array $bank_details
+	 * @param array $user_info
 	 *
 	 * @return array
+	 * @since 1.8
+	 *
 	 */
 	public function generate_create_subscription_request_args( $subscription, $bank_details, $user_info ) {
 
@@ -267,8 +270,8 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 				'name'            => $name,
 				'paymentSchedule' => array(
 					'interval'         => array(
-						'length' => $subscription['frequency'],
-						'unit'   => $subscription['period'],
+						'length' => $this->get_interval_count( $subscription['period'], $subscription['frequency'] ),
+						'unit'   => $this->get_interval( $subscription['period'], $subscription['frequency'] ),
 					),
 					'startDate'        => $today,
 					'totalOccurrences' => $total_occurrences,
@@ -303,19 +306,20 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		);
 
 		// Use `CCD` echeckType when account type is `businessChecking`.
-		if ( isset( $bank_details['account-type'] ) && 'businessChecking' === $bank_details['account-type'] ){
+		if ( isset( $bank_details['account-type'] ) && 'businessChecking' === $bank_details['account-type'] ) {
 			$args['subscription']['payment']['bankAccount']['echeckType'] = 'CCD';
 		}
 
 		/**
 		 * Update authorize_echeck subscription request api args.
 		 *
-		 * @since 1.8
-		 *
 		 * @param array $args         eCheck request args.
 		 * @param Give_Recurring_Authorize_eCheck eCheck recurring object.
 		 * @param array $subscription Subscription details.
 		 * @param array $bank_details Bank details.
+		 *
+		 * @since 1.8
+		 *
 		 */
 		return apply_filters( 'give_recurring_authorize_echeck_create_subscription_request_args', $args, $this, $subscription, $bank_details );
 
@@ -324,12 +328,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Gets interval length for Authorize.net based on Give subscription period.
 	 *
-	 * @param  string $subscription_period
-	 * @param  int    $subscription_interval
-	 * 
-	 * @since 1.8
+	 * @param string $subscription_period
+	 * @param int    $subscription_interval
 	 *
 	 * @return array
+	 * @since 1.8
+	 *
 	 */
 	public static function get_interval( $subscription_period, $subscription_interval ) {
 
@@ -341,16 +345,16 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 				$unit = 'days';
 				break;
 			case 'week':
-				$unit   = 'days';
+				$unit = 'days';
 				break;
 			case 'quarter':
-				$unit   = 'months';
+				$unit = 'months';
 				break;
 			case 'month':
-				$unit   = 'months';
+				$unit = 'months';
 				break;
 			case 'year':
-				$unit   = 'months';
+				$unit = 'months';
 				break;
 		}
 
@@ -360,12 +364,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Gets interval unit for Authorize.net based on Give subscription period.
 	 *
-	 * @param  string $subscription_period
-	 * @param  int    $subscription_interval
-	 * 
+	 * @param string $subscription_period
+	 * @param int    $subscription_interval
+	 *
+	 * @return int
 	 * @since 1.9.0
 	 *
-	 * @return array
 	 */
 	public static function get_interval_count( $subscription_period, $subscription_interval ) {
 
@@ -393,12 +397,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Determines if the subscription can be cancelled.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  bool              $ret
-	 * @param  Give_Subscription $subscription
+	 * @param bool              $ret
+	 * @param Give_Subscription $subscription
 	 *
 	 * @return bool
+	 * @since 1.8
+	 *
 	 */
 	public function can_cancel( $ret, $subscription ) {
 
@@ -417,12 +421,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Determines if the subscription can be cancelled.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  bool              $ret
-	 * @param  Give_Subscription $subscription
+	 * @param bool              $ret
+	 * @param Give_Subscription $subscription
 	 *
 	 * @return bool
+	 * @since 1.8
+	 *
 	 */
 	public function can_sync( $ret, $subscription ) {
 
@@ -440,12 +444,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Cancels a subscription.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  Give_Subscription $subscription
-	 * @param  bool              $valid
+	 * @param Give_Subscription $subscription
+	 * @param bool              $valid
 	 *
 	 * @return bool|AuthnetXML
+	 * @since 1.8
+	 *
 	 */
 	public function cancel_subscription( $subscription, $valid ) {
 
@@ -461,11 +465,11 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Cancel a ARB subscription based for a given subscription id.
 	 *
-	 * @since 1.8
-	 *
-	 * @param  string $anet_subscription_id
+	 * @param string $anet_subscription_id
 	 *
 	 * @return bool
+	 * @since 1.8
+	 *
 	 */
 	public function cancel_authorize_net_echeck_subscription( $anet_subscription_id ) {
 
@@ -483,23 +487,24 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Processes the net.authorize.payment.authcapture.subscription.terminated webhook for subscription termination.
 	 *
-	 * @since 1.9.0
-	 *
 	 * @param object $event_json Webhook data sent over from Authorize.net
 	 *
 	 * @return bool|\Give_Subscription
+	 * @since 1.9.0
+	 *
 	 */
 	public function process_webhook_subscription_terminated( $event_json ) {
 
 		// Must be using latest Authorize with webhook support.
 		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
-			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription terminated webhooks.', 'give-recurring' ) );
+			give_record_gateway_error( 'Authorize.net Webhook Error',
+				__( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription terminated webhooks.', 'give-recurring' ) );
 
 			return false;
 		}
 
 		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
-		
+
 		// Must have the transaction id.
 		if ( empty( $transaction_id ) ) {
 			return false;
@@ -511,7 +516,7 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		if ( 0 === $subscription->id ) {
 			return false;
 		}
-		
+
 		// Set subscription status to cancelled.
 		$subscription->cancel();
 	}
@@ -521,23 +526,24 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Processes the net.authorize.payment.authcapture.subscription.expiring webhook for subscription expiration.
 	 *
-	 * @since 1.9.0
-	 *
 	 * @param object $event_json Webhook data sent over from Authorize.net
 	 *
 	 * @return bool|\Give_Subscription
+	 * @since 1.9.0
+	 *
 	 */
 	public function process_webhook_subscription_expiring( $event_json ) {
 
 		// Must be using latest Authorize with webhook support.
 		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
-			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
+			give_record_gateway_error( 'Authorize.net Webhook Error',
+				__( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
 
 			return false;
 		}
-		
+
 		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
-		
+
 		// Must have the transaction id.
 		if ( empty( $transaction_id ) ) {
 			return false;
@@ -549,7 +555,7 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		if ( 0 === $subscription->id ) {
 			return false;
 		}
-		
+
 		// Set subscription status to expired.
 		$subscription->update( array(
 			'status' => 'expired',
@@ -561,23 +567,24 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Processes the net.authorize.payment.authcapture.subscription.suspended webhook for subscription suspension.
 	 *
-	 * @since 1.9.0
-	 *
 	 * @param object $event_json Webhook data sent over from Authorize.net
 	 *
 	 * @return bool|\Give_Subscription
+	 * @since 1.9.0
+	 *
 	 */
 	public function process_webhook_subscription_suspended( $event_json ) {
 
 		// Must be using latest Authorize with webhook support.
 		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
-			give_record_gateway_error( 'Authorize.net Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
+			give_record_gateway_error( 'Authorize.net Webhook Error',
+				__( 'You are using an outdated version of the Authorize.net gateway. Please update to accept subscription suspended webhooks.', 'give-recurring' ) );
 
 			return false;
 		}
 
 		$transaction_id = isset( $event_json->payload->id ) ? $event_json->payload->id : '';
-		
+
 		// Must have the transaction id.
 		if ( empty( $transaction_id ) ) {
 			return false;
@@ -589,7 +596,7 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		if ( 0 === $subscription->id ) {
 			return false;
 		}
-		
+
 		// Set subscription status to suspended.
 		$subscription->update( array(
 			'status' => 'suspended',
@@ -601,17 +608,18 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Processes the net.authorize.payment.authcapture.created webhook for subscription renewals.
 	 *
-	 * @since 1.8
-	 *
 	 * @param object $event_json Webhook data sent over from Authorize.net
 	 *
 	 * @return bool|\Give_Subscription
+	 * @since 1.8
+	 *
 	 */
 	public function process_webhook_renewal( $event_json ) {
 
 		// Must be using latest Authorize with webhook support.
 		if ( ! method_exists( Give_Authorize()->payments, 'setup_api_request' ) ) {
-			give_record_gateway_error( 'Authorize.net eCheck Webhook Error', __( 'You are using an outdated version of the Authorize.net gateway. Please update to accept renewal webhooks.', 'give-recurring' ) );
+			give_record_gateway_error( 'Authorize.net eCheck Webhook Error',
+				__( 'You are using an outdated version of the Authorize.net gateway. Please update to accept renewal webhooks.', 'give-recurring' ) );
 
 			return false;
 		}
@@ -722,11 +730,11 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Processes the net.authorize.customer.subscription.cancelled webhook for subscription cancellations.
 	 *
-	 * @since 1.8
-	 *
 	 * @param object $event_json Webhook data sent over from Authorize.net
 	 *
 	 * @return bool|\Give_Subscription
+	 * @since 1.8
+	 *
 	 */
 	public function process_webhook_cancel( $event_json ) {
 
@@ -763,12 +771,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Link the recurring profile in Authorize.net.
 	 *
-	 * @since  1.8
-	 *
-	 * @param  string $profile_id   The recurring profile id
-	 * @param  object $subscription The Subscription object
+	 * @param string $profile_id   The recurring profile id
+	 * @param object $subscription The Subscription object
 	 *
 	 * @return string               The link to return or just the profile id.
+	 * @since  1.8
+	 *
 	 */
 	public function link_profile_id( $profile_id, $subscription ) {
 
@@ -789,9 +797,10 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Require last name if authorize recurring donation.
 	 *
+	 * @param $form_id
+	 *
 	 * @since  1.8
 	 *
-	 * @param $form_id
 	 */
 	public function maybe_require_last_name( $form_id ) {
 
@@ -821,12 +830,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	 *
 	 * Authorize requires the last name field be completed and passed when creating subscriptions.
 	 *
-	 * @since 1.8
-	 *
 	 * @param $required_fields
 	 * @param $form_id
 	 *
 	 * @return mixed
+	 * @since 1.8
+	 *
 	 */
 	function require_last_name( $required_fields, $form_id ) {
 
@@ -841,13 +850,13 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Get gateway subscription.
 	 *
+	 * @param $subscription Give_Subscription
+	 *
+	 * @return bool|mixed
 	 * @since 1.8
 	 *
 	 * @see   https://github.com/DevinWalker/Authorize.Net-XML/blob/master/examples/arb/ARBGetSubscriptionStatusRequest.php
 	 *
-	 * @param $subscription Give_Subscription
-	 *
-	 * @return bool|mixed
 	 */
 	public function get_subscription_details( $subscription ) {
 
@@ -883,11 +892,11 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Format the billing period for sync.
 	 *
-	 * @since 1.8
-	 *
 	 * @param $authnet_xml
 	 *
 	 * @return string
+	 * @since 1.8
+	 *
 	 */
 	public function sync_format_billing_period( $authnet_xml ) {
 
@@ -913,11 +922,11 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Format the billing period for sync.
 	 *
-	 * @since 1.8
-	 *
 	 * @param $authnet_xml
 	 *
 	 * @return string
+	 * @since 1.8
+	 *
 	 */
 	public function sync_format_expiration( $authnet_xml ) {
 
@@ -934,14 +943,14 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Get transactions.
 	 *
-	 * @since 1.8
-	 * @see   https://community.developer.authorize.net/t5/Integration-and-Testing/Getting-transaction-details/td-p/14198
-	 *
 	 * @param \Give_Subscription $subscription
 	 * @param string             $date
 	 *
 	 * @return array|bool
 	 * @throws Exception     Throws an error message.
+	 * @since 1.8
+	 * @see   https://community.developer.authorize.net/t5/Integration-and-Testing/Getting-transaction-details/td-p/14198
+	 *
 	 */
 	public function get_gateway_transactions( $subscription, $date = '' ) {
 
@@ -996,13 +1005,13 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Get invoices for Authorize.net subscription.
 	 *
-	 * @since 1.8
-	 *
 	 * @param $subscription
 	 * @param $start_date
 	 * @param $end_date
 	 *
 	 * @return array|bool
+	 * @since 1.8
+	 *
 	 */
 	public function get_invoices_for_give_subscription( $subscription, $start_date, $end_date ) {
 
@@ -1069,16 +1078,16 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Setup batch transactions.
 	 *
-	 * @since 1.8
-	 *
-	 * This function checks conditionally if a transaction is part of the subscription.
-	 * If it is then it is added to the subscription transactions' array.
-	 *
 	 * @param array              $transaction
 	 * @param array              $transactions
 	 * @param \Give_Subscription $subscription
 	 *
 	 * @return array
+	 * @since 1.8
+	 *
+	 * This function checks conditionally if a transaction is part of the subscription.
+	 * If it is then it is added to the subscription transactions' array.
+	 *
 	 */
 	function setup_batch_transaction_array( $transaction, $transactions, $subscription ) {
 
@@ -1104,12 +1113,12 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 	/**
 	 * Can update subscription details.
 	 *
-	 * @since 1.8
-	 *
 	 * @param bool   $ret
 	 * @param object $subscription
 	 *
 	 * @return bool
+	 * @since 1.8
+	 *
 	 */
 	public function can_update_subscription( $ret, $subscription ) {
 
@@ -1122,18 +1131,19 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		) {
 			return true;
 		}
+
 		return $ret;
 	}
 
 	/**
 	 * Process the update subscription.
 	 *
-	 * @since  1.8
-	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
+	 * @param Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
+	 * @param Give_Subscription         $subscription Give_Subscription
 	 *
 	 * @return void
+	 * @since  1.8
+	 *
 	 */
 	public function update_subscription( $subscriber, $subscription ) {
 
@@ -1154,7 +1164,7 @@ class Give_Recurring_Authorize_eCheck extends Give_Recurring_Gateway {
 		}
 
 		// Set error if Profile id not set for Authorize eCheck.
-		if( isset( $subscription->profile_id ) && empty( $subscription->profile_id ) ) {
+		if ( isset( $subscription->profile_id ) && empty( $subscription->profile_id ) ) {
 			give_set_error( 'give_recurring_invalid_echeck_subscription', __( 'Missing Profile ID in Authorize eCheck Subscription.', 'give-recurring' ) );
 		}
 

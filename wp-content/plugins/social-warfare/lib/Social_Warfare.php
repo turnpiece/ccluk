@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly 
+
 /**
  * A class of functions used to load the plugin files and functions
  *
@@ -15,9 +17,15 @@
  * @license   GPL-3.0+
  * @since     3.0.0  | 19 FEB 2018 | Created
  * @since     3.1.0 | 20 JUN 2018 | Added instantiate_frontend_classes()
- *
  */
 class Social_Warfare {
+
+	/**
+	 * Declare the core_version property.
+	 *
+	 * @var string
+	 */
+	public $core_version;
 
 	/**
 	 * The magic method used to instantiate this class.
@@ -30,12 +38,11 @@ class Social_Warfare {
 	 * @param  void
 	 * @return void
 	 * @access public
-	 *
 	 */
 	public function __construct() {
 		$this->core_version = SWP_VERSION;
 		require_once SWP_PLUGIN_DIR . '/lib/utilities/functions.php';
-		add_action('plugins_loaded', array($this, 'init'));
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
 	}
 
 
@@ -47,12 +54,12 @@ class Social_Warfare {
 		$this->instantiate_classes();
 
 		// Instantiate the admin-only classes.
-		if( true === is_admin() ) {
+		if ( true === is_admin() ) {
 			$this->instantiate_admin_classes();
 		}
 
 		// Instatiate classes that need to be defered.
-		add_action('plugins_loaded' , array( $this, 'instantiate_deferred_classes' ) , 100 );
+		add_action( 'plugins_loaded', array( $this, 'instantiate_deferred_classes' ), 100 );
 		require_once SWP_PLUGIN_DIR . '/assets/js/post-editor/blocks.php';
 	}
 
@@ -67,66 +74,52 @@ class Social_Warfare {
 	 * @param  void
 	 * @return void
 	 * @access public
-	 *
 	 */
 	private function instantiate_classes() {
-
 
 		/**
 		 * The Global $swp_user_options Loader
 		 *
 		 * This creates and filters and manages the user options array.
-		 *
 		 */
 		new SWP_User_Options();
-
 
 		/**
 		 * The Global Options Page Object
 		 *
 		 * This is created as a global so that all addons can modify it.
-		 *
 		 */
 		global $SWP_Options_Page;
-
 
 		/**
 		 * The Social Networks Loader
 		 *
 		 * Instantiates the class that will load the social networks.
-		 *
 		 */
 		new SWP_Social_Networks_Loader();
-
 
 		/**
 		 * The Localization Class
 		 *
 		 * Instantiates the class that will load the plugin translations.
-		 *
 		 */
 		$Localization = new SWP_Localization();
 		$Localization->init();
-
 
 		/**
 		 * The URL_Management Class
 		 *
 		 * This is the class that controls short links and UTM parameters.
-		 *
 		 */
 		new SWP_Link_Manager();
-
 
 		/**
 		 * The Script Class
 		 *
 		 * Instantiates the class that will enqueue all of the styles and
 		 * scripts used throughout the plugin both frontend, and admin.
-		 *
 		 */
 		new SWP_Script();
-
 
 		/**
 		 * The Shortcode Class
@@ -135,10 +128,8 @@ class Social_Warfare {
 		 * click to tweets, total shares, and other shortcodes used in posts and
 		 * pages, and consequently convert those shortcodes into their
 		 * respective HTML output.
-		 *
 		 */
 		new SWP_Shortcode();
-
 
 		/**
 		 * The Buttons Panel Shortcode Class
@@ -146,10 +137,8 @@ class Social_Warfare {
 		 * Instantiate the class that will process all instances of the
 		 * [social_warfare] shortcode used in posts and pages, and consequently
 		 * convert those shortcodes into sets of share buttons.
-		 *
 		 */
 		new SWP_Buttons_Panel_Shortcode();
-
 
 		/**
 		 * The Header Output Class
@@ -157,10 +146,8 @@ class Social_Warfare {
 		 * Instantiate the class that processes the values and creates the HTML
 		 * output required in the <head> section of a website. This includes our
 		 * font css, open graph meta tags, and Twitter cards.
-		 *
 		 */
 		new SWP_Header_Output();
-
 
 		/**
 		 * The Buttons Panel Loader
@@ -168,20 +155,16 @@ class Social_Warfare {
 		 * Instantiates the class that is used to queue up or hook the buttons
 		 * generator into WordPress' the_content() hook which allows us to
 		 * append our buttons to it.
-		 *
 		 */
 		new SWP_Buttons_Panel_Loader();
-
 
 		/**
 		 * The Compatibility Class
 		 *
 		 * Instantiate the class that provides solutions to very specific
 		 * incompatibilities with certain other plugins.
-		 *
 		 */
 		new SWP_Compatibility();
-
 
 		/**
 		 * The Widget Loader Class
@@ -189,28 +172,22 @@ class Social_Warfare {
 		 * Instantiate the class that registers and output the "Popular Posts"
 		 * widget. If other widgets are added later, this class will fire those
 		 * up as well.
-		 *
 		 */
 		new SWP_Widget_Loader();
-
 
 		/**
 		 * Database Migration
 		 *
 		 * Converts camelCased variable names to the new snake_case option names.
-		 *
 		 */
 		new SWP_Database_Migration();
-
 
 		/**
 		 * The Options Page Class
 		 *
 		 * Instantiates the class that will load the plugin options page.
-		 *
 		 */
 		$SWP_Options_Page = new SWP_Options_Page();
-
 
 		/**
 		 * The Post Cache Loader Class
@@ -218,11 +195,9 @@ class Social_Warfare {
 		 * Instantiates a global object that will manage and load cached data
 		 * for each individual post on a site allowing access to cached data like
 		 * share counts, for example.
-		 *
 		 */
 		global $SWP_Post_Caches;
 		$SWP_Post_Caches = new SWP_Post_Cache_Loader();
-
 
 		/**
 		 * The Utility Class
@@ -230,13 +205,11 @@ class Social_Warfare {
 		 * While the methods are all static functions that do not require
 		 * a class instance to use, there are hooks that need to be set up
 		 * in the class __construct() method.
-		 *
 		 */
 
 		new SWP_Utility();
 
 		new SWP_Buttons_Panel_Ajax();
-
 	}
 
 
@@ -247,10 +220,8 @@ class Social_Warfare {
 	 * @param  void
 	 * @return void
 	 * @access public
-	 *
 	 */
 	private function instantiate_admin_classes() {
-
 
 		/**
 		 * The Shortcode Generator
@@ -259,10 +230,8 @@ class Social_Warfare {
 		 * post editor which allows users to generate the [social_warfare]
 		 * shortcodes by simply pointing clicking, and filling in a few fill in
 		 * the blanks.
-		 *
 		 */
 		new SWP_Shortcode_Generator();
-
 
 		/**
 		 * The Click to Tweet Class
@@ -270,10 +239,8 @@ class Social_Warfare {
 		 * Instantiate the class that that creates the Click to Tweet button in
 		 * the WordPress post editor's dashboard (the kitchen sink) and also
 		 * process the shortcode on the front end.
-		 *
 		 */
 		new SWP_Click_To_Tweet();
-
 
 		/**
 		 * The "Social Shares" column in the posts view.
@@ -282,10 +249,8 @@ class Social_Warfare {
 		 * the WordPress admin area. This column allows you to see how many
 		 * times each post has been shared. It also allows you to sort the
 		 * column in ascending or descending order.
-		 *
 		 */
 		new SWP_Column();
-
 
 		/**
 		 * The The Settings Link
@@ -293,10 +258,8 @@ class Social_Warfare {
 		 * Instantiates the class that addes links to the plugin listing on the
 		 * plugins page of the WordPress admin area. This will link to the
 		 * Social Warfare options page.
-		 *
 		 */
 		new SWP_Settings_Link();
-
 
 		/**
 		 * The User Profile Fields
@@ -306,10 +269,8 @@ class Social_Warfare {
 		 * Twitter username and Facebook author URL on a per-user basis. If set,
 		 * this will override these same settings from the options page on any
 		 * posts authored by that user.
-		 *
 		 */
 		new SWP_User_Profile();
-
 
 		/**
 		 * The JSON Cache Handler
@@ -317,19 +278,15 @@ class Social_Warfare {
 		 * This class fetches the JSON data from our home server and makes it
 		 * available to the plugin for important information like adding
 		 * dashboard notices or updating the sidebar in the admin settings page.
-		 *
 		 */
 		new SWP_JSON_Cache_Handler();
-
 
 		/**
 		 * The Settings Page Sidebar Loader
 		 *
 		 * This class controls the sidebar on the settings page.
-		 *
 		 */
 		new SWP_Sidebar_Loader();
-
 	}
 
 
@@ -339,12 +296,10 @@ class Social_Warfare {
 	 * @since  3.3.0 | 06 AUG 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function instantiate_deferred_classes() {
 		/**
 		 * Instantiates all of our notices.
-		 *
 		 */
 		new SWP_Notice_Loader();
 	}
@@ -357,7 +312,6 @@ class Social_Warfare {
 	 * @param  none
 	 * @return none
 	 * @access public
-	 *
 	 */
 	private function load_classes() {
 
@@ -367,17 +321,16 @@ class Social_Warfare {
 		// WordPress functions for plugin operations.
 		require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-
 		/**
 		 * Utility Classes
 		 *
 		 * This loads our Utility Trait and our various classes used to provide general
 		 * functionality that will be used by many different classes throughout the plugin.
-		 *
 		 */
 		$utilities = array(
 			'Debug_Trait',
 			'Compatibility',
+			'Requests',
 			'CURL',
 			'Localization',
 			'Database_Migration',
@@ -386,29 +339,25 @@ class Social_Warfare {
 			'Post_Cache_Loader',
 			'Post_Cache',
 			'JSON_Cache_Handler',
-			'Plugin_Updater',
 			'Utility',
 			'Auth_Helper',
 			'Credential_Helper',
-			'AMP'
+			'AMP',
 		);
-		$this->load_files( '/lib/utilities/', $utilities);
-
+		$this->load_files( '/lib/utilities/', $utilities );
 
 		/**
 		 * The URL Management Classes
 		 *
 		 * These classes will control the shortlinks and Google UTM parameters
 		 * functionality of the shareable links.
-		 *
 		 */
 		$url_management = array(
 			'Link_Manager',
 			'Link_Shortener',
 			'Permalink',
 		);
-		$this->load_files( '/lib/url-management/', $url_management);
-
+		$this->load_files( '/lib/url-management/', $url_management );
 
 		/**
 		 * The Social Network Classes
@@ -419,7 +368,6 @@ class Social_Warfare {
 		 * than ever before to create and add more social networks to the plugin.
 		 *
 		 * @since 3.6.1 | 31 MAY 2019 | Removed Google Plus
-		 *
 		 */
 		$social_networks = array(
 			'Social_Networks_Loader',
@@ -428,10 +376,9 @@ class Social_Warfare {
 			'Twitter',
 			'Linkedin',
 			'Pinterest',
-			'Mix'
+			'Mix',
 		);
-		$this->load_files( '/lib/social-networks/', $social_networks);
-
+		$this->load_files( '/lib/social-networks/', $social_networks );
 
 		/**
 		 * The Buttons Panel Classes
@@ -439,7 +386,6 @@ class Social_Warfare {
 		 * These are the classes used to instantiate and render the buttons
 		 * panels across a WordPress site. It also controls the hooks and filters
 		 * which get the buttons panels added to them.
-		 *
 		 */
 		$buttons_panels = array(
 			'Buttons_Panel_Ajax',
@@ -451,7 +397,6 @@ class Social_Warfare {
 		);
 		$this->load_files( '/lib/buttons-panel/', $buttons_panels );
 
-
 		/**
 		 * The Frontend Output Classes
 		 *
@@ -459,7 +404,6 @@ class Social_Warfare {
 		 * WordPress frontend. This includes the HTML for the buttons panels,
 		 * the meta data that is output in the head section of the site, scripts
 		 * and styles being enqueued for output, and other things like that.
-		 *
 		 */
 		$frontends = array(
 			'Header_Output',
@@ -467,7 +411,6 @@ class Social_Warfare {
 			'Shortcode',
 		);
 		$this->load_files( '/lib/frontend-output/', $frontends );
-
 
 		/**
 		 * The Widget Classes
@@ -482,15 +425,13 @@ class Social_Warfare {
 		 *
 		 * The Widget Loader creates a filter hook for adding more widgets
 		 * as addons.
-		 *
 		 */
 		$widgets = array(
 			'Popular_Posts_Widget',
 			'Widget',
-			'Widget_Loader'
+			'Widget_Loader',
 		);
 		$this->load_files( '/lib/widgets/', $widgets );
-
 
 		/**
 		 * The Admin Classes
@@ -502,7 +443,6 @@ class Social_Warfare {
 		 * to the posts view and a few other things related to the admin area.
 		 * This does NOT include the classes used to generate the options page
 		 * for Social Warfare.
-		 *
 		 */
 		$admins = array(
 			'Click_To_Tweet',
@@ -510,10 +450,9 @@ class Social_Warfare {
 			'Settings_Link',
 			'Shortcode_Generator',
 			'User_Profile',
-			'Sidebar_Loader'
+			'Sidebar_Loader',
 		);
 		$this->load_files( '/lib/admin/', $admins );
-
 
 		/**
 		 * The Options Classes
@@ -521,7 +460,6 @@ class Social_Warfare {
 		 * These classes provide the framework that creates the admin options
 		 * page as well as the tools needed for addons to be able to interface
 		 * with it to add their own options.
-		 *
 		 */
 		$options = array(
 			'User_Options',
@@ -537,21 +475,9 @@ class Social_Warfare {
 			'Section_HTML',
 			'Option_Icons',
 			'Registration_Tab_Template',
-			'Option_Button'
+			'Option_Button',
 		);
 		$this->load_files( '/lib/options/', $options );
-
-
-		/**
-		 * The Update Checker
-		 *
-		 * This loads the class which will in turn load all other class that are
-		 * needed in order to properly check for updates for addons.
-		 *
-		 */
-		require_once SWP_PLUGIN_DIR . '/lib/update-checker/plugin-update-checker.php';
-
-
 	}
 
 
@@ -560,25 +486,26 @@ class Social_Warfare {
 	 *
 	 * @since  3.0.0 | 01 MAR 2018 | Created
 	 * @since  4.0.0 | 20 JUL 2019 | Implemented autoloading.
-	 * @param  string   $path  The relative path to the files home.
-	 * @param  array    $files The name of the files (classes), no vendor prefix.
+	 * @param  string $path  The relative path to the files home.
+	 * @param  array  $files The name of the files (classes), no vendor prefix.
 	 * @return void     The files are loaded into memory.
-	 *
 	 */
 	private function load_files( $path, $files ) {
 
 		// Use Autoload to loadup out files and classes.
-		spl_autoload_register( function( $class_name ) use ($path) {
-			if( file_exists( SWP_PLUGIN_DIR.$path.$class_name.'.php' ) ) {
-				include SWP_PLUGIN_DIR.$path.$class_name.'.php';
+		spl_autoload_register(
+			function ( $class_name ) use ( $path ) {
+				if ( file_exists( SWP_PLUGIN_DIR . $path . $class_name . '.php' ) ) {
+						include SWP_PLUGIN_DIR . $path . $class_name . '.php';
+				}
 			}
-		});
+		);
 
 		// If autoloading fails, we'll loop and manually add all the files.
-		foreach( $files as $file ) {
+		foreach ( $files as $file ) {
 
 			// If the class exists, then autoloading is functional so bail out.
-			if( class_exists( 'SWP_' . $file ) ) {
+			if ( class_exists( 'SWP_' . $file ) ) {
 				return;
 			}
 
@@ -605,7 +532,6 @@ class Social_Warfare {
 	 * @param  void
 	 *
 	 * @return bool True iff the conflict is fatal, else false.
-	 *
 	 */
 	public static function has_plugin_conflict() {
 
@@ -615,7 +541,7 @@ class Social_Warfare {
 			remove_filter( 'the_title', array( Subtitles::getinstance(), 'the_subtitle' ), 10, 2 );
 		endif;
 
-		//* Disable on BuddyPress pages.
+		// * Disable on BuddyPress pages.
 		if ( function_exists( 'is_buddypress' ) && is_buddypress() ) :
 			return true;
 		endif;
@@ -626,7 +552,6 @@ class Social_Warfare {
 
 /**
  * Include the plugin's admin files.
- *
  */
 if ( is_admin() ) {
 	require_once SWP_PLUGIN_DIR . '/lib/admin/swp_system_checker.php';

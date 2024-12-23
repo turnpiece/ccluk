@@ -13,10 +13,18 @@
  * @since     3.0.0 | 07 APR 2018 | Rebuilt into a class-based system.
  * @since     3.4.0 | 16 NOV 2018 | Removed Open Share Counts API.
  * @since     3.4.0 | 16 NOV 2018 | Added local properties for debugging.
- *
  */
 class SWP_Twitter extends SWP_Social_Network {
 
+	/**
+	 * @var string The API URL used to fetch Twitter share counts.
+	 */
+	protected $request_url = '';
+
+	/**
+	 * @var string The raw response from the API request.
+	 */
+	protected $response = '';
 
 	/**
 	 * The Magic __construct Method
@@ -31,13 +39,12 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @param  none
 	 * @return none
 	 * @access public
-	 *
 	 */
 	public function __construct() {
 
 		// Update the class properties for this network
-		$this->name    = __( 'Twitter','social-warfare' );
-		$this->cta     = __( 'Tweet','social-warfare' );
+		$this->name    = esc_html__( 'Twitter', 'social-warfare' );
+		$this->cta     = esc_html__( 'Tweet', 'social-warfare' );
 		$this->key     = 'twitter';
 		$this->default = 'true';
 
@@ -59,50 +66,17 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @since  3.4.0 | 16 NOV 2018 | Removed Open Share Counts API.
 	 * @since  3.4.0 | 16 NOV 2018 | Added local property for debugging.
 	 * @since  4.0.0 | 24 FEB 2020 | Added Open Share Count API.
+	 * @since  4.5.0 | 25 JUL 2024 | Removed Open Share Count API.
 	 * @var    $request_url Stored in a local property to allow us to output it
 	 *                      via the debug method when ?swp_debug=twitter is used.
 	 * @param  string $url The permalink of the page or post for which to fetch share counts
 	 * @return string $request_url The complete URL to be used to access share counts via the API
-	 *
 	 */
 	public function get_api_link( $url ) {
 
 		// Fetch the user's options
 		global $swp_user_options;
 		$this->request_url = 0;
-
-
-		/**
-		 * If share counts for Twitter aren't even turned on, just return zero
-		 * and bail early.
-		 *
-		 */
-		if( false === SWP_Utility::get_option( 'twitter_shares' ) ) {
-			return 0;
-		}
-
-
-		/**
-		 * Twitcount is a working, valid source of Twitter share counts. If it's
-		 * active, return the API url of the JSON enpoint.
-		 *
-		 */
-		if( 'twitcount' === SWP_Utility::get_option( 'tweet_count_source' ) ) {
-			$this->request_url = 'https://counts.twitcount.com/counts.php?url=' . $url;
-			return $this->request_url;
-		}
-
-
-		/**
-		 * OpenShareCount.com is another alternative source for fetching share
-		 * counts for shared pages. If it's active, we return it's API URL for
-		 * it's JSON endpoint.
-		 *
-		 */
-		if( 'opensharecount' === SWP_Utility::get_option( 'tweet_count_source' ) ) {
-			$this->request_url = 'https://opensharecount.com/count.json?url=' . $url;
-			return $this->request_url;
-		}
 
 		return 0;
 	}
@@ -121,7 +95,6 @@ class SWP_Twitter extends SWP_Social_Network {
 	 *                         via the debug method when ?swp_debug=twitter is used.
 	 * @param  string $response The raw response returned from the API request
 	 * @return int $total_activity The number of shares reported from the API
-	 *
 	 */
 	public function parse_api_response( $response ) {
 
@@ -130,7 +103,7 @@ class SWP_Twitter extends SWP_Social_Network {
 		$this->response = 0;
 
 		// If the user has enabled Twitter shares....
-		if ( true == SWP_Utility::get_option('twitter_shares') ) {
+		if ( true === SWP_Utility::get_option( 'twitter_shares' ) ) {
 			$response       = json_decode( $response, true );
 			$this->response = isset( $response['count'] ) ? intval( $response['count'] ) : 0;
 			return $this->response;
@@ -150,7 +123,6 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @since  3.4.0 | 17 NOV 2018 | Stripped down into smaller, subordinate methods.
 	 * @param  array $post_data The array of information passed in from the buttons panel.
 	 * @return string The generated link
-	 *
 	 */
 	public function generate_share_link( $post_data ) {
 
@@ -167,40 +139,33 @@ class SWP_Twitter extends SWP_Social_Network {
 	/**
 	 * This is the method that generates the via=username section of the share link.
 	 *
-	 *
 	 * @since  3.4.0 | 19 NOV 2018 | Created
 	 * @since  3.5.2 | 21 MAR 2018 | Changed access from protected to public.
 	 * @param  array $post_data The array of information passed in from the buttons panel.
 	 * @return sting The via=username section of the share link.
-	 *
 	 */
 	public static function get_via_parameter( $post_data ) {
 		if ( is_object( $post_data ) ) {
-			// A global $post, for example
 			$post_data = (array) $post_data;
 		}
-
 
 		/**
 		 * Find out who the author of this post is, then check that author's
 		 * profile to see if they have filled out their Twitter username. If so,
 		 * we'll use that for this post instead of the global Twitter username.
-		 *
 		 */
-		$author = SWP_User_Profile::get_author( $post_data['ID'] );
-		$user_twitter_handle = get_the_author_meta( 'swp_twitter' , $author );
-		if ( !empty( $user_twitter_handle ) ) {
+		$author              = SWP_User_Profile::get_author( $post_data['ID'] );
+		$user_twitter_handle = get_the_author_meta( 'swp_twitter', $author );
+		if ( ! empty( $user_twitter_handle ) ) {
 			return '&via=' . str_replace( '@', '', esc_attr( $user_twitter_handle ) );
 		}
-
 
 		/**
 		 * Next we'll check to see if a Twitter username has been filled out on
 		 * the global options page. If so, we'll use that as a backup.
-		 *
 		 */
 		$twitter_id = SWP_Utility::get_option( 'twitter_id' );
-		if ( !empty( $twitter_id ) ) {
+		if ( ! empty( $twitter_id ) ) {
 			return '&via=' . str_replace( '@', '', esc_attr( $twitter_id ) );
 		}
 
@@ -215,19 +180,17 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @param  string $tweet     The tweet being shared.
 	 * @param  array  $post_data The array of information passed in from the buttons panel.
 	 * @return string The url parameter to be concatenated to the share link.
-	 *
 	 */
-	protected function get_url_parameter( $tweet , $post_data ) {
-
+	protected function get_url_parameter( $tweet, $post_data ) {
 
 		/**
 		 * If the custom tweet already contains a link in it, then setting this
 		 * parameter to a forward slash will stop Twitter from adding its own
 		 * link, AKA a second link in the tweet.
-		 *
 		 */
-		if ( false !== strpos( $tweet , 'http' ) ) {
-			return $url_parameter = '&url=/';
+		if ( false !== strpos( $tweet, 'http' ) ) {
+			$url_parameter = '&url=/';
+			return $url_parameter;
 		}
 
 		$twitter_link = $this->get_shareable_permalink( $post_data );
@@ -241,27 +204,22 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @since  3.3.0 | 16 AUG 2018 | Created. Ported code from $this->generate_share_link.
 	 * @param array $post_data WordPress post data, such as 'ID' and 'post_content'.
 	 * @return string $tweet The encoded tweet text.
-	 *
 	 */
 	protected function get_tweet( $post_data ) {
-
 
 		/**
 		 * If the user has drafted a custom tweet for this post, it will be
 		 * stored in the swp_custom_tweet custom field. We will check and use
 		 * this if it is available.
-		 *
 		 */
-		$tweet = get_post_meta( $post_data['ID'] , 'swp_custom_tweet' , true );
-
+		$tweet = get_post_meta( $post_data['ID'], 'swp_custom_tweet', true );
 
 		/**
 		 * If the user has not filled out the custom tweet field, then we will
 		 * use the title of the post instead.
-		 *
 		 */
 		if ( empty( $tweet ) ) {
-			$tweet = str_replace( '|', '', strip_tags( $post_data['post_title'] ) );
+			$tweet = str_replace( '|', '', wp_strip_all_tags( $post_data['post_title'] ) );
 		}
 
 		return urlencode( $tweet );
@@ -277,7 +235,6 @@ class SWP_Twitter extends SWP_Social_Network {
 	 * @since  3.4.0 | 16 NOV 2018 | Completely rewritten
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	protected function handle_invalid_share_count_sources() {
 
@@ -285,12 +242,12 @@ class SWP_Twitter extends SWP_Social_Network {
 		$source = SWP_Utility::get_option( 'tweet_count_source' );
 
 		// If the current source is set to New Share Counts
-		if ( 'newsharecounts' == $source ) {
+		if ( 'newsharecounts' === $source ) {
 			$service_name = 'New Share Count';
 		}
 
 		// If an invalid source was matched above, handle it here.
-		if( isset( $service_name ) ) {
+		if ( isset( $service_name ) ) {
 
 			// Disable share counts for Twitter.
 			SWP_Utility::update_option( 'twitter_shares', false );

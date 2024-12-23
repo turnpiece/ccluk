@@ -329,7 +329,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 
 			try {
 				// Get metadata.
-				$metadata = give_recurring_get_metadata( $this->purchase_data, $this->payment_id );
+				$metadata = give_stripe_prepare_metadata( $this->payment_id, $this->purchase_data );
 
 				// Set Application Information.
 				give_stripe_set_app_info();
@@ -795,7 +795,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 
 		// First check user meta to see if they have made a previous donation
 		// w/ Stripe via non-recurring donation so we don't create a duplicate Stripe customer for recurring.
-		$customer_id = give_get_stripe_customer_id( $user_email );
+		$customer_id = give_stripe_get_customer_id( $user_email );
 
 		// If no data found check the subscribers profile to see if there's a recurring ID already.
 		if ( empty( $customer_id ) ) {
@@ -824,17 +824,7 @@ class Give_Recurring_Stripe_ACH extends Give_Recurring_Gateway {
 		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
 
 		// Get update renewal amount.
-		$renewal_amount = isset( $post_data['give-amount'] ) ? give_maybe_sanitize_amount( $post_data['give-amount'] ) : 0;
-		$current_recurring_amount = give_maybe_sanitize_amount( $subscription->recurring_amount );
-		$check_amount = number_format( $renewal_amount, 0 );
-
-		// Set error if renewal amount not valid.
-		if (
-			empty( $check_amount ) ||
-			$renewal_amount === $current_recurring_amount
-		) {
-			give_set_error( 'give_recurring_invalid_subscription_amount', __( 'Please enter the valid subscription amount.', 'give-recurring' ) );
-		}
+		$renewal_amount = $this->getNewRenewalAmount();
 
 		// Is errors?
 		$errors = give_get_errors();

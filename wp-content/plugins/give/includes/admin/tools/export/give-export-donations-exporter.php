@@ -157,6 +157,7 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 	/**
 	 * CSV file columns.
 	 *
+     * @since 3.12.1 add phone column.
 	 * @since  2.1
 	 *
 	 * @param array $columns
@@ -199,6 +200,9 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 					$cols['address_zip']     = __( 'Zip', 'give' );
 					$cols['address_country'] = __( 'Country', 'give' );
 					break;
+                case 'phone':
+                    $cols['phone'] = __( 'Donor Phone Number', 'give' );
+                    break;
 				case 'comment':
 					$cols['comment'] = __( 'Donor Comment', 'give' );
 					break;
@@ -284,6 +288,7 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 			'number' => 30,
 			'page'   => $this->step,
 			'status' => $this->status,
+			'order'  => 'ASC',
 		);
 		// Date query.
 		if ( ! empty( $this->start ) || ! empty( $this->end ) ) {
@@ -313,6 +318,7 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 	 *
 	 * @access public
 	 *
+     * @since 3.12.1 add donor phone.
 	 * @since  2.1
 	 *
 	 * @global object $wpdb Used to query the database using the WordPress database API.
@@ -372,6 +378,10 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 					$data[ $i ]['address_zip']     = isset( $address['zip'] ) ? $address['zip'] : '';
 					$data[ $i ]['address_country'] = isset( $address['country'] ) ? $address['country'] : '';
 				}
+
+                if ( ! empty( $columns['phone'] ) ) {
+                    $data[ $i ]['phone'] = $payment_meta['_give_payment_donor_phone'];
+                }
 
 				if ( ! empty( $columns['comment'] ) ) {
 					$comment               = give_get_donor_donation_comment( $payment->ID, $payment->donor_id );
@@ -636,6 +646,7 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 	 * @access public
 	 *
 	 * @since  2.1
+	 * @since 3.14.0 Use maybe_serialize() for column data (some data are arrays)
 	 *
 	 * @return string|false
 	 */
@@ -653,7 +664,8 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 				foreach ( $row as $col_id => $column ) {
 					// Make sure the column is valid
 					if ( array_key_exists( $col_id, $cols ) ) {
-						$row_data .= '"' . preg_replace( '/"/', "'", $column ) . '"';
+                        $column = maybe_serialize( $column );
+						$row_data .= '"' . $this->escape_csv_cell_data(preg_replace( '/"/', "'", $column )) . '"';
 						$row_data .= $i == count( $cols ) ? '' : ',';
 						$i ++;
 					}
@@ -668,4 +680,24 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 
 		return false;
 	}
+
+    /**
+     * Escapes CSV cell data to protect against CSV injection.
+     * @link https://owasp.org/www-community/attacks/CSV_Injection
+     *
+     * @since 3.12.1 sanitize + prefix
+     * @since 2.25.2
+     *
+     * @param mixed|string $cellData
+     *
+     * @return mixed|string
+     */
+    protected function escape_csv_cell_data($cellData) {
+        $cellData = str_replace('+', '', $cellData);
+        $firstCharacter = substr($cellData, 0, 1);
+        if( in_array($firstCharacter, array('=', '+', '-', '@')) ) {
+            $cellData = "'" . $cellData;
+        }
+        return $cellData;
+    }
 }

@@ -8,7 +8,7 @@
 
 namespace Give\Onboarding\Setup;
 
-use Give\DonationForms\DonationFormsAdminPage;
+use Give\DonationForms\V2\DonationFormsAdminPage;
 
 defined('ABSPATH') || exit;
 
@@ -59,12 +59,11 @@ class Page
     {
         add_submenu_page(
             'edit.php?post_type=give_forms',
-            esc_html__('Setup GiveWP', 'give'),
+            esc_html__('Set up GiveWP', 'give'),
             esc_html__('Setup', 'give'),
             'manage_give_settings',
             'give-setup',
-            [$this, 'render_page'],
-            2
+            [$this, 'render_page']
         );
     }
 
@@ -85,12 +84,7 @@ class Page
             [],
             GIVE_VERSION
         );
-        wp_enqueue_style(
-            'give-admin-setup-google-fonts',
-            'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap',
-            [],
-            GIVE_VERSION
-        );
+        wp_enqueue_style('givewp-admin-fonts');
         wp_enqueue_script(
             'give-admin-setup-script',
             GIVE_PLUGIN_URL . 'assets/dist/js/admin-setup.js',
@@ -98,6 +92,25 @@ class Page
             GIVE_VERSION,
             $in_footer = true
         );
+        
+        wp_enqueue_script(
+            'give-admin-add-ons-script',
+            GIVE_PLUGIN_URL . 'assets/dist/js/admin-add-ons.js',
+            ['jquery'],
+            GIVE_VERSION,
+            $in_footer = true
+        );
+
+        $localized_data = [
+            'notices' => [
+                'invalid_license'        => __( 'Sorry, you entered an invalid key.', 'give' ),
+                'download_file'          => __( 'Success! You have activated your license key and are receiving updates and priority support. <a href="{link}">Click here</a> to download your add-on.', 'give' ),
+                'addon_activated'        => __( '{pluginName} add-on activated successfully.', 'give' ),
+                'addon_activation_error' => __( 'The add-on did not activate successfully.', 'give' ),
+            ],
+        ];
+
+        wp_localize_script( 'give-admin-add-ons-script', 'give_addon_var', $localized_data );
     }
 
     /**

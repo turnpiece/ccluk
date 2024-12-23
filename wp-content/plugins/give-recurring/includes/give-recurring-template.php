@@ -233,6 +233,11 @@ function give_recurring_multilevel_text( $level_text, $form_id, $level ) {
 
 	$text = $level_text . apply_filters( 'give_recurring_multilevel_text_separator', ', ', $form_id, $level ) . '<span class="give-recurring-multilevel-label">' . $pretty_period . '</span>';
 
+	// Remove html tag if need recurring multilevel text during donation processing.
+	if( doing_action('give_purchase' ) ) {
+		$text = strip_tags( $text );
+	}
+
 	return apply_filters( 'give_recurring_multilevel_text', $text, $form_id, $level );
 
 }

@@ -128,6 +128,9 @@ function give_recurring_do_automatic_upgrades() {
 		case version_compare( $give_recurring_version, '1.8.4', '<' ) :
 		case version_compare( $give_recurring_version, '1.8.7', '<' ) :
 			give_recurring_v184_alter_amount_column_type_callback();
+		case version_compare( $give_recurring_version, '1.10.3', '<' ) :
+			give_recurring_v1103_add_fee_amount_column_callback();
+			give_recurring_v1103_alter_db_for_object_id_length();
 	}
 }
 
@@ -487,4 +490,50 @@ function give_recurring_v184_alter_amount_column_type_callback() {
 	// The Update Ran.
 	give_set_upgrade_complete( 'give_recurring_v184_alter_amount_column_type' );
 
+}
+
+/**
+ * Add "recurring_fee_amount" column after "recurring_amount" to add support for fee amount to subscriptions.
+ * @see https://github.com/impress-org/give-fee-recovery/issues/266
+ *
+ * @since 1.10.3
+ */
+function give_recurring_v1103_add_fee_amount_column_callback() {
+	global $wpdb;
+
+	$completed = give_has_upgrade_completed( 'give_recurring_v1103_add_fee_amount_column' );
+
+	if ( $completed ) {
+		return;
+	}
+
+	// Alter columns.
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions ADD `recurring_fee_amount` DECIMAL(18,10) NOT NULL AFTER `recurring_amount`" );
+
+	// The Update Ran.
+	give_set_upgrade_complete( 'give_recurring_v1103_add_fee_amount_column' );
+}
+
+/**
+ * Update Transaction ID Column Data type length.
+ *
+ * @see https://github.com/impress-org/give-recurring/issues/945
+ *
+ * @since 1.10.3
+ */
+function give_recurring_v1103_alter_db_for_object_id_length() {
+	global $wpdb;
+
+	$completed = give_has_upgrade_completed( 'give_recurring_v1103_alter_db_for_object_id_length' );
+
+	if ( $completed ) {
+		return;
+	}
+
+	// Alter columns.
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions MODIFY `transaction_id` VARCHAR(255)" );
+	$wpdb->query( "ALTER TABLE {$wpdb->prefix}give_subscriptions MODIFY `profile_id` VARCHAR(255)" );
+
+	// The Update Ran.
+	give_set_upgrade_complete( 'give_recurring_v1103_alter_db_for_object_id_length' );
 }

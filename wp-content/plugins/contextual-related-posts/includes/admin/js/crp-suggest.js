@@ -7,8 +7,11 @@ jQuery(document).ready(function($) {
 
 		options = options || {};
 
-		var taxonomy = options.taxonomy || $element.attr( 'data-wp-taxonomy' ) || 'category';
+		var taxonomy = options.taxonomy || $element.attr( 'data-wp-taxonomy' ) || '';
 		delete( options.taxonomy );
+
+		var ajaxAction = options.ajaxAction || $element.attr( 'data-wp-ajax-action' ) || 'crp_tag_search';
+		delete( options.ajaxAction );
 
 		function split( val ) {
 			return val.split( /,(?=(?:(?:[^"]*"){2})*[^"]*$)/ ); // Split typical CSV format, with commas and double quotes.
@@ -26,26 +29,19 @@ jQuery(document).ready(function($) {
 				collision: 'none'
 			},
 			source: function( request, response ) {
-				var term;
-
 				if ( last === request.term ) {
 					response( cache );
 					return;
 				}
 
-				term = extractLast( request.term );
-
-				if ( last === request.term ) {
-					response( cache );
-					return;
-				}
+				var term = extractLast( request.term );
 
 				$.ajax({
 					type: 'POST',
 					dataType: 'json',
 					url: ajaxurl,
 					data: {
-						action: 'crp_tag_search',
+						action: ajaxAction,
 						tax: taxonomy,
 						q: term
 					},
@@ -102,9 +98,5 @@ jQuery(document).ready(function($) {
 
 	$( '.category_autocomplete' ).each( function ( i, element ) {
 		$( element ).crpTagsSuggest();
-	});
-
-	$('.widget-liquid-right, #customize-controls').on( 'click', '.category_autocomplete', function() {
-		$( '.category_autocomplete' ).crpTagsSuggest();
 	});
 });

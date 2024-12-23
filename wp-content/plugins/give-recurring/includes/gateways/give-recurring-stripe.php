@@ -1,5 +1,7 @@
 <?php
 
+use GiveRecurring\Gateways\Stripe\Plan;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -10,9 +12,37 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 
+	/**
+	 * Call Give Stripe Invoice Class for processing recurring donations.
+	 *
+	 * @var $invoice
+	 */
 	public $invoice;
 
+	/**
+	 * Call Give Stripe Payment Intent Class for processing recurring donations.
+	 *
+	 * @var $payment_intent
+	 */
 	public $payment_intent;
+
+	/**
+	 * Call Give Stripe Plan Class for processing recurring donations.
+	 *
+	 * @since 1.10.3
+	 *
+	 * @var $plan
+	 */
+	public $plan;
+
+	/**
+	 * Call Give Stripe Plan Class for processing recurring donations.
+	 *
+	 * @since 1.10.3
+	 *
+	 * @var $subscription
+	 */
+	public $subscription;
 
 	/**
 	 * Get Stripe Started.
@@ -42,12 +72,11 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 			return;
 		}
 
-		$this->secret_key     = give_stripe_get_secret_key();
-		$this->public_key     = give_stripe_get_publishable_key();
 		$this->stripe_gateway = new Give_Stripe_Gateway();
 		$this->invoice        = new Give_Stripe_Invoice();
 		$this->payment_intent = new Give_Stripe_Payment_Intent();
-
+		$this->plan           = new Plan();
+		$this->subscription   = new Give_Recurring_Stripe_Subscription();
 
 		add_action( 'give_pre_refunded_payment', array( $this, 'process_refund' ) );
 		add_action( 'give_recurring_cancel_stripe_subscription', array( $this, 'cancel' ), 10, 2 );
@@ -94,26 +123,13 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 	 */
 	public function create_payment_profiles() {
 
-		$source = ! empty( $_POST['give_stripe_payment_method'] ) ? give_clean( $_POST['give_stripe_payment_method'] ) : $this->generate_source_dictionary();
-		$email  = $this->purchase_data['user_email'];
+		$source        = ! empty( $_POST['give_stripe_payment_method'] ) ? give_clean( $_POST['give_stripe_payment_method'] ) : $this->generate_source_dictionary();
+		$email         = $this->purchase_data['user_email'];
+		$source_object = $this->stripe_gateway->payment_method->retrieve( $source );
 
-		// Convert token to source in case of stripe checkout.
-		if ( give_stripe_is_checkout_enabled() ) {
-
-			// In case of Stripe Checkout, $source_object is pretended as Token Object.
-			$source_object = $this->stripe_gateway->get_token_details( $source );
-
-			// Add source to donation notes and meta.
-			give_insert_payment_note( $this->payment_id, 'Stripe Token ID: ' . $source_object->id );
-			give_update_payment_meta( $this->payment_id, '_give_stripe_token_id', $source_object->id );
-		} else {
-
-			$source_object = $this->stripe_gateway->payment_method->retrieve( $source );
-
-			// Add source to donation notes and meta.
-			give_insert_payment_note( $this->payment_id, 'Stripe Source ID: ' . $source_object->id );
-			give_update_payment_meta( $this->payment_id, '_give_stripe_source_id', $source_object->id );
-		}
+		// Add source to donation notes and meta.
+		give_insert_payment_note( $this->payment_id, 'Stripe Source ID: ' . $source_object->id );
+		give_update_payment_meta( $this->payment_id, '_give_stripe_source_id', $source_object->id );
 
 		$this->stripe_customer = new Give_Stripe_Customer( $email, $source_object->id );
 		$stripe_customer       = $this->stripe_customer->customer_data;
@@ -161,8 +177,9 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 					? $this->stripe_customer->customer_data->default_source
 					: $source->id;
 
-					// Get metadata.
-				$metadata = give_recurring_get_metadata( $this->purchase_data, $this->payment_id );
+				// Get metadata.
+				$metadata = give_stripe_prepare_metadata( $this->payment_id, $this->purchase_data );
+
 				$args     = array(
 					'customer' => $stripe_customer->id,
 					'items'    => array(
@@ -173,11 +190,7 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 					'metadata' => $metadata,
 				);
 
-				if ( give_stripe_is_checkout_enabled() ) {
-					$args['default_source'] = $default_source_id;
-				} else {
-					$args['default_payment_method'] = $default_source_id;
-				}
+				$args['default_payment_method'] = $default_source_id;
 
 				$subscription                      = \Stripe\Subscription::create( $args, give_stripe_get_connected_account_options() );
 				$this->subscriptions['profile_id'] = $subscription->id;
@@ -500,7 +513,6 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 				'active',
 				'failing',
 			), true )
-			&& ! give_is_setting_enabled( give_get_option( 'stripe_checkout_enabled' ) )
 		) {
 			return true;
 		}
@@ -751,7 +763,7 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 			return;
 		}
 
-		// give_stripe_credit_card_form() only shows when Stripe Checkout is enabled so we fake it
+		// addCreditCardForm() only shows when Stripe Checkout is enabled so we fake it
 		add_filter( 'give_get_option_stripe_checkout', '__return_false' );
 
 		// Remove Billing address fields.
@@ -761,8 +773,8 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 
 		$form_id           = ! empty( $subscription->form_id ) ? absint( $subscription->form_id ) : 0;
 		$args['id_prefix'] = "$form_id-1";
-		give_stripe_credit_card_form( $form_id, $args, $echo = true );
-
+		$stripeCard = new Give_Stripe_Card();
+		$stripeCard->addCreditCardForm( $form_id, $args );
 	}
 
 	/**
@@ -780,6 +792,10 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 		// Check for any existing errors.
 		$errors    = give_get_errors();
 		$post_data = give_clean( $_POST );
+		$form_id   = ! empty( $subscription->form_id ) ? $subscription->form_id : false;
+
+		// Set App info.
+		give_stripe_set_app_info( $form_id );
 
 		if ( empty( $errors ) ) {
 
@@ -958,26 +974,16 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 	 */
 	public function update_subscription( $subscriber, $subscription ) {
 		// Sanitize the values submitted with donation form.
-		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		$postedData = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
 
 		// Get update renewal amount.
-		$renewal_amount           = isset( $post_data['give-amount'] ) ? give_maybe_sanitize_amount( $post_data['give-amount'] ) : 0;
-		$current_recurring_amount = give_maybe_sanitize_amount( $subscription->recurring_amount );
-		$check_amount             = number_format( $renewal_amount, 0 );
-
-		// Set error if renewal amount not valid.
-		if (
-			empty( $check_amount ) ||
-			$renewal_amount === $current_recurring_amount
-		) {
-			give_set_error( 'give_recurring_invalid_subscription_amount', __( 'Please enter the valid subscription amount.', 'give-recurring' ) );
-		}
+		$renewalAmount = $this->getNewRenewalAmount();
 
 		// Is errors?
 		$errors = give_get_errors();
 
 		if ( empty( $errors ) ) {
-			$this->update_subscription_plan( $subscription, $renewal_amount );
+			$this->update_subscription_plan( $subscription, $renewalAmount );
 		}
 	}
 
@@ -993,8 +999,11 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 		$stripe_plan_name = give_recurring_generate_subscription_name( $subscription->form_id, $subscription->price_id );
 		$stripe_plan_id   = $this->generate_stripe_plan_id( $stripe_plan_name, $renewal_amount, $subscription->period, $subscription->frequency );
 
-		try {
 
+		$stripe_plan = $this->plan->retrieve( $stripe_plan_id );
+
+		// If Plan not found, then create one.
+		if ( empty( $stripe_plan ) ) {
 			// The plan does not exist, please create a new plan.
 			$args = array(
 				'amount'         => give_stripe_dollars_to_cents( $renewal_amount ),
@@ -1011,55 +1020,34 @@ class Give_Recurring_Stripe extends Give_Recurring_Gateway {
 				'type'                 => 'service',
 			) );
 
-			$stripe_plan = false;
+			$stripe_plan = $this->plan->create( $args );
+		}
 
-			try {
+		if ( ! empty( $stripe_plan->id ) ) {
+			$stripe_subscription = $this->subscription->retrieve( $subscription->profile_id );
 
-				$stripe_plan = \Stripe\Plan::create( $args );
+			if (
+				isset( $stripe_subscription->items->data[0]->id )
+				&& isset( $stripe_plan->id )
+			) {
+				$stripe_subscription->update( $subscription->profile_id, array(
+						'items'   => array(
+							array(
+								'id'   => $stripe_subscription->items->data[0]->id,
+								'plan' => $stripe_plan->id
+							)
+						),
+						'prorate' => false,
+					)
+				);
 
-			} catch ( \Stripe\Error\Base $e ) {
-
-				$body = $e->getJsonBody();
-				$err  = $body['error'];
-
-				if ( isset( $err['message'] ) ) {
-					give_set_error( 'stripe_error', $err['message'] );
-				} else {
-					give_set_error( 'stripe_error', __( 'There was an issue creating the Stripe plan.', 'give-recurring' ) );
-				}
-
-			} catch ( Exception $e ) {
-
-				// Something went wrong outside of Stripe.
-				give_set_error( 'Stripe Error', __( 'An error occurred while processing the donation. Please try again.', 'give-recurring' ) );
+				$stripe_subscription->save();
+			} else {
+				give_set_error(
+					'give_recurring_stripe_update_subscription',
+					esc_html__( 'The Stripe gateway returned an error while updating the subscription.', 'give-recurring' )
+				);
 			}
-
-			if ( isset( $stripe_plan ) && is_object( $stripe_plan ) ) {
-				// get stripe subscription.
-				$stripe_subscription = \Stripe\Subscription::retrieve( $subscription->profile_id );
-
-				if (
-					isset( $stripe_subscription->items->data[0]->id )
-					&& isset( $stripe_plan->id )
-				) {
-					$stripe_subscription->update( $subscription->profile_id, array(
-							'items'   => array(
-								array(
-									'id'   => $stripe_subscription->items->data[0]->id,
-									'plan' => $stripe_plan->id
-								)
-							),
-							'prorate' => false,
-						)
-					);
-
-					$stripe_subscription->save();
-				} else {
-					give_set_error( 'give_recurring_stripe_subscription_update', __( 'Problem in Stripe subscription update.', 'give-recurring' ) );
-				}
-			}
-		} catch ( Exception $e ) {
-			give_set_error( 'give_recurring_update_subscription_amount', __( 'Problem in update subscription amount.', 'give-recurring' ) );
 		}
 	}
 

@@ -363,7 +363,7 @@ class Give_Recurring_PayPal extends Give_Recurring_Gateway {
 
 		$args = array(
 			'amount'         => $ipn_data['mc_gross'],
-			'transaction_id' => $ipn_data['txn_id'],
+			'transaction_id' => $ipn_data['txn_id']
 		);
 
 		$subscription->add_payment( $args );

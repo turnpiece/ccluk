@@ -3,6 +3,7 @@
 namespace Give\ServiceProviders;
 
 use Closure;
+use Give\PaymentGateways\Gateways\Stripe\LegacyStripeAdapter;
 use Give\Route\Form;
 
 /**
@@ -19,6 +20,10 @@ class LegacyServiceProvider implements ServiceProvider
      */
     public function register()
     {
+        // TODO: move this
+        // this needs to load before the LegacyServiceProvider loads in GiveWP.
+        give(LegacyStripeAdapter::class)->addToStripeSupportedPaymentMethodsList();
+
         $this->includeLegacyFiles();
         $this->bindClasses();
     }
@@ -33,6 +38,8 @@ class LegacyServiceProvider implements ServiceProvider
     /**
      * Load all the legacy class files since they don't have auto-loading
      *
+     * @since 3.1.2 remove WP_Background_Process & WP_Async_Request in favor of namespaced versions.
+     * @since 3.0.0 remove the manual (Test Donations) gateway from loading in favor of the new Test Donations gateway
      * @since 2.8.0
      */
     private function includeLegacyFiles()
@@ -40,17 +47,6 @@ class LegacyServiceProvider implements ServiceProvider
         global $give_options;
 
         require_once GIVE_PLUGIN_DIR . 'includes/class-give-cache-setting.php';
-
-        /**
-         * Load libraries.
-         */
-        if ( ! class_exists('WP_Async_Request')) {
-            include_once GIVE_PLUGIN_DIR . 'includes/libraries/wp-async-request.php';
-        }
-
-        if ( ! class_exists('WP_Background_Process')) {
-            include_once GIVE_PLUGIN_DIR . 'includes/libraries/wp-background-process.php';
-        }
 
         require_once GIVE_PLUGIN_DIR . 'includes/setting-functions.php';
         require_once GIVE_PLUGIN_DIR . 'includes/country-functions.php';
@@ -128,7 +124,6 @@ class LegacyServiceProvider implements ServiceProvider
         require_once GIVE_PLUGIN_DIR . 'includes/gateways/actions.php';
         require_once GIVE_PLUGIN_DIR . 'includes/gateways/paypal/paypal-standard.php';
         require_once GIVE_PLUGIN_DIR . 'includes/gateways/offline-donations.php';
-        require_once GIVE_PLUGIN_DIR . 'includes/gateways/manual.php';
         require_once GIVE_PLUGIN_DIR . 'includes/emails/class-give-emails.php';
         require_once GIVE_PLUGIN_DIR . 'includes/emails/class-give-email-tags.php';
         require_once GIVE_PLUGIN_DIR . 'includes/admin/emails/class-email-notifications.php';
@@ -167,7 +162,7 @@ class LegacyServiceProvider implements ServiceProvider
 
         // This conditional check will add backward compatibility to older Stripe versions (i.e. < 2.2.0) when used with Give 2.5.0.
         if (
-            ! defined('GIVE_STRIPE_VERSION') ||
+            !defined('GIVE_STRIPE_VERSION') ||
             (
                 defined('GIVE_STRIPE_VERSION') &&
                 version_compare(GIVE_STRIPE_VERSION, '2.2.0', '>=')
@@ -250,20 +245,23 @@ class LegacyServiceProvider implements ServiceProvider
      * @param string $type admin, ajax, cron or frontend.
      *
      * @return bool
+     * @throws UnknownRequestTypeException
      */
     private function is_request($type)
     {
         switch ($type) {
-            case 'admin':
+            case RequestType::ADMIN:
                 return is_admin();
-            case 'ajax':
+            case RequestType::AJAX:
                 return defined('DOING_AJAX');
-            case 'cron':
+            case RequestType::CRON:
                 return defined('DOING_CRON');
-            case 'frontend':
-                return ( ! is_admin() || defined('DOING_AJAX')) && ! defined('DOING_CRON') && ! defined('REST_REQUEST');
-            case 'wpcli':
+            case RequestType::FRONTEND:
+                return (!is_admin() || defined('DOING_AJAX')) && !defined('DOING_CRON') && !defined('REST_REQUEST');
+            case RequestType::WPCLI:
                 return defined('WP_CLI') && WP_CLI;
+            default:
+                throw new UnknownRequestTypeException($type);
         }
     }
 }

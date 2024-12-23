@@ -150,9 +150,10 @@ class TableHelper
 
     function format_dump_name($dump_name)
     {
-        $state_data = $this->migration_state_manager->set_post_data();
-        $form_data  = $this->form_data->getFormData();
-        $extension  = '.sql';
+        $state_data          = $this->migration_state_manager->set_post_data();
+        $form_data           = $this->form_data->getFormData();
+        $extension           = '.sql';
+        $is_full_site_export = isset($state_data['full_site_export']) ? $state_data['full_site_export'] : false;
 
         if (empty($form_data) && empty($state_data)) {
             return $dump_name . $extension;
@@ -167,7 +168,7 @@ class TableHelper
                 $extension .= '.gz';
             }
         } else {
-            if (Util::gzip() && $form_data['gzip_file']) {
+            if (Util::gzip() && $form_data['gzip_file'] && !$is_full_site_export) {
                 $extension .= '.gz';
             }
         }
@@ -195,6 +196,7 @@ class TableHelper
      * @param string $scope         Optional type of table to match against, default is 'table'.
      * @param string $new_prefix    Optional new prefix already added to $given_table.
      * @param int    $blog_id       Optional Only used with 'blog' scope to test against a specific subsite's tables other than current for $wpdb.
+     * @param string $source_prefix Optional prefix from source site already added to $given_table.
      *
      * @return boolean
      */

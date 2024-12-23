@@ -965,7 +965,7 @@ class WPMUDEV_Dashboard_Remote {
 		// Get project id.
 		$project = isset( $params->project ) ? $params->project : '';
 
-		if ( ! empty( $plugin ) ) {
+		if ( ! empty( $project ) ) {
 			// Replace free version with Pro.
 			$success = WPMUDEV_Dashboard::$site->maybe_replace_free_with_pro( $project, false );
 		}
@@ -1141,23 +1141,9 @@ class WPMUDEV_Dashboard_Remote {
 
 		// Register the user to be logged in for SSO, only if the SSO was just enabled.
 		if ( $enable_sso && ! $previous_sso ) {
-			$user_id = get_current_user_id();
-			// If we couldn't find a user.
-			if ( empty( $user_id ) ) {
-				$users = WPMUDEV_Dashboard::$site->get_allowed_users( true );
-				if ( ! empty( $users[0] ) ) {
-					$user_id = $users[0];
-				}
+			// Get an admin user ID for SSO.
+			$user_id = WPMUDEV_Dashboard::$utils->get_admin_user_for_sso();
 
-				// Still empty?.
-				if ( empty( $user_id ) ) {
-					// Let's get an admin user now.
-					$users = WPMUDEV_Dashboard::$site->get_available_users();
-					if ( ! empty( $users[0] ) ) {
-						$user_id = $users[0]->ID;
-					}
-				}
-			}
 			WPMUDEV_Dashboard::$settings->set( 'userid', $user_id, 'sso' );
 		}
 

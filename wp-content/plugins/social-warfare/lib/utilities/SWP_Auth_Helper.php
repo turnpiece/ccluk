@@ -13,31 +13,30 @@
  *
  * This class only tells us if we have access for a network, and if not,
  * which link we should use to request access.
- *
  */
 class SWP_Auth_Helper {
 
 
 	/**
 	 * The network this controller interfaces.
-	 * @var string $network
 	 *
+	 * @var string $network
 	 */
 	public $network = '';
 
 
 	/**
 	 * Alias of $network.
-	 * @var string $key
 	 *
+	 * @var string $key
 	 */
 	public $key = '';
 
 
 	/**
 	 * Whether or not we have registered credentials for this network.
-	 * @var bool $has_credentials;
 	 *
+	 * @var bool $has_credentials;
 	 */
 	public $has_credentials = false;
 
@@ -49,7 +48,6 @@ class SWP_Auth_Helper {
 	 * SWFW_Follow_Network __construct() method.
 	 *
 	 * @var string $client_secret;
-	 *
 	 */
 	protected $client_key = '';
 
@@ -61,35 +59,33 @@ class SWP_Auth_Helper {
 	 * SWFW_Follow_Network __construct() method.
 	 *
 	 * @var string $client_secret;
-	 *
 	 */
 	protected $client_secret = '';
 
 
 	/**
 	 * The user's API key.
-	 * @var string $consumer_key;
 	 *
+	 * @var string $consumer_key;
 	 */
 	protected $consumer_key = '';
 
 
 	/**
 	 * The user's API secret.
-	 * @var string $access_secret;
 	 *
+	 * @var string $access_secret;
 	 */
 	protected $access_secret = '';
 
 
 	public function __construct( $network_key ) {
-		if ( empty( $network_key ) ) {
-			error_log('Please provide a network_key when constructing an SWP_Auth_Controller.');
-			return;
-		}
+		if (empty($network_key)) {
+			throw new InvalidArgumentException('Please provide a network_key when constructing an SWP_Auth_Controller.');
+		}		
 
 		$this->network = $network_key;
-		$this->key = $network_key;
+		$this->key     = $network_key;
 		$this->establish_credentials();
 	}
 
@@ -100,7 +96,6 @@ class SWP_Auth_Helper {
 	 * @since 3.5.0 | 03 JAN 2018 | Created.
 	 * @param void
 	 * @return mixed String if the key exists, else false.
-	 *
 	 */
 	public function get_access_token() {
 
@@ -116,17 +111,16 @@ class SWP_Auth_Helper {
 	 * @since  4.0.2 | 23 JUL 2020 | Created
 	 * @param  void
 	 * @return boolean True if valid. False if invalid or missing.
-	 *
 	 */
 	public function has_valid_token() {
 
 		// If we don't have an access token at all.
-		if ( false == $this->get_access_token() ) {
+		if ( false === $this->get_access_token() ) {
 			return false;
 		}
 
 		// If the access token is expired.
-		if( 'expired' == $this->get_access_token() ) {
+		if ( 'expired' === $this->get_access_token() ) {
 			return false;
 		}
 
@@ -141,7 +135,6 @@ class SWP_Auth_Helper {
 	 * @since 3.5.0 | 03 JAN 2018 | Created.
 	 * @param void
 	 * @return mixed String if the key exists, else false.
-	 *
 	 */
 	public function get_access_secret() {
 		return $this->has_credentials ? $this->access_secret : false;
@@ -161,7 +154,6 @@ class SWP_Auth_Helper {
 	 *
 	 * @TODO Some networks may only have a key and no secret.
 	 * Right now both are required, so find a way to distinguish the two.
-	 *
 	 */
 	public function establish_credentials() {
 		$access_token = SWP_Credential_Helper::get_token( $this->network );
@@ -171,17 +163,17 @@ class SWP_Auth_Helper {
 		}
 
 		$access_secret = SWP_Credential_Helper::get_token( $this->network, 'access_secret' );
-		if ( !empty( $access_secret ) ) {
+		if ( ! empty( $access_secret ) ) {
 			$this->access_secret = $access_secret;
 		}
 
-		$this->access_token = $access_token;
-		return $this->has_credentials = true;
+		$this->access_token    = $access_token;
+		$this->has_credentials = true;
+		return $this->has_credentials;
 	}
 
 
 	public function add_to_authorizations( $network_keys ) {
-		// return $network_keys;
 		return array_merge( $network_keys, array( $this->network ) );
 	}
 
@@ -192,11 +184,10 @@ class SWP_Auth_Helper {
 	 * @since 3.5.0 | 03 JAN 2018 | Created.
 	 * @param void
 	 * @return string The URL which handles the oAuth handshakes.
-	 *
 	 */
 	public function get_authorization_link() {
 		$request_url = 'https://warfareplugins.com/authorizations/' . $this->network . '/request_token.php';
-		return add_query_arg('return_address', admin_url('?page=social-warfare'), $request_url);
+		return add_query_arg( 'return_address', admin_url( '?page=social-warfare' ), $request_url );
 	}
 
 
@@ -208,27 +199,26 @@ class SWP_Auth_Helper {
 	 * @since 3.5.0 | 15 JAN 2019 | Created.
 	 * @param void
 	 * @return string The URL which handles the revoke access action.
-	 *
 	 */
 	public function get_revoke_access_url() {
-		switch( $this->network ) {
+		switch ( $this->network ) {
 
-			case 'facebook' :
+			case 'facebook':
 				return 'https://www.facebook.com/settings?tab=applications';
 
-			case 'instagram' :
+			case 'instagram':
 				return 'https://www.instagram.com/accounts/manage_access/';
 
-			case 'pinterest' :
+			case 'pinterest':
 				return 'https://www.pinterest.com/settings#apps';
 
-			case 'twitter' :
+			case 'twitter':
 				return 'https://twitter.com/settings/sessions';
 
-			case 'tumblr' :
+			case 'tumblr':
 				return 'https://www.tumblr.com/settings/apps';
 
-			case 'vimeo' :
+			case 'vimeo':
 				return 'https://vimeo.com/settings/apps';
 
 			default:
@@ -238,11 +228,11 @@ class SWP_Auth_Helper {
 
 	public function get_auth_button_text() {
 		switch ( $this->network ) {
-			case 'facebook' :
+			case 'facebook':
 				return '<i class="sw swp_facebook_icon"></i> Continue with Facebook';
 
-			default :
-				return '<i class="sw swp_'.$this->key.'_icon"></i> Login with ' . ucfirst( $this->key );
+			default:
+				return '<i class="sw swp_' . $this->key . '_icon"></i> Login with ' . ucfirst( $this->key );
 		}
 	}
 }

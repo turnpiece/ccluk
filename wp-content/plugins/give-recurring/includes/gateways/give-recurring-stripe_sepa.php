@@ -181,7 +181,7 @@ class Give_Recurring_Stripe_Sepa extends Give_Recurring_Gateway {
 					: $source->id;
 
 				// Get metadata.
-				$metadata = give_recurring_get_metadata( $this->purchase_data, $this->payment_id );
+				$metadata = give_stripe_prepare_metadata( $this->payment_id, $this->purchase_data );
 
 				$setup_intent = \Stripe\SetupIntent::create([
 					'payment_method_types' => ['sepa_debit'],
@@ -768,23 +768,13 @@ class Give_Recurring_Stripe_Sepa extends Give_Recurring_Gateway {
 		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
 
 		// Get update renewal amount.
-		$renewal_amount           = isset( $post_data['give-amount'] ) ? give_maybe_sanitize_amount( $post_data['give-amount'] ) : 0;
-		$current_recurring_amount = give_maybe_sanitize_amount( $subscription->recurring_amount );
-		$check_amount             = number_format( $renewal_amount, 0 );
-
-		// Set error if renewal amount not valid.
-		if (
-			empty( $check_amount ) ||
-			$renewal_amount === $current_recurring_amount
-		) {
-			give_set_error( 'give_recurring_invalid_subscription_amount', __( 'Please enter the valid subscription amount.', 'give-recurring' ) );
-		}
+		$renewalAmount = $this->getNewRenewalAmount();
 
 		// Is errors?
 		$errors = give_get_errors();
 
 		if ( empty( $errors ) ) {
-			$this->update_subscription_plan( $subscription, $renewal_amount );
+			$this->update_subscription_plan( $subscription, $renewalAmount );
 		}
 	}
 

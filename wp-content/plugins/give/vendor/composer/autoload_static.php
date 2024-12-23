@@ -4,22 +4,25 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
+class ComposerStaticInit035a59cb7f15cc6ca6964b692035eb4d
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '5f6326688f4debc6e43d6860fdea3df8' => __DIR__ . '/../..' . '/src/Framework/Http/Response/functions.php',
+        'd07363a44b39ed7758400be44c013440' => __DIR__ . '/../..' . '/src/FormMigration/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php70\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Component\\HttpFoundation\\' => 33,
             'Stripe\\' => 7,
+            'StellarWP\\Validation\\' => 21,
+            'StellarWP\\FieldConditions\\' => 26,
+            'StellarWP\\ContainerContract\\' => 28,
             'Sample\\' => 7,
         ),
         'P' => 
@@ -29,7 +32,6 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         ),
         'M' => 
         array (
-            'MyCLabs\\Enum\\' => 13,
             'Money\\' => 6,
         ),
         'G' => 
@@ -39,7 +41,6 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         'F' => 
         array (
             'FormatObjectList\\' => 17,
-            'Faker\\' => 6,
         ),
         'C' => 
         array (
@@ -48,13 +49,13 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php70\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php70',
-        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
         'Symfony\\Component\\HttpFoundation\\' => 
         array (
@@ -63,6 +64,18 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         'Stripe\\' => 
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'StellarWP\\Validation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stellarwp/validation/src',
+        ),
+        'StellarWP\\FieldConditions\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stellarwp/field-conditions/src',
+        ),
+        'StellarWP\\ContainerContract\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stellarwp/container-contract/src',
         ),
         'Sample\\' => 
         array (
@@ -76,10 +89,6 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         array (
             0 => __DIR__ . '/..' . '/paypal/paypal-checkout-sdk/lib/PayPalCheckoutSdk',
         ),
-        'MyCLabs\\Enum\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
-        ),
         'Money\\' => 
         array (
             0 => __DIR__ . '/..' . '/moneyphp/money/src',
@@ -92,10 +101,6 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         array (
             0 => __DIR__ . '/..' . '/kjohnson/format-object-list/src',
         ),
-        'Faker\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
-        ),
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
@@ -103,16 +108,10 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
     );
 
     public static $classMap = array (
-        'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',
-        'AssertionError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/AssertionError.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Datamatrix' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/datamatrix.php',
-        'DivisionByZeroError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/DivisionByZeroError.php',
-        'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
         'PDF417' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/pdf417.php',
-        'ParseError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ParseError.php',
         'QRcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/barcodes/qrcode.php',
-        'SessionUpdateTimestampHandlerInterface' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/SessionUpdateTimestampHandlerInterface.php',
         'TCPDF' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf.php',
         'TCPDF2DBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_2d.php',
         'TCPDFBarcode' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_barcodes_1d.php',
@@ -124,15 +123,14 @@ class ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815
         'TCPDF_IMPORT' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_import.php',
         'TCPDF_PARSER' => __DIR__ . '/..' . '/tecnickcom/tcpdf/tcpdf_parser.php',
         'TCPDF_STATIC' => __DIR__ . '/..' . '/tecnickcom/tcpdf/include/tcpdf_static.php',
-        'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitebe3aefe49d19c1b9a1f8f4524105815::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit035a59cb7f15cc6ca6964b692035eb4d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit035a59cb7f15cc6ca6964b692035eb4d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit035a59cb7f15cc6ca6964b692035eb4d::$classMap;
 
         }, null, ClassLoader::class);
     }

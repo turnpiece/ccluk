@@ -32,7 +32,7 @@
 					<i class="sui-icon-academy sui-md" aria-hidden="true"></i>
 				</a>
 
-				<?php if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'support' ) ) : ?>
+				<?php if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'support' ) || $has_hosted_access ) : ?>
 					<a
 						href="<?php echo esc_url( $url_support ); ?>"
 						class="sui-button-icon sui-tooltip sui-tooltip-bottom sui-tooltip-bottom-left-mobile"
@@ -61,9 +61,15 @@
 					<?php endif; ?>
 					<ul>
 						<li>
-							<a href="<?php echo esc_url( $url_logout ); ?>">
-								<i class="sui-icon-plug-disconnected" aria-hidden="true"></i> <?php esc_html_e( 'Logout', 'wpmudev' ); ?>
-							</a>
+							<?php if ( $free_services_active ) : ?>
+								<button data-modal-open="logout-confirmation-content">
+									<i class="sui-icon-plug-disconnected" aria-hidden="true"></i> <?php esc_html_e( 'Logout', 'wpmudev' ); ?>
+								</button>
+							<?php else : ?>
+								<a href="<?php echo esc_url( $url_logout ); ?>">
+									<i class="sui-icon-plug-disconnected" aria-hidden="true"></i> <?php esc_html_e( 'Logout', 'wpmudev' ); ?>
+								</a>
+							<?php endif; ?>
 						</li>
 					</ul>
 				</div>
@@ -71,3 +77,6 @@
 		</div>
 	</div>
 </div>
+<?php if ( $is_logged_in && $free_services_active ) : ?>
+	<?php $this->render( 'sui/popup-logout-confirmation' ); ?>
+<?php endif; ?>

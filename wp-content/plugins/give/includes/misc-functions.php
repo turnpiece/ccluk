@@ -9,9 +9,10 @@
  * @since       1.0
  */
 
-// Exit if accessed directly.
+use Give\DonationForms\AsyncData\AsyncDataHelpers;
 use Give\License\PremiumAddonsListManager;
 
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -145,40 +146,51 @@ function give_get_timezone_id() {
  *
  * Returns the IP address of the current visitor
  *
+ * @since 2.33.5  Add $single param.
+ * @since       1.0
+ *
  * @return string $ip User's IP address
- * @since 1.0
  */
-function give_get_ip() {
-
-	$ip = '127.0.0.1';
+function give_get_ip($single = true)
+{
+    $ip_addresses = '127.0.0.1';
+    $header_type = '';
 
 	if ( ! empty( $_SERVER['HTTP_CLIENT_IP'] ) ) {
 		// check ip from share internet
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
+        $ip_addresses = $_SERVER['HTTP_CLIENT_IP'];
+        $header_type = 'HTTP_CLIENT_IP';
 	} elseif ( ! empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
 		// to check ip is pass from proxy
-		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $ip_addresses = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        $header_type = 'HTTP_X_FORWARDED_FOR';
 	} elseif ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
-		$ip = $_SERVER['REMOTE_ADDR'];
+        $ip_addresses = $_SERVER['REMOTE_ADDR'];
+        $header_type = 'REMOTE_ADDR';
 	}
 
 	/**
 	 * Filter the IP
 	 *
-	 * @since 1.0
+     * @since 2.33.5 Add $single and $header_type params.
+     * @since      1.0
 	 */
-	$ip = apply_filters( 'give_get_ip', $ip );
+    $ip_addresses = apply_filters('give_get_ip', $ip_addresses, $single, $header_type);
 
 	// Filter empty values.
-	if ( false !== strpos( $ip, ',' ) ) {
-		$ip = give_clean( explode( ',', $ip ) );
-		$ip = array_filter( $ip );
-		$ip = implode( ',', $ip );
+    if (false !== strpos($ip_addresses, ',')) {
+        $ip_addresses = give_clean(explode(',', $ip_addresses));
+        $ip_addresses = array_filter($ip_addresses);
+        $ip_addresses = implode(',', $ip_addresses);
 	} else {
-		$ip = give_clean( $ip );
+        $ip_addresses = give_clean($ip_addresses);
 	}
 
-	return $ip;
+    if ($single && false !== strpos($ip_addresses, ',')) {
+        return explode(',', $ip_addresses)[0];
+    }
+
+    return $ip_addresses;
 }
 
 
@@ -1916,10 +1928,12 @@ function give_get_nonce_field( $action, $name, $referer = false ) {
 /**
  * Display/Return a formatted goal for a donation form
  *
+ * @since 3.16.0 Add form_id to the array return
+ * @since 2.1
+ *
  * @param int|Give_Donate_Form $form Form ID or Form Object.
  *
  * @return array
- * @since 2.1
  */
 function give_goal_progress_stats( $form ) {
 
@@ -1931,7 +1945,6 @@ function give_goal_progress_stats( $form ) {
 
 	/**
 	 * Filter the form.
-	 *
 	 * @since 1.8.8
 	 */
 	$total_goal = apply_filters( 'give_goal_amount_target_output', round( give_maybe_sanitize_amount( $form->goal ), 2 ), $form->ID, $form );
@@ -1959,12 +1972,14 @@ function give_goal_progress_stats( $form ) {
 			$actual = apply_filters( 'give_goal_donors_target_output', give_get_form_donor_count( $form->ID ), $form->ID, $form );
 			break;
 		default:
-			/**
-			 * Filter the form income.
-			 *
-			 * @since 1.8.8
-			 */
-			$actual = apply_filters( 'give_goal_amount_raised_output', $form->earnings, $form->ID, $form );
+            /**
+             * Filter the form income.
+             *
+             * @since 3.16.0 Revert changes implemented on the 3.14.0 version
+             * @since 3.14.0 Replace "$form->earnings" with (new DonationQuery())->form($form->ID)->sumIntendedAmount()
+             * @since 1.8.8
+             */
+            $actual = apply_filters( 'give_goal_amount_raised_output', $form->earnings, $form->ID, $form );
 			break;
 	}
 
@@ -2006,6 +2021,7 @@ function give_goal_progress_stats( $form ) {
 			'actual'   => $actual,
 			'goal'     => $total_goal,
 			'format'   => $goal_format,
+			'form_id' => $form->ID
 		],
 		$stats_array
 	);
@@ -2407,12 +2423,13 @@ function give_get_addon_readme_url( $plugin_slug, $by_plugin_name = false ) {
 /**
  * Refresh all givewp license.
  *
- * @param bool $wp_check_updates
+ * @since 2.27.0 delete update_plugins transient instead of invalidate it
+ * @since  2.5.0
+ *
+ * @param  bool  $wp_check_updates
  *
  * @access public
  * @return array|WP_Error
- *
- * @since  2.5.0
  */
 function give_refresh_licenses( $wp_check_updates = true ) {
 	$give_licenses = get_option( 'give_licenses', [] );
@@ -2505,7 +2522,7 @@ function give_refresh_licenses( $wp_check_updates = true ) {
 
 	// Tell WordPress to look for updates.
 	if ( $wp_check_updates ) {
-		set_site_transient( 'update_plugins', null );
+		delete_site_transient('update_plugins');
 	}
 
 	return [
@@ -2577,4 +2594,38 @@ function give_check_addon_updates( $_transient_data ) {
 	$_transient_data->last_checked = time();
 
 	return $_transient_data;
+}
+
+/**
+ * Get page by title
+ *
+ * @since 2.26.0
+ *
+ * @param string $page_title
+ * @param string $output
+ * @param string $post_type
+ *
+ * @return null|WP_Post
+ */
+function give_get_page_by_title(string $page_title, string $output = OBJECT, string $post_type = 'page')
+{
+    $args = [
+        'title' => $page_title,
+        'post_type' => $post_type,
+        'post_status' => get_post_stati(),
+        'posts_per_page' => 1,
+        'update_post_term_cache' => false,
+        'update_post_meta_cache' => false,
+        'no_found_rows' => true,
+        'orderby' => 'post_date ID',
+        'order' => 'ASC',
+    ];
+    $query = new WP_Query($args);
+    $pages = $query->posts;
+
+    if (empty($pages)) {
+        return null;
+    }
+
+    return get_post($pages[0], $output);
 }

@@ -21,7 +21,6 @@ class SWP_Script {
 	 * @access public
 	 * @param  none
 	 * @return none
-	 *
 	 */
 	public function __construct() {
 		$this->add_hooks();
@@ -36,7 +35,6 @@ class SWP_Script {
 	 * @since  3.1.0 | 18 JUNE 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function add_hooks() {
 
@@ -57,8 +55,7 @@ class SWP_Script {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
 		// Queue up our hook function
-		add_action( 'wp_footer' , array( $this, 'footer_functions' ) , 99 );
-
+		add_action( 'wp_footer', array( $this, 'footer_functions' ), 99 );
 	}
 
 
@@ -68,7 +65,6 @@ class SWP_Script {
 	 * @since  1.0.0
 	 * @access public
 	 * @return string
-	 *
 	 */
 	public static function get_suffix() {
 		$debug = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG;
@@ -77,7 +73,7 @@ class SWP_Script {
 			$debug = true;
 		}
 
-		$enabled = (bool) apply_filters( 'swp_enable_suffix', !$debug );
+		$enabled = (bool) apply_filters( 'swp_enable_suffix', ! $debug );
 
 		return $enabled ? '.min' : '';
 	}
@@ -92,7 +88,7 @@ class SWP_Script {
 	 * @return void
 	 */
 	public function enqueue_scripts() {
-		$suffix = SWP_Script::get_suffix();
+		$suffix = self::get_suffix();
 
 		wp_enqueue_style(
 			'social_warfare',
@@ -101,7 +97,7 @@ class SWP_Script {
 			SWP_VERSION
 		);
 
-		if( false === SWP_AMP::is_amp() ) {
+		if ( false === SWP_AMP::is_amp() ) {
 			wp_enqueue_script(
 				'social_warfare_script',
 				SWP_PLUGIN_URL . "/assets/js/script{$suffix}.js",
@@ -112,7 +108,6 @@ class SWP_Script {
 		}
 
 		$this->localize_variables();
-
 	}
 
 
@@ -123,12 +118,11 @@ class SWP_Script {
 	 * @access public
 	 * @param  string $screen The ID of the current admin screen.
 	 * @return void
-	 *
 	 */
 	public function enqueue_admin_scripts( $screen ) {
 		$this->enqueue_scripts();
 
-		$suffix = SWP_Script::get_suffix();
+		$suffix = self::get_suffix();
 
 		wp_enqueue_style(
 			'social_warfare_admin',
@@ -144,9 +138,11 @@ class SWP_Script {
 			SWP_VERSION
 		);
 
-		wp_localize_script( 'social_warfare_admin_script', 'swp_localize_admin',
+		wp_localize_script(
+			'social_warfare_admin_script',
+			'swp_localize_admin',
 			array(
-				// 'swp_characters_remaining' => __( 'Characters Remaining', 'social-warfare' ),
+				// 'swp_characters_remaining' => esc_html__( 'Characters Remaining', 'social-warfare' ),
 				'swp_characters_remaining' => '',
 			)
 		);
@@ -159,33 +155,36 @@ class SWP_Script {
 	 * Queue up our javscript for options and whatnot
 	 *
 	 * @since 1.4.0
+	 * @since 4.4.0 Update script output to convert HTML entities back to characters.
 	 * @param Void
 	 * @return Void. Echo results directly to the screen.
-	 *
 	 */
 	public function footer_functions() {
 
-		if( SWP_AMP::is_amp() ) {
+		if ( SWP_AMP::is_amp() ) {
 			return;
 		}
 
 		// Fetch a few variables.
-		$info['postID']           = get_the_ID();
-		$info['footer_output']    = '';
+		$info['postID']        = get_the_ID();
+		$info['footer_output'] = '';
 
 		// Pass the array through our custom filters.
-		$info = apply_filters( 'swp_footer_scripts' , $info );
+		$info = apply_filters( 'swp_footer_scripts', $info );
 
 		// Clean up and minifiy the output.
-		$info['footer_output'] = preg_replace( "/\r|\n/", "", $info['footer_output'] );
-		$info['footer_output'] = preg_replace( "/[ ]{2,}|[\t]/", " ", $info['footer_output'] );
-		$info['footer_output'] = preg_replace( "!\s+!", " ", $info['footer_output'] );
+		$info['footer_output'] = preg_replace( "/\r|\n/", '', $info['footer_output'] );
+		$info['footer_output'] = preg_replace( "/[ ]{2,}|[\t]/", ' ', $info['footer_output'] );
+		$info['footer_output'] = preg_replace( '!\s+!', ' ', $info['footer_output'] );
 
 		// If we have output, output it.
 		if ( $info['footer_output'] ) {
-			echo '<script type="text/javascript">';
-			echo $info['footer_output'];
-			echo '</script>';
+			$html  = '<script type="text/javascript">';
+			$html .= $info['footer_output'];
+			$html .= '</script>';
+
+			// Convert special HTML entities back to Characters.
+			echo htmlspecialchars_decode( wp_kses( $html, SWP_Section_HTML::get_allowable_html() ) );
 		}
 	}
 
@@ -197,7 +196,6 @@ class SWP_Script {
 	 * @access public
 	 * @param  array $info An array of footer script information.
 	 * @return array $info A modified array of footer script information.
-	 *
 	 */
 	public function click_tracking( $info ) {
 
@@ -219,7 +217,6 @@ class SWP_Script {
 	 * @access public
 	 * @param  array $info An array of footer script information.
 	 * @return array $info A modified array of footer script information.
-	 *
 	 */
 	public function frame_buster( $info ) {
 		global $swp_user_options;
@@ -239,7 +236,6 @@ class SWP_Script {
 	 * @since  3.1.0 | 18 JUN 2018 | Created
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function fix_litespeed_compatibility() {
 		if ( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) :
@@ -255,12 +251,11 @@ class SWP_Script {
 	 * @access public
 	 * @param  array $info An array of footer script information.
 	 * @return array $info A modified array of footer script information.
-	 *
 	 */
 	public function nonce( $info ) {
 
 		// To make sure LSCWP ESI is on
-		if( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) {
+		if ( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) {
 			// To make sure is using the compatible API version
 			if ( method_exists( 'LiteSpeed_Cache_API', 'v' ) && LiteSpeed_Cache_API::v( '1.3' ) ) {
 				// Let's turn this block to ESI and return
@@ -270,7 +265,7 @@ class SWP_Script {
 		}
 
 		// Create a nonce
-		$info['footer_output'] .= ' var swp_nonce = "'.wp_create_nonce().'";';
+		$info['footer_output'] .= ' var swp_nonce = "' . wp_create_nonce() . '";';
 		return $info;
 	}
 
@@ -282,12 +277,11 @@ class SWP_Script {
 	 * @access public
 	 * @param  array $info An array of footer script information.
 	 * @return array $info A modified array of footer script information.
-	 *
 	 */
 	public function ajax_url( $info ) {
 
 		// Create a variable containing the AJAX url.
-		$info['footer_output'] .= ' var swp_ajax_url = "'.admin_url( 'admin-ajax.php' ).'";';
+		$info['footer_output'] .= ' var swp_ajax_url = "' . admin_url( 'admin-ajax.php' ) . '";';
 		return $info;
 	}
 
@@ -299,13 +293,12 @@ class SWP_Script {
 	 * @access public
 	 * @param  array $info An array of footer script information.
 	 * @return array $info A modified array of footer script information.
-	 *
 	 */
 	public function post_id( $info ) {
 
 		// Create a variable containing the AJAX url.
-		if( true === is_singular() ) {
-			$info['footer_output'] .= ' var swp_post_id = "'.get_the_ID().'";';
+		if ( true === is_singular() ) {
+			$info['footer_output'] .= ' var swp_post_id = "' . get_the_ID() . '";';
 		}
 		return $info;
 	}
@@ -317,16 +310,14 @@ class SWP_Script {
 	 * @since  3.1.0 | 27 JUN 2018 | Created the method.
 	 * @access public
 	 * @return void
-	 *
 	 */
 	public function float_before_content( $vars ) {
 		global $swp_user_options;
 		$options = $swp_user_options;
 
-
 		$float_before_content = $options['float_before_content'];
 
-		$vars['footer_output'] .= "var swpFloatBeforeContent = " . json_encode($float_before_content) . ";";
+		$vars['footer_output'] .= 'var swpFloatBeforeContent = ' . json_encode( $float_before_content ) . ';';
 
 		return $vars;
 	}
@@ -343,51 +334,42 @@ class SWP_Script {
 	 *                              using the parent variable within its own loop.
 	 * @param  void
 	 * @return void
-	 *
 	 */
-	function localize_variables() {
+	public function localize_variables() {
 		global $post;
-
 
 		/**
 		 * The post ID will be null/unset if we are on the plugin's admin
 		 * settings page. As such, we'll just use 0.
-		 *
 		 */
 		$id = isset( $post ) ? $post->ID : 0;
-
 
 		/**
 		 * We'll fetch all the registered addons so that we can list the key of
 		 * each one in the socialWarfare.addons variable.
-		 *
 		 */
 		$installed_addons = apply_filters( 'swp_registrations', array() );
 		$js_variables     = apply_filters( 'swp_javascript_variables', array() );
-
 
 		/**
 		 * Loop through all of the addons that we found and fetch the key for
 		 * each one. The key should be the only information we need on the
 		 * front-end. Example keys: "pro", "affiliatewp", etc.
-		 *
 		 */
 		$addons = array();
-		foreach( $installed_addons as $addon ) {
+		foreach ( $installed_addons as $addon ) {
 			$addons[] = $addon->key;
 		}
-
 
 		/**
 		 * Once all the data has been collected, we'll organize it into a single
 		 * variable for output.
-		 *
 		 */
 		$data = array(
 			'addons'             => $addons,
 			'post_id'            => $id,
 			'variables'          => $js_variables,
-			'floatBeforeContent' => SWP_Utility::get_option( 'float_before_content' )
+			'floatBeforeContent' => SWP_Utility::get_option( 'float_before_content' ),
 		);
 
 		wp_localize_script( 'social_warfare_script', 'socialWarfare', $data );
@@ -400,10 +382,9 @@ class SWP_Script {
 	 * @access public
 	 * @param  void
 	 * @return void
-	 *
 	 */
 	public function hook_esi() {
-		echo ' var swp_nonce = "'.wp_create_nonce().'";';
+		echo ' var swp_nonce = "' . wp_create_nonce() . '";';
 		exit;
 	}
 
@@ -414,23 +395,21 @@ class SWP_Script {
 	 * @since  4.0.0 | 13 JUL 2019 | Created
 	 * @param  array $variables An array of server variables to be sent to the JS
 	 * @return array The modified array of server variables to be sent to the JS
-	 *
 	 */
 	public function emphasize_buttons( $variables ) {
-		$variables['emphasizeIcons'] = SWP_Utility::get_option('emphasized_icon');
+		$variables['emphasizeIcons'] = SWP_Utility::get_option( 'emphasized_icon' );
 		return $variables;
 	}
 
 	public function powered_by_variables( $variables ) {
-		$variables['powered_by_toggle'] = SWP_Utility::get_option('powered_by_toggle');
+		$variables['powered_by_toggle'] = SWP_Utility::get_option( 'powered_by_toggle' );
 
-		$affiliate_link = SWP_Utility::get_option('affiliate_link');
-		if( false === $affiliate_link || empty( $affiliate_link ) || '#' === $affiliate_link ) {
+		$affiliate_link = SWP_Utility::get_option( 'affiliate_link' );
+		if ( false === $affiliate_link || empty( $affiliate_link ) || '#' === $affiliate_link ) {
 			$affiliate_link = 'https://warfareplugins.com';
 		}
 
 		$variables['affiliate_link'] = $affiliate_link;
 		return $variables;
 	}
-
 }

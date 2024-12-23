@@ -25,18 +25,13 @@
 }
 
 .tsf-term-checkbox-wrap {
-	display: block;
+	display: inline-block;
 	margin-top: 14px;
-	margin-left: 2px;
-	width: 95%; /* calc -2px... meh */
+	margin-inline-start: 2px;
+	max-width: calc( 95% - 2px );
 }
 
-body.rtl .tsf-term-checkbox-wrap {
-	margin-left: 0;
-	margin-right: 2px;
-}
-
-@media only screen and (max-width: 782px) {
+@media only screen and ( max-width: 782px ) {
 	.tsf-term-button-wrap,
 	.tsf-term-select-wrap {
 		max-width: 100%;
@@ -47,7 +42,7 @@ body.rtl .tsf-term-checkbox-wrap {
 	}
 
 	/* WP forgotten template... TODO open trac ticket. */
-	/* .form-table td input[type="url"] { */
+	/* .form-table td input[type=url] { */
 	.tsf-term-meta input[type=url] {
 		width: 100%;
 		font-size: 16px;

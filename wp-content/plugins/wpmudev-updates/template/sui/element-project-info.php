@@ -2,10 +2,12 @@
 /**
  * Helper for plugin table and popups
  *
- * @var int                             $pid             Project ID.
- * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls            URLs class.
- * @var string                          $membership_type Membership type.
- * @var array                           $membership_data Membership data.
+ * @var int                             $pid                   Project ID.
+ * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls                  URLs class.
+ * @var string                          $membership_type       Membership type.
+ * @var array                           $membership_data       Membership data.
+ * @var bool                            $is_wpmudev_host       Is WPMUDEV Host.
+ * @var bool                            $is_standalone_hosting Is standalone hosting plan.
  *
  * @package WPMUDEV DASHBOARD 4.9.0
  */
@@ -21,6 +23,7 @@ $free               = false;
 $is_unit_membership = false;
 $is_unit_allowed    = false;
 $dash_pid           = 119;
+$has_hosted_access  = $is_wpmudev_host && ! $is_standalone_hosting && 'free' === $membership_type;
 
 if ( 'free' === $membership_type ) {
 	$free = true;
@@ -168,7 +171,7 @@ if ( ! $res->is_installed ) {
 
 	// update always prioritized.
 	if ( $res->has_update ) {
-		if ( ( $is_unit_membership && false === $is_unit_allowed ) || $free ) {
+		if ( ( $is_unit_membership && false === $is_unit_allowed ) || ( $free && ! $res->is_licensed ) ) {
 			$main_action_class_modal = 'sui-button-purple';
 			$main_action = array(
 				'name' => __( 'Upgrade Membership', 'wpmudev' ),
@@ -663,15 +666,7 @@ foreach ( $res->tags as $tid => $plugin_tag ) {
 				</a>
 			</div>
 
-			<div class="sui-block-content-center">
-				<img
-					src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?>"
-					srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading@2x.png' ); ?> 2x"
-					alt="Upgrade"
-					aria-hidden="true"
-					style="vertical-align: middle;"
-				/>
-			</div>
+			<div class="sui-block-content-center"></div>
 
 		</div>
 

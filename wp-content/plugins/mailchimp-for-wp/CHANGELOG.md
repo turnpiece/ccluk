@@ -1,6 +1,171 @@
 Changelog
 =========
 
+#### 4.9.19 - Nov 11, 2024
+
+- Add integration with [Prosopo](https://prosopo.io/), a GDPR compliant anti-spam solution for protecting your sign-up forms against bot sign-ups. Thanks [Maxim Akimov](https://github.com/light-source)!
+
+
+#### 4.9.18 - Oct 21, 2024
+
+- Bump required PHP version to 7.2.
+- Prevent non-functional checkbox from showing up on WooCommerce my account page if WooCommerce checkout integration is enabled.
+- Update default form content to include a "for" attribute on the label element.
+- Minor performance optimizations to `MC4WP_Form::get_subscriber_tags()`
+- Begrudgingly rename Mailchimp lists to Mailchimp audiences throughout the plugin's admin interfaces.
+
+
+#### 4.9.17 - Sep 17, 2024
+
+- Fix compatibility with WooCommerce versions 8.5 to 8.8 because of private method that was later made public.
+- Fix potential reflected XSS by stripping and escaping all HTML from `{email}` tag replacements. Thanks to kauenavarro for responsibly disclosing.
+- Fix potential stored XSS for attackers with both administrator access and Mailchimp account access by escaping HTML from interest group name. Thanks to Jorge Diaz (ddiax) for responsibly disclosing.
+
+
+#### 4.9.16 - Sep 11, 2024
+
+- Add support for WooCommerce Checkout Block in sign-up checkbox integration.
+
+
+#### 4.9.15 - Aug 13, 2024
+
+- Improved anti-spam measures on the [custom form integration](https://www.mc4wp.com/kb/subscribe-mailchimp-custom-html-form/). If you are using the custom form integration (using the `mc4wp-subscribe` checkbox), please test your forms after upgrading and report any issues to us.
+- Improved anti-spam measures on all sign-up forms.
+- Remove unsupported filter hook from Gravity Forms integration. 
+
+
+#### 4.9.14 - Jul 17, 2024
+
+- Very minor code-size improvements to public forms related JavaScript.
+- Update third-party JS dependencies.
+- Bump tested WordPress version to 6.6.
+
+
+#### 4.9.13 - Apr 25, 2024
+
+- Fix issue with Composer classmap throwing a fatal error when an older version of Composer is already loaded.
+
+
+#### 4.9.12 - Apr 22, 2024 
+
+- Fix last 10 Mailchimp lists not being pulled-in when having more than 10 lists.
+
+
+#### 4.9.11 - Jan 8, 2024
+
+- Update third-party JS dependencies.
+- Bump tested WordPress version.
+
+
+#### 4.9.10 - Nov 20, 2023
+
+- Integrations: Update CheckoutWC hook name for WooCommerce checkbox integration.
+- Forms: Don't show form preview to users without `edit_posts` capability.
+- Forms: Explicitly exclude form preview from search engine indexing.
+- General: Don't unnecessarily go through service contrainer while bootstrapping plugin.
+- General: Remove some unnecessary JavaScript now that browser support has caught up.
+
+
+#### 4.9.9 - Oct 3, 2023 
+
+- Fix class "MC4WP_Usage_Tracking" not found error for WP Cron / WP CLI processes.
+
+
+#### 4.9.8 - Oct 3, 2023
+
+- Remove the opt-in usage tracking functionality as we're not really using it for decision making anymore.
+- Add missing label element to the select element for setting the logging level.
+- Our JavaScript assets are now transpiled to support the same set of browsers as WordPress core. 
+This drops support for some very old browsers, but results in smaller bundle sizes for the supported set of browsers.
+- Update third-party JS dependencies to their latest versions.
+
+
+#### 4.9.7 - Aug 29, 2023
+
+- Update third-party JS dependencies.
+- Minor textual improvements.
+- Bump tested WordPress version.
+
+
+#### 4.9.6 - Jul 12, 2023
+
+- Update third-party JS dependencies.
+- Address some minor codestyle issues.
+
+
+#### 4.9.5 - Jun 7, 2023
+
+- Fix generated HTML for list/audience choice fields.
+- Fix deprecation warning in includes/admin/class-review-notice.php.
+- Update JavaScript dependencies.
+
+
+#### 4.9.4 - May 2, 2023
+
+- Fallback to default checkbox label if none given. Thanks to [Shojib Khan](https://github.com/kshojib).
+- Improve WooCommerce integration settings page by disabling position field if integration is disabled. Thanks to [Shojib Khan](https://github.com/kshojib).
+- Update JavaScript dependencies.
+
+
+#### 4.9.3 - Mar 31, 2023
+
+- Defend against breaking change in latest WPForms update.
+
+
+#### 4.9.2 - Mar 21, 2023
+
+- Add support for a field named `MARKETING_PERMISSIONS` to enable GDPR fields configured in Mailchimp. A [sample code snippet can be found here](https://github.com/ibericode/mailchimp-for-wordpress/blob/main/sample-code-snippets/forms/gdpr-marketing-permissions.md).
+- Remove Google reCaptcha feature. This was already disabled if you were not already using it.
+
+
+#### 4.9.1 - Feb 7, 2023
+
+- Fix generated value attribute for fields of type choice (dropdown, checkboxes, radio fields).
+- Fix type of `marketing_permissions` field in API requests. Thanks to [George Korakas](https://github.com/gkorakas-eli).
+- Refactor list overview JS to not depend on Mithril.js anymore.
+- Simplify admin footer text asking for a plugin review.
+- When renewing lists, renew cached marketing permissions too.
+
+
+#### 4.9.0 - Jan 13, 2023 
+
+- Removed deprecated filter hook `mc4wp_settings_cap`, use `mc4wp_admin_required_capability` instead.
+- Removed deprecated filter hook `mc4wp_merge_vars`, use `mc4wp_form_data` or `mc4wp_integration_data` instead.
+- Removed deprecated filter hook `mc4wp_form_merge_vars`, use `mc4wp_form_data` instead.
+- Removed deprecated filter hook `mc4wp_integration_merge_vars`, use `mc4wp_integration_data` instead.
+- Removed deprecated filter hook `mc4wp_valid_form_request`, use `mc4wp_form_errors` instead.
+- Removed deprecated function `mc4wp_get_api()` and deprecated class `MC4WP_API`.
+- Removed deprecated function `mc4wp_checkbox()`.
+- Removed deprecated function `mc4wp_form()`, use `mc4wp_show_form()` instead.
+- Added filter `mc4wp_debug_log_message` to modify or disable messages that are written to the debug log.
+- Fix color of invalid Mailchimp API key notice.
+- Sanitize IP address value from `$_SERVER['REMOTE_ADDR']` too.
+- Fetch GDPR marketing permissions via first subscriber on list and show them in lists overview table.
+
+
+#### 4.8.12 - Dec 06, 2022
+
+- Minor performance, memory usage & size optimizations for all JavaScript code bundled with this plugin.
+
+
+#### 4.8.11 - Nov 1, 2022
+
+- Improved default styling for the WooCommerce sign-up checkbox integration.
+- Add `<strong>` to allowed HTML elements for GDPR disclaimer text on settings pages.
+- Remove all references to obsolete placeholders.js polyfill.
+- Move the GiveWP sign-up checkbox closer to the email input field. Thanks [Matthew Lewis](https://github.com/Matthew-Lewis).
+
+
+#### 4.8.10 - Sep 14, 2022
+
+- Fix mc4wp_get_request_ip_address() to return an IP address that matches Mailchimp's validation format when X-Forwarded-For header contains a port component.
+
+
+#### 4.8.8 - Aug 25, 2022
+
+- Fix mc4wp_get_request_ip_address() to pass new Mailchimp validation format. This fixes the "This value is not a valid IP." error some users using a proxy may have been seeing.
+
+
 #### 4.8.7 - Mar 2, 2022
 
 - Fix PHP 8.1 deprecation warnings in `MC4WP_Container` class.
@@ -26,7 +191,7 @@ Thanks to the team over at [pluginvulnerabilities.com](https://www.pluginvulnera
 
 #### 4.8.5 - Jun 1, 2021
 
-Add nonce verification to all URL's using _mc4wp_action query parameter.
+Add nonce verification to all URL's using `_mc4wp_action` query parameter.
 This fixes a CSRF vulnerability where a malicious website could trick a logged-in admin user in performing unwanted actions.
 
 A special thanks to Erwan from [WPScan](https://wpscan.com/) for bringing this issue to our attention.

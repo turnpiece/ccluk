@@ -9,6 +9,9 @@
  */
 
 // Exit if accessed directly.
+use Give\Receipt\DonationReceipt;
+use GiveRecurring\Receipt\UpdateDonationReceipt;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -34,6 +37,7 @@ class Give_Recurring_Shortcodes {
 		// Show recurring details on the [give_receipt].
 		add_action( 'give_payment_receipt_after_table', array( $this, 'subscription_receipt' ), 10, 2 );
 		add_action( 'give_payment_receipt_after_table', array( $this, 'add_manage_subscriptions_link' ), 11, 1 );
+		add_action( 'give_new_receipt', array( $this, 'addSubscriptionDetailsGroupToReceipt'), 10, 1 );
 
 		// Adds the [give_subscriptions] shortcode for display subscription information.
 		add_shortcode( 'give_subscriptions', array( $this, 'give_subscriptions' ) );
@@ -42,7 +46,8 @@ class Give_Recurring_Shortcodes {
 		add_action( 'give_recurring_update_payment', array( $this, 'verify_profile_update_setup' ), 10 );
 
 		// Update renewal subscription.
-		add_action( 'give_recurring_update_subscription_amount', array( $this, 'verify_subscription_update' ), 10 );
+		add_action( 'wp_ajax_recurring_update_subscription_amount', array( $this, 'verify_subscription_update' ), 10 );
+		add_action( 'wp_ajax_nopriv_recurring_update_subscription_amount', array( $this, 'verify_subscription_update' ), 10 );
 	}
 
 	/**
@@ -101,6 +106,19 @@ class Give_Recurring_Shortcodes {
 			give_recurring_get_manage_subscriptions_link();
 		}
 
+	}
+
+	/**
+	 * Update donation receipt.
+	 *
+	 * @param DonationReceipt $receipt
+	 *
+	 * @return mixed
+	 */
+	public function addSubscriptionDetailsGroupToReceipt( $receipt ){
+		$updateReceipt = new UpdateDonationReceipt($receipt);
+
+		$updateReceipt->apply();
 	}
 
 
@@ -264,7 +282,7 @@ class Give_Recurring_Shortcodes {
 	/**
 	 * Get subscription id from posted data
 	 *
-	 * @since 1.11.0
+	 * @since 1.10.1
 	 *
 	 * @return int|null
 	 */

@@ -4,58 +4,65 @@
  * @subpackage The_SEO_Framework\Sitemap
  */
 
-defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and $_this = \the_seo_framework_class() and $this instanceof $_this or die;
+namespace The_SEO_Framework;
 
-$this->the_seo_framework_debug and $timer_start = microtime( true );
+\defined( 'THE_SEO_FRAMEWORK_PRESENT' ) and Helper\Template::verify_secret( $secret ) or die;
 
-$sitemap_bridge = \The_SEO_Framework\Bridges\Sitemap::get_instance();
-$sitemap_bridge->output_sitemap_header();
+// phpcs:disable, WordPress.WP.GlobalVariablesOverride -- This isn't the global scope.
 
-if ( $this->the_seo_framework_debug ) {
-	echo '<!-- Site estimated peak usage prior to generation: ' . number_format( memory_get_peak_usage() / 1024 / 1024, 3 ) . ' MB -->' . "\n";
-	echo '<!-- System estimated peak usage prior to generation: ' . number_format( memory_get_peak_usage( true ) / 1024 / 1024, 3 ) . ' MB -->' . "\n";
+/**
+ * The SEO Framework plugin
+ * Copyright (C) 2019 - 2024 Sybre Waaijer, CyberWire B.V. (https://cyberwire.nl/)
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 3 as published
+ * by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// See output_base_sitemap et al.
+[ $sitemap_id ] = $view_args;
+
+THE_SEO_FRAMEWORK_DEBUG and $timer_start = hrtime( true );
+
+Sitemap\Registry::output_sitemap_header();
+
+if ( THE_SEO_FRAMEWORK_DEBUG ) {
+	echo '<!-- Site estimated peak usage prior to generation: ', number_format( memory_get_peak_usage() / MB_IN_BYTES, 3 ), ' MB -->' . "\n";
+	echo '<!-- System estimated peak usage prior to generation: ', number_format( memory_get_peak_usage( true ) / MB_IN_BYTES, 3 ), ' MB -->' . "\n";
 }
 
-$sitemap_bridge->output_sitemap_urlset_open_tag();
+Sitemap\Registry::output_sitemap_urlset_open_tag();
 
-$sitemap_generated = false;
-$sitemap_content   = $this->get_option( 'cache_sitemap' ) ? $this->get_transient( $this->get_sitemap_transient_name() ) : false;
-
-if ( false === $sitemap_content ) {
-	$sitemap_generated = true;
-
-	//* Transient doesn't exist yet.
-	$sitemap_base = new \The_SEO_Framework\Builders\Sitemap_Base;
-	$sitemap_base->prepare_generation();
-
-	$sitemap_content = $sitemap_base->build_sitemap();
-
-	$sitemap_base->shutdown_generation();
-	$sitemap_base = null; // destroy class.
-
-	/**
-	 * Transient expiration: 1 week.
-	 * Keep the sitemap for at most 1 week.
-	 */
-	$expiration = WEEK_IN_SECONDS;
-
-	if ( $this->get_option( 'cache_sitemap' ) )
-		$this->set_transient( $this->get_sitemap_transient_name(), $sitemap_content, $expiration );
-}
+$sitemap_base = new Sitemap\Optimized\Base; // TODO make static? Why would this need to be instantiated anyway?
 // phpcs:ignore, WordPress.Security.EscapeOutput
-echo $sitemap_content;
+echo $sitemap_base->generate_sitemap( $sitemap_id );
 
-$sitemap_bridge->output_sitemap_urlset_close_tag();
+Sitemap\Registry::output_sitemap_urlset_close_tag();
 
-if ( $sitemap_generated ) {
-	echo "\n" . '<!-- ' . \esc_html__( 'Sitemap is generated for this view', 'autodescription' ) . ' -->';
+if ( $sitemap_base->base_is_regenerated ) {
+	echo "\n<!-- ", \esc_html__( 'Sitemap is generated for this view', 'autodescription' ), ' -->';
 } else {
-	echo "\n" . '<!-- ' . \esc_html__( 'Sitemap is served from cache', 'autodescription' ) . ' -->';
+	echo "\n<!-- ", \esc_html__( 'Sitemap is served from cache', 'autodescription' ), ' -->';
 }
 
-if ( $this->the_seo_framework_debug ) {
-	echo "\n" . '<!-- Site estimated peak usage: ' . number_format( memory_get_peak_usage() / 1024 / 1024, 3 ) . ' MB -->';
-	echo "\n" . '<!-- System estimated peak usage: ' . number_format( memory_get_peak_usage( true ) / 1024 / 1024, 3 ) . ' MB -->';
-	echo "\n" . '<!-- Freed memory prior to generation: ' . number_format( $this->clean_up_globals_for_sitemap( true ) / 1024, 3 ) . ' kB -->';
-	echo "\n" . '<!-- Sitemap generation time: ' . number_format( microtime( true ) - $timer_start, 6 ) . ' seconds -->';
+// Destruct class.
+$sitemap_base = null;
+
+if ( THE_SEO_FRAMEWORK_DEBUG ) {
+	echo "\n<!-- Site estimated current usage: ", number_format( memory_get_usage() / MB_IN_BYTES, 3 ), ' MB -->';
+	echo "\n<!-- System estimated current usage: ", number_format( memory_get_usage( true ) / MB_IN_BYTES, 3 ), ' MB -->';
+	echo "\n<!-- Site estimated peak usage: ", number_format( memory_get_peak_usage() / MB_IN_BYTES, 3 ), ' MB -->';
+	echo "\n<!-- System estimated peak usage: ", number_format( memory_get_peak_usage( true ) / MB_IN_BYTES, 3 ), ' MB -->';
+	echo "\n<!-- Freed memory prior to generation: ", number_format( Sitemap\Registry::get_freed_memory( true ) / KB_IN_BYTES, 3 ), ' kB -->';
+	echo "\n<!-- Sitemap generation time: ", number_format( ( hrtime( true ) - $timer_start ) / 1e9, 6 ), ' seconds -->';
+	echo "\n<!-- Sitemap caching enabled: ", ( Data\Plugin::get_option( 'cache_sitemap' ) ? 'yes' : 'no' ), ' -->';
+	echo "\n<!-- Sitemap transient key: ", \esc_html( Sitemap\Cache::get_sitemap_cache_key( $sitemap_id ) ), ' -->';
 }

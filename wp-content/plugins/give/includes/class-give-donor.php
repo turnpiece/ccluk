@@ -21,6 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0
  */
+#[\AllowDynamicProperties]
 class Give_Donor {
 
 	/**
@@ -255,10 +256,10 @@ class Give_Donor {
 					"
 				SELECT meta_key, meta_value FROM {$wpdb->donormeta}
 				WHERE meta_key
-				LIKE '%%%s%%'
+				LIKE '%s'
 				AND {$meta_type}_id=%d
 				",
-					'give_donor_address',
+					'%give_donor_address%',
 					$this->id
 				),
 				ARRAY_N
@@ -1086,7 +1087,7 @@ class Give_Donor {
 	 *
 	 * @return bool               False for failure. True for success.
 	 */
-	public function add_meta( $meta_key = '', $meta_value, $unique = false ) {
+	public function add_meta( $meta_key, $meta_value, $unique = false ) {
 		return Give()->donor_meta->add_meta( $this->id, $meta_key, $meta_value, $unique );
 	}
 
@@ -1102,7 +1103,7 @@ class Give_Donor {
 	 *
 	 * @return bool               False on failure, true if success.
 	 */
-	public function update_meta( $meta_key = '', $meta_value, $prev_value = '' ) {
+	public function update_meta( $meta_key, $meta_value, $prev_value = '' ) {
 		return Give()->donor_meta->update_meta( $this->id, $meta_key, $meta_value, $prev_value );
 	}
 
@@ -1395,12 +1396,12 @@ class Give_Donor {
 						"
 						SELECT meta_key FROM {$wpdb->donormeta}
 						WHERE meta_key
-						LIKE '%%%s%%'
+						LIKE '%s'
 						AND {$meta_type}_id=%d
 						ORDER BY meta_id DESC
 						LIMIT 1
 						",
-						"_give_donor_address_{$address_type}_line1",
+						"%_give_donor_address_{$address_type}_line1%",
 						$this->id
 					)
 				);

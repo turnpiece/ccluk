@@ -12,16 +12,23 @@
  * @package wpmduev
  */
 
-$register_url      = 'https://wpmudev.com/#trial';
-$reset_url         = 'https://wpmudev.com/wp-login.php?action=lostpassword';
-$account_url       = 'https://wpmudev.com/hub/account/';
-$skip_trial_url    = $urls->skip_trial_url;
-$hosting_url       = 'https://wpmudev.com/hub2/hosting/';
-$trial_info_url    = 'https://wpmudev.com/docs/getting-started/how-free-trials-work/';
-$websites_url      = 'https://wpmudev.com/hub2/';
-$security_info_url = 'https://wpmudev.com/manuals/hub-security/';
-$support_url       = 'https://wpmudev.com/hub/support/';
-$support_modal_url = 'https://wpmudev.com/hub/support/#get-support';
+// Base URL.
+$base_url = 'https://wpmudev.com/';
+if ( defined( 'WPMUDEV_CUSTOM_API_SERVER' ) && ! empty( WPMUDEV_CUSTOM_API_SERVER ) ) {
+	$base_url = trailingslashit( WPMUDEV_CUSTOM_API_SERVER );
+}
+
+$register_url        = $base_url . 'register/?signup=main&utm_source=dashboard&utm_medium=plugin&utm_campaign=dashboard_connect_page';
+$reset_url           = $base_url . 'wp-login.php?action=lostpassword';
+$account_url         = $base_url . 'hub/account/';
+$skip_trial_url      = $urls->skip_trial_url;
+$hosting_url         = $base_url . 'hub2/hosting/';
+$trial_info_url      = $base_url . 'docs/getting-started/how-free-trials-work/';
+$websites_url        = $base_url . 'hub2/';
+$security_info_url   = $base_url . 'manuals/hub-security/';
+$support_url         = $base_url . 'hub/support/';
+$support_modal_url   = $base_url . 'hub/support/#get-support';
+$account_details_url = $base_url . 'hub2/account/details/';
 
 $login_url = $urls->dashboard_url;
 if ( ! empty( $_GET['pid'] ) ) { // phpcs:ignore
@@ -32,16 +39,43 @@ $last_user = WPMUDEV_Dashboard::$settings->get( 'auth_user', 'general' );
 
 $login_errors = array();
 if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
-	$api_error = esc_html( $_GET['api_error'] ); // phpcs:ignore
+	$api_error  = esc_html( $_GET['api_error'] ); // phpcs:ignore
+	$auth_error = isset( $_GET['auth_error'] ) ? esc_html( $_GET['auth_error'] ) : ''; // phpcs:ignore
 
-	// Invalid credentials.
 	if ( 1 === (int) $api_error || 'auth' === $api_error ) {
-		$login_errors[] = sprintf(
-			'%s<br><a href="%s" target="_blank">%s</a>',
-			esc_html__( 'Your login details were incorrect. Please make sure you\'re using your WPMU DEV email and password and try again.', 'wpmudev' ),
-			$reset_url,
-			esc_html__( 'Forgot your password?', 'wpmudev' )
-		);
+		switch ( $auth_error ) {
+			case 'google_linked':
+				$login_errors[] = sprintf(
+				// translators: %s Account detail URL.
+					__( 'You are currently using your Google account as your preferred login method. If you wish to login with your WPMU DEV email & password instead, please change the <strong>Login Method</strong> in <a href="%s" target="_blank">your WPMU DEV account</a>.', 'wpmudev' ),
+					$account_details_url
+				);
+				break;
+			case 'google_unlinked':
+				$login_errors[] = sprintf(
+				// translators: %s Account detail URL.
+					__( 'You are currently using your WPMU DEV email & password as your preferred login method. If you wish to login with your Google account instead, please change the <strong>Login Method</strong> in <a href="%s" target="_blank">your WPMU DEV account</a>.', 'wpmudev' ),
+					$account_details_url
+				);
+				break;
+			case 'reauth_google':
+				$login_errors[] = sprintf(
+				// translators: %1$s Account detail URL, %2$s Reset URL.
+					__( 'Due to security improvements, you will need to re-link your Google account in the Hub. Please log in with your WPMU DEV email & password for now, then set up your preferred <strong>Login Method</strong> in <a href="%1$s" target="_blank">your WPMU DEV account</a>. Forgot your password? You can <a href="%2$s" target="_blank">reset it here</a>.', 'wpmudev' ),
+					$account_details_url,
+					$reset_url
+				);
+				break;
+			default:
+				// Invalid credentials.
+				$login_errors[] = sprintf(
+					'%s<br><a href="%s" target="_blank">%s</a>',
+					esc_html__( 'Your login details were incorrect. Please make sure you\'re using your WPMU DEV email and password and try again.', 'wpmudev' ),
+					$reset_url,
+					esc_html__( 'Forgot your password?', 'wpmudev' )
+				);
+				break;
+		}
 	} else {
 		switch ( $api_error ) {
 			case 'in_trial':
@@ -49,11 +83,9 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 					$login_errors[] = sprintf(
 						'%s<br><a href="%s" target="_blank">%s</a>',
 						sprintf(
-							__(
-								'This local development site URL has previously been registered with us by the user %1$s. To use WPMU DEV with this site URL, log in with the original user (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Alternatively, try a more uniquely named development site URL. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.',
-								'wpmudev'
-							),
-							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // wpcs csrf ok.
+						// translators: %1$s Account name, %2$s Reset URL, %3$s Trial skip URL, %4$s Trail info URL.
+							__( 'This local development site URL has previously been registered with us by the user %1$s. To use WPMU DEV with this site URL, log in with the original user (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Alternatively, try a more uniquely named development site URL. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.', 'wpmudev' ),
+							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // phpcs:ignore
 							$reset_url,
 							$skip_trial_url,
 							$trial_info_url
@@ -65,11 +97,9 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 					$login_errors[] = sprintf(
 						'%s<br><a href="%s" target="_blank">%s</a>',
 						sprintf(
-							__(
-								'This domain has previously been registered with us by the user %1$s. To use WPMU DEV on this domain, you can either log in with the original account (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.',
-								'wpmudev'
-							),
-							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // wpcs csrf ok.
+						// translators: %1$s Rest URL, %2$s Upgrade URL, %3$s Trial URL.
+							__( 'This domain has previously been registered with us by the user %1$s. To use WPMU DEV on this domain, you can either log in with the original account (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.', 'wpmudev' ),
+							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // phpcs:ignore
 							$reset_url,
 							$skip_trial_url,
 							$trial_info_url
@@ -84,11 +114,9 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 					$login_errors[] = sprintf(
 						'%s<br><a href="%s" target="_blank">%s</a>',
 						sprintf(
-							__(
-								'This local development site URL is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If that account is not yours, then make your local development site URL more unique.',
-								'wpmudev'
-							),
-							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // wpcs csrf ok.
+						// translators: %1$s Account name, %2$s Security info, %3$s Hub URL.
+							__( 'This local development site URL is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If that account is not yours, then make your local development site URL more unique.', 'wpmudev' ),
+							'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // phpcs:ignore
 							$security_info_url,
 							$websites_url
 						),
@@ -97,11 +125,9 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 					);
 				} else {
 					$login_errors[] = sprintf(
-						__(
-							'This site is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If you do not have access to that account, and have no way of contacting that user, please <a target="_blank" href="%4$s">contact support for assistance</a>.',
-							'wpmudev'
-						),
-						'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // wpcs csrf ok.
+					// translators: %1$d Account name, %2$s Security info, %3$s Hub URL, %4$s Support URL.
+						__( 'This site is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If you do not have access to that account, and have no way of contacting that user, please <a target="_blank" href="%4$s">contact support for assistance</a>.', 'wpmudev' ),
+						'<strong style="word-break: break-all;">' . esc_html( $_GET['display_name'] ) . '</strong>', // phpcs:ignore.
 						$security_info_url,
 						$websites_url,
 						$support_url
@@ -110,10 +136,8 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 				break;
 			case 'banned_account':
 				$login_errors[] = sprintf(
-					__(
-						'This domain cannot be registered to your WPMU DEV account.<br><a href="%s">Contact Accounts & Billing if you need further assistance »</a>',
-						'wpmudev'
-					),
+				// translators: %s Support URL.
+					__( 'This domain cannot be registered to your WPMU DEV account.<br><a href="%s">Contact Accounts & Billing if you need further assistance »</a>', 'wpmudev' ),
 					$urls->external_support_url
 				);
 				break;
@@ -134,11 +158,13 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 	$login_errors[] = sprintf(
 		'%s<br>%s<br><em>%s</em>',
 		sprintf(
+		// translators: %s error message.
 			__( 'Your server had a problem connecting to WPMU DEV: "%s". Please try again.', 'wpmudev' ),
 			WPMUDEV_Dashboard::$api->api_error
 		),
 		__( 'If this problem continues, please contact your host with this error message and ask:', 'wpmudev' ),
 		sprintf(
+		// translators: url to API.
 			__( '"Is php on my server properly configured to be able to contact %s with a POST HTTP request via fsockopen or CURL?"', 'wpmudev' ),
 			WPMUDEV_Dashboard::$api->rest_url( '' )
 		)
@@ -148,9 +174,11 @@ if ( isset( $_GET['api_error'] ) ) { // phpcs:ignore
 	$login_errors[] = __( 'Your API Key was invalid. Please try again.', 'wpmudev' );
 } elseif ( $site_limit_exceeded ) {
 	// Variable `$site_limit_exceeded` is set by the UI function `render_dashboard`.
+	// translators: %1$d Limit, %2$s upgrade URL, %3$s Site removal URL, %4$s support URL.
 	$error_msg = sprintf( __( 'You have already reached your plans limit of %1$d site, not hosted with us, connected to The Hub. <a target="_blank" href="%2$s">Upgrade your membership</a> or <a target="_blank" href="%3$s">remove a site</a> before adding another. <a target="_blank" href="%4$s">Contact support</a> for assistance.', 'wpmudev' ), $site_limit_num, $account_url, $websites_url, $support_modal_url );
 
 	if ( $available_hosting_sites ) {
+		// translators: %1$d Site count, %2$s Hosting URL.
 		$error_msg .= sprintf( __( '</br><strong>Note:</strong> You still have %1$d site <a target="_blank" href="%2$s">hosted with us</a> available.', 'wpmudev' ), $available_hosting_sites, $hosting_url );
 	}
 
@@ -200,6 +228,7 @@ $logo3x = WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/onboarding/login
 				<input type="hidden" name="context" value="connect">
 				<input type="hidden" name="redirect_url" value="<?php echo esc_url( $urls->dashboard_url ); ?>">
 				<input type="hidden" name="domain" value="<?php echo esc_url( WPMUDEV_Dashboard::$api->network_site_url() ); ?>">
+				<input type="hidden" name="auth_nonce" value="<?php echo esc_attr( wp_create_nonce( 'auth_nonce' ) ); ?>" class="input-auth-nonce">
 				<button class="sui-button dashui-google-login-button" type="submit">
 					<span class="sui-icon-google-login" aria-hidden="true"></span>
 					<?php esc_html_e( 'Sign in with Google', 'wpmudev' ); ?>
@@ -211,6 +240,7 @@ $logo3x = WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/onboarding/login
 			</div>
 
 			<form action="<?php echo esc_url( $form_action ); ?>" method="post" class="js-wpmudev-login-form">
+				<input type="hidden" name="auth_nonce" value="<?php echo esc_attr( wp_create_nonce( 'auth_nonce' ) ); ?>" class="input-auth-nonce">
 				<div class="sui-form-field">
 					<label for="dashboard-email" class="sui-screen-reader-text">
 						<?php esc_html_e( 'Email', 'wpmudev' ); ?>

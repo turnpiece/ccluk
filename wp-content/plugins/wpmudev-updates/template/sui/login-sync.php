@@ -22,8 +22,9 @@ $logo   = WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/onboarding/login
 $logo2x = WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/onboarding/login/logo@2x.png';
 $logo3x = WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/onboarding/login/logo@3x.png';
 
+$auth_verify_nonce = wp_verify_nonce( ( isset( $_REQUEST['auth_nonce'] ) ? $_REQUEST['auth_nonce'] : '' ), 'auth_nonce' );
 $key = isset( $_GET['key'] ) ? trim( $_GET['key'] ) : '';
-if ( empty( $key ) ) {
+if ( ! $auth_verify_nonce || empty( $key ) ) {
 	WPMUDEV_Dashboard::$ui->redirect_to( $urls->dashboard_url );
 }
 ?>

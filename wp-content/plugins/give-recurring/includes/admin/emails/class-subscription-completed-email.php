@@ -14,7 +14,7 @@ class Give_Subscription_Completed_Email extends Give_Email_Notification {
 		$this->load( array(
 			'id'                    => 'subscription-completed',
 			'label'                 => __( 'Subscription Completed Email', 'give-recurring' ),
-			'description'           => __( 'Check this option if you would like donors to receive an email when a subscription has been completed. The email will send when either the donor or admin cancels the subscription', 'give-recurring' ),
+			'description'           => __( 'Check this option if you would like donors to receive an email when a subscription has been completed.', 'give-recurring' ),
 			'recipient_group_name'  => __( 'Donor', 'give-recurring' ),
 			'form_metabox_setting'  => false,
 			'has_recipient_field'   => false,

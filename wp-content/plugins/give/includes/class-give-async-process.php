@@ -1,4 +1,6 @@
 <?php
+use Give\Framework\WordPressLibraries\WPAsyncRequest;
+
 /**
  * Background Process
  *
@@ -6,10 +8,13 @@
  * updates in the background.
  *
  * @class    Give_Async_Request
+ * @since 3.1.2 replace WP_Async_Request with namespaced version WPAsyncRequest.
  * @version  2.0.0
  * @package  Give/Classes
  * @category Class
  * @author   GiveWP
+ *
+ * @since 2.32.0 updated to extend WPAsyncRequest
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -18,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Give_Background_Updater Class.
  */
-class Give_Async_Process extends WP_Async_Request {
+class Give_Async_Process extends WPAsyncRequest {
 	/**
 	 * Prefix
 	 *

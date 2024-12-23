@@ -88,7 +88,7 @@ p {
     flex-direction: column;
     background-color: #fff;
     -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
-        0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
     width: 100%;
     overflow: hidden;
@@ -106,10 +106,12 @@ p {
     font-size: 30px;
     padding-top: 15px;
     padding-bottom: 15px;
+
     &:focus {
         outline: none;
         box-shadow: 0 0 8px #28c77b;
     }
+
     &:hover {
         filter: brightness(1.2);
     }
@@ -424,6 +426,8 @@ p {
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.09487);
 
     > span {
+        display: block;
+        height: 100%;
         border-radius: 20px;
         background: linear-gradient(180deg, #28c77b 0%, #28c77b 100%), linear-gradient(180deg, #fff 0%, #ccc 100%);
         background-blend-mode: multiply;
@@ -893,6 +897,7 @@ p {
         margin-right: 20px;
         margin-left: 20px;
     }
+
     .heading {
         padding: 39px 3px 0;
         font-size: 16px;
@@ -904,22 +909,27 @@ p {
             padding: 20px 3px 0;
         }
     }
+
     .subheading {
         @media screen and (max-width: $break-phone) {
             padding-left: 20px !important;
             padding-right: 20px !important;
         }
     }
+
     .give_notices {
         width: 100%;
         order: 1;
     }
+
     .give_notices + .heading {
         padding: 28px 3px 0;
     }
+
     .give_error + .heading {
         padding: 28px 3px 0;
     }
+
     .subheading {
         padding: 5px 0 34px 0;
         font-style: italic;
@@ -945,6 +955,47 @@ p {
             display: none;
         }
     }
+
+    #give-company-radio-list-wrap {
+        font-size: 14px;
+
+        .give-company-option {
+            padding-left: 23px;
+            position: relative;
+
+            &::before {
+                content: ' ';
+                position: absolute;
+                top: calc(50% - 10px);
+                left: 0;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 1px solid #b4b9be;
+                background-color: #fff;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        input[type='radio']:checked + .give-company-option::after {
+            transform: scale3d(1, 1, 1);
+        }
+
+        input[type='radio'] + .give-company-option::after {
+            transform: scale3d(0, 0, 0);
+            transition: transform 0.2s ease;
+            border-radius: 11px;
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            top: calc(50% - 5px);
+            left: 5px;
+            content: ' ';
+            display: block;
+            background: #333;
+        }
+    }
+
     #give-payment-mode-select {
         .gateway-stripe-google_pay,
         .gateway-stripe-apple_pay {
@@ -954,7 +1005,8 @@ p {
         legend {
             display: none;
         }
-        ul {
+
+        #give-gateway-radio-list {
             @include before-after-content-none;
             display: grid;
             grid-gap: 10px;
@@ -1015,6 +1067,56 @@ p {
                 content: ' ';
                 display: block;
                 background: #333;
+            }
+
+            ul {
+                input[type='radio'] {
+                    opacity: 0 !important;
+                    position: absolute !important;
+                }
+
+                input[type='radio'] + label:not(.give-tribute-type-button) {
+                    padding: 0 10px 0 28px;
+                    width: 100%;
+                    color: #696969;
+                    font-size: 14px !important;
+                    font-weight: 400 !important;
+                    display: inline-block;
+                    position: relative;
+                    margin: 0 0 5px;
+                    line-height: 1.7;
+
+                    &::before {
+                        content: ' ';
+                        position: absolute;
+                        top: calc(50% - 9px);
+                        left: 0;
+                        width: 16px;
+                        height: 16px;
+                        border-radius: 50%;
+                        border: 1px solid #b4b9be;
+                        background-color: #fff;
+                        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+                    }
+
+                    &::after {
+                        transform: scale3d(0, 0, 0);
+                        transition: transform 0.2s ease;
+                        border-radius: 8px;
+                        width: 8px;
+                        height: 8px;
+                        position: absolute;
+                        top: calc(50% - 4px);
+                        left: 5px;
+                        content: ' ';
+                        display: block;
+                        background: #333;
+                    }
+                }
+
+                input[type='radio']:checked + label:not(.give-tribute-type-button)::after {
+                    transform: scale3d(1, 1, 1);
+                }
             }
         }
     }
@@ -1117,6 +1219,7 @@ fieldset {
     legend {
         display: none;
     }
+
     p {
         position: relative;
 
@@ -1372,7 +1475,7 @@ form.give-form .form-row select.multiselect {
 // This is popup used by PayPal to verify 3ds card.
 // Exclude Give Aid add-on popup too by adding give-modal to the selector
 body
-    > *:not([class^='give']):not([id^='give']):not([class*='payments-sdk-contingency-handler']):not([class*='give-modal']) {
+> *:not([class^='give']):not([id^='give']):not([class*='payments-sdk-contingency-handler']):not([class*='give-modal']) {
     display: none;
 }
 

@@ -2,6 +2,8 @@
 /**
  * Dashboard plugin template
  *
+ * @var WPMUDEV_Dashboard_Sui_Page_Urls $urls URLs class.
+ *
  * @package WPMUDEV DASHBOARD 4.9.0
  */
 
@@ -32,6 +34,11 @@ $this->render_sui_header( $page_title, $page_slug );
 if ( in_array( $type, array( 'expired', 'paused' ), true ) ) {
 	$this->render_switch_free_notice( 'dashboard_plugins' );
 }
+
+$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
+$has_hosted_access     = $is_wpmudev_host && ! $is_standalone_hosting;
+
 ?>
 <div class="sui-floating-notices">
 	<?php
@@ -132,7 +139,7 @@ if ( in_array( $type, array( 'expired', 'paused' ), true ) ) {
 						</a>
 					</li> -->
 
-					<?php if ( ! empty( $update_plugins ) && $update_plugins ) : ?>
+					<?php if ( ! empty( $update_plugins ) ) : ?>
 						<li class="sui-vertical-tab">
 							<a role="button"
 							   class="sui-tab-item wdev-update-tab"
@@ -223,7 +230,7 @@ if ( in_array( $type, array( 'expired', 'paused' ), true ) ) {
 						</div>
 					</div>
 				</div>
-			<?php elseif ( 'free' === $type ) : ?>
+			<?php elseif ( 'free' === $type && ! $has_hosted_access ) : ?>
 				<div class="sui-notice sui-notice-purple">
 					<div class="sui-notice-content">
 						<div class="sui-notice-message">
@@ -244,13 +251,6 @@ if ( in_array( $type, array( 'expired', 'paused' ), true ) ) {
 		<div role="alert" class="sui-box-body dashui-plugin-loader">
 
 			<p><?php printf( esc_html__( '%s Checking for updates, please wait…', 'wpmudev' ), '<i class="sui-icon-loader sui-md sui-loading" aria-hidden="true"></i>' ); //phpcs:ignore ?></p>
-
-			<img
-				src="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?>"
-				srcset="<?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading.png' ); ?> 1x, <?php echo esc_url( WPMUDEV_Dashboard::$site->plugin_url . 'assets/images/devman-loading@2x.png' ); ?> 2x"
-				alt="<?php esc_html_e( 'Dev-man is drinking a cup of coffee while waiting for content to load.' ); ?>"
-				class="sui-image sui-image-center"
-			/>
 
 		</div>
 
@@ -325,7 +325,13 @@ foreach ( $data['projects'] as $project ) {
 	if ( empty( $project['id'] ) ) {
 		continue;
 	}
+
 	if ( 'plugin' !== $project['type'] ) {
+		continue;
+	}
+
+	// No need to render addons.
+	if ( ! empty( $project['is_plugin_addon'] ) ) {
 		continue;
 	}
 
@@ -392,7 +398,7 @@ foreach ( $data['projects'] as $project ) {
 				foreach ( $plugin_actions as $plugin_action ) :
 					// Message for page reload.
 					$msg = '<p>' . esc_html__( 'This page needs to be reloaded before changes you just made become visible.', 'wpmudev' ) . '</p>';
-					$msg        .= '<div class="sui-notice-buttons"><a href="' . add_query_arg( 'success-action', $plugin_action ) . '" class="sui-button">' . esc_html__( 'Reload now', 'wpmudev' ) . '</a></div>';
+					$msg        .= '<div class="sui-notice-buttons"><a href="' . esc_url( add_query_arg( 'success-action', $plugin_action, $urls->plugins_url ) ) . '" class="sui-button">' . esc_html__( 'Reload now', 'wpmudev' ) . '</a></div>';
 					?>
 					<div
 						role="alert"

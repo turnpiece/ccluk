@@ -1,71 +1,85 @@
 .tsf-metaboxes {
 	box-sizing: border-box;
-	max-width: 690px;
+	max-width: 740px;
 	padding-bottom: 20px;
 }
 
 .tsf-top-wrap {
+	/* About half of notification height */
+	margin-bottom: 8px;
+}
+
+.tsf-top-wrap,
+.tsf-bottom-wrap {
 	width: 100%;
-	display: inline-block;
-	vertical-align: top;
+	display: flex;
+	justify-content: space-between;
+	flex: 1 1 100%;
+	flex-flow: row wrap;
+	gap: 10px;
 }
 
-.tsf-top-wrap > h1 {
-	float: left;
+/* Matches .wrap h1 */
+.tsf-top-buttons {
+	padding: 9px 0 4px;
+}
+.tsf-top-buttons,
+.tsf-bottom-buttons {
+	display: flex;
+	flex: 1 1 auto;
+	justify-content: start;
+	flex-flow: row wrap;
+	gap: 10px;
+}
+.tsf-top-buttons.tsf-end,
+.tsf-bottom-buttons.tsf-end {
+	justify-content: flex-end;
 }
 
-body.rtl .tsf-top-wrap > h1 {
-	float: right;
+@media screen and ( max-width: 782px ) {
+	.tsf-top-wrap,
+	.tsf-bottom-wrap,
+	.tsf-top-buttons.tsf-end,
+	.tsf-bottom-buttons.tsf-end {
+		justify-content: start;
+	}
+	.tsf-top-buttons,
+	.tsf-bottom-buttons {
+		width: 100%;
+	}
+}
+
+.tsf-metaboxes .tsf-top-buttons > *,
+.tsf-metaboxes .tsf-bottom-buttons > * {
+	text-align: center;
 }
 
 .tsf-metaboxes .metabox-holder {
 	clear: both;
 }
 
-.tsf-top-buttons {
-	float: right;
-}
-
-body.rtl .tsf-top-buttons {
-	float: left;
-}
-
-.tsf-bottom-buttons {
-	text-align: right;
-}
-
-body.rtl .tsf-bottom-buttons {
-	text-align: left;
-}
-
-.tsf-metaboxes .tsf-top-buttons input,
-.tsf-metaboxes .tsf-bottom-buttons input {
-	margin-left: 10px;
-}
-
-#tsf-title-separator,
-#tsf-description-separator {
+#tsf-title-separator {
 	display: table;
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
 
-#tsf-description-separator {
-	margin-bottom: 0;
-}
-
-#tsf-title-separator input,
-#tsf-description-separator input {
-	display: none;
-	float: left;
+#tsf-title-separator input {
+	position: absolute;
 	width: 0;
-	min-width: 0;
+	height: 0;
 	opacity: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	z-index: -1;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
-#tsf-title-separator label,
-#tsf-description-separator label {
+#tsf-title-separator label {
 	display: inline-block;
 	width: auto;
 	min-width: 28px;
@@ -82,18 +96,18 @@ body.rtl .tsf-bottom-buttons {
 	font-size: 16px;
 }
 
-#tsf-title-separator input:hover + label,
-#tsf-title-separator label:hover,
-#tsf-description-separator input:hover + label,
-#tsf-description-separator label:hover {
+#tsf-title-separator label:hover {
 	box-shadow: 1px 1px 1px #aaa inset;
 	background-color: #fff;
 }
 
-#tsf-title-separator input:checked + label,
-#tsf-description-separator input:checked + label {
+#tsf-title-separator input:checked + label {
 	box-shadow: 1px 1px 1px #333 inset;
 	background-color: #fff;
+}
+
+#tsf-title-separator input:focus + label:not( .tsf-no-focus-ring ) {
+	box-shadow: 0px 0px 1px 1px #333 inset;
 }
 
 #tsf-title-location,
@@ -101,28 +115,65 @@ body.rtl .tsf-bottom-buttons {
 	display: block;
 }
 
-#tsf-title-location label span,
-#tsf-home-title-location label span {
+#tsf-title-location label > span,
+#tsf-home-title-location label > span {
 	display: inline-block;
 	min-width: 60px;
 	vertical-align: baseline;
 }
 
-#tsf-home-title-location label .tsf-custom-title-js,
-#tsf-home-title-location label .tsf-custom-blogname-js,
-#tsf-home-title-location label .tsf-custom-tagline-js,
-#tsf-title-location label .tsf-sep-js,
-#tsf-title-location label .tsf-title-additions-js,
-#tsf-home-title-location label .tsf-sep-js {
-	display: inline;
-	min-width: 0;
-	white-space: pre;
+.tsf-title-additions-js,
+.tsf-title-additions-example-left code,
+.tsf-title-additions-example-right code {
+	white-space: pre-wrap;
+}
+
+.tsf-title-additions-location-hidden,
+.tsf-title-tax-prefix-hidden {
+	display: none;
+}
+
+#tsf-post-type-archive-header-wrap {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+	align-items: center;
+	vertical-align: top;
+	gap: 1.625em 4ch;
+}
+
+#tsf-post-type-archive-select-wrap {
+	display: flex;
+	flex-flow: row wrap;
+	gap: 1em;
+	align-items: center;
+}
+
+#tsf-post-type-archive-select-wrap label {
+	font-weight: 600;
+}
+
+#tsf-post-type-archive-header-wrap h4 {
+	margin: 0;
+}
+
+.tsf-post-type-archive-link {
+	display: inline-block;
+}
+
+.tsf-post-type-archive-if-excluded p:last-of-type {
+	margin-bottom: 0;
+}
+
+/** @overrides tsf.css */
+.tsf-select-block > select:last-of-type {
+	margin-bottom: 14px;
 }
 
 /**
  * Start Tabs.
  */
-.tsf-tab-no-js,
+.tsf-nav-tab-no-js,
 .tsf-nav-tab-wrapper {
 	position: relative;
 	clear: both;
@@ -134,24 +185,18 @@ body.rtl .tsf-bottom-buttons {
 	margin: -4px -12px;
 }
 
-.tsf-nav-tab {
-	float: left;
+.tsf-nav-tab-label {
+	float: inline-start;
 	border: 1px solid #ccc;
-	margin-left: .5em;
+	margin-inline-start: .5em;
 	margin-bottom: -1px;
-	padding: 5px 14px;
+	padding: 1ch 2ch;
 	font-size: 12px;
-	line-height: 16px;
 	background: #f1f1f1;
 	color: #555;
 	font-weight: 600;
 	border-radius: 3px 3px 0 0;
-}
-
-body.rtl .tsf-nav-tab {
-	float: right;
-	margin-left: 0;
-	margin-right: .5em;
+	cursor: pointer;
 }
 
 .tsf-nav-desktop {
@@ -164,7 +209,7 @@ body.rtl .tsf-nav-tab {
 	vertical-align: text-bottom;
 }
 
-input.tsf-tabs-radio {
+input.tsf-nav-tab-radio {
 	position: absolute;
 	width: 0;
 	height: 0;
@@ -178,75 +223,39 @@ input.tsf-tabs-radio {
 	appearance: none;
 }
 
-.tsf-tabs-radio:checked + label,
-.tsf-active-tab {
+.tsf-nav-tab-radio:checked + label,
+.tsf-nav-tab-active {
 	background-color: inherit;
 	border-bottom-color: #fff;
 	color: #000;
 }
 
 /* make all border colors #fff, so it doesn't look skewed */
-.tsf-tabs-radio:focus + label:not(.tsf-no-focus-ring) {
+.tsf-nav-tab-radio:focus + label:not( .tsf-no-focus-ring ) {
 	box-shadow:
 		0 0 0 1px #5b9dd9,
-		0 0 2px 1px rgba(30, 140, 190, .8);
+		0 0 2px 1px rgba( 30, 140, 190, .8 );
 	border-color: #fff;
 }
 
-.tsf-tabs-content {
+.tsf-nav-tab-content {
 	margin: 1.33em auto 0;
 }
 
-.tsf-tabs-content select {
+.tsf-nav-tab-content select {
 	width: 100%;
 	max-width: max-content;
 	text-overflow: ellipsis;
 }
 
-.tsf-content-no-js {
+.tsf-nav-tab-content-no-js {
 	margin: 1.33em auto;
 }
 
-body.js .tsf-tabs-content {
+body.js .tsf-nav-tab-content {
 	display: none;
 }
 
-body.js .tsf-tabs-content.tsf-active-tab-content {
+body.js .tsf-nav-tab-content.tsf-nav-tab-content-active {
 	display: block;
 }
-
-/**
- * End tabs.
- */
-
-/**
- * TEMP
- * @see https://core.trac.wordpress.org/ticket/49543
- */
-
-.wp-picker-input-wrap .button.wp-picker-clear {
-	margin-left: 6px;
-	padding: 0 8px;
-	line-height: 2.54545455; /* 28px */
-	min-height: 30px;
-}
-
-body.rtl .wp-picker-input-wrap .button.wp-picker-clear {
-	margin-right: 6px;
-	padding: 0 8px;
-	line-height: 2.54545455; /* 28px */
-	min-height: 30px;
-}
-
-@media screen and (max-width: 782px) {
-	.wp-picker-input-wrap .button.wp-picker-clear,
-	body.rtl .wp-picker-input-wrap .button.wp-picker-clear {
-		padding: 0 8px;
-		line-height: 2.14285714; /* 30px */
-		min-height: 32px;
-	}
-}
-
-/**
- * End TEMP.
- */

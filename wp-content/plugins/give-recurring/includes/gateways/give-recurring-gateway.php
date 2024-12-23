@@ -22,14 +22,14 @@ class Give_Recurring_Gateway {
 	 *
 	 * @var array
 	 */
-	public $subscriptions = array();
+	public $subscriptions = [];
 
 	/**
 	 * Array of donation data.
 	 *
 	 * @var array
 	 */
-	public $purchase_data = array();
+	public $purchase_data = [];
 
 	/**
 	 * Whether the gateway is offsite or onsite.
@@ -81,30 +81,33 @@ class Give_Recurring_Gateway {
 
 		$this->init();
 
-		add_action( 'give_checkout_error_checks', array( $this, 'checkout_errors' ), 0, 1 );
-		add_action( 'give_gateway_' . $this->id, array( $this, 'process_checkout' ), 0 );
-		add_action( 'init', array( $this, 'process_webhooks' ), 9 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ), 10 );
-		add_action( 'give_cancel_subscription', array( $this, 'process_cancellation' ) );
-		add_filter( 'give_subscription_can_cancel', array( $this, 'can_cancel' ), 10, 2 );
-		add_filter( 'give_subscription_can_sync', array( $this, 'can_sync' ), 10, 2 );
-		add_filter( 'give_subscription_can_update', array( $this, 'can_update' ), 10, 2 );
-		add_filter( 'give_subscription_can_update_subscription', array( $this, 'can_update_subscription' ), 10, 2 );
-		add_filter( 'give_subscription_can_cancel_' . $this->id . '_subscription', array(
+		add_action( 'give_checkout_error_checks', [ $this, 'checkout_errors' ], 0, 1 );
+		add_action( 'give_gateway_' . $this->id, [ $this, 'process_checkout' ], 0 );
+		add_action( 'init', [ $this, 'process_webhooks' ], 9 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'scripts' ], 10 );
+		add_action( 'give_cancel_subscription', [ $this, 'process_cancellation' ] );
+		add_filter( 'give_subscription_can_cancel', [ $this, 'can_cancel' ], 10, 2 );
+		add_filter( 'give_subscription_can_sync', [ $this, 'can_sync' ], 10, 2 );
+		add_filter( 'give_subscription_can_update', [ $this, 'can_update' ], 10, 2 );
+		add_filter( 'give_subscription_can_update_subscription', [ $this, 'can_update_subscription' ], 10, 2 );
+		add_filter( 'give_subscription_can_cancel_' . $this->id . '_subscription', [
 			$this,
 			'can_cancel',
-		), 10, 2 );
-		add_action( 'give_recurring_update_payment_form', array( $this, 'update_payment_method_form' ), 10, 1 );
-		add_action( 'give_recurring_update_subscription_payment_method', array(
+		], 10, 2 );
+		add_action( 'give_recurring_update_payment_form', [ $this, 'update_payment_method_form' ], 10, 1 );
+		add_action( 'give_recurring_update_subscription_payment_method', [
 			$this,
 			'process_payment_method_update',
-		), 10, 3 );
-		add_filter( 'give_subscription_profile_link_' . $this->id, array( $this, 'link_profile_id' ), 10, 2 );
-		add_action( "give_recurring_update_{$this->id}_subscription", array( $this, 'update_payment_method' ), 10, 2 );
+		], 10, 3 );
+		add_filter( 'give_subscription_profile_link_' . $this->id, [ $this, 'link_profile_id' ], 10, 2 );
+		add_action( "give_recurring_update_{$this->id}_subscription", [ $this, 'update_payment_method' ], 10, 2 );
 
 		// Process update renewal subscription information.
-		add_action( 'give_recurring_update_renewal_subscription', array( $this, 'process_renewal_subscription_update', ), 10, 3 );
-		add_action( "give_recurring_update_renewal_{$this->id}_subscription", array( $this, 'update_subscription' ), 10, 2 );
+		add_action( 'give_recurring_update_renewal_subscription', [
+			$this,
+			'process_renewal_subscription_update',
+		], 10, 3 );
+		add_action( "give_recurring_update_renewal_{$this->id}_subscription", [ $this, 'update_subscription' ], 10, 2 );
 	}
 
 	/**
@@ -136,7 +139,7 @@ class Give_Recurring_Gateway {
 	 * @access      public
 	 * @since       1.0
 	 *
-	 * @param array $data   List of valid data.
+	 * @param array $data List of valid data.
 	 * @param array $posted List of posted variables.
 	 *
 	 * @return      void
@@ -247,8 +250,8 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.2
 	 *
-	 * @param  bool              $ret          Default setting (false)
-	 * @param  Give_Subscription $subscription The subscription
+	 * @param bool              $ret Default setting (false)
+	 * @param Give_Subscription $subscription The subscription
 	 *
 	 * @return bool
 	 */
@@ -261,8 +264,8 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.8
 	 *
-	 * @param  bool              $ret          Default setting (false)
-	 * @param  Give_Subscription $subscription The subscription
+	 * @param bool              $ret Default setting (false)
+	 * @param Give_Subscription $subscription The subscription
 	 *
 	 * @return bool
 	 */
@@ -275,8 +278,8 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.1.2
 	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
+	 * @param Give_Recurring_Subscriber $subscriber Give_Recurring_Subscriber
+	 * @param Give_Subscription         $subscription Give_Subscription
 	 *
 	 * @return void
 	 */
@@ -289,7 +292,7 @@ class Give_Recurring_Gateway {
 	 * @since  1.1.2
 	 * @since  1.7 Remove CC address fields.
 	 *
-	 * @param  Give_Subscription $subscription The subscription object.
+	 * @param Give_Subscription $subscription The subscription object.
 	 *
 	 * @return void
 	 */
@@ -335,10 +338,10 @@ class Give_Recurring_Gateway {
 	/**
 	 * Processes the recurring donation form and sends sets up the subscription data for hand-off to the gateway.
 	 *
+	 * @since       1.0
+	 *
 	 * @param $donation_data
 	 *
-	 * @access      public
-	 * @since       1.0
 	 * @return      void
 	 *
 	 */
@@ -350,7 +353,7 @@ class Give_Recurring_Gateway {
 		}
 
 		if ( ! wp_verify_nonce( $donation_data['gateway_nonce'], 'give-gateway' ) ) {
-			wp_die( __( 'Nonce verification failed.', 'give-recurring' ), __( 'Error', 'give-recurring' ), array( 'response' => 403 ) );
+			wp_die( __( 'Nonce verification failed.', 'give-recurring' ), __( 'Error', 'give-recurring' ), [ 'response' => 403 ] );
 		}
 
 		// Initial validation.
@@ -380,11 +383,11 @@ class Give_Recurring_Gateway {
 				( ! empty( $donation_data['user_info']['last_name'] ) ? trim( $donation_data['user_info']['last_name'] ) : '' )
 			);
 
-			$subscriber_data = array(
+			$subscriber_data = [
 				'name'    => trim( $name ),
 				'email'   => $donation_data['user_info']['email'],
 				'user_id' => $this->user_id,
-			);
+			];
 
 			$subscriber->create( $subscriber_data );
 
@@ -393,14 +396,14 @@ class Give_Recurring_Gateway {
 		$this->customer_id = $subscriber->id;
 
 		// Get billing times.
-		$times = ! empty( $this->purchase_data['times'] ) ? intval( $this->purchase_data['times'] ) : 0;
+		$times = ! empty( $this->purchase_data['times'] ) ? (int) $this->purchase_data['times'] : 0;
 		// Get frequency value.
-		$frequency = ! empty( $this->purchase_data['frequency'] ) ? intval( $this->purchase_data['frequency'] ) : 1;
+		$frequency = ! empty( $this->purchase_data['frequency'] ) ? (int) $this->purchase_data['frequency'] : 1;
 
-		$payment_data = array(
+		$payment_data = [
 			'price'           => $this->purchase_data['price'],
 			'give_form_title' => $this->purchase_data['post_data']['give-form-title'],
-			'give_form_id'    => intval( $this->purchase_data['post_data']['give-form-id'] ),
+			'give_form_id'    => (int) $this->purchase_data['post_data']['give-form-id'],
 			'give_price_id'   => $this->get_price_id(),
 			'date'            => $this->purchase_data['date'],
 			'user_email'      => $this->purchase_data['user_email'],
@@ -408,24 +411,29 @@ class Give_Recurring_Gateway {
 			'currency'        => give_get_currency(),
 			'user_info'       => $this->purchase_data['user_info'],
 			'status'          => 'pending',
-		);
+		];
 
 		// Record the pending payment.
 		$this->payment_id = give_insert_payment( $payment_data );
 
-		$this->subscriptions = apply_filters( 'give_recurring_subscription_pre_gateway_args', array(
+		$this->subscriptions = apply_filters( 'give_recurring_subscription_pre_gateway_args', [
 			'name'             => $this->purchase_data['post_data']['give-form-title'],
-			'id'               => $this->purchase_data['post_data']['give-form-id'], // @TODO Deprecate w/ backwards compatiblity.
+			'id'               => $this->purchase_data['post_data']['give-form-id'],
+			// @TODO Deprecate w/ backwards compatiblity.
 			'form_id'          => $this->purchase_data['post_data']['give-form-id'],
 			'price_id'         => $this->get_price_id(),
-			'initial_amount'   => give_sanitize_amount_for_db( $this->purchase_data['price'] ), // add fee here in future.
+			'initial_amount'   => give_sanitize_amount_for_db( $this->purchase_data['price'] ),
+			// add fee here in future.
 			'recurring_amount' => give_sanitize_amount_for_db( $this->purchase_data['price'] ),
-			'period'           => $this->get_interval( $this->purchase_data['period'], $frequency ),
-			'frequency'        => $this->get_interval_count( $this->purchase_data['period'], $frequency ), // Passed interval. Example: charge every 3 weeks.
+			'period'           => self::get_interval( $this->purchase_data['period'], $frequency ),
+			'frequency'        => self::get_interval_count( $this->purchase_data['period'], $frequency ),
+			// Passed interval. Example: charge every 3 weeks.
 			'bill_times'       => give_recurring_calculate_times( $times, $frequency ),
-			'profile_id'       => '', // Profile ID for this subscription - This is set by the payment gateway.
-			'transaction_id'   => '', // Transaction ID for this subscription - This is set by the payment gateway.
-		) );
+			'profile_id'       => '',
+			// Profile ID for this subscription - This is set by the payment gateway.
+			'transaction_id'   => '',
+			// Transaction ID for this subscription - This is set by the payment gateway.
+		], $this->purchase_data );
 
 		do_action( 'give_recurring_pre_create_payment_profiles', $this );
 
@@ -461,11 +469,12 @@ class Give_Recurring_Gateway {
 	/**
 	 * Gets interval length and interval unit for Authorize.net based on Give subscription period.
 	 *
-	 * @param  string $period
-	 * @param  int    $frequency
-	 *
 	 * @since  2.2.0
 	 * @access public
+	 *
+	 * @param int    $frequency
+	 *
+	 * @param string $period
 	 *
 	 * @return array
 	 */
@@ -486,11 +495,12 @@ class Give_Recurring_Gateway {
 	/**
 	 * Gets interval length and interval unit for Authorize.net based on Give subscription period.
 	 *
-	 * @param  string $period
-	 * @param  int    $frequency
-	 *
 	 * @since  2.2.0
 	 * @access public
+	 *
+	 * @param int    $frequency
+	 *
+	 * @param string $period
 	 *
 	 * @return array
 	 */
@@ -532,19 +542,20 @@ class Give_Recurring_Gateway {
 		// Set Subscription frequency.
 		$frequency = ! empty( $this->subscriptions['frequency'] ) ? intval( $this->subscriptions['frequency'] ) : 1;
 
-		$args = array(
-			'form_id'           => $this->subscriptions['id'],
-			'parent_payment_id' => $this->payment_id,
-			'status'            => $status,
-			'period'            => $this->subscriptions['period'],
-			'frequency'         => $frequency,
-			'initial_amount'    => $this->subscriptions['initial_amount'],
-			'recurring_amount'  => $this->subscriptions['recurring_amount'],
-			'bill_times'        => $this->subscriptions['bill_times'],
-			'expiration'        => $subscriber->get_new_expiration( $this->subscriptions['id'], $this->subscriptions['price_id'], $frequency, $this->subscriptions['period'] ),
-			'profile_id'        => $this->subscriptions['profile_id'],
-			'transaction_id'    => $this->subscriptions['transaction_id'],
-		);
+		$args = [
+			'form_id'              => $this->subscriptions['id'],
+			'parent_payment_id'    => $this->payment_id,
+			'status'               => $status,
+			'period'               => $this->subscriptions['period'],
+			'frequency'            => $frequency,
+			'initial_amount'       => $this->subscriptions['initial_amount'],
+			'recurring_amount'     => $this->subscriptions['recurring_amount'],
+			'recurring_fee_amount' => isset( $this->subscriptions['recurring_fee_amount'] ) ? $this->subscriptions['recurring_fee_amount'] : 0,
+			'bill_times'           => $this->subscriptions['bill_times'],
+			'expiration'           => $subscriber->get_new_expiration( $this->subscriptions['id'], $this->subscriptions['price_id'], $frequency, $this->subscriptions['period'] ),
+			'profile_id'           => $this->subscriptions['profile_id'],
+			'transaction_id'       => $this->subscriptions['transaction_id'],
+		];
 
 		// Support user_id if it is present is purchase_data.
 		if ( isset( $this->purchase_data['user_info']['id'] ) ) {
@@ -586,9 +597,9 @@ class Give_Recurring_Gateway {
 	 * @since  1.1.2
 	 * @since  1.7 Updated payment method.
 	 *
-	 * @param  int  $user_id         User ID
-	 * @param  int  $subscription_id Subscription ID
-	 * @param  bool $verified        Sanity check that the request to update is coming from a verified source
+	 * @param int  $user_id User ID
+	 * @param int  $subscription_id Subscription ID
+	 * @param bool $verified Sanity check that the request to update is coming from a verified source
 	 *
 	 * @return void
 	 */
@@ -623,12 +634,12 @@ class Give_Recurring_Gateway {
 		$errors = give_get_errors();
 
 		if ( empty( $errors ) ) {
-			$url = add_query_arg( array( 'action' => 'update', 'updated' => true, 'subscription_id' => $subscription->id ) );
+			$url = add_query_arg( [ 'action' => 'update', 'updated' => true, 'subscription_id' => $subscription->id ] );
 		} else {
-			$url = add_query_arg( array( 'action' => 'update', 'subscription_id' => $subscription->id ) );
+			$url = add_query_arg( [ 'action' => 'update', 'subscription_id' => $subscription->id ] );
 		}
 
-		if ( 'stripe' === $subscription->gateway && empty( $errors ) ) {
+		if ( empty( $errors ) ) {
 			wp_safe_redirect( $url );
 			exit();
 		} else {
@@ -645,9 +656,11 @@ class Give_Recurring_Gateway {
 	 *
 	 * @access      public
 	 * @since       1.0
-	 * @return      void
 	 *
 	 * @param $data
+	 *
+	 * @return      void
+	 *
 	 */
 	public function process_cancellation( $data ) {
 
@@ -676,13 +689,13 @@ class Give_Recurring_Gateway {
 
 		// Verify the nonce for security.
 		if ( ! wp_verify_nonce( $data['_wpnonce'], "give-recurring-cancel-{$data['sub_id']}" ) ) {
-			wp_die( __( 'Nonce verification failed.', 'give-recurring' ), __( 'Error', 'give-recurring' ), array( 'response' => 403 ) );
+			wp_die( __( 'Nonce verification failed.', 'give-recurring' ), __( 'Error', 'give-recurring' ), [ 'response' => 403 ] );
 		}
 
 		$subscription = new Give_Subscription( $data['sub_id'] );
 
 		if ( ! $subscription->can_cancel() ) {
-			wp_die( __( 'This subscription cannot be cancelled.', 'give-recurring' ), __( 'Error', 'give-recurring' ), array( 'response' => 403 ) );
+			wp_die( __( 'This subscription cannot be cancelled.', 'give-recurring' ), __( 'Error', 'give-recurring' ), [ 'response' => 403 ] );
 		}
 
 		try {
@@ -698,15 +711,15 @@ class Give_Recurring_Gateway {
 
 			} else {
 
-				$args = ! give_get_errors() ? array( 'give-message' => 'cancelled' ) : array();
+				$args = ! give_get_errors() ? [ 'give-message' => 'cancelled' ] : [];
 
 				wp_redirect(
 					remove_query_arg(
-						array(
+						[
 							'_wpnonce',
 							'give_action',
 							'sub_id',
-						),
+						],
 						add_query_arg( $args )
 					)
 				);
@@ -716,7 +729,7 @@ class Give_Recurring_Gateway {
 			}
 
 		} catch ( Exception $e ) {
-			wp_die( $e->getMessage(), __( 'Error', 'give-recurring' ), array( 'response' => 403 ) );
+			wp_die( $e->getMessage(), __( 'Error', 'give-recurring' ), [ 'response' => 403 ] );
 		}
 
 	}
@@ -729,9 +742,10 @@ class Give_Recurring_Gateway {
 	 *
 	 * @access      public
 	 *
+	 * @since       1.2
+	 *
 	 * @param Give_Subscription $subscription
 	 *
-	 * @since       1.2
 	 * @return      array
 	 */
 	public function get_subscription_details( $subscription ) {
@@ -743,11 +757,11 @@ class Give_Recurring_Gateway {
 		 * - expiration: The expiration / renewal date of the subscription
 		 * - error: An instance of WP_Error with error code and message (if any)
 		 */
-		$ret = array(
+		$ret = [
 			'status'     => '',
 			'expiration' => '',
 			'error'      => '',
-		);
+		];
 
 		return $ret;
 	}
@@ -784,7 +798,7 @@ class Give_Recurring_Gateway {
 	 *
 	 * @return string
 	 */
-	private function get_price_id(){
+	private function get_price_id() {
 		return array_key_exists( 'give-price-id', $this->purchase_data['post_data'] )
 			? $this->purchase_data['post_data']['give-price-id']
 			: '';
@@ -796,9 +810,9 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.8 Update renewal subscription.
 	 *
-	 * @param  int  $user_id         User ID
-	 * @param  int  $subscription_id Subscription ID
-	 * @param  bool $verified        Sanity check that the request to update is coming from a verified source
+	 * @param int  $user_id User ID
+	 * @param int  $subscription_id Subscription ID
+	 * @param bool $verified Sanity check that the request to update is coming from a verified source
 	 *
 	 * @return void
 	 */
@@ -854,24 +868,27 @@ class Give_Recurring_Gateway {
 			$this->update_renewal_subscription_details( $subscription );
 
 			$url = add_query_arg(
-				array(
-					'action'          => 'edit_subscription',
-					'updated'         => true,
-					'subscription_id' => $subscription->id,
-				)
-			);
-		} else {
-			$url = add_query_arg(
-				array(
+				[
 					'action'          => 'edit_subscription',
 					'subscription_id' => $subscription->id,
-				)
+					'status'          => 'success',
+				],
+				give_get_subscriptions_page_uri()
 			);
+
+			wp_send_json_success( [ 'url' => $url ] );
 		}
 
-		// If Gateway is Stripe then redirect it else return URL in ajax response.
-		echo $url;
-		give_die();
+		$url = add_query_arg(
+			[
+				'action'          => 'edit_subscription',
+				'subscription_id' => $subscription->id,
+				'status'          => 'error',
+			],
+			give_get_subscriptions_page_uri()
+		);
+
+		wp_send_json_error( [ 'url' => $url ] );
 	}
 
 	/**
@@ -879,8 +896,8 @@ class Give_Recurring_Gateway {
 	 *
 	 * @since  1.8
 	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
+	 * @param Give_Recurring_Subscriber $subscriber Give_Recurring_Subscriber
+	 * @param Give_Subscription         $subscription Give_Subscription
 	 *
 	 * @return void
 	 */
@@ -896,23 +913,29 @@ class Give_Recurring_Gateway {
 	 * @param \Give_Subscription $subscription
 	 */
 	private function update_renewal_subscription_details( $subscription ) {
+		$subscription_id   = $subscription->id;
+		$parent_payment_id = $subscription->parent_payment_id;
+		$oldRenewalAmount  = $subscription->recurring_amount;
 
-		// Sanitize the values submitted with donation form.
-		$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+		/**
+		 * This action will be used updating subscription amount.
+		 *
+		 * @since 1.10.3
+		 *
+		 * @param Give_Subscription $subscription
+		 */
+		do_action( 'give_recurring_process_update_subscription_amount', $subscription );
 
-		// Get update renewal amount.
-		$new_recurring_amount = isset( $post_data['give-amount'] ) ? give_sanitize_amount_for_db( $post_data['give-amount'] ) : 0;
-
-		// Subscription id.
-		$subscription_id      = $subscription->id;
-		$parent_payment_id    = $subscription->parent_payment_id;
-		$old_recurring_amount = $subscription->recurring_amount;
+		$updateArgs = [
+			'recurring_amount'     => $subscription->recurring_amount,
+			'recurring_fee_amount' => $subscription->recurring_fee_amount,
+		];
 
 		$subscription_db = new Give_Subscriptions_DB();
-		$subscription_db->update( $subscription_id, array( 'recurring_amount' => $new_recurring_amount ) );
+		$subscription_db->update( $subscription_id, $updateArgs );
 
 		// Insert Subscription note, if old and new amount not matched.
-		if ( $old_recurring_amount !== $new_recurring_amount ) {
+		if ( $oldRenewalAmount !== $subscription->recurring_amount ) {
 
 			$interval  = ! empty( $subscription->frequency ) ? $subscription->frequency : 1;
 			$frequency = give_recurring_pretty_subscription_frequency( $subscription->period, false, false, $interval );
@@ -924,20 +947,43 @@ class Give_Recurring_Gateway {
 					__( 'Subscription amount updated by donor: Previous amount %1$s, New amount %2$s', 'give-recurring' ),
 					give_currency_filter(
 						give_format_amount(
-							$old_recurring_amount
-						), array(
+							$oldRenewalAmount
+						), [
 							'currency_code' => give_get_payment_currency_code( $parent_payment_id ),
-						)
+						]
 					) . '/' . $frequency,
 					give_currency_filter(
 						give_format_amount(
-							$new_recurring_amount
-						), array(
+							$subscription->recurring_amount
+						), [
 							'currency_code' => give_get_payment_currency_code( $parent_payment_id ),
-						)
+						]
 					) . '/' . $frequency
 				)
 			);
 		}
+	}
+
+	/**
+	 * Return new subscription amount selected by donor.
+	 *
+	 * @since 1.10.3
+	 * @return string
+	 */
+	protected function getNewRenewalAmount() {
+		$postedData     = give_clean( $_POST );
+		$subscriptionId = (int) $postedData['subscription_id'];
+
+		$subscription       = new Give_Subscription( $subscriptionId );
+		$currencyFormatArgs = [ 'currency' => $subscription->parent_payment_id ];
+		$renewalAmount      = ! empty( $postedData['give-amount'] ) ? give_maybe_sanitize_amount( $postedData['give-amount'], $currencyFormatArgs ) : 0;
+		$isFeeOpted         = ! empty( $postedData['give-fee-mode-enable'] ) && 'true' === $postedData['give-fee-mode-enable'];
+		$feeAmount          = ! empty( $postedData['give-fee-amount'] ) ? give_sanitize_amount_for_db( $postedData['give-fee-amount'], $currencyFormatArgs ) : 0;
+
+		if ( $isFeeOpted ) {
+			$renewalAmount += $feeAmount;
+		}
+
+		return $renewalAmount;
 	}
 }

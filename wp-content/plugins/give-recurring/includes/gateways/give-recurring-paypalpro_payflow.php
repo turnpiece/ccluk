@@ -48,12 +48,12 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 		$this->give_payflow = new Give_PayPal_Pro_Payflow();
 
 		// Cancellation action.
-		add_action( 'give_recurring_cancel_' . $this->id . '_subscription', array( $this, 'cancel' ), 10, 2 );
+		add_action( 'give_recurring_cancel_' . $this->id . '_subscription', [ $this, 'cancel' ], 10, 2 );
 
 		// IPN should point to https://mywebsite.com/?give-listener=IPN
-		add_action( 'give_paypal_web_accept', array( $this, 'process_web_accept_ipn' ), 10, 2 );
+		add_action( 'give_paypal_web_accept', [ $this, 'process_web_accept_ipn' ], 10, 2 );
 
-		add_filter( 'give_recurring_gateway_factory_get_gateway', array( $this, 'sync_get_gateway' ), 10, 3 );
+		add_filter( 'give_recurring_gateway_factory_get_gateway', [ $this, 'sync_get_gateway' ], 10, 3 );
 
 	}
 
@@ -62,7 +62,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 *
 	 * PayPal + Payflow sends renewals in via normal IPN "web_accept" transactions.
 	 *
-	 * @param array $ipn_data   Encoded data.
+	 * @param array $ipn_data Encoded data.
 	 * @param int   $payment_id Payment id. Note: This is not brought over for Payflow transactions.
 	 *
 	 * @return array|bool
@@ -110,8 +110,8 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			foreach ( $response as $renewal ) {
 
 				// Ensure PDT like IPN.
-				$renewal_timestamp = strtotime( $renewal[ "P_TRANSTIME{$counter}" ] . ' PDT' );
-				$payment_amount    = $renewal[ "P_AMT{$counter}" ];
+				$renewal_timestamp = strtotime( $renewal["P_TRANSTIME{$counter}"] . ' PDT' );
+				$payment_amount    = $renewal["P_AMT{$counter}"];
 
 				// Match timestamp within 8 hours and amount equals.
 				// Payment amounts must match as well.
@@ -120,7 +120,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 					&& $payment_amount === $ipn_amount
 				) {
 					$payment_timestamp = $renewal_timestamp;
-					$pp_ref            = $renewal[ "P_PNREF{$counter}" ];
+					$pp_ref            = $renewal["P_PNREF{$counter}"];
 				}
 
 				$counter ++;
@@ -140,11 +140,11 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 				$post_date->setTimezone( new DateTimeZone( 'America/Los_Angeles' ) );
 
 				$sub_added = $subscription->add_payment(
-					array(
+					[
 						'amount'         => $payment_amount,
 						'transaction_id' => $pp_ref,
 						'post_date'      => $post_date->format( 'Y-m-d H:i:s' ),
-					)
+					]
 				);
 
 				if ( $sub_added ) {
@@ -179,12 +179,12 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 		// First we need a successful initial charge.
 		$payflow_transaction_id = $this->initial_charge( $payment_data );
 
-		$frequency = ! empty( $this->subscriptions['frequency'] ) ? intval( $this->subscriptions['frequency'] ) : 1;
+		$frequency = ! empty( $this->purchase_data['frequency'] ) ? (int) $this->purchase_data['frequency'] : 1;
 
 		// Must have a transaction ID to continue.
 		if ( ! empty( $payflow_transaction_id ) ) {
 
-			$payflow_query_array = array(
+			$payflow_query_array = [
 				'USER'         => $this->give_payflow->paypal_user,
 				'VENDOR'       => $this->give_payflow->paypal_vendor,
 				'PARTNER'      => $this->give_payflow->paypal_partner,
@@ -205,7 +205,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 				// START.tho.270313
 				'COMMENT1'     => sprintf( __( 'Initial donation ID: %1$s / Donation made from: %2$s', 'give-recurring' ), $payflow_transaction_id, get_bloginfo( 'url' ) ),
 				'BUTTONSOURCE' => 'givewp_SP',
-			);
+			];
 
 			// Send billing fields if enabled.
 			if ( $this->give_payflow->billing_fields ) {
@@ -232,7 +232,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			/**
 			 * Allows other plugins to modify data before sending to PayPal.
 			 *
-			 * @param array $payflow_query_array                 PayPal query data.
+			 * @param array                             $payflow_query_array PayPal query data.
 			 * @param Give_Recurring_PayPal_Pro_Payflow $gateway Gateway object.
 			 *
 			 * @return array                                     PayPal query data.
@@ -291,13 +291,13 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			$post_data['CVV2']    = $payment_data['card_cvc']; // CVV code
 
 			$response = wp_remote_post(
-				$url, array(
+				$url, [
 					'method'      => 'POST',
 					'body'        => urldecode( http_build_query( apply_filters( 'give_recurring_payflow_initial_request', $post_data, $this->purchase_data ), null, '&' ) ),
 					'timeout'     => 70,
 					'user-agent'  => 'GiveWP',
 					'httpversion' => '1.1',
-				)
+				]
 			);
 
 			// Get response body.
@@ -314,7 +314,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 
 			if (
 				isset( $parsed_response['RESULT'] )
-				&& in_array( $parsed_response['RESULT'], array( 0, 126, 127 ) )
+				&& in_array( $parsed_response['RESULT'], [ 0, 126, 127 ] )
 			) {
 				$txn_id = ! empty( $parsed_response['PNREF'] ) ? $parsed_response['PNREF'] : '';
 				give_set_payment_transaction_id( $this->payment_id, $txn_id );
@@ -375,7 +375,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 
 		try {
 			// Inquire about a false record to see if we get a response back.
-			$payflow_query_array = array(
+			$payflow_query_array = [
 				'TRXTYPE'       => 'R', // Specifies a recurring profile request.
 				'USER'          => $this->give_payflow->paypal_user,
 				'VENDOR'        => $this->give_payflow->paypal_vendor,
@@ -383,7 +383,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 				'PWD'           => $this->give_payflow->paypal_password,
 				'ACTION'        => 'I',
 				'ORIGPROFILEID' => 'RP123412341234', // Some made up profile ID.
-			);
+			];
 
 			// Hit PP API with Query.
 			$response = $this->api_request( $payflow_query_array );
@@ -440,12 +440,12 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 		$url = give_is_test_mode() ? $this->give_payflow->testurl : $this->give_payflow->liveurl;
 
 		$response = wp_remote_post(
-			$url, array(
+			$url, [
 				'timeout'     => 500,
 				'sslverify'   => false,
 				'body'        => urldecode( http_build_query( apply_filters( 'give_recurring_payflow_api_request', $args ), null, '&' ) ),
 				'httpversion' => '1.1',
-			)
+			]
 		);
 
 		if ( is_wp_error( $response ) ) {
@@ -487,7 +487,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 
 		$frequency = ! empty( $this->subscriptions['frequency'] ) ? intval( $this->subscriptions['frequency'] ) : 1;
 
-		$args = array(
+		$args = [
 			'form_id'           => $this->subscriptions['id'],
 			'parent_payment_id' => $this->payment_id,
 			'status'            => 'active',
@@ -498,7 +498,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			'bill_times'        => $this->subscriptions['bill_times'],
 			'expiration'        => $subscriber->get_new_expiration( $this->subscriptions['id'], $this->subscriptions['price_id'], $frequency, $this->subscriptions['period'] ),
 			'profile_id'        => $this->subscriptions['profile_id'],
-		);
+		];
 
 		// Support user_id if it is present in purchase_data.
 		if ( isset( $this->purchase_data['user_info']['id'] ) ) {
@@ -551,7 +551,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			return false;
 		}
 
-		$post_data                  = array();
+		$post_data                  = [];
 		$post_data['USER']          = $this->give_payflow->paypal_user;
 		$post_data['VENDOR']        = $this->give_payflow->paypal_vendor;
 		$post_data['PARTNER']       = $this->give_payflow->paypal_partner;
@@ -618,7 +618,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 */
 	private function get_payflow_transactions( $subscription ) {
 
-		$payflow_query_array = array(
+		$payflow_query_array = [
 			'USER'           => $this->give_payflow->paypal_user,
 			'VENDOR'         => $this->give_payflow->paypal_vendor,
 			'PARTNER'        => $this->give_payflow->paypal_partner,
@@ -627,7 +627,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			'TRXTYPE'        => 'R',
 			'ACTION'         => 'I',
 			'PAYMENTHISTORY' => 'Y',
-		);
+		];
 		$response            = $this->api_request( $payflow_query_array );
 
 		// Chunk flat array into workable data.
@@ -642,8 +642,8 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	/**
 	 * Determines if the subscription can be cancelled.
 	 *
-	 * @param  bool              $ret
-	 * @param  Give_Subscription $subscription
+	 * @param bool              $ret
+	 * @param Give_Subscription $subscription
 	 *
 	 * @return bool
 	 */
@@ -688,7 +688,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	public function get_subscription_details( $subscription ) {
 
 		// Lookup this subscription in Payflow via API request.
-		$payflow_query_array = array(
+		$payflow_query_array = [
 			'USER'          => $this->give_payflow->paypal_user,
 			'VENDOR'        => $this->give_payflow->paypal_vendor,
 			'PARTNER'       => $this->give_payflow->paypal_partner,
@@ -696,7 +696,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			'ORIGPROFILEID' => $subscription->profile_id,
 			'TRXTYPE'       => 'R',
 			'ACTION'        => 'I',
-		);
+		];
 		$response            = $this->api_request( $payflow_query_array );
 
 		// Form created timestamp from PP's format of MMDDYYY
@@ -719,12 +719,12 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			$status = 'completed';
 		}
 
-		$subscription_details = array(
+		$subscription_details = [
 			'status'         => $status,
 			'billing_period' => $billing_period,
 			'frequency'      => $frequency,
 			'created'        => $created_time,
-		);
+		];
 
 		return $subscription_details;
 
@@ -735,7 +735,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 * Get transactions for synchronizer.
 	 *
 	 * @param        $subscription
-	 * @param string       $date
+	 * @param string $date
 	 *
 	 * @return array
 	 */
@@ -743,22 +743,22 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 
 		$subscription_invoices = $this->get_payflow_transactions( $subscription );
 		$counter               = 1;
-		$transactions          = array();
+		$transactions          = [];
 
 		foreach ( $subscription_invoices as $renewal ) {
 
 			// Only sync completed payments
 			// 8 = settlement completed  successfully.
-			if ( 8 !== intval( $renewal[ "P_TRANSTATE{$counter}" ] ) ) {
+			if ( 8 !== (int) $renewal["P_TRANSTATE{$counter}"] ) {
 				$counter ++; // Still increment even if skipped.
 				continue; // skip.
 			}
 
-			$transactions[ $renewal[ "P_PNREF{$counter}" ] ] = array(
-				'amount'         => $renewal[ "P_AMT{$counter}" ],
-				'date'           => strtotime( $renewal[ "P_TRANSTIME{$counter}" ] ),
-				'transaction_id' => $renewal[ "P_PNREF{$counter}" ],
-			);
+			$transactions[ $renewal["P_PNREF{$counter}"] ] = [
+				'amount'         => $renewal["P_AMT{$counter}"],
+				'date'           => strtotime( $renewal["P_TRANSTIME{$counter}"] ),
+				'transaction_id' => $renewal["P_PNREF{$counter}"],
+			];
 
 			$counter ++;
 
@@ -801,21 +801,23 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 *
 	 * Format: MMDDYYYY. Numeric (eight characters)
 	 *
-	 * @param int $frequency Recurring frequency.
-	 *
 	 * @see https://developer.paypal.com/docs/classic/payflow/recurring-billing/#required-parameters-for-the-add-action
+	 *
+	 * @param int $frequency Recurring frequency.
 	 *
 	 * @return false|string
 	 */
 	private function format_start( $frequency ) {
 
-		switch ( $this->subscriptions['period'] ) {
+		switch ( $this->purchase_data['period'] ) {
 			case 'day':
 				return date( 'mdY', strtotime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) . '+' . $frequency . ' day' ) );
 			case 'week':
 				return date( 'mdY', strtotime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) . '+' . $frequency . ' week' ) );
 			case 'month':
 				return date( 'mdY', strtotime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) . '+' . $frequency . ' month' ) );
+			case 'quarter':
+				return date( 'mdY', strtotime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) . '+' . $frequency * 3 . ' month' ) );
 			case 'year':
 				return date( 'mdY', strtotime( date( 'Y-m-d', strtotime( date( 'Y-m-d' ) ) ) . '+' . $frequency . ' year' ) );
 		}
@@ -831,13 +833,15 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 */
 	private function format_period() {
 
-		switch ( $this->subscriptions['period'] ) {
+		switch ( $this->purchase_data['period'] ) {
 			case 'day':
 				return 'DAYS';
 			case 'week':
 				return 'WEEK';
 			case 'month':
 				return 'MONT';
+			case 'quarter':
+				return 'QTER';
 			case 'year':
 				return 'YEAR';
 			default:
@@ -851,8 +855,8 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 *
 	 * @since  1.4
 	 *
-	 * @param  string $profile_id   The recurring profile id.
-	 * @param  object $subscription The Subscription object.
+	 * @param string $profile_id The recurring profile id.
+	 * @param object $subscription The Subscription object.
 	 *
 	 * @return string               The link to return or just the profile id.
 	 */
@@ -900,9 +904,9 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			'paypalpro_payflow' === $subscription->gateway
 			&& ! empty( $subscription->profile_id )
 			&& in_array(
-				$subscription->status, array(
-					'active',
-				), true
+				$subscription->status, [
+				'active',
+			], true
 			)
 		) {
 			return true;
@@ -916,8 +920,8 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 	 *
 	 * @since  1.8
 	 *
-	 * @param  Give_Recurring_Subscriber $subscriber   Give_Recurring_Subscriber
-	 * @param  Give_Subscription         $subscription Give_Subscription
+	 * @param Give_Recurring_Subscriber $subscriber Give_Recurring_Subscriber
+	 * @param Give_Subscription         $subscription Give_Subscription
 	 *
 	 * @return void
 	 */
@@ -944,7 +948,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 
 		if ( empty( $errors ) ) {
 			// Lookup this subscription in Payflow via API request.
-			$payflow_query_array = array(
+			$payflow_query_array = [
 				'USER'          => $this->give_payflow->paypal_user,
 				'VENDOR'        => $this->give_payflow->paypal_vendor,
 				'PARTNER'       => $this->give_payflow->paypal_partner,
@@ -954,7 +958,7 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 				'ACTION'        => 'M',
 				'TENDER'        => 'C',
 				'AMT'           => $renewal_amount,
-			);
+			];
 
 			// Hit PP API with Query.
 			$response = $this->api_request( $payflow_query_array );
@@ -968,7 +972,6 @@ class Give_Recurring_PayPal_Pro_Payflow extends Give_Recurring_Gateway {
 			}
 		}// End if().
 	}
-
 }
 
 new Give_Recurring_PayPal_Pro_Payflow();

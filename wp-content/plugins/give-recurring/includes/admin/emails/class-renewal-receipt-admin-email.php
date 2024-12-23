@@ -37,7 +37,7 @@ if ( ! class_exists( 'Give_Renewal_Recipient_Admin_Email' ) ) :
 				'notification_status'   => 'disabled',
 				'form_metabox_setting'  => false,
 				'default_email_subject' => __( 'Subscription Donation Receipt', 'give-recurring' ),
-				'default_email_message' => __( 'Hi there,', 'give-recurring' ) . "\n\n" . "{name} " . __( 'has succesfully completed renewal donation process. Here are donation details:', 'give-recurring' ) . "\n\n<strong>Donar Name:</strong> {fullname}\n<strong>Donation:</strong> {donation} - {amount}\n<strong>Payment ID:</strong> {payment_id} \n<strong>Payment Method:</strong> {payment_method}\n<strong>Date:</strong> {date}\n\nSincerely,\n{sitename}",
+				'default_email_message' => __( 'Hi there,', 'give-recurring' ) . "\n\n" . "{name} " . __( 'has succesfully renewed their donation. Here are the donation details:', 'give-recurring' ) . "\n\n<strong>Donor Name:</strong> {fullname}\n<strong>Donation:</strong> {donation} - {amount}\n<strong>Payment ID:</strong> {payment_id} \n<strong>Payment Method:</strong> {payment_method}\n<strong>Date:</strong> {date}\n\nSincerely,\n{sitename}",
 				'default_email_header'  => __( 'Donation Receipt', 'give-recurring' ),
 			) );
 

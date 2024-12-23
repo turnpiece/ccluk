@@ -42,6 +42,20 @@ class WPMUDEV_Dashboard_Upgrader {
 	protected $update_results = array();
 
 	/**
+	 * Minimum PHP version required by WPMU DEV plugins.
+	 *
+	 * @var string
+	 */
+	public $min_php = '5.6';
+
+	/**
+	 * Special upgrader instance holder.
+	 *
+	 * @var WPMUDEV_Dashboard_Special_Upgrader
+	 */
+	protected $special_upgrader;
+
+	/**
 	 * Set up actions for the Upgrader module.
 	 *
 	 * @internal
@@ -72,7 +86,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		}
 
 		// Init special upgrader.
-		new WPMUDEV_Dashboard_Special_Upgrader();
+		$this->special_upgrader = new WPMUDEV_Dashboard_Special_Upgrader();
 	}
 
 	/**
@@ -446,6 +460,9 @@ class WPMUDEV_Dashboard_Upgrader {
 		} elseif ( $is_upfront && 'single' === $membership_type ) {
 			// User wants to get Upfront parent theme.
 			$access = true;
+		} elseif ( 'free' === $membership_type && in_array( intval( $project_id ), $licensed_projects, true ) ) {
+			// TFH user with plugin access.
+			$access = true;
 		}
 
 		return $access;
@@ -470,7 +487,19 @@ class WPMUDEV_Dashboard_Upgrader {
 			return false;
 		}
 
+		// Get project data.
 		$project = $data['projects'][ $project_id ];
+
+		// Minimum required PHP version.
+		$requires_min_php = empty( $project['requires_min_php'] ) ? $this->min_php : $project['requires_min_php'];
+
+		// Skip if minimum required PHP version is not found.
+		if ( version_compare( PHP_VERSION, $requires_min_php, '<' ) ) {
+			$reason = 'php';
+
+			return false;
+		}
+
 		if ( empty( $project['requires'] ) ) {
 			$reason = 'unknown requirements';
 
@@ -662,6 +691,13 @@ class WPMUDEV_Dashboard_Upgrader {
 		}
 
 		$project          = WPMUDEV_Dashboard::$site->get_project_info( $pid );
+
+		if ( ! $project->is_compatible && ! empty( $project->incompatible_reason ) ) {
+			$this->set_error( $pid, 'INS.09', sprintf( __( 'Incompatible: %s', 'wpmudev' ), $project->incompatible_reason ) );
+
+			return false;
+		}
+
 		$resp['type']     = $project->type;
 		$resp['filename'] = $project->filename;
 
@@ -707,7 +743,7 @@ class WPMUDEV_Dashboard_Upgrader {
 				// Plugin upgrader class.
 				$upgrader = new Plugin_Upgrader( $skin );
 				// Run the upgrade process.
-				$result = $upgrader->upgrade( $file );
+				$result = $upgrader->bulk_upgrade( array( $file ) );
 
 				/*
 				 * Note: The following plugin activation is an intended and
@@ -731,7 +767,7 @@ class WPMUDEV_Dashboard_Upgrader {
 				// Theme upgrader class.
 				$upgrader = new Theme_Upgrader( $skin );
 				// Run the upgrade process.
-				$result = $upgrader->upgrade( $file );
+				$result = $upgrader->bulk_upgrade( array( $file ) );
 				break;
 
 			default:
@@ -781,7 +817,7 @@ class WPMUDEV_Dashboard_Upgrader {
 			}
 
 			return $response;
-		} elseif ( true === $result ) {
+		} elseif ( is_array( $result ) && ! empty( $result[ $file ] ) ) {
 			// Upgrade is success. Yay!.
 			$response['success'] = true;
 			// Get the new version.
@@ -1160,6 +1196,13 @@ class WPMUDEV_Dashboard_Upgrader {
 				return false;
 			}
 
+			// Check if project is compatible.
+			if ( ! $project->is_compatible && ! empty( $project->incompatible_reason ) ) {
+				$this->set_error( $pid, 'INS.09', sprintf( __( 'Incompatible: %s', 'wpmudev' ), $project->incompatible_reason ) );
+
+				return false;
+			}
+
 			// Make sure Upfront is available before an upfront theme or plugin is installed.
 			if ( $project->need_upfront && ! WPMUDEV_Dashboard::$site->is_upfront_installed() ) {
 				$this->install( WPMUDEV_Dashboard::$site->id_upfront );
@@ -1233,11 +1276,20 @@ class WPMUDEV_Dashboard_Upgrader {
 
 				// If installed and activation is required.
 				if ( ! empty( $options['activate'] ) && true === $result ) {
-					$plugin = $upgrader->plugin_info();
+					$plugin = $this->special_upgrader->get_plugin_info_path( $upgrader->skin->result );
 					// Plugin file found.
 					if ( ! empty( $plugin ) ) {
-						// Activate the plugin silently.
-						$activated = activate_plugin( $plugin, false, is_multisite(), true );
+						/**
+						 * Filter hook to change plugin silent activation.
+						 *
+						 * @since 4.11.20
+						 *
+						 * @param bool $silent Should silence activation?.
+						 */
+						$silent_activation = apply_filters( 'wpmudev_dashboard_plugin_install_silent_activation', false );
+
+						// Activate the plugin.
+						$activated = activate_plugin( $plugin, false, is_multisite(), $silent_activation );
 						// If error in activation.
 						if ( is_wp_error( $activated ) ) {
 							$this->set_error( $pid, 'INS.10', $activated->get_error_message() );

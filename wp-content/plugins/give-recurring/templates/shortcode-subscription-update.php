@@ -24,13 +24,6 @@ if ( ! $subscription->can_update() ) {
 	return false;
 }
 
-// Bail out and print notice if Subscription ID is not valid.
-if ( isset( $subscription ) && empty( $subscription->id ) ) {
-	Give_Notices::print_frontend_notice( __( 'Subscription ID is Invalid.', 'give-recurring' ), true, 'warning' );
-
-	return false;
-}
-
 $action_url = remove_query_arg( array( 'subscription_id', 'updated' ), give_get_current_page_url() );
 $form_title = give_get_meta( $subscription->parent_payment_id, '_give_payment_form_title', true );
 $form_id    = absint( $subscription->form_id );
@@ -41,12 +34,24 @@ $last_digit   = ! empty( $card_details['last_digit'] ) ? $card_details['last_dig
 $exp_month    = ! empty( $card_details['exp_month'] ) ? $card_details['exp_month'] : '';
 $exp_year     = ! empty( $card_details['exp_year'] ) ? $card_details['exp_year'] : '';
 $cc_type      = ! empty( $card_details['cc_type'] ) ? $card_details['cc_type'] : '';
+
+// Set form html tags.
+$form_html_tags = array(
+	'data-gateway' => esc_attr( $subscription->gateway ),
+	'data-id'      => esc_attr( $form_id ) . '-1'
+);
+$form_html_tags = apply_filters( "give_recurring_update_subscription_form_tags", (array) $form_html_tags, $subscription );
 ?>
 <a href="<?php echo esc_url( $action_url ); ?>">&larr;&nbsp;<?php _e( 'Back', 'give-recurring' ); ?></a>
 <div class="give-recurring-donation-main give-form-wrap" id="give_purchase_form_wrap">
 	<h3 class="give-recurring-donation-title"><?php printf( __( 'Update Payment Method for <em>%s</em>', 'give-recurring' ), $form_title ); ?></h3>
-	<form name="give-recurring-form" action="<?php echo esc_url( $action_url ); ?>" class="give-form give-form-<?php echo esc_attr( $form_id ) . '-1'; ?> give-recurring-form"
-	      method="POST" id="give-form" data-gateway="<?php echo esc_attr( $subscription->gateway ); ?>" data-id="<?php echo esc_attr( $form_id ) . '-1'; ?>">
+	<form
+        name="give-recurring-form"
+        action="<?php echo esc_url( $action_url ); ?>"
+        class="give-form give-form-<?php echo esc_attr( $form_id ) . '-1'; ?> give-recurring-form"
+        method="POST"
+        id="give-form"
+		<?php echo give_get_attribute_str( $form_html_tags ); ?>>
 		<input name="give-recurring-update-gateway" type="hidden" value="<?php echo esc_attr( $subscription->gateway ); ?>" />
 		<input type="hidden" name="give-form-id" value="<?php echo absint( $form_id ); ?>" />
 		<input type="hidden" name="give-form-id-prefix" value="<?php echo esc_attr( $form_id ) . '-1'; ?>" />

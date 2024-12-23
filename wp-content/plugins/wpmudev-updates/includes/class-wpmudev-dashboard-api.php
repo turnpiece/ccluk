@@ -47,6 +47,13 @@ class WPMUDEV_Dashboard_Api {
 	protected $rest_api_translation = 'api/translations/v1/';
 
 	/**
+	 * Path to the hosting site endpoints.
+	 *
+	 * @var string
+	 */
+	protected $rest_api_hub = 'api/hub/v1/';
+
+	/**
 	 * The complete WPMUDEV REST API endpoint. Defined in constructor.
 	 *
 	 * @var string (URL)
@@ -100,20 +107,11 @@ class WPMUDEV_Dashboard_Api {
 			}
 
 			// Run action on wpmudev admin actions.
-			add_action( 'wpmudev_dashboard_admin_action', array( $this, 'run_admin_cron' ), 10, 3 );
+			add_action( 'wpmudev_dashboard_admin_request', array( $this, 'run_admin_cron' ) );
 
-			add_action(
-				'wpmudev_scheduled_jobs',
-				array( $this, 'admin_hub_sync' )
-			);
-			add_action(
-				'wpmudev_scheduled_jobs',
-				array( $this, 'refresh_projects_data' )
-			);
-			add_action(
-				'wpmudev_scheduled_jobs',
-				array( $this, 'maybe_update_translations' )
-			);
+			add_action( 'wpmudev_scheduled_jobs', array( $this, 'cron_hub_sync' ) );
+			add_action( 'wpmudev_scheduled_jobs', array( $this, 'refresh_projects_data' ) );
+			add_action( 'wpmudev_scheduled_jobs', array( $this, 'maybe_update_translations' ) );
 
 		} elseif ( wp_next_scheduled( 'wpmudev_scheduled_jobs' ) ) {
 			// In case the cron job was already installed in a sub-site...
@@ -334,32 +332,39 @@ class WPMUDEV_Dashboard_Api {
 	/**
 	 * Process admin side actions if it's from cron.
 	 *
-	 * @param string $action Action name.
-	 * @param array  $params Parameters.
-	 * @param string $from   Action from (remote or cron).
-	 *
 	 * @since  4.11.6
 	 * @access public
 	 *
+	 * @param array $data Request data.
+	 *
 	 * @return void
 	 */
-	public function run_admin_cron( $action, $params, $from ) {
-		if ( 'cron' === $from && 'hub_sync' === $action ) {
+	public function run_admin_cron( $data ) {
+		if (
+			isset( $data['action'], $data['from'] ) &&
+			'cron' === $data['from'] &&
+			'hub_sync' === $data['action']
+		) {
 			// Run hub sync.
 			$this->hub_sync();
 		}
 	}
 
 	/**
-	 * Run hub sync using admin HTTP request.
+	 * Run cron hub sync using admin HTTP request.
 	 *
 	 * @since  4.11.6
 	 * @access public
 	 *
 	 * @return void
 	 */
-	public function admin_hub_sync() {
-		WPMUDEV_Dashboard::$utils->send_admin_request( 'hub_sync', 'cron' );
+	public function cron_hub_sync() {
+		WPMUDEV_Dashboard::$utils->send_admin_request(
+			array(
+				'from'   => 'cron',
+				'action' => 'hub_sync',
+			)
+		);
 	}
 
 	/**
@@ -412,6 +417,9 @@ class WPMUDEV_Dashboard_Api {
 		} elseif ( 'POST' === $method ) {
 			$options['body'] = $data;
 			$response        = wp_remote_post( $link, $options );
+		} elseif ( 'DELETE' === $method ) {
+			$options['method'] = 'DELETE';
+			$response          = wp_remote_request( $link, $options );
 		}
 
 		// Add the request-URL to the response data.
@@ -430,8 +438,18 @@ class WPMUDEV_Dashboard_Api {
 			if ( ! defined( 'WPMUDEV_API_DEBUG_CRAZY' ) ) {
 				$req_body = isset( $options['body'] ) ? $options['body'] : '';
 				if ( isset( $req_body['projects'] ) ) {
+					/**
+					 * this contains 2 keys: plugins and themes
+					 *
+					 * @see self::get_repo_updates_infos()
+					 */
+					$repo_updates = json_decode( $req_body['repo_updates'], true );
 					$req_body['projects']     = count( (array) json_decode( $req_body['projects'] ) ) . ' PROJECTS';
-					$req_body['repo_updates'] = count( (array) json_decode( $req_body['repo_updates'] ) ) . ' REPO_UPDATES';
+					// TODO: subject for code/implementation improvement
+					$req_body['repo_updates'] = array(
+						'plugins' => ( isset( $repo_updates['plugins'] ) && $repo_updates['plugins'] ) ? count( $repo_updates['plugins'] ) : 0,
+						'themes'  => ( isset( $repo_updates['themes'] ) && $repo_updates['themes'] ) ? count( $repo_updates['themes'] ) : 0,
+					);
 					$packages                 = (object) json_decode( $req_body['packages'] );
 					$packages->plugins        = count( (array) $packages->plugins ) . ' PLUGINS';
 					$packages->themes         = count( (array) $packages->themes ) . ' THEMES';
@@ -789,21 +807,21 @@ class WPMUDEV_Dashboard_Api {
 		if ( 'full' === $data['membership'] ) {
 			return array();
 		}
-		if ( 'unit' === $data['membership'] ) {
-			$projects = $data['membership_projects'];
+		// For free and unit memberships.
+		if ( in_array( $data['membership'], array( 'free', 'unit' ), true ) ) {
+			$projects = is_array( $data['membership_projects'] ) ? $data['membership_projects'] : array();
 			foreach ( $projects as $i => $p ) {
 				$projects[ $i ] = intval( $p );
 			}
 			return $projects;
 		}
 		if ( is_numeric( $data['membership'] ) ) {
-			$project_id = intval( $data['membership'] );
-			return $project_id;
+			return intval( $data['membership'] );
 		}
 		if ( is_bool( $data['membership'] ) && is_numeric( $data['membership_full_level'] ) ) {
-			$project_id = intval( $data['membership_full_level'] );
-			return $project_id;
+			return intval( $data['membership_full_level'] );
 		}
+
 		return array();
 	}
 
@@ -957,6 +975,7 @@ class WPMUDEV_Dashboard_Api {
 					'version'           => '1.0.0',
 					'autoupdate'        => 1,
 					'requires'          => 'wp',
+					'requires_min_php'  => '5.6',
 					'compatible'        => '',
 					'url'               => '',
 					'thumbnail'         => '',
@@ -1357,7 +1376,6 @@ class WPMUDEV_Dashboard_Api {
 		$projects = apply_filters( 'wpmudev_api_project_data', $projects );
 
 		// Get WP/BP version string to help with support.
-		$wp_ver = '';
 		if ( is_multisite() ) {
 			$wp_ver     = "WordPress Multisite $wp_version";
 			$blog_count = get_blog_count();
@@ -1368,6 +1386,9 @@ class WPMUDEV_Dashboard_Api {
 		if ( defined( 'BP_VERSION' ) ) {
 			$wp_ver .= ', BuddyPress ' . BP_VERSION;
 		}
+
+		// Prepare site info.
+		$site_info = WPMUDEV_Dashboard::$utils->get_site_info();
 
 		// Get a list of pending WP updates of non-WPMUDEV themes/plugins.
 		$repo_updates = $this->get_repo_updates_infos();
@@ -1391,10 +1412,11 @@ class WPMUDEV_Dashboard_Api {
 			'repo_updates' => $repo_updates,
 			'packages'     => $packages,
 			'auth_cookies' => $auth_cookies,
+			'site_info'    => $site_info,
 		);
 
 		// Report the hosting site_id if in WPMUDEV Hosting environment.
-		if ( defined( 'WPMUDEV_HOSTING_SITE_ID' ) || isset( $_SERVER['WPMUDEV_HOSTED'] ) ) {
+		if ( WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting() ) {
 			$data['hosting_site_id'] = defined( 'WPMUDEV_HOSTING_SITE_ID' ) ? WPMUDEV_HOSTING_SITE_ID : gethostname();
 		}
 
@@ -1403,6 +1425,7 @@ class WPMUDEV_Dashboard_Api {
 			$data['repo_updates'] = json_encode( $data['repo_updates'] );
 			$data['packages']     = json_encode( $data['packages'] );
 			$data['auth_cookies'] = json_encode( $data['auth_cookies'] );
+			$data['site_info']    = json_encode( $data['site_info'] );
 		}
 
 		return $data;
@@ -1412,11 +1435,46 @@ class WPMUDEV_Dashboard_Api {
 	 * Checks if site is hosted on WPMU Dev hosting.
 	 *
 	 * @since 4.9.0
+	 * @since 4.11.15 Added extra checks.
 	 *
-	 * @return boolean - is site hosted on WPMU Dev, true if it is.
+	 * @return bool Is site hosted on WPMU Dev, true if it is.
 	 */
 	public function is_wpmu_dev_hosting() {
-		return isset( $_SERVER['WPMUDEV_HOSTED'] );
+		return defined( 'WPMUDEV_HOSTING_SITE_ID' ) || isset( $_SERVER['WPMUDEV_HOSTED'] );
+	}
+
+	/**
+	 * Checks if site is hosted on WPMU Dev hosting with standalone hosting plan.
+	 *
+	 * @since 4.11.15 Added extra checks.
+	 *
+	 * @return bool
+	 */
+	public function is_standalone_hosting_plan() {
+		// Get membership data.
+		$data = $this->get_membership_data();
+		// For standalone hosting there should be active products.
+		if ( isset( $data['membership_active_products'] ) && is_array( $data['membership_active_products'] ) ) {
+			foreach ( $data['membership_active_products'] as $product ) {
+				// If hosting plan found return early.
+				if ( strpos( $product, 'hosting-' ) === 0 ) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Checks if current site is a third party site with standalone hosting plan.
+	 *
+	 * @since 4.11.15
+	 *
+	 * @return bool
+	 */
+	public function is_hosted_third_party() {
+		return $this->is_standalone_hosting_plan() && ! $this->is_wpmu_dev_hosting();
 	}
 
 	/**
@@ -1454,7 +1512,7 @@ class WPMUDEV_Dashboard_Api {
 		$data_hash = md5( json_encode( $hash_data ) ); // get a hash of the data to see if it changed (minus auth cookies)
 		unset( $hash_data );
 
-		$last_run = WPMUDEV_Dashboard::$settings->get( 'last_run_sync', 'general', array() );
+		$last_run = (array) WPMUDEV_Dashboard::$settings->get( 'last_run_sync', 'general', array() );
 
 		// used to bypass the cache on api side when logging in or upgrading
 		if ( $force || empty( $last_run ) ) {
@@ -1780,8 +1838,15 @@ class WPMUDEV_Dashboard_Api {
 
 		// return from cache if possible. Get locale baset cache.
 		$cached = WPMUDEV_Dashboard::$settings->get_transient( 'translations_all_' . $locale );
-
+		// Return from cache.
 		if ( false !== $cached && ! $force ) {
+			return $cached;
+		}
+
+		// Get last check time.
+		$last_checked = WPMUDEV_Dashboard::$settings->get( 'last_run_translation', 'general', 0 );
+		// Already checked in within last 12 hours. Skip API call.
+		if ( false !== $cached && ! empty( $last_checked ) && $last_checked > ( time() - DAY_IN_SECONDS ) ) {
 			return $cached;
 		}
 
@@ -1819,11 +1884,9 @@ class WPMUDEV_Dashboard_Api {
 			$res = $this->sort_translation_projects( $res );
 		}
 		$data['timestamp'] = time();
-		WPMUDEV_Dashboard::$settings->set_transient(
-			'translations_all_' . $locale,
-			$res,
-			WEEK_IN_SECONDS
-		);
+		WPMUDEV_Dashboard::$settings->set_transient( 'translations_all_' . $locale, $res, WEEK_IN_SECONDS );
+		// Set last checked time.
+		WPMUDEV_Dashboard::$settings->set( 'last_run_translation', time(), 'general' );
 
 		return $res;
 	}
@@ -1877,7 +1940,7 @@ class WPMUDEV_Dashboard_Api {
 			// sort installed plugins
 			foreach ( $translations as $key => $value ) {
 				$project = WPMUDEV_Dashboard::$site->get_project_info( $value['dev_project_id'] );
-				if ( $project->is_installed ) {
+				if ( ! empty( $project->is_installed ) ) {
 					// Handle Snapshot translation slug.
 					// https://incsub.atlassian.net/browse/WDD-187
 					$value['translation_slug'] = 3760011 === (int) $value['dev_project_id'] ? 'snapshot' : $value['slug'];
@@ -2645,6 +2708,46 @@ class WPMUDEV_Dashboard_Api {
 	}
 
 	/**
+	 * Clear WPMUDEV hosting static cache if possible.
+	 *
+	 * This will be a non-blocking request, so do not expect a response.
+	 *
+	 * @return void
+	 */
+	public function maybe_clear_hosting_static_cache() {
+		// Only if WPMUDEV hosting.
+		if ( ! $this->is_wpmu_dev_hosting() ) {
+			return;
+		}
+
+		// Hub site ID.
+		$hub_site_id = WPMUDEV_Dashboard::$api->get_site_id();
+		// Not a Hub site.
+		if ( empty( $hub_site_id ) ) {
+			return;
+		}
+
+		// set api base.
+		$api_base = $this->server_root . $this->rest_api_hub;
+
+		// No blocking.
+		$options = array(
+			'timeout'  => 0.01,
+			'blocking' => false,
+		);
+		// Sets up special auth header.
+		$options['headers']                  = array();
+		$options['headers']['Authorization'] = $this->get_key();
+
+		WPMUDEV_Dashboard::$api->call(
+			$api_base . 'sites/' . $hub_site_id . '/modules/hosting/static-cache',
+			false,
+			'DELETE',
+			$options
+		);
+	}
+
+	/**
 	 * Enable and configure analytics to collect data for the site.
 	 *
 	 * @since  4.6
@@ -2667,10 +2770,15 @@ class WPMUDEV_Dashboard_Api {
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 
-			WPMUDEV_Dashboard::$settings->set( 'site_id', $data['site_id'], 'analytics' );
-			WPMUDEV_Dashboard::$settings->set( 'tracker', $data['tracker'], 'analytics' );
+			if ( isset( $data['site_id'], $data['tracker'] ) ) {
+				WPMUDEV_Dashboard::$settings->set( 'site_id', $data['site_id'], 'analytics' );
+				WPMUDEV_Dashboard::$settings->set( 'tracker', $data['tracker'], 'analytics' );
 
-			return true;
+				// Clear WPMUDEV static cache.
+				$this->maybe_clear_hosting_static_cache();
+
+				return true;
+			}
 		} else {
 			$this->parse_api_error( $response );
 		}
@@ -2700,6 +2808,9 @@ class WPMUDEV_Dashboard_Api {
 		);
 
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+			// Clear WPMUDEV static cache.
+			$this->maybe_clear_hosting_static_cache();
+
 			return true;
 		} else {
 			$this->parse_api_error( $response );
@@ -2714,7 +2825,7 @@ class WPMUDEV_Dashboard_Api {
 	 *
 	 * @since  4.6
 	 *
-	 * @param int $days_ago How many days in the past to look back
+	 * @param int $days_ago How many days in the past to look back.
 	 * @param int $subsite  If filtering to a subsite pass the blog_id of it.
 	 *
 	 * @return mixed
@@ -2743,6 +2854,9 @@ class WPMUDEV_Dashboard_Api {
 		if ( $subsite ) {
 			$remote_path = add_query_arg( 'subsite', $subsite, $remote_path );
 		}
+
+		// Add hub site ID.
+		$remote_path = add_query_arg( 'domain', $this->network_site_url(), $remote_path );
 
 		// Using version name in key to force clear cache on update.
 		$transient_key = 'wdp_analytics_v4117_' . md5( $remote_path );
@@ -3125,6 +3239,7 @@ class WPMUDEV_Dashboard_Api {
 			array(
 				'filter'   => $filter,
 				'days_ago' => $days_ago,
+				'domain'   => $this->network_site_url(),
 			),
 			"{$api_base}site/{$site_id}/{$type}"
 		);

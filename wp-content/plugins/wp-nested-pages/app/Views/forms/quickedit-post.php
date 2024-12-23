@@ -123,7 +123,7 @@ $has_menu_options = ( $this->user->canSortPosts($this->post_type->name) && $this
 			<?php endif; ?>
 
 			<?php
-			$custom_fields_left = $this->custom_fields_repo->outputFields($this->post_type, 'left');
+			$custom_fields_left = $this->custom_fields_repo->outputQuickEditFields($this->post_type, 'left');
 			if ( $custom_fields_left ) echo $custom_fields_left;
 			?>
 
@@ -188,7 +188,7 @@ $has_menu_options = ( $this->user->canSortPosts($this->post_type->name) && $this
 			<?php endif; ?>
 
 			<?php
-			$custom_fields_right = $this->custom_fields_repo->outputFields($this->post_type, 'right');
+			$custom_fields_right = $this->custom_fields_repo->outputQuickEditFields($this->post_type, 'right');
 			if ( $custom_fields_right ) echo $custom_fields_right;
 			?>
 
@@ -255,6 +255,10 @@ $has_menu_options = ( $this->user->canSortPosts($this->post_type->name) && $this
 			<div class="form-control">
 				<label><?php _e( 'CSS Classes' ); ?></label>
 				<input type="text" name="np_nav_css_classes" class="np_nav_css_classes" value="" />
+			</div>
+			<div class="form-control">
+				<label><?php _e( 'Custom URL' ); ?></label>
+				<input type="text" name="np_nav_custom_url" class="np_nav_custom_url" placeholder="<?php _e('Example: #', 'wp-nested-pages'); ?>" value="" />
 			</div>
 		</div><!-- .menuoptions-left -->
 		<div class="right">

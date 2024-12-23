@@ -213,45 +213,29 @@ add_action( 'plugins_loaded', 'give_add_recurring_licensing' );
  * @return bool
  */
 function give_recurring_check_environment() {
-
 	// Check for if give plugin activate or not.
-	$is_give_active = defined( 'GIVE_PLUGIN_BASENAME' ) ? true : false;
+	$is_give_active = defined( 'GIVE_VERSION' );
+
+	if( ! current_user_can( 'activate_plugins' ) ) {
+		return  $is_give_active;
+	}
 
 	// Check to see if Give is activated, if it isn't deactivate and show a banner
-	if ( current_user_can( 'activate_plugins' ) && ! $is_give_active ) {
-
+	if (  ! $is_give_active ) {
 		add_action( 'admin_notices', 'give_recurring_core_issue_msg' );
 
-		add_action( 'admin_init', 'give_recurring_deactivate_self' );
-
 		return false;
-
 	}
 
 	// Min. Give. plugin version.
-	if ( defined( 'GIVE_VERSION' ) && version_compare( GIVE_VERSION, GIVE_RECURRING_MIN_GIVE_VERSION, '<' ) ) {
-
+	if ( version_compare( GIVE_VERSION, GIVE_RECURRING_MIN_GIVE_VERSION, '<' ) ) {
 		add_action( 'admin_notices', 'give_recurring_core_version_issue_msg' );
-		add_action( 'admin_init', 'give_recurring_deactivate_self' );
 
 		return false;
 	}
 
 	// Checks pass.
 	return true;
-
-}
-
-/**
- * Deactivate self. Must be hooked with admin_init.
- *
- * Currently hooked via give_recurring_check_environment()
- */
-function give_recurring_deactivate_self() {
-	deactivate_plugins( GIVE_RECURRING_PLUGIN_BASENAME );
-	if ( isset( $_GET['activate'] ) ) {
-		unset( $_GET['activate'] );
-	}
 
 }
 
@@ -277,7 +261,7 @@ function give_recurring_core_issue_msg() {
  * @since 1.3.1
  */
 function give_recurring_core_version_issue_msg() {
-	$message = sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%1$s" target="_blank">Give</a> version %2$s+ for the Recurring Donations add-on to activate.', 'give-recurring' ), 'https://givewp.com', GIVE_RECURRING_MIN_GIVE_VERSION );
+	$message = sprintf( __( '<strong>Activation Error:</strong> You must have <a href="%1$s" target="_blank">Give</a> version %2$s for the Recurring Donations add-on to activate.', 'give-recurring' ), 'https://givewp.com', GIVE_RECURRING_MIN_GIVE_VERSION );
 	if ( property_exists( 'Give', 'notices' ) ) {
 		Give()->notices->register_notice( array(
 			'id'          => 'give-activation-error',

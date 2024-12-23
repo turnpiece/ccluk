@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2018-2019 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2018 - 2024 Sybre Waaijer, CyberWire B.V. (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -31,44 +31,26 @@
  * @since 3.1.0
  *
  * @constructor
- * @param {!jQuery} $ jQuery object.
  */
-window.tsfMedia = function( $ ) {
+window.tsfMedia = function () {
 
 	/**
 	 * Data property injected by WordPress l10n handler.
 	 *
 	 * @since 3.1.0
 	 * @access public
-	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
+	 * @type {(Object<string,*>)|boolean|null} l10n Localized strings
 	 */
-	const l10n = 'undefined' !== typeof tsfMediaL10n && tsfMediaL10n;
+	const l10n = tsfMediaL10n;
 
 	/**
-	 * Image cropper instance.
+	 * Image Cropper instance.
 	 *
 	 * @since 3.1.0
 	 * @access private
-	 * @type {!Object} cropper
+	 * @type {!Object} Cropper
 	 */
-	let cropper = {};
-
-	/**
-	 * Escapes HTML class or ID keys. Doesn't double-escape.
-	 *
-	 * @since ??? (never implemented)
-	 * @access private
-	 * @ignore
-	 *
-	 * @function
-	 * @param {String} str
-	 * @return {(string|undefined)} HTML to jQuery converted string
-	 */
-	// const escapeKey = ( str ) => {
-	// 	if ( str )
-	// 		return str.replace( /(?!\\)(?=[\[\]\/])/g, '\\' );
-	// 	return str;
-	// }
+	let Cropper = {};
 
 	/**
 	 * Opens the image editor on request.
@@ -76,43 +58,38 @@ window.tsfMedia = function( $ ) {
 	 * @since 4.0.0
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event jQuery event
-	 * @return {undefined}
+	 * @param {Event} event
 	 */
-	const _openImageEditor = ( event ) => {
+	function _openImageEditor( event ) {
 
-		let $button = $( event.target );
+		const button = event.target;
 
-		if ( $button.prop( 'disabled' ) || 'undefined' === typeof wp.media ) {
+		if ( button.disabled || 'undefined' === typeof wp.media ) {
 			event.preventDefault();
 			event.stopPropagation();
 			return;
 		}
 
-		let
-			// inputURL = $button.data( 'input-url' ),
-			inputType = $button.data( 'input-type' ),
-			// s_inputURL = escapeKey( inputURL ),
-			inputID = $button.data( 'input-id' ),
-			// s_inputID = escapeKey( inputURL ),
-			frame; // Backbone.js var.
+		const imageType = button.dataset.inputType || '',
+			  imageId   = button.dataset.inputId || '';
+
+		let frame; // Backbone.js var.
 
 		event.preventDefault();
 		event.stopPropagation();
 
-		//* Init extend cropper.
+		// Init extend Cropper.
 		_extendCropper();
 
-		let _states = {
-			suggestedWidth:  $button.data( 'width' ) || 1200,
-			suggestedHeight: $button.data( 'height' ) || 630,
-			isFlex:          typeof $button.data( 'flex' ) !== 'undefined' ? $button.data( 'flex' ) : 1,
-			minWidth:        typeof $button.data( 'minWidth' ) !== 'undefined' ? $button.data( 'minWidth' ) : 200,
-			minHeight:       typeof $button.data( 'minHeight' ) !== 'undefined' ? $button.data( 'minHeight' ) : 200,
+		const _states = {
+			suggestedWidth:  +( button.dataset.width || 1200 ),
+			suggestedHeight: +( button.dataset.height || 630 ),
+			isFlex:          +( button.dataset.flex || 1 ), // Dataset is string, "0" is a passable, useful value.
+			minWidth:        +( button.dataset.minWidth || 200 ),
+			minHeight:       +( button.dataset.minHeight || 200 ),
 		};
 
-		cropper.control = {
+		Cropper.control = {
 			params: {
 				flex_width:  _states.isFlex ? 4096 : 0,
 				flex_height: _states.isFlex ? 4096 : 0,
@@ -126,12 +103,12 @@ window.tsfMedia = function( $ ) {
 
 		frame = wp.media( {
 			button : {
-				text:  l10n.labels[ inputType ].imgFrameButton,
+				text:  l10n.labels[ imageType ].imgFrameButton,
 				close: false,
 			},
 			states: [
 				new wp.media.controller.Library( {
-					title:           l10n.labels[ inputType ].imgFrameTitle,
+					title:           l10n.labels[ imageType ].imgFrameTitle,
 					library:         wp.media.query({ 'type' : 'image' }),
 					multiple:        false,
 					date:            false,
@@ -139,54 +116,67 @@ window.tsfMedia = function( $ ) {
 					suggestedWidth:  _states.suggestedWidth,
 					suggestedHeight: _states.suggestedHeight
 				} ),
-				new cropper( {
+				new Cropper( {
 					imgSelectOptions: _calculateImageSelectOptions
 				} ),
 			],
 		} );
 
-		const onSelect = (function() {
+		const inputUrl = document.getElementById( `${imageId}-url` ),
+			  inputId  = document.getElementById( `${imageId}-id` );
+
+		const onSelect = () => {
 			frame.setState( 'cropper' );
-		} );
+		};
 		frame.off( 'select', onSelect );
 		frame.on( 'select', onSelect );
 
-		const onCropped = function( croppedImage ) {
-			let url = croppedImage.url,
+		const onCropped = croppedImage => {
+			let url          = croppedImage.url,
 				attachmentId = croppedImage.id;
 				// w = croppedImage.width,
 				// h = croppedImage.height;
 
+			if ( inputUrl ) {
+				inputUrl.value = url;
+				inputUrl.dispatchEvent( new Event( 'change' ) );
+			}
 			// Send the attachment id to our hidden input. URL to explicit output.
-			$( '#' + inputID + '-url' ).val( url ).trigger( 'change' );
-			$( '#' + inputID + '-id' ).val( attachmentId ).trigger( 'change' );
+			if ( inputId ) {
+				inputId.value = attachmentId;
+				inputId.dispatchEvent( new Event( 'change' ) );
+			}
 		};
 		frame.off( 'cropped', onCropped );
 		frame.on( 'cropped', onCropped );
 
-		const onSkippedCrop = function( selection ) {
-			let url = selection.get( 'url' ),
+		const onSkippedCrop = selection => {
+			let url          = selection.get( 'url' ),
 				attachmentId = selection.get( 'id' );
 				// w = selection.get( 'width' ),
 				// h = selection.get( 'height' );
 
+			if ( inputUrl ) {
+				inputUrl.value = url;
+				inputUrl.dispatchEvent( new Event( 'change' ) );
+			}
 			// Send the attachment id to our hidden input. URL to explicit output.
-			$( '#' + inputID + '-url' ).val( url ).trigger( 'change' );
-			$( '#' + inputID + '-id' ).val( attachmentId ).trigger( 'change' );
+			if ( inputId ) {
+				inputId.value = attachmentId;
+				inputId.dispatchEvent( new Event( 'change' ) );
+			}
 		};
 		frame.off( 'skippedcrop', onSkippedCrop );
 		frame.on( 'skippedcrop', onSkippedCrop );
 
-		const onDone = function( imageSelection ) {
-			$( '#' + inputID + '-select' ).text( l10n.labels[ inputType ].imgChange );
-			$( '#' + inputID + '-url' ).prop( 'readonly', true ).css( 'opacity', 0 ).animate(
-				{ 'opacity' : 1 },
-				{ 'queue' : true, 'duration' : 1000 },
-				'swing'
-			);
+		const onDone = () => {
+			button.textContent = l10n.labels[ imageType ].imgChange;
 
-			_appendRemoveButton( $button, { id: inputID, type: inputType }, true );
-			tsfAys && tsfAys.registerChange();
+			if ( inputUrl )
+				inputUrl.readOnly = true;
+
+			_appendRemoveButton( button, true );
+			'tsfAys' in window && tsfAys.registerChange();
 		};
 		frame.off( 'skippedcrop cropped', onDone );
 		frame.on( 'skippedcrop cropped', onDone );
@@ -198,39 +188,40 @@ window.tsfMedia = function( $ ) {
 	 * Removes the image editor image on request.
 	 *
 	 * @since 3.1.0
+	 * @since 4.1.1 Removed second parameter, shifted third to second.
+	 * @since 4.2.8 Now parses button classList data.
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.event.target} $target jQuery event.target
-	 * @param {Array}                data    The input data.
-	 * @param {Boolean}              animate Whether to fade in the button.
-	 * @return {(undefined|null)}
+	 * @param {Element} target  event target
+	 * @param {Boolean} animate Whether to fade in the button.
 	 */
-	const _appendRemoveButton = ( $target, data, animate ) => {
+	function _appendRemoveButton( target, animate ) {
 
-		if ( $target && data.id ) {
-			if ( ! $( '#' + data.id + '-remove' ).length ) {
-				let button               = document.createElement( 'button' );
-				button.type              = 'button';
-				button.id                = data.id + '-remove';
-				button.dataset.inputId   = data.id;
-				button.dataset.inputType = data.type;
-				button.title             = tsf.decodeEntities( l10n.labels[ data.type ].imgRemoveTitle );
-				button.innerHTML         = tsf.escapeString( l10n.labels[ data.type ].imgRemove );
-				button.classList.add( 'tsf-remove-image-button', 'button', 'button-small' );
+		const inputId   = target.dataset?.inputId,
+			  inputType = target.dataset?.inputType;
 
-				$target.after( button );
+		if ( ! inputId || ! inputType ) return;
 
-				if ( animate ) {
-					$( '#' + data.id + '-remove' ).css( 'opacity', 0 ).animate(
-						{ opacity: 1 },
-						{ queue: true, duration: 1000 }
-					);
-				}
-			}
-		}
+		// Don't append another remove button if one's found.
+		if ( document.getElementById( `${inputId}-remove` ) ) return;
 
-		//* Reset cache.
+		const button = document.createElement( 'button' );
+
+		button.type              = 'button';
+		button.id                = `${inputId}-remove`
+		button.dataset.inputId   = inputId;
+		button.dataset.inputType = inputType;
+		button.title             = tsf.decodeEntities( l10n.labels[ inputType ].imgRemoveTitle );
+		button.innerHTML         = tsf.escapeString( tsf.decodeEntities( l10n.labels[ inputType ].imgRemove ) );
+
+		button.classList.add( 'tsf-remove-image-button', ...( JSON.parse( target.dataset?.buttonClass || 0 )?.remove || [] ) );
+
+		target.insertAdjacentElement( 'afterend', button );
+
+		if ( animate )
+			tsfUI.fadeIn( button, 250 ); // Magic number: tickbox doesn't quickly disappear; so double the default.
+
+		// Reset cache.
 		_resetImageEditorRemovalActions();
 	}
 
@@ -240,56 +231,118 @@ window.tsfMedia = function( $ ) {
 	 * @since 4.0.0
 	 * @access private
 	 *
-	 * @function
-	 * @param {!jQuery.Event} event jQuery event
-	 * @return {(undefined|null)}
+	 * @param {Event} event
 	 */
-	const _removeEditorImage = ( event ) => {
+	function _removeEditorImage( event ) {
 
-		let inputID   = $( event.target ).data( 'input-id' ),
-			inputType = $( event.target ).data( 'input-type' );
+		const imageId   = event.target.dataset.inputId,
+			  imageType = event.target.dataset.inputType;
 
-		if ( $( '#' + inputID + '-select' ).prop( 'disabled' ) )
-			return;
+		if ( ! imageId || ! imageType ) return;
 
-		$( '#' + inputID + '-select' ).addClass( 'disabled' ).prop( 'disabled', true );
+		const inputSelect = document.getElementById( `${imageId}-select` );
 
-		//* event.target.id === '#' + inputID + '-remove'.
-		$( '#' + inputID + '-remove' ).addClass( 'disabled' ).prop( 'disabled', true ).fadeOut( 500, function() {
-			$( this ).remove();
-			$( '#' + inputID + '-select' ).text( l10n.labels[ inputType ].imgSelect ).removeClass( 'disabled' ).removeProp( 'disabled' );
-		} );
+		// Another image remover is probably handling this entry.
+		if ( inputSelect.disabled ) return;
 
-		let $inputUrl = $( '#' + inputID + '-url' );
+		inputSelect.disabled = true;
+		inputSelect.classList.add( 'disabled' );
 
-		$inputUrl.val( '' ).trigger( 'change' );
-		if ( ! $inputUrl.data( 'readonly' ) ) {
-			$inputUrl.removeProp( 'readonly' );
+		const inputRemove = document.getElementById( `${imageId}-remove` );
+		if ( inputRemove ) {
+			inputRemove.disabled = true;
+			inputRemove.classList.add( 'disabled' );
+
+			tsfUI.fadeOut(
+				inputRemove,
+				125, // Magic number: default.
+				() => {
+					inputRemove.remove();
+
+					inputSelect.textContent = l10n.labels[ imageType ].imgSelect;
+					inputSelect.classList.remove( 'disabled' );
+					inputSelect.disabled = false;
+				}
+			);
 		}
-		$inputUrl.css( 'opacity', 0 ).animate(
-			{ opacity: 1 },
-			{ queue: true, duration: 500 },
-			'swing'
-		);
 
-		$( '#' + inputID + '-id' ).val( '' ).trigger( 'change' );
+		const inputUrl = document.getElementById( `${imageId}-url` );
+		if ( inputUrl ) {
+			inputUrl.value = '';
+			inputUrl.dispatchEvent( new Event( 'change' ) );
+			if ( ! inputUrl.dataset.readonly ) { // this data entry should be added when the input should not be user-editable. Honor it.
+				inputUrl.readOnly = false;
+			}
+		}
 
-		tsfAys && tsfAys.registerChange();
+		const inputId = document.getElementById( `${imageId}-id` );
+		if ( inputId ) {
+			inputId.value = '';
+			inputId.dispatchEvent( new Event( 'change' ) );
+		}
+
+		'tsfAys' in window && tsfAys.registerChange();
 	}
 
 	/**
-	 * Builds constructor for media cropper.
+	 * Builds constructor for media Cropper.
 	 *
 	 * @since 3.1.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _extendCropper = () => {
+	function _extendCropper() {
 
-		if ( 'undefined' !== typeof cropper.control )
+		if ( 'undefined' !== typeof Cropper.control )
 			return;
+
+		const View = wp.media.view;
+		/**
+		 * wp.media.view.Cropper augmentation.
+		 *
+		 * Allows for squaring images.
+		 *
+		 * @class
+		 * @augments wp.media.View
+		 * @augments wp.Backbone.View
+		 * @augments Backbone.View
+		 */
+		const TSFView = View.Cropper.extend( {
+			className:   'crop-content tsf-image',
+			ready:       function () {
+				View.Cropper.prototype.ready.apply( this, arguments );
+			},
+			onImageLoad: function () {
+				let imgOptions = this.controller.get( 'imgSelectOptions' ),
+					imgSelect;
+
+				if ( typeof imgOptions === 'function' )
+					imgOptions = imgOptions( this.options.attachment, this.controller );
+
+				if ( 'undefined' === typeof imgOptions.aspectRatio ) {
+					imgOptions = Object.assign(
+						imgOptions,
+						{
+							parent: this.$el,
+							onInit: function () {
+								this.parent.children().on( 'mousedown touchstart', function( e ) {
+									if ( e.shiftKey ) {
+										imgSelect.setOptions( {
+											aspectRatio: '1:1'
+										} );
+									} else {
+										imgSelect.setOptions( {
+											aspectRatio: false
+										} );
+									}
+								} );
+							}
+						},
+					);
+				}
+				this.trigger( 'image-loaded' );
+				imgSelect = this.controller.imgSelect = this.$image.imgAreaSelect( imgOptions );
+			},
+		} );
 
 		/**
 		 * wp.media.controller.Cropper augmentation.
@@ -301,61 +354,8 @@ window.tsfMedia = function( $ ) {
 		 * @augments wp.media.controller.State
 		 * @augments Backbone.Model
 		 */
-		let TSFCropper,
-			Controller = wp.media.controller;
-
-		/**
-		 * wp.media.view.Cropper augmentation.
-		 *
-		 * Allows for squaring images.
-		 *
-		 * @class
-		 * @augments wp.media.View
-		 * @augments wp.Backbone.View
-		 * @augments Backbone.View
-		 */
-		let TSFView,
-			View = wp.media.view;
-
-		TSFView = View.Cropper.extend( {
-			className: 'crop-content tsf-image',
-			ready: function () {
-				View.Cropper.prototype.ready.apply( this, arguments );
-			},
-			onImageLoad: function() {
-				let imgOptions = this.controller.get( 'imgSelectOptions' ),
-					imgSelect;
-
-				if ( typeof imgOptions === 'function' ) {
-					imgOptions = imgOptions( this.options.attachment, this.controller );
-				}
-
-				//= Seriously Core team, was this condition too hard to implement?
-				if ( 'undefined' === typeof imgOptions.aspectRatio ) {
-					imgOptions = _.extend( imgOptions, {
-						parent: this.$el,
-						onInit: function() {
-							this.parent.children().on( 'mousedown touchstart', function( e ) {
-								if ( e.shiftKey ) {
-									imgSelect.setOptions( {
-										aspectRatio: '1:1'
-									} );
-								} else {
-									imgSelect.setOptions( {
-										aspectRatio: false
-									} );
-								}
-							} );
-						}
-					} );
-				}
-				this.trigger( 'image-loaded' );
-				imgSelect = this.controller.imgSelect = this.$image.imgAreaSelect( imgOptions );
-			},
-		} );
-
-		TSFCropper = Controller.Cropper.extend( {
-			createCropContent: function() {
+		const TSFCropper = wp.media.controller.Cropper.extend( {
+			createCropContent: function () {
 				this.cropperView = new TSFView( {
 					controller: this,
 					attachment: this.get( 'selection' ).first()
@@ -363,9 +363,9 @@ window.tsfMedia = function( $ ) {
 				this.cropperView.on( 'image-loaded', this.createCropToolbar, this );
 				this.frame.content.set( this.cropperView );
 			},
-			doCrop: function( attachment ) {
+			doCrop:            function( attachment ) {
 				let cropDetails = attachment.get( 'cropDetails' ),
-					control = cropper.control; // prototyped earlier.
+					control     = Cropper.control; // prototyped prior cropping, below.
 
 				// Use crop measurements when flexible in both directions.
 				if ( control.params.flex_width && control.params.flex_height ) {
@@ -401,18 +401,21 @@ window.tsfMedia = function( $ ) {
 					cropDetails.dst_height = 0;
 				}
 
-				return wp.ajax.post( 'tsf-crop-image', {
-					nonce:      l10n.nonce,
-					id:         attachment.get( 'id' ),
-					context:    'tsf-image',
-					cropDetails: cropDetails
-				} );
+				return wp.ajax.post(
+					'tsf_crop_image',
+					{
+						nonce:      l10n.nonce,
+						id:         attachment.get( 'id' ),
+						context:    'tsf-image',
+						cropDetails: cropDetails,
+					}
+				);
 			}
 		} );
 
 		TSFCropper.prototype.control = {};
 
-		cropper = TSFCropper;
+		Cropper = TSFCropper;
 	}
 
 	/**
@@ -423,34 +426,31 @@ window.tsfMedia = function( $ ) {
 	 * @since 3.1.0
 	 * @access private
 	 *
-	 * @function
 	 * @param {wp.media.model.Attachment} attachment
 	 * @param {wp.media.controller.Cropper} controller
 	 * @return {Object} imgSelectOptions
 	 */
-	const _calculateImageSelectOptions = ( attachment, controller ) => {
+	function _calculateImageSelectOptions( attachment, controller ) {
 
-		let control = cropper.control;
+		const control = Cropper.control;
 
-		let flexWidth  = !! parseInt( control.params.flex_width, 10 ),
-			flexHeight = !! parseInt( control.params.flex_height, 10 ),
-			xInit = parseInt( control.params.width, 10 ),
+		let xInit = parseInt( control.params.width, 10 ),
 			yInit = parseInt( control.params.height, 10 );
 
-		let realWidth  = attachment.get( 'width' ),
-			realHeight = attachment.get( 'height' ),
-			ratio      = xInit / yInit,
-			xImg       = xInit,
-			yImg       = yInit,
-			x1,
-			y1,
-			imgSelectOptions;
+		const flexWidth  = !! parseInt( control.params.flex_width, 10 ),
+			  flexHeight = !! parseInt( control.params.flex_height, 10 );
+
+		const realWidth  = attachment.get( 'width' ),
+			  realHeight = attachment.get( 'height' ),
+			  ratio      = xInit / yInit,
+			  xImg       = xInit,
+			  yImg       = yInit;
 
 		let canSkipCrop;
 		if ( control.params.isFlex ) {
 			canSkipCrop = ! _mustBeCropped( control.params.flex_width, control.params.flex_height, realWidth, realHeight );
 		} else {
-			//= Not flex. If ratios match, then we can skip.
+			// Not flex. If ratios match, then we can skip.
 			canSkipCrop = ratio === realWidth / realHeight;
 		}
 
@@ -467,11 +467,11 @@ window.tsfMedia = function( $ ) {
 		}
 
 		// Find starting points, I think? Why do we halve this?
-		// This is taken from WordPress' very own '_calculateImageSelectOptions' as-is.
-		x1 = ( realWidth - xInit ) / 2;
-		y1 = ( realHeight - yInit ) / 2;
+		// This is taken from WordPress's very own '_calculateImageSelectOptions' as-is.
+		let x1 = ( realWidth - xInit ) / 2,
+			y1 = ( realHeight - yInit ) / 2;
 
-		imgSelectOptions = {
+		const imgSelectOptions = {
 			handles:     true,
 			keys:        true,
 			instance:    true,
@@ -483,7 +483,7 @@ window.tsfMedia = function( $ ) {
 			x1:          x1,
 			y1:          y1,
 			x2:          xInit + x1,
-			y2:          yInit + y1
+			y2:          yInit + y1,
 		};
 
 		// @TODO Convert set img min-width/height to output ratio.
@@ -492,9 +492,9 @@ window.tsfMedia = function( $ ) {
 
 		if ( ! control.params.isFlex ) {
 			imgSelectOptions.handles = 'corners';
-			imgSelectOptions.aspectRatio = xInit + ':' + yInit;
+			imgSelectOptions.aspectRatio = `${xInit}:${yInit}`;
 		} else if ( ! flexHeight && ! flexWidth ) {
-			imgSelectOptions.aspectRatio = xInit + ':' + yInit;
+			imgSelectOptions.aspectRatio = `${xInit}:${yInit}`;
 		} else {
 			if ( flexHeight ) {
 				imgSelectOptions.minHeight = control.params.minHeight;
@@ -516,54 +516,66 @@ window.tsfMedia = function( $ ) {
 	 * @since 3.1.0
 	 * @access private
 	 *
-	 * @function
 	 * @param {Number} dstW
 	 * @param {Number} dstH
 	 * @param {Number} imgW
 	 * @param {Number} imgH
 	 * @return {Boolean}
 	 */
-	const _mustBeCropped = ( dstW, dstH, imgW, imgH ) => {
+	function _mustBeCropped( dstW, dstH, imgW, imgH ) {
+		return imgW > dstW || imgH > dstH;
+	}
 
-		if ( imgW <= dstW && imgH <= dstH )
-			return false;
+	/**
+	 * Updates button text on change.
+	 *
+	 * @since 4.1.0
+	 * @access private
+	 *
+	 * @param {!jQuery.event} event
+	 */
+	function _updateButtonText( event ) {
+		const imageId   = event.target.dataset.id || '',
+			  imageType = event.target.dataset.type || '';
 
-		return true;
+		if ( ! imageId || ! imageType ) return;
+
+		const inputSelect = document.getElementById( `${imageId}-select` );
+
+		// The image remover is probably handling this entry.
+		if ( inputSelect.disabled ) return;
+
+		inputSelect.textContent = event.target.value.length
+			? l10n.labels[ imageType ].imgChange
+			: l10n.labels[ imageType ].imgSelect;
 	}
 
 	/**
 	 * Checks if input is filled in by image editor.
 	 *
 	 * @since 3.1.0
+	 * @since 4.1.0 Now prepares an input change event.
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _checkImageEditorInput = () => {
+	function _checkImageEditorInput() {
 
-		let $buttons = $( '.tsf-set-image-button' );
+		document.querySelectorAll( '.tsf-set-image-button' ).forEach(
+			element => {
+				const imageId  = element.dataset.inputId || '',
+					  inputId  = imageId && document.getElementById( `${imageId}-id` ),
+					  inputUrl = imageId && document.getElementById( `${imageId}-url` );
 
-		if ( $buttons.length ) {
-			let inputID = '',
-				inputType = '',
-				$valID = '';
-
-			$.each( $buttons, function( index, value ) {
-				inputID   = $( value ).data( 'input-id' );
-				inputType = $( value ).data( 'input-type' );
-				$valID    = $( '#' + inputID + '-id' );
-
-				if ( $valID.length && $valID.val() > 0 ) {
-					$( '#' + inputID + '-url' ).prop( 'readonly', true );
-					_appendRemoveButton( $( value ), { 'id': inputID, 'type': inputType }, false );
+				if ( inputId && inputId.value > 0 ) {
+					if ( inputUrl ) inputUrl.readOnly = true;
+					_appendRemoveButton( element, false );
 				}
 
-				if ( $( '#' + inputID + '-url' ).val() ) {
-					$( '#' + inputID + '-select' ).text( l10n.labels[ inputType ].imgChange );
+				if ( inputUrl ) {
+					inputUrl.addEventListener( 'change', _updateButtonText );
+					inputUrl.dispatchEvent( new Event( 'change' ) );
 				}
-			} );
-		}
+			}
+		);
 	}
 
 	/**
@@ -571,14 +583,11 @@ window.tsfMedia = function( $ ) {
 	 *
 	 * @since 3.1.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _resetImageEditorSetActions = () => {
-		$( '.tsf-set-image-button' )
-			.off( 'click', _openImageEditor )
-			.on( 'click', _openImageEditor );
+	function _resetImageEditorSetActions() {
+		document.querySelectorAll( '.tsf-set-image-button' ).forEach( el => {
+			el.addEventListener( 'click', _openImageEditor );
+		} );
 	}
 
 	/**
@@ -586,32 +595,193 @@ window.tsfMedia = function( $ ) {
 	 *
 	 * @since 3.1.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _resetImageEditorRemovalActions = () => {
-		$( '.tsf-remove-image-button' )
-			.off( 'click', _removeEditorImage )
-			.on( 'click', _removeEditorImage );
+	function _resetImageEditorRemovalActions() {
+		document.querySelectorAll( '.tsf-remove-image-button' ).forEach( el => {
+			el.addEventListener( 'click', _removeEditorImage );
+		} );
 	}
 
 	/**
 	 * Sets up jQuery image editor cache.
 	 *
 	 * @since 3.1.0
-	 * TODO set a callback.
 	 * @see tsfemMedia.setupImageEditorActions() (Extension Manager plugin)
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _setupImageEditorActions = () => {
+	function _setupImageEditorActions() {
 		_resetImageEditorSetActions();
 		_resetImageEditorRemovalActions();
 
-		$( '.tsf-enable-media-if-js' ).removeProp( 'disabled' ).removeClass( 'tsf-enable-media-if-js' );
+		document.querySelectorAll( '.tsf-enable-media-if-js' ).forEach( el => {
+			el.disabled = false;
+			el.classList.remove( 'tsf-enable-media-if-js' );
+		} );
+
+		_checkImageEditorInput(); // This fires a change event... is that desired?
+		_prepareTooltip();
+	}
+
+	let _notificationBuffer = new Map();
+	/**
+	 * Updates the input's parentNode tooltip input.
+	 *
+	 * @since 4.1.4
+	 * @since 5.1.0 Reworked to support more notification types.
+	 *
+	 * @param {Event} event
+	 */
+	function _updateImageNotifications( event ) {
+		const imageId = event.target.id?.replace( /-[a-z]+$/, '' ); // inferred from get_image_uploader_form().
+
+		if ( ! imageId ) return;
+
+		const preview      = document.getElementById( `${imageId}-preview` ),
+			  imageWarning = document.getElementById( `${imageId}-image-warning` );
+
+		_notificationBuffer.has( imageId ) && clearTimeout( _notificationBuffer.get( imageId ) );
+
+		const firstLoad = ! ( event.target.dataset.tsfNotificationsLoaded || false );
+
+		let inputSrc = event.target.value || event.target.placeholder || '';
+
+		const showElement = el => {
+			if ( firstLoad ) {
+				el.classList.remove( 'hidden' );
+				el.style.opacity = '1';
+			} else {
+				if ( el.classList.contains( 'hidden' ) ) {
+					el.classList.remove( 'hidden' );
+					tsfUI.fadeIn( el );
+				}
+			}
+			tsfTT.triggerUpdate( el );
+		}
+		// Hide without fading; albeit nicer, it will cause the elements to move when rearranged.
+		// There's no workaround but to keep track of every element's position, which adds a lot of code smell.
+		const hideElement = el => {
+			el.classList.add( 'hidden' );
+			el.style.opacity = '0';
+		}
+
+		const updateToolTip = () => {
+			if ( ! inputSrc.length ) {
+				[ preview, imageWarning ].forEach( hideElement );
+				return;
+			}
+
+			let currentUpdateTime = Date.now();
+			event.target.dataset.tsfCurrentInputTime = currentUpdateTime; // note: this will be a string.
+
+			const imageObject = new Image();
+
+			const writeTooltips = success => {
+
+				// If the input has changed, we don't want to update the tooltip.
+				if ( currentUpdateTime !== +event.target.dataset.tsfCurrentInputTime ) return;
+
+				let warning     = '',
+					warningType = 'warning';
+
+				if ( preview ) {
+					if ( success ) {
+						// 250px is the max width for tooltips; we subtract 24 for padding, and 1 for subpixel rounding errors.
+						// We set min-height and width as that will prevent jumping. Also, those are the absolute-minimum for sharing/schema images.
+						imageObject.style    = "max-width:225px;max-height:225px;min-width:60px;min-height:60px;border-radius:3px;display:block;";
+						preview.dataset.desc = imageObject.outerHTML;
+
+						showElement( preview );
+					} else {
+						warning     = l10n.warning.i18n.notLoaded;
+						warningType = 'error';
+
+						hideElement( preview );
+					}
+				}
+
+				if ( imageWarning ) {
+					// If there's already a display warning, we don't want to overwrite it.
+					if ( ! warning.length ) {
+						// Let's keep the check simple for now.
+						let ext = imageObject.src.length && imageObject.src.split( '.' ).pop().toLowerCase();
+
+						if ( ext.length ) {
+							if ( l10n.warning.warnedTypes.hasOwnProperty( ext ) ) {
+								warning = l10n.warning.i18n.extWarned.replace( '%s', tsf.escapeString( ext ) );
+							} else if ( l10n.warning.forbiddenTypes.hasOwnProperty( ext ) ) {
+								warning      = l10n.warning.i18n.extForbidden.replace( '%s', tsf.escapeString( ext ) );
+								warningType = 'error';
+							}
+						}
+						// TODO: If the above fails, we'd have to parse the MIME type.
+						// But we don't know how to do this yet securely, so it's punted.
+						// We'd probably have to extract the file's first few bytes and check for magic numbers.
+					}
+
+					if ( warning.length ) {
+						// Remove here because it'll flicker otherwise.
+						imageWarning.classList.toggle( 'tsf-media-warning', warningType === 'warning' );
+						imageWarning.classList.toggle( 'tsf-media-error', warningType === 'error' );
+
+						imageWarning.dataset.desc = warning;
+
+						showElement( imageWarning );
+					} else {
+						hideElement( imageWarning );
+					}
+				}
+			}
+
+			// Prepare asynchronous tooltip update.
+			let invokedTooltipUpdate = false;
+			imageObject.onload  = () => {
+				writeTooltips( true );
+				invokedTooltipUpdate = true;
+			}
+			imageObject.onerror = () => {
+				writeTooltips( false );
+				invokedTooltipUpdate = true;
+			}
+			// Do something after 7s if neither loads have been invoked (slow connection, huge image).
+			setTimeout(
+				() => {
+					if ( ! invokedTooltipUpdate ) {
+						imageObject.src = '';
+						writeTooltips( false );
+					}
+				},
+				7000, // Magic number: default keep-alive time. Huge images shouldn't be used anyway.
+			);
+
+			/**
+			 * Preload image. Moreover, the Image object escapes
+			 *
+			 * XSS tests that passed (i.e., no issue), because the --browser-- must (and does) block these:
+			 * - data:text/html;base64,amF2YXNjcmlwdDphbGVydCgnaGknKTs=
+			 * - svg loading with scripts attached (CORB blocks, good. Thank you for bringing attention, Meltdown & Spectr)
+			 * - "/><script>alert(\'XSS\');</script>
+			 *
+			 * CSRF should be blocked by the browser, as well. Otherwise, Authors and Editors are able to execute
+			 * these via the default WordPress editor, already.
+			 *
+			 * URLs that aren't trusted are also filtered via sanitization on save.
+			 *
+			 * We are NOT creating a document node here, that's something we leave for the tooltip.
+			 * We're just writing a template.
+			 */
+			imageObject.src = inputSrc;
+		}
+
+		event.target.dataset.tsfNotificationsLoaded = true;
+
+		_notificationBuffer.set(
+			imageId,
+			setTimeout(
+				updateToolTip,
+				// High timeout: Don't DoS the inputted URL, plus the delay is quite nice. This equals to about 522ms.
+				firstLoad && 0 ? inputSrc.length : 1000/(115/60), // Magic number: 115 Keys/Min is considered a "slow" typer. ISBN: 978-3-319-20498-7.
+			)
+		);
 	}
 
 	/**
@@ -619,74 +789,31 @@ window.tsfMedia = function( $ ) {
 	 *
 	 * @since 4.0.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {(undefined|null)}
 	 */
-	const _prepareTooltip = () => {
+	function _prepareTooltip() {
+		document.querySelectorAll( '.tsf-image-notifications' ).forEach( el => {
+			const inputUrl = document.getElementById( `${el.dataset.for}-url` );
+			if ( ! inputUrl ) return;
 
-		let _updateToolTipBuffer = [];
-		/**
-		 * Updates the input's parentNode tooltip input.
-		 *
-		 * @param {!jQuery.Event} event
-		 */
-		const _updateToolTip = event => {
-			let id      = event.target.id || event.target.name || 1,
-				preview = document.getElementById( event.data.preview );
+			inputUrl.addEventListener( 'input', _updateImageNotifications );
+			inputUrl.addEventListener( 'change', _updateImageNotifications );
 
-			if ( ! preview ) return;
-
-			clearTimeout( _updateToolTipBuffer[ id ] );
-
-			_updateToolTipBuffer[ id ] = setTimeout( () => {
-
-				// The maxWidth is defined at tsfTT.doTooltip(), where the tooltip has 12px padding.
-				// Remove 1 to account for floating point errors.
-				let maxWidth = 250 - ( 12 * 2 ) - 1 + 'px';
-
-				let src   = event.target.value || event.target.placeholder || '',
-					style = `max-width:${maxWidth};max-height:${maxWidth};min-width:60px;min-height:60px;border-radius:3px;display:block;`;
-					// We set min-height and width as that will prevent jumping. Also, those are the absolute-minimum for sharing/schema images.
-
-				if ( ! src.length ) {
-					$( preview ).fadeOut( 250 );
-					return;
-				}
-
-				/**
-				 * XSS tests that passed (i.e., no issue), because the --browser-- must (and does) block these:
-				 * - data:text/html;base64,amF2YXNjcmlwdDphbGVydCgnaGknKTs=
-				 * - svg loading with scripts attached (CORB blocks, good. Thank you for bringing attention, Meltdown & Spectr)
-				 *
-				 * CSRF should be blocked by the browser, as well. Otherwise, Authors and Editors are able to execute
-				 * these via the default WordPress editor, already.
-				 *
-				 * URLs that aren't trusted are also filtered via sanitization on save, using `the_seo_framework()->s_url_query()`.
-				 *
-				 * We are NOT creating a document node here, that's something we leave for the tooltip.
-				 */
-				preview.dataset.desc = "<img src='" + tsf.escapeString( src ) + "' style=" + style + " />";
-
-				$( preview ).not( ':visible' ).fadeIn( 250 );
-
-				// Preload image. The same security notes apply as above. Moreover, the Image object escapes:
-				// ( new Image() ).src = '"/><script>alert(\'XSS\');</script>';
-				( new Image() ).src = src;
-
-				tsfTT.triggerUpdate( preview );
-			}, 500 ); // High timeout: Don't DoS the inputted URL.
-		}
-
-		// Prepare tooltip updates.
-		$( '.tsf-image-preview' ).each( ( index, element ) => {
-			let input = document.getElementById( element.dataset.for + '-url' );
-
-			$( input )
-				.on( 'input.tsfMediaTooltip change.tsfMediaTooltip', { preview: element.id }, _updateToolTip )
-				.trigger( 'change.tsfMediaTooltip' );
+			inputUrl.dispatchEvent( new Event( 'change' ) );
 		} );
 	}
+
+	/**
+	 * Resets image editor actions and selectors.
+	 *
+	 * High timeout. Resets should only happen during failures or changing document states;
+	 * the latter of which is slow.
+	 *
+	 * @since 4.1.2
+	 * @access public
+	 *
+	 * @function
+	 */
+	const resetImageEditorActions = tsfUtils.debounce( _setupImageEditorActions, 500 );
 
 	return Object.assign( {
 		/**
@@ -697,20 +824,15 @@ window.tsfMedia = function( $ ) {
 		 * @access protected
 		 *
 		 * @function
-		 * @return {undefined}
 		 */
 		load: () => {
 			// Initialize image uploader button cache.
-			$( document.body ).ready( _setupImageEditorActions );
-
-			// Determine image editor button input states.
-			$( document.body ).ready( _checkImageEditorInput );
-
-			// Prepares image input tooltips.
-			$( document.body ).on( 'tsf-ready', _prepareTooltip );
-		}
-	}, {}, {
-		l10n
+			document.body.addEventListener( 'tsf-ready', _setupImageEditorActions );
+		},
+	}, {
+		resetImageEditorActions,
+	}, {
+		l10n,
 	} );
-}( jQuery );
-jQuery( window.tsfMedia.load );
+}();
+window.tsfMedia.load();

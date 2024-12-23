@@ -64,6 +64,9 @@ class WPMUDEV_Dashboard_Ui {
 		// Hide admin notices on login page.
 		add_action( 'in_admin_header', array( $this, 'login_hide_admin_notices' ), 10000 );
 
+		// Upsell notice.
+		add_action( 'all_admin_notices', array( $this, 'expired_upsell_notice' ) );
+
 		/**
 		 * Run custom initialization code for the UI module.
 		 *
@@ -71,6 +74,83 @@ class WPMUDEV_Dashboard_Ui {
 		 * @since  4.0.0
 		 */
 		do_action( 'wpmudev_dashboard_ui_init', $this );
+	}
+
+	/**
+	 * Removes WPMU DEV Dashboard from native plugins page.
+	 *
+	 * @return void
+	 */
+	public function expired_upsell_notice() {
+		// Do not continue.
+		if ( ! $this->can_show_expired_upsell() ) {
+			return;
+		}
+
+		// Enqueue assets.
+		wp_enqueue_style(
+			'wpmudev-dashboard-upsell',
+			WPMUDEV_Dashboard::$site->plugin_url . 'assets/css/dashboard-upsell.min.css',
+			array(),
+			WPMUDEV_Dashboard::$version
+		);
+
+		wp_enqueue_script(
+			'wpmudev-dashboard-upsell',
+			WPMUDEV_Dashboard::$site->plugin_url . 'assets/js/dashboard-upsell.min.js',
+			array( 'jquery' ),
+			WPMUDEV_Dashboard::$version,
+			true
+		);
+
+		wp_localize_script(
+			'wpmudev-dashboard-upsell',
+			'wpmudevDashboard',
+			array(
+				'extend_nonce'  => wp_create_nonce( 'extend-upsell' ),
+				'dismiss_nonce' => wp_create_nonce( 'dismiss-upsell' ),
+			)
+		);
+
+		// Render template.
+		$this->render( 'sui/notice-upsell' );
+
+		// Add modal template.
+		add_action( 'admin_footer', array( $this, 'upsell_modal' ) );
+	}
+
+	/**
+	 * Print upsell modal template.
+	 *
+	 * @since 4.11.15
+	 *
+	 * @return void
+	 */
+	public function upsell_modal() {
+		// Render template.
+		$this->render( 'sui/popup-upsell' );
+	}
+
+	/**
+	 * Check if upsell can be shown.
+	 *
+	 * @since 4.11.15
+	 *
+	 * @return bool
+	 */
+	public function can_show_expired_upsell() {
+		return (
+			// Only on pages except Dashboard pages.
+			! WPMUDEV_Dashboard::$utils->is_wpmudev_admin_page() &&
+			// Only for expired membership.
+			'expired' === WPMUDEV_Dashboard::$api->get_membership_status() &&
+			// Only for WPMUDEV admin user.
+			WPMUDEV_Dashboard::$site->allowed_user() &&
+			// Only if not dismissed.
+			! WPMUDEV_Dashboard::$settings->get( 'upsell_dismissed', 'flags' ) &&
+			// Only if time has reached.
+			WPMUDEV_Dashboard::$settings->get( 'upsell_notice_time', 'general', time() ) <= time()
+		);
 	}
 
 	/**
@@ -439,7 +519,19 @@ class WPMUDEV_Dashboard_Ui {
 			$url_changelog
 		);
 
-		if ( WPMUDEV_Dashboard::$upgrader->user_can_install( $project_id ) ) {
+		$item = WPMUDEV_Dashboard::$site->get_project_info( $project_id );
+		// Is compatible.
+		$is_compatible = WPMUDEV_Dashboard::$upgrader->is_project_compatible( $project_id, $reason );
+
+		if ( ! $is_compatible ) {
+			if ( 'php' === $reason ) {
+				// Incompatible PHP version.
+				$row_text = __( 'There is a new version of %1$s available, but it is not compatible with your current PHP version. To update to the latest %1$s version, please upgrade your PHP to version %6$s or above. <a href="%2$s" title="%3$s" class="thickbox open-plugin-details-modal">View version %4$s details</a>.', 'wpmudev' );
+			} else {
+				// Other incompatibilities.
+				$row_text = __( 'There is a new version of %1$s available, but it is not compatible. <a href="%2$s" title="%3$s" class="thickbox open-plugin-details-modal">View version %4$s details</a>.', 'wpmudev' );
+			}
+		} elseif ( WPMUDEV_Dashboard::$upgrader->user_can_install( $project_id ) ) {
 			// Current user is logged in and has permission for this plugin.
 			if ( $autoupdate ) {
 				// All clear: One-Click-Update is available for this plugin!
@@ -478,9 +570,9 @@ class WPMUDEV_Dashboard_Ui {
 
 		?>
 		<tr class="plugin-update-tr<?php echo esc_attr( $active_class ); ?>"
-			id="<?php echo esc_attr( dirname( $filename ) ); ?>-update"
-			data-slug="<?php echo esc_attr( dirname( $filename ) ); ?>"
-			data-plugin="<?php echo esc_attr( $filename ); ?>">
+		    id="<?php echo esc_attr( dirname( $filename ) ); ?>-update"
+		    data-slug="<?php echo esc_attr( dirname( $filename ) ); ?>"
+		    data-plugin="<?php echo esc_attr( $filename ); ?>">
 			<td colspan="4" class="plugin-update colspanchange">
 				<div class="update-message notice inline notice-warning notice-alt">
 					<p>
@@ -491,7 +583,8 @@ class WPMUDEV_Dashboard_Ui {
 							esc_url( $url_changelog ),
 							esc_attr( $plugin_name ),
 							esc_html( $version ),
-							esc_url( $url_action )
+							esc_url( $url_action ),
+							$item->requires_min_php
 						);
 						?>
 					</p>
@@ -499,11 +592,12 @@ class WPMUDEV_Dashboard_Ui {
 					/**
 					 * Append content to an update notice (Only for Pro plugins).
 					 *
-					 * @param string $project_id Plugin ID.
+					 * @since 4.11.13
+					 *
 					 * @param string $version    New version.
 					 * @param array  $project    Project data (Will be empty if Dashboard plugin is not active).
 					 *
-					 * @since 4.11.13
+					 * @param string $project_id Plugin ID.
 					 */
 					do_action( 'wpmudev_dashboard_after_update_row_message', $project_id, $version, $project );
 					?>
@@ -512,14 +606,21 @@ class WPMUDEV_Dashboard_Ui {
 				/**
 				 * Add content after a plugin update notice (Only for Pro plugins).
 				 *
-				 * @param string $project_id Plugin ID.
+				 * @since 4.11.13
+				 *
 				 * @param string $version    New version.
 				 * @param array  $project    Project data (Will be empty if Dashboard plugin is not active).
 				 *
-				 * @since 4.11.13
+				 * @param string $project_id Plugin ID.
 				 */
 				do_action( 'wpmudev_dashboard_after_update_row_content', $project_id, $version, $project );
 				?>
+				<?php if ( ! $is_compatible ) : ?>
+					<script>
+						let checkbox = jQuery('input:checkbox[value="<?php echo esc_attr( $filename ); ?>"]');
+						checkbox.prop('disabled', true).prop('checked', false).attr('name', '').addClass('disabled');
+					</script>
+				<?php endif; ?>
 			</td>
 		</tr>
 		<?php
@@ -554,9 +655,16 @@ class WPMUDEV_Dashboard_Ui {
 				if ( ! $is_logged_in ) {
 					// translators: %s link to dashboard.
 					$action_html = sprintf( __( '<a href="%s">Login to WPMU DEV Dashboard</a> to update', 'wpmudev' ), esc_url( $this->page_urls->dashboard_url ) );
-				} elseif ( $allowed_user ) {
+				} elseif ( ! $allowed_user ) {
 					// If auto update is disabled.
 					$action_html = __( 'Auto-update not possible.', 'wpmudev' );
+					if ( ! empty( $item->url->infos ) ) {
+						// translators: %s link to dashboard.
+						$action_html = $action_html . ' ' . sprintf( __( '<a href="%s">More info &raquo;</a>', 'wpmudev' ), esc_url( $item->url->infos ) );
+					}
+				} elseif ( ! $item->is_compatible && ! empty( $item->incompatible_reason ) ) {
+					// If auto update is disabled.
+					$action_html = sprintf( __( 'Update not possible: %s.', 'wpmudev' ), $item->incompatible_reason );
 					if ( ! empty( $item->url->infos ) ) {
 						// translators: %s link to dashboard.
 						$action_html = $action_html . ' ' . sprintf( __( '<a href="%s">More info &raquo;</a>', 'wpmudev' ), esc_url( $item->url->infos ) );
@@ -568,7 +676,7 @@ class WPMUDEV_Dashboard_Ui {
 					'pid'         => $item->pid,
 					'file'        => $item->filename,
 					'name'        => $item->name,
-					'disabled'    => ! $item->can_update || ! $item->can_autoupdate,
+					'disabled'    => ! $item->can_update || ! $item->can_autoupdate || ! $item->is_compatible,
 					'action_html' => empty( $action_html ) ? '' : '<div class="wpmudev-info" style="font-style: italic;">' . $action_html . '</div>',
 				);
 			}
@@ -884,14 +992,26 @@ class WPMUDEV_Dashboard_Ui {
 			ob_start();
 		}
 
-		$membership_type = WPMUDEV_Dashboard::$api->get_membership_status();
-		$membership_data = WPMUDEV_Dashboard::$api->get_membership_data();
-		$hide_row        = false;
+		$membership_type       = WPMUDEV_Dashboard::$api->get_membership_status();
+		$membership_data       = WPMUDEV_Dashboard::$api->get_membership_data();
+		$hide_row              = false;
+		$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+		$is_hosted_third_party = WPMUDEV_Dashboard::$api->is_hosted_third_party();
+		$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
 
 		$urls = $this->page_urls;
 		$this->render(
 			'sui/element-project-info',
-			compact( 'pid', 'urls', 'membership_type', 'membership_data', 'hide_row' )
+			compact(
+				'pid',
+				'urls',
+				'membership_type',
+				'membership_data',
+				'hide_row',
+				'is_wpmudev_host',
+				'is_standalone_hosting',
+				'is_hosted_third_party'
+			)
 		);
 
 		if ( $as_json ) {
@@ -1226,11 +1346,17 @@ class WPMUDEV_Dashboard_Ui {
 		}
 
 		if ( $is_logged_in ) {
+			$data = WPMUDEV_Dashboard::$api->get_projects_data();
 			// Show total number of available updates.
 			$updates = WPMUDEV_Dashboard::$settings->get( 'updates_available' );
 			if ( is_array( $updates ) ) {
-				foreach ( $updates as $item ) {
+				foreach ( $updates as $id => $item ) {
 					if ( 'plugin' === $item['type'] ) {
+						// Skip addons.
+						if ( ! empty( $data['projects'][ $id ]['is_plugin_addon'] ) ) {
+							continue;
+						}
+
 						$update_plugins ++;
 					}
 				}
@@ -1290,7 +1416,12 @@ class WPMUDEV_Dashboard_Ui {
 		);
 
 		if ( $is_logged_in ) {
-			if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'plugins' ) ) {
+			$membership_type       = WPMUDEV_Dashboard::$api->get_membership_status();
+			$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+			$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
+			$has_hosted_access     = $is_wpmudev_host && ! $is_standalone_hosting && 'free' === $membership_type;
+
+			if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'plugins' ) || $has_hosted_access ) {
 				/**
 				 * Use this action to register custom sub-menu items.
 				 *
@@ -1318,7 +1449,7 @@ class WPMUDEV_Dashboard_Ui {
 				);
 			}
 
-			if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'support' ) ) {
+			if ( WPMUDEV_Dashboard::$utils->can_access_feature( 'support' ) || $has_hosted_access ) {
 				do_action( 'wpmudev_dashboard_setup_menu', 'support' );
 
 				// Support page.
@@ -1385,11 +1516,8 @@ class WPMUDEV_Dashboard_Ui {
 		ob_start();
 		echo '<?xml version="1.0" encoding="UTF-8" standalone="no"?>';
 		?>
-		<svg width="24px" height="24px" version="1.1" xmlns="http://www.w3.org/2000/svg">
-			<g stroke="none" fill="#a0a5aa" fill-rule="evenodd">
-				<path
-					d="M12,0 C5.36964981,0 0,5.36964981 0,12 C0,18.6303502 5.36964981,24 12,24 C18.6303502,24 24,18.6303502 24,12 C24,5.36964981 18.6303502,0 12,0 L12,0 Z M19.5004228,4.1500001 L17.8398594,5.47845082 L17.8398594,14.3901411 C17.8398594,14.9436623 17.4523946,15.331127 17.0095777,15.331127 C16.5114087,15.331127 16.1239439,14.9436623 16.1239439,14.3901411 L16.1239439,9.62985934 C16.1239439,8.08000016 15.0169016,6.86225366 13.6330987,6.86225366 C12.2492959,6.86225366 11.1422536,8.08000016 11.1422536,9.62985934 L11.1422536,14.3901411 C11.1422536,14.9436623 10.7547888,15.331127 10.3119719,15.331127 C9.86915502,15.331127 9.48169023,14.9436623 9.48169023,14.3901411 L9.48169023,9.62985934 C9.48169023,8.08000016 8.37464795,6.86225366 6.99084511,6.86225366 C5.60704227,6.86225366 4.5,8.08000016 4.5,9.62985934 L4.5,9.62985934 L4.5,19.8700004 L6.10521129,18.5969017 L6.10521129,9.62985934 C6.10521129,9.13169032 6.49267609,8.68887341 6.99084511,8.68887341 C7.43366202,8.68887341 7.82112682,9.13169032 7.82112682,9.62985934 L7.82112682,14.3901411 C7.82112682,15.9400003 8.92816909,17.2130989 10.3119719,17.2130989 C11.6957748,17.2130989 12.802817,15.9400003 12.802817,14.3901411 L12.802817,14.3901411 L12.802817,9.62985934 C12.802817,9.13169032 13.1902818,8.68887341 13.6330987,8.68887341 C14.1312678,8.68887341 14.5187326,9.13169032 14.5187326,9.62985934 L14.5187326,14.3901411 C14.5187326,15.9400003 15.6257748,17.2130989 17.0095777,17.2130989 C18.3933805,17.2130989 19.5004228,15.9400003 19.5004228,14.3901411 L19.5004228,14.3901411 L19.5004228,4.1500001 L19.5004228,4.1500001 Z"></path>
-			</g>
+		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M1.91282 3.91087C1.63883 4.37887 1.49602 4.91528 1.50009 5.4611L1.50009 17.4622L3.70066 17.4622L3.70066 5.45906C3.70041 5.36562 3.71895 5.27313 3.75514 5.18736C3.79133 5.1016 3.84439 5.02441 3.91099 4.96063C4.06577 4.82307 4.26374 4.74734 4.46857 4.74734C4.67341 4.74734 4.87138 4.82307 5.02616 4.96063C5.09221 5.02474 5.14477 5.10204 5.1806 5.18776C5.21643 5.27347 5.23477 5.36581 5.2345 5.45906L5.2345 14.496C5.22425 14.8878 5.29258 15.2776 5.43525 15.6411C5.57793 16.0047 5.79191 16.3344 6.06393 16.6098C6.46926 17.0329 6.98871 17.3222 7.55557 17.4403C8.12243 17.5585 8.71081 17.5003 9.24513 17.273C9.77945 17.0458 10.2353 16.66 10.5542 16.1652C10.873 15.6703 11.0403 15.0891 11.0346 14.496L11.0346 5.45906C11.033 5.36654 11.0498 5.27465 11.0839 5.18898C11.118 5.1033 11.1687 5.02561 11.233 4.96063C11.3071 4.88829 11.3946 4.83207 11.4905 4.79536C11.5863 4.75865 11.6884 4.7422 11.7906 4.74701C11.8928 4.74148 11.9951 4.75759 12.091 4.79434C12.187 4.83109 12.2745 4.88769 12.3482 4.96063C12.4148 5.02441 12.4678 5.1016 12.504 5.18736C12.5402 5.27313 12.5587 5.36562 12.5585 5.45906L12.5585 14.496C12.5483 14.8876 12.6165 15.2772 12.7588 15.6407C12.9011 16.0042 13.1146 16.334 13.3859 16.6098C13.6579 16.8898 13.9828 17.1099 14.3408 17.2565C14.6987 17.4031 15.0821 17.4731 15.4674 17.4622C16.2593 17.4718 17.0239 17.1662 17.6005 16.6098C17.8904 16.345 18.1209 16.0189 18.2761 15.654C18.4313 15.2891 18.5075 14.894 18.4994 14.496L18.4994 2.50303L16.2969 2.50303L16.2969 14.496C16.2984 14.5885 16.2816 14.6804 16.2475 14.7661C16.2134 14.8518 16.1627 14.9295 16.0984 14.9944C15.9437 15.132 15.7457 15.2077 15.5409 15.2077C15.336 15.2077 15.1381 15.132 14.9833 14.9944C14.917 14.9304 14.8641 14.8532 14.8279 14.7675C14.7918 14.6818 14.773 14.5894 14.7729 14.496L14.7729 5.45906C14.7829 5.06751 14.7146 4.67801 14.5723 4.3145C14.43 3.951 14.2167 3.62117 13.9455 3.34529C13.6739 3.06817 13.3502 2.85045 12.9942 2.70533C12.6381 2.56021 12.257 2.49069 11.8739 2.501C11.0807 2.48839 10.3134 2.79094 9.73287 3.34529C9.44323 3.61043 9.21281 3.93653 9.05734 4.30133C8.90187 4.66613 8.825 5.06103 8.83201 5.45906L8.83201 14.496C8.81366 14.6717 8.73258 14.8343 8.60437 14.9524C8.47617 15.0705 8.30988 15.1359 8.13751 15.1359C7.96514 15.1359 7.79885 15.0705 7.67065 14.9524C7.54244 14.8343 7.46136 14.6717 7.44301 14.496L7.44301 5.45906C7.44762 4.91289 7.30403 4.37616 7.0283 3.90883C6.76827 3.45456 6.38493 3.08769 5.92504 2.85296C5.47483 2.62153 4.97815 2.50102 4.47453 2.50102C3.9709 2.50102 3.47423 2.62153 3.02402 2.85296C2.56072 3.08665 2.1744 3.45445 1.91282 3.91087Z" fill="#A7AAAD"/>
 		</svg>
 		<?php
 		$svg = ob_get_clean();
@@ -1500,6 +1628,8 @@ class WPMUDEV_Dashboard_Ui {
 			$this->render_with_sui_wrapper( 'sui/no_access' );
 		}
 
+		$auth_verify_nonce = wp_verify_nonce( ( isset( $_REQUEST['auth_nonce'] ) ? $_REQUEST['auth_nonce'] : '' ), 'auth_nonce' );
+
 		// First login redirect is done.
 		if ( ! WPMUDEV_Dashboard::$settings->get( 'redirected_v4', 'flags' ) ) {
 			WPMUDEV_Dashboard::$settings->set( 'redirected_v4', true, 'flags' );
@@ -1509,19 +1639,35 @@ class WPMUDEV_Dashboard_Ui {
 			// User requested to log-out.
 			WPMUDEV_Dashboard::$site->logout();
 		} elseif ( isset( $_REQUEST['is_multi_auth'] ) && 1 === (int) $_REQUEST['is_multi_auth'] && ! empty( $_REQUEST['user_apikey'] ) ) {
+			// nonce verifier.
+			if ( ! $auth_verify_nonce ) {
+				// User has no permission to view the page.
+				$this->render_with_sui_wrapper( 'sui/no_access' );
+
+				return;
+			}
 			$url = add_query_arg(
 				array(
-					'view' => 'team-selection',
-					'key'  => trim( $_REQUEST['user_apikey'] ),
+					'view'       => 'team-selection',
+					'key'        => trim( $_REQUEST['user_apikey'] ),
+					'auth_nonce' => $_REQUEST['auth_nonce'],
 				),
 				$this->page_urls->dashboard_url
 			);
 			$this->redirect_to( $url );
-		} elseif ( ! empty( $_REQUEST['set_apikey'] ) ) {// wpcs csrf ok.
+		} elseif ( ! empty( $_REQUEST['set_apikey'] ) ) {
+			// nonce verifier.
+			if ( ! $auth_verify_nonce ) {
+				// User has no permission to view the page.
+				$this->render_with_sui_wrapper( 'sui/no_access' );
+
+				return;
+			}
 			$url = add_query_arg(
 				array(
-					'view' => 'sync',
-					'key'  => trim( $_REQUEST['set_apikey'] ), // wpcs csrf ok.
+					'view'       => 'sync',
+					'key'        => trim( $_REQUEST['set_apikey'] ),
+					'auth_nonce' => $_REQUEST['auth_nonce'],
 				),
 				$this->page_urls->dashboard_url
 			);
@@ -1590,8 +1736,13 @@ class WPMUDEV_Dashboard_Ui {
 			// Show total number of available updates.
 			$updates = WPMUDEV_Dashboard::$settings->get( 'updates_available' );
 			if ( is_array( $updates ) ) {
-				foreach ( $updates as $item ) {
+				foreach ( $updates as $id => $item ) {
 					if ( 'plugin' === $item['type'] ) {
+						// Skip addons.
+						if ( ! empty( $data['projects'][ $id ]['is_plugin_addon'] ) ) {
+							continue;
+						}
+
 						$update_plugins ++;
 					}
 				}
@@ -1899,9 +2050,28 @@ class WPMUDEV_Dashboard_Ui {
 		$member  = WPMUDEV_Dashboard::$api->get_profile();
 		$profile = $member['profile'];
 
+		// Check if hub free services active.
+		$free_services_active = WPMUDEV_Dashboard::$compatibility->is_free_services_active();
+
+		// WPMUDEV hosting.
+		$membership_type       = WPMUDEV_Dashboard::$api->get_membership_status();
+		$is_wpmudev_host       = WPMUDEV_Dashboard::$api->is_wpmu_dev_hosting();
+		$is_standalone_hosting = WPMUDEV_Dashboard::$api->is_standalone_hosting_plan();
+		$has_hosted_access     = $is_wpmudev_host && ! $is_standalone_hosting && 'free' === $membership_type;
+
 		$this->render(
 			'sui/header',
-			compact( 'page_title', 'is_logged_in', 'url_dash', 'url_logout', 'profile', 'url_support', 'documentation_url' )
+			compact(
+				'page_title',
+				'is_logged_in',
+				'url_dash',
+				'url_logout',
+				'profile',
+				'url_support',
+				'documentation_url',
+				'has_hosted_access',
+				'free_services_active'
+			)
 		);
 
 		$data = array();
@@ -1965,8 +2135,13 @@ class WPMUDEV_Dashboard_Ui {
 		// Show total number of available updates.
 		$updates = WPMUDEV_Dashboard::$settings->get( 'updates_available' );
 		if ( is_array( $updates ) ) {
-			foreach ( $updates as $item ) {
+			foreach ( $updates as $id => $item ) {
 				if ( 'plugin' === $item['type'] ) {
+					// Skip addons.
+					if ( ! empty( $data['projects'][ $id ]['is_plugin_addon'] ) ) {
+						continue;
+					}
+
 					$update_plugins ++;
 				}
 			}

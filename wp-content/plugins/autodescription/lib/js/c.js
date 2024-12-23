@@ -8,7 +8,7 @@
 
 /**
  * The SEO Framework plugin
- * Copyright (C) 2019 - 2020 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
+ * Copyright (C) 2019 - 2024 Sybre Waaijer, CyberWire B.V. (https://cyberwire.nl/)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 3 as published
@@ -31,18 +31,17 @@
  * @since 4.0.0
  *
  * @constructor
- * @param {!jQuery} $ jQuery object.
  */
-window.tsfC = function( $ ) {
+window.tsfC = function () {
 
 	/**
 	 * Data property injected by WordPress l10n handler.
 	 *
 	 * @since 4.0.0
 	 * @access public
-	 * @type {(Object<string, *>)|boolean|null} l10n Localized strings
+	 * @type {(Object<string,*>)|boolean|null} l10n Localized strings
 	 */
-	const l10n = 'undefined' !== typeof tsfCL10n && tsfCL10n;
+	const l10n = tsfCL10n;
 
 	/**
 	 * The current counter type.
@@ -53,18 +52,6 @@ window.tsfC = function( $ ) {
 	 * @type {Number} countertype The counterType
 	 */
 	let counterType = +( l10n.counterType || 0 );
-
-	/**
-	 * Returns the counter type.
-	 *
-	 * @since 4.0.0
-	 * @access public
-	 * @see counterClasses
-	 *
-	 * @function
-	 * @return {Number} The counter type
-	 */
-	const getCounterType = () => counterType;
 
 	/**
 	 * The current character counter classes.
@@ -82,26 +69,37 @@ window.tsfC = function( $ ) {
 	};
 
 	/**
+	 * Returns the counter type.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 * @see counterClasses
+	 *
+	 * @return {Number} The counter type
+	 */
+	function getCounterType() {
+		return counterType;
+	}
+
+	/**
 	 * Updates character counter.
 	 *
 	 * @since 4.0.0
 	 * @access private
 	 *
-	 * @function
-	 * @param {Object} test
-	 * @return {undefined}
+	 * @param {Object} test The object to test.
 	 */
-	const updateCharacterCounter = ( test ) => {
+	function updateCharacterCounter( test ) {
 
 		let el         = test.e,
 			text       = tsf.decodeEntities( test.text ),
 			guidelines = l10n.guidelines[ test.field ][ test.type ].chars;
 
 		let testLength = tsf.getStringLength( text ),
-			newClass = '',
-			exclaimer = '';
+			newClass   = '',
+			exclaimer  = '';
 
-		let classes = {
+		const classes = {
 			bad:     'tsf-count-bad',
 			okay:    'tsf-count-okay',
 			good:    'tsf-count-good',
@@ -124,34 +122,28 @@ window.tsfC = function( $ ) {
 			newClass  = classes.okay;
 			exclaimer = l10n.i18n.guidelines.short.tooLong;
 		} else {
-			//= between goodUpper and goodLower.
+			// between goodUpper and goodLower.
 			newClass  = classes.good;
 			exclaimer = l10n.i18n.guidelines.short.good;
 		}
 
 		switch ( counterType ) {
 			case 3:
-				exclaimer = testLength.toString() + ' - ' + exclaimer;
+				exclaimer = `${testLength} &ndash; ${exclaimer}`;
 				break;
 			case 2:
 				// 2 uses exclaimer as-is.
 				break;
 			case 1:
 			default:
-				exclaimer = testLength.toString();
+				exclaimer = testLength;
 				break;
 		}
 
 		el.innerHTML = exclaimer;
 
-		for ( let _c in classes ) {
-			el.classList.remove( classes[ _c ] );
-		}
-		for ( let _c in counterClasses ) {
-			el.classList.remove( counterClasses[ _c ] );
-		}
-		el.classList.add( newClass );
-		el.classList.add( counterClasses[ counterType ] );
+		el.classList.remove( ...Object.values( classes ), ...Object.values( counterClasses ) );
+		el.classList.add( newClass, counterClasses[ counterType ] );
 	}
 
 	/**
@@ -160,42 +152,37 @@ window.tsfC = function( $ ) {
 	 * @since 4.0.0
 	 * @access public
 	 *
-	 * @function
-	 * @param {Object} test
-	 * @return {undefined}
+	 * @param {Object} test The object to test.
 	 */
-	const updatePixelCounter = ( test ) => {
+	function updatePixelCounter( test ) {
 
-		let el         = test.e,
-			text       = tsf.decodeEntities( test.text ),
-			guidelines = l10n.guidelines[ test.field ][ test.type ].pixels;
-
-		let wrap = el.parentElement;
+		const wrap = test.e.parentElement;
 
 		if ( ! wrap )
 			return;
 
-		let bar    = wrap.querySelector( '.tsf-pixel-counter-bar' ),
-			shadow = wrap.querySelector( '.tsf-pixel-counter-shadow' );
+		const bar    = wrap.querySelector( '.tsf-pixel-counter-bar' ),
+			  shadow = wrap.querySelector( '.tsf-pixel-counter-shadow' );
 
 		if ( ! bar || ! shadow )
 			return;
 
-		shadow.innerHTML = tsf.escapeString( text );
+		shadow.innerHTML = tsf.escapeString( tsf.decodeEntities( test.text ) );
 
-		let testWidth = shadow.offsetWidth,
-			newClass = '',
-			newWidth = '',
+		let testWidth       = shadow.offsetWidth,
+			newClass        = '',
+			newWidth        = '',
 			guidelineHelper = '';
 
-		let classes = {
+		const guidelines = l10n.guidelines[ test.field ][ test.type ].pixels;
+		const classes    = {
 			bad:     'tsf-pixel-counter-bad',
 			okay:    'tsf-pixel-counter-okay',
 			good:    'tsf-pixel-counter-good',
 			unknown: 'tsf-pixel-counter-unknown',
 		};
 
-		//= Can never be over 100. Good.
+		// Can never be over 100. Good formula is good.
 		newWidth = ( testWidth / guidelines.goodUpper * 100 ) + '%';
 
 		if ( ! testWidth ) {
@@ -209,7 +196,7 @@ window.tsfC = function( $ ) {
 			newClass = classes.okay;
 			guidelineHelper = l10n.i18n.guidelines.long.tooShort;
 		} else if ( testWidth > guidelines.upper ) {
-			//= Can never be 0. Good. Add 2/3rds of difference to it; implying emphasis.
+			// Can never be 0. Good formula is good. Add 2/3rds of difference to it; implying emphasis.
 			newWidth = ( guidelines.upper / ( testWidth + ( ( testWidth - guidelines.upper ) * 2 / 3 ) ) * 100 ) + '%';
 			newClass = classes.bad;
 			guidelineHelper = l10n.i18n.guidelines.long.farTooLong;
@@ -218,28 +205,26 @@ window.tsfC = function( $ ) {
 			guidelineHelper = l10n.i18n.guidelines.long.tooLong;
 			newWidth = '100%'; // Let's just assume someone will break this otherwise.
 		} else {
-			//= between goodUpper and goodLower.
+			// between goodUpper and goodLower.
 			newClass = classes.good;
 			guidelineHelper = l10n.i18n.guidelines.long.good;
 		}
 
-		let sub = bar.querySelector( '.tsf-pixel-counter-fluid' ),
-			label;
+		let label = l10n.i18n.pixelsUsed
+			.replace( /%1\$d/g, testWidth )
+			.replace( /%2\$d/g, guidelines.goodUpper );
 
-		label = l10n.i18n.pixelsUsed.replace( /%1\$d/g, testWidth );
-		label = label.replace( /%2\$d/g, guidelines.goodUpper );
-
-		label += '<br>' + guidelineHelper;
+		label += `<br>${guidelineHelper}`;
 
 		bar.classList.remove( ...Object.values( classes ) );
 
 		// Set visuals.
 		bar.classList.add( newClass );
-		sub.style.width = newWidth;
+		bar.querySelector( '.tsf-pixel-counter-fluid' ).style.width = newWidth;
 
 		// Update tooltip and ARIA label.
 		bar.dataset.desc = label;
-		// Replace HTML with spaces. TODO see TSF's PHP-code `strip_tags_cs()` for a better solution.
+		// Replace HTML tags with spaces. TODO see TSF's PHP-code `strip_tags_cs()` for a better solution.
 		// NOTE: Screen readers don't always read out HTML entities as intended. They should fix that, not us, as it's an escaping issue.
 		bar.setAttribute( 'aria-label', tsf.escapeString( label.replace( /(<([^>]+)?>?)/ig, ' ' ) ) );
 
@@ -251,12 +236,9 @@ window.tsfC = function( $ ) {
 	 *
 	 * @since 4.0.0
 	 * @access public
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
-	const triggerCounterUpdate = () => {
-		$( window ).trigger( 'tsf-counter-updated' );
+	function triggerCounterUpdate() {
+		window.dispatchEvent( new CustomEvent( 'tsf-counter-updated' ) );
 	}
 
 	/**
@@ -265,11 +247,9 @@ window.tsfC = function( $ ) {
 	 * @since 4.0.0
 	 * @access private
 	 *
-	 * @function
 	 * @param {(undefined|boolean)} countUp Whether to add one.
-	 * @return {undefined}
 	 */
-	const updateCounterClasses = ( countUp ) => {
+	function updateCounterClasses( countUp ) {
 
 		if ( countUp ) ++counterType;
 
@@ -284,64 +264,32 @@ window.tsfC = function( $ ) {
 	 * Updates the counter type.
 	 *
 	 * @since 4.0.0
+	 * @since 4.2.0 Now uses wp.ajax, instead of jQuery.ajax
+	 * @since 5.1.0 No longer listens to the response to change the counter.
 	 * @access private
-	 *
-	 * @function
-	 * @param {!jQuery.Event} event
-	 * @return {undefined}
 	 */
-	const _counterUpdate = ( event ) => {
+	function _counterUpdate() {
 
-		//* Update counters locally, and add a number.
+		// Update counters locally, and add a number.
 		//! We don't want this to be promised after the AJAX call, that'll resolve separately.
 		updateCounterClasses( true );
 
-		let target = '.tsf-counter-wrap .tsf-ajax',
-			status = 0;
+		const target = '.tsf-counter-wrap .tsf-ajax';
 
-		//* Reset ajax loader
 		tsf.resetAjaxLoader( target );
-
-		//* Set ajax loader.
 		tsf.setAjaxLoader( target );
 
-		//* Setup external update.
-		let settings = {
-			method: 'POST',
-			url: ajaxurl,
-			datatype: 'json',
-			data: {
-				action: 'the_seo_framework_update_counter',
-				nonce:  tsf.l10n.nonces.edit_posts,
-				val:    counterType,
-			},
-			async: true,
-			success: response => {
-
-				response = tsf.convertJSONResponse( response );
-
-				//* I could do value check, but that will simply lag behind. Unless an annoying execution delay is added.
-				if ( 'success' === response.type )
-					status = 1;
-
-				switch ( status ) {
-					case 0:
-						tsf.unsetAjaxLoader( target, false );
-						break;
-					case 1:
-						tsf.unsetAjaxLoader( target, true );
-						break;
-					default:
-						tsf.resetAjaxLoader( target );
-						break;
-				}
-			},
-			error: () => {
-				tsf.unsetAjaxLoader( target, false );
+		wp.ajax.post(
+			'tsf_update_counter',
+			{
+				nonce: tsf.l10n.nonces.edit_posts,
+				val:   counterType,
 			}
-		}
-
-		$.ajax( settings );
+		).done( () => {
+			tsf.unsetAjaxLoader( target, true );
+		} ).fail( () => {
+			tsf.unsetAjaxLoader( target, false );
+		} );
 	}
 
 	/**
@@ -349,26 +297,22 @@ window.tsfC = function( $ ) {
 	 *
 	 * @since 4.0.0
 	 * @access public
-	 *
-	 * @function
-	 * @return {jQuery}
 	 */
-	const resetCounterListener = () => $( '.tsf-counter' ).off( 'click.tsfC' ).on( 'click.tsfC', _counterUpdate );
+	function resetCounterListener() {
+		return document.querySelectorAll( '.tsf-counter' ).forEach(
+			el => el.addEventListener( 'click', _counterUpdate )
+		);
+	}
 
 	/**
 	 * Initializes counters.
 	 *
 	 * @since 4.0.0
 	 * @access private
-	 *
-	 * @function
-	 * @return {undefined}
 	 */
-	const _initCounters = () => {
-
+	function _initCounters() {
 		// Any edit screen
 		resetCounterListener();
-
 	}
 
 	return Object.assign( {
@@ -380,11 +324,10 @@ window.tsfC = function( $ ) {
 		 * @access protected
 		 *
 		 * @function
-		 * @return {undefined}
 		 */
 		load: () => {
-			$( document.body ).on( 'tsf-onload', _initCounters );
-		}
+			document.body.addEventListener( 'tsf-onload', _initCounters );
+		},
 	}, {
 		updatePixelCounter,
 		updateCharacterCounter,
@@ -395,5 +338,5 @@ window.tsfC = function( $ ) {
 		counterClasses,
 		l10n,
 	} );
-}( jQuery );
-jQuery( window.tsfC.load );
+}();
+window.tsfC.load();

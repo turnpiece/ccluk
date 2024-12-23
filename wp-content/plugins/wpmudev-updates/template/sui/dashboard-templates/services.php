@@ -9,7 +9,7 @@
  * @package template
  */
 
-$site_id      = isset( $membership_data['hub_site_id'] ) ? $membership_data['hub_site_id'] : '';	 	 	 	 	 		    	
+$site_id      = isset( $membership_data['hub_site_id'] ) ? $membership_data['hub_site_id'] : '';
 $url_base     = sprintf( '%shub2/site/%s/', $urls->remote_site, $site_id );
 $uptime_url   = sprintf( '%suptime', $url_base );
 $automate_url = sprintf( '%spluginsThemes/automate', $url_base );

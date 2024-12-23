@@ -22,52 +22,73 @@ class ProfileManager
      * @var Http
      */
     private $http;
+
     /**
      * @var Properties
      */
     private $properties;
+
     /**
      * @var Settings
      */
     private $settings;
+
     /**
      * @var MigrationStateManager
      */
     private $state_manager;
+
     /**
      * @var Util
      */
     private $util;
+
     /**
      * @var ErrorLog
      */
     private $error_log;
+
     /**
      * @var Table
      */
     private $table;
+
     /**
      * @var FormData
      */
     private $form_data;
+
     /**
      * @var Helper
      */
     private $http_helper;
+
     /**
      * @var Assets
      */
     private $assets;
+
     /**
      * @var WPMDBRestAPIServer
      */
     private $rest_API_server;
 
     protected $valid_post_types;
+
     /**
      * @var ProfileImporter
      */
     private $profile_importer;
+
+    /**
+     * @var string[]
+     */
+    private $checkbox_options;
+
+    /**
+     * @var array
+     */
+    private $default_profile;
 
     /**
      * ProfileManager constructor.
@@ -640,28 +661,6 @@ class ProfileManager
         );
 
         return $filtered_tables;
-    }
-
-    /**
-     * @param $saved_profiles
-     * @param $state_data
-     *
-     * @return array|\WP_Error
-     */
-    public function decode_profile_data($the_profile)
-    {
-        if (empty($saved_profiles) || !\is_array($saved_profiles)) {
-            return new \WP_Error('wpmdb_profile_not_found', __('Profile not found.', 'wp-migrate-db'));
-        }
-
-
-        $parsed_profile = json_decode($the_profile['value'], true);
-
-        if (!$parsed_profile) {
-            return new \WP_Error('wpmdb_profile_invalid_json', __('Profile saved as invalid JSON.', 'wp-migrate-db'));
-        }
-
-        return $parsed_profile;
     }
 
     /**

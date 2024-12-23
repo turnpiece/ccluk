@@ -30,6 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @property $earnings
  * @property $post_type
  */
+#[\AllowDynamicProperties]
 class Give_Donate_Form {
 
 	/**
@@ -813,6 +814,10 @@ class Give_Donate_Form {
 	 * @return string
 	 */
 	public function get_form_classes( $args ) {
+        /**
+         * @since 3.11.0 sanitize $args
+         */
+        $args = give_clean($args);
 
 		$float_labels_option = give_is_float_labels_enabled( $args )
 			? 'float-labels-enabled'
@@ -833,6 +838,11 @@ class Give_Donate_Form {
 		// Remove empty class names.
 		$form_classes_array = array_filter( $form_classes_array );
 
+        /**
+         * @since 3.11.0 sanitize attributes
+         */
+        $form_classes_array = array_map('esc_attr', $form_classes_array);
+
 		return implode( ' ', $form_classes_array );
 
 	}
@@ -849,6 +859,11 @@ class Give_Donate_Form {
 	 * @return string
 	 */
 	public function get_form_wrap_classes( $args ) {
+        /**
+         * @since 3.11.0 sanitize $args
+         */
+        $args = give_clean($args);
+
 		$custom_class = [
 			'give-form-wrap',
 		];
@@ -874,6 +889,11 @@ class Give_Donate_Form {
 		 * @since 1.0
 		 */
 		$form_wrap_classes_array = (array) apply_filters( 'give_form_wrap_classes', $custom_class, $this->ID, $args );
+
+        /**
+         * @since 3.11.0 sanitize attributes
+         */
+        $form_wrap_classes_array = array_map('esc_attr', $form_wrap_classes_array);
 
 		return implode( ' ', $form_wrap_classes_array );
 
@@ -921,7 +941,7 @@ class Give_Donate_Form {
 		if ( ! isset( $this->sales ) ) {
 
 			if ( '' == give_get_meta( $this->ID, '_give_form_sales', true ) ) {
-				add_post_meta( $this->ID, '_give_form_sales', 0 );
+                give_update_meta( $this->ID, '_give_form_sales', 0 );
 			} // End if
 
 			$this->sales = give_get_meta( $this->ID, '_give_form_sales', true );
@@ -932,8 +952,10 @@ class Give_Donate_Form {
 			}
 		}
 
-		return $this->sales;
-
+        /**
+        * @since 3.14.0
+        */
+		return apply_filters('give_donate_form_get_sales', $this->sales, $this->ID);
 	}
 
 	/**
@@ -1009,7 +1031,7 @@ class Give_Donate_Form {
 		if ( ! isset( $this->earnings ) ) {
 
 			if ( '' == give_get_meta( $this->ID, '_give_form_earnings', true ) ) {
-				add_post_meta( $this->ID, '_give_form_earnings', 0 );
+                give_update_meta( $this->ID, '_give_form_earnings', 0 );
 			}
 
 			$this->earnings = give_get_meta( $this->ID, '_give_form_earnings', true );
