@@ -31,7 +31,7 @@ class Agm_Fimm_UserPages {
 	}
 
 	function set_shortcode_flag ($atts) {
-		if (isset($atts['featured_image']) && $atts['featured_image']) $this->_use_featured_image = true;
+		if (isset($atts['featured_image']) && $atts['featured_image']) $this->_use_featured_image = true;	 	 	 	 			    	 
 		return $atts;
 	}
 

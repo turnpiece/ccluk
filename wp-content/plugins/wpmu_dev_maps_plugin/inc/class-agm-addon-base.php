@@ -122,6 +122,6 @@ class AgmAddonBase {
 		}
 
 		unset( self::$custom_data[$group][$key] );
-		update_option( 'agm_custom_data', self::$custom_data );	 	 	 	 			    	 
+		update_option( 'agm_custom_data', self::$custom_data );
 	}
 }

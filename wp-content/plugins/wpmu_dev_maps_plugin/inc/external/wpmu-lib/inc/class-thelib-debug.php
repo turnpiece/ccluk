@@ -678,7 +678,7 @@ class TheLib_Debug extends TheLib  {
 
 		// Data-Type.
 		if ( ! empty( $args['toggle'] ) ) {
-			echo '<a href="javascript:toggleDisplay(\''. $args['toggle'] . '\',\'' . trim( $row_class . ' ' . $args['toggle'] ) . '\');" class="dev-item dev-toggle-item">';	 	 	 	 			    	 
+			echo '<a href="javascript:toggleDisplay(\''. $args['toggle'] . '\',\'' . trim( $row_class . ' ' . $args['toggle'] ) . '\');" class="dev-item dev-toggle-item">';
 			echo '<span style="color:#666666">' . $type . '</span>&nbsp;&nbsp;';
 			echo '</a>';
 		} else {

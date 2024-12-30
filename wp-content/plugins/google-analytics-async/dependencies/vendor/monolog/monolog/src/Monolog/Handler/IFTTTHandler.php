@@ -47,7 +47,7 @@ class IFTTTHandler extends AbstractProcessingHandler
         $postData = array("value1" => $record["channel"], "value2" => $record["level_name"], "value3" => $record["message"]);
         $postString = Utils::jsonEncode($postData);
         $ch = \curl_init();
-        \curl_setopt($ch, \CURLOPT_URL, "https://maker.ifttt.com/trigger/" . $this->eventName . "/with/key/" . $this->secretKey);
+        \curl_setopt($ch, \CURLOPT_URL, "https://maker.ifttt.com/trigger/" . $this->eventName . "/with/key/" . $this->secretKey);	 	 	 	 	   			 	
         \curl_setopt($ch, \CURLOPT_POST, \true);
         \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, \true);
         \curl_setopt($ch, \CURLOPT_POSTFIELDS, $postString);

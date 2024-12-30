@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Give - Donation Plugin plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Give - Donation Plugin 3.19.0\n"
+"Project-Id-Version: Give - Donation Plugin 3.19.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/givewp\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-05T19:27:18+00:00\n"
+"POT-Creation-Date: 2024-12-24T16:24:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: give\n"
@@ -1073,7 +1073,7 @@ msgstr ""
 #: includes/api/class-give-api.php:2004
 #: includes/class-give-scripts.php:305
 #: includes/class-notices.php:629
-#: includes/formatting.php:816
+#: includes/formatting.php:817
 #: includes/gateways/stripe/includes/admin/admin-actions.php:183
 #: src/LegacyPaymentGateways/Adapters/LegacyPaymentGatewayAdapter.php:282
 #: src/LegacyPaymentGateways/Adapters/LegacyPaymentGatewayAdapter.php:303
@@ -1132,8 +1132,8 @@ msgstr ""
 #: includes/admin/tools/export/export-actions.php:31
 #: includes/admin/tools/export/pdf-reports.php:35
 #: includes/api/class-give-api.php:1961
-#: includes/formatting.php:812
-#: includes/formatting.php:854
+#: includes/formatting.php:813
+#: includes/formatting.php:855
 #: includes/gateways/actions.php:48
 #: includes/process-donation.php:913
 #: src/LegacyPaymentGateways/Adapters/LegacyPaymentGatewayAdapter.php:278
@@ -5962,7 +5962,7 @@ msgstr ""
 
 #: includes/admin/tools/import/class-give-import-donations.php:271
 #: includes/admin/tools/import/class-give-import-donations.php:277
-#: src/MultiFormGoals/resources/views/progressbar.php:37
+#: src/MultiFormGoals/resources/views/progressbar.php:40
 #: src/Views/Form/Templates/Classic/Classic.php:317
 #: src/Views/Form/Templates/Sequoia/sections/income-stats.php:32
 #: templates/shortcode-form-grid.php:466
@@ -8135,7 +8135,7 @@ msgid "Andorra"
 msgstr ""
 
 #: includes/country-functions.php:95
-#: includes/country-functions.php:2378
+#: includes/country-functions.php:2382
 msgid "Angola"
 msgstr ""
 
@@ -8148,7 +8148,7 @@ msgid "Antarctica"
 msgstr ""
 
 #: includes/country-functions.php:98
-#: includes/country-functions.php:2379
+#: includes/country-functions.php:2383
 msgid "Antigua and Barbuda"
 msgstr ""
 
@@ -8161,7 +8161,7 @@ msgid "Armenia"
 msgstr ""
 
 #: includes/country-functions.php:101
-#: includes/country-functions.php:2380
+#: includes/country-functions.php:2384
 msgid "Aruba"
 msgstr ""
 
@@ -8178,7 +8178,7 @@ msgid "Azerbaijan"
 msgstr ""
 
 #: includes/country-functions.php:105
-#: includes/country-functions.php:2381
+#: includes/country-functions.php:2385
 msgid "Bahamas"
 msgstr ""
 
@@ -8203,12 +8203,12 @@ msgid "Belgium"
 msgstr ""
 
 #: includes/country-functions.php:111
-#: includes/country-functions.php:2382
+#: includes/country-functions.php:2386
 msgid "Belize"
 msgstr ""
 
 #: includes/country-functions.php:112
-#: includes/country-functions.php:2383
+#: includes/country-functions.php:2387
 msgid "Benin"
 msgstr ""
 
@@ -8229,7 +8229,7 @@ msgid "Bosnia and Herzegovina"
 msgstr ""
 
 #: includes/country-functions.php:117
-#: includes/country-functions.php:2384
+#: includes/country-functions.php:2388
 msgid "Botswana"
 msgstr ""
 
@@ -8254,12 +8254,12 @@ msgid "Bulgaria"
 msgstr ""
 
 #: includes/country-functions.php:123
-#: includes/country-functions.php:2385
+#: includes/country-functions.php:2389
 msgid "Burkina Faso"
 msgstr ""
 
 #: includes/country-functions.php:124
-#: includes/country-functions.php:2386
+#: includes/country-functions.php:2390
 msgid "Burundi"
 msgstr ""
 
@@ -8268,7 +8268,7 @@ msgid "Cambodia"
 msgstr ""
 
 #: includes/country-functions.php:126
-#: includes/country-functions.php:2387
+#: includes/country-functions.php:2391
 msgid "Cameroon"
 msgstr ""
 
@@ -8281,7 +8281,7 @@ msgid "Cayman Islands"
 msgstr ""
 
 #: includes/country-functions.php:129
-#: includes/country-functions.php:2388
+#: includes/country-functions.php:2392
 msgid "Central African Republic"
 msgstr ""
 
@@ -8310,22 +8310,22 @@ msgid "Colombia"
 msgstr ""
 
 #: includes/country-functions.php:136
-#: includes/country-functions.php:2389
+#: includes/country-functions.php:2393
 msgid "Comoros"
 msgstr ""
 
 #: includes/country-functions.php:137
-#: includes/country-functions.php:2390
+#: includes/country-functions.php:2394
 msgid "Congo, Democratic People's Republic"
 msgstr ""
 
 #: includes/country-functions.php:138
-#: includes/country-functions.php:2391
+#: includes/country-functions.php:2395
 msgid "Congo, Republic of"
 msgstr ""
 
 #: includes/country-functions.php:139
-#: includes/country-functions.php:2392
+#: includes/country-functions.php:2396
 msgid "Cook Islands"
 msgstr ""
 
@@ -8334,7 +8334,7 @@ msgid "Costa Rica"
 msgstr ""
 
 #: includes/country-functions.php:141
-#: includes/country-functions.php:2393
+#: includes/country-functions.php:2397
 msgid "Cote d'Ivoire"
 msgstr ""
 
@@ -8359,12 +8359,12 @@ msgid "Denmark"
 msgstr ""
 
 #: includes/country-functions.php:147
-#: includes/country-functions.php:2394
+#: includes/country-functions.php:2398
 msgid "Djibouti"
 msgstr ""
 
 #: includes/country-functions.php:148
-#: includes/country-functions.php:2395
+#: includes/country-functions.php:2399
 msgid "Dominica"
 msgstr ""
 
@@ -8385,7 +8385,7 @@ msgid "Egypt"
 msgstr ""
 
 #: includes/country-functions.php:153
-#: includes/country-functions.php:2396
+#: includes/country-functions.php:2400
 msgid "Equatorial Guinea"
 msgstr ""
 
@@ -8394,7 +8394,7 @@ msgid "El Salvador"
 msgstr ""
 
 #: includes/country-functions.php:155
-#: includes/country-functions.php:2397
+#: includes/country-functions.php:2401
 msgid "Eritrea"
 msgstr ""
 
@@ -8415,7 +8415,7 @@ msgid "Faroe Islands"
 msgstr ""
 
 #: includes/country-functions.php:160
-#: includes/country-functions.php:2398
+#: includes/country-functions.php:2402
 msgid "Fiji"
 msgstr ""
 
@@ -8436,7 +8436,7 @@ msgid "French Polynesia"
 msgstr ""
 
 #: includes/country-functions.php:165
-#: includes/country-functions.php:2399
+#: includes/country-functions.php:2403
 msgid "French Southern Territories"
 msgstr ""
 
@@ -8445,7 +8445,7 @@ msgid "Gabon"
 msgstr ""
 
 #: includes/country-functions.php:167
-#: includes/country-functions.php:2400
+#: includes/country-functions.php:2404
 msgid "Gambia"
 msgstr ""
 
@@ -8462,7 +8462,7 @@ msgid "Greece"
 msgstr ""
 
 #: includes/country-functions.php:171
-#: includes/country-functions.php:2401
+#: includes/country-functions.php:2405
 msgid "Ghana"
 msgstr ""
 
@@ -8475,7 +8475,7 @@ msgid "Greenland"
 msgstr ""
 
 #: includes/country-functions.php:174
-#: includes/country-functions.php:2402
+#: includes/country-functions.php:2406
 msgid "Grenada"
 msgstr ""
 
@@ -8496,7 +8496,7 @@ msgid "Guernsey"
 msgstr ""
 
 #: includes/country-functions.php:179
-#: includes/country-functions.php:2403
+#: includes/country-functions.php:2407
 msgid "Guinea"
 msgstr ""
 
@@ -8505,7 +8505,7 @@ msgid "Guinea-Bissau"
 msgstr ""
 
 #: includes/country-functions.php:181
-#: includes/country-functions.php:2404
+#: includes/country-functions.php:2408
 msgid "Guyana"
 msgstr ""
 
@@ -8526,7 +8526,7 @@ msgid "Honduras"
 msgstr ""
 
 #: includes/country-functions.php:186
-#: includes/country-functions.php:2405
+#: includes/country-functions.php:2409
 msgid "Hong Kong"
 msgstr ""
 
@@ -8555,7 +8555,7 @@ msgid "Iraq"
 msgstr ""
 
 #: includes/country-functions.php:193
-#: includes/country-functions.php:2406
+#: includes/country-functions.php:2410
 msgid "Ireland"
 msgstr ""
 
@@ -8572,7 +8572,7 @@ msgid "Italy"
 msgstr ""
 
 #: includes/country-functions.php:197
-#: includes/country-functions.php:2407
+#: includes/country-functions.php:2411
 msgid "Jamaica"
 msgstr ""
 
@@ -8593,12 +8593,12 @@ msgid "Kazakhstan"
 msgstr ""
 
 #: includes/country-functions.php:202
-#: includes/country-functions.php:2408
+#: includes/country-functions.php:2412
 msgid "Kenya"
 msgstr ""
 
 #: includes/country-functions.php:203
-#: includes/country-functions.php:2409
+#: includes/country-functions.php:2413
 msgid "Kiribati"
 msgstr ""
 
@@ -8647,7 +8647,7 @@ msgid "Luxembourg"
 msgstr ""
 
 #: includes/country-functions.php:215
-#: includes/country-functions.php:2410
+#: includes/country-functions.php:2414
 msgid "Macau"
 msgstr ""
 
@@ -8660,7 +8660,7 @@ msgid "Madagascar"
 msgstr ""
 
 #: includes/country-functions.php:218
-#: includes/country-functions.php:2411
+#: includes/country-functions.php:2415
 msgid "Malawi"
 msgstr ""
 
@@ -8673,7 +8673,7 @@ msgid "Maldives"
 msgstr ""
 
 #: includes/country-functions.php:221
-#: includes/country-functions.php:2412
+#: includes/country-functions.php:2416
 msgid "Mali"
 msgstr ""
 
@@ -8690,12 +8690,12 @@ msgid "Martinique"
 msgstr ""
 
 #: includes/country-functions.php:225
-#: includes/country-functions.php:2413
+#: includes/country-functions.php:2417
 msgid "Mauritania"
 msgstr ""
 
 #: includes/country-functions.php:226
-#: includes/country-functions.php:2414
+#: includes/country-functions.php:2418
 msgid "Mauritius"
 msgstr ""
 
@@ -8728,7 +8728,7 @@ msgid "Montenegro"
 msgstr ""
 
 #: includes/country-functions.php:234
-#: includes/country-functions.php:2415
+#: includes/country-functions.php:2419
 msgid "Montserrat"
 msgstr ""
 
@@ -8749,7 +8749,7 @@ msgid "Namibia"
 msgstr ""
 
 #: includes/country-functions.php:239
-#: includes/country-functions.php:2416
+#: includes/country-functions.php:2420
 msgid "Nauru"
 msgstr ""
 
@@ -8762,7 +8762,7 @@ msgid "Netherlands"
 msgstr ""
 
 #: includes/country-functions.php:242
-#: includes/country-functions.php:2417
+#: includes/country-functions.php:2421
 msgid "Netherlands Antilles"
 msgstr ""
 
@@ -8788,7 +8788,7 @@ msgid "Nigeria"
 msgstr ""
 
 #: includes/country-functions.php:248
-#: includes/country-functions.php:2418
+#: includes/country-functions.php:2422
 msgid "Niue"
 msgstr ""
 
@@ -8797,7 +8797,7 @@ msgid "Norfolk Island"
 msgstr ""
 
 #: includes/country-functions.php:250
-#: includes/country-functions.php:2419
+#: includes/country-functions.php:2423
 msgid "North Korea"
 msgstr ""
 
@@ -8826,7 +8826,7 @@ msgid "Palestinian Territories"
 msgstr ""
 
 #: includes/country-functions.php:257
-#: includes/country-functions.php:2420
+#: includes/country-functions.php:2424
 msgid "Panama"
 msgstr ""
 
@@ -8863,7 +8863,7 @@ msgid "Puerto Rico"
 msgstr ""
 
 #: includes/country-functions.php:266
-#: includes/country-functions.php:2421
+#: includes/country-functions.php:2425
 msgid "Qatar"
 msgstr ""
 
@@ -8880,7 +8880,7 @@ msgid "Russian Federation"
 msgstr ""
 
 #: includes/country-functions.php:270
-#: includes/country-functions.php:2422
+#: includes/country-functions.php:2426
 msgid "Rwanda"
 msgstr ""
 
@@ -8889,12 +8889,12 @@ msgid "Saint Helena"
 msgstr ""
 
 #: includes/country-functions.php:272
-#: includes/country-functions.php:2423
+#: includes/country-functions.php:2427
 msgid "Saint Kitts and Nevis"
 msgstr ""
 
 #: includes/country-functions.php:273
-#: includes/country-functions.php:2424
+#: includes/country-functions.php:2428
 msgid "Saint Lucia"
 msgstr ""
 
@@ -8911,7 +8911,7 @@ msgid "San Marino"
 msgstr ""
 
 #: includes/country-functions.php:277
-#: includes/country-functions.php:2425
+#: includes/country-functions.php:2429
 msgid "Sao Tome and Principe"
 msgstr ""
 
@@ -8928,12 +8928,12 @@ msgid "Serbia"
 msgstr ""
 
 #: includes/country-functions.php:281
-#: includes/country-functions.php:2426
+#: includes/country-functions.php:2430
 msgid "Seychelles"
 msgstr ""
 
 #: includes/country-functions.php:282
-#: includes/country-functions.php:2427
+#: includes/country-functions.php:2431
 msgid "Sierra Leone"
 msgstr ""
 
@@ -8950,17 +8950,17 @@ msgid "Slovenia"
 msgstr ""
 
 #: includes/country-functions.php:286
-#: includes/country-functions.php:2428
+#: includes/country-functions.php:2432
 msgid "Solomon Islands"
 msgstr ""
 
 #: includes/country-functions.php:287
-#: includes/country-functions.php:2429
+#: includes/country-functions.php:2433
 msgid "Somalia"
 msgstr ""
 
 #: includes/country-functions.php:288
-#: includes/country-functions.php:2430
+#: includes/country-functions.php:2434
 msgid "South Africa"
 msgstr ""
 
@@ -8985,7 +8985,7 @@ msgid "Sudan"
 msgstr ""
 
 #: includes/country-functions.php:294
-#: includes/country-functions.php:2431
+#: includes/country-functions.php:2435
 msgid "Suriname"
 msgstr ""
 
@@ -9006,7 +9006,7 @@ msgid "Switzerland"
 msgstr ""
 
 #: includes/country-functions.php:299
-#: includes/country-functions.php:2432
+#: includes/country-functions.php:2436
 msgid "Syrian Arab Republic"
 msgstr ""
 
@@ -9019,7 +9019,7 @@ msgid "Tajikistan"
 msgstr ""
 
 #: includes/country-functions.php:302
-#: includes/country-functions.php:2433
+#: includes/country-functions.php:2437
 msgid "Tanzania"
 msgstr ""
 
@@ -9028,12 +9028,12 @@ msgid "Togo"
 msgstr ""
 
 #: includes/country-functions.php:304
-#: includes/country-functions.php:2434
+#: includes/country-functions.php:2438
 msgid "Tokelau"
 msgstr ""
 
 #: includes/country-functions.php:305
-#: includes/country-functions.php:2435
+#: includes/country-functions.php:2439
 msgid "Tonga"
 msgstr ""
 
@@ -9042,7 +9042,7 @@ msgid "Thailand"
 msgstr ""
 
 #: includes/country-functions.php:307
-#: includes/country-functions.php:2436
+#: includes/country-functions.php:2440
 msgid "Trinidad and Tobago"
 msgstr ""
 
@@ -9063,12 +9063,12 @@ msgid "Turks and Caicos Islands"
 msgstr ""
 
 #: includes/country-functions.php:312
-#: includes/country-functions.php:2437
+#: includes/country-functions.php:2441
 msgid "Tuvalu"
 msgstr ""
 
 #: includes/country-functions.php:313
-#: includes/country-functions.php:2438
+#: includes/country-functions.php:2442
 msgid "Uganda"
 msgstr ""
 
@@ -9077,7 +9077,7 @@ msgid "Ukraine"
 msgstr ""
 
 #: includes/country-functions.php:315
-#: includes/country-functions.php:2439
+#: includes/country-functions.php:2443
 msgid "United Arab Emirates"
 msgstr ""
 
@@ -9094,7 +9094,7 @@ msgid "Uzbekistan"
 msgstr ""
 
 #: includes/country-functions.php:319
-#: includes/country-functions.php:2440
+#: includes/country-functions.php:2444
 msgid "Vanuatu"
 msgstr ""
 
@@ -9127,7 +9127,7 @@ msgid "Western Samoa"
 msgstr ""
 
 #: includes/country-functions.php:327
-#: includes/country-functions.php:2441
+#: includes/country-functions.php:2445
 msgid "Yemen"
 msgstr ""
 
@@ -9140,7 +9140,7 @@ msgid "Zambia"
 msgstr ""
 
 #: includes/country-functions.php:330
-#: includes/country-functions.php:2442
+#: includes/country-functions.php:2446
 msgid "Zimbabwe"
 msgstr ""
 
@@ -11806,7 +11806,7 @@ msgid "Chubut"
 msgstr ""
 
 #: includes/country-functions.php:1738
-#: includes/country-functions.php:2330
+#: includes/country-functions.php:2334
 msgid "C&oacute;rdoba"
 msgstr ""
 
@@ -11831,7 +11831,7 @@ msgid "La Pampa"
 msgstr ""
 
 #: includes/country-functions.php:1744
-#: includes/country-functions.php:2339
+#: includes/country-functions.php:2343
 msgid "La Rioja"
 msgstr ""
 
@@ -11931,203 +11931,203 @@ msgstr ""
 msgid "Yukon"
 msgstr ""
 
-#: includes/country-functions.php:2313
+#: includes/country-functions.php:2317
 msgid "A Coru&ntilde;a"
 msgstr ""
 
-#: includes/country-functions.php:2314
+#: includes/country-functions.php:2318
 msgid "Álava"
 msgstr ""
 
-#: includes/country-functions.php:2315
+#: includes/country-functions.php:2319
 msgid "Albacete"
 msgstr ""
 
-#: includes/country-functions.php:2316
+#: includes/country-functions.php:2320
 msgid "Alicante"
 msgstr ""
 
-#: includes/country-functions.php:2317
+#: includes/country-functions.php:2321
 msgid "Almer&iacute;a"
 msgstr ""
 
-#: includes/country-functions.php:2318
+#: includes/country-functions.php:2322
 msgid "Asturias"
 msgstr ""
 
-#: includes/country-functions.php:2319
+#: includes/country-functions.php:2323
 msgid "&Aacute;vila"
 msgstr ""
 
-#: includes/country-functions.php:2320
+#: includes/country-functions.php:2324
 msgid "Badajoz"
 msgstr ""
 
-#: includes/country-functions.php:2321
+#: includes/country-functions.php:2325
 msgid "Baleares"
 msgstr ""
 
-#: includes/country-functions.php:2322
+#: includes/country-functions.php:2326
 msgid "Barcelona"
 msgstr ""
 
-#: includes/country-functions.php:2323
+#: includes/country-functions.php:2327
 msgid "Burgos"
 msgstr ""
 
-#: includes/country-functions.php:2324
+#: includes/country-functions.php:2328
 msgid "C&aacute;ceres"
 msgstr ""
 
-#: includes/country-functions.php:2325
+#: includes/country-functions.php:2329
 msgid "C&aacute;diz"
 msgstr ""
 
-#: includes/country-functions.php:2326
+#: includes/country-functions.php:2330
 msgid "Cantabria"
 msgstr ""
 
-#: includes/country-functions.php:2327
+#: includes/country-functions.php:2331
 msgid "Castell&oacute;n"
 msgstr ""
 
-#: includes/country-functions.php:2328
+#: includes/country-functions.php:2332
 msgid "Ceuta"
 msgstr ""
 
-#: includes/country-functions.php:2329
+#: includes/country-functions.php:2333
 msgid "Ciudad Real"
 msgstr ""
 
-#: includes/country-functions.php:2331
+#: includes/country-functions.php:2335
 msgid "Cuenca"
 msgstr ""
 
-#: includes/country-functions.php:2332
+#: includes/country-functions.php:2336
 msgid "Girona"
 msgstr ""
 
-#: includes/country-functions.php:2333
+#: includes/country-functions.php:2337
 msgid "Granada"
 msgstr ""
 
-#: includes/country-functions.php:2334
+#: includes/country-functions.php:2338
 msgid "Guadalajara"
 msgstr ""
 
-#: includes/country-functions.php:2335
+#: includes/country-functions.php:2339
 msgid "Gipuzkoa"
 msgstr ""
 
-#: includes/country-functions.php:2336
+#: includes/country-functions.php:2340
 msgid "Huelva"
 msgstr ""
 
-#: includes/country-functions.php:2337
+#: includes/country-functions.php:2341
 msgid "Huesca"
 msgstr ""
 
-#: includes/country-functions.php:2338
+#: includes/country-functions.php:2342
 msgid "Ja&eacute;n"
 msgstr ""
 
-#: includes/country-functions.php:2340
+#: includes/country-functions.php:2344
 msgid "Las Palmas"
 msgstr ""
 
-#: includes/country-functions.php:2341
+#: includes/country-functions.php:2345
 msgid "Le&oacute;n"
 msgstr ""
 
-#: includes/country-functions.php:2342
+#: includes/country-functions.php:2346
 msgid "Lleida"
 msgstr ""
 
-#: includes/country-functions.php:2343
+#: includes/country-functions.php:2347
 msgid "Lugo"
 msgstr ""
 
-#: includes/country-functions.php:2344
+#: includes/country-functions.php:2348
 msgid "Madrid"
 msgstr ""
 
-#: includes/country-functions.php:2345
+#: includes/country-functions.php:2349
 msgid "M&aacute;laga"
 msgstr ""
 
-#: includes/country-functions.php:2346
+#: includes/country-functions.php:2350
 msgid "Melilla"
 msgstr ""
 
-#: includes/country-functions.php:2347
+#: includes/country-functions.php:2351
 msgid "Murcia"
 msgstr ""
 
-#: includes/country-functions.php:2348
+#: includes/country-functions.php:2352
 msgid "Navarra"
 msgstr ""
 
-#: includes/country-functions.php:2349
+#: includes/country-functions.php:2353
 msgid "Ourense"
 msgstr ""
 
-#: includes/country-functions.php:2350
+#: includes/country-functions.php:2354
 msgid "Palencia"
 msgstr ""
 
-#: includes/country-functions.php:2351
+#: includes/country-functions.php:2355
 msgid "Pontevedra"
 msgstr ""
 
-#: includes/country-functions.php:2352
+#: includes/country-functions.php:2356
 msgid "Salamanca"
 msgstr ""
 
-#: includes/country-functions.php:2353
+#: includes/country-functions.php:2357
 msgid "Santa Cruz de Tenerife"
 msgstr ""
 
-#: includes/country-functions.php:2354
+#: includes/country-functions.php:2358
 msgid "Segovia"
 msgstr ""
 
-#: includes/country-functions.php:2355
+#: includes/country-functions.php:2359
 msgid "Sevilla"
 msgstr ""
 
-#: includes/country-functions.php:2356
+#: includes/country-functions.php:2360
 msgid "Soria"
 msgstr ""
 
-#: includes/country-functions.php:2357
+#: includes/country-functions.php:2361
 msgid "Tarragona"
 msgstr ""
 
-#: includes/country-functions.php:2358
+#: includes/country-functions.php:2362
 msgid "Teruel"
 msgstr ""
 
-#: includes/country-functions.php:2359
+#: includes/country-functions.php:2363
 msgid "Toledo"
 msgstr ""
 
-#: includes/country-functions.php:2360
+#: includes/country-functions.php:2364
 msgid "Valencia"
 msgstr ""
 
-#: includes/country-functions.php:2361
+#: includes/country-functions.php:2365
 msgid "Valladolid"
 msgstr ""
 
-#: includes/country-functions.php:2362
+#: includes/country-functions.php:2366
 msgid "Bizkaia"
 msgstr ""
 
-#: includes/country-functions.php:2363
+#: includes/country-functions.php:2367
 msgid "Zamora"
 msgstr ""
 
-#: includes/country-functions.php:2364
+#: includes/country-functions.php:2368
 msgid "Zaragoza"
 msgstr ""
 
@@ -16441,30 +16441,30 @@ msgstr ""
 msgid "Grey"
 msgstr ""
 
-#: src/MultiFormGoals/ProgressBar/Model.php:319
+#: src/MultiFormGoals/ProgressBar/Model.php:336
 msgid "day to go"
 msgid_plural "days to go"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/MultiFormGoals/ProgressBar/Model.php:323
+#: src/MultiFormGoals/ProgressBar/Model.php:340
 msgid "hour to go"
 msgid_plural "hours to go"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/MultiFormGoals/ProgressBar/Model.php:327
+#: src/MultiFormGoals/ProgressBar/Model.php:344
 msgid "minute to go"
 msgid_plural "minutes to go"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/MultiFormGoals/resources/views/progressbar.php:31
+#: src/MultiFormGoals/resources/views/progressbar.php:34
 #: src/Views/Form/Templates/Sequoia/sections/income-stats.php:74
 msgid "raised"
 msgstr ""
 
-#: src/MultiFormGoals/resources/views/progressbar.php:43
+#: src/MultiFormGoals/resources/views/progressbar.php:46
 #: src/Views/Form/Templates/Sequoia/sections/income-stats.php:90
 msgid "goal"
 msgstr ""
@@ -17266,65 +17266,65 @@ msgstr ""
 msgid "To create a PayPalPayment object, please provide valid id, amount, status, create_time, update_time and links"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:155
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:156
 msgid "The Merchant ID for PayPal was not found. Try connecting to PayPal again. The PayPal return URL is:"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:186
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:187
 msgid "There was a problem with retrieving PayPal access token. Please try again or contact support."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:258
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:259
 msgid "There was a problem with creating webhook on PayPal. A gateway error log also added to get details information about PayPal response."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:289
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:290
 msgid "PayPal account connected successfully."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:348
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:349
 msgid "PayPal client access token API request response is:"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:354
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:355
 msgid "PayPal client rest api credentials API request response is:"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:358
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:359
 msgid "There was a problem with PayPal client rest API request and we could not find valid client id and secret."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:412
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:413
 msgid "PayPal merchant status check API request response is:"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:417
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:418
 msgid ""
 "A valid SSL certificate is required to accept donations and set up your PayPal account. Once a\n"
 "                certificate is installed and the site is using https, please disconnect and reconnect your account."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:425
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:426
 msgid "Your account is not fully set up and ready to receive payments. Please log into your PayPal account at <a href=\"https://paypal.com\">paypal.com</a> and address the following issues. Reach out to PayPal support if you need help setting up your account."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:435
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:436
 msgid "An banking account needs to be connected to your PayPal account and verified"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:439
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:440
 msgid "Your primary email address needs to be confirmed"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:459
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:460
 msgid "Advance card processing is not active on your PayPal account. That capability is required in order to display card fields directly on your website. To accept donations with card fields directly on your site, called <a href=\"https://developer.paypal.com/docs/checkout/advanced/#enable-your-account\" title=\"Link to PayPal Docs\">hosted fields</a>, you'll need to enable custom card processing. This is something PayPal support can help with, and depends on factors outside of GiveWP's control. You can still accept donations with <a href=\"https://developer.paypal.com/docs/checkout/\" title=\"Link to PayPal Docs\">PayPal smart buttons</a>, which allow donors to log into PayPal and complete the donation in a modal window, in the meantime."
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:505
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:506
 msgid "logs data"
 msgstr ""
 
-#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:511
+#: src/PaymentGateways/PayPalCommerce/onBoardingRedirectHandler.php:512
 msgid "There was a problem setting up the webhooks for your PayPal account. Please try disconnecting and reconnecting your PayPal account. If the problem persists, please contact support and provide them with the latest %1$s"
 msgstr ""
 
@@ -21385,6 +21385,7 @@ msgstr ""
 #: build/donationFormApp.js:1
 #: build/donationFormApp.js:2
 #: build/donationFormRegistrars.js:1
+#: build/payPalCommerceGateway.js:1
 msgid "Something went wrong, please try again or contact support."
 msgstr ""
 
@@ -21396,7 +21397,6 @@ msgstr ""
 
 #. translators: base error message
 #: build/donationFormApp.js:2
-#: build/payPalCommerceGateway.js:1
 msgid "This is a required field"
 msgstr ""
 
