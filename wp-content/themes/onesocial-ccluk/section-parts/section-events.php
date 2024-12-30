@@ -2,7 +2,7 @@
 <?php
     $q = new WP_Query(
         array(
-            'posts_per_page' => 3,
+            'posts_per_page' => 1,
             'post_type' => 'incsub_event',
             'meta_key' => 'incsub_event_start',
             'orderby' => 'meta_value',

@@ -26,17 +26,15 @@ do_action( 'ccluk_frontpage_before_section_parts' );
 
 if ( ! has_action( 'ccluk_frontpage_section_parts' ) ) {
 
-	$sections = apply_filters( 'ccluk_frontpage_sections_order', array(
+        $sections = apply_filters( 'ccluk_frontpage_sections_order', array(
         'banner',
         'about',
         'news',
         'newsletter',
         'campaign',
         'posts',
-        'join',
         'events',
-        'groups',
-        'twitter'
+        'groups'
     ) );
 
 	foreach ( $sections as $section ){
