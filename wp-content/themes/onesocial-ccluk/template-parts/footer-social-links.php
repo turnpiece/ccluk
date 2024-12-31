@@ -3,7 +3,6 @@
 // display social links in footer
 $social_links = array(
 	'facebook' => 'https://www.facebook.com/CitizensClimateLobbyUK/',
-	'twitter' => 'https://twitter.com/CitznsClimateUK',
 	'youtube' => 'https://www.youtube.com/channel/UCKg3OsMPlMzXlE0sGxrwhkg',
 	'instagram' => 'https://www.instagram.com/citizensclimatelobby/',
 	'linkedin' => 'https://uk.linkedin.com/company/ccluk/'
