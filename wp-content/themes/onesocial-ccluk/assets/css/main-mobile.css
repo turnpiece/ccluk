@@ -90,14 +90,12 @@ body:not(.single-post) footer.entry-meta {
 #item-posts footer.entry-meta {
   display: block;
 }
-
 #item-posts .to-top {
   display: none;
 }
 
 /* Page Content */
-body:not(.buddypress) #content article,
-body.buddypress #content article.error404 {
+body:not(.buddypress) #content article, body.buddypress #content article.error404 {
   clear: left;
   overflow: hidden;
   background-color: #fff;
@@ -146,7 +144,6 @@ body .mfp-bg.onesocial-popup {
 html.mfp-helper {
   height: 100%;
 }
-
 html.mfp-helper body {
   overflow: hidden;
   height: 100%;
@@ -185,7 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="email"], input[type="number"] {
+input[type=text], input[type=email], input[type=password], input[type=email], input[type=number] {
   background-color: #fff;
 }
 
@@ -210,7 +207,6 @@ header#masthead #header-aside, header#masthead #logo-area {
   right: 0;
   left: 0;
 }
-
 #mobile-header h1 {
   text-align: center;
   font-size: 23px;
@@ -225,29 +221,24 @@ header#masthead #header-aside, header#masthead #logo-area {
   margin: 0 60px;
   color: #fff;
 }
-
 #mobile-header h1 a {
   color: #fff;
   text-decoration: none;
 }
-
 #mobile-header .searchform {
   margin: 0 auto;
   padding: 8px 70px;
   position: relative;
   transition: padding 0.4s;
 }
-
 #mobile-header .searchform.animate-form {
   padding: 8px 10px;
   z-index: 6;
 }
-
 #mobile-header #search-close {
   display: none;
 }
-
-#mobile-header .searchform input[type="text"] {
+#mobile-header .searchform input[type=text] {
   border: 0;
   border-radius: 3px;
   font-size: 16px;
@@ -255,7 +246,6 @@ header#masthead #header-aside, header#masthead #logo-area {
   padding: 0 10px;
   width: 100%;
 }
-
 #mobile-header #searchsubmit {
   background: none;
   color: black;
@@ -266,11 +256,9 @@ header#masthead #header-aside, header#masthead #logo-area {
   top: 10px;
   transition: right 0.4s;
 }
-
 #mobile-header .animate-form #searchsubmit {
   right: 10px;
 }
-
 #mobile-header #searchsubmit:hover {
   box-shadow: none;
 }
@@ -316,7 +304,6 @@ body:not(.buddypress).archive #content article.type-post {
     max-width: 100%;
   }
 }
-
 /*--------------------------------------------------------------
 1.1.5 - Dropdowns
 --------------------------------------------------------------*/
@@ -337,7 +324,6 @@ body .buddyboss-select {
   float: left;
   border: 1px solid #aaa;
 }
-
 .buddyboss-select-inner:after {
   font-family: "onesocial" !important;
   font-style: normal !important;
@@ -355,7 +341,6 @@ body .buddyboss-select {
   right: 12px;
   top: 12px;
 }
-
 .buddyboss-select-inner select {
   cursor: pointer;
   height: 37px;
@@ -406,41 +391,33 @@ body .buddyboss-select {
 .widget-area {
   clear: both;
 }
-
 .widget-area .widget {
   margin: 0;
   padding: 10px 0;
 }
-
 .widget-area .widget h3 {
   font-size: 20px;
 }
-
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
   font-size: 14px;
 }
-
-.widget-area .widget input[type="text"], .widget-area .widget input[type="password"], .widget-area .widget input[type="number"] {
+.widget-area .widget input[type=text], .widget-area .widget input[type=password], .widget-area .widget input[type=number] {
   background-color: #fff;
   height: auto;
   padding: 12px;
 }
-
 .widget-area .widget textarea {
   background-color: #fff;
   height: auto;
   padding: 12px;
 }
-
 .widget-area .widget_bp_profile_search h4 {
   font-size: 20px;
 }
-
-.widget-area .widget_search input[type="text"],
-.widget-area .widget_display_search input[type="text"] {
+.widget-area .widget_search input[type=text],
+.widget-area .widget_display_search input[type=text] {
   background: transparent;
 }
-
 .widget-area .widget input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 50px #fff inset;
 }
@@ -451,7 +428,6 @@ body .buddyboss-select {
 div.footer-inner-bottom {
   font-size: 14px;
 }
-
 div.footer-inner-bottom div.footer-inner {
   padding: 0 20px;
   -webkit-box-orient: vertical;
@@ -460,20 +436,16 @@ div.footer-inner-bottom div.footer-inner {
   -ms-flex-direction: column;
   flex-direction: column;
 }
-
 div.footer-inner ul.social-icons {
   margin: 20px 0 0;
 }
-
 div.footer-inner div#footer-links {
   clear: left;
   line-height: 1.6;
 }
-
 div.footer-inner ul.footer-menu {
   margin-top: 10px;
 }
-
 div.footer-inner ul.footer-menu li {
   margin: 0 3px;
 }
@@ -485,7 +457,6 @@ div.footer-inner ul.footer-menu li {
   border-bottom: 1px solid #aaa;
   margin-bottom: 30px;
 }
-
 .article-outher .entry-summary p {
   margin-bottom: 14px;
 }
@@ -550,14 +521,12 @@ div.footer-inner ul.footer-menu li {
   position: absolute;
   right: 12px;
 }
-
 .author-follow span {
   display: block;
   padding-left: 0;
   margin-top: 5px;
   margin-left: -15px;
 }
-
 .author-follow div.generic-button a {
   width: 40px;
 }
@@ -570,7 +539,6 @@ body:not(.buddypress) #content article {
   border-bottom: 0;
   padding-top: 0;
 }
-
 body #content article.boss-create-post-wrapper {
   border-bottom: 1px solid #aaa;
   margin-bottom: 20px;
@@ -580,9 +548,8 @@ body #content article.boss-create-post-wrapper {
 aside.post-author {
   margin-top: 20px;
 }
-
 aside.post-author:after {
-  content: ' ';
+  content: " ";
   clear: both;
   display: table;
 }
@@ -609,7 +576,6 @@ aside.post-author:after {
   margin-top: 0;
   padding-top: 0;
 }
-
 .author-details .author-stats li {
   float: left;
   margin-right: 20px;
@@ -618,7 +584,6 @@ aside.post-author:after {
 .single-post .entry-post-thumbnail {
   margin-bottom: 0;
 }
-
 .single-post .entry-header.has-image h1 {
   font-size: 45px;
 }
@@ -630,17 +595,14 @@ body:not(.buddypress).error404 #content article {
   padding: 0;
   border: 0;
 }
-
 body.error404 footer.entry-meta {
   display: block;
 }
-
 body.activity .entry-content > #buddypress > #item-body {
   float: left;
   min-height: 300px;
   width: 100%;
 }
-
 body:not(.has-activity) .entry-content > #buddypress > #item-body {
   clear: left;
   margin: 0 0 15px;
@@ -698,13 +660,11 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
     padding: 0;
   }
 }
-
 @media screen and (max-width: 350px) {
   .error404 .entry-title {
     font-size: 142px;
   }
 }
-
 @media screen and (max-width: 460px) {
   .author-top .author .url img {
     width: 50px;
@@ -723,7 +683,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
     display: none;
   }
 }
-
 /*--------------------------------------------------------------
 1.2.1 - Profile Posts
 --------------------------------------------------------------*/
@@ -732,7 +691,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
     width: 100%;
   }
 }
-
 /*--------------------------------------------------------------
 1.1.6 - Forms
 --------------------------------------------------------------*/
@@ -764,7 +722,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
-
 .button-load-more-posts:hover {
   outline: none;
   color: #fff;
@@ -818,7 +775,6 @@ body, .left-btn, .right-btn, #main-wrap {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
-
 #mobile-header .mobile-site-title {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
@@ -859,11 +815,9 @@ body, .left-btn, .right-btn, #main-wrap {
   z-index: 2001;
   /*Increase due to cover image*/
 }
-
 #mobile-header #mobile-logo {
   text-align: center;
 }
-
 #mobile-header #mobile-logo img {
   max-height: 40px;
   max-width: 200px;
@@ -900,7 +854,6 @@ body, .left-btn, .right-btn, #main-wrap {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
-
 .left-btn > img {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -932,7 +885,7 @@ body.open-right .right-btn {
 }
 
 .right-btn:before {
-  font-family: 'onesocial';
+  font-family: "onesocial";
   font-weight: normal;
   font-style: normal;
   text-rendering: auto;
@@ -994,7 +947,6 @@ body.open-right .right-btn:before {
 .menu-visible-right #mobile-right-panel {
   opacity: 1;
 }
-
 .menu-visible-right #wpadminbar {
   opacity: 0;
 }
@@ -1016,7 +968,6 @@ body.open-right #mobile-right-panel {
   position: relative;
   width: 240px;
 }
-
 #mobile-right-panel li a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 14px 25px;
@@ -1027,25 +978,20 @@ body.open-right #mobile-right-panel {
   display: block;
   color: rgba(255, 255, 255, 0.75);
 }
-
 #mobile-right-panel li a:active, #mobile-right-panel li a:hover {
   color: rgba(255, 255, 255, 0.75);
 }
-
 #mobile-right-panel li:hover a {
   box-shadow: none;
 }
-
 #mobile-right-panel .sub-menu {
   background: rgba(0, 0, 0, 0.2);
   /*display: none;*/
   overflow: hidden;
 }
-
 #mobile-right-panel .menu-item-has-children > a {
   padding-right: 32px;
 }
-
 #mobile-right-panel .submenu-btn {
   color: rgba(255, 255, 255, 0.75);
   font-size: 18px;
@@ -1067,7 +1013,6 @@ body.open-right #mobile-right-panel {
 .main-navigation ul {
   margin: 0;
 }
-
 .main-navigation ul.nav-menu {
   padding-bottom: 30px;
 }
@@ -1088,7 +1033,7 @@ body.open-right #mobile-right-panel {
 --------------------------------------------------------------*/
 @-webkit-keyframes slideInLeft {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     -webkit-transform: translate3d(30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1096,10 +1041,9 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 @-moz-keyframes slideInLeft {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     -moz-transform: translate3d(30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1107,10 +1051,9 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 @keyframes slideInLeft {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     transform: translate3d(30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1118,7 +1061,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.1.2 - Left: Menu Close
 --------------------------------------------------------------*/
@@ -1128,33 +1070,30 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     -webkit-transform: translate3d(30px, 0, 0) scale(0.97);
   }
 }
-
 @-moz-keyframes slideOutLeft {
   0% {
     opacity: 1;
     -moz-transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     -moz-transform: translate3d(30px, 0, 0) scale(0.97);
   }
 }
-
 @keyframes slideOutLeft {
   0% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     transform: translate3d(30px, 0, 0) scale(0.97);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.1.3 - Left: Content Open
 --------------------------------------------------------------*/
@@ -1169,7 +1108,6 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(240px, 0, 0);
   }
 }
-
 @-moz-keyframes openLeft {
   0% {
     -moz-transform: translate3d(0, 0, 0);
@@ -1181,7 +1119,6 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(240px, 0, 0);
   }
 }
-
 @keyframes openLeft {
   0% {
     transform: translate3d(0, 0, 0);
@@ -1193,7 +1130,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(240px, 0, 0);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.1.4 - Left: Content close
 --------------------------------------------------------------*/
@@ -1205,7 +1141,6 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0);
   }
 }
-
 @-moz-keyframes closeLeft {
   0% {
     -moz-transform: translate3d(240px, 0, 0);
@@ -1214,7 +1149,6 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(0, 0, 0);
   }
 }
-
 @keyframes closeLeft {
   0% {
     transform: translate3d(240px, 0, 0);
@@ -1223,7 +1157,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(0, 0, 0);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.2 - Right Animation
 --------------------------------------------------------------*/
@@ -1232,7 +1165,7 @@ body.open-right #mobile-right-panel {
 --------------------------------------------------------------*/
 @-webkit-keyframes slideInRight {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     -webkit-transform: translate3d(-30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1240,10 +1173,9 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 @-moz-keyframes slideInRight {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     -moz-transform: translate3d(-30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1251,10 +1183,9 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 @keyframes slideInRight {
   0% {
-    opacity: .3;
+    opacity: 0.3;
     transform: translate3d(-30px, 0, 0) scale(0.97);
   }
   100% {
@@ -1262,7 +1193,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(0, 0, 0) scale(1);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.2.2 - Right: Menu Close
 --------------------------------------------------------------*/
@@ -1272,33 +1202,30 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     -webkit-transform: translate3d(-30px, 0, 0) scale(0.97);
   }
 }
-
 @-moz-keyframes slideOutRight {
   0% {
     opacity: 1;
     -moz-transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     -moz-transform: translate3d(-30px, 0, 0) scale(0.97);
   }
 }
-
 @keyframes slideOutRight {
   0% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
   }
   100% {
-    opacity: .3;
+    opacity: 0.3;
     transform: translate3d(-30px, 0, 0) scale(0.97);
   }
 }
-
 /*--------------------------------------------------------------
 2.2.3 - Right: Content Open
 --------------------------------------------------------------*/
@@ -1313,7 +1240,6 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(-240px, 0, 0);
   }
 }
-
 @-moz-keyframes openRight {
   0% {
     -moz-transform: translate3d(0, 0, 0);
@@ -1325,7 +1251,6 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(-240px, 0, 0);
   }
 }
-
 @keyframes openRight {
   0% {
     transform: translate3d(0, 0, 0);
@@ -1337,7 +1262,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(-240px, 0, 0);
   }
 }
-
 /*--------------------------------------------------------------
 1.2.2.4 - Right: Content close
 --------------------------------------------------------------*/
@@ -1349,7 +1273,6 @@ body.open-right #mobile-right-panel {
     -webkit-transform: translate3d(0, 0, 0);
   }
 }
-
 @-moz-keyframes closeRight {
   0% {
     -moz-transform: translate3d(-240px, 0, 0);
@@ -1358,7 +1281,6 @@ body.open-right #mobile-right-panel {
     -moz-transform: translate3d(0, 0, 0);
   }
 }
-
 @keyframes closeRight {
   0% {
     transform: translate3d(-240px, 0, 0);
@@ -1367,7 +1289,6 @@ body.open-right #mobile-right-panel {
     transform: translate3d(0, 0, 0);
   }
 }
-
 /*--------------------------------------------------------------
 >>>PLUGINS
 --------------------------------------------------------------*/
@@ -1383,7 +1304,6 @@ body.register .page-full-width {
   display: -ms-flexbox;
   display: flex;
 }
-
 .datebox .buddyboss-select:nth-child(2), .datebox .buddyboss-select:nth-child(3) {
   padding-top: 25px;
 }
@@ -1425,7 +1345,6 @@ div#register-page .register-section, div#register-page .security-question-sectio
     font-size: 14px;
   }
 }
-
 #page .boss-tooltip:after {
   left: auto;
   right: -5px;
@@ -1451,7 +1370,6 @@ div#register-page .register-section, div#register-page .security-question-sectio
     max-width: 500px;
   }
 }
-
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
@@ -1468,7 +1386,6 @@ Responsive media queries (mobile styles)
     flex: 1 1 50%;
   }
 }
-
 @media screen and (max-width: 630px) {
   div.footer-inner.widget-area {
     -webkit-box-orient: vertical;
@@ -1484,7 +1401,6 @@ Responsive media queries (mobile styles)
     border-left: 1px solid #aaa;
   }
 }
-
 @media screen and (max-width: 622px) {
   .popup-content .col {
     float: none;
@@ -1498,7 +1414,6 @@ Responsive media queries (mobile styles)
     padding-top: 40px;
   }
 }
-
 .is-mobile:not(.bm-vendor-shop) #sitewide-notice {
   padding-top: 55px;
 }
@@ -1509,13 +1424,11 @@ Responsive media queries (mobile styles)
     padding-left: 0;
   }
 }
-
 @media screen and (max-width: 480px) {
   .register.page .wp-social-login-provider-list.wp-social-login-provider-list a {
     width: 100%;
   }
 }
-
 /*--------------------------------------------------------------
 Mobile Header
 --------------------------------------------------------------*/
@@ -1524,26 +1437,21 @@ Mobile Header
   padding-top: 8px;
   height: 70px;
 }
-
 #mobile-header h1 {
   color: #000;
 }
-
 #mobile-header h1 a {
   color: #000;
 }
-
 #mobile-header .left-btn,
 #mobile-header .right-btn {
   padding-top: 8px;
 }
-
 #mobile-header .left-btn:before,
 #mobile-header .right-btn:before {
   color: #333;
   font-size: 21px;
 }
-
 #mobile-header #mobile-logo img {
   max-height: 70px;
   max-width: 300px;
@@ -1556,41 +1464,32 @@ Mobile Menu
 #mobile-right-panel li {
   width: 100%;
 }
-
 #mobile-right-panel li > a {
   font-weight: 600;
 }
-
 #mobile-right-panel li a {
   color: #22a7f0;
 }
-
 #mobile-right-panel li a:hover {
   color: #54ae68;
 }
-
 #mobile-right-panel li.current-menu-item, #mobile-right-panel li:hover {
   background-color: #fff;
 }
-
 #mobile-right-panel li.current-menu-item > a, #mobile-right-panel li:hover > a {
   color: #54ae68;
 }
-
 #mobile-right-panel li.current-menu-item .sub-menu, #mobile-right-panel li:hover .sub-menu {
   background-color: #333;
 }
-
 #mobile-right-panel .sub-menu li a {
   font-weight: 400;
   padding-left: 40px;
 }
-
 #mobile-right-panel .submenu-btn {
   color: #22a7f0;
   right: 20px;
 }
-
 #mobile-right-panel .submenu-btn:hover {
   color: #54ae68;
 }
@@ -1610,17 +1509,14 @@ body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 750px;
   margin: 0 auto;
 }
-
 body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary {
   margin-top: 20px;
   margin-top: 2rem;
 }
-
 body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
   margin-bottom: 30px;
   margin-bottom: 3rem;
 }
-
 body.is-mobile #main-wrap {
   padding-top: 70px;
 }
@@ -1735,7 +1631,6 @@ MAXIMUM width of 1024 pixels (tablets)
     max-width: 560px;
   }
 }
-
 /*--------------------------------------------------------------
 MAXIMUM width of 768 pixels (vertical tablets & large phones)
 --------------------------------------------------------------*/
@@ -1771,7 +1666,6 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
     width: 100%;
   }
 }
-
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/
@@ -1803,8 +1697,12 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   .site .buddyboss-media-photos-wrap-container {
     max-width: 400px;
   }
+  .wp-block-media-text.is-stacked-on-mobile {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
-
 /*--------------------------------------------------------------
 MAXIMUM width of 480 pixels (phones)
 --------------------------------------------------------------*/
@@ -1870,7 +1768,6 @@ MAXIMUM width of 480 pixels (phones)
     width: 160px;
   }
 }
-
 /*--------------------------------------------------------------
 MAXIMUM width of 320 pixels (small phones)
 --------------------------------------------------------------*/
