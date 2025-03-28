@@ -2090,10 +2090,6 @@ footer[role=contentinfo] {
 }
 
 .footer-inner-top {
-  background-color: #f9f9f9;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  padding: 80px 0 60px;
-  clear: left;
   color: rgba(0, 0, 0, 0.4);
 }
 .footer-inner-top a {
