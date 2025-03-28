@@ -2623,7 +2623,7 @@ div.footer-inner ul.social-icons li span:before {
   font-size: 15px;
 }
 
-.entry-meta {
+.entry-meta, .entry-date {
   color: #54ae68;
 }
 

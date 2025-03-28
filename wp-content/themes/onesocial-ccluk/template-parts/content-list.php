@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template used for displaying page content
  *
@@ -13,7 +14,7 @@
 	<header class="entry-header">
 		<?php if (has_post_thumbnail()) : ?>
 			<a href="<?php the_permalink() ?>">
-				<?php the_post_thumbnail( 'medium-thumb' ) ?>
+				<?php the_post_thumbnail('medium-thumb') ?>
 			</a>
 		<?php endif; ?>
 
