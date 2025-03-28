@@ -34,10 +34,8 @@ if (! has_action('ccluk_frontpage_section_parts')) {
                 'about',
                 'news',
                 'newsletter',
-                'campaign',
                 'posts',
-                'events',
-                'groups'
+                'events'
         ));
 
         foreach ($sections as $section) {
