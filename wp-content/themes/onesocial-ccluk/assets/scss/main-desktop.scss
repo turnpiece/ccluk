@@ -1191,12 +1191,7 @@ li.hideshow > ul li {
   -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;
-  width: 165px;
-  float: left;
-  position: relative;
   z-index: 1;
-  padding-right: 20px;
-  padding-bottom: 10px;
 }
 
 .blog .post-author .author img, 
@@ -1217,14 +1212,11 @@ li.hideshow > ul li {
 
 .blog .post-author .author {
   display: inline-block;
-  width: 84px;
   position: relative;
 }
 
 .post-author {
   .entry-date time {
-    padding-bottom: 25px;
-    width: 50px;
     display: inline-block;
     border-bottom: 1px solid $divider_color;
   }
@@ -1294,16 +1286,6 @@ li.hideshow > ul li {
   width: 100%;
   float: left;
   position: relative;
-}
-
-.article-outher {
-  @include display-flex();
-  border-bottom: 1px solid $divider_color;
-  &:nth-last-child(2) {
-    .to-top, &:after {
-      display: none;
-    }
-  }
 }
 
 .blog:not(.bp-user) .hentry {

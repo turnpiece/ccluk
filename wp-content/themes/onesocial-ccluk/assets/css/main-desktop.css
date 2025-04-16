@@ -1111,12 +1111,7 @@ li.hideshow > ul li a {
   -webkit-order: 0;
   -ms-flex-order: 0;
   order: 0;
-  width: 165px;
-  float: left;
-  position: relative;
   z-index: 1;
-  padding-right: 20px;
-  padding-bottom: 10px;
 }
 
 .blog .post-author .author img,
@@ -1135,13 +1130,10 @@ li.hideshow > ul li a {
 
 .blog .post-author .author {
   display: inline-block;
-  width: 84px;
   position: relative;
 }
 
 .post-author .entry-date time {
-  padding-bottom: 25px;
-  width: 50px;
   display: inline-block;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
@@ -1208,18 +1200,6 @@ li.hideshow > ul li a {
   width: 100%;
   float: left;
   position: relative;
-}
-
-.article-outher {
-  display: -moz-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-.article-outher:nth-last-child(2) .to-top, .article-outher:nth-last-child(2):after {
-  display: none;
 }
 
 .blog:not(.bp-user) .hentry {
@@ -1378,14 +1358,6 @@ Media queries
   body.page #primary article > .entry-header h1.entry-title {
     font-size: 48px;
     line-height: 1.4;
-  }
-  body.archive.post-type-archive-ccluk_news .post-author .entry-date, body.blog.post-type-archive-ccluk_news .post-author .entry-date {
-    font-size: 20px;
-    text-align: right;
-  }
-  body.archive.post-type-archive-ccluk_news .post-author .entry-date time, body.blog.post-type-archive-ccluk_news .post-author .entry-date time {
-    width: 100px;
-    margin-left: -50px;
   }
   body.archive #primary .archive-header, body.blog #primary .archive-header {
     margin: 24px auto;

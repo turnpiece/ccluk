@@ -121,7 +121,6 @@ a,
     }
 
     #main {
-
         max-width: 100%;
         display: block;
 
@@ -133,15 +132,10 @@ a,
             -webkit-order: 0;
             -ms-flex-order: 0;
             order: 0;
-            width: 165px;
-            float: left;
             position: relative;
             z-index: 1;
-            padding-right: 20px;
-            padding-bottom: 10px;
             .author {
                 display: inline-block;
-                width: 84px;
                 position: relative;
                 img {
                     width: 50px;
@@ -168,8 +162,6 @@ a,
 
 .entry-header {
     .entry-title {
-        margin-top: 10px;
-        margin-top: 1rem;
         font-weight: 600;
 
         a {

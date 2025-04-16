@@ -168,8 +168,6 @@ a:hover,
 }
 
 .entry-header .entry-title {
-  margin-top: 10px;
-  margin-top: 1rem;
   font-weight: 600;
 }
 .entry-header .entry-title a {
@@ -2007,10 +2005,6 @@ div#sitewide-notice div#message p {
 }
 
 /***************** Desktop ******************/
-.footer-inner-top {
-  background-color: #f9f9f9;
-}
-
 .footer-inner-bottom {
   background-color: #333;
 }

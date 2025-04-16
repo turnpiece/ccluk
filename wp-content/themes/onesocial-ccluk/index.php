@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file.
  *
@@ -15,7 +16,7 @@
 get_header();
 ?>
 
-<a href="#" id="trigger-sidebar" class="" title="<?php _e( 'Toggle Sidebar', 'onesocial' ); ?>">
+<a href="#" id="trigger-sidebar" class="" title="<?php _e('Toggle Sidebar', 'onesocial'); ?>">
 	<span class="bb-side-icon" aria-hidden="true"></span>
 </a>
 
@@ -26,16 +27,16 @@ get_header();
 		<div id="content" role="main">
 
 			<!-- Display blog posts -->
-			<?php if ( have_posts() ) : ?>
+			<?php if (have_posts()) : ?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php while (have_posts()) : the_post(); ?>
 
 					<div class="article-outher">
 
-						<?php get_template_part( 'template-parts/content', 'author' ); ?>
-						
+						<?php get_template_part('template-parts/content', 'author'); ?>
+
 						<div class="content-wrap">
-							<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+							<?php get_template_part('template-parts/content', get_post_format()); ?>
 						</div>
 
 					</div>
@@ -45,14 +46,15 @@ get_header();
 				<?php endwhile; ?>
 
 				<div class="pagination-below">
-					<?php buddyboss_pagination(); ?>
+					<?php ccluk_pagination(); ?>
 				</div>
 
 			<?php else : ?>
 
-				<?php get_template_part( 'template-parts/content', 'none' ); ?>
+				<?php get_template_part('template-parts/content', 'none'); ?>
 
-			<?php endif; // end have_posts() check     ?>
+			<?php endif; // end have_posts() check     
+			?>
 
 		</div><!-- #content -->
 

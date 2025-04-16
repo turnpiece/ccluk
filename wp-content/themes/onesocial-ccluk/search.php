@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template for displaying Search Results pages.
  *
@@ -13,38 +14,38 @@ get_header();
 <div id="primary" class="site-content">
 
 	<header class="page-header dir-header">
-		<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'onesocial' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
+		<h1 class="page-title"><?php printf(__('Search Results for: %s', 'onesocial'), '<span>' . get_search_query() . '</span>'); ?></h1>
 	</header>
 
 	<div id="content" role="main" class="search-content-wrap">
 
 		<section class="search-content">
 
-			<?php if ( have_posts() ) : ?>
+			<?php if (have_posts()) : ?>
 
-			<div class="search-content-inner">
+				<div class="search-content-inner">
 
-				<?php /* Start the Loop */ ?>
-				<?php while ( have_posts() ) : the_post(); ?>
-					<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
-				<?php endwhile; ?>
+					<?php /* Start the Loop */ ?>
+					<?php while (have_posts()) : the_post(); ?>
+						<?php get_template_part('template-parts/content', get_post_format()); ?>
+					<?php endwhile; ?>
 
-			</div>
+				</div>
 
-			<div class="pagination-below">
-				<?php buddyboss_pagination(); ?>
-			</div>
+				<div class="pagination-below">
+					<?php ccluk_pagination(); ?>
+				</div>
 
-		<?php else : ?>
+			<?php else : ?>
 
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
+				<?php get_template_part('template-parts/content', 'none'); ?>
 
-		<?php endif; ?>
+			<?php endif; ?>
 
 		</section>
 
 		<?php
-		if ( is_active_sidebar( 'search' ) ) {
+		if (is_active_sidebar('search')) {
 			get_sidebar();
 		}
 		?>

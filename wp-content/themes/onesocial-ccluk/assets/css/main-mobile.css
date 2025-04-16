@@ -545,9 +545,6 @@ body #content article.boss-create-post-wrapper {
   padding: 20px 0;
 }
 
-aside.post-author {
-  margin-top: 20px;
-}
 aside.post-author:after {
   content: " ";
   clear: both;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The main template file.
  *
@@ -22,20 +23,20 @@ get_header();
 		<div id="content" role="main">
 
 			<header class="archive-header dir-header">
-				<h1 class="archive-title"><?php _e( 'Blog', 'onesocial' ) ?></h1>
+				<h1 class="archive-title"><?php _e('Blog', 'onesocial') ?></h1>
 			</header><!-- .archive-header -->
 
 			<!-- Display blog posts -->
-			<?php if ( have_posts() ) : ?>
+			<?php if (have_posts()) : ?>
 
-				<?php while ( have_posts() ) : the_post(); ?>
+				<?php while (have_posts()) : the_post(); ?>
 
 					<div class="article-outher">
 
-						<?php get_template_part( 'template-parts/content', 'author' ); ?>
-						
+						<?php get_template_part('template-parts/content', 'author'); ?>
+
 						<div class="content-wrap">
-							<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
+							<?php get_template_part('template-parts/content', get_post_format()); ?>
 						</div>
 
 					</div>
@@ -45,14 +46,15 @@ get_header();
 				<?php endwhile; ?>
 
 				<div class="pagination-below">
-					<?php buddyboss_pagination(); ?>
+					<?php ccluk_pagination(); ?>
 				</div>
 
 			<?php else : ?>
 
-				<?php get_template_part( 'template-parts/content', 'none' ); ?>
+				<?php get_template_part('template-parts/content', 'none'); ?>
 
-			<?php endif; // end have_posts() check     ?>
+			<?php endif; // end have_posts() check     
+			?>
 
 		</div><!-- #content -->
 
