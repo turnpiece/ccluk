@@ -7,7 +7,6 @@
  */
 
 define('CCLUK_DEBUGGING', false);
-define('CCLUK_BB_COVER_PHOTO', false); // use group cover photos?
 define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 
 /**
@@ -41,12 +40,6 @@ require get_stylesheet_directory() . '/inc/customizer.php';
 
 // load any widgets
 require get_stylesheet_directory() . '/inc/widgets/newsletter-signup.php';
-
-// BP custom text
-add_action('plugins_loaded', function () {
-    load_plugin_textdomain('buddypress', FALSE, basename(dirname(__FILE__)) . '/languages');
-});
-
 
 // Category archives to include news posts
 function ccluk_show_cpt_archives($query)
@@ -336,28 +329,6 @@ add_action('ccluk_section_before_inner', function ($arg) {
     }
 }, 10, 1);
 
-// WordPress social login
-add_action('bp_after_registration_submit_buttons', function () {
-    if ('registration-disabled' != bp_get_current_signup_step())
-        do_action('wordpress_social_login');
-});
-
-// output privacy policy link
-add_action('bp_before_registration_submit_buttons', function () {
-    // get MailChimp integration options
-    $options = get_option('mc4wp_integrations');
-
-    // bail if implicit option is not set as then we'll
-    // be displaying a checkbox and text
-    if (empty($options['buddypress']['implicit']))
-        return;
-
-?>
-    <p class="privacy-text">
-        <a href="/privacy-policy"><?php _e('We respect your privacy.', 'onesocial') ?></a>
-    </p>
-<?php });
-
 // display user link
 function ccluk_the_user_link($author_id)
 {
@@ -374,7 +345,6 @@ function ccluk_the_user_link($author_id)
  */
 function ccluk_get_user_link($author_id)
 {
-
     if (is_user_logged_in()) {
         if (function_exists('bp_core_get_userlink')) {
             $user_link = bp_core_get_userlink($author_id, false, true);

@@ -7,7 +7,8 @@
  */
 /* * **************************** MAIN BUDDYBOSS THEME CLASS ***************************** */
 
-Class BuddyBoss_Theme {
+class BuddyBoss_Theme
+{
 
 	/**
 	 * BuddyBoss parent/main theme path
@@ -58,7 +59,8 @@ Class BuddyBoss_Theme {
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 		/**
 		 * Globals, constants, theme path etc
 		 */
@@ -88,7 +90,8 @@ Class BuddyBoss_Theme {
 	/**
 	 * Global variables
 	 */
-	public function globals() {
+	public function globals()
+	{
 		global $bp, $buddyboss_debug_log, $buddyboss_js_params;
 
 		// Get theme path
@@ -103,8 +106,8 @@ Class BuddyBoss_Theme {
 		// Get includes url
 		$this->inc_url = $this->tpl_url . '/buddyboss-inc';
 
-		if ( !defined( 'BUDDYBOSS_DEBUG' ) ) {
-			define( 'BUDDYBOSS_DEBUG', false );
+		if (!defined('BUDDYBOSS_DEBUG')) {
+			define('BUDDYBOSS_DEBUG', false);
 		}
 
 		// Set BuddyPress and BBPress as inactive by default, then we hook into
@@ -116,7 +119,7 @@ Class BuddyBoss_Theme {
 		$buddyboss_debug_log = "";
 
 		// Child themes can add variables to this array for JS on the front end
-		if ( empty( $buddyboss_js_params ) ) {
+		if (empty($buddyboss_js_params)) {
 			$buddyboss_js_params = array();
 		}
 	}
@@ -124,84 +127,59 @@ Class BuddyBoss_Theme {
 	/**
 	 * Load options
 	 */
-	public function options() {
-		$opt = get_option( 'buddyboss_theme_options' );
+	public function options()
+	{
+		$opt = get_option('buddyboss_theme_options');
 	}
 
 	/**
 	 * Includes
 	 */
-	public function includes() {
+	public function includes()
+	{
 		// Theme setup
-		require_once( $this->inc_dir . '/theme-functions.php' );
-		require_once( $this->inc_dir . '/extra-functions.php' );
+		require_once($this->inc_dir . '/theme-functions.php');
+		require_once($this->inc_dir . '/extra-functions.php');
 
 		// Ajax file
-		require_once( $this->inc_dir . '/ajax-load-posts.php' );
+		require_once($this->inc_dir . '/ajax-load-posts.php');
 
 		// Recommend Posts
-		if ( ! function_exists( 'buddyboss_sap' ) ) {
-			require_once( $this->inc_dir . '/recommend-posts.php' );
-		}
-/*
-		// Add Redux Framework
-		if ( $this->backend_should_load() ) {
-			require_once( $this->inc_dir . '/buddyboss-framework/admin-init.php' );
+		if (! function_exists('buddyboss_sap')) {
+			require_once($this->inc_dir . '/recommend-posts.php');
 		}
 
-        if(!is_admin()) {
-        	add_action( 'wp_head', array( $this, 'output_typography_css' ), 150 );
-        }
-*/
 		// Option settings
-		require_once( $this->inc_dir . '/buddyboss-framework/options/setting-options.php' );
+		require_once($this->inc_dir . '/buddyboss-framework/options/setting-options.php');
 
 		// User Options & Settings
-		require_once( $this->inc_dir . '/users-options.php' );
-/*
-		// BuddyPress legacy plugin support
-		if ( function_exists( 'bp_is_active' ) ) {
-			require_once( $this->inc_dir . '/buddyboss-bp-legacy/bp-legacy-loader.php' );
-		}
-*/
-		// Cover Photo Support
-		if (CCLUK_BB_COVER_PHOTO)
-			require_once( $this->inc_dir . '/cover-photo.php' );
+		require_once($this->inc_dir . '/users-options.php');
 
 		// Login popup
-		require_once( $this->inc_dir . "/popup/user_email_verify.php" );
-		require_once( $this->inc_dir . "/popup/ajax_login.php" );
-		require_once( $this->inc_dir . "/popup/ajax_register.php" );
+		require_once($this->inc_dir . "/popup/user_email_verify.php");
+		require_once($this->inc_dir . "/popup/ajax_login.php");
+		require_once($this->inc_dir . "/popup/ajax_register.php");
 
 		// Debug functions
-		require_once( $this->inc_dir . '/debug.php' );
+		require_once($this->inc_dir . '/debug.php');
 
 		if (BUDDYBOSS_DEBUG)
-			require_once( $this->inc_dir . '/bp-debug.php' );
-/*
-		// BuddyPress Modules
-		if ( class_exists( 'BP_Component' ) ) {
-			// Widgets
-			require_once( $this->inc_dir . '/buddyboss-widgets/buddyboss-profile-widget-loader.php' );
-		}
+			require_once($this->inc_dir . '/bp-debug.php');
 
-		// Custom Widgets
-		require_once( $this->inc_dir . '/buddyboss-widgets/custom-widgets.php' );
-*/
 		//Cache update hook
-		require_once( $this->inc_dir . '/cache-update-hook.php' );
-
+		require_once($this->inc_dir . '/cache-update-hook.php');
 	}
 
-	function backend_should_load() {
+	function backend_should_load()
+	{
 
-		if(is_admin()) {
+		if (is_admin()) {
 			return true;
 		}
 
-        $onesocial_typography = get_transient("onesocial_typography");
+		$onesocial_typography = get_transient("onesocial_typography");
 
-		if(empty($onesocial_typography)) {
+		if (empty($onesocial_typography)) {
 			return true;
 		}
 
@@ -211,22 +189,24 @@ Class BuddyBoss_Theme {
 	/**
 	 * Actions and filters
 	 */
-	public function actions_filters() {
-		if ( BUDDYBOSS_DEBUG ) {
-			add_action( 'bp_footer', 'buddyboss_dump_log' );
+	public function actions_filters()
+	{
+		if (BUDDYBOSS_DEBUG) {
+			add_action('bp_footer', 'buddyboss_dump_log');
 		}
 
 		// If BuddyPress or BBPress is active we'll update our
 		// global variable (theme uses this later on)
-		add_action( 'bp_init', array( $this, 'set_buddypress_active' ) );
-		add_action( 'bbp_init', array( $this, 'set_bbpress_active' ) );
+		add_action('bp_init', array($this, 'set_buddypress_active'));
+		add_action('bbp_init', array($this, 'set_bbpress_active'));
 	}
 
 	/**
 	 * Assets
 	 */
-	public function assets() {
-		if ( !class_exists( 'BP_Legacy' ) ) {
+	public function assets()
+	{
+		if (!class_exists('BP_Legacy')) {
 			return false;
 		}
 	}
@@ -234,26 +214,29 @@ Class BuddyBoss_Theme {
 	/**
 	 * Set BuddyPress global variable to true
 	 */
-	public function set_buddypress_active() {
+	public function set_buddypress_active()
+	{
 		$this->buddypress_active = true;
 	}
 
 	/**
 	 * Set BBPress global variable to true
 	 */
-	public function set_bbpress_active() {
+	public function set_bbpress_active()
+	{
 		$this->bbpress_active = true;
 	}
 
 	/**
 	 * Utility function for loading modules
 	 */
-	public function add_mod( $mod_info ) {
-		if ( !isset( $mod_info[ 'name' ] ) ) {
-			wp_die( __( 'Module does not have the proper info array', 'onesocial' ) );
+	public function add_mod($mod_info)
+	{
+		if (!isset($mod_info['name'])) {
+			wp_die(__('Module does not have the proper info array', 'onesocial'));
 		}
 
-		$this->mods[ $mod_info[ 'name' ] ] = $mod_info;
+		$this->mods[$mod_info['name']] = $mod_info;
 
 		return true;
 	}
@@ -261,37 +244,38 @@ Class BuddyBoss_Theme {
 	/**
 	 * Check if a module is active
 	 */
-	public function is_active( $name ) {
+	public function is_active($name)
+	{
 		$active = false;
 
 		// Check for active module
-		if ( isset( $this->mods[ $name ] ) && isset( $this->mods[ $name ][ 'active' ] ) && $this->mods[ $name ][ 'active' ] == true ) {
+		if (isset($this->mods[$name]) && isset($this->mods[$name]['active']) && $this->mods[$name]['active'] == true) {
 			$active = true;
 		}
 
 		// Check for active module (old way, soon to be deprecated)
-		if ( isset( $this->opt[ 'mod_' . $name ] ) ) {
-			return $this->opt[ 'mod_' . $name ];
+		if (isset($this->opt['mod_' . $name])) {
+			return $this->opt['mod_' . $name];
 		}
 
 		return $active;
 	}
-
 }
 
-$GLOBALS[ 'onesocial' ] = new BuddyBoss_Theme;
+$GLOBALS['onesocial'] = new BuddyBoss_Theme;
 
-function onesocial() {
-	return $GLOBALS[ 'onesocial' ];
+function onesocial()
+{
+	return $GLOBALS['onesocial'];
 }
 
 /*
  * Change BuddyPress avatar size
  */
-if ( !defined( 'BP_AVATAR_FULL_WIDTH' ) ) {
-	define( 'BP_AVATAR_FULL_WIDTH', 280 );
+if (!defined('BP_AVATAR_FULL_WIDTH')) {
+	define('BP_AVATAR_FULL_WIDTH', 280);
 }
 
-if ( !defined( 'BP_AVATAR_FULL_HEIGHT' ) ) {
-	define( 'BP_AVATAR_FULL_HEIGHT', 280 );
+if (!defined('BP_AVATAR_FULL_HEIGHT')) {
+	define('BP_AVATAR_FULL_HEIGHT', 280);
 }
