@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The template used for displaying page content
  *
@@ -7,8 +8,8 @@
  * @since OneSocial Theme 1.0.0
  */
 
-$datetime = get_post_meta( get_the_ID(), 'incsub_event_start', true );
-$date = mysql2date( get_option('date_format'), $datetime );
+$datetime = get_post_meta(get_the_ID(), 'incsub_event_start', true);
+$date = mysql2date(get_option('time_format') . ' \o\n jS F', $datetime);
 
 ?>
 
@@ -17,7 +18,7 @@ $date = mysql2date( get_option('date_format'), $datetime );
 	<header class="entry-header">
 		<?php if (has_post_thumbnail()) : ?>
 			<a href="<?php the_permalink() ?>">
-				<?php the_post_thumbnail( 'medium-thumb' ) ?>
+				<?php the_post_thumbnail('medium-thumb') ?>
 			</a>
 		<?php endif; ?>
 
@@ -25,11 +26,11 @@ $date = mysql2date( get_option('date_format'), $datetime );
 			<h2 class="entry-title"><?php the_title(); ?></h2>
 		</a>
 
-        <div class="entry-meta">
-            <span class="post-date">
-                <time datetime="<?php echo $datetime ?>"><?php echo $date ?></time>
-            </span>
-        </div>
+		<div class="entry-meta">
+			<span class="post-date">
+				<time datetime="<?php echo $datetime ?>"><?php echo $date ?></time>
+			</span>
+		</div>
 	</header>
 
 	<div class="entry-content">

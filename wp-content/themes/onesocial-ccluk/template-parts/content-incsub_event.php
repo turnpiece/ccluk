@@ -9,7 +9,7 @@
  */
 
 $datetime = get_post_meta(get_the_ID(), 'incsub_event_start', true);
-$date = mysql2date(get_option('date_format') . ' at ga', $datetime);
+$date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_format'), $datetime);
 
 ?>
 
@@ -41,10 +41,6 @@ $date = mysql2date(get_option('date_format') . ' at ga', $datetime);
 				</a>
 
 			<?php } ?>
-
-			<div class="profile-visible">
-				<time datetime="<?php echo $datetime ?>"><?php echo $date ?></time>
-			</div>
 
 			<!-- Title -->
 			<header class="entry-header<?php echo $header_class; ?>">
@@ -111,8 +107,7 @@ $date = mysql2date(get_option('date_format') . ' at ga', $datetime);
 					<div class="entry-tags col">
 						<?php
 						$terms = wp_get_post_tags(get_the_ID());
-						if ($terms) {
-						?>
+						if ($terms) { ?>
 							<h3><?php _e('Tagged in', 'onesocial'); ?></h3><?php
 																			foreach ($terms as $t) {
 																				echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';

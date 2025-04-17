@@ -2077,6 +2077,11 @@ div#sitewide-notice div#message p {
   background-color: #54ae68;
 }
 
+.incsub_event .entry-header .entry-meta,
+.post-type-archive-incsub_event .entry-header .entry-meta {
+  font-size: 21px;
+}
+
 /* styles for GIve donation pages */
 body.single-give_forms .entry-header {
   margin: 12px 0px;
