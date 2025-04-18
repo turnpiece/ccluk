@@ -3145,6 +3145,27 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   /*margin-top: 70px;*/
 }
 
+body.page {
+  #primary {
+      article {
+          > .entry-header {
+              @include entry-header();
+          }
+      }
+  }
+}
+
+body {
+  &.archive,
+  &.blog {
+      #primary {
+          .archive-header {
+              @include entry-header();
+          }
+      }
+  }
+}
+
 .archive-meta {
   color: #757575;
   font-size: $font-size-tiny;

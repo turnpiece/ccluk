@@ -1349,40 +1349,6 @@ Media queries
     padding: 30px 0px;
     padding: 3rem 0rem;
   }
-  body.page #primary article > .entry-header {
-    margin: 24px auto;
-    margin: 2.4rem auto;
-    margin-bottom: 16px;
-    margin-bottom: 1rem;
-  }
-  body.page #primary article > .entry-header h1.entry-title {
-    font-size: 48px;
-    line-height: 1.4;
-  }
-  body.archive #primary .archive-header, body.blog #primary .archive-header {
-    margin: 24px auto;
-    margin: 2.4rem auto;
-    margin-bottom: 16px;
-    margin-bottom: 1rem;
-  }
-  body.archive #primary .archive-header h1.entry-title, body.blog #primary .archive-header h1.entry-title {
-    font-size: 48px;
-    line-height: 1.4;
-  }
-  #buddypress div#register-page .register-section {
-    width: 46%;
-    max-width: 46%;
-    margin: 30px 0 30px 0;
-    padding: 0;
-  }
-  #buddypress div#register-page .register-section#basic-details-section {
-    float: right;
-    clear: right;
-  }
-  #buddypress div#register-page .register-section#profile-details-section {
-    float: left;
-    clear: left;
-  }
 }
 @media screen and (min-width: 1200px) {
   /*--------------------------------------------------------------

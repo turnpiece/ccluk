@@ -2933,6 +2933,28 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   /*margin-top: 70px;*/
 }
 
+body.page #primary article > .entry-header {
+  margin: 24px auto;
+  margin: 2.4rem auto;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+body.page #primary article > .entry-header h1.entry-title {
+  font-size: 48px;
+  line-height: 1.4;
+}
+
+body.archive #primary .archive-header, body.blog #primary .archive-header {
+  margin: 24px auto;
+  margin: 2.4rem auto;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+}
+body.archive #primary .archive-header h1.entry-title, body.blog #primary .archive-header h1.entry-title {
+  font-size: 48px;
+  line-height: 1.4;
+}
+
 .archive-meta {
   color: #757575;
   font-size: 12px;
