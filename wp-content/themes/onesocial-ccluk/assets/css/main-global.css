@@ -2838,11 +2838,11 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 }
 
 .post-author .name {
-  font-size: 14px;
+  font-size: 21px;
 }
 .post-author .entry-date {
-  margin-top: 8px;
-  font-size: 12px;
+  margin-top: 12px;
+  font-size: 15px;
   color: #54ae68;
 }
 .post-author .entry-date:hover {
@@ -2851,7 +2851,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .author-details .author-middle .author-bio {
   color: #333;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.3;
   margin-bottom: 26px;
@@ -2874,7 +2874,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 .author-details .author-stats li span {
   color: #333;
   margin-right: 7px;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .article-outher {

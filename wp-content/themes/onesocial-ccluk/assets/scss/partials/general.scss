@@ -135,7 +135,8 @@ a,
             position: relative;
             z-index: 1;
             .author {
-                display: inline-block;
+                display: inline-flex;
+                flex-direction: column;
                 position: relative;
                 img {
                     width: 50px;
