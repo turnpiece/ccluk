@@ -3035,6 +3035,8 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 .post-author {
   .name {
     font-size: $font-size-std;
+    display: inline-block;
+    min-height: 50px;
   }
   .entry-date {
     margin-top: $font-size-tiny;

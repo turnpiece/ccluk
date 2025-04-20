@@ -142,7 +142,7 @@ class Shipper_Helper_Assets {
 		 */
 		return apply_filters(
 			'shipper_assets_shipper_icon',
-			plugin_dir_path( SHIPPER_PLUGIN_FILE ) . 'assets/img/anchor.svg'
+			plugin_dir_path( SHIPPER_PLUGIN_FILE ) . 'assets/img/shipper-admin-menu-icon.svg'
 		);
 	}
 

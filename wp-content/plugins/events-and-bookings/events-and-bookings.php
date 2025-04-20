@@ -1442,7 +1442,7 @@ class Eab_EventsHub
 			: array();
 	}
 
-	function user_has_cap($allcaps, $caps = array(), $args = null)
+	function user_has_cap($allcaps, $caps = null, $args = null)
 	{
 		global $current_user, $blog_id, $post;
 

@@ -38,6 +38,9 @@ $per_page = $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 ); // ph
 							value="<?php echo esc_attr( $per_page ); ?>"
 							name="pagination[<?php echo esc_attr( Shipper_Model_Stored_Options::KEY_PER_PAGE ); ?>]"
 							class="sui-form-control sui-input-sm sui-field-has-suffix"
+							min="0"
+							max="20"
+							step="1"
 						>
 					</div>
 				</div>

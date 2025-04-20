@@ -14,6 +14,8 @@
  */
 abstract class Shipper_Controller_Runner extends Shipper_Controller {
 
+	public $process;
+
 	/**
 	 * Holds kickstarter helper instance
 	 *

@@ -137,7 +137,7 @@ class Shipper_Model_System_Php extends Shipper_Model {
 	 * @return bool
 	 */
 	public function get_aws_support_level() {
-		if ( version_compare( phpversion(), '5.5.0', '<' ) ) {
+		if ( version_compare( phpversion(), '7.4', '<' ) ) {
 			// Too old PHP.
 			return false;
 		}
@@ -197,6 +197,7 @@ class Shipper_Model_System_Php extends Shipper_Model {
 				array(
 					'version' => '2006-03-01',
 					'region'  => 'us-east-1',
+					'use_aws_shared_config_files' => false,
 				)
 			);
 		} catch ( Exception $e ) {

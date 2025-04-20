@@ -62,7 +62,7 @@ class Shipper_Controller_Ajax_Notifications extends Shipper_Controller_Ajax {
 		if ( ! is_email( $email ) ) {
 			return wp_send_json_error(
 				/* translators: %s: email address. */
-				sprintf( __( 'This is not a valid email: %s', 'shipper' ), $email )
+				sprintf( __( 'This is not a valid email: %s', 'shipper' ), esc_html( $email ) )
 			);
 		}
 

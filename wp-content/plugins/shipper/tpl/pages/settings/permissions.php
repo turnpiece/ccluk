@@ -10,7 +10,7 @@
 $model        = new Shipper_Model_Stored_Options();
 $per_page     = $model->get( Shipper_Model_Stored_Options::KEY_PER_PAGE, 10 ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- this is not WordPress global variable
 $users        = shipper_get_allowed_users();
-$is_dash_user = in_array( get_current_user_id(), shipper_get_dashboard_users(), true );
+$is_dash_user = Shipper_Helper_Api::user_can_access();
 ?>
 
 <div class="sui-box shipper-page-settings-permissions">

@@ -65,14 +65,14 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 	 */
 	public function add_setting_links( $links ) {
 		$mylinks = array(
-			'<a href="' . network_admin_url( 'admin.php?page=shipper-settings&tool=migration' ) . '">' . __( 'Settings', 'shipper' ) . '</a>',
+			'<a href="' . network_admin_url( 'admin.php?page=shipper' ) . '">' . esc_attr__( 'Dashboard', 'shipper' ) . '</a>',
 		);
 
 		$mylinks = array_merge( $links, $mylinks );
 		$mylinks = array_merge(
 			$mylinks,
 			array(
-				'<a target="_blank" href="https://wpmudev.com/docs/wpmu-dev-plugins/shipper/">' . __( 'Docs', 'shipper' ) . '</a>',
+				'<a target="_blank" href="https://wpmudev.com/docs/wpmu-dev-plugins/shipper/">' . esc_attr__( 'Docs', 'shipper' ) . '</a>',
 			)
 		);
 
@@ -180,7 +180,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 		}
 
 		$cls   = explode( ' ', $classes );
-		$cls[] = 'sui-2-10-8';
+		$cls[] = 'sui-2-12-24';
 		$cls[] = 'shipper-admin';
 		$cls[] = 'shipper-sui';
 
@@ -212,7 +212,6 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			true
 		);
 
-		$message = 'Your account authentication failed. Please try again or contact our support team for help.';
 		$model = new Shipper_Model_Stored_Options();
 		wp_localize_script(
 			'shipper',
@@ -228,7 +227,7 @@ class Shipper_Controller_Admin extends Shipper_Controller {
 			)
 		);
 
-		$this->add_black_friday_dependencies();
+		// $this->add_black_friday_dependencies();
 
 		// Trigger this on print, but early enough!
 		add_action( 'admin_print_scripts', array( $this, 'reenable_heartbeat' ), 0 );

@@ -1,6 +1,23 @@
 Plugin Name: Shipper
 Author: Incsub
 
+1.2.16 - 2024-02-06
+- Enhance: Visual Improvements
+- Enhance: Update Twitter Logo
+- Enhance: Adjust Summary Box Logo
+- Enhance: Redirect to dashboard instead of settings
+
+1.2.15 - 2023-07-31
+- Fix: Issue with unrecognized database host
+- Fix: Compatibility with PHP version 8.0 and up tested
+
+1.2.14 - 2023-03-15
+- New: Updated plugin admin icon
+- Improvement: Security issues
+
+1.2.13 - 2022-09-28
+- Improvement: Enhanced membership detection
+
 1.2.12 - 2022-04-04
 - New: Added "Google Login" support
 
@@ -198,4 +215,4 @@ Author: Incsub
 - Initial release
 
 
-87274-1651163094-au
+87274-1743193998-au

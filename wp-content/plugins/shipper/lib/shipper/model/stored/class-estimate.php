@@ -137,7 +137,7 @@ class Shipper_Model_Stored_Estimate extends Shipper_Model_Stored {
 
 		$result  = $number_of_minutes / 60;
 		$hours   = is_float( $result ) ? explode( '.', $result )[0] : $result;
-		$minutes = $number_of_minutes % 60;
+		$minutes = ceil($number_of_minutes % 60);
 
 		return array(
 			'hours'   => $hours,

@@ -32,21 +32,15 @@ if ( empty( $message ) && empty( $skippable ) ) {
 }
 ?>
 
-<div
-	class="sui-modal shipper-welcome sui-modal-md <?php echo ! empty( $skippable ) ? 'shipper-skippable' : ''; ?>"
-	data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'shipper_modal_close' ) ); ?>"
-	aria-hidden="true"
->
+<div class="sui-modal shipper-welcome sui-modal-lg <?php echo ! empty( $skippable ) ? 'shipper-skippable' : ''; ?>"
+	data-wpnonce="<?php echo esc_attr( wp_create_nonce( 'shipper_modal_close' ) ); ?>" aria-hidden="true">
 
-	<div
-		role="dialog"
-		id="shipper-welcome"
-		class="sui-modal-content sui-fade-in"
-	>
+	<div role="dialog" id="shipper-welcome" class="sui-modal-content sui-fade-in">
 		<div class="sui-box" role="document">
 			<div class="shipper-welcome-title">
 				<div class="shipper-wrapper">
-					<h3><i class="sui-icon-shipper-anchor" aria-hidden="true"></i></h3>
+					<div><img src="<?php echo esc_url( Shipper_Helper_Assets::get_image( 'shipper-logo.png' ) ); ?>" />
+					</div>
 					<?php echo wp_kses_post( Shipper_Helper_Assets::get_custom_hero_image_markup() ); ?>
 				</div>
 			</div>
@@ -62,8 +56,8 @@ if ( empty( $message ) && empty( $skippable ) ) {
 					<?php } ?>
 
 					<div>
-						<a
-							href="<?php echo esc_url( $action ); ?>" <?php echo ! preg_match( '/' . preg_quote( network_admin_url(), '/' ) . '/', $action ) ? 'target="_blank"' : ''; ?>
+						<a href="<?php echo esc_url( $action ); ?>"
+							<?php echo ! preg_match( '/' . preg_quote( network_admin_url(), '/' ) . '/', $action ) ? 'target="_blank"' : ''; ?>
 							class="<?php echo esc_attr( $button_class ); ?> sui-button">
 							<?php echo esc_html( $button ); ?>
 						</a>
@@ -71,8 +65,8 @@ if ( empty( $message ) && empty( $skippable ) ) {
 						<?php if ( ! empty( $skippable ) ) { ?>
 						<p>
 							<small><a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'done_this', 1 ) ) ); ?>">
-								<?php esc_html_e( 'I\'ve done this step', 'shipper' ); ?>
-							</a></small>
+									<?php esc_html_e( 'I\'ve done this step', 'shipper' ); ?>
+								</a></small>
 						</p>
 						<?php } ?>
 

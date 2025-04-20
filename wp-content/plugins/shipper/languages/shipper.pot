@@ -1,14 +1,14 @@
-# Copyright (C) 2022 WPMU DEV
+# Copyright (C) 2024 WPMU DEV
 # This file is distributed under the same license as the Shipper Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shipper Pro 1.2.12\n"
+"Project-Id-Version: Shipper Pro 1.2.16\n"
 "Report-Msgid-Bugs-To: https://wpmudev.com\n"
-"POT-Creation-Date: 2022-04-04 08:03:20+00:00\n"
+"POT-Creation-Date: 2024-02-06 13:15:01+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2022-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
@@ -130,7 +130,7 @@ msgid "Packaging failed, concurrent process is running"
 msgstr ""
 
 #: lib/shipper/controller/ajax/packages/class-build.php:195
-#: lib/shipper/controller/class-runner.php:226
+#: lib/shipper/controller/class-runner.php:228
 #. translators: %1$s %2$s %3$s: message, file and line number.
 #. translators: %1$s %2$s %3$s: error message, file and line number.
 msgid "Encountered a FATAL ERROR: %1$s in %2$s on line %3$d"
@@ -140,11 +140,8 @@ msgstr ""
 msgid "Package migration failed"
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:68
-#: tpl/pages/dashboard/settings.php:15 tpl/pages/packages/main.php:11
-#: tpl/pages/packages/settings.php:19 tpl/pages/settings/data.php:41
-#: tpl/pages/settings/main.php:22
-msgid "Settings"
+#: lib/shipper/controller/class-admin.php:68 tpl/pages/dashboard/main.php:16
+msgid "Dashboard"
 msgstr ""
 
 #: lib/shipper/controller/class-admin.php:75
@@ -156,30 +153,30 @@ msgstr ""
 msgid "Destination error: %s"
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:225
+#: lib/shipper/controller/class-admin.php:224
 msgid ""
 "Your account authentication failed. Please try again or contact our <a "
 "href=\"https://wpmudev.com/hub2/support#get-support\" "
 "target=\"_blank\">support team</a> for help."
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:226
+#: lib/shipper/controller/class-admin.php:225
 msgid ""
 "Your account authentication failed. Please try again or contact our support "
 "team for help."
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:317
+#: lib/shipper/controller/class-admin.php:316
 msgid "Black Friday Offer!"
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:318
+#: lib/shipper/controller/class-admin.php:317
 msgid ""
 "Get 11 Pro plugins on unlimited sites and much more with 50% OFF WPMU DEV "
 "Agency plan FOREVER"
 msgstr ""
 
-#: lib/shipper/controller/class-admin.php:319
+#: lib/shipper/controller/class-admin.php:318
 msgid "*Only admin users can see this message"
 msgstr ""
 
@@ -218,7 +215,7 @@ msgstr ""
 msgid "Shipper Encountered An Error"
 msgstr ""
 
-#: lib/shipper/controller/class-runner.php:336
+#: lib/shipper/controller/class-runner.php:338
 #. translators: $d: response code.
 msgid "Non-success response code (%d)"
 msgstr ""
@@ -329,7 +326,7 @@ msgstr ""
 #: lib/shipper/helper/fs/class-list.php:269
 #: lib/shipper/helper/fs/class-list.php:279
 #: lib/shipper/task/export/class-files-ms.php:76
-#: lib/shipper/task/export/class-files.php:87
+#: lib/shipper/task/export/class-files.php:93
 #. translators: %s: file name.
 #. translators: %s: file path.
 #. translators: %s: file name.
@@ -848,11 +845,11 @@ msgid "ZIP support is not found"
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:168
-msgid "PHP v5.5 or newer is available"
+msgid "PHP v7.4 or newer is available"
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:175
-msgid "PHP v5.5 or newer is required"
+msgid "PHP v7.4 or newer is required"
 msgstr ""
 
 #: lib/shipper/task/check/class-system.php:200
@@ -976,18 +973,18 @@ msgid "Compress gathered files %s"
 msgstr ""
 
 #: lib/shipper/task/export/class-files-ms.php:68
-#: lib/shipper/task/export/class-files.php:79
+#: lib/shipper/task/export/class-files.php:85
 #. translators: %s: file path.
 #. translators: %s: file name.
 msgid "Shipper couldn't read file: %s"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:219
+#: lib/shipper/task/export/class-files.php:225
 #. translators: %1$d %2$s: file count and size.
 msgid " (%1$d files, %2$s)"
 msgstr ""
 
-#: lib/shipper/task/export/class-files.php:227
+#: lib/shipper/task/export/class-files.php:233
 #. translators: %s: file name.
 msgid "Gather files for upload %s"
 msgstr ""
@@ -1021,16 +1018,16 @@ msgid "Upload package %s"
 msgstr ""
 
 #: lib/shipper/task/export/class-remote.php:205
-#. translators: %1$s %2$s: souce site and destination site.
+#. translators: %1$s: destination site.
 msgid ""
-"Unable to remotely import on %1$s. Please visit %2$s and start import there "
+"Unable to remotely import on %1$s. Please visit %1$s and start import there "
 "manually."
 msgstr ""
 
 #: lib/shipper/task/export/class-remote.php:218
-#. translators: %1$s %2$s: souce site and destination site.
+#. translators: %1$s: destination site.
 msgid ""
-"Error starting import on %1$s. Please visit %2$s and start import there "
+"Error starting import on %1$s. Please visit %1$s and start import there "
 "manually."
 msgstr ""
 
@@ -1388,7 +1385,7 @@ msgstr ""
 msgid "Uncompress package %s"
 msgstr ""
 
-#: lib/shipper/task/package/class-all.php:105
+#: lib/shipper/task/package/class-all.php:110
 #. translators: %1$s %2$d %3$d %4$d %5$d: task type, step and total steps.
 msgid "Running %1$s task, %2$d of %3$d ( %4$d%% / %5$d%% )"
 msgstr ""
@@ -1866,12 +1863,12 @@ msgid ""
 "versions are released over time that brings both speed and security "
 "improvements. It’s important to use the latest and greatest tools, so older "
 "PHP versions eventually cease to be supported. Shipper is using AWS PHP SDK "
-"which requires PHP 5.5 or higher to work properly. "
+"which requires PHP 7.4 or higher to work properly. "
 msgstr ""
 
 #: tpl/checks/php-version.php:28
 #. translators: %1$s %2$s: website name and PHP version.
-msgid "<b>%1$s</b> is using PHP %2$s, and Shipper needs PHP 5.5 or above to work."
+msgid "<b>%1$s</b> is using PHP %2$s, and Shipper needs PHP 7.4 or above to work."
 msgstr ""
 
 #: tpl/checks/php-version.php:43
@@ -1924,8 +1921,8 @@ msgid ""
 "current host!)."
 msgstr ""
 
-#: tpl/checks/remote-package-large.php:50
-#: tpl/pages/preflight/wizard-files-package_size-full.php:40
+#: tpl/checks/remote-package-large.php:46
+#: tpl/pages/preflight/wizard-files-package_size-full.php:36
 #. translators: %s" website url.
 #. translators: %s: website url.
 msgid ""
@@ -2257,77 +2254,57 @@ msgstr ""
 msgid "Zip support is not found on %1$s. Please fix this and check again."
 msgstr ""
 
-#: tpl/emails/export/body.php:47 tpl/emails/import/body.php:47
-#. translators: %1$s user name.
-msgid "Ahoy, Captain %s!"
+#: tpl/emails/export/body.php:34 tpl/emails/import/body.php:34
+msgid "Shipper Captain"
 msgstr ""
 
-#: tpl/emails/export/body.php:49 tpl/emails/import/body.php:49
-#. translators: %1$s user name.
-msgid "Aye, matey %s!"
+#: tpl/emails/export/body.php:60 tpl/emails/export/body.php:156
+#: tpl/emails/import/body.php:60 tpl/emails/import/body.php:156
+msgid "Shipper Logo"
 msgstr ""
 
-#: tpl/emails/export/body.php:61
+#: tpl/emails/export/body.php:66 tpl/emails/import/body.php:66
+msgid "Site import"
+msgstr ""
+
+#: tpl/emails/export/body.php:93 tpl/emails/import/body.php:93
+msgid "Hi %s,"
+msgstr ""
+
+#: tpl/emails/export/body.php:105 tpl/emails/import/body.php:105
 #. translators: %1$s %2$s %3$s %4$s %5$s %6$s: source and destination site url.
 msgid ""
 "Your site <a style=\"%1$s\" href=\"http://%2$s\" target=\"_blank\">%3$s</a> "
-"was successfully exported to <a style=\"%4$s\" href=\"http://%5$s\" "
+"was successfully ported to <a style=\"%4$s\" href=\"http://%5$s\" "
 "target=\"_blank\">%6$s</a>."
 msgstr ""
 
-#: tpl/emails/export/body.php:73 tpl/emails/import/body.php:73
+#: tpl/emails/export/body.php:117 tpl/emails/import/body.php:117
 #. translators: %1$s %2$s %3$s %4$s %5$s %6$s: source and destination site url.
 msgid ""
-"Alas, Shipper was unable to transfer your data from <a style=\"%1$s\" "
-"href=\"http://%2$s\" target=\"_blank\">%3$s</a> to <a style=\"%4$s\" "
-"href=\"http://%5$s\" target=\"_blank\">%6$s</a>."
+"Unfortunately, Shipper was unable to transfer your data from <a "
+"style=\"%1$s\" href=\"http://%2$s\" target=\"_blank\">%3$s</a> to <a "
+"style=\"%4$s\" href=\"http://%5$s\" target=\"_blank\">%6$s</a>."
 msgstr ""
 
-#: tpl/emails/export/body.php:90 tpl/emails/import/body.php:90
-msgid "This calls for drinks all around."
+#: tpl/emails/export/body.php:135 tpl/emails/import/body.php:135
+msgid "Cheers,"
 msgstr ""
 
-#: tpl/emails/export/body.php:91 tpl/emails/import/body.php:91
-msgid ""
-"Check the Shipper logs for details. Our support crew is standing by if you "
-"need assistance."
+#: tpl/emails/export/body.php:141 tpl/emails/import/body.php:141
+msgid "The WPMU DEV Team."
 msgstr ""
 
-#: tpl/emails/export/body.php:100 tpl/emails/import/body.php:100
-msgid "Raise your glass!"
+#: tpl/emails/export/body.php:161 tpl/emails/import/body.php:161
+msgid "Build A Better WordPress Business"
 msgstr ""
 
-#: tpl/emails/export/body.php:101 tpl/emails/import/body.php:101
-msgid "Happy Sailing!"
+#: tpl/emails/export/body.php:196 tpl/emails/import/body.php:196
+msgid "Follow us"
 msgstr ""
 
-#: tpl/emails/export/body.php:108 tpl/emails/import/body.php:108
-#: tpl/modals/selection/connecting-wpmudev.php:36
-msgid "Shipper"
-msgstr ""
-
-#: tpl/emails/export/body.php:114 tpl/emails/import/body.php:114
-msgid "WPMU DEV Migration Hero"
-msgstr ""
-
-#: tpl/emails/export/body.php:147 tpl/emails/import/body.php:147
-msgid "Everything You Need For WordPress."
-msgstr ""
-
-#: tpl/emails/export/body.php:148 tpl/emails/import/body.php:148
-msgid "One place, one low price, unlimited sites."
-msgstr ""
-
-#: tpl/emails/export/body.php:154 tpl/emails/import/body.php:154
+#: tpl/emails/export/body.php:255 tpl/emails/import/body.php:255
 msgid "INCSUB PO BOX 163, ALBERT PARK, VICTORIA.3206 AUSTRALIA"
-msgstr ""
-
-#: tpl/emails/import/body.php:61
-#. translators: %1$s %2$s %3$s %4$s %5$s %6$s: source and destination site url.
-msgid ""
-"Your site <a style=\"%1$s\" href=\"http://%2$s\" target=\"_blank\">%3$s</a> "
-"was successfully imported to <a style=\"%4$s\" href=\"http://%5$s\" "
-"target=\"_blank\">%6$s</a>."
 msgstr ""
 
 #: tpl/modals/check/hub.php:22
@@ -2634,12 +2611,12 @@ msgstr ""
 msgid "We encountered an error adding site as destination."
 msgstr ""
 
-#: tpl/modals/email-add.php:22 tpl/modals/new-features.php:24
+#: tpl/modals/email-add.php:22 tpl/modals/new-features.php:23
 #: tpl/modals/user-add.php:23
 msgid "Close"
 msgstr ""
 
-#: tpl/modals/email-add.php:26 tpl/pages/settings/notifications.php:134
+#: tpl/modals/email-add.php:26 tpl/pages/settings/notifications.php:131
 msgid "Add Recipient"
 msgstr ""
 
@@ -3011,7 +2988,11 @@ msgstr ""
 msgid "Migration Type"
 msgstr ""
 
-#: tpl/modals/new-features.php:59
+#: tpl/modals/new-features.php:18
+msgid "Site and multisite migration made easy and stress-free"
+msgstr ""
+
+#: tpl/modals/new-features.php:54
 msgid "GOT IT"
 msgstr ""
 
@@ -3475,6 +3456,10 @@ msgstr ""
 msgid "Please wait a few moments while we are checking the account connection…"
 msgstr ""
 
+#: tpl/modals/selection/connecting-wpmudev.php:36
+msgid "Shipper"
+msgstr ""
+
 #. Author of the plugin/theme
 msgid "WPMU DEV"
 msgstr ""
@@ -3652,11 +3637,11 @@ msgstr ""
 msgid "<b>%s</b> has been added as a destination and is ready for migrating!"
 msgstr ""
 
-#: tpl/modals/welcome.php:56
+#: tpl/modals/welcome.php:50
 msgid "Welcome to Shipper - the easiest migration tool for WordPress."
 msgstr ""
 
-#: tpl/modals/welcome.php:74
+#: tpl/modals/welcome.php:68
 msgid "I've done this step"
 msgstr ""
 
@@ -3882,10 +3867,6 @@ msgstr ""
 msgid "Sites migrated via the API will need to be connected to The Hub first."
 msgstr ""
 
-#: tpl/pages/dashboard/main.php:16
-msgid "Dashboard"
-msgstr ""
-
 #: tpl/pages/dashboard/package-migration.php:21
 msgid ""
 "Download and upload a package of your site onto any server (local or live) "
@@ -3900,6 +3881,12 @@ msgstr ""
 msgid "Creating Package"
 msgstr ""
 
+#: tpl/pages/dashboard/settings.php:15 tpl/pages/packages/main.php:11
+#: tpl/pages/packages/settings.php:19 tpl/pages/settings/data.php:41
+#: tpl/pages/settings/main.php:22
+msgid "Settings"
+msgstr ""
+
 #: tpl/pages/dashboard/settings.php:21
 msgid "Configure your settings for the available migration methods"
 msgstr ""
@@ -3912,19 +3899,19 @@ msgstr ""
 msgid "All Settings"
 msgstr ""
 
-#: tpl/pages/dashboard/summary.php:28
+#: tpl/pages/dashboard/summary.php:29
 msgid "Website size (based on last migration)"
 msgstr ""
 
-#: tpl/pages/dashboard/summary.php:37
+#: tpl/pages/dashboard/summary.php:38
 msgid "Last Migration"
 msgstr ""
 
-#: tpl/pages/dashboard/summary.php:40
+#: tpl/pages/dashboard/summary.php:41
 msgid "In Progresss..."
 msgstr ""
 
-#: tpl/pages/dashboard/summary.php:48
+#: tpl/pages/dashboard/summary.php:49
 msgid "Last Migration Method"
 msgstr ""
 
@@ -4568,8 +4555,8 @@ msgstr ""
 
 #: tpl/pages/settings/accessibility.php:57 tpl/pages/settings/data.php:122
 #: tpl/pages/settings/migration.php:134
-#: tpl/pages/settings/notifications.php:170
-#: tpl/pages/settings/pagination.php:50 tpl/pages/settings/permissions.php:92
+#: tpl/pages/settings/notifications.php:164
+#: tpl/pages/settings/pagination.php:53 tpl/pages/settings/permissions.php:92
 msgid "Save changes"
 msgstr ""
 
@@ -4733,23 +4720,23 @@ msgstr ""
 msgid "Choose who should receive an email when migration completes."
 msgstr ""
 
-#: tpl/pages/settings/notifications.php:81
+#: tpl/pages/settings/notifications.php:78
 msgid "Send an email when migration completes"
 msgstr ""
 
-#: tpl/pages/settings/notifications.php:88
+#: tpl/pages/settings/notifications.php:87
 msgid "Recipients"
 msgstr ""
 
-#: tpl/pages/settings/notifications.php:95
+#: tpl/pages/settings/notifications.php:94
 msgid "You haven't added any recipients yet"
 msgstr ""
 
-#: tpl/pages/settings/notifications.php:139
+#: tpl/pages/settings/notifications.php:136
 msgid "Options"
 msgstr ""
 
-#: tpl/pages/settings/notifications.php:151
+#: tpl/pages/settings/notifications.php:145
 msgid "Only send an email if a migration fails"
 msgstr ""
 

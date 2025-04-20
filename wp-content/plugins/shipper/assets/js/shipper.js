@@ -97,7 +97,6 @@
  * Hub checks and welcome modals scripts
  */
 ;
-
 (function ($) {
   /**
    * Actually closes dialog and stores the dialog close choice
@@ -111,31 +110,28 @@
       SUI.closeModal();
     });
   }
+
   /**
    * Handles dialog closing button click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_close_dialog(e) {
     if (e && e.preventDefault) e.preventDefault();
     close_dialog();
     return false;
   }
+
   /**
    * Handles skip link click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_skip_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     window.location.reload();
     return false;
   }
-
   function open_modal(replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id();
@@ -146,21 +142,17 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-welcome';
   }
-
   function get_modal() {
     return $('#' + get_modal_id());
   }
-
   function boot_welcome_dialogs() {
     open_modal();
     $('.shipper-welcome-continue').on('click', handle_close_dialog);
     $('.shipper-welcome a[href="#skip"]').on('click', handle_skip_click);
   }
-
   $(function () {
     if (get_modal().length) {
       $(window).on('load', boot_welcome_dialogs);
@@ -181,7 +173,6 @@
  * Hub checks and welcome modals scripts
  */
 ;
-
 (function ($) {
   /**
    * Handles dialog closing button click
@@ -203,25 +194,22 @@
     });
     return false;
   }
+
   /**
    * Handles skip link click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_recheck_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     window.location.reload();
     return false;
   }
-
   function boot_system_dialog() {
     $('.sui-dialog.shipper-system-check').attr('aria-hidden', false);
     $('.shipper-system-check a[href="#recheck"]').on('click', handle_recheck_click);
     $('.shipper-system-check a[href="#override"]').on('click', handle_close_dialog);
   }
-
   $(function () {
     if ($('.sui-dialog.shipper-system-check').length) {
       $(window).on('load', boot_system_dialog);
@@ -239,73 +227,60 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   var CHECK_TIMEOUT = 500;
-
   var _ticker;
-
   function is_working_dialog() {
     return !!$('#shipper-preflight-check').is('.shipper-working');
   }
+
   /**
    * Initiates preflight checks
    */
-
-
   function begin_checks() {
     $('#shipper-preflight-check').attr('aria-hidden', false);
-
     if (!is_working_dialog()) {
       return false;
     }
-
     start_receiving();
   }
+
   /**
    * Starts listening to heartbeat ticks
    */
-
-
   function start_receiving() {
     _ticker.start(heartbeat_request, heartbeat_response);
   }
+
   /**
    * Stop listening to heartbeat ticks
    */
-
-
   function stop_receiving() {
     _ticker.stop();
   }
+
   /**
    * Adds Shipper flag to heartbeat request
    */
-
-
   function heartbeat_request(event, data) {
     data['shipper-preflight'] = true;
   }
+
   /**
    * Deals with heartbeat response from the back-end
    */
-
-
   function heartbeat_response(event, data) {
     if (!data['shipper-preflight']) {
       return;
     }
-
     var is_done = !!(data['shipper-preflight'] || {}).is_done,
-        checks_sections = (data['shipper-preflight'] || {}).sections || {},
-        dfr = new $.Deferred(),
-        total_checks = 0,
-        tasks = [];
-
+      checks_sections = (data['shipper-preflight'] || {}).sections || {},
+      dfr = new $.Deferred(),
+      total_checks = 0,
+      tasks = [];
     if (heartbeat_response.is_working) {
       return ping_or_finish(is_done);
     }
-
     heartbeat_response.is_working = true;
     $.each(checks_sections, function (section, data) {
       tasks.push(data);
@@ -322,25 +297,20 @@
     setTimeout(dfr.resolve);
     if (!is_done) return _ticker.ping();
   }
-
   function ping_or_finish(is_done) {
     if (is_done && is_working_dialog()) {
       stop_receiving(); // Yeah, we're done.
-
       window.location.reload();
       return false;
     } else _ticker.ping();
   }
-
   function preflight_cancel_popup(e) {
     if (e && e.preventDefault) {
       e.preventDefault;
     }
-
     if (!_ticker.is_running()) {
       return stop_check_and_back();
     }
-
     var modal = open_modal('shipper-preflight-cancel-dialog');
     modal.find('.shipper-preflight-continue').off('click').on('click', function () {
       SUI.closeModal();
@@ -348,30 +318,24 @@
     modal.find('.shipper-preflight-cancel').off('click').on('click', stop_check_and_back);
     return false;
   }
-
   function stop_check_and_back(e) {
     if (e && e.preventDefault) {
       e.preventDefault;
     }
-
     var back_url = $('.shipper-select-check a.shipper-button-back').attr('href');
-
     if (!back_url) {
       return false;
     }
-
     stop_receiving(); // Stop checking, please.
 
     preflight_cancel(back_url);
     return false;
   }
-
   function preflight_cancel(url) {
     $.post(ajaxurl, {
       action: 'shipper_preflight_cancel'
     }).done(function (rsp) {
       var status = !!(rsp || {}).success;
-
       if (!!status) {
         window.location = url;
       } else {
@@ -381,27 +345,22 @@
       }
     });
   }
-
   function complete_section(section) {
     if (is_section_done(section)) return true;
     var done = $('.sui-progress-bar').data('shipper-sections-done') || [];
     done.push(section);
     $('.sui-progress-bar').data('shipper-sections-done', done);
   }
-
   function is_section_done(section) {
     var done = $('.sui-progress-bar').data('shipper-sections-done') || [];
     return done.indexOf(section) >= 0;
   }
-
   function render_check_result(checks, section, is_done, total) {
     var check_percentage = 0;
     checks_length = !!(checks || []).length, dfr = new $.Deferred();
-
     if (!checks_length || is_section_done(section)) {
       return dfr.resolve();
     }
-
     render_checks_section(section, checks);
     checks.forEach(function (check, idx, checks) {
       check_percentage++;
@@ -413,13 +372,11 @@
           status: check.status,
           is_done: is_done
         });
-
         if (idx === checks.length - 1) {
           setTimeout(function () {
             if (!!is_done) {
               complete_section(section);
             }
-
             dfr.resolve();
           }, CHECK_TIMEOUT);
         }
@@ -427,7 +384,6 @@
     });
     return dfr;
   }
-
   function render_checks_section(section, checks) {
     $('.sui-progress-state-subtext').empty();
     $('.sui-progress-state-text').html(section);
@@ -437,22 +393,19 @@
       $('.sui-progress-state-subtext').append(node);
     });
   }
+
   /**
    * Updates progress bar UI
    *
    * @param {Object} state State object to update UI with.
    */
-
-
   function update_progress_bar(state) {
     var raw_progress = parseInt((state || {}).progress, 10) || 0;
-
     if (!raw_progress && 'relative_progress' in state) {
       var relprogress = parseInt(state.relative_progress, 10) || 0;
       raw_progress = parseInt($('.sui-progress-bar').data('raw_progress'), 10) || 0;
       raw_progress += relprogress;
     }
-
     if (raw_progress >= 100) raw_progress = 99;
     var progress = raw_progress + '%';
     var msg = (state || {}).msg || false;
@@ -460,45 +413,36 @@
     var check = (state || {}).check || false;
     var status = (state || {}).status || false;
     var is_done = !!(state || {}).is_done;
-
     if (raw_progress > 0) {
       $('.sui-progress-bar').data('raw_progress', raw_progress);
       $('.sui-progress-bar span').css('width', progress);
       $('.sui-progress-text span').text(progress);
     }
-
     if (section) {
       $('.sui-progress-state-text').html(section);
     }
-
     if (msg) {
       $('.sui-progress-state-subtext').text(msg);
     } else if (!!check && !!status) {
       update_check_node_status(check, status, is_done);
     }
   }
-
   function update_check_node_status(check, status, is_done) {
     var cid = get_check_node_id(check),
-        $node = $('#' + cid);
-
+      $node = $('#' + cid);
     if (!$node.length) {
       return false;
     }
-
     if (is_done) {
       $node.find('i').remove();
       $node.append(get_status_icon(status));
     }
   }
-
   function get_check_node_id(check) {
     return 'shipper-' + check.replace(/[^a-z]/ig, '').toLowerCase() + '-check';
   }
-
   function get_status_icon(status) {
     var icon = '';
-
     if ('ok' === status) {
       icon = 'sui-icon-check-tick sui-success';
     } else if ('warning' === status) {
@@ -506,9 +450,9 @@
     } else {
       icon = 'sui-icon-warning-alert sui-error';
     }
-
     return '<i class="' + icon + '"></i>';
   }
+
   /**
    * Re-initiates the preflight check
    *
@@ -516,13 +460,10 @@
    *
    * @return bool
    */
-
-
   function refresh(e) {
     if (e && e.preventDefault) {
       e.preventDefault;
     }
-
     $.post(ajaxurl, {
       action: 'shipper_preflight_restart'
     }).done(function (rsp) {
@@ -530,14 +471,13 @@
     });
     return false;
   }
+
   /**
    * Dispatches checks event listeners and boots the checks
    */
-
-
   function bootstrap_check_page() {
-    _ticker = new window._shipper.Ticker('shipper-preflight'); // show_page( 'progress' );
-
+    _ticker = new window._shipper.Ticker('shipper-preflight');
+    // show_page( 'progress' );
     update_progress_bar({
       progress: 0
     });
@@ -546,18 +486,16 @@
     $('.shipper-select-check a.shipper-button-back').on('click', preflight_cancel_popup);
     $('.shipper-select-check .sui-progress-close').on('click', preflight_cancel_popup);
   }
+
   /**
    * Boots the UI for "ready" state
    */
-
-
   function bootstrap_ready_page() {
     open_modal('shipper-migration-ready');
     $('#shipper-migration-ready button[data-a11y-dialog-hide]').off('click').on('click', function () {
       var $el = $('#shipper-migration-ready [data-cancel-url]'),
-          url = $el.attr('data-cancel-url'),
-          wpnonce = $el.attr('data-wpnonce');
-
+        url = $el.attr('data-cancel-url'),
+        wpnonce = $el.attr('data-wpnonce');
       if (url) {
         $.post(ajaxurl, {
           action: 'shipper_reset_migration',
@@ -568,17 +506,14 @@
       }
     });
   }
-
   $(window).on('load', function () {
     if ($('#shipper-preflight-check').length) {
       bootstrap_check_page();
     }
-
     if ($('#shipper-migration-ready').length) {
       bootstrap_ready_page();
     }
   });
-
   function open_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -589,22 +524,19 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
+
   /**
    * Clear DB Preifx on ready to ship page (API migration)
    * Back button
    *
    * @since 1.2.1
    */
-
-
   if ($('.shipper-page-migrate').length) {
     $('.shipper-migration-ready a.shipper-button-back.clear-db-prefix').off('click').on('click', function (e) {
       e.preventDefault();
@@ -627,33 +559,30 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   function init() {
     if ($('.shipper-db-prefix-modal').length) {
       //open modal
       $(window).on('load', function () {
         open_modal();
-        $('.shipper-db-prefix-modal').find('.sui-tab-item.active input[name="migrate_dbprefix"]').click();
+        $('.shipper-db-prefix-modal').find('.sui-tab-item.active input[name="migrate_dbprefix"]').get(0).click();
       });
       $('.shipper-db-prefix-modal .sui-dialog-close,' + ' .shipper-db-prefix-modal .shipper-cancel').on('click', handle_preflight_cancel);
       $('.shipper-update-prefix').on('click', handle_update_prefix);
       $('.shipper-db-prefix-modal button[data-modal-close]').on('click', handle_preflight_cancel);
     }
   }
-
   function stop_prop(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
     return false;
   }
+
   /**
    * Copy the code form preflight as the process much same
    * @param e
    * @returns {boolean}
    */
-
-
   function handle_preflight_cancel(e) {
     $.post(ajaxurl, {
       action: 'shipper_preflight_cancel'
@@ -662,11 +591,10 @@
     });
     return stop_prop(e);
   }
+
   /**
    * Saving the prefix option to current migration
    */
-
-
   function handle_update_prefix(e) {
     var option = $('input[name="migrate_dbprefix"]');
     option.each(function (key, element) {
@@ -682,11 +610,11 @@
     }, function (data) {
       if (data.success === true) {
         location.reload();
-      } else {//show error
+      } else {
+        //show error
       }
     });
   }
-
   function open_modal(replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id();
@@ -697,15 +625,12 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-db-prefix';
   }
-
   function get_modal() {
     return $('#' + get_modal_id());
   }
-
   $(init());
 })(jQuery);
 
@@ -719,7 +644,6 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   function init() {
     if ($('#shipper-migration-exclusion').length) {
@@ -732,28 +656,25 @@
       $(document).on('click', '.shipper-update-exclusion', update_exclusion);
     }
   }
-
   function insert_quicklink(e) {
     var path = $(this).attr('data-path'),
-        $target = $(this).closest('.sui-form-field').find('textarea'),
-        paths = $target.val().split("\n");
+      $target = $(this).closest('.sui-form-field').find('textarea'),
+      paths = $target.val().split("\n");
     paths.push(path);
     $target.val($.trim(paths.join("\n")));
     return stop_prop(e);
   }
-
   function stop_prop(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
     return false;
   }
+
   /**
    * Copy the code form preflight as the process much same
    * @param e
    * @returns {boolean}
    */
-
-
   function handle_preflight_cancel(e) {
     $.post(ajaxurl, {
       action: 'shipper_preflight_cancel'
@@ -762,7 +683,6 @@
     });
     return stop_prop(e);
   }
-
   function update_exclusion(e) {
     var data = _.extend({
       action: 'shipper_migration_exclusion'
@@ -773,7 +693,6 @@
     }, {
       'exclude_extra': gather_advanced()
     });
-
     var el = $(e.target);
     $.post(ajaxurl, data, function (data) {
       if (data.success === true) {
@@ -781,30 +700,26 @@
       }
     });
   }
-
   function gather_files() {
     return $('.shipper-file-exclusions textarea').val().split("\n");
   }
-
   function gather_database() {
     var $selected = $('.sui-tree [aria-selected="true"] [data-table]'),
-        sel = [];
+      sel = [];
     $selected.each(function () {
       sel.push($(this).attr('data-table'));
     });
     return sel;
   }
-
   function gather_advanced() {
     var $els = $('.sui-checkbox-stacked :checkbox'),
-        opts = [];
+      opts = [];
     $els.each(function () {
       if (!$(this).is(':checked')) return true;
       opts.push($(this).attr('name'));
     });
     return opts;
   }
-
   function open_modal(replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id();
@@ -815,15 +730,12 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-migration-exclusion';
   }
-
   function get_modal() {
     return $('#' + get_modal_id());
   }
-
   $(init());
 })(jQuery);
 
@@ -840,23 +752,18 @@
  * Initial web site addition
  */
 ;
-
 (function ($) {
   var MSG_SHOW_INTERVAL = 5 * 1000;
-
   function show_state(state) {
     $('.shipper-destination-state').hide();
     get_state(state).show();
   }
-
   function get_state(state) {
     return $('.shipper-destination-state-' + state);
   }
-
   function hide_messages() {
     $('.shipper-destination-added-message .sui-notice').hide();
   }
-
   function show_message(msg) {
     hide_messages();
     var $msg = $('.shipper-destination-added-message .status-' + msg);
@@ -865,73 +772,64 @@
     }, MSG_SHOW_INTERVAL);
     return $msg.show();
   }
-
   function handle_dismiss_notice(e) {
     if (e && e.preventDefault) e.preventDefault();
     hide_messages();
     $('.select-container').removeClass('active');
     return false;
   }
+
   /**
    * Handles add link click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_show_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     var $dialog = $('.shipper-destination-add.sui-dialog'),
-        initial_state = $dialog.data('shipper-initial-state') || 'add';
+      initial_state = $dialog.data('shipper-initial-state') || 'add';
     handle_dismiss_notice();
     $dialog.attr('aria-hidden', false);
-
     if ('add' === initial_state) {
       show_state('add');
     } else handle_connect_click();
-
     return false;
   }
+
   /**
    * Handles back link click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_back_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     var $dialog = $('.shipper-destination-add.sui-dialog'),
-        initial_state = $dialog.data('shipper-initial-state') || 'add';
-
+      initial_state = $dialog.data('shipper-initial-state') || 'add';
     if ('add' === initial_state) {
       show_state('add');
     } else {
       show_state('connect');
     }
-
     return false;
   }
+
   /**
    * Handles close dialog click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_close_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     hide_messages();
     $('.shipper-destination-add.sui-dialog').attr('aria-hidden', true);
     return false;
   }
+
   /**
    * Handles connection check click
    *
    * @param {Object} e Event object
    */
-
-
   function handle_check_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     show_state('check');
@@ -941,7 +839,6 @@
       show_state('fail');
     }).done(function (data) {
       var success = !!(data || {}).success;
-
       if (success) {
         return window.location.reload();
       } else {
@@ -950,14 +847,12 @@
     });
     return false;
   }
-
   function handle_hub_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     hide_messages();
     show_state('hub');
     return false;
   }
-
   function handle_connect_click(e) {
     if (e && e.preventDefault) e.preventDefault();
     hide_messages();
@@ -969,8 +864,8 @@
       show_state('connect');
       show_message('refresh');
       var $target = get_state('connect').find('.shipper-selection.select-name'),
-          sites = (resp || {}).data || [],
-          content = '';
+        sites = (resp || {}).data || [],
+        content = '';
       $.each(sites, function (idx, site) {
         content += '<option value="' + site + '">' + site + '</option>';
       });
@@ -981,7 +876,6 @@
       get_state('connect').find('button[type="submit"]').off('click').on('click', function (e) {
         if (e && e.preventDefault) e.preventDefault();
         var to_prepare = get_state('connect').find('select[name="site"]').val();
-
         if (to_prepare) {
           show_state('prepare');
           $.post(ajaxurl, {
@@ -990,10 +884,9 @@
             _wpnonce: get_state('prepare').find('[name="_wpnonce"]').val()
           }).always(function (data) {
             var done = (data || {}).success,
-                msg = done ? 'success' : 'failure';
+              msg = done ? 'success' : 'failure';
             handle_close_click();
             show_message(msg);
-
             if (done) {
               // If this was a success, we will want to
               // reload the page to pick up the new stuff.
@@ -1001,13 +894,11 @@
             }
           });
         }
-
         return false;
       });
     });
     return false;
   }
-
   function boot_dialog() {
     $('.shipper-add-website').on('click', handle_show_click);
     $('.sui-dialog-close').on('click', handle_close_click);
@@ -1016,13 +907,12 @@
     $(document).on('click', 'a[href="#connect"].shipper-connect', handle_connect_click);
     $(document).on('click', '.sui-notice-dismiss a', handle_dismiss_notice);
   }
+
   /**
    * Sends out the destination removal request
    *
    * @return object $.Deferred instance
    */
-
-
   function remove_destination(site_id) {
     return $.post(ajaxurl, {
       action: 'shipper_remove_destination',
@@ -1037,18 +927,15 @@
    *
    * @return object $.Deferred instance
    */
-
-
   function remove_destination_popup(site_id, site_name) {
     var dfr = new $.Deferred(),
-        $container = $('.select-container.active'),
-        oldz = $container.css('z-index'),
-        $popup = $('#shipper-destdelete-confirmation'),
-        close = function close() {
-      $container.css('z-index', oldz);
-      $popup.attr('aria-hidden', true).hide();
-    };
-
+      $container = $('.select-container.active'),
+      oldz = $container.css('z-index'),
+      $popup = $('#shipper-destdelete-confirmation'),
+      close = function close() {
+        $container.css('z-index', oldz);
+        $popup.attr('aria-hidden', true).hide();
+      };
     $container.css('z-index', 0);
     $popup.find('.shipper-destdelete-target').text(site_name).end().find('.shipper-destdelete-continue').off('click').on('click', function (e) {
       if (e && e.preventDefault) e.preventDefault();
@@ -1072,76 +959,63 @@
     }).end().show();
     return dfr.promise();
   }
+
   /**
    * Moves the export screen "Add destination" notification
    * into the site selection dropdown.
    */
-
-
   function boot_selection_message_placement() {
     var $root = $('.shipper-page-migrate .shipper-selection'),
-        $msg = $root.find('.shipper-page-notice'),
-        $dropdown = $root.find('.list-results');
-
+      $msg = $root.find('.shipper-page-notice'),
+      $dropdown = $root.find('.list-results');
     if (!$msg.length) {
       return false;
     }
-
     $dropdown.prepend('<li class="shipper-moved-msg" />').end().find('li.shipper-moved-msg').append($msg);
     $msg.show();
   }
+
   /**
    * Injects destination selection items with removal markup
    * and sets up the callbacks
    */
-
-
   function boot_destinations_selection() {
     boot_selection_message_placement();
-
     var $root = $('.shipper-page-migrate .shipper-selection'),
-        $items = $root.find('ul.list-results li'),
-        $selected = $root.find('.list-value'),
-        callback = function callback(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      if (e && e.stopPropagation) e.stopPropagation();
-      $('.shipper-destdelete-success').hide();
-      var $me = $(this),
+      $items = $root.find('ul.list-results li'),
+      $selected = $root.find('.list-value'),
+      callback = function callback(e) {
+        if (e && e.preventDefault) e.preventDefault();
+        if (e && e.stopPropagation) e.stopPropagation();
+        $('.shipper-destdelete-success').hide();
+        var $me = $(this),
           $item = $me.closest('li'),
           site_id = $item.data('value');
-      $me.removeClass('sui-icon-trash').addClass('sui-icon-loader sui-loading');
-
-      if ($item.length && site_id) {
-        remove_destination_popup(site_id, $item.text()).done(function () {
-          if ($item.is('.current')) {
-            $item.next('li').trigger('click');
-          }
-
-          $item.remove();
-        }).always(function () {
-          $me.addClass('sui-icon-trash').removeClass('sui-icon-loader sui-loading');
-        });
-      }
-
-      return false;
-    };
-
+        $me.removeClass('sui-icon-trash').addClass('sui-icon-loader sui-loading');
+        if ($item.length && site_id) {
+          remove_destination_popup(site_id, $item.text()).done(function () {
+            if ($item.is('.current')) {
+              $item.next('li').trigger('click');
+            }
+            $item.remove();
+          }).always(function () {
+            $me.addClass('sui-icon-trash').removeClass('sui-icon-loader sui-loading');
+          });
+        }
+        return false;
+      };
     $items.each(function () {
       var $me = $(this);
-
       if ($me.is('.shipper-moved-msg')) {
         return true;
       }
-
       $me.append('<i class="sui-icon-trash" aria-hidden="true"></i>').find('i').off('click').on('click', callback);
     });
   }
-
   $(function () {
     if ($('.shipper-destination-add.sui-dialog').length) {
       $(window).on('load', boot_dialog);
     }
-
     if ($('.shipper-page-migrate .shipper-selection')) {
       $(window).on('load', boot_destinations_selection);
     }
@@ -1158,7 +1032,6 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   function init() {
     if ($('#shipper-network-type').length) {
@@ -1188,7 +1061,6 @@
                   results: {}
                 };
               }
-
               var options = response.data.map(function (option) {
                 return {
                   id: option.site_id,
@@ -1201,25 +1073,23 @@
             }
           }
         });
-        $('#shipper-network-type').find('.sui-tab-item.active input[name="network_mode"]').click();
+        $('#shipper-network-type').find('.sui-tab-item.active input[name="network_mode"]').get(0).click();
       });
       $('#shipper-network-type .sui-modal-close,' + ' .shipper-db-prefix-modal .shipper-cancel').on('click', handle_preflight_cancel);
       $('.shipper-update-networktype').on('click', handle_update_networktype);
     }
   }
-
   function stop_prop(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
     return false;
   }
+
   /**
    * Copy the code form preflight as the process much same
    * @param e
    * @returns {boolean}
    */
-
-
   function handle_preflight_cancel(e) {
     $.post(ajaxurl, {
       action: 'shipper_preflight_cancel'
@@ -1228,12 +1098,10 @@
     });
     return stop_prop(e);
   }
-
   function handle_update_networktype() {
     var site_id = $('select[name="site_id"]').val();
     var mode = $('input[name="network_mode"]');
     var hidden_mode = $('input:hidden[name="network_mode"]').val();
-
     if (mode && mode.length) {
       mode.each(function (key, element) {
         if ($(element).is(':checked')) {
@@ -1242,9 +1110,9 @@
       });
     } else {
       mode = false;
-    } // hidden_mode is defined in import screen only. So if it's found, update mode with hidden_mode.
+    }
 
-
+    // hidden_mode is defined in import screen only. So if it's found, update mode with hidden_mode.
     mode = hidden_mode ? hidden_mode : mode;
     $.post(ajaxurl, {
       action: 'shipper_networktype_update',
@@ -1253,11 +1121,11 @@
     }, function (data) {
       if (data.success === true) {
         location.reload();
-      } else {//show error
+      } else {
+        //show error
       }
     });
   }
-
   function open_modal(replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id();
@@ -1268,15 +1136,12 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-network-type';
   }
-
   function get_modal() {
     return $('#' + get_modal_id());
   }
-
   $(init());
 })(jQuery);
 
@@ -1293,7 +1158,6 @@
  * New features js
  */
 ;
-
 (function ($) {
   function open_modal(replace_modal) {
     var replace_modal = replace_modal ? true : false;
@@ -1305,15 +1169,12 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-new-features';
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id());
   }
-
   function shipper_new_feature(e) {
     e.preventDefault();
     var data = {
@@ -1324,7 +1185,6 @@
       SUI.closeModal();
     });
   }
-
   function boot() {
     $(window).on('load', function () {
       if (get_modal().length) {
@@ -1332,7 +1192,6 @@
       }
     });
   }
-
   boot();
 })(jQuery);
 
@@ -1346,48 +1205,37 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   var Filter = function Filter($root, type, filter_callback) {
     function get_filter_form_field() {
       return $('.shipper-filter-area [data-filter-field="' + type + '"]', $root);
     }
-
     function get_filter_form_value() {
       return get_filter_form_field().find(':input').val();
     }
-
     function reset_filter_form_field() {
       get_filter_form_field().find(':input').val('');
       clear_active_filter();
     }
-
     function get_active_filter() {
       return $('.shipper-active-filters .shipper-filter', $root).filter('[data-filter-type="' + type + '"]');
     }
-
     function clear_active_filter() {
       get_active_filter().removeClass('shipper-filter-active');
     }
-
     function is_active_filter() {
       return get_active_filter().is('.shipper-filter-active');
     }
-
     function update_active_filter(value) {
       clear_active_filter();
-
       if (!value) {
         return false;
       }
-
       get_active_filter().addClass('shipper-filter-active').find('.shipper-filter-target').text(value);
     }
-
     function get_filter_callback() {
       return filter_callback(get_filter_form_value());
     }
-
     var filter = {
       apply_filter: function apply_filter() {
         update_active_filter(get_filter_form_value());
@@ -1401,63 +1249,51 @@
     };
     return filter;
   };
-
   var Pagination = function Pagination($root) {
     var PER_PAGE = parseInt((_shipper || {}).per_page || 10);
     var _current_page = 1;
-
     function get_current_page() {
       return _current_page || 1;
     }
-
     function set_current_page(idx) {
       _current_page = idx || 1;
     }
-
     function apply_pagination(page) {
       if (page) {
         set_current_page(page);
       }
-
       page = get_current_page();
       var start = (page - 1) * PER_PAGE + 1,
-          end = page * PER_PAGE,
-          $rows = $('.shipper-filelist tr.shipper-paginated', $root),
-          $pagination_items = $('.sui-pagination li', $root),
-          current = 0;
+        end = page * PER_PAGE,
+        $rows = $('.shipper-filelist tr.shipper-paginated', $root),
+        $pagination_items = $('.sui-pagination li', $root),
+        current = 0;
       $rows.removeClass('shipper-paginated-visible');
       $rows.each(function () {
         current++;
-
         if (current < start) {
           return true;
         }
-
         if (current > end) {
           return false;
         }
-
         var $row = $(this);
         $row.addClass('shipper-paginated-visible');
       });
       $pagination_items.removeClass('sui-active').filter('[data-idx="' + page + '"]').addClass('sui-active');
       $root.trigger('shipper-pagination-applied');
     }
-
     function build_pagination() {
       var $paginations = $('.sui-pagination', $root),
-          $rows = $('.shipper-filelist tr.shipper-paginated', $root),
-          items = Math.ceil($rows.length / PER_PAGE);
-
+        $rows = $('.shipper-filelist tr.shipper-paginated', $root),
+        items = Math.ceil($rows.length / PER_PAGE);
       if ($rows.length <= PER_PAGE) {
         $paginations.remove();
         return false;
       }
-
       $paginations.each(function () {
         var $pagination = $(this),
-            $first = $pagination.find('li:first');
-
+          $first = $pagination.find('li:first');
         for (var i = 1; i <= items; i++) {
           var $tpl = $first.clone();
           $tpl.attr('data-idx', i).find('a').attr('href', '#page-' + i).text(i).off('click').on('click', function (e) {
@@ -1483,14 +1319,12 @@
       });
       $paginations.show();
     }
-
     function destroy_pagination() {
       var $paginations = $('.sui-pagination', $root),
-          $items = $paginations.find('[data-idx]');
+        $items = $paginations.find('[data-idx]');
       $items.remove();
       $paginations.hide();
     }
-
     build_pagination();
     return {
       build: build_pagination,
@@ -1499,7 +1333,6 @@
       get_current: get_current_page
     };
   };
-
   var PaginatedFilterArea = function PaginatedFilterArea($root) {
     var FILTER_PATH = 'path';
     var FILTER_TYPE = 'type';
@@ -1525,29 +1358,22 @@
         return parseInt($(this).attr('data-size'), 10) > size_mb;
       };
     });
-
     var _pagination = new Pagination($root);
-
     _pagination.apply();
-
     function filter_form_reset() {
       $.each(_filters, function (type, filter) {
         filter.reset_filter();
       });
       unselect_all();
-
       _pagination.destroy();
-
       _pagination.build();
-
       _pagination.apply();
     }
-
     function filter_form_apply() {
       unselect_all();
       var $element = $('tr.shipper-paginated', $root).removeClass('shipper-paginated-visible').filter(function (index) {
         var me = this,
-            show = true;
+          show = true;
         $.each(_filters, function (type, filter) {
           show = filter.apply_filter().call(me, index);
           if (!show) return false;
@@ -1555,10 +1381,8 @@
         return show;
       }).addClass('shipper-paginated-visible');
       $root.trigger('shipper-filter-form-apply', [$element]);
-
       _pagination.destroy();
     }
-
     function get_active_filter_types() {
       var active = [];
       $.each(_filters, function (type, filter) {
@@ -1568,42 +1392,31 @@
       });
       return active;
     }
-
     function has_active_filters() {
       return !!get_active_filter_types().length;
     }
-
     function handle_remove_active_filter(e) {
       var $active = $(this);
-
       if (!$active.is('.shipper-filter')) {
         $active = $active.closest('.shipper-filter');
       }
-
       var type = $active.attr('data-filter-type');
-
       _filters[type].reset_filter();
-
       filter_form_apply();
-
       if (!has_active_filters()) {
         filter_form_reset();
       }
-
       return stop_prop(e);
     }
-
     function toggle_all_selection_visible() {
       var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root),
-          $me = $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root);
-
+        $me = $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root);
       if ($me.is(':checked')) {
         select_all();
       } else {
         unselect_all();
       }
     }
-
     function select_all() {
       var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root);
       $rows.each(function (idx, row) {
@@ -1612,12 +1425,10 @@
       $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root).prop('checked', true);
       toggle_bulk_actions_disabled();
     }
-
     function select($row) {
       $row.find(':checkbox[name="shipper-bulk"]').prop('checked', true);
       toggle_bulk_actions_disabled();
     }
-
     function unselect_all() {
       var $rows = $('.shipper-filelist tr.shipper-paginated-visible', $root);
       $rows.each(function (idx, row) {
@@ -1626,66 +1437,53 @@
       $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root).prop('checked', false);
       toggle_bulk_actions_disabled();
     }
-
     function unselect($row) {
       $row.find(':checkbox[name="shipper-bulk"]').prop('checked', false);
       toggle_bulk_actions_disabled();
     }
-
     function toggle_bulk_actions_disabled_raw() {
       var $rows = $('.shipper-filelist tr.shipper-paginated-visible').find(':checkbox[name="shipper-bulk"]:checked');
       $('.shipper-bulk-actions-field select, .shipper-bulk-actions-field button').attr('disabled', !$rows.length);
     }
-
     var toggle_bulk_actions_disabled = _.debounce(toggle_bulk_actions_disabled_raw, 100);
-
     function handle_filter_area_toggle(e) {
       var $el = $(this),
-          $target = $('.shipper-filter-area', $root);
+        $target = $('.shipper-filter-area', $root);
       $el.toggleClass('sui-active');
       unselect_all();
-
       if ($el.is('.sui-active')) {
         $target.show();
       } else {
         $target.hide();
-
         if (!has_active_filters()) {
           filter_form_reset();
         }
       }
-
       return stop_prop(e);
     }
-
     function apply_bulk_actions() {
       var $me = $('.shipper-bulk-actions-field', $root),
-          $els = $(':checkbox[name="shipper-bulk"]:checked', $root),
-          action = $(this).closest('.sui-form-field').find('select').val(),
-          els = [];
-
+        $els = $(':checkbox[name="shipper-bulk"]:checked', $root),
+        action = $(this).closest('.sui-form-field').find('select').val(),
+        els = [];
       var $msgroot = $('.shipper-toggle-success'),
-          hide_warning = function hide_warning() {
-        $msgroot.find('.sui-notice-content').hide().end().hide();
-      };
-
+        hide_warning = function hide_warning() {
+          $msgroot.find('.sui-notice-content').hide().end().hide();
+        };
       hide_warning();
       if (!action || !$els.length) return false;
       $me.find('button').attr('disabled', true).end().find('select').attr('disabled', true).end().find('.sui-with-button').append('<i class="sui-icon-loader sui-loading"></i>');
       $els.each(function () {
         var $el = $(this).closest('tr'),
-            dfr = new $.Deferred();
-
+          dfr = new $.Deferred();
         if ('exclude' === action && $el.is('.shipper-file-excluded')) {
           // Already excluded, don't bother.
           return true;
         }
-
         if ('include' === action && !$el.is('.shipper-file-excluded')) {
           // Already included, carry on.
           return true;
         }
-
         els.push({
           path: $el.attr('data-path'),
           _wpnonce: $el.find('[data-wpnonce]').attr('data-wpnonce')
@@ -1707,15 +1505,12 @@
         update_package_size_message();
       });
     }
-
     function enter_to_apply_filters(e) {
       var key = e.which;
-
       if (13 === key) {
         filter_form_apply();
       }
     }
-
     function toggle_files_top_level_warning() {
       /*
       var $notice = $( '.shipper-wizard-files .sui-notice.sui-notice-warning' ),
@@ -1731,41 +1526,33 @@
       }
       */
     }
-
     function update_package_size_message() {
       var $package_size = $('#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last .shipper-check-status');
-
       if (!$package_size.find('i.sui-loading').length) {
         $package_size.append('<i class="sui-icon-loader sui-loading"></i>');
       }
-
       var urlParams = new URLSearchParams(window.location.search);
       var action = 'shipper_get_package_size_message';
-
       if ('shipper-packages' === urlParams.get('page')) {
         action = 'shipper_package_get_package_size_message';
       }
-
       $.post(ajaxurl, {
         action: action
       }, function (rsp) {
         var oversized = ((rsp || {}).data || {}).oversized || false,
-            markup = ((rsp || {}).data || {}).markup || false,
-            excluded = ((rsp || {}).data || {}).excluded || 0,
-            package_size = ((rsp || {}).data || {}).package_size || '';
-
+          markup = ((rsp || {}).data || {}).markup || false,
+          excluded = ((rsp || {}).data || {}).excluded || 0,
+          package_size = ((rsp || {}).data || {}).package_size || '';
         if (!markup) {
           // No markup, nothing to do here.
           return false;
         }
-
         $(document).trigger('shipper:preflight-files:package_size', [package_size]);
         var $target = $('#shipper-preflight-results [data-section="files"] div.sui-accordion-item:last'),
-            $msg = $('.shipper-package-size-summary'),
-            $file_items = $('#shipper-preflight-results .shipper-filelist tbody tr'),
-            $status = $target.find('div.shipper-check-status .sui-tag'),
-            $title_status = $target.find('.sui-accordion-item-title i');
-
+          $msg = $('.shipper-package-size-summary'),
+          $file_items = $('#shipper-preflight-results .shipper-filelist tbody tr'),
+          $status = $target.find('div.shipper-check-status .sui-tag'),
+          $title_status = $target.find('.sui-accordion-item-title i');
         if (!!oversized) {
           $status.removeClass('sui-tag-success').addClass('sui-tag-warning').text(package_size);
           $title_status.removeClass('sui-success').addClass('sui-warning');
@@ -1773,7 +1560,6 @@
           $status.removeClass('sui-tag-warning').addClass('sui-tag-success').text(package_size);
           $title_status.removeClass('sui-warning').addClass('sui-success');
         }
-
         $msg.each(function () {
           $(this).replaceWith(markup);
         });
@@ -1784,46 +1570,42 @@
         update_files_tab_status();
       });
     }
-
     var debounced_msg_update = _.debounce(update_package_size_message, 1000);
-
     function update_file_item_check_row(row_cls) {
       var $root = $('#shipper-preflight-results [data-section="files"]'),
-          $row = $root.find('div.sui-accordion-item' + row_cls),
-          $cnt_row = $row.find('div.sui-accordion-item-body'),
-          $status = $row.find('.sui-tag'),
-          $title_status = $row.find('.sui-accordion-item-title i');
-      ex = $cnt_row.find('tbody .shipper-paginated:not(.shipper-file-excluded)').length; // Update the counts.
+        $row = $root.find('div.sui-accordion-item' + row_cls),
+        $cnt_row = $row.find('div.sui-accordion-item-body'),
+        $status = $row.find('.sui-tag'),
+        $title_status = $row.find('.sui-accordion-item-title i');
+      ex = $cnt_row.find('tbody .shipper-paginated:not(.shipper-file-excluded)').length;
 
-      $status.text(ex); // Update the colors.
+      // Update the counts.
+      $status.text(ex);
 
+      // Update the colors.
       if (ex) {
         $status.removeClass('sui-tag-success').addClass('sui-tag-warning');
         $title_status.removeClass('sui-success').addClass('sui-warning');
       } else {
         $status.removeClass('sui-tag-warning').addClass('sui-tag-success');
         $title_status.removeClass('sui-warning').addClass('sui-success');
-      } // Update the status messages.
+      }
 
-
+      // Update the status messages.
       var $cell = $row.find('[data-shipper-success-msg]');
-
       if ($status.is('.sui-tag-success')) {
         $cell.text($cell.attr('data-shipper-success-msg'));
       } else {
         $cell.text($cell.attr('data-shipper-warning-msg'));
       }
     }
-
     function update_file_item_rows() {
       update_file_item_check_row('.shipper-file_sizes');
       update_file_item_check_row('.shipper-file_names');
     }
-
     function update_files_tab_status() {
       $(document).trigger('shipper:preflight-files:status', [$('.shipper-wizard-files .shipper-check-status .sui-tag-warning').length]);
     }
-
     function exclude_file($el) {
       var exclude = $el.attr('data-path');
       return $.post(ajaxurl, {
@@ -1836,24 +1618,20 @@
         debounced_msg_update();
       });
     }
-
     function update_exclusions(excludes) {
       excludes = excludes || {};
       $('.shipper-filelist tr[data-path]', $root).each(function () {
         update_exclusion(excludes, $(this));
       });
     }
-
     function update_exclusion(excludes, $el) {
       var path = $el.attr('data-path');
-
       if (!!(excludes[path] || "").length) {
         $el.addClass('shipper-file-excluded');
       } else {
         $el.removeClass('shipper-file-excluded');
       }
     }
-
     function load_exclusions() {
       return $.post(ajaxurl, {
         action: 'shipper_get_path_exclusions'
@@ -1864,7 +1642,6 @@
         $(document).trigger('shipper:preflight-files:status');
       });
     }
-
     function boot() {
       $('body').on('change', '.shipper-filelist tr.shipper-paginated-visible :checkbox[name="shipper-bulk"]', toggle_bulk_actions_disabled);
       $('.shipper-filelist :checkbox[name="shipper-bulk-all"]', $root).off('change').on('change', toggle_all_selection_visible);
@@ -1886,7 +1663,6 @@
       toggle_files_top_level_warning();
       toggle_bulk_actions_disabled();
     }
-
     boot();
     return {
       get_filters: function get_filters() {
@@ -1901,34 +1677,29 @@
       }
     };
   };
-
   function stop_prop(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
     return false;
   }
-
   var _areas = [];
-
   function bootstrap() {
     $('.shipper-wizard-result-files').each(function () {
       _areas.push(new PaginatedFilterArea($(this)));
     });
   }
-
   $(window).on('load', function () {
     if ($('.shipper-wizard-result-files').length) {
       bootstrap();
     }
-
     $('.shipper-preflight-results .shipper-modal-close').on('click', function () {
       window.location.search = '?page=shipper-api';
     });
   });
+
   /**
    * Well, saddle me up and call me Margaret, these will get reused!
    */
-
   window._shipper.Filter = Filter;
   window._shipper.Pagination = Pagination;
   window._shipper.PaginatedFilterArea = PaginatedFilterArea;
@@ -1944,16 +1715,13 @@
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   var _ticker;
-
   function stop_prop(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
     return false;
   }
-
   function open_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -1964,124 +1732,106 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return 'shipper-preflight-' + id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
+
   /**
    * Starts listening to heartbeat ticks
    */
-
-
   function start_receiving() {
     _ticker.start(heartbeat_request, heartbeat_response);
   }
+
   /**
    * Stop listening to heartbeat ticks
    */
-
-
   function stop_receiving() {
     _ticker.stop();
   }
+
   /**
    * Adds Shipper flag to heartbeat request
    */
-
-
   function heartbeat_request(event, data) {
     data['shipper-preflight'] = true;
   }
+
   /**
    * Deals with heartbeat response from the back-end
    */
-
-
   function heartbeat_response(event, data) {
     var preflight = (data || {})['shipper-preflight'] || {};
-
     if (preflight.is_done) {
       stop_receiving();
       window.location.reload();
       return false;
     }
-
     update_preflight_state(preflight);
   }
-
   function update_preflight_state(data) {
     var $preflight = get_modal('loading'),
-        sum = function sum(a, b) {
-      return a + b;
-    },
-        local_done = !!(((data || {}).sections || {}).system_checks || {}).is_done,
-        remote_done = !!(((data || {}).sections || {}).remote_checks || {}).is_done,
-        files_done = !!(((data || {}).sections || {}).files_check || {}).is_done,
-        is_stuck = data && data.is_stuck,
-        percentage = [local_done, remote_done, files_done].reduce(sum) * 33,
-        activate_preflight_step = function activate_preflight_step(step) {
-      var $current = $preflight.find('.shipper-step-active'),
+      sum = function sum(a, b) {
+        return a + b;
+      },
+      local_done = !!(((data || {}).sections || {}).system_checks || {}).is_done,
+      remote_done = !!(((data || {}).sections || {}).remote_checks || {}).is_done,
+      files_done = !!(((data || {}).sections || {}).files_check || {}).is_done,
+      is_stuck = data && data.is_stuck,
+      percentage = [local_done, remote_done, files_done].reduce(sum) * 33,
+      activate_preflight_step = function activate_preflight_step(step) {
+        var $current = $preflight.find('.shipper-step-active'),
           $loader = $current.find('i'),
           $next = $preflight.find('[data-step="' + step + '"]'),
           domain = $next.attr('data-domain');
-      $preflight.find('.sui-progress-state .shipper-preflight-target').text(domain);
-      $current.removeClass('shipper-step-active');
-      $next.addClass('shipper-step-active').append($loader);
-    };
-
+        $preflight.find('.sui-progress-state .shipper-preflight-target').text(domain);
+        $current.removeClass('shipper-step-active');
+        $next.addClass('shipper-step-active').append($loader);
+      };
     if (is_stuck) {
       $preflight.find('.shipper-progress').hide();
       $preflight.find('.shipper-progress-stuck').show();
       return false;
     }
-
     $preflight.find('.sui-progress-bar span').width(percentage + '%').end().find('.sui-progress-text').text(percentage + '%').end();
     if (local_done) return activate_preflight_step('remote');
     if (remote_done) return activate_preflight_step('sysdiff');
   }
-
   function update_section_status(section) {
     var sect_select = !!section ? '[data-section="' + section + '"]' : '[data-section]',
-        $sections = $(sect_select);
+      $sections = $(sect_select);
     $sections.each(function () {
       var $s = $(this);
-
       if ($s.find('[data-section]').length) {
         return update_parent_section($s);
       } else {
         return update_normal_section($s);
       }
     });
-
     if ($('[data-section] i.sui-error, [data-section] .sui-tag-error').length) {
       disable_migration_start();
     } else {
       enable_migration_start();
     }
   }
-
   function update_normal_section($section) {
     var $titles = $section.find('.sui-accordion-item-title'),
-        warnings = $titles.find('i.sui-warning').length,
-        errors = $titles.find('i.sui-error').length,
-        service_errors = $section.find('.shipper-service-error.sui-notice-error').length,
-        issues = warnings + errors + service_errors,
-        kind_class = !!(service_errors + errors) ? 'error' : warnings ? 'warning' : 'success';
+      warnings = $titles.find('i.sui-warning').length,
+      errors = $titles.find('i.sui-error').length,
+      service_errors = $section.find('.shipper-service-error.sui-notice-error').length,
+      issues = warnings + errors + service_errors,
+      kind_class = !!(service_errors + errors) ? 'error' : warnings ? 'warning' : 'success';
     $section.find('.sui-accordion-item-title .sui-tag').removeClass('sui-tag-success sui-tag-warning sui-tag-error').addClass('sui-tag-' + kind_class).text(issues);
-
     if (issues) {
       $section.addClass('shipper-has-issues').removeClass('shipper-no-issues').find('>.sui-accordion-item-header').find('.sui-accordion-item-title .sui-tag').show().end().find('.sui-accordion-item-title>.sui-icon-check-tick').hide();
     } else {
       $section.removeClass('shipper-has-issues').addClass('shipper-no-issues').find('>.sui-accordion-item-header').find('.sui-accordion-item-title .sui-tag').hide().end().find('.sui-accordion-item-title>.sui-icon-check-tick').show();
     }
-
     $section.find('.shipper-rechecked-success .sui-icon-check-tick').show();
   }
-
   function update_parent_section($parent) {
     var $working = $parent.clone();
     $working.find('[data-section]').each(function () {
@@ -2089,61 +1839,52 @@
       $(this).remove();
     });
     var $own_titles = $working.find('.sui-accordion-item-title'),
-        $all_titles = $parent.find('.sui-accordion-item-title'),
-        own_warnings = $own_titles.find('i.sui-warning').length,
-        all_warnings = $all_titles.find('i.sui-warning').length,
-        own_errors = $own_titles.find('i.sui-error').length,
-        all_errors = $all_titles.find('i.sui-error').length,
-        own_ses = $working.find('.shipper-service-error.sui-notice-error').length,
-        all_ses = $parent.find('.shipper-service-error.sui-notice-error').length,
-        own_issues = own_errors + own_warnings + own_ses,
-        all_issues = all_errors + all_warnings + all_ses,
-        kind_class = !!(all_ses + all_errors) ? 'error' : all_warnings ? 'warning' : 'success';
+      $all_titles = $parent.find('.sui-accordion-item-title'),
+      own_warnings = $own_titles.find('i.sui-warning').length,
+      all_warnings = $all_titles.find('i.sui-warning').length,
+      own_errors = $own_titles.find('i.sui-error').length,
+      all_errors = $all_titles.find('i.sui-error').length,
+      own_ses = $working.find('.shipper-service-error.sui-notice-error').length,
+      all_ses = $parent.find('.shipper-service-error.sui-notice-error').length,
+      own_issues = own_errors + own_warnings + own_ses,
+      all_issues = all_errors + all_warnings + all_ses,
+      kind_class = !!(all_ses + all_errors) ? 'error' : all_warnings ? 'warning' : 'success';
     $parent.find('.sui-accordion-item-title .sui-tag').removeClass('sui-tag-success sui-tag-warning sui-tag-error').addClass('sui-tag-' + kind_class).text(all_issues);
-
     if (all_issues) {
       $parent.addClass('shipper-has-issues').removeClass('shipper-no-issues').find('>.sui-accordion-item-header').find('.sui-accordion-item-title .sui-tag').show().end().find('.sui-accordion-item-title>.sui-icon-check-tick').hide();
     } else {
       $parent.removeClass('shipper-has-issues').addClass('shipper-no-issues').find('>.sui-accordion-item-header').find('.sui-accordion-item-title .sui-tag').hide().end().find('.sui-accordion-item-title>.sui-icon-check-tick').show();
     }
-
     if (own_issues) {
       $parent.find('.sui-accordion-item-body>.sui-accordion>.sui-accordion-item').find('.sui-accordion-item-title .sui-tag').show().end().find('.sui-accordion-item-title>.sui-icon-check-tick').hide();
     } else {
       $parent.find('.sui-accordion-item-body>.sui-accordion>.sui-accordion-item').find('.sui-accordion-item-title .sui-tag').hide().end().find('.sui-accordion-item-title>.sui-icon-check-tick').show();
     }
-
     $parent.find('.shipper-rechecked-success .sui-icon-check-tick').show();
   }
-
   function disable_migration_start() {
     var $start = get_modal('results').find('.shipper-migration-start'),
-        href = $start.attr('data-start');
+      href = $start.attr('data-start');
     $start.attr('href', '#start').addClass('shipper-disabled shipper-tooltip').on('click', stop_prop);
   }
-
   function enable_migration_start() {
     var $start = get_modal('results').find('.shipper-migration-start'),
-        href = $start.attr('data-start');
+      href = $start.attr('data-start');
     $start.attr('href', href).removeClass('shipper-disabled sui-tooltip').off('click', stop_prop);
   }
-
   function show_results() {
     open_modal('results');
     setTimeout(update_section_status, 300);
   }
-
   function track_preflight_progress() {
     if (!get_modal('loading').is(':visible')) {
       open_modal('loading');
     }
-
     start_receiving();
   }
-
   function handle_reset_preflight(e) {
     var $me = $(this),
-        section = $me.attr('data-section');
+      section = $me.attr('data-section');
     $.post(ajaxurl, {
       action: 'shipper_preflight_restart',
       section: section
@@ -2152,73 +1893,62 @@
     });
     return stop_prop(e);
   }
-
   function handle_individual_check_reset(e) {
     var $me = $(this),
-        content = $me.html(),
-        check_id = $me.attr('data-check'),
-        $section = $me.closest('[data-section]'),
-        $check = $me.closest('[data-check_item="' + check_id + '"]'),
-        section = $section.attr('data-section'),
-        debounce_timeout = 'local' === section ? 3 : parseInt(_shipper.update_interval, 10),
-        update_preflight = _.debounce(function () {
-      $.post(ajaxurl, {
-        action: 'shipper_preflight_get_results_markup'
-      }, function (resp) {
-        var status = (resp || {}).success,
+      content = $me.html(),
+      check_id = $me.attr('data-check'),
+      $section = $me.closest('[data-section]'),
+      $check = $me.closest('[data-check_item="' + check_id + '"]'),
+      section = $section.attr('data-section'),
+      debounce_timeout = 'local' === section ? 3 : parseInt(_shipper.update_interval, 10),
+      update_preflight = _.debounce(function () {
+        $.post(ajaxurl, {
+          action: 'shipper_preflight_get_results_markup'
+        }, function (resp) {
+          var status = (resp || {}).success,
             msg = (resp || {}).data;
-
-        if (!status) {
-          return update_preflight();
-        }
-
-        var $new_section = $(msg).find('[data-section="' + section + '"]');
-
-        if (check_id && $check.length) {
-          var $new_check = $new_section.find('[data-check_item="' + check_id + '"]'),
+          if (!status) {
+            return update_preflight();
+          }
+          var $new_section = $(msg).find('[data-section="' + section + '"]');
+          if (check_id && $check.length) {
+            var $new_check = $new_section.find('[data-check_item="' + check_id + '"]'),
               $notification = $new_check.find('.shipper-recheck-unsuccessful').clone();
-
-          if ($new_check.length) {
-            // Issue is still present
-            $check.replaceWith($new_check);
-            SUI.suiTabs();
-
-            if ($notification.length) {
-              get_modal('results').find('.shipper-recheck-active').remove().end().append($notification.removeClass('shipper-recheck-unsuccessful').addClass('shipper-recheck-active'));
-              $notification.show();
-              setTimeout(function () {
-                $notification.remove();
-              }, 5000);
+            if ($new_check.length) {
+              // Issue is still present
+              $check.replaceWith($new_check);
+              SUI.suiTabs();
+              if ($notification.length) {
+                get_modal('results').find('.shipper-recheck-active').remove().end().append($notification.removeClass('shipper-recheck-unsuccessful').addClass('shipper-recheck-active'));
+                $notification.show();
+                setTimeout(function () {
+                  $notification.remove();
+                }, 5000);
+              }
+            } else {
+              // We could not find this check - it's done now.
+              $check.addClass('shipper-rechecked-success').find('.sui-accordion-item-title i').removeClass('sui-icon-warning-alert').removeClass('sui-error sui-warning').addClass('sui-icon-check-tick').addClass('sui-success').end().find('.sui-accordion-open-indicator').remove().end().find('.sui-accordion-item-body').remove();
             }
+            update_section_status(section);
+            $section.addClass('shipper-rechecked');
+          } else if ($section.length) {
+            var $goods = $new_section.find('>.sui-accordion-item-body>.sui-accordion').find('.shipper-rechecked-success');
+            if ($goods.length > 1) {
+              // This is so we don't show tons of new successes.
+              $goods.remove();
+            }
+            $section.replaceWith($new_section);
+            update_section_status();
+            $section.addClass('shipper-rechecked');
+            SUI.suiTabs();
           } else {
-            // We could not find this check - it's done now.
-            $check.addClass('shipper-rechecked-success').find('.sui-accordion-item-title i').removeClass('sui-icon-warning-alert').removeClass('sui-error sui-warning').addClass('sui-icon-check-tick').addClass('sui-success').end().find('.sui-accordion-open-indicator').remove().end().find('.sui-accordion-item-body').remove();
+            window.location.reload();
           }
-
-          update_section_status(section);
-          $section.addClass('shipper-rechecked');
-        } else if ($section.length) {
-          var $goods = $new_section.find('>.sui-accordion-item-body>.sui-accordion').find('.shipper-rechecked-success');
-
-          if ($goods.length > 1) {
-            // This is so we don't show tons of new successes.
-            $goods.remove();
-          }
-
-          $section.replaceWith($new_section);
-          update_section_status();
-          $section.addClass('shipper-rechecked');
-          SUI.suiTabs();
-        } else {
-          window.location.reload();
-        }
-
-        $me.html(content).removeClass('sui-button-onload');
-        $(document).on('click', '.shipper-check-result a[href="#reload"]', handle_individual_check_reset);
-        $('.shipper-check-result a[href="#reload"]').attr('disabled', false);
-      });
-    }, debounce_timeout * 1000, true); // #1 - do this immediately
-
+          $me.html(content).removeClass('sui-button-onload');
+          $(document).on('click', '.shipper-check-result a[href="#reload"]', handle_individual_check_reset);
+          $('.shipper-check-result a[href="#reload"]').attr('disabled', false);
+        });
+      }, debounce_timeout * 1000, true); // #1 - do this immediately
 
     $me.html('<i class="sui-icon-loader sui-loading"></i>&nbsp;').addClass('sui-button-onload');
     $(document).off('click', '.shipper-check-result a[href="#reload"]', handle_individual_check_reset);
@@ -2228,12 +1958,12 @@
       section: section
     }, function (resp) {
       var status = (resp || {}).success,
-          msg = (resp || {}).data;
+        msg = (resp || {}).data;
       setTimeout(update_preflight, 3000); // #2 - BUT, wait a bit before we do this initially
     });
+
     return stop_prop(e);
   }
-
   function handle_preflight_cancel(e) {
     $.post(ajaxurl, {
       action: 'shipper_preflight_cancel'
@@ -2242,17 +1972,14 @@
     });
     return stop_prop(e);
   }
-
   function show_error(msg) {
     msg = msg || 'Error!';
     console.log(msg);
   }
-
   function init() {
     if (!$('.sui-box.shipper-select-check').length) {
       return false;
     }
-
     _ticker = new window._shipper.Ticker('shipper-preflight');
     $('.shipper-reset-preflight').off('click').on('click', handle_reset_preflight);
     $(document).on('click', '.shipper-check-result a[href="#reload"]', handle_individual_check_reset);
@@ -2265,7 +1992,6 @@
     var callback = $('.shipper-content.shipper-select-check-done').length ? show_results : track_preflight_progress;
     setTimeout(callback);
   }
-
   $(init);
 })(jQuery);
 
@@ -2282,28 +2008,23 @@
  * Migration progress related JS
  */
 ;
-
 (function ($) {
   var _ticker;
+
   /**
    * Shows appropriate screen
    *
    * @param {String} page Screen to show
    */
-
-
   function show_page(page) {
     $('.shipper-migration-content').hide();
-
     if ('done' === page) {
       $('.shipper-actions').find(' .shipper-actions-left').hide().end().find(' .shipper-actions-right').show().end();
     } else {
       $('.shipper-actions').find(' .shipper-actions-left').show().end().find(' .shipper-actions-right').hide().end();
     }
-
     $('.shipper-migration-' + page + '-content').show();
   }
-
   function show_done_with_errors() {
     var $root = $('.shipper-migration-done-content');
     $.post(ajaxurl, {
@@ -2314,17 +2035,17 @@
       show_page('done');
     });
   }
+
   /**
    * Updates progress bar UI
    *
    * @param {Object} state State object to update UI with.
    */
-
-
   function update_progress_bar(state) {
     var raw_progress = parseInt((state || {}).progress, 10) || 0;
     var progress = raw_progress + '%';
     var msg = (state || {}).msg || false;
+
     /*
     if (raw_progress > 0 && msg) {
     	console.log(msg, progress);
@@ -2335,100 +2056,85 @@
       $('.sui-progress-bar span').css('width', progress);
       $('.sui-progress-text span').text(progress);
     }
-
     if (msg) {
       $('.sui-progress-state-text').text(msg);
     }
   }
+
   /**
    * Stop progress checking
    */
-
-
   function stop_progress() {
     _ticker.stop();
   }
+
   /**
    * Starts progress checking
    */
-
-
   function start_progress() {
     _ticker.start(heartbeat_request, heartbeat_response, heartbeat_error);
   }
-
   function heartbeat_error() {
     var $el = $('.sui-progress-state-text'),
-        msg = $el.attr('data-progress_stalled');
-
+      msg = $el.attr('data-progress_stalled');
     if (msg) {
       $el.text(msg);
     }
   }
+
   /**
    * Toggles the notifications message based on migration health status
    */
-
-
   function toggle_migration_health_message(is_slow) {
     var $msg = $('.shipper-migration-health'),
-        is_visible = !!$msg.is(':visible');
-
+      is_visible = !!$msg.is(':visible');
     if (is_slow && !is_visible) {
       return $msg.show();
     }
-
     if (!is_slow && is_visible) {
       return $msg.hide();
     }
   }
+
   /**
    * Adds Shipper flag to heartbeat request
    */
-
-
   function heartbeat_request(event, data) {
     data['shipper-migration'] = true;
   }
-
   function heartbeat_response(event, data) {
     if (!data['shipper-migration']) {
       return;
     }
-
     var is_done = !!(data['shipper-migration'] || {}).is_done,
-        is_slow = !!(data['shipper-migration'] || {}).is_slow,
-        percentage = parseInt((data['shipper-migration'] || {}).progress, 10) || 0,
-        msg = (data['shipper-migration'] || {}).message || false,
-        errors = (data['shipper-migration'] || {}).errors || [];
+      is_slow = !!(data['shipper-migration'] || {}).is_slow,
+      percentage = parseInt((data['shipper-migration'] || {}).progress, 10) || 0,
+      msg = (data['shipper-migration'] || {}).message || false,
+      errors = (data['shipper-migration'] || {}).errors || [];
     update_progress_bar({
       progress: percentage,
       msg: msg
     });
     toggle_migration_health_message(is_slow);
-
     if (percentage >= 100 || is_done) {
       if (errors.length) {
         show_done_with_errors();
       } else {
         show_page('done');
       }
-
       stop_progress();
     } else {
       _ticker.ping();
     }
   }
+
   /**
    * Pops the cancel migration modal
    */
-
-
   function handle_stop_progress() {
     stop_progress();
     show_modal();
   }
-
   function show_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -2439,36 +2145,31 @@
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id() {
     return 'shipper-migration-cancel';
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id());
   }
+
   /**
    * Handle migration cancel button click
    *
    * @param {Object} e Click event
    */
-
-
   function handle_migration_cancel(e) {
     if (e && e.preventDefault) e.preventDefault();
     var $me = $(this),
-        url = $(this).attr('href');
+      url = $(this).attr('href');
     $me.attr('disabled', true).html('&nbsp;<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>');
     migration_cancel(url);
     return false;
   }
-
   function migration_cancel(url) {
     $.post(ajaxurl, {
       action: 'shipper_cancel_migration'
     }).done(function (rsp) {
       var status = !!(rsp || {}).success;
-
       if (!!status) {
         window.location = url;
       } else {
@@ -2478,48 +2179,45 @@
       }
     });
   }
+
   /**
    * Handle migration continue button click (in cancellation dialog)
    *
    * @param {Object} e Click event
    */
-
-
   function handle_migration_continue(e) {
     if (e && e.preventDefault) e.preventDefault();
     start_progress();
     SUI.closeModal();
     return false;
   }
+
   /**
    * Handle refresh page button click
    *
    * @param {Object} e Click event
    */
-
-
   function handle_refresh_page(e) {
     window.location.reload();
   }
+
   /**
    * Handle notice dismiss
    *
    * @param e
    */
-
-
   function handle_notice_dismiss(e) {
     $.post(ajaxurl, {
       action: 'shipper_api_notice_dismissed',
       _wpnonce: $('.shipper-migration-starts').attr('data-wpnonce')
-    }).done(function (rsp) {//
+    }).done(function (rsp) {
+      //
     });
   }
+
   /**
    * Boots the progress page
    */
-
-
   function boot_migration_progress_page() {
     _ticker = new window._shipper.Ticker('shipper-migration');
     show_page('progress');
@@ -2533,7 +2231,6 @@
     $('.shipper-migration-starts .sui-notice-dismiss').on('click', handle_notice_dismiss);
     start_progress();
   }
-
   $(function () {
     if ($('.shipper-page-migrate-progress').length) {
       boot_migration_progress_page();
@@ -2554,7 +2251,6 @@
  * Actions shared across pages
  */
 ;
-
 (function ($) {
   /**
    * Handles refresh link click
@@ -2570,52 +2266,47 @@
     });
     return false;
   }
+
   /**
    * Remove session storage data if page is not shipper-api.
    */
-
-
   function removeHubPasswordConfirmedData() {
     if (!sessionStorage.getItem('shipper_hub_password_confirmed')) {
       return;
     }
-
     var hasType = window.location.search.includes('type');
     var apiPage = window.location.search.includes('page=shipper-api');
-
     if (apiPage && hasType) {
       return;
     }
-
     sessionStorage.removeItem('shipper_hub_password_confirmed');
   }
-
   function boot() {
     $(document).on('click', 'a[href="#refresh-locations"]', handle_refresh_click);
+
     /**
      * Register work activator clicks
      *
      * On click, these get their icon replaced with loader indicator
      */
-
     $(document).on('click', '.shipper-work-activator', function () {
       $(this).find('i').replaceWith('<i class="sui-icon-loader sui-loading"></i>');
     });
+
     /**
      * Dismiss notices
      */
-
     $(document).on('click', '.sui-can-dismiss .sui-notice-dismiss a, button.sui-notice-dismiss', function (e) {
       if (e && e.preventDefault) e.preventDefault();
       if (e && e.stopPropagation) e.stopPropagation();
       var $notice = $(this).closest('.sui-can-dismiss');
       $notice.remove();
       return false;
-    }); // Remove session storage data if page is not shipper-api.
+    });
 
+    // Remove session storage data if page is not shipper-api.
     removeHubPasswordConfirmedData();
   }
-
   $(boot);
 })(jQuery);
 
@@ -2634,36 +2325,29 @@ var Notice = {
       // Message must be set and mustn't be empty.
       return;
     }
-
     var icon_class = '';
-
     switch (args.type) {
       case 'success':
         icon_class = 'check-tick';
         break;
-
       case 'error':
       case 'warning':
         icon_class = 'warning-alert';
         break;
-
       case 'info':
       default:
         icon_class = 'info';
         break;
     }
-
     var options = {
       icon: icon_class,
       type: args.type
     };
-
     if (args.dismissible) {
       options.dismiss = {
         show: true
       };
     }
-
     if (args.autoclose) {
       options.autoclose = {
         timeout: args.autoclose
@@ -2673,17 +2357,14 @@ var Notice = {
         show: false
       };
     }
-
     var $suiHeader = document.querySelector('.sui-header');
     var noticeId = 'shipper-notice-' + Math.random().toString(36).substr(2, 9);
     var $noticesWrapper = document.querySelector('.sui-floating-notices');
     var $notice = document.createElement('div');
-
     if (!$noticesWrapper) {
       $noticesWrapper = document.createElement('div');
       $noticesWrapper.setAttribute('class', 'sui-floating-notices');
     }
-
     $suiHeader.insertBefore($noticesWrapper, $suiHeader.childNodes[0]);
     $notice.setAttribute('id', noticeId);
     $notice.setAttribute('role', 'alert');
@@ -2695,7 +2376,6 @@ var Notice = {
   }
 };
 ;
-
 (function ($) {
   function handle(callback) {
     return function (e) {
@@ -2705,7 +2385,6 @@ var Notice = {
       return false;
     };
   }
-
   function open_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -2716,38 +2395,33 @@ var Notice = {
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return 'shipper-site_selection-' + id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
-
   function send_request(act) {
     var selection = get_modal('destination').find('[name="site"] :selected'),
-        promise = $.post(ajaxurl, {
-      action: act,
-      _wpnonce: get_modal('destination').find(':hidden[name="_wpnonce"]').val(),
-      site: selection.val(),
-      domain: selection.text()
-    }, function () {});
+      promise = $.post(ajaxurl, {
+        action: act,
+        _wpnonce: get_modal('destination').find(':hidden[name="_wpnonce"]').val(),
+        site: selection.val(),
+        domain: selection.text()
+      }, function () {});
     promise.fail(show_install_fail);
     return promise;
   }
-
   function activate_prepare_step(step) {
     var $modal = get_modal('prepare'),
-        $steps = $modal.find('.shipper-progress-steps [data-step]'),
-        $target = $steps.filter('[data-step="' + step + '"]'),
-        $previous = $target.prevAll('[data-step]'),
-        progress = parseInt(($previous.length + 1) / $steps.length * 100, 10);
+      $steps = $modal.find('.shipper-progress-steps [data-step]'),
+      $target = $steps.filter('[data-step="' + step + '"]'),
+      $previous = $target.prevAll('[data-step]'),
+      progress = parseInt(($previous.length + 1) / $steps.length * 100, 10);
     $steps.filter('.shipper-step-active').removeClass('shipper-step-active').find('i').remove();
     $target.addClass('shipper-step-active').append('<i class="sui-icon-loader sui-loading"></i>');
     $modal.find('.sui-progress-text').text(progress + '%').end().find('.sui-progress-bar span').width(progress + '%').end();
   }
-
   function show_site_prepare() {
     var destination = get_modal('destination').find('[name="site"]').val();
     set_site_urls_in_modal('prepare');
@@ -2767,37 +2441,30 @@ var Notice = {
       }, 1000);
     });
   }
-
   function set_site_urls_in_modal(modal, domain) {
     var dmn = domain || get_modal('destination').find('[name="site"] :selected').text(),
-        $modal = get_modal(modal),
-        $targets = $modal.find('.shipper-site-domain');
+      $modal = get_modal(modal),
+      $targets = $modal.find('.shipper-site-domain');
     $targets.text(dmn);
   }
-
   function show_install_fail() {
     set_site_urls_in_modal('install-fail');
     open_modal('install-fail');
   }
-
   function move_to_preflight(site_id) {
     window.location.search += '&site=' + site_id;
     return false;
   }
-
   function prepare_selected_site() {
     var destination = get_modal('destination').find('[name="site"]').val(),
-        $button = get_modal('destination').find('button[type="submit"]'),
-        button = $button.html();
-
+      $button = get_modal('destination').find('button[type="submit"]'),
+      button = $button.html();
     if (!destination) {
       return false;
     }
-
     $button.addClass('sui-button-onload').html('<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>');
     send_request('shipper_is_shippable').done(function (resp) {
       var status = (resp || {}).success;
-
       if (status) {
         return move_to_preflight(destination);
       } else {
@@ -2807,15 +2474,13 @@ var Notice = {
       $button.html(button).removeClass('sui-button-onload');
     });
   }
-
   function show_hub_sites(resp) {
     var replace_modal = true;
     open_modal('destination', replace_modal);
     var $target = get_modal('destination').find('.shipper-selection.select-name'),
-        success = !!(resp || {}).success,
-        sites = (resp || {}).data || [],
-        content = '';
-
+      success = !!(resp || {}).success,
+      sites = (resp || {}).data || [],
+      content = '';
     if (success) {
       $.each(sites, function (idx, site) {
         content += '<option value="' + idx + '">' + site + '</option>';
@@ -2829,7 +2494,6 @@ var Notice = {
       open_modal('loading-error', replace_modal);
     }
   }
-
   function load_hub_sites(newModal) {
     var replace_modal = !newModal;
     open_modal('loading', replace_modal);
@@ -2842,39 +2506,33 @@ var Notice = {
       show_hub_sites();
     });
   }
+
   /**
    * Toggle the password display button.
    *
    * @param {*} modal
    * @returns
    */
-
-
   function onPasswordModalDisplay(modal) {
     var password_eye = modal.find('.shipper-password-eye');
     modal.find('#shipper-wpmu-dev-password').on("focus", function () {
       password_eye.show();
     });
     password_eye.off('click').on('click', toggle_shipper_password_eye);
-
     if (maybe_confirm_password(modal)) {
       return;
     }
-
     modal.find('.shipper-confirm-password').off('click').on('click', get_auth_key);
     modal.find('.shipper-cancel').off('click').on('click', move_to_main_page);
   }
-
   function confirm_password() {
     // If member comes with back button.
     if (sessionStorage.getItem('shipper_hub_password_confirmed')) {
       load_hub_sites(true);
       return;
     }
-
     var href = window.location.href;
     var modal = null;
-
     if (href.indexOf('referer=google_login') >= 0) {
       if (href.indexOf('api_error=auth') >= 0) {
         Notice.show({
@@ -2895,71 +2553,57 @@ var Notice = {
       }
     } else {
       var el = document.querySelector('#shipper-site_selection-confirm-password');
-
       if (!el) {
         return;
       }
-
       if (el) {
         modal = open_modal('confirm-password');
         onPasswordModalDisplay(modal);
       }
     }
   }
-
   function toggle_shipper_password_eye(e) {
     e.preventDefault();
     var eye_button = $(this);
     var password_field = eye_button.siblings('#shipper-wpmu-dev-password');
-
     if (password_field.attr('type') === 'password') {
       password_field.attr('type', 'text');
     } else {
       password_field.attr('type', 'password');
     }
-
     eye_button.find('i').toggleClass('sui-icon-eye-hide');
   }
-
   function move_to_main_page() {
     window.location.search = 'page=shipper-api';
   }
-
   function maybe_confirm_password(modal) {
     // if it's not the page we'are looking for, return
     if (!window.location.search.includes('page=shipper-api')) {
       return;
     }
-
     if (!window.location.search.includes('set_apikey') && !window.location.search.includes('api_error')) {
       return;
     }
-
     if (!window.location.search.includes('api_error')) {
       // time to show the connecting to wpmudev modal.
       open_modal('connecting-wpmudev', true);
     }
-
     var data = {
       action: 'shipper_confirm_wpmudev_password',
       auth_key: modal.find('.shipper-confirm-password').data('authKey'),
       _wpnonce: modal.find('.shipper-confirm-password').data('confirmPassword')
     };
     var position = window.location.href.indexOf('&set_apikey');
-
     if (window.history.pushState && position !== -1) {
       history.pushState({}, null, window.location.href.substring(0, position));
     }
-
     $.post(ajaxurl, data).done(function (response) {
       if (response && response.success) {
         sessionStorage.setItem('shipper_hub_password_confirmed', 'true');
         return load_hub_sites();
       }
-
       var referer = window.location.href.indexOf('referer');
       var apiError = window.location.href.indexOf('api_error');
-
       if (apiError >= 0) {
         if (referer < 0) {
           modal.find('#shipper-wpmu-dev-password').css('border-bottom', '2px solid #FF6D6D');
@@ -2973,20 +2617,16 @@ var Notice = {
     });
     return false;
   }
-
   function get_auth_key(e) {
     var modal = get_modal('confirm-password');
     modal.find('.shipper-confirm-password').addClass('sui-button-onload');
   }
-
   function init() {
     if (!$('.sui-box.shipper-select-site').length) {
       return false;
     }
-
     setTimeout(confirm_password);
   }
-
   $(init);
 })(jQuery);
 
@@ -3000,16 +2640,15 @@ var Notice = {
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   window._shipper = window._shipper || {};
   var UPDATE_INTERVAL = window._shipper.update_interval || 'fast';
   var _timers = {};
   var _request_lock = false;
-
   var Ticker = function Ticker(name) {
     var _request_lock = false;
     var _is_running = false;
+
     /**
      * Starts the heartbeat update cycle with given callbacks
      *
@@ -3017,7 +2656,6 @@ var Notice = {
      * @param {Function} response_callback On response.
      * @param {Function} error_callback On error (optional).
      */
-
     function start(request_callback, response_callback, error_callback) {
       stop();
       _is_running = true;
@@ -3030,50 +2668,43 @@ var Notice = {
         if (!data[name]) {
           return;
         }
-
         start_timer(name);
         clearTimeout(_request_lock);
         response_callback(event, data);
       });
-
       if (error_callback) {
         $(document).on('heartbeat-error', error_callback);
       }
-
       $(document).on('heartbeat-tick.wp-auth-check', check_auth_context);
-      update_interval(UPDATE_INTERVAL); // Send first tick immediately
+      update_interval(UPDATE_INTERVAL);
 
+      // Send first tick immediately
       if (((wp || {}).heartbeat || {}).connectNow) {
         wp.heartbeat.connectNow();
       }
     }
+
     /**
      * Filthy hack around WP login iframe
      *
      * Because the entire re-logging thing is as filthy as it gets anyways.
      */
-
-
     function check_auth_context(event, data) {
       // Did we just get logged out?
       if (!('wp-auth-check' in data)) {
         return false;
       }
-
       if (data['wp-auth-check']) {
         return true;
       }
-
       console.log('We just got logged out :(');
       var parent = window,
-          $root = $('#wp-auth-check-wrap'),
-          $iframe = $root.find("iframe");
-
+        $root = $('#wp-auth-check-wrap'),
+        $iframe = $root.find("iframe");
       if ($root.length && !$root.is('.shipper-bound') && $iframe.length) {
         $root.addClass('shipper-bound');
         $iframe.on('load', function () {
           var $body = $(this).contents().find('body');
-
           if ($body.is('.interim-login-success')) {
             setTimeout(function () {
               parent.location.reload();
@@ -3082,11 +2713,10 @@ var Notice = {
         });
       }
     }
+
     /**
      * Stops the heartbeat update
      */
-
-
     function stop() {
       _is_running = false;
       $(document).off('heartbeat-send.' + name);
@@ -3094,34 +2724,31 @@ var Notice = {
       $(document).off('heartbeat-tick.wp-auth-check', check_auth_context);
       update_interval('standard');
     }
+
     /**
      * Sets heartbeat update interval
      *
      * @param {Number|String} interval Interval to set.
      */
-
-
     function update_interval(interval) {
       var reset_interval = 'standard' === interval,
-          num = get_interval_value(interval);
+        num = get_interval_value(interval);
       clearTimeout(_request_lock);
-
       if (((wp || {}).heartbeat || {}).interval) {
         wp.heartbeat.interval(interval, 10);
       }
-
       if (reset_interval) {
         // No need to re-apply timeout:
         // whatever the heartbeat was doing is fine.
         return;
       }
-
       if (num) {
         _request_lock = setTimeout(function () {
           wp.heartbeat.connectNow();
         }, num * 1000 + 500);
       }
     }
+
     /**
      * Gets integer interval value, in seconds
      *
@@ -3129,39 +2756,34 @@ var Notice = {
      *
      * @return {Number}
      */
-
-
     function get_interval_value(interval) {
       if ('standard' === interval) return 60;
       if ('fast' === interval) return 5;
       var num = parseInt(interval, 10);
       return num ? num : get_interval_value('standard');
     }
+
     /**
      * Starts internal timer
      *
      * @param {String} timer Timer to start.
      */
-
-
     function start_timer(timer) {
       _timers[timer] = new Date().getTime();
     }
+
     /**
      * Reports elapsed interval time for a timer
      *
      * @param {String} timer Timer to report.
      */
-
-
     function report_elapsed_time(timer) {
       var end = new Date().getTime(),
-          started = _timers[timer] || end,
-          secs = (end - started) / 1000,
-          elapsed = secs <= 0 ? 'immediate' : secs + 's';
+        started = _timers[timer] || end,
+        secs = (end - started) / 1000,
+        elapsed = secs <= 0 ? 'immediate' : secs + 's';
       console.log('Timer ' + timer + ': ' + elapsed);
     }
-
     return {
       start: start,
       stop: stop,
@@ -3173,7 +2795,6 @@ var Notice = {
       }
     };
   };
-
   window._shipper.Ticker = Ticker;
 })(jQuery);
 
@@ -3190,7 +2811,6 @@ var Notice = {
  * Shims in the smallscreen navigation functionality.
  */
 ;
-
 (function ($) {
   /**
    * Boots the method listeners
@@ -3201,19 +2821,16 @@ var Notice = {
     var selector = selector_fragment + ' .sui-sidenav select.sui-mobile-nav';
     $(document).on('change', selector, function (e) {
       var tool = $(this).val(),
-          href = window.location.search,
-          rx = new RegExp('([?&])tool[^&]+');
-
+        href = window.location.search,
+        rx = new RegExp('([?&])tool[^&]+');
       if (!tool) {
         return false;
       }
-
       tool = encodeURIComponent(tool);
       window.location.search = href.match(rx) ? href.replace(rx, '$1tool=' + tool) : href + '&tool=' + tool;
       return true;
     });
   }
-
   window._shipper.navbar = window._shipper.navbar || boot;
 })(jQuery);
 
@@ -3226,10 +2843,8 @@ var Notice = {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 ;
-
 (function ($) {
   /**
    * Building state flag
@@ -3239,13 +2854,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
   var _building_paused = false;
   var _package_building_started = 'shipper-package-building-started';
   var _logging_timer = null;
-
   function stop_prop(e) {
     if (e && e.stopPropagation) e.stopPropagation();
     if (e && e.preventDefault) e.preventDefault();
     return false;
   }
-
   function show_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -3256,59 +2869,49 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return 'shipper-package-build-' + id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
-
   function send_request(action, obj) {
     var dfr = new $.Deferred();
     obj = obj || {};
     obj.action = 'shipper_packages_build_' + action;
     $.post(ajaxurl, obj).done(function (resp) {
       var status = (resp || {}).success,
-          data = (resp || {}).data;
-
+        data = (resp || {}).data;
       if (status) {
         return dfr.resolveWith(this, [data]);
       }
-
       return dfr.rejectWith(this, [data]);
     }).fail(function (resp, type, error) {
       var json = resp.responseJSON || {},
-          msg = (json || {}).data || error;
-
+        msg = (json || {}).data || error;
       if (_typeof("") !== _typeof(msg)) {
         msg = error;
       }
-
       dfr.rejectWith(this, [msg]);
     });
     return dfr.promise();
   }
-
   function update_progress(percentage, msg) {
     percentage = (parseInt(percentage, 10) || 1) + '%';
     get_modal('migration').find('.shipper-progress-label').text(percentage).end().find('.shipper-progress-bar').css('width', percentage).end();
-
     if (msg) {
       get_modal('migration').find('.shipper-progress-status').text(msg);
     }
   }
-
   function finalize_package() {
     var $active = get_modal('migration').find('.shipper-progress-check').removeClass('active').last().addClass('active');
     update_progress(50, $active.find('.shipper-progress-title').text() + '...');
     send_request('done').done(function () {
       update_progress(100, 'Done');
-      var url = document.location; // Package build is done. So clear the package building started sate.
+      var url = document.location;
 
+      // Package build is done. So clear the package building started sate.
       clear_package_building_started();
-
       if (url.search.includes('?page=shipper-packages&start=true')) {
         url.search = '?page=shipper-packages';
       } else {
@@ -3318,21 +2921,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       show_error_dialog(error);
     });
   }
-
   function process_package() {
     if (_building_paused) {
       return false;
-    } // Package building is started, so record it.
+    }
 
-
+    // Package building is started, so record it.
     set_package_building_started();
     send_request('build').done(function (percentage) {
       update_progress(percentage);
-
       if (percentage < 100) {
         return setTimeout(process_package, 100);
       }
-
       stop_logging();
       return setTimeout(finalize_package, 100);
     }).fail(function (error) {
@@ -3340,7 +2940,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       show_error_dialog(error);
     });
   }
-
   function start_building(e) {
     _building_paused = false;
     var replace_modal = true;
@@ -3355,7 +2954,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     return stop_prop(e);
   }
-
   function cancel_building(e) {
     send_request('cancel').done(function () {
       window.location.reload();
@@ -3364,7 +2962,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     return stop_prop(e);
   }
-
   function continue_building(e) {
     _building_paused = false;
     var replace_modal = true;
@@ -3372,43 +2969,39 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     process_package();
     return stop_prop(e);
   }
-
   function show_cancel_dialog(e, replace_modal) {
     _building_paused = true;
     show_modal('cancel', replace_modal).find('.shipper-goback').off('click').on('click', continue_building).end().find('.shipper-cancel').off('click').on('click', cancel_building).end();
     return stop_prop(e);
   }
-
   function show_error_dialog(error) {
     // There is an error, so clear the package building state and send a failed request.
     clear_package_building_started();
     send_failed_request();
     show_modal('fail').find('.shipper-error-message-wrapper').hide().end().find('.shipper-restart').off('click').on('click', start_building);
-
     if ((error || {}).length) {
       get_modal('fail').find('.shipper-error-message-wrapper').show().find('.shipper-error-message').html('<code style="color: #ff0000">' + error + '</code>');
     }
   }
+
   /**
    * Send failed request when a package creation has been field for any reason.
    *
    * @since 1.2.5
    */
-
-
   function send_failed_request() {
     send_request('failed');
   }
+
   /**
    * Save package building started state.
    *
    * @since 1.2.5
    */
-
-
   function set_package_building_started() {
     window.localStorage.setItem(_package_building_started, 'true');
   }
+
   /**
    * Check whether the package building was started or not.
    *
@@ -3416,22 +3009,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    *
    * @return boolean
    */
-
-
   function get_package_building_started() {
     return window.localStorage.getItem(_package_building_started) === 'true';
   }
+
   /**
    * Clear the package building started state.
    *
    * @since 1.2.5
    */
-
-
   function clear_package_building_started() {
     window.localStorage.removeItem(_package_building_started);
   }
-
   function update_log(message) {
     var log_area = $('.shipper-package-progress-logs .sui-notice-message');
     log_area.slideUp(350, function () {
@@ -3440,50 +3029,44 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       log_area.show(350);
     });
   }
+
   /**
    * Send logging request
    *
    * @since 1.2.7
    */
-
-
   function send_log_request() {
     send_request('logs').done(function (data) {
       if (!data || !data.message) {
         return;
       }
-
       update_log(data.message);
     });
   }
+
   /**
    * Start logging
    *
    * @since 1.2.7
    */
-
-
   function start_logging() {
     _logging_timer = setInterval(function () {
       send_log_request();
     }, 5000);
   }
+
   /**
    * Stop logging
    *
    * @since 1.2.7
    */
-
-
   function stop_logging() {
     clearInterval(_logging_timer);
   }
-
   function init() {
     if (!$('.shipper-packages-migration-main').length) {
       return false;
     }
-
     $(window).on('beforeunload', function () {
       if (get_package_building_started()) {
         // So package building was started and user reloaded or closed the window.
@@ -3498,7 +3081,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       show_cancel_dialog(e, replace_modal);
     });
   }
-
   $(init);
 })(jQuery);
 
@@ -3512,46 +3094,40 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   function stop_prop(e) {
     if (e && e.stopPropagation) e.stopPropagation();
     if (e && e.preventDefault) e.preventDefault();
     return false;
   }
-
   function insert_quicklink(e) {
     var path = $(this).attr('data-path'),
-        $target = $(this).closest('.sui-form-field').find('textarea'),
-        paths = $target.val().split("\n");
+      $target = $(this).closest('.sui-form-field').find('textarea'),
+      paths = $target.val().split("\n");
     paths.push(path);
     $target.val($.trim(paths.join("\n")));
     return stop_prop(e);
   }
-
   function gather_files() {
     return $('.shipper-file-exclusions textarea').val().split("\n");
   }
-
   function gather_database() {
     var $selected = $('.sui-tree [aria-selected="true"] [data-table]'),
-        sel = [];
+      sel = [];
     $selected.each(function () {
       sel.push($(this).attr('data-table'));
     });
     return sel;
   }
-
   function gather_advanced() {
     var $els = $('.sui-checkbox-stacked :checkbox'),
-        opts = [];
+      opts = [];
     $els.each(function () {
       if (!$(this).is(':checked')) return true;
       opts.push($(this).attr('name'));
     });
     return opts;
   }
-
   function gather_meta() {
     var $modal = get_modal('meta');
     return {
@@ -3560,14 +3136,12 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       _wpnonce: $modal.find('input[name="shipper-create-package"]').val()
     };
   }
-
   function start_preflight(e) {
     // colse any open modal and trigger preflight event
     SUI.closeModal();
     $(document).trigger('shipper-package-preflight');
     return stop_prop(e);
   }
-
   function gather_all_settings(e) {
     send_request('create', _.extend(gather_meta(), {
       'exclude_files': gather_files()
@@ -3578,13 +3152,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     })).done(start_preflight);
     return stop_prop(e);
   }
-
   function send_request(action, obj) {
     obj = obj || {};
     obj.action = 'shipper_packages_meta_' + action;
     return $.post(ajaxurl, obj);
   }
-
   function handle_package_rewrite(e) {
     var nonce = $('input[name="shipper-reset-package"]').val();
     send_request('reset', {
@@ -3592,7 +3164,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     }).done(show_package_meta);
     return stop_prop(e);
   }
-
   function show_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -3603,22 +3174,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return 'shipper-package-create-' + id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
-
   function show_package_settings(e) {
     show_modal('settings', true).find('.shipper-next').off('click').on('click', gather_all_settings).end().find('.shipper-previous').off('click').on('click', function (e) {
       show_package_meta(e, true);
     });
     return stop_prop(e);
   }
-
   function set_password_and_show_package_settings(e) {
     var $modal = get_modal('meta');
     var $password = $modal.find('[data-state]:visible input[name="installer-password"]');
@@ -3626,7 +3193,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     $modal.find('.shipper-next').attr('disabled', 'disabled');
     var site_id = $modal.find('select[name="site_id"]').val();
     var network_type = $modal.find('input[name="network_type"]');
-
     if (network_type && network_type.length) {
       network_type.each(function (key, element) {
         if ($(element).is(':checked')) {
@@ -3636,7 +3202,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     } else {
       network_type = undefined;
     }
-
     $.post(ajaxurl, {
       _wpnonce: $modal.find('#shipper-refreshdbt-nonce').val(),
       site_id: site_id,
@@ -3651,7 +3216,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       return show_package_settings(e);
     });
   }
-
   function show_package_meta(e, replace) {
     var modal = show_modal('meta', replace);
     var all_sites = modal.find('.sui-select#all-sites');
@@ -3677,7 +3241,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
               results: {}
             };
           }
-
           var options = response.data.map(function (option) {
             return {
               id: option.site_id,
@@ -3693,19 +3256,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     modal.attr('data-password', '').find('.shipper-next').off('click').on('click', set_password_and_show_package_settings);
     return stop_prop(e);
   }
-
   function show_package_rewrite_confirm() {
     show_modal('confirm').find('.shipper-next').off('click').on('click', handle_package_rewrite);
   }
-
   function create_new_package(e) {
     if ($('.shipper-packages-migration').is('.shipper-has-packages')) {
       show_package_rewrite_confirm();
     } else show_package_meta();
-
     return stop_prop(e);
   }
-
   function delete_package(e) {
     var nonce = $('input[name="shipper-reset-package"]').val();
     send_request('reset', {
@@ -3715,29 +3274,24 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     return stop_prop(e);
   }
-
   function download_package(e) {
     var nonce = $(this).closest('.shipper-download').find(':hidden[name="_wpnonce"]').val();
     window.location = ajaxurl + '?action=shipper_packages_meta_download_package&_wpnonce=' + nonce;
     return stop_prop(e);
   }
-
   function download_installer(e) {
     var nonce = $(this).closest('.shipper-download').find(':hidden[name="_wpnonce"]').val();
     window.location = ajaxurl + '?action=shipper_packages_meta_download_installer&_wpnonce=' + nonce;
     console.log(ajaxurl + '?action=shipper_packages_meta_download_installer&_wpnonce=' + nonce);
     return stop_prop(e);
   }
-
   function init() {
     if (!$('.shipper-packages-migration-main').length) {
       return false;
     }
-
     if ((window._shipper || {}).navbar) {
       window._shipper.navbar('.shipper-page-packages');
     }
-
     $(document).on('click', '.shipper-new-package', create_new_package);
     $(document).on('click', '.shipper-delete', delete_package);
     $(document).on('click', '.shipper-quicklinks a[data-path]', insert_quicklink);
@@ -3749,13 +3303,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     $(document).on('click', '.shipper-download-item.installer', download_installer);
     $(window).on('load', function () {
       var url = document.location;
-
       if (url.search.includes('?page=shipper-packages&start=true')) {
         create_new_package();
       }
     });
   }
-
   $(init);
 })(jQuery);
 
@@ -3769,7 +3321,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   /**
    * Preflight state flag
@@ -3778,13 +3329,11 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
    */
   var _preflight_paused = false;
   var issues_count = 0;
-
   function stop_prop(e) {
     if (e && e.stopPropagation) e.stopPropagation();
     if (e && e.preventDefault) e.preventDefault();
     return false;
   }
-
   function show_modal(id, replace_modal) {
     var replace_modal = replace_modal ? true : false;
     var modal_id = get_modal_id(id);
@@ -3795,45 +3344,37 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     SUI[replace_modal ? 'replaceModal' : 'openModal'](modal_id, focus_after_closed, focus_when_open, has_overlay_mask);
     return modal;
   }
-
   function get_modal_id(id) {
     return 'shipper-package-preflight-' + id;
   }
-
   function get_modal(id) {
     return $('#' + get_modal_id(id));
   }
-
   function send_request(action, obj) {
     var dfr = new $.Deferred();
     obj = obj || {};
     obj.action = 'shipper_packages_preflight_' + action;
     $.post(ajaxurl, obj).done(function (resp) {
       var status = (resp || {}).success,
-          data = (resp || {}).data;
-
+        data = (resp || {}).data;
       if (status) {
         return dfr.resolveWith(this, [data]);
       }
-
       return dfr.rejectWith(this, [data]);
     }).fail(function () {
       dfr.reject();
     });
     return dfr.promise();
   }
-
   function start_building(e) {
     // colse any open modal and trigger preflight event
     SUI.closeModal();
     $(document).trigger('shipper-package-build');
   }
-
   function update_countable_files_status($item) {
     var $total = $item.find('.shipper-paginated'),
-        $excluded = $total.filter('.shipper-file-excluded'),
-        severity = $total.length > $excluded.length ? 'warning' : 'success';
-
+      $excluded = $total.filter('.shipper-file-excluded'),
+      severity = $total.length > $excluded.length ? 'warning' : 'success';
     if (!$total.length) {
       $item.hide(); // Nothing to show here.
     }
@@ -3842,57 +3383,48 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     $item.find('.shipper-issue-summary').after('<div class="shipper-issue-summary-count">' + '<span class="sui-tag sui-tag-' + severity + '">' + ($total.length - $excluded.length) + '</span>' + '</div>');
     $item.find('.shipper-issue-severity').removeClass('shipper-severity-success').removeClass('shipper-severity-warning').addClass('shipper-severity-' + severity);
   }
-
   function update_package_size($item) {
     if ($item.length === 0) {
       return;
     }
-
     var size = $item.find('[data-size]').attr('data-size'),
-        num = size.split(/(\d+)/)[1],
-        unit = size.split(/(\d+)/)[2] || "b";
+      num = size.split(/(\d+)/)[1],
+      unit = size.split(/(\d+)/)[2] || "b";
     multiplier = 1, severity = 'success', cutoff = 200 * 1024 * 1024;
     if (unit.match(/^\s*k/i)) multiplier = 1024;
     if (unit.match(/^\s*m/i)) multiplier = 1024 * 1024;
     if (unit.match(/^\s*g/i)) multiplier = 1024 * 1024 * 1024;
     if (unit.match(/^\s*t/i)) multiplier = 1024 * 1024 * 1024 * 1024;
-
     if ((parseInt(num, 10) || 1) * multiplier > cutoff) {
       severity = 'warning';
     }
-
     $item.find('.shipper-issue-summary-count').remove();
     $item.find('.shipper-issue-summary').after('<div class="shipper-issue-summary-count">' + '<span class="sui-tag sui-tag-' + severity + '">' + size.replace(/ /, '&nbsp;') + '</span>' + '</div>');
     $item.find('.shipper-issue-severity').removeClass('shipper-severity-success').removeClass('shipper-severity-warning').addClass('shipper-severity-' + severity);
   }
-
   function update_preflight_state() {
     var $modal = get_modal('issues'),
-        $large = $modal.find('.shipper-issue-file_sizes'),
-        $names = $modal.find('.shipper-issue-file_names'),
-        $size = $modal.find('.shipper-issue-package_size');
+      $large = $modal.find('.shipper-issue-file_sizes'),
+      $names = $modal.find('.shipper-issue-file_names'),
+      $size = $modal.find('.shipper-issue-package_size');
     update_countable_files_status($large);
     update_countable_files_status($names);
     update_package_size($size);
     $modal.find('.shipper-next').attr('disabled', !!$modal.find('.shipper-severity-error').length);
   }
-
   function handle_update_package_size(e, package_size) {
     $('.shipper-issue-package_size .shipper-package_size').attr('data-size', package_size);
     update_preflight_state();
   }
-
   function show_results() {
     if (_preflight_paused) {
       return true;
-    } //we will check if no preflight issues, we moving forward to build screen
-
-
+    }
+    //we will check if no preflight issues, we moving forward to build screen
     if (issues_count === 0) {
       start_building();
       return;
     }
-
     update_preflight_state();
     var $modal = show_modal('issues').find('.shipper-next').off('click').on('click', start_building).end().find('.shipper-restart').off('click').on('click', function (e) {
       start_preflight(e, true);
@@ -3910,47 +3442,39 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     SUI.suiTabs();
   }
-
   function check_database() {
     if (_preflight_paused) {
       return true;
     }
-
     var $active = show_modal('check').find('.shipper-progress-label').text('99%').end().find('.shipper-progress-bar').css('width', '99%').end().find('.shipper-progress-check').removeClass('active').last().addClass('active');
     get_modal('check').find('.shipper-progress-status').text($active.find('.shipper-progress-title').attr('data-active'));
     setTimeout(show_results, 1000);
   }
-
   function check_files() {
     if (_preflight_paused) {
       return true;
     }
-
     var $active = show_modal('check').find('.shipper-progress-label').text('66%').end().find('.shipper-progress-bar').css('width', '66%').end().find('.shipper-progress-check').removeClass('active').eq(1).addClass('active');
     get_modal('check').find('.shipper-progress-status').text($active.find('.shipper-progress-title').attr('data-active'));
     send_request('files').done(function (data) {
       var $issues = get_modal('issues').find('.shipper-issues'),
-          is_done = (data || {}).is_done,
-          issues = (data || {}).issues || [];
-
+        is_done = (data || {}).is_done,
+        issues = (data || {}).issues || [];
       if (!is_done) {
         return setTimeout(check_files, 100);
       }
-
       $.each(issues, function (idx, issue) {
         $issues.append(issue);
-      }); //set the counter
-
+      });
+      //set the counter
       issues_count += issues.length;
       setTimeout(check_database, 100);
     });
   }
-
   function check_system() {
     if (_preflight_paused) {
       return true;
     }
-
     var replaceModal = true;
     var $active = show_modal('check', replaceModal).find('.shipper-progress-label').text('33%').end().find('.shipper-progress-bar').css('width', '33%').end().find('.shipper-progress-check').removeClass('active').first().addClass('active');
     get_modal('check').find('.shipper-progress-status').text($active.find('.shipper-progress-title').attr('data-active'));
@@ -3963,7 +3487,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       setTimeout(check_files, 100);
     });
   }
-
   function start_preflight(e, replaceModal) {
     _preflight_paused = false;
     issues_count = 0;
@@ -3972,19 +3495,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     check_system();
     return stop_prop(e);
   }
-
   function cancel_preflight(e) {
     _preflight_paused = true;
     SUI.closeModal();
     window.location.reload();
     return stop_prop(e);
   }
-
   function init() {
     if (!$('.shipper-packages-migration-main').length) {
       return false;
     }
-
     $(document).on('shipper-package-preflight', start_preflight);
     $(document).on('click', '.shipper-issue-title', function (e) {
       $(this).closest('.shipper-issue').toggleClass('shipper-issue-open');
@@ -3996,7 +3516,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       start_preflight(e, replaceModal);
     });
   }
-
   $(init);
 })(jQuery);
 
@@ -4010,42 +3529,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   function stop_prop(e) {
     if (e && e.stopPropagation) e.stopPropagation();
     if (e && e.preventDefault) e.preventDefault();
     return false;
   }
-
   function handle_tab_option_selection() {
     $(this).find(':radio').prop('checked', false).end().find('.sui-tab-boxed.active').find(':radio').prop('checked', true);
     maybe_prevent_submit();
   }
-
   function maybe_prevent_submit() {
     var is_mysqldump_error = $('.shipper-tab-boxed-error input[name="database-use-binary"]').is(':checked');
     var is_shellarchive_error = $('.shipper-tab-boxed-error input[name="archive-use-binary"]').is(':checked');
-
     if (is_mysqldump_error || is_shellarchive_error) {
       $('.sui-button.shipper-save').attr('disabled', true);
     } else {
       $('.sui-button.shipper-save').removeAttr('disabled');
     }
   }
-
   function init() {
     if (!$('.shipper-packages-settings').length) {
       return false;
     }
-
     if ((window._shipper || {}).navbar) {
       window._shipper.navbar('.shipper-page-packages');
     }
-
     $(".sui-tabs").on('click', handle_tab_option_selection).each(handle_tab_option_selection);
   }
-
   $(init);
 })(jQuery);
 
@@ -4059,19 +3570,16 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   /**
    * Enables or disables email notifications
    */
   function update_notifications_status() {
     var $send = $('#shipper-email-notifications'),
-        action_pfx = 'shipper_notifications_';
-
+      action_pfx = 'shipper_notifications_';
     if (!$send.length) {
       return false;
     }
-
     $.post(ajaxurl, {
       action: action_pfx + ($send.is(':checked') ? 'enable' : 'disable'),
       _wpnonce: $send.val()
@@ -4079,26 +3587,22 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       window.location.reload();
     });
   }
+
   /**
    * Updates the shipper email options change button
    */
-
-
   function update_options_change() {
     var $send = $('.shipper-notification-options :checkbox'),
-        action_pfx = 'shipper_notifications_fail_only_';
-
+      action_pfx = 'shipper_notifications_fail_only_';
     if (!$send.length) {
       return false;
     }
-
     $.post(ajaxurl, {
       action: action_pfx + ($send.is(':checked') ? 'enable' : 'disable'),
       _wpnonce: $send.val()
     }).done(function (rsp) {
       var status = !!(rsp || {}).success,
-          msg = (rsp || {}).data || '';
-
+        msg = (rsp || {}).data || '';
       if (!status) {
         $send.attr('checked', false);
         return false;
@@ -4107,23 +3611,20 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       $send.attr('checked', false);
     });
   }
+
   /**
    * Sends out an email addition request
    */
-
-
   function add_email(e) {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
     var $me = $('#shipper-add-recipient'),
-        email = $me.find(':input[type="email"]').val(),
-        name = $me.find(':input[type="text"]').val();
+      email = $me.find(':input[type="email"]').val(),
+      name = $me.find(':input[type="text"]').val();
     $.post(ajaxurl, {
       action: 'shipper_notifications_add',
       name: name,
@@ -4131,18 +3632,14 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       _wpnonce: $me.find('button[data-add]').attr('data-add')
     }).done(function (rsp) {
       var status = !!(rsp || {}).success,
-          rsp_data = (rsp || {}).data || '';
+        rsp_data = (rsp || {}).data || '';
       data = rsp_data.data || rsp_data; // sometimes data can be nested
-
       message = rsp_data.message || rsp_data; // sometimes message can be nested
-
       ;
-
       if (!status) {
         show_error(message);
         return false;
       }
-
       show_success(message);
       $('.shipper-notifications-wrapper').html($(data).find('.shipper-notifications-wrapper').html());
       $('.shipper-notifications-status-notice').hide();
@@ -4150,51 +3647,42 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     return false;
   }
+
   /**
    * Sends out an email removal request
    */
-
-
   function rmv_email(e) {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
     var $me = $(this).closest('.shipper-notification-item'),
-        email = $me.find('.shipper-email[data-email]').attr('data-email');
+      email = $me.find('.shipper-email[data-email]').attr('data-email');
     $.post(ajaxurl, {
       action: 'shipper_notifications_rmv',
       email: email,
       _wpnonce: $me.find('a[data-rmv]').attr('data-rmv')
     }).done(function (rsp) {
       var status = !!(rsp || {}).success,
-          rsp_data = (rsp || {}).data || '';
+        rsp_data = (rsp || {}).data || '';
       data = rsp_data.data || rsp_data; // sometimes data can be nested
-
       message = rsp_data.message || rsp_data; // sometimes message can be nested
-
       ;
-
       if (!status) {
         show_error(message);
         return false;
       }
-
       show_success(message);
       $('.shipper-notifications-wrapper').html($(data).find('.shipper-notifications-wrapper').html());
       $('.shipper-notifications-status-notice').hide();
     });
     return false;
   }
-
   function show_error(message) {
     show_notice(message, 'error');
   }
-
   function show_notice(message, type) {
     message = '<p>' + message + '</p>';
     var options = {
@@ -4202,52 +3690,42 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
     SUI.openNotice('shipper-recipient-add-notice', message, options);
   }
-
   function show_success(message) {
     show_notice(message, 'success');
   }
-
   function reveal_add(e) {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
     var modalId = 'shipper-add-recipient',
-        focusAfterClosed = this,
-        focusWhenOpen = undefined,
-        hasOverlayMask = false;
+      focusAfterClosed = this,
+      focusWhenOpen = undefined,
+      hasOverlayMask = false;
     SUI.openModal(modalId, focusAfterClosed, focusWhenOpen, hasOverlayMask);
   }
-
   function hide_add(e) {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
     var $me = $('#shipper-add-recipient'),
-        $email = $me.find(':input[type="email"]'),
-        $name = $me.find(':input[type="text"]');
+      $email = $me.find(':input[type="email"]'),
+      $name = $me.find(':input[type="text"]');
     $email.val('');
     $name.val('');
     SUI.closeModal();
   }
-
   function enter_to_add_email(e) {
     var key = e.which;
-
     if (13 === key) {
       add_email();
     }
   }
-
   function init() {
     if ($('.shipper-page-settings-notifications').length) {
       $('#shipper-email-notifications').on('change', update_notifications_status);
@@ -4262,7 +3740,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       });
     }
   }
-
   $(init);
 })(jQuery);
 
@@ -4276,60 +3753,50 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 /***/ (function(module, exports) {
 
 ;
-
 (function ($, undefined) {
   function stop_prop(e) {
     if (e && e.preventDefault) {
       e.preventDefault();
     }
-
     if (e && e.stopPropagation) {
       e.stopPropagation();
     }
-
     return false;
   }
-
   function reveal_add(e) {
     var modalId = 'shipper-add-user',
-        focusAfterClosed = this,
-        focusWhenOpen = undefined,
-        hasOverlayMask = false;
+      focusAfterClosed = this,
+      focusWhenOpen = undefined,
+      hasOverlayMask = false;
     SUI.openModal(modalId, focusAfterClosed, focusWhenOpen, hasOverlayMask);
     return stop_prop(e);
   }
-
   function hide_add(e) {
     var $me = $('#shipper-add-user'),
-        $ins = $me.find(':input');
+      $ins = $me.find(':input');
     $ins.val('');
     SUI.closeModal();
     return stop_prop(e);
   }
-
   function handle_verify_user(e) {
     var $me = $('#shipper-add-user'),
-        $input = $me.find('#shipper-permissions-add'),
-        $nonce = $me.find('button.shipper-add');
+      $input = $me.find('#shipper-permissions-add'),
+      $nonce = $me.find('button.shipper-add');
     $.post(ajaxurl, {
       action: 'shipper_permissions_verify',
       user_id: $input.val(),
       _wpnonce: $nonce.attr('data-add')
     }).done(function (rsp) {
       var status = !!(rsp || {}).success,
-          rsp_data = (rsp || {}).data || '';
+        rsp_data = (rsp || {}).data || '';
       data = rsp_data.data || rsp_data; // sometimes data can be nested
-
       message = rsp_data.message || rsp_data; // sometimes message can be nested
-
       ;
       hide_add();
-
       if (!status) {
         show_error(message);
         return false;
       }
-
       if (message) {
         add_user_row(data, message);
         $input.val(null).trigger('change');
@@ -4337,24 +3804,19 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     });
     return stop_prop(e);
   }
-
   function remove_user(e) {
     $(e.target).closest('.shipper-user-item').remove();
     return stop_prop(e);
   }
-
   function enter_to_verify_user(e) {
     var key = e.which;
-
     if (13 === key) {
       handle_verify_user(e);
     }
   }
-
   function show_error(message) {
     show_notice(message, 'error');
   }
-
   function show_notice(message, type) {
     message = '<p>' + message + '</p>';
     var options = {
@@ -4362,34 +3824,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     };
     SUI.openNotice('shipper-add-user-notice', message, options);
   }
-
   function show_success(message) {
     show_notice(message, 'success');
   }
-
   function add_user_row(row_html, message) {
     var $me = $('.shipper-page-settings-permissions .shipper-users-list');
     $row = $(row_html), user_id = $row.find(':hidden').val(), username = $row.find('.shipper-user').text();
-
     if (!user_id) {
       return false;
     }
-
     if ($me.find(':hidden[value="' + user_id + '"]').length) {
       return false;
     }
-
     $me.append(row_html);
     show_success(message);
   }
-
   function init() {
     if (!$('.shipper-page-settings-permissions').length) {
       return false;
     }
-
     var $add = $('#shipper-permissions-add'),
-        wpnonce = $add.attr('data-wpnonce');
+      wpnonce = $add.attr('data-wpnonce');
     $add.SUIselect2({
       allowClear: false,
       dropdownCssClass: 'sui-select-dropdown',
@@ -4414,7 +3869,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
         if (typeof result.id !== 'undefined' && typeof result.label !== 'undefined') {
           return $(result.label);
         }
-
         return result.text;
       },
       templateSelection: function templateSelection(result) {
@@ -4427,7 +3881,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     $(document).on('keydown', '#shipper-add-user input', enter_to_verify_user);
     $(document).on('click', '.shipper-user-item a.shipper-rmv', remove_user);
   }
-
   $(init);
 })(jQuery);
 
@@ -4444,7 +3897,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  * Smallscreen navigation functionality for settings.
  */
 ;
-
 (function ($) {
   function reset_settings(nonce) {
     return $.post(ajaxurl, {
@@ -4454,7 +3906,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       window.location.reload();
     });
   }
-
   function handle_settings_reset(e) {
     if (e && e.preventDefault) e.preventDefault();
     if (e && e.stopPropagation) e.stopPropagation();
@@ -4466,34 +3917,28 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
       reset_settings(nonce);
     });
   }
-
   function handle_data_toggle(e) {
     var $radio = $(this),
-        my_state = $radio.is(':checked') ? 1 : 0,
-        other_state = $radio.is(':checked') ? 0 : 1,
-        $toggle = $radio.closest('[data-active]'),
-        $toggles = $radio.closest('.shipper-data-toggles').find('[data-active]');
+      my_state = $radio.is(':checked') ? 1 : 0,
+      other_state = $radio.is(':checked') ? 0 : 1,
+      $toggle = $radio.closest('[data-active]'),
+      $toggles = $radio.closest('.shipper-data-toggles').find('[data-active]');
     $toggles.attr('data-active', other_state);
     $toggle.attr('data-active', my_state);
   }
-
   function boot_data_toggles() {
     $('.shipper-data-toggles :radio').off('change').on('change', handle_data_toggle);
   }
-
   function boot_settings_reset() {
     $('.shipper-reset-settings[data-wpnonce]').off('click').on('click', handle_settings_reset);
   }
-
   $(function () {
     if ($('.shipper-page-settings').length) {
       var boot = (window._shipper || {}).navbar;
       if (boot) boot('.shipper-page-settings');
-
       if ($('.shipper-data-toggles').length) {
         boot_data_toggles();
       }
-
       if ($('.shipper-reset-settings[data-wpnonce]').length) {
         boot_settings_reset();
       }
@@ -4571,9 +4016,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
  // @deprecated
-
  // @deprecated?
-
 
  // @deprecated
 
@@ -4593,12 +4036,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
 var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.json */ "./node_modules/@wpmudev/shared-ui/package.json").version;
-
 ;
-
 (function ($) {
   var pkgv = 'sui-' + shipper_sui_version.replace(/\./g, '-');
   $(function () {
@@ -4616,28 +4055,25 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 /***/ (function(module, exports) {
 
 ;
-
 (function ($) {
   /**
    * Toggles info section visibility, based on the select box value
    */
   function toggle_section_display() {
     var sect = $('#shipper-sysinfo-section').val(),
-        $target = $('.shipper-info-section-' + sect);
+      $target = $('.shipper-info-section-' + sect);
     if (!$target.length) return false;
     $('.shipper-info-section').hide();
     $target.show();
   }
+
   /**
    * Dispatches event listeners and boots the UI
    */
-
-
   function bootstrap_sysinfo_page() {
     $("#shipper-sysinfo-section").on('change', toggle_section_display);
     toggle_section_display();
   }
-
   $(function () {
     if ($("#shipper-sysinfo-section").length) {
       bootstrap_sysinfo_page();
@@ -4658,7 +4094,6 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
  * Smallscreen navigation functionality for tools page
  */
 ;
-
 (function ($) {
   $(function () {
     if ($('.shipper-page-tools').length) {
@@ -4681,13 +4116,12 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
  * Tutorials JS
  */
 ;
-
 (function ($) {
   // Make the whole tutorial card clickable.
+
   var card = null;
   var clickableElements = null;
   var cardOnDashboard = $('#dashboard-tutorials .shipper-tutorial-item');
-
   if (cardOnDashboard.length) {
     card = cardOnDashboard;
     clickableElements = $('#dashboard-tutorials .shipper-tutorial-item a');
@@ -4695,7 +4129,6 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     card = $('#shipper-page-tutorials .shipper-tutorial-post-wrapper');
     clickableElements = $('#shipper-page-tutorials .shipper-tutorial-post-wrapper a');
   }
-
   clickableElements = Array.from(clickableElements);
   clickableElements.forEach(function (ele) {
     $(ele).on('click', function (event) {
@@ -4706,19 +4139,18 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     if (window.getSelection().toString()) {
       return;
     }
-
     var link = $(event.currentTarget).find('a');
-
     if (link && link.get(0)) {
       link.get(0).click();
     }
   });
+
   /**
    * @namespace aria
    */
+  var aria = aria || {};
 
-  var aria = aria || {}; // Key codes.
-
+  // Key codes.
   aria.KeyCode = {
     TAB: 9,
     RETURN: 13,
@@ -4733,44 +4165,41 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
     RIGHT: 39,
     DOWN: 40,
     DELETE: 46
-  }; // Handling accessibility for the tutorials tab.
+  };
 
+  // Handling accessibility for the tutorials tab.
   $('#shipper-page-tutorials div[role="link"]').on('keydown', function (e) {
     var focusOnNextTut = function focusOnNextTut(direction) {
       var current = $(ref).data('tutorial'),
-          next = 'next' === direction ? current + 1 : current - 1;
-      var $nextTut = $('#shipper-page-tutorials [data-tutorial="' + next + '"]'); // When we are at the end and moving forward, or at the beginning and moving backward.
+        next = 'next' === direction ? current + 1 : current - 1;
+      var $nextTut = $('#shipper-page-tutorials [data-tutorial="' + next + '"]');
 
+      // When we are at the end and moving forward, or at the beginning and moving backward.
       if (!$nextTut.length) {
         var allTuts = $('#shipper-page-tutorials .shipper-tutorial-post-wrapper'),
-            nextTutKey = 'next' === direction ? 0 : allTuts.length - 1;
+          nextTutKey = 'next' === direction ? 0 : allTuts.length - 1;
         $nextTut = allTuts[nextTutKey];
       }
-
       $nextTut.focus();
     };
-
     var key = e.which || e.keyCode,
-        ref = e.target !== null ? e.target : e.srcElement;
-
+      ref = e.target !== null ? e.target : e.srcElement;
     switch (key) {
       case aria.KeyCode.RETURN:
         if (ref) {
           window.open(ref.getAttribute('data-href'), '_blank');
         }
-
         break;
-
       case aria.KeyCode.LEFT:
         focusOnNextTut('prev');
         break;
-
       case aria.KeyCode.RIGHT:
         focusOnNextTut('next');
         break;
     }
-  }); // Hide shipper tutorials
+  });
 
+  // Hide shipper tutorials
   var hideBtn = $('#dashboard-tutorials .hide-shipper-tutorials');
   hideBtn.on('click', function (event) {
     event.preventDefault();
@@ -4793,10 +4222,10 @@ var shipper_sui_version = __webpack_require__(/*! @wpmudev/shared-ui/package.jso
 
 /* WEBPACK VAR INJECTION */(function(module) {var require;var require;/*!
  * WPMU DEV Shared UI
- * Copyright 2018 - 2019 Incsub (https://incsub.com)
- * Licensed under GPL v2 (http://www.gnu.org/licenses/gpl-2.0.html)
+ * Copyright 2018 - 2021 Incsub (https://incsub.com)
+ * Licensed under GPL v3 (http://www.gnu.org/licenses/gpl-3.0.html)
  */
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -4827,9 +4256,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var flexHeader = $(this),
             flexItem = flexHeader.parent(),
             flexChart = flexItem.find('.sui-chartjs-animated'),
-            flexParent = flexItem.parent();
+            flexParent = flexItem.parent(),
+            flexContent = flexHeader.next('.sui-accordion-item-body').find(' .sui-box');
         var tableItem = $(this),
-            tableContent = tableItem.nextUntil('.sui-accordion-item').filter('.sui-accordion-item-content');
+            tableContent = tableItem.nextUntil('.sui-accordion-item').filter('.sui-accordion-item-content'),
+            tableBox = tableContent.find('.sui-box');
+        var button = $(this).find('.sui-accordion-open-indicator > .sui-screen-reader-text'),
+            buttonText = button === null || button === void 0 ? void 0 : button.text(),
+            dataContent = button === null || button === void 0 ? void 0 : button.data('content');
 
         if (clickedTarget.closest('.sui-accordion-item-action').length) {
           return true;
@@ -4844,6 +4278,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
               flexItem.removeClass('sui-accordion-item--open');
             } else {
               flexItem.addClass('sui-accordion-item--open');
+              flexContent.attr('tabindex', '0').trigger('focus');
             }
           } // CHECK: Accordion Blocks
 
@@ -4872,8 +4307,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             } else {
               tableItem.addClass('sui-accordion-item--open');
               tableContent.addClass('sui-accordion-item--open');
+              tableBox.attr('tabindex', '0').trigger('focus');
             }
           }
+        } // Change button accessiblity content based on accordin open and close.
+
+
+        if (dataContent) {
+          button.html(dataContent);
+          button.data('content', buttonText);
         }
 
         event.stopPropagation();
@@ -4911,13 +4353,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this;
   };
 
-  if (0 !== $('.sui-2-10-8 .sui-accordion').length) {
-    $('.sui-2-10-8 .sui-accordion').each(function () {
+  if (0 !== $('.sui-2-12-24 .sui-accordion').length) {
+    $('.sui-2-12-24 .sui-accordion').each(function () {
       SUI.suiAccordion(this);
     });
   }
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 // the semi-colon before function invocation is a safety net against concatenated
 // scripts and/or other plugins which may not be closed properly.
@@ -4964,7 +4406,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         // build markup
         this.$element.wrap('<div class="sui-code-snippet-wrapper"></div>');
         this._clipboardId = this.generateUniqueId();
-        button = '<button class="sui-button" id="sui-code-snippet-button-' + this._clipboardId + '" data-clipboard-target="#sui-code-snippet-' + this._clipboardId + '">' + this.settings.copyText + '</button>';
+        button = '<button type="button" class="sui-button" id="sui-code-snippet-button-' + this._clipboardId + '" data-clipboard-target="#sui-code-snippet-' + this._clipboardId + '">' + this.settings.copyText + '</button>';
         this.$element.attr('id', 'sui-code-snippet-' + this._clipboardId).after(button);
         this._clipboardJs = new ClipboardJS('#sui-code-snippet-button-' + this._clipboardId); // attach events
 
@@ -5026,7 +4468,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.suiCodeSnippet = function () {
     // Convert all code snippet.
-    $('.sui-2-10-8 .sui-code-snippet:not(.sui-no-copy)').each(function () {
+    $('.sui-2-12-24 .sui-code-snippet:not(.sui-no-copy)').each(function () {
       // backward compat of instantiate new accordion
       $(this).SUICodeSnippet({});
     });
@@ -5037,7 +4479,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     SUI.suiCodeSnippet();
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -5302,11 +4744,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this;
   };
 
-  $('.sui-2-10-8 .sui-slider').each(function () {
+  $('.sui-2-12-24 .sui-slider').each(function () {
     SUI.dialogSlider(this);
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -5318,7 +4760,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.linkDropdown = function () {
     function closeAllDropdowns($except) {
-      var $dropdowns = $('.sui-2-10-8 .sui-dropdown');
+      var $dropdowns = $('.sui-2-12-24 .sui-dropdown');
 
       if ($except) {
         $dropdowns = $dropdowns.not($except);
@@ -5339,7 +4781,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       e.preventDefault();
     });
     $('body').on('mouseup', function (e) {
-      var $anchor = $('.sui-2-10-8 .sui-dropdown-anchor');
+      var $anchor = $('.sui-2-12-24 .sui-dropdown-anchor');
 
       if (!$anchor.is(e.target) && 0 === $anchor.has(e.target).length) {
         closeAllDropdowns();
@@ -5358,7 +4800,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     colorpickers.removeClass('sui-colorpicker-wrap');
   }
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function () {
   // Enable strict mode.
@@ -5584,11 +5026,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
    * Default: true
    * Optional boolean parameter that when it's set to "true", it will enable closing the
    * dialog with the Esc key.
+   *
+   * @param isAnimated
+   * Default: true
+   * Optional boolean parameter that when it's set to "true", it will enable animation in dialog box.
    */
 
 
   aria.Dialog = function (dialogId, focusAfterClosed, focusFirst, hasOverlayMask) {
     var isCloseOnEsc = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var isAnimated = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
     this.dialogNode = document.getElementById(dialogId);
 
     if (null === this.dialogNode) {
@@ -5671,10 +5118,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
 
     this.addListeners();
-    aria.OpenDialogList.push(this);
-    this.dialogNode.classList.add('sui-content-fade-in'); // make visible
+    aria.OpenDialogList.push(this); // If isAnimated is set true then modal box will animate.
 
-    this.dialogNode.classList.remove('sui-content-fade-out');
+    if (isAnimated) {
+      this.dialogNode.classList.add('sui-content-fade-in'); // make visible
+
+      this.dialogNode.classList.remove('sui-content-fade-out');
+    } else {
+      this.dialogNode.classList.remove('sui-content-fade-in');
+      this.dialogNode.classList.remove('sui-content-fade-out');
+    }
 
     if (this.focusFirst) {
       this.focusFirst.focus();
@@ -5692,10 +5145,15 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
    * @desc Hides the current top dialog, removes listeners of the top dialog,
    * restore listeners of a parent dialog if one was open under the one that
    * just closed, and sets focus on the element specified for focusAfterClosed.
+   *
+   * @param isAnimated
+   * Default: true
+   * Optional boolean parameter that when it's set to "true", it will enable animation in dialog box.
    */
 
 
   aria.Dialog.prototype.close = function () {
+    var isAnimated = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
     var self = this; // Trigger the 'close' event at the beginning of the closing process.
 
     var closeEvent = new Event('close');
@@ -5703,9 +5161,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     aria.OpenDialogList.pop();
     this.removeListeners();
     this.preNode.parentNode.removeChild(this.preNode);
-    this.postNode.parentNode.removeChild(this.postNode);
-    this.dialogNode.classList.add('sui-content-fade-out');
-    this.dialogNode.classList.remove('sui-content-fade-in');
+    this.postNode.parentNode.removeChild(this.postNode); // If isAnimated is set true then modal box will animate.
+
+    if (isAnimated) {
+      this.dialogNode.classList.add('sui-content-fade-out');
+      this.dialogNode.classList.remove('sui-content-fade-in');
+    } else {
+      this.dialogNode.classList.remove('sui-content-fade-in');
+      this.dialogNode.classList.remove('sui-content-fade-out');
+    }
+
     this.focusAfterClosed.focus();
     setTimeout(function () {
       self.backdropNode.classList.remove('sui-active');
@@ -5833,17 +5298,31 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
    * Default: true
    * Optional boolean parameter that when it's set to "true", it will enable closing the
    * dialog with the Esc key.
+   *
+   * @param isAnimated
+   * Default: true
+   * Optional boolean parameter that when it's set to "true", it will enable animation in dialog box.
    */
 
 
   aria.Dialog.prototype.replace = function (newDialogId, newFocusAfterClosed, newFocusFirst, hasOverlayMask) {
     var isCloseOnEsc = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var isAnimated = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
     var self = this;
     aria.OpenDialogList.pop();
     this.removeListeners();
     aria.Utils.remove(this.preNode);
-    aria.Utils.remove(this.postNode);
-    this.dialogNode.classList.remove('sui-content-fade-in');
+    aria.Utils.remove(this.postNode); // If isAnimated is set true then modal box will animate.
+
+    if (isAnimated) {
+      this.dialogNode.classList.add('sui-content-fade-in'); // make visible
+
+      this.dialogNode.classList.remove('sui-content-fade-out');
+    } else {
+      this.dialogNode.classList.remove('sui-content-fade-in');
+      this.dialogNode.classList.remove('sui-content-fade-out');
+    }
+
     this.backdropNode.classList.remove('sui-active');
     setTimeout(function () {
       var slides = self.dialogNode.querySelectorAll('.sui-modal-slide');
@@ -5935,7 +5414,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     }, 350);
     var focusAfterClosed = newFocusAfterClosed || this.focusAfterClosed;
-    var dialog = new aria.Dialog(newDialogId, focusAfterClosed, newFocusFirst, hasOverlayMask, isCloseOnEsc);
+    var dialog = new aria.Dialog(newDialogId, focusAfterClosed, newFocusFirst, hasOverlayMask, isCloseOnEsc, isAnimated);
   }; // end replace
 
   /**
@@ -6096,7 +5575,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
   aria.Dialog.prototype.trapFocus = function (event) {
-    if (aria.Utils.IgnoreUtilFocusChanges) {
+    var parentElement = event.target.parentElement;
+
+    if (aria.Utils.IgnoreUtilFocusChanges || parentElement && parentElement.classList.contains('wp-link-input')) {
       return;
     }
 
@@ -6118,18 +5599,20 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.openModal = function (dialogId, focusAfterClosed, focusFirst, dialogOverlay) {
     var isCloseOnEsc = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var dialog = new aria.Dialog(dialogId, focusAfterClosed, focusFirst, dialogOverlay, isCloseOnEsc);
+    var isAnimated = arguments.length > 5 ? arguments[5] : undefined;
+    var dialog = new aria.Dialog(dialogId, focusAfterClosed, focusFirst, dialogOverlay, isCloseOnEsc, isAnimated);
   }; // end openModal.
 
 
-  SUI.closeModal = function () {
+  SUI.closeModal = function (isAnimated) {
     var topDialog = aria.getCurrentDialog();
-    topDialog.close();
+    topDialog.close(isAnimated);
   }; // end closeDialog.
 
 
   SUI.replaceModal = function (newDialogId, newFocusAfterClosed, newFocusFirst, hasOverlayMask) {
     var isCloseOnEsc = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+    var isAnimated = arguments.length > 5 ? arguments[5] : undefined;
     var topDialog = aria.getCurrentDialog();
     /**
      * BUG #1:
@@ -6140,7 +5623,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
      * if ( topDialog.dialogNode.contains( document.activeElement ) ) { ... }
      */
 
-    topDialog.replace(newDialogId, newFocusAfterClosed, newFocusFirst, hasOverlayMask, isCloseOnEsc);
+    topDialog.replace(newDialogId, newFocusAfterClosed, newFocusFirst, hasOverlayMask, isCloseOnEsc, isAnimated);
   }; // end replaceModal.
 
 
@@ -6161,7 +5644,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.modalDialog = function () {
     function init() {
-      var button, buttonOpen, buttonClose, buttonReplace, buttonSlide, overlayMask, modalId, slideId, closeFocus, newFocus, animation;
+      var button, buttonOpen, buttonClose, buttonReplace, buttonSlide, overlayMask, modalId, slideId, closeFocus, newFocus, animation, isAnimated;
       buttonOpen = $('[data-modal-open]');
       buttonClose = $('[data-modal-close]');
       buttonReplace = $('[data-modal-replace]');
@@ -6173,6 +5656,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         closeFocus = button.attr('data-modal-close-focus');
         newFocus = button.attr('data-modal-open-focus');
         overlayMask = button.attr('data-modal-mask');
+        isAnimated = button.attr('data-modal-animated');
         var isCloseOnEsc = 'false' === button.attr('data-esc-close') ? false : true;
 
         if (( true ? "undefined" : undefined) === _typeof(closeFocus) || false === closeFocus || '' === closeFocus) {
@@ -6189,8 +5673,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           overlayMask = false;
         }
 
+        if (( true ? "undefined" : undefined) !== _typeof(isAnimated) && false !== isAnimated && 'false' === isAnimated) {
+          isAnimated = false;
+        } else {
+          isAnimated = true;
+        }
+
         if (( true ? "undefined" : undefined) !== _typeof(modalId) && false !== modalId && '' !== modalId) {
-          SUI.openModal(modalId, closeFocus, newFocus, overlayMask, isCloseOnEsc);
+          SUI.openModal(modalId, closeFocus, newFocus, overlayMask, isCloseOnEsc, isAnimated);
         }
 
         e.preventDefault();
@@ -6218,7 +5708,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
 
         if (( true ? "undefined" : undefined) !== _typeof(modalId) && false !== modalId && '' !== modalId) {
-          SUI.replaceModal(modalId, closeFocus, newFocus, overlayMask, isCloseOnEsc);
+          SUI.replaceModal(modalId, closeFocus, newFocus, overlayMask, isCloseOnEsc, isAnimated);
         }
 
         e.preventDefault();
@@ -6244,7 +5734,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         e.preventDefault();
       });
       buttonClose.on('click', function (e) {
-        SUI.closeModal();
+        SUI.closeModal(isAnimated);
         e.preventDefault();
       });
     }
@@ -6255,7 +5745,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.modalDialog();
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -6347,12 +5843,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           placeholder = '',
           ariaLabel = '',
           ariaDescription = '';
+      var dataPlaceholder = textarea.attr('placeholder');
+      var dataLabel = textarea.attr('data-field-label');
 
-      if ('undefined' !== typeof textarea.attr('placeholder') && '' !== textarea.attr('placeholder')) {
-        placeholder = ' placeholder="' + textarea.attr('placeholder') + '"';
+      if ('undefined' !== typeof dataPlaceholder && '' !== dataPlaceholder) {
+        placeholder = ' placeholder="' + dataPlaceholder + '"';
       }
 
-      if ('undefinded' !== typeof textarea.attr('data-field-label') && '' !== textarea.attr('data-field-label')) {
+      if ('undefined' !== typeof dataLabel && '' !== dataLabel) {
         ariaLabel = ' aria-labelledby="' + uniqid + '-label"';
         textarea.attr('aria-labelledby', uniqid + '-label');
       } else {
@@ -6363,7 +5861,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         textarea.attr('aria-labelledby', uniqid + '-label');
       }
 
-      if ('undefinded' !== typeof textarea.attr('data-field-label') && '' !== textarea.attr('data-field-label')) {
+      if ('undefined' !== typeof dataLabel && '' !== dataLabel) {
         ariaDescription = ' aria-describedby="' + uniqid + '-description"';
       } else {
         if (textarea.closest('.sui-form-field').find('.sui-label').length) {
@@ -6380,10 +5878,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     function buildItem(itemName) {
       var html = '';
       html += '<li title="' + itemName + '">';
-      html += '<i class="sui-icon-page sui-sm" aria-hidden="true"></i>';
+      html += '<span class="sui-icon-page sui-sm" aria-hidden="true"></span>';
       html += itemName;
       html += '<button class="sui-button-close">';
-      html += '<i class="sui-icon-close" aria-hidden="true"></i>';
+      html += '<span class="sui-icon-close" aria-hidden="true"></span>';
       html += '<span class="sui-screen-reader-text">Delete</span>';
       html += '</button>';
       html += '</li>';
@@ -6436,12 +5934,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 
         var customKeysArray = customDisallowedKeys.split(',');
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
+
+        var _iterator = _createForOfIteratorHelper(customKeysArray),
+            _step;
 
         try {
-          for (var _iterator = customKeysArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var key = _step.value;
             // Convert to integer.
             var intKey = parseInt(key, 10); // And filter out any NaN.
@@ -6452,18 +5950,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             }
           }
         } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
+          _iterator.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-              _iterator["return"]();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
+          _iterator.f();
         }
       }
 
@@ -6495,7 +5984,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
         var input = $(this),
             oldValue = $textarea.val(),
-            newValue = input.val(); // Get rid of new lines, commas, and any chars passed by the admin from the newly entered value.
+            newValue = input.val(); // Sanitize value.
+
+        newValue = newValue.replace(/</g, '&lt;');
+        newValue = DOMPurify.sanitize(newValue); // Get rid of new lines, commas, and any chars passed by the admin from the newly entered value.
 
         var newTrim = newValue.replace(regex, ''),
             isEnter = 13 === e.keyCode;
@@ -6574,40 +6066,31 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var textboxValuesArray = cleanedCurrentValue.split(/[\r\n]+/gm),
             tags = $mainWrapper.find('.sui-multistrings-list li:not(.sui-multistrings-input)'),
             tagsTitles = [];
-        var _iteratorNormalCompletion2 = true;
-        var _didIteratorError2 = false;
-        var _iteratorError2 = undefined;
+
+        var _iterator2 = _createForOfIteratorHelper(tags),
+            _step2;
 
         try {
-          for (var _iterator2 = tags[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
             var tag = _step2.value;
             tagsTitles.push($(tag).attr('title'));
           }
         } catch (err) {
-          _didIteratorError2 = true;
-          _iteratorError2 = err;
+          _iterator2.e(err);
         } finally {
-          try {
-            if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
-              _iterator2["return"]();
-            }
-          } finally {
-            if (_didIteratorError2) {
-              throw _iteratorError2;
-            }
-          }
+          _iterator2.f();
         }
 
         var areEqual = compareArrays(textboxValuesArray, tagsTitles); // The existing elements changed, update the existing tags.
 
         if (!areEqual) {
           $mainWrapper.find('.sui-multistrings-list li:not(.sui-multistrings-input)').remove();
-          var _iteratorNormalCompletion3 = true;
-          var _didIteratorError3 = false;
-          var _iteratorError3 = undefined;
+
+          var _iterator3 = _createForOfIteratorHelper(textboxValuesArray),
+              _step3;
 
           try {
-            for (var _iterator3 = textboxValuesArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
               var value = _step3.value;
               value = value.trim();
 
@@ -6619,18 +6102,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             } // Bind the event to remove the tags.
 
           } catch (err) {
-            _didIteratorError3 = true;
-            _iteratorError3 = err;
+            _iterator3.e(err);
           } finally {
-            try {
-              if (!_iteratorNormalCompletion3 && _iterator3["return"] != null) {
-                _iterator3["return"]();
-              }
-            } finally {
-              if (_didIteratorError3) {
-                throw _iteratorError3;
-              }
-            }
+            _iterator3.f();
           }
 
           bindRemoveTag($mainWrapper);
@@ -6730,7 +6204,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 })(jQuery);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -6874,7 +6348,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
 
         innerHTML += '<button class="sui-button-icon">';
-        innerHTML += '<i class="sui-icon-check" aria-hidden="true"></i>';
+        innerHTML += '<span class="sui-icon-check" aria-hidden="true"></span>';
 
         if ('' !== dismiss.label) {
           innerHTML += '<span class="sui-screen-reader-text">' + dismiss.label + '</span>';
@@ -7283,7 +6757,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.notice();
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -7294,14 +6768,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   }
 
   SUI.showHidePassword = function () {
-    $('.sui-2-10-8 .sui-form-field').each(function () {
+    $('.sui-2-12-24 .sui-form-field').each(function () {
       var $this = $(this);
 
       if (0 !== $this.find('input[type="password"]').length) {
         $this.find('[class*="sui-button"], .sui-password-toggle').off('click.toggle-password').on('click.toggle-password', function () {
           var $button = $(this),
               $input = $button.parent().find('input'),
-              $icon = $button.find('i');
+              $icon = $button.find('> span');
           $button.parent().toggleClass('sui-password-visible');
           $button.find('.sui-password-text').toggleClass('sui-hidden');
 
@@ -7319,26 +6793,50 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.showHidePassword();
 })(jQuery);
-(function ($) {
-  var endpoint = 'https://api.reviews.co.uk/merchant/reviews?store=wpmudev-org'; // Update the reviews with the live stats.
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-  $('.sui-2-10-8 .sui-reviews').each(function () {
-    var review = $(this);
-    $.get(endpoint, function (data) {
-      var stars = Math.round(data.stats.average_rating);
-      var starsBlock = review.find('.sui-reviews__stars')[0];
-      var i;
+(function ($) {
+  // Enable strict mode.
+  'use strict'; // Define global SUI object if it doesn't exist.
+
+  if ('object' !== _typeof(window.SUI)) {
+    window.SUI = {};
+  }
+
+  SUI.reviews = function (review, reviews, rating) {
+    if (reviews <= 0) {
+      return;
+    }
+
+    function init() {
+      var stars = Math.round(rating),
+          starsBlock = review.find('.sui-reviews__stars')[0],
+          i;
 
       for (i = 0; i < stars; i++) {
-        starsBlock.innerHTML += '<i class="sui-icon-star" aria-hidden="true"></i> ';
+        starsBlock.innerHTML += '<span class="sui-icon-star" aria-hidden="true"></span> ';
       }
 
-      review.find('.sui-reviews-rating')[0].innerHTML = data.stats.average_rating;
-      review.find('.sui-reviews-customer-count')[0].innerHTML = data.stats.total_reviews;
+      review.find('.sui-reviews-rating').replaceWith(rating);
+      review.find('.sui-reviews-customer-count').replaceWith(reviews);
+    }
+
+    init();
+    return this;
+  }; // Update the reviews with the live stats.
+
+
+  $('.sui-2-12-24 .sui-reviews').each(function () {
+    var review = $(this);
+    $.ajax({
+      url: "https://api.reviews.co.uk/merchant/reviews?store=wpmudev-org",
+      success: function success(data) {
+        SUI.reviews(review, data.stats.reviews, data.stats.average_rating);
+      }
     });
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -7355,16 +6853,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         circumference = 2 * Math.PI * radius,
         dashLength = circumference / 100 * score,
         gapLength = dashLength * 100 - score,
-        svg = '<svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">\n' + '<circle stroke-width="16" cx="50" cy="50" r="42" />\n' + '<circle stroke-width="16" cx="50" cy="50" r="42" stroke-dasharray="0,' + gapLength + '" />\n' + '</svg>\n' + '<span class="sui-circle-score-label">' + score + '</span>\n'; // Add svg to score element, add loaded class, & change stroke-dasharray to represent target score/percentage.
+        svg = '<svg viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">\n' + '<circle stroke-width="16" cx="50" cy="50" r="42" />\n' + '<circle stroke-width="16" cx="50" cy="50" r="42" stroke-dasharray="0,' + gapLength + '" />\n' + '</svg>\n' + '<span class="sui-circle-score-label" aria-hidden="true">' + score + '</span>\n' + '<span class="sui-screen-reader-text" tabindex="0">Score ' + score + ' out of 100</span>'; // Add svg to score element, add loaded class, & change stroke-dasharray to represent target score/percentage.
 
     $(el).prepend(svg).addClass('loaded').find('circle:last-child').css('animation', 'sui' + score + ' 3s forwards');
   };
 
-  $('.sui-2-10-8 .sui-circle-score').each(function () {
+  $('.sui-2-12-24 .sui-circle-score').each(function () {
     SUI.loadCircleScore(this);
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 /*!
  * Select2 4.1.0-rc.0
@@ -8938,7 +8436,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             originalEvent: evt
           });
         });
-        this.$selection.on('click', '.select2-selection__choice__remove', function (evt) {
+        this.$selection.on('click', '.sui-button-icon', function (evt) {
           // Ignore the event if it is disabled
           if (self.isDisabled()) {
             return;
@@ -8952,7 +8450,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
             data: data
           });
         });
-        this.$selection.on('keydown', '.select2-selection__choice__remove', function (evt) {
+        this.$selection.on('keydown', '.sui-button-icon', function (evt) {
           // Ignore the event if it is disabled
           if (self.isDisabled()) {
             return;
@@ -8966,6 +8464,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var $rendered = this.$selection.find('.select2-selection__rendered');
         $rendered.empty();
         $rendered.removeAttr('title');
+        $rendered.removeClass('has-option-selected');
       };
 
       MultipleSelection.prototype.display = function (data, container) {
@@ -8975,7 +8474,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       };
 
       MultipleSelection.prototype.selectionContainer = function () {
-        var $container = $('<li class="select2-selection__choice">' + '<button type="button" class="select2-selection__choice__remove" ' + 'tabindex="-1">' + '<span aria-hidden="true">&times;</span>' + '</button>' + '<span class="select2-selection__choice__display"></span>' + '</li>');
+        var $container = $('<li class="select2-selection__choice">' + '<span class="select2-selection__choice__display"></span>' + '<button type="button" class="sui-button-icon" ' + 'tabindex="-1">' + '<span class="sui-icon-close sui-sm" aria-hidden="true"></span>' + '</button>' + '</li>');
         return $container;
       };
 
@@ -9009,7 +8508,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           }
 
           var removeItem = this.options.get('translations').get('removeItem');
-          var $remove = $selection.find('.select2-selection__choice__remove');
+          var $remove = $selection.find('.sui-button-icon');
           $remove.attr('title', removeItem());
           $remove.attr('aria-label', removeItem());
           $remove.attr('aria-describedby', selectionId);
@@ -9018,7 +8517,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         }
 
         var $rendered = this.$selection.find('.select2-selection__rendered');
-        $rendered.append($selections);
+        $rendered.append($selections).addClass('has-option-selected');
       };
 
       return MultipleSelection;
@@ -12398,28 +11897,69 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         });
         this.on('keypress', function (evt) {
           var key = evt.which;
+          var isMultiSelect = this.$element[0].hasAttribute('multiple');
 
           if (self.isOpen()) {
-            if (key === KEYS.ESC || key === KEYS.UP && evt.altKey) {
-              self.close(evt);
-              evt.preventDefault();
-            } else if (key === KEYS.ENTER || key === KEYS.TAB) {
-              self.trigger('results:select', {});
+            if (key === KEYS.ENTER) {
+              self.trigger('results:select');
               evt.preventDefault();
             } else if (key === KEYS.SPACE && evt.ctrlKey) {
-              self.trigger('results:toggle', {});
+              self.trigger('results:toggle');
               evt.preventDefault();
             } else if (key === KEYS.UP) {
-              self.trigger('results:previous', {});
+              self.trigger('results:previous');
               evt.preventDefault();
             } else if (key === KEYS.DOWN) {
-              self.trigger('results:next', {});
+              self.trigger('results:next');
+              evt.preventDefault();
+            } else if (key === KEYS.ESC || key === KEYS.TAB) {
+              self.close();
               evt.preventDefault();
             }
-          } else {
-            if (key === KEYS.ENTER || key === KEYS.SPACE || key === KEYS.DOWN && evt.altKey) {
+          } else if (!isMultiSelect) {
+            // Added the functionality to change option on press of up and down arrow. @edited
+            if (key === KEYS.ENTER || key === KEYS.SPACE || (key === KEYS.DOWN || key === KEYS.UP) && evt.altKey) {
               self.open();
               evt.preventDefault();
+            } else if (key === KEYS.DOWN) {
+              if (undefined != this.$element.find('option:selected').next().val()) {
+                this.$element.val(this.$element.find('option:selected').next().val());
+                this.$element.trigger('change');
+              }
+
+              evt.preventDefault();
+            } else if (key === KEYS.UP) {
+              if (undefined != this.$element.find('option:selected').prev().val()) {
+                this.$element.val(this.$element.find('option:selected').prev().val());
+                this.$element.trigger('change');
+              }
+
+              evt.preventDefault();
+            } // Added the functionality to select option based on key press. @edited
+            else {
+              var selectedValue = this.$element.find('option:selected').text();
+              var keyPressed = String.fromCharCode(key).toLowerCase();
+              var values = this.$element.find('option').filter(function () {
+                var _$$text;
+
+                return (_$$text = $(this).text()) === null || _$$text === void 0 ? void 0 : _$$text.toLowerCase().startsWith(keyPressed);
+              });
+              var arrLength = values.length - 1;
+              var elemVal = selectedValue;
+              values.each(function (index) {
+                if (selectedValue !== '' && selectedValue[0].toLowerCase() === keyPressed) {
+                  if ($(this).text() === selectedValue && index !== arrLength) {
+                    elemVal = $(values[index + 1]).val();
+                    return false;
+                  }
+
+                  return;
+                }
+
+                elemVal = $(this).val();
+                return false;
+              });
+              elemVal !== selectedValue && (self.$element.val(elemVal), self.$element.trigger('change'));
             }
           }
         });
@@ -12753,7 +12293,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   return select2;
 });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 ;
 
@@ -12765,9 +12305,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select = {};
 
+  SUI.select.escapeJS = function (string) {
+    // Create a temporary <div> element using jQuery and set the HTML content.
+    var div = $('<div>').html(string); // Get the text content of the <div> element and remove script tags
+
+    var text = div.text().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, ''); // Return the escaped text
+
+    return text;
+  };
+
   SUI.select.formatIcon = function (data, container) {
     var markup;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     var icon = $(data.element).attr('data-icon');
 
     if (!data.id) {
@@ -12785,7 +12334,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select.formatIconSelection = function (data, container) {
     var markup;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     var icon = $(data.element).attr('data-icon');
 
     if ('undefined' !== typeof icon) {
@@ -12799,7 +12348,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select.formatColor = function (data, container) {
     var markup, border;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     var color = $(data.element).attr('data-color');
 
     if (!data.id) {
@@ -12835,7 +12384,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select.formatColorSelection = function (data, container) {
     var markup;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     var color = $(data.element).attr('data-color');
 
     if ('undefined' !== typeof color) {
@@ -12867,7 +12416,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select.formatVars = function (data, container) {
     var markup;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     var content = $(data.element).val();
 
     if (!data.id) {
@@ -12885,7 +12434,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
   SUI.select.formatVarsSelection = function (data, container) {
     var markup;
-    var label = data.text;
+    var label = SUI.select.escapeJS(data.text);
     markup = '<span class="sui-icon-plus-circle sui-md" aria-hidden="true"></span>';
     markup += '<span class="sui-screen-reader-text">' + label + '</span>';
     return markup;
@@ -12894,7 +12443,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   SUI.select.init = function (select) {
     var getParent = select.closest('.sui-modal-content'),
         getParentId = getParent.attr('id'),
-        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-10-8'),
+        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-12-24'),
         hasSearch = 'true' === select.attr('data-search') ? 0 : -1,
         isSmall = select.hasClass('sui-select-sm') ? 'sui-select-dropdown-sm' : '';
     select.SUIselect2({
@@ -12907,7 +12456,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   SUI.select.initIcon = function (select) {
     var getParent = select.closest('.sui-modal-content'),
         getParentId = getParent.attr('id'),
-        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-10-8'),
+        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-12-24'),
         hasSearch = 'true' === select.attr('data-search') ? 0 : -1,
         isSmall = select.hasClass('sui-select-sm') ? 'sui-select-dropdown-sm' : '';
     select.SUIselect2({
@@ -12925,7 +12474,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   SUI.select.initColor = function (select) {
     var getParent = select.closest('.sui-modal-content'),
         getParentId = getParent.attr('id'),
-        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-10-8'),
+        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-12-24'),
         hasSearch = 'true' === select.attr('data-search') ? 0 : -1,
         isSmall = select.hasClass('sui-select-sm') ? 'sui-select-dropdown-sm' : '';
     select.SUIselect2({
@@ -12943,7 +12492,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   SUI.select.initSearch = function (select) {
     var getParent = select.closest('.sui-modal-content'),
         getParentId = getParent.attr('id'),
-        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-10-8'),
+        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-12-24'),
         isSmall = select.hasClass('sui-select-sm') ? 'sui-select-dropdown-sm' : '';
     select.SUIselect2({
       dropdownParent: selectParent,
@@ -12956,7 +12505,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   SUI.select.initVars = function (select) {
     var getParent = select.closest('.sui-modal-content'),
         getParentId = getParent.attr('id'),
-        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-10-8'),
+        selectParent = getParent.length ? $('#' + getParentId) : $('.sui-2-12-24'),
         hasSearch = 'true' === select.attr('data-search') ? 0 : -1;
     select.SUIselect2({
       theme: 'vars',
@@ -12967,11 +12516,18 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         return markup;
       },
       minimumResultsForSearch: hasSearch
+    }).on('select2:open', function () {
+      $(this).val(null);
     });
+    select.val(null);
   };
 
   $('.sui-select').each(function () {
-    var select = $(this);
+    var select = $(this); // return if select2 already initalized for element.
+
+    if (select.hasClass('select2-hidden-accessible') || select.hasClass('select2')) {
+      return;
+    }
 
     if ('icon' === select.data('theme')) {
       SUI.select.initIcon(select);
@@ -12984,11 +12540,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   });
   $('.sui-variables').each(function () {
-    var select = $(this);
+    var select = $(this); // return if select2 already initalized for element.
+
+    if (select.hasClass('select2-hidden-accessible') || select.hasClass('select2')) {
+      return;
+    }
+
     SUI.select.initVars(select);
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode
@@ -13008,10 +12569,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         newContent;
     $this.on('click', function (e) {
       $alllabels.removeClass('active');
-      $allinputs.removeProp('checked');
-      $wrapper.find('.sui-tabs-content>div[data-tab-content]').removeClass('active');
+      $allinputs.attr('checked', false);
+      $allinputs.attr('aria-selected', false);
+      $wrapper.find('> .sui-tabs-content > div[data-tab-content]').removeClass('active');
       $label.addClass('active');
-      $this.prop('checked', true);
+      $this.attr('checked', true);
+      $this.attr('aria-selected', true);
       newContent = $wrapper.find('.sui-tabs-content div[data-tab-content="' + $data + '"]');
 
       if (newContent.length) {
@@ -13020,11 +12583,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     });
   };
 
-  $('.sui-2-10-8 .sui-side-tabs label.sui-tab-item input').each(function () {
+  $('.sui-2-12-24 .sui-side-tabs label.sui-tab-item input').each(function () {
     SUI.sideTabs(this);
   });
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -13087,7 +12650,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     }
   }
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -13140,7 +12703,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
     function onClick(groupIndex, itemIndex) {
       setNodes(groupIndex, itemIndex);
-      setCallback(indexGroup, indexItem);
+      setCallback();
     }
 
     function setNodes(groupIndex, itemIndex) {
@@ -13203,7 +12766,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     }
 
-    return init(config);
+    init(config);
+    return;
   };
 
   SUI.tabsOverflow = function ($el) {
@@ -13299,10 +12863,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     } // Deactivate all tabs and tab panels.
 
 
-    function deactivateTabs(tabs, panels) {
+    function deactivateTabs(tabs, panels, inputs) {
       tabs.removeClass('active');
       tabs.attr('tabindex', '-1');
       tabs.attr('aria-selected', false);
+      inputs.prop('checked', false);
       panels.removeClass('active');
       panels.prop('hidden', true);
     } // Activate current tab panel.
@@ -13310,13 +12875,16 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
     function activateTab(tab) {
       var tabs = $(tab).closest('[role="tablist"]').find('[role="tab"]'),
+          inputs = $(tab).closest('[role="tablist"]').find('input[type="radio"]'),
           panels = $(tab).closest('.sui-tabs').find('> .sui-tabs-content > [role="tabpanel"]'),
           controls = $(tab).attr('aria-controls'),
+          input = $(tab).next('input[type="radio"]'),
           panel = $('#' + controls);
-      deactivateTabs(tabs, panels);
+      deactivateTabs(tabs, panels, inputs);
       $(tab).addClass('active');
       $(tab).removeAttr('tabindex');
       $(tab).attr('aria-selected', true);
+      input.prop('checked', true);
       panel.addClass('active');
       panel.prop('hidden', false);
     } // When a "tablist" aria-orientation is set to vertical,
@@ -13396,15 +12964,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
       switch (key) {
         case keys.end:
-          event.preventDefault(); // Actiavte last tab.
-          // focusLastTab();
-
-          break;
-
         case keys.home:
-          event.preventDefault(); // Activate first tab.
-          // focusFirstTab();
-
+          event.preventDefault();
           break;
         // Up and down are in keydown
         // because we need to prevent page scroll.
@@ -13458,17 +13019,17 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this;
   };
 
-  if (0 !== $('.sui-2-10-8 .sui-tabs').length) {
+  if (0 !== $('.sui-2-12-24 .sui-tabs').length) {
     // Support tabs new markup.
     SUI.tabs(); // Support legacy tabs.
 
     SUI.suiTabs();
-    $('.sui-2-10-8 .sui-tabs-navigation').each(function () {
+    $('.sui-2-12-24 .sui-tabs-navigation').each(function () {
       SUI.tabsOverflow($(this));
     });
   }
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -13783,13 +13344,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     return this;
   };
 
-  if (0 !== $('.sui-2-10-8 .sui-tree').length) {
-    $('.sui-2-10-8 .sui-tree').each(function () {
+  if (0 !== $('.sui-2-12-24 .sui-tree').length) {
+    $('.sui-2-12-24 .sui-tree').each(function () {
       SUI.suiTree($(this), true);
     });
   }
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function ($) {
   // Enable strict mode.
@@ -13800,19 +13361,128 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
   }
 
   SUI.upload = function () {
-    $('.sui-2-10-8 .sui-upload-group input[type="file"]').on('change', function (e) {
+    $('.sui-2-12-24 .sui-upload-group input[type="file"]').on('change', function (e) {
       var file = $(this)[0].files[0],
           message = $(this).find('~ .sui-upload-message');
 
       if (file) {
         message.text(file.name);
       }
-    });
+    }); // check whether element exist then execute js
+
+    if ($('.sui-2-12-24 .sui-file-upload').length) {
+      // This will trigger on file change. 
+      $('.sui-2-12-24 .sui-file-browser input[type="file"]').on('change', function () {
+        var parent = $(this).parent();
+        var filename = $(this).val();
+        var imageContainer = parent.find('.sui-upload-image');
+
+        if (filename) {
+          var lastIndex = filename.lastIndexOf("\\");
+
+          if (lastIndex >= 0) {
+            filename = filename.substring(lastIndex + 1); // To show uploaded file preview.
+
+            if (imageContainer.length) {
+              var reader = new FileReader();
+              var imagePreview = imageContainer.find('.sui-image-preview');
+
+              reader.onload = function (e) {
+                imagePreview.attr('style', 'background-image: url(' + e.target.result + ' );');
+              };
+
+              reader.readAsDataURL($(this)[0].files[0]);
+            }
+
+            parent.find('.sui-upload-file > span').text(filename);
+            parent.addClass('sui-has_file');
+          }
+        } else {
+          if (imageContainer.length) {
+            var imagePreview = imageContainer.find('.sui-image-preview');
+            imagePreview.attr('style', 'background-image: url();');
+          }
+
+          parent.find('.sui-upload-file > span').text('');
+          parent.removeClass('sui-has_file');
+        }
+      }); // This will trigger on click of upload button
+
+      $('.sui-2-12-24 .sui-file-browser .sui-upload-button').on('click', function () {
+        selectFile($(this));
+      }); // This will trigger when user wants to remove the selected upload file
+
+      $('.sui-2-12-24 .sui-file-upload [aria-label="Remove file"]').on('click', function () {
+        removeFile($(this));
+      }); // This will trigger reupload of file
+
+      $('.sui-2-12-24 .sui-file-browser .sui-upload-image').on('click', function () {
+        selectFile($(this));
+      }); // upload drag and drop functionality
+
+      var isAdvancedUpload = function () {
+        var div = document.createElement('div');
+        return ('draggable' in div || 'ondragstart' in div && 'ondrop' in div) && 'FormData' in window && 'FileReader' in window;
+      }();
+
+      var uploadArea = $('.sui-2-12-24 .sui-upload-button');
+
+      if (isAdvancedUpload) {
+        var droppedFiles = false;
+        uploadArea.on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }).on('dragover dragenter', function () {
+          uploadArea.addClass('sui-is-dragover');
+        }).on('dragleave dragend drop', function () {
+          uploadArea.removeClass('sui-is-dragover');
+        }).on('drop', function (e) {
+          droppedFiles = e.originalEvent.dataTransfer.files;
+          uploadedFile($(this), droppedFiles[0], droppedFiles[0].name);
+        });
+      } // function to set uploaded file
+
+
+      var uploadedFile = function uploadedFile(element, file, filename) {
+        var parent = element.closest('.sui-upload');
+        var imageContainer = parent.find('.sui-upload-image');
+
+        if (filename) {
+          if (imageContainer.length) {
+            var reader = new FileReader();
+            var imagePreview = imageContainer.find('.sui-image-preview');
+
+            reader.onload = function (e) {
+              imagePreview.attr('style', 'background-image: url(' + e.target.result + ' );');
+            };
+
+            reader.readAsDataURL(file);
+          }
+
+          parent.find('.sui-upload-file > span').text(filename);
+          parent.addClass('sui-has_file');
+        }
+      }; // function to open browser file explorer for selecting file
+
+
+      var selectFile = function selectFile(element) {
+        var parent = element.closest('.sui-upload');
+        var file = parent.find('input[type="file"]');
+        file.trigger('click');
+      }; // function to remove file
+
+
+      var removeFile = function removeFile(element) {
+        var parent = element.closest('.sui-upload');
+        var file = parent.find('input[type="file"]');
+        file.val('').change();
+      };
+    }
   };
 
   SUI.upload();
 })(jQuery);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 (function () {
   function o(n) {
@@ -25523,11 +25193,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     if (!window.ace) window.ace = a;
 
     for (var key in a) {
-      if (a.hasOwnProperty(key)) window.ace[key] = a[key];
+      if (a.hasOwnProperty(key) && !window.ace[key]) window.ace[key] = a[key];
     }
   });
 })();
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 ace.define("ace/mode/css_highlight_rules", ["require", "exports", "module", "ace/lib/oop", "ace/lib/lang", "ace/mode/text_highlight_rules"], function (e, t, n) {
   "use strict";
@@ -26344,7 +26014,7 @@ ace.define("ace/mode/css_highlight_rules", ["require", "exports", "module", "ace
     }, this.$id = "ace/mode/css";
   }.call(c.prototype), t.Mode = c;
 });
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 ace.define("ace/mode/doc_comment_highlight_rules", ["require", "exports", "module", "ace/lib/oop", "ace/mode/text_highlight_rules"], function (e, t, n) {
   "use strict";
@@ -28974,7 +28644,7 @@ ace.define("ace/mode/doc_comment_highlight_rules", ["require", "exports", "modul
     }
   });
 })();
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 var aceSui = function () {
   ace.require(['ace/theme/sui'], function (m) {
@@ -29000,10 +28670,10 @@ ace.define('ace/theme/sui', [], function (require, exports, module) {
 /*!******************************************************!*\
   !*** ./node_modules/@wpmudev/shared-ui/package.json ***!
   \******************************************************/
-/*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, contributors, description, devDependencies, eslintConfig, eslintIgnore, files, homepage, license, main, name, private, repository, sass, scripts, style, version, default */
+/*! exports provided: name, version, description, private, author, contributors, homepage, license, repository, devDependencies, eslintConfig, eslintIgnore, files, style, sass, main, scripts, dependencies, default */
 /***/ (function(module) {
 
-module.exports = JSON.parse("{\"_args\":[[\"@wpmudev/shared-ui@2.10.8\",\"/opt/atlassian/pipelines/agent/build\"]],\"_from\":\"@wpmudev/shared-ui@2.10.8\",\"_id\":\"@wpmudev/shared-ui@2.10.8\",\"_inBundle\":false,\"_integrity\":\"sha512-EzUdKuC12PHV0cN+v8YTcapRxixG8s2v/D4bpXMirlfX8naSeJIjTlg0P48R8esk/DOCS8vHtEdIV3x/F7KNpA==\",\"_location\":\"/@wpmudev/shared-ui\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"version\",\"registry\":true,\"raw\":\"@wpmudev/shared-ui@2.10.8\",\"name\":\"@wpmudev/shared-ui\",\"escapedName\":\"@wpmudev%2fshared-ui\",\"scope\":\"@wpmudev\",\"rawSpec\":\"2.10.8\",\"saveSpec\":null,\"fetchSpec\":\"2.10.8\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/@wpmudev/shared-ui/-/shared-ui-2.10.8.tgz\",\"_spec\":\"2.10.8\",\"_where\":\"/opt/atlassian/pipelines/agent/build\",\"author\":{\"name\":\"WPMU DEV\",\"url\":\"https://wpmudev.com/\"},\"bugs\":{\"url\":\"https://github.com/wpmudev/shared-ui/issues\"},\"contributors\":[{\"name\":\"Leighton Sapir\",\"email\":\"2328848+iamleigh@users.noreply.github.com\",\"url\":\"https://iamleigh.com/\"},{\"name\":\"Danae Millan\",\"email\":\"41606954+a-danae@users.noreply.github.com\"}],\"description\":\"For internal use in WPMU DEV plugins\",\"devDependencies\":{\"@babel/core\":\"7.4.3\",\"@babel/preset-env\":\"7.4.3\",\"babel-loader\":\"8.0.5\",\"chalk\":\"^2.4.1\",\"chart.js\":\"^2.9.1\",\"clipboard\":\"^2.0.6\",\"eslint-config-wordpress\":\"2.0.0\",\"fs\":\"0.0.1-security\",\"gh-pages\":\"^2.1.1\",\"gulp\":\"3.9.1\",\"gulp-autoprefixer\":\"6.0.0\",\"gulp-babel\":\"8.0.0\",\"gulp-clean\":\"^0.4.0\",\"gulp-clean-css\":\"3.10.0\",\"gulp-concat\":\"2.6.1\",\"gulp-eslint\":\"5.0.0\",\"gulp-header\":\"^2.0.9\",\"gulp-notify\":\"^3.2.0\",\"gulp-rename\":\"1.4.0\",\"gulp-replace\":\"^1.0.0\",\"gulp-sass\":\"4.0.2\",\"gulp-uglify\":\"3.0.1\",\"gulp-uglify-es\":\"1.0.4\",\"gulp-watch\":\"^5.0.1\",\"jquery\":\"^3.5.1\",\"lodash.template\":\"^4.5.0\",\"lunr\":\"0.7.2\",\"pump\":\"^3.0.0\"},\"eslintConfig\":{\"extends\":\"wordpress\",\"parserOptions\":{\"sourceType\":\"module\",\"ecmaVersion\":2018},\"env\":{\"es6\":true}},\"eslintIgnore\":[\"ace.js\",\"mode-css.js\",\"mode-html.js\",\"clipboard.js\",\"*.min.js\",\"*.full.js\",\"assets/js/shared-ui/accordion.js\",\"assets/js/shared-ui/code-snippet.js\",\"assets/js/shared-ui/dialog-slider.js\",\"assets/js/shared-ui/dropdowns.js\",\"assets/js/shared-ui/ie.js\",\"assets/js/shared-ui/notifications.js\",\"assets/js/shared-ui/password.js\",\"assets/js/shared-ui/reviews.js\",\"assets/js/shared-ui/scores.js\",\"assets/js/shared-ui/select2.full.js\",\"assets/js/shared-ui/side-tabs.js\",\"assets/js/shared-ui/sidenav-input.js\",\"assets/js/shared-ui/sticky-box.js\",\"assets/js/shared-ui/tabs.js\",\"assets/js/shared-ui/trees.js\",\"assets/js/shared-ui/upload.js\"],\"files\":[\"dist/\",\"js/\",\"scss/\"],\"homepage\":\"https://wpmudev.github.io/shared-ui/\",\"license\":\"GPL-2.0\",\"main\":\"dist/js/shared-ui\",\"name\":\"@wpmudev/shared-ui\",\"private\":false,\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/wpmudev/shared-ui.git\"},\"sass\":\"scss/shared-ui.scss\",\"scripts\":{\"build:all\":\"gulp update-version && npm run build:library && npm run build:showcase && gulp copy-files\",\"build:library\":\"gulp sui:styles && gulp sui:scripts\",\"build:showcase\":\"gulp dev:styles && gulp dev:jsCopies && gulp dev:scripts\",\"clean:ghpages\":\"rm -rf node_modules/gh-pages/.cache\",\"clean:modules\":\"rm -rf ./node_modules/ && rm -rf ./package-lock.json\",\"publish:library\":\"npm run clean:ghpages && gulp publish:sui\",\"publish:showcase\":\"npm run clean:ghpages && gulp publish:dev\",\"release:major\":\"npm version major --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:minor\":\"npm version minor --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:patch\":\"npm version patch --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:premajor\":\"npm version premajor --preid=beta --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:preminor\":\"npm version preminor --preid=beta --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:prepatch\":\"npm version prepatch --preid=beta --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"release:prerelease\":\"npm version prerelease --preid=beta --no-git-tag-version && npm run build:all && npm run publish:showcase && npm run publish:library\",\"watch:assets\":\"npm run build:library && npm run build:showcase && gulp watch\",\"watch:showcase\":\"bundler exec jekyll serve --watch\"},\"style\":\"dist/css/shared-ui.css\",\"version\":\"2.10.8\"}");
+module.exports = JSON.parse("{\"name\":\"@wpmudev/shared-ui\",\"version\":\"2.12.24\",\"description\":\"For internal use in WPMU DEV plugins\",\"private\":false,\"author\":\"WPMU DEV (https://wpmudev.com/)\",\"contributors\":[{\"name\":\"Leighton Sapir\",\"email\":\"2328848+iamleigh@users.noreply.github.com\",\"url\":\"https://iamleigh.com/\"},{\"name\":\"Danae Millan\",\"email\":\"41606954+a-danae@users.noreply.github.com\"},{\"name\":\"Pawan Kumar\",\"email\":\"40248406+creador-dev@users.noreply.github.com\",\"url\":\"https://creador.dev/\"}],\"homepage\":\"https://wpmudev.github.io/shared-ui/\",\"license\":\"GPL-2.0\",\"repository\":{\"type\":\"git\",\"url\":\"git://github.com/wpmudev/shared-ui.git\"},\"devDependencies\":{\"@babel/core\":\"^7.15.5\",\"@babel/preset-env\":\"^7.15.6\",\"@babel/register\":\"^7.15.3\",\"chalk\":\"^4.1.2\",\"chart.js\":\"^2.9.1\",\"clipboard\":\"^2.0.6\",\"cross-env\":\"^7.0.3\",\"eslint\":\"^7.32.0\",\"eslint-config-wordpress\":\"^2.0.0\",\"fs\":\"0.0.1-security\",\"gh-pages\":\"^3.2.3\",\"gulp\":\"^4.0.2\",\"gulp-autoprefixer\":\"^8.0.0\",\"gulp-babel\":\"^8.0.0\",\"gulp-clean-css\":\"^4.3.0\",\"gulp-concat\":\"2.6.1\",\"gulp-eslint7\":\"^0.3.2\",\"gulp-gh-pages\":\"^0.5.4\",\"gulp-header\":\"^2.0.9\",\"gulp-notify\":\"^4.0.0\",\"gulp-rename\":\"^2.0.0\",\"gulp-replace\":\"^1.1.3\",\"gulp-sass\":\"^5.0.0\",\"gulp-uglify\":\"^3.0.2\",\"gulp-uglify-es\":\"^3.0.0\",\"jquery\":\"^3.6.0\",\"lunr\":\"0.7.2\",\"sass\":\"^1.42.1\",\"webpack\":\"^5.57.1\"},\"eslintConfig\":{\"extends\":[\"wordpress\"],\"parserOptions\":{\"sourceType\":\"module\",\"ecmaVersion\":2018},\"env\":{\"es6\":true}},\"eslintIgnore\":[\"ace.js\",\"mode-css.js\",\"mode-html.js\",\"clipboard.js\",\"*.min.js\",\"*.full.js\",\"assets/js/shared-ui/accordion.js\",\"assets/js/shared-ui/code-snippet.js\",\"assets/js/shared-ui/dialog-slider.js\",\"assets/js/shared-ui/dropdowns.js\",\"assets/js/shared-ui/ie.js\",\"assets/js/shared-ui/notifications.js\",\"assets/js/shared-ui/password.js\",\"assets/js/shared-ui/reviews.js\",\"assets/js/shared-ui/scores.js\",\"assets/js/shared-ui/select2.full.js\",\"assets/js/shared-ui/side-tabs.js\",\"assets/js/shared-ui/sidenav-input.js\",\"assets/js/shared-ui/sticky-box.js\",\"assets/js/shared-ui/tabs.js\",\"assets/js/shared-ui/trees.js\",\"assets/js/shared-ui/upload.js\",\"gulpfile.js\"],\"files\":[\"dist/\",\"js/\",\"scss/\"],\"style\":\"dist/css/shared-ui.css\",\"sass\":\"scss/shared-ui.scss\",\"main\":\"dist/js/shared-ui\",\"scripts\":{\"clean:modules\":\"rm -rf ./node_modules/ && rm -rf ./package-lock.json\",\"clean:ghpages\":\"rm -rf node_modules/gh-pages/.cache\",\"clean:package\":\"rm -rf _dist/\",\"build\":\"gulp update && gulp build && gulp copy\",\"watch:assets\":\"gulp build && gulp watch\",\"watch:showcase\":\"bundler exec jekyll serve --watch\",\"publish:library\":\"npm run clean:ghpages && gulp publishLibrary\",\"publish:showcase\":\"npm run clean:ghpages && gulp publishShowcase\",\"publish:all\":\"npm run build && npm run clean:ghpages && gulp publishShowcase && gulp publishLibrary\",\"release:patch\":\"npm version patch --no-git-tag-version && npm run publish:all\",\"release:prepatch\":\"npm version prepatch --preid=beta --no-git-tag-version && npm run publish:all\",\"release:minor\":\"npm version minor --no-git-tag-version && npm run publish:all\",\"release:preminor\":\"npm version preminor --preid=beta --no-git-tag-version && npm run publish:all\",\"release:major\":\"npm version major --no-git-tag-version && npm run publish:all\",\"release:premajor\":\"npm version premajor --preid=beta --no-git-tag-version && npm run publish:all\",\"release:prerelease\":\"npm version prerelease --preid=beta --no-git-tag-version && npm run publish:all\"},\"dependencies\":{\"dompurify\":\"^3.0.0\"}}");
 
 /***/ }),
 

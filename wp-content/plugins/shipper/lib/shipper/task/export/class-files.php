@@ -13,6 +13,12 @@
 class Shipper_Task_Export_Files extends Shipper_Task_Export {
 
 	/**
+	 *
+	 * @var \Shipper_Helper_Fs_List
+	 */
+	protected $files;
+
+	/**
 	 * Task runner method
 	 *
 	 * Returns (bool)true when the export is done, and

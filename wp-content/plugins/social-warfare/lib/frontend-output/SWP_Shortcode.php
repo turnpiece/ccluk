@@ -1,9 +1,8 @@
 <?php
-
 /**
  * A class of functions used to render shortcodes for the user
  *
- * The SWP_Shortcodes Class used to add our shorcodes to WordPress
+ * The SWP_Shortcode Class used to add our shorcodes to WordPress
  * registry of registered functions.
  *
  * @package   SocialWarfare\Frontend-Output
@@ -98,13 +97,13 @@ class SWP_Shortcode {
 		 * If they included a link in the tweet text, we need to not pass a URL
 		 * parameter over to Twitter.
 		 *
-		 * Twitter will diregard value if it is: empty, a whitespace, or %20.
+		 * Twitter will disregard value if it is: empty, a whitespace, or %20.
 		 * Instead, give it an invalid URL! It achieves the targeted effect.
 		 *
 		 * This means that Twitter will not add a URL to the end of the tweet
 		 * which is the desired effect since the author added a link within the
 		 * tweet itself.
-		*/
+		 */
 		$url = '&url=' . SWP_Link_Manager::process_url( get_permalink(), 'twitter', get_the_ID() );
 		if ( ! empty( $atts['tweet'] ) && strpos( $atts['tweet'], 'http' ) > -1 ) {
 			$url = '&url=x';
@@ -114,14 +113,18 @@ class SWP_Shortcode {
 		$via = SWP_Twitter::get_via_parameter( $post );
 
 		/**
+		 * @since     4.5.6 | 13 MAR 2025 | Sanitized $theme param to prevent XSS.
+		 *
 		 * If a theme was passed into the shortcode via a parameter, we'll use
 		 * that theme. If a theme was not passed in, or if the theme is set to
 		 * 'default', or if an empty string was passed in, then we'll use the
 		 * global theme which is set on the plugin's options page.
 		 */
-		$theme = SWP_Utility::get_option( 'ctt_theme' );
+		$global_theme = SWP_Utility::get_option( 'ctt_theme' );
+		$theme        = false === $global_theme ? 'style1' : $global_theme;
+
 		if ( ! empty( $atts['theme'] ) && 'default' !== $atts['theme'] ) {
-			$theme = $atts['theme'];
+			$theme = sanitize_html_class( $atts['theme'] );
 		}
 
 		/**
@@ -134,6 +137,11 @@ class SWP_Shortcode {
 		}
 
 		/**
+		 * @since     4.5.6 | 13 MAR 2025 | Sanitizing the 'quote' parameter to prevent XSS.
+		 */
+		$quote = ! empty( $atts['quote'] ) ? esc_html( $atts['quote'] ) : '';
+
+		/**
 		 * This will generate the user's custom Tweet that will be used to
 		 * prepopulate the share dialogue box when an end user clicks on the
 		 * actual Click to Tweet.
@@ -144,46 +152,51 @@ class SWP_Shortcode {
 		 * Now that all the information has been processed, we generate the
 		 * actual string of html that will be returned and output to the screen.
 		 */
-		$html              = '<div class="sw-tweet-clear"></div>';
-		$html             .= '<a class="swp_CTT ' . $theme;
-		$html             .= '" href="https://twitter.com/share?text=' . $tweet . $via . $url;
-		$html             .= '" data-link="https://twitter.com/share?text=' . $tweet . $via . $url;
-		$html             .= '" rel="nofollow noreferrer noopener" target="_blank">';
-			$html         .= '<span class="sw-click-to-tweet">';
-				$html     .= '<span class="sw-ctt-text">';
-					$html .= ( ! empty( $atts['quote'] ) ) ? $atts['quote'] : '';
-				$html     .= '</span>';
-				$html     .= '<span class="sw-ctt-btn">';
+		$html  = '<div class="sw-tweet-clear"></div>';
+		$html .= '<a class="swp_CTT ' . esc_attr( $theme );
+		$html .= '" href="https://twitter.com/share?text=' . $tweet . $via . $url;
+		$html .= '" data-link="https://twitter.com/share?text=' . $tweet . $via . $url;
+		$html .= '" rel="nofollow noreferrer noopener" target="_blank">';
+			$html .= '<span class="sw-click-to-tweet">';
+				$html .= '<span class="sw-ctt-text">';
+					$html .= $quote;
+				$html .= '</span>';
+				$html .= '<span class="sw-ctt-btn">';
 					$html .= esc_html__( 'Click To Tweet', 'social-warfare' );
 					$html .= '<i class="sw swp_twitter_icon"></i>';
-			$html         .= '</span>';
-			$html         .= '</span>';
-		$html             .= '</a>';
+				$html .= '</span>';
+			$html .= '</span>';
+		$html .= '</a>';
 
 		return $html;
 	}
 
 	/**
-	 *
 	 * Retrieves tweet from database and converts to UTF-8 for Twitter.
 	 *
 	 * @since  3.3.0 | 16 AUG 2018 | Created. Ported code from $this->generate_share_link.
-	 * @param array $atts Shortcode attributes.
+	 * @since  4.5.6 | 13 MAR 2025 | Sanitized $atts['tweet'] to prevent injection.
 	 *
+	 * @param array $atts Shortcode attributes.
 	 * @return string $tweet The encoded tweet text.
 	 */
 	protected function get_tweet( $atts ) {
 		$max_tweet_length = 240;
 
-		// Check for a custom tweet from the shortcode attributes. .
-		$tweet = ( ! empty( $atts['tweet'] ) ) ? $atts['tweet'] : '';
+		/**
+		 * @since 4.5.6 | 13 MAR 2025 | Sanitize the 'tweet' attribute to prevent malicious injections
+		 */
+		$raw_tweet = ! empty( $atts['tweet'] ) ? sanitize_text_field( $atts['tweet'] ) : '';
 
-		if ( function_exists( 'mb_convert_encoding' ) ) :
-			$tweet = mb_convert_encoding( $tweet, 'UTF-8', get_bloginfo( 'charset' ) );
-		endif;
+		if ( function_exists( 'mb_convert_encoding' ) ) {
+			$raw_tweet = mb_convert_encoding( $raw_tweet, 'UTF-8', get_bloginfo( 'charset' ) );
+		}
 
-		$html_safe_tweet = htmlentities( $tweet, ENT_COMPAT, 'UTF-8' );
-		$tweet           = urlencode( $tweet );
+		// Convert to HTML entities so that special characters do not break.
+		$html_safe_tweet = htmlentities( $raw_tweet, ENT_COMPAT, 'UTF-8' );
+
+		// URL-encode for safe insertion into Twitter share URL.
+		$tweet = urlencode( $raw_tweet );
 
 		return $tweet;
 	}

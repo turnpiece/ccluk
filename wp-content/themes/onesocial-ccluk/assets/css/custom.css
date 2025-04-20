@@ -1582,7 +1582,6 @@ a.button {
 }
 
 #secondary div.generic-button a,
-#buddypress .comment-reply-link,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button, a.bp-title-button,
 #search-members-form > label:after,
@@ -1591,7 +1590,8 @@ a.button {
   background-color: #22a7f0;
 }
 
-#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
+#buddyboss-bbpress-media-attach,
+#buddyboss-comment-media-attach {
   background-color: #54ae68;
 }
 
@@ -1602,7 +1602,9 @@ a.button {
   background-color: #54ae68;
 }
 
-.header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
+.header-account-login .count,
+.header-notifications a.header-button span b,
+#aw-whats-new-submit-bbmedia {
   background-color: #54ae68;
 }
 
@@ -1613,14 +1615,12 @@ a.button {
   background: #54ae68;
 }
 
-#primary .author-follow div.generic-button a:before,
-#buddypress div#item-header .inner-avatar-wrap div.generic-button a:before,
-#secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
+#primary .author-follow div.generic-button a:before #secondary .inner-avatar-wrap div.generic-button a:before,
+body .selectionSharer a.action:hover {
   background: #54ae68;
 }
 
-#page #main .author-follow div.generic-button.loading a:before,
-#page #main #buddypress .inner-avatar-wrap .generic-button.loading a:before {
+#page #main .author-follow div.generic-button.loading a:before {
   background: #54ae68;
 }
 
@@ -1655,7 +1655,7 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
   color: #54ae68;
 }
 
-.dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
+.dir-header span {
   color: #54ae68;
 }
 
@@ -1691,9 +1691,7 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
 }
 
 .entry-meta a.read-more,
-.bb-user-notifications .avatar + a,
-#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
-#main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
+.bb-user-notifications .avatar + a {
   color: #54ae68;
 }
 
@@ -1708,7 +1706,6 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-#buddypress .bboss_search_page a.loading:after,
 .header-account-login .pop .count {
   color: #54ae68;
 }
@@ -1800,10 +1797,8 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
 }
 
 .entry-meta a.read-more,
-#buddypress #group-create-nav .group-create,
 .sap-publish-popup.sap-publish-popup .sap-action-button,
 .sap-container-wrapper .sap-story-publish,
-#main #buddypress div.item-list-tabs li.hideshow > ul,
 input[type=submit] {
   border-color: #22a7f0;
 }
