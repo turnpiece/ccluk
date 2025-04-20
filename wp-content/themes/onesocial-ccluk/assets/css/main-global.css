@@ -1283,6 +1283,7 @@ img.wp-smiley, .rsswidget img {
 --------------------------------------------------------------*/
 .author .archive-header {
   position: relative;
+  padding-left: 90px;
 }
 .author .archive-header .author-avatar {
   position: absolute;
@@ -1290,7 +1291,7 @@ img.wp-smiley, .rsswidget img {
   left: 0;
 }
 .author .archive-header > h1 {
-  padding-left: 100px;
+  text-align: left;
 }
 
 .author-info {
@@ -2829,6 +2830,8 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .post-author .name {
   font-size: 21px;
+  display: inline-block;
+  min-height: 50px;
 }
 .post-author .entry-date {
   margin-top: 12px;

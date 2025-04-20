@@ -1373,6 +1373,7 @@ img.wp-smiley, .rsswidget img {
 
 .author .archive-header {
   position: relative;
+  padding-left: 90px;
 
   .author-avatar {
       position: absolute;
@@ -1381,7 +1382,7 @@ img.wp-smiley, .rsswidget img {
   }
 
   > h1 {
-    padding-left: 100px;
+    text-align: left;
   }
 }
 
