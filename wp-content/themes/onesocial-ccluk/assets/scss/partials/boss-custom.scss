@@ -27,7 +27,6 @@ a.button {
 }
 
 #secondary div.generic-button a,
-#buddypress .comment-reply-link,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button, a.bp-title-button,
 #search-members-form > label:after,
@@ -36,7 +35,8 @@ a.button {
   background-color: $blue;
 }
 
-#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach {
+#buddyboss-bbpress-media-attach, 
+#buddyboss-comment-media-attach {
   background-color: $green;
 }
 
@@ -47,7 +47,9 @@ a.button {
   }
 }
 
-.header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
+.header-account-login .count, 
+.header-notifications a.header-button span b, 
+#aw-whats-new-submit-bbmedia {
   background-color: $green;
 }
 
@@ -58,15 +60,13 @@ a.button {
   }
 }
 
-#primary .author-follow div.generic-button a:before, 
-#buddypress div#item-header .inner-avatar-wrap div.generic-button a:before, 
+#primary .author-follow div.generic-button a:before
 #secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
   background: $green;
 }
 
 #page #main {
-  .author-follow div.generic-button.loading a:before, 
-  #buddypress .inner-avatar-wrap .generic-button.loading a:before {
+  .author-follow div.generic-button.loading a:before {
     background: $green;
   }
 }
@@ -116,7 +116,7 @@ li {
     }
 }
 
-.dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
+.dir-header span {
   color: $green;
 }
 
@@ -160,9 +160,7 @@ li {
 }
 
 .entry-meta a.read-more,
-.bb-user-notifications .avatar + a,
-#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover,
-#main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
+.bb-user-notifications .avatar + a {
   color: $green;
 }
 
@@ -180,7 +178,6 @@ a {
     color: $green;
 }
 
-#buddypress .bboss_search_page a.loading:after,
 .header-account-login .pop .count {
   color: $green;
 }
@@ -291,10 +288,8 @@ a {
 }
 
 .entry-meta a.read-more,
-#buddypress #group-create-nav .group-create,
 .sap-publish-popup.sap-publish-popup .sap-action-button,
 .sap-container-wrapper .sap-story-publish,
-#main #buddypress div.item-list-tabs li.hideshow > ul,
 input[type="submit"] {
   border-color: $blue;
 }

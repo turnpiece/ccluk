@@ -71,81 +71,11 @@ div#register-page {
   }
 }
 
-#buddypress {
-    .standard-form {
-      &#signup_form {
-        div.error {
-          background-color: $red;
-          border-radius: 3px;
-          color: $white;
-          margin: 0 0 10px 0;
-          padding: 6px;
-          text-align: center;
-        }
-        .buddyboss-select label {
-          margin-top: 0;
-        }
-        div.submit {
-          float: right;
-        }
-      }
-
-      p.description {
-        color: $gray;
-        margin: 5px 0;
-      }
-      
-      div.submit {
-        clear: both;
-        padding: 5px 0 0 0;
-      }
-
-      div#signup-avatar img {
-        margin: 0 15px 10px 0;
-      }
-    }
-    
-    div#register-page .register-section h4 {
-      color: $black;
-      margin-bottom: 40px;
-      margin-top: 10px;
-      padding-bottom: 15px;
-    }
-}
-
-#buddypress div#register-page {
-  #basic-details-section,
-  #profile-details-section {
-    input {
-      &[type="text"],
-      &[type="email"],
-      &[type="password"]{
-        width: 100%;
-      }
-    }
-  }
-
-  #signup_form.standard-form div.submit {
-    float: none !important;
-    margin: 0 auto;
-    input {
-      margin: 0;
-      padding: 17px 22px;
-      font-size: 20px;
-      color: $white;
-    }
-  }
-}
-
 .item-header-mobile {
   display: none;
 }
 
 body.register {
-
-    #buddypress div.page ul {
-      list-style: none;
-    }
 
     .standard-form {
       &#signup_form {
@@ -308,20 +238,6 @@ body.register {
       #pass-strength-result {
         text-align: right;
       }      
-    }
-
-    #buddypress {
-      .standard-form #blog-details-section input#signup_blog_url,
-      select[multiple="multiple"] {
-        width: 100%;
-      }
-      div#register-page {
-        .register-section h4 {
-          margin-bottom: 40px;
-          margin-top: 10px;
-          padding-bottom: 15px;
-        }
-      }
     }
 
     .popup-content {

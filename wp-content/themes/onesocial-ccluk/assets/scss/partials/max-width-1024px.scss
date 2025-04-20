@@ -23,17 +23,6 @@ body {
                 border-bottom: none;
             }
         }
-
-        &.buddypress {
-            #buddypress {
-                .item-header-mobile {
-                    display: block;
-                }
-                .item-header-sidebar {
-                    display: none;
-                }
-            }
-        }
     }
 
     &.register {
@@ -109,7 +98,4 @@ body {
       }
     }
   }
-}
-#buddypress #whats-new-header-content {
-    max-width: 560px;
 }

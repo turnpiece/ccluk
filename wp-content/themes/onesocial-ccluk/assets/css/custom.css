@@ -146,9 +146,9 @@ a:hover,
 .blog #main .post-author .author img {
   width: 50px;
   height: 50px;
-  margin-right: 23px;
+  margin-right: 5px;
   vertical-align: bottom;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 .archive #main .post-author .author-details .author-middle,
 .blog #main .post-author .author-details .author-middle {
@@ -172,7 +172,6 @@ a:hover,
 
 #save_as_draft,
 .popup-content .button:not(.ed_button),
-#buddypress form#whats-new-form #whats-new-submit input[type=submit],
 input[type=submit] {
   border: none;
   padding: 10px 20px 10px 20px;
@@ -185,8 +184,6 @@ input[type=submit] {
 #save_as_draft:hover, #save_as_draft:active,
 .popup-content .button:not(.ed_button):hover,
 .popup-content .button:not(.ed_button):active,
-#buddypress form#whats-new-form #whats-new-submit input[type=submit]:hover,
-#buddypress form#whats-new-form #whats-new-submit input[type=submit]:active,
 input[type=submit]:hover,
 input[type=submit]:active {
   background-color: #54ae68;
@@ -965,62 +962,10 @@ div#register-page .manual-registration {
   margin-top: 40px;
 }
 
-#buddypress .standard-form#signup_form div.error {
-  background-color: #e85c41;
-  border-radius: 3px;
-  color: #fff;
-  margin: 0 0 10px 0;
-  padding: 6px;
-  text-align: center;
-}
-#buddypress .standard-form#signup_form .buddyboss-select label {
-  margin-top: 0;
-}
-#buddypress .standard-form#signup_form div.submit {
-  float: right;
-}
-#buddypress .standard-form p.description {
-  color: #838383;
-  margin: 5px 0;
-}
-#buddypress .standard-form div.submit {
-  clear: both;
-  padding: 5px 0 0 0;
-}
-#buddypress .standard-form div#signup-avatar img {
-  margin: 0 15px 10px 0;
-}
-#buddypress div#register-page .register-section h4 {
-  color: #000;
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
-}
-
-#buddypress div#register-page #basic-details-section input[type=text], #buddypress div#register-page #basic-details-section input[type=email], #buddypress div#register-page #basic-details-section input[type=password],
-#buddypress div#register-page #profile-details-section input[type=text],
-#buddypress div#register-page #profile-details-section input[type=email],
-#buddypress div#register-page #profile-details-section input[type=password] {
-  width: 100%;
-}
-#buddypress div#register-page #signup_form.standard-form div.submit {
-  float: none !important;
-  margin: 0 auto;
-}
-#buddypress div#register-page #signup_form.standard-form div.submit input {
-  margin: 0;
-  padding: 17px 22px;
-  font-size: 20px;
-  color: #fff;
-}
-
 .item-header-mobile {
   display: none;
 }
 
-body.register #buddypress div.page ul {
-  list-style: none;
-}
 body.register .standard-form#signup_form input[type=email], body.register .standard-form#signup_form input[type=text] {
   width: 100%;
 }
@@ -1149,15 +1094,6 @@ body.register div#register-page #signup_form.standard-form div.submit input {
 }
 body.register div#register-page #pass-strength-result {
   text-align: right;
-}
-body.register #buddypress .standard-form #blog-details-section input#signup_blog_url,
-body.register #buddypress select[multiple=multiple] {
-  width: 100%;
-}
-body.register #buddypress div#register-page .register-section h4 {
-  margin-bottom: 40px;
-  margin-top: 10px;
-  padding-bottom: 15px;
 }
 body.register .popup-content {
   background: rgba(255, 255, 255, 0.8);

@@ -962,7 +962,6 @@ input[disabled] {
 /* Default state */
 
 #secondary div.generic-button a,
-#buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
 a.bp-title-button,
 article.post-password-required input[type=submit],
@@ -997,7 +996,6 @@ button {
 }
 
 #secondary div.generic-button a,
-#buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
 a.bp-title-button,
 article.post-password-required input[type=submit],
@@ -1013,7 +1011,6 @@ a.button {
 article.post-password-required input[type=submit],
 a.button,
 #secondary div.generic-button a,
-#buddypress .comment-reply-link,
 .entry-header .entry-title a.button,
 a.bp-title-button {
   &:hover, &:active {
@@ -1915,7 +1912,6 @@ img.avatar {
   float: left;
 }
 
-#buddypress .widget-area .widget ul.item-list img.avatar,
 .footer-widget .widget ul.item-list img.avatar {
   border-radius: 100%;
   display: block;
@@ -2920,11 +2916,6 @@ article.sticky .featured-post {
 }
 
 .entry-content {
-  #buddypress {
-    ol, ul {
-      overflow: visible;
-    }
-  }
   blockquote .author {
     color: $green;
     font-size: 18px;
@@ -4090,8 +4081,7 @@ body article.error404 .entry-header {
   margin: 0 auto;
 }
 
-.bb-search-result-group .horiz-gallery, 
-#buddypress ul.item-list li .bb-search-result-group div.item-desc {
+.bb-search-result-group .horiz-gallery {
   margin: 0;
 }
 
@@ -4139,7 +4129,6 @@ body article.error404 .entry-header {
 
 .sap-load-more-posts.loading:after, 
 .button-load-more-posts.loading:after, 
-#buddypress a.loading:after, 
 .footer-widget a.loading:after {
   font-family: 'fontawesome';
   font-weight: normal;
@@ -4218,15 +4207,13 @@ body article.error404 .entry-header {
 9.2 - Headers
 --------------------------------------------------------------*/
 
-#secondary div#item-header-content h1, 
-#buddypress div#item-header div#item-header-content h1 {
+#secondary div#item-header-content h1 {
   font-size: 24px;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-#secondary .user-nicename, 
-#buddypress div#item-header h2 {
+#secondary .user-nicename {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
@@ -4432,41 +4419,6 @@ We need to hide these elements from displaying on non-legacy pages. */
 
 h2.entry-title .button.bp-title-button {
   float: right;
-}
-
-#buddypress .standard-form .editfield,
-#buddyboss-media-album-create-form > div,
-#buddypress #create-group-form .editfield {
-  margin-bottom: 30px;
-}
-
-#buddypress {
-  .standard-form {
-    p.description {
-      font-size: $font-size-sm;
-    }
-    .input-options {
-      padding: 10px 0;
-
-      label.option-label {
-          font-size: $font-size-sm;
-          display: block;
-      }
-    }
-
-    &#sidebar-login-form input {
-      &[type="text"], 
-      &[type="password"] {
-        padding: 4px;
-        width: 95%;
-      }
-    }
-
-    div.submit input:hover {
-      @include box-shadow( none );
-      color: $dark;
-    }
-  }
 }
 
 /*--------------------------------------------------------------

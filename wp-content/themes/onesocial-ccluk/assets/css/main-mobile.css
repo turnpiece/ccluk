@@ -551,8 +551,7 @@ aside.post-author:after {
   display: table;
 }
 
-.blog .post-author .author img,
-#buddypress .search_results .post-author .author img {
+.blog .post-author .author img {
   height: auto;
   vertical-align: bottom;
   width: 50px;
@@ -584,24 +583,12 @@ aside.post-author:after {
 /*----------------------------------------------------------------
 1.1.9 - 404 Template
 ----------------------------------------------------------------*/
-body:not(.buddypress).error404 #content article {
+body.error404 #content article {
   padding: 0;
   border: 0;
 }
 body.error404 footer.entry-meta {
   display: block;
-}
-body.activity .entry-content > #buddypress > #item-body {
-  float: left;
-  min-height: 300px;
-  width: 100%;
-}
-body:not(.has-activity) .entry-content > #buddypress > #item-body {
-  clear: left;
-  margin: 0 0 15px;
-  padding: 15px;
-  background-color: #fff;
-  overflow: hidden;
 }
 
 /*--------------------------------------------------------------
@@ -635,9 +622,6 @@ body:not(.has-activity) .entry-content > #buddypress > #item-body {
   }
   #posts-carousel .entry-post-thumbnail {
     height: 140px;
-  }
-  .boss-create-post .buddyboss-select-inner {
-    height: 40px;
   }
   .buddyboss-media-photos-wrap-container {
     max-width: 400px;
@@ -1541,12 +1525,6 @@ MAXIMUM width of 1024 pixels (tablets)
     padding: 0 15px;
     border-bottom: none;
   }
-  body.page.buddypress #buddypress .item-header-mobile {
-    display: block;
-  }
-  body.page.buddypress #buddypress .item-header-sidebar {
-    display: none;
-  }
   body.register div#register-page p {
     font-size: 15px;
   }
@@ -1619,9 +1597,6 @@ MAXIMUM width of 1024 pixels (tablets)
   }
   .archive.author .archive-header .author-avatar {
     top: 0;
-  }
-  #buddypress #whats-new-header-content {
-    max-width: 560px;
   }
 }
 /*--------------------------------------------------------------
