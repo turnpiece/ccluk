@@ -16,7 +16,7 @@ if ($q->have_posts()) : ?>
         </header>
         <div class="section-content">
             <?php while ($q->have_posts()) : $q->the_post(); ?>
-                <?php get_template_part('template-parts/content', 'list_news'); ?>
+                <?php get_template_part('template-parts/content', 'list'); ?>
             <?php endwhile;
             wp_reset_postdata(); ?>
         </div>
