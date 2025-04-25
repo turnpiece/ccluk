@@ -241,7 +241,7 @@ function ccluk_create_news_post_type()
     );
 
     // add to Buddypress activity stream
-    add_post_type_support('ccluk_news', 'buddypress-activity');
+    #add_post_type_support('ccluk_news', 'buddypress-activity');
 }
 add_action('init', 'ccluk_create_news_post_type');
 

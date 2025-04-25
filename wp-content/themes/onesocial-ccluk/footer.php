@@ -17,14 +17,13 @@
 </div><!-- #main-wrap (Wrap For Mobile) -->
 
 <?php
-global $bp, $post;
+global $post;
 
 $post_infinite			 = true;
 $boss_activity_infinite	 = true;
-$activity				 = isset($bp) ? $bp->current_component : false;
 
 // don't remove this filter, marketplace plugin uses it
-$show_footer = apply_filters('onesocial_show_footer', !((is_archive() || is_home()) && $post_infinite && !(function_exists('is_shop') && is_shop()) && !(function_exists('is_product_category') && is_product_category()) && !(function_exists('is_product_tag') && is_product_tag()) && !(function_exists('bbp_is_forum_archive') && bbp_is_forum_archive())) || ($activity == 'activity' && $boss_activity_infinite));
+$show_footer = apply_filters('onesocial_show_footer', !((is_archive() || is_home()) && $post_infinite && !(function_exists('is_shop') && is_shop()) && !(function_exists('is_product_category') && is_product_category()) && !(function_exists('is_product_tag') && is_product_tag())) || ($activity == 'activity' && $boss_activity_infinite));
 
 if ($show_footer) : ?>
 
@@ -34,12 +33,10 @@ if ($show_footer) : ?>
 
 		<div class="footer-inner-bottom">
 			<div class="footer-inner">
-
 				<div id="footer-links">
-
 					<?php
 					$show_copyright	 = true;
-					$copyright		 = "&copy; 2022 - " . get_bloginfo('name');
+					$copyright		 = "&copy; 2025 - " . get_bloginfo('name');
 
 					if ($show_copyright && $copyright) {
 					?>
@@ -84,8 +81,6 @@ if ($show_footer) : ?>
 // Lost Password
 get_template_part('template-parts/site-lost-password');
 ?>
-
-<?php do_action('bp_footer') ?>
 
 <?php wp_footer(); ?>
 
