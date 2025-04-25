@@ -111,7 +111,7 @@ a:hover,
 }
 
 .archive.post-type-archive .site-content {
-  max-width: 750px;
+  max-width: 600px;
 }
 
 .archive #content > .archive-header h1,
@@ -406,7 +406,7 @@ body.page.page-sidebar-active #main #primary article > .entry-header > .entry-ti
   text-align: left;
 }
 body.page.page-template-page-nosidebar #main {
-  max-width: 750px;
+  max-width: 600px;
 }
 body.page.page-template-page-nosidebar #secondary {
   display: none;
@@ -1858,7 +1858,7 @@ input[type=radio] + span:before, input[type=radio] + label:before, input[type=ra
     background-color: #fff;
   }
 }
-body:not(.buddypress) #content article, body.buddypress #content article.error404 {
+body #content article {
   background-color: #fff;
 }
 
@@ -1951,7 +1951,7 @@ div#sitewide-notice div#message p {
   color: #22a7f0;
 }
 .single-incsub_event .header-area {
-  max-width: 750px;
+  max-width: 600px;
   margin: 0 auto;
 }
 .single-incsub_event #wpmudevevents-wrapper {
@@ -2029,10 +2029,10 @@ body.single-give_forms .entry-header a > .entry-title {
   color: #22a7f0;
 }
 body.single-give_forms #main {
-  max-width: 750px;
+  max-width: 600px;
 }
 body.single-give_forms #main #content .header-area {
-  max-width: 750px;
+  max-width: 600px;
   margin: 15px auto;
   margin: 1.5rem auto;
 }

@@ -204,8 +204,7 @@ body.single-item.groups #main {
 .sidebar-left {
   #main, 
   .home-inner-wrap, 
-  .search-content-wrap, 
-  .buddypress-content-wrap {
+  .search-content-wrap {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: reverse;
     -webkit-flex-direction: row-reverse;
@@ -233,18 +232,16 @@ body.single-item.groups #main {
   margin: 0 auto;
 }
 
-.single:not(.bp-user):not(.bbpress) #primary {
+.single #primary {
   max-width: 780px;
 }
 
-.search-content-wrap, 
-.buddypress-content-wrap {
+.search-content-wrap {
   @include display-flex();
   @include flex-flow( row wrap );
 }
 
-.search-content, 
-.buddypress-content {
+.search-content {
   -webkit-box-flex: 1;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -254,8 +251,7 @@ body.single-item.groups #main {
 }
 
 .bb-has-sidebar {
-  .search-content, 
-  .buddypress-content {
+  .search-content {
     max-width: $content_w_large;
   }
 }
@@ -1368,7 +1364,6 @@ article:hover a.to-top {
 .posts-stream {
   background-color: $white;
   position: relative;
-  /*z-index: 1;*/
   z-index: 0;
   width: 100%;
   min-height: 200px;
@@ -1381,8 +1376,7 @@ article:hover a.to-top {
   width: 100%;
   max-width: $content_w;
   .hentry {
-    border-bottom: 1px solid $divider_color;
-    padding: 70px 0;
+    padding: 20px 0;
     position: relative;
   }
 }

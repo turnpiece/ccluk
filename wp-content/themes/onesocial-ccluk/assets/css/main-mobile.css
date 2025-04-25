@@ -95,7 +95,7 @@ body:not(.single-post) footer.entry-meta {
 }
 
 /* Page Content */
-body:not(.buddypress) #content article, body.buddypress #content article.error404 {
+body #content article {
   clear: left;
   overflow: hidden;
   background-color: #fff;
@@ -287,7 +287,7 @@ header#masthead #header-aside, header#masthead #logo-area {
   padding: 10px 0 20px;
 }
 
-body:not(.buddypress).archive #content article.type-post {
+body.archive #content article.type-post {
   padding: 35px 20px 40px 20px;
 }
 
@@ -376,11 +376,7 @@ body .buddyboss-select {
   padding: 0 15px;
 }
 
-.buddypress-content-wrap #secondary {
-  padding: 0;
-}
-
-.page:not(.buddypress) #secondary {
+.page #secondary {
   padding-top: 30px;
 }
 
@@ -535,7 +531,7 @@ div.footer-inner ul.footer-menu li {
   display: none;
 }
 
-body:not(.buddypress) #content article {
+body #content article {
   border-bottom: 0;
   padding-top: 0;
 }
@@ -1483,7 +1479,7 @@ body.is-mobile.page:not(.home-page) #secondary,
 body.is-mobile.page:not(.home-page) .site-content, body.is-mobile.blog:not(.bp-user) #primary,
 body.is-mobile.blog:not(.bp-user) #secondary,
 body.is-mobile.blog:not(.bp-user) .site-content {
-  max-width: 750px;
+  max-width: 600px;
   margin: 0 auto;
 }
 body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary {
@@ -1537,7 +1533,7 @@ MAXIMUM width of 1024 pixels (tablets)
   body.page:not(.home-page) .site-content, body.blog:not(.bp-user) #primary,
   body.blog:not(.bp-user) #secondary,
   body.blog:not(.bp-user) .site-content {
-    max-width: 750px;
+    max-width: 600px;
     margin: 0 auto;
   }
   body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary, body.blog:not(.bp-user).page.page-sidebar-active #secondary {
@@ -1559,17 +1555,17 @@ MAXIMUM width of 1024 pixels (tablets)
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .sidebar-left #main, .sidebar-left .search-content-wrap, .sidebar-left .buddypress-content-wrap {
+  .sidebar-left #main, .sidebar-left .search-content-wrap {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .search-content-wrap, .buddypress-content-wrap {
+  .search-content-wrap {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .bb-has-sidebar .search-content, .bb-has-sidebar .buddypress-content {
+  .bb-has-sidebar .search-content {
     max-width: 100%;
   }
   #secondary {

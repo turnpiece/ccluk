@@ -38,7 +38,11 @@
 
 			<?php } ?>
 
-			<div class="profile-visible"><?php the_date(); ?></div>
+			<div class="entry-meta">
+				<span class="post-date">
+					<time datetime="<?php echo get_the_date('c') ?>"><?php the_date() ?></time>
+				</span>
+			</div>
 
 			<!-- Title -->
 			<header class="entry-header<?php echo $header_class; ?>">
