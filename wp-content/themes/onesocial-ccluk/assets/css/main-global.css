@@ -2854,12 +2854,11 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .article-outher {
   position: relative;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 
 .archive-header, .page-header {
   font-size: 40px;
-  /*margin-top: 70px;*/
 }
 
 body.page #primary article > .entry-header {
@@ -3018,15 +3017,21 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
   max-width: 780px;
 }
 
-.archive .site-content a.to-top {
+.archive .site-content a.to-top,
+.search .site-content a.to-top {
   right: 28px;
 }
-.archive article.type-post {
+.archive article,
+.search article {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 70px 0;
+  padding: 30px 0 10px;
   position: relative;
 }
-.archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content {
+.archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content,
+.search.tag .site-content,
+.search.date .site-content,
+.search.author .site-content,
+.search.category .site-content {
   max-width: 650px;
 }
 

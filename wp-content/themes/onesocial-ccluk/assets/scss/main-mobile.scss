@@ -494,8 +494,7 @@ div {
 ----------------------------------------------------------------*/
 
 .article-outher {
-  border-bottom: 1px solid $light;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   .entry-summary p {
     margin-bottom: 14px;
   }
@@ -1479,7 +1478,7 @@ div#register-page {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.blog:not(.bp-user) .site-content {
+.blog .site-content {
   max-width: 100%;
 }
 

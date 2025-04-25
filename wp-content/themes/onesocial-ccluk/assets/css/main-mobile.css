@@ -450,8 +450,7 @@ div.footer-inner ul.footer-menu li {
 1.1.8 - Home Template
 ----------------------------------------------------------------*/
 .article-outher {
-  border-bottom: 1px solid #aaa;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .article-outher .entry-summary p {
   margin-bottom: 14px;
@@ -1330,7 +1329,7 @@ div#register-page .register-section, div#register-page .security-question-sectio
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.blog:not(.bp-user) .site-content {
+.blog .site-content {
   max-width: 100%;
 }
 
@@ -1585,7 +1584,7 @@ MAXIMUM width of 1024 pixels (tablets)
   .home-inner-wrap #secondary {
     display: block !important;
   }
-  .blog:not(.bp-user) .site-content {
+  .blog .site-content {
     max-width: 100%;
   }
   .archive.tag .site-content, .archive.date .site-content, .archive.author .site-content, .archive.category .site-content {
