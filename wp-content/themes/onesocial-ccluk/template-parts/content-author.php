@@ -19,16 +19,11 @@
 					<span class="name"><?php echo get_the_author(); ?></span>
 				</a>
 
-				<span class="post-date">
+				<span class="entry-date post-date">
 					<a href="<?php echo get_permalink(); ?>" title="<?php echo get_the_time(); ?>" rel="bookmark" class="entry-date">
 						<time datetime="<?php echo get_the_date('c'); ?>"><?php the_date(); ?></time>
 					</a>
 				</span>
-
-				<div class="load-more-posts">
-					<a href="<?php echo get_the_author_meta('ID'); ?>" data-sort="recommended" data-target="target-<?php the_ID(); ?>" data-sequence="500"><?php _e('Most recommended stories', 'onesocial'); ?></a>
-					<a href="<?php echo get_the_author_meta('ID'); ?>" data-sort="latests" class="show-latest" data-target="target-<?php the_ID(); ?>" data-sequence="500"><?php _e('Latest stories', 'onesocial'); ?></a>
-				</div>
 			</div>
 		</div>
 	</div>
