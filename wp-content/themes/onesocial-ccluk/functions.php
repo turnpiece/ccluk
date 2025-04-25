@@ -6,7 +6,7 @@
  * Add your own functions in this file.
  */
 
-define('CCLUK_DEBUGGING', true);
+define('CCLUK_DEBUGGING', false);
 define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 
 /**
