@@ -1673,9 +1673,6 @@ MAXIMUM width of 480 pixels (phones)
   body {
     background-color: #fff;
   }
-  body.archive .listing .article-outher .post-author {
-    display: none;
-  }
   body #mobile-header #mobile-logo img {
     max-height: 44px;
     max-width: 200px;

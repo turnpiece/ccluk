@@ -123,10 +123,6 @@ a:hover,
   max-width: 100%;
   display: block;
 }
-.archive #main article,
-.blog #main article {
-  padding-top: 0 !important;
-}
 .archive #main .post-author,
 .blog #main .post-author {
   -webkit-box-ordinal-group: 1;
