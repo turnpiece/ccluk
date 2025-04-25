@@ -1185,13 +1185,13 @@ li.hideshow > ul li a {
   color: #54ae68;
 }
 
-.blog .content-wrap, .search_results .content-wrap {
+.blog .content-wrap,
+.search_results .content-wrap {
   -webkit-box-ordinal-group: 2;
   -webkit-order: 1;
   -ms-flex-order: 1;
   order: 1;
   width: 100%;
-  float: left;
   position: relative;
 }
 
