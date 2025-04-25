@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The default template for displaying content. Used for both single and index/archive/search.
  *
@@ -11,43 +12,47 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<div class="posts-stream">
-		<div class="loader"><?php _e( 'Loading...', 'onesocial' ); ?></div>
+		<div class="loader"><?php _e('Loading...', 'onesocial'); ?></div>
 	</div>
 
-    <div class="header-area">
+	<div class="header-area">
 		<?php
 		$header_class = '';
 
-		if ( has_post_thumbnail() ) {
+		if (has_post_thumbnail()) {
 			$thumb_class	 = '';
 			$header_class	 = ' has-image';
 			$size			 = 'full';
 
-			if ( !is_single() ) {
+			if (!is_single()) {
 				$thumb_class = ' category-thumb';
 				$size		 = 'post-thumb';
 			}
 
 			$image_id	 = get_post_thumbnail_id();
-			$full_image	 = wp_get_attachment_image_src( $image_id, 'post-thumb' );
-			?>
+			$full_image	 = wp_get_attachment_image_src($image_id, 'post-thumb');
+		?>
 
 			<a class="entry-post-thumbnail<?php echo $thumb_class; ?>" href="<?php the_permalink(); ?>">
-				<img class="<?php $thumb_class ?>" src="<?php echo $full_image[ 0 ]; ?>" />
+				<img class="<?php $thumb_class ?>" src="<?php echo $full_image[0]; ?>" />
 			</a>
 
 		<?php } ?>
 
-        <div class="profile-visible"><?php echo get_the_date( 'M j' ); ?></div>
+		<div class="entry-meta">
+			<span class="post-date">
+				<time datetime="<?php echo get_the_date('c') ?>"><?php the_date() ?></time>
+			</span>
+		</div>
 
-        <!-- Title -->
-        <header class="entry-header<?php echo $header_class; ?>">
+		<!-- Title -->
+		<header class="entry-header<?php echo $header_class; ?>">
 			<h2 class="entry-title">
-				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark"><?php the_title(); ?></a>
+				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
 			</h2>
-        </header><!-- .entry-header -->
+		</header><!-- .entry-header -->
 
-    </div><!-- /.header-area -->
+	</div><!-- /.header-area -->
 
 	<div class="entry-content entry-summary">
 
@@ -59,9 +64,9 @@
 		<?php the_excerpt(); ?>
 
 		<footer class="entry-meta">
-			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" class="read-more"><?php _e( 'Continue reading', 'onesocial' ); ?></a>
-			<span class="sep"><?php _e( '.', 'onesocial' ) ?></span>
-			<span><?php echo boss_estimated_reading_time( $post_content ); ?></span>
+			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'onesocial'); ?></a>
+			<span class="sep"><?php _e('.', 'onesocial') ?></span>
+			<span><?php echo boss_estimated_reading_time($post_content); ?></span>
 			<a href="#" class="to-top bb-icon-arrow-top-f"></a>
 		</footer><!-- .entry-meta -->
 

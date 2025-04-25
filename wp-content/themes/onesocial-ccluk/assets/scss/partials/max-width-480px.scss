@@ -1,16 +1,6 @@
 body {
 	background-color: $white;
 
-	&.archive {
-		.listing {
-			.article-outher {
-				.post-author {
-					display: none;
-				}
-			}
-		}
-	}
-
 	#mobile-header {
 		#mobile-logo {
 			img {

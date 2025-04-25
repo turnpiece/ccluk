@@ -3,8 +3,8 @@ Contributors: termly, brandondove, jeffreyzinn
 Tags: GDPR, cookie banner, cookie consent, CCPA, privacy
 Requires at least: 5.2
 Requires PHP: 5.6
-Tested up to: 6.6.1
-Stable tag: 3.3.0
+Tested up to: 6.7.1
+Stable tag: 3.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,6 +145,10 @@ The free plan has a 10,000 monthly unique visitor limit to your consent banner. 
 9. Enable/disable your consent banner with a single click within WordPress. Easily control whether or not the Auto Blocker is enabled.
 
 == Changelog ==
+
+= 3.3.1 =
+* Minor UI changes.
+* New Termly x WP Rocket partnership to improve site performance.
 
 = 3.3.0 =
 * Added WP-CLI Commands to administer the plugin programmatically.

@@ -201,9 +201,9 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 				$this->add_error(
 					self::ERR_REMOTE,
 					sprintf(
-						/* translators: %1$s %2$s: souce site and destination site. */
-						__( 'Unable to remotely import on %1$s. Please visit %2$s and start import there manually.', 'shipper' ),
-						$remote_site
+						/* translators: %1$s: destination site. */
+						__( 'Unable to remotely import on %1$s. Please visit %1$s and start import there manually.', 'shipper' ),
+						$remote_site,
 					)
 				);
 			}
@@ -214,8 +214,8 @@ class Shipper_Task_Export_Remote extends Shipper_Task_Export {
 			$this->add_error(
 				self::ERR_REMOTE,
 				sprintf(
-					/* translators: %1$s %2$s: souce site and destination site. */
-					__( 'Error starting import on %1$s. Please visit %2$s and start import there manually.', 'shipper' ),
+					/* translators: %1$s: destination site. */
+					__( 'Error starting import on %1$s. Please visit %1$s and start import there manually.', 'shipper' ),
 					$remote_site
 				)
 			);

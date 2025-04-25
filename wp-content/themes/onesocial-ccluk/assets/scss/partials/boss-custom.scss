@@ -372,8 +372,7 @@ input {
 }
 
 body {
-  &:not(.buddypress) #content article,
-  &.buddypress #content article.error404 {
+  #content article {
     background-color: $white;
   }
 }

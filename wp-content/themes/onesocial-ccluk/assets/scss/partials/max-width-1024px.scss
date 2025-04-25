@@ -45,19 +45,19 @@ body {
     flex-wrap: wrap;
 }
 .sidebar-left {
-    #main, .search-content-wrap, .buddypress-content-wrap {
+    #main, .search-content-wrap {
           -webkit-flex-wrap: wrap;
           -ms-flex-wrap: wrap;
           flex-wrap: wrap;
     }
 }
-.search-content-wrap, .buddypress-content-wrap {
+.search-content-wrap {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
 .bb-has-sidebar {
-    .search-content, .buddypress-content {
+    .search-content {
         max-width: 100%;
     }
 }
@@ -78,7 +78,7 @@ body {
 .home-inner-wrap #secondary {
     display: block !important;
 }
-.blog:not(.bp-user) .site-content {
+.blog .site-content {
     max-width: 100%;
 }
 .archive {

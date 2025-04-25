@@ -24,26 +24,22 @@ if ( ! empty( $estimate['high'] ) ) {
 }
 ?>
 <div class="shipper-wizard-result-files">
-	<p>
-		<?php echo wp_kses_post( $estimate_msg ); ?>
-	</p>
-	<p>
-		<?php esc_html_e( 'Also, please note that the time your site takes to migrate may vary considerably depending on many other factors (such as the speed of your current host!).', 'shipper' ); ?>
-	</p>
+    <p>
+        <?php echo wp_kses_post( $estimate_msg ); ?>
+    </p>
+    <p>
+        <?php esc_html_e( 'Also, please note that the time your site takes to migrate may vary considerably depending on many other factors (such as the speed of your current host!).', 'shipper' ); ?>
+    </p>
 
-	<div class="sui-row shipper-package-size-full-captain-notice">
-		<div class="sui-col-md-4">
-			<div class="shipper-captain-image"></div>
-			<?php echo wp_kses_post( Shipper_Helper_Assets::get_custom_hero_image_markup() ); ?>
-		</div>
-		<div class="sui-col-md-8">
-			<div class="sui-notice sui-notice-info">
-				<div class="sui-notice-content">
-					<div class="sui-notice-message">
-						<i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
+    <div class="sui-row shipper-package-size-full-notice">
+        <div class="sui-col-md-12">
+            <div class="sui-notice sui-notice-info">
+                <div class="sui-notice-content">
+                    <div class="sui-notice-message">
+                        <i class="sui-notice-icon sui-icon-info sui-md" aria-hidden="true"></i>
 
-						<p>
-							<?php
+                        <p>
+                            <?php
 							echo wp_kses_post(
 								sprintf(
 									// translators: %s" website url.
@@ -52,10 +48,10 @@ if ( ! empty( $estimate['high'] ) ) {
 								)
 							);
 							?>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

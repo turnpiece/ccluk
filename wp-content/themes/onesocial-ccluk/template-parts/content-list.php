@@ -19,8 +19,14 @@
 		<?php endif; ?>
 
 		<a href="<?php the_permalink() ?>">
-			<h2 class="entry-title"><?php the_title(); ?></h2>
+			<h2 class="entry-title"><?php the_title() ?></h2>
 		</a>
+
+		<div class="entry-meta">
+			<span class="post-date">
+				<time datetime="<?php echo get_the_date('c') ?>"><?php the_date() ?></time>
+			</span>
+		</div>
 	</header>
 
 	<div class="entry-content">

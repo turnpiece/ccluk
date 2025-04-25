@@ -155,22 +155,6 @@ function ccluk_theme_setup()
             return $classes;
         });
     }
-
-    // include functions for logged in users
-    if (is_user_logged_in()) {
-        require_once 'inc/members-functions.php';
-    }
-
-    // disable public messaging
-    add_filter('bp_get_send_public_message_button', '__return_false');
-
-    // check for WordPress Social Login
-    if (isset($GLOBALS['WORDPRESS_SOCIAL_LOGIN_VERSION'])) {
-        add_action('wsl_process_login_authenticate_wp_user_start', 'ccluk_wsl_secure_avatar_fix', 10, 6);
-        add_action('wsl_hook_process_login_before_wp_safe_redirect', 'ccluk_wsl_secure_avatar_check', 10, 4);
-        add_filter('wsl_hook_alter_get_bp_user_custom_avatar', 'ccluk_wsl_get_bp_avatar_filter', 10, 5);
-        add_filter('wsl_hook_alter_wp_user_custom_avatar', 'ccluk_wsl_get_wp_avatar_filter', 10, 8);
-    }
 }
 add_action('after_setup_theme', 'ccluk_theme_setup');
 

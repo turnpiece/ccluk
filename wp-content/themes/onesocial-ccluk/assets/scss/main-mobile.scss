@@ -105,8 +105,7 @@ body:not(.single-post) footer.entry-meta {
 /* Page Content */
 
 body {
-  &:not(.buddypress) #content article, 
-  &.buddypress #content article.error404 {
+  #content article {
     clear: left;
     overflow: hidden;
     background-color: $white;
@@ -313,7 +312,7 @@ header#masthead {
   padding: 10px 0 20px;
 }
 
-body:not(.buddypress).archive #content article.type-post {
+body.archive #content article.type-post {
   padding: 35px 20px 40px 20px;
 }
 
@@ -409,11 +408,7 @@ body .buddyboss-select {
   padding: 0 15px;
 }
 
-.buddypress-content-wrap #secondary {
-  padding: 0;
-}
-
-.page:not(.buddypress) #secondary {
+.page #secondary {
   padding-top: 30px;
 }
 
@@ -499,8 +494,7 @@ div {
 ----------------------------------------------------------------*/
 
 .article-outher {
-  border-bottom: 1px solid $light;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   .entry-summary p {
     margin-bottom: 14px;
   }
@@ -581,7 +575,7 @@ div {
 }
 
 body {
-  &:not(.buddypress) #content article {
+  #content article {
     border-bottom: 0;
     padding-top: 0;
   }
@@ -1484,7 +1478,7 @@ div#register-page {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.blog:not(.bp-user) .site-content {
+.blog .site-content {
   max-width: 100%;
 }
 

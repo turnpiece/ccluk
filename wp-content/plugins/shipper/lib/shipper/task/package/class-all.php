@@ -19,6 +19,11 @@ class Shipper_Task_Package_All extends Shipper_Task_Package {
 	private $migration;
 
 	/**
+	 * @var mixed
+	 */
+	protected $current_task;
+
+	/**
 	 * Get migration
 	 *
 	 * @return \Shipper_Model_Stored_Migration
