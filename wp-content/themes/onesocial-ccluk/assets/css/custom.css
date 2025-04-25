@@ -561,6 +561,7 @@ body.page-template-homepage #main .section.banner .section-title-container > .se
   font-weight: 500;
   text-transform: uppercase;
   margin: 10px;
+  font-size: 21px;
 }
 body.page-template-homepage #main .section.banner.background .section-content, body.page-template-homepage #main .section.banner.background-box .section-content {
   max-width: 100%;
