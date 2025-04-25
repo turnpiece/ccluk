@@ -2610,10 +2610,11 @@ div.footer-inner ul.social-icons li span:before {
 .entry-header .entry-meta {
   color: #54ae68;
   clear: left;
-  font-size: 15px;
+  font-size: 16px;
 }
 
-.entry-meta, .entry-date {
+.entry-meta,
+.entry-date {
   color: #54ae68;
 }
 

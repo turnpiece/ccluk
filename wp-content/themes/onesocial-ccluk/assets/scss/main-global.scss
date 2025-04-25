@@ -2802,11 +2802,12 @@ div {
   .entry-meta {
     color: $green;
     clear: left;
-    font-size: $font-size-sm;
+    font-size: 16px;
   }
 }
 
-.entry-meta, .entry-date {
+.entry-meta, 
+.entry-date {
   color: $green;
 }
 

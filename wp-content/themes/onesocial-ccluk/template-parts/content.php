@@ -38,12 +38,6 @@
 
 			<?php } ?>
 
-			<div class="entry-meta">
-				<span class="post-date">
-					<time datetime="<?php echo get_the_date('c') ?>"><?php the_date() ?></time>
-				</span>
-			</div>
-
 			<!-- Title -->
 			<header class="entry-header<?php echo $header_class; ?>">
 
@@ -62,8 +56,15 @@
 						</div>
 					</div>
 
-				<?php endif; // is_single()    
+				<?php endif; // is_single() 
 				?>
+
+				<div class="entry-meta">
+					<span class="post-date">
+						<time datetime="<?php echo get_the_date('c') ?>"><?php the_date() ?></time>
+					</span>
+				</div><!-- .entry-meta -->
+
 
 			</header><!-- .entry-header -->
 
@@ -139,13 +140,6 @@
 												?>
 									</li>
 								<?php } ?>
-
-								<?php if (function_exists('ADDTOANY_SHARE_SAVE_KIT')) { ?>
-									<li>
-										<?php ADDTOANY_SHARE_SAVE_KIT(array('use_current_page' => true)); ?>
-									</li><?php
-										}
-											?>
 							</ul>
 						</div>
 						<!-- /.entry-share -->
