@@ -19,7 +19,7 @@
 					<span class="name"><?php echo get_the_author(); ?></span>
 				</a>
 
-				<span class="entry-date post-date">
+				<span class="post-date">
 					<a href="<?php echo get_permalink(); ?>" title="<?php echo get_the_time(); ?>" rel="bookmark" class="entry-date">
 						<time datetime="<?php echo get_the_date('c'); ?>"><?php the_date(); ?></time>
 					</a>
