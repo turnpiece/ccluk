@@ -1,0 +1,464 @@
+Plugin Name: Events
+Author: WPMU DEV
+
+Changelog:
+----------------------------------------------------------------------
+
+1.9.9 - 2019-01-07
+----------------------------------------------------------------------
+- Fixed: Facebook import
+- Added: Time option in Front End editing
+- Fixed: Calendar jump months
+- Fixed: Accurate hours in time picker
+- Fixed: Recurring Events dates, somethimes set to January 1970
+- Fixed: Pagination not following option fron settings
+- Fixed: Time picker for recurring events doesn't allow to choose time before save
+- Fixed: Not showing events in next month if event start in previous month
+- Fixed: MarketPress Integration Bug with Payment
+- Fixed: Trying to get property of non-object with CoursePress
+- Fixed: Automatically disable RSVP for Announcement (only) events
+- Fixed: Expired events still displayed in category archives
+- Fixed: Events+ user event creation not working - front page editing
+- Fixed: Popup for Time entry, incorrect layering
+- Fixed: File editor stops working when I enable events+ plugin
+- Added: RSVPs and MarketPress - Paid events can now be deleted
+- Fixed: Events+ shortcode no longer displaying event data
+- Fixed: "You haven't paid for this event" issue for Recurring Events with MarketPress add-on
+
+
+1.9.8 - 2017-11-21
+----------------------------------------------------------------------
+- Fixed: Event archive page not showing all events
+- Fixed: eab_archive shortcode
+- Fixed: eab_calendar shortcode
+- Fixed: Default to all events addon bug fix
+- Fixed: When event product is removed from cart, it still says the even is in the cart
+- Fixed: Weeks issue in eab_archive shortcode
+- Fixed: Single event view for future events
+- Fixed: Frontend editor addon
+
+
+1.9.7 - 2017-10-23
+----------------------------------------------------------------------
+- Added: New attribute show_old on the shortcode eab_calendar to allow viewing of past events
+- Added: 24 hour clock timepicker
+- Added: Disabled text input in event edit date and time fields. Date and time picker are used instead
+- Fixed: E-newsletter activation error. Tables of eneswletter would not be created
+- Fixed: Session warning when enewsletter is activated
+- Fixed: Prevent multiple clicking of event RSVP buttons after confirmation
+- Fixed: Archived Events shortcode
+- Fixed: Php notices
+- Fixed: Admin CSS alignments
+
+----------------------------------------------------------------------
+1.9.6 - 2017-09-08
+----------------------------------------------------------------------
+
+- Added: Option to show event thumb in archive page
+- Added: Option to show event thumb in calendar template - filter added: eab_show_thumb_in_calendar_template
+- Added: Widget added for monthly archive navigation
+- Added: Filter - eab_rsvp_scheduled_rsvp_reset_cron_times to modify the reset settings cron job times
+- Added: No start and end time option in front end editor
+- Added: Sorting and pagination for archive of events
+- Improved: Events Schema Markup for Google Structured Data Testing Tool
+- Updated: Shortcode documentation for network attribute
+- Fixed: RSVP Email settings from name and email were not working
+- Fixed: RSVP Notification Email settings from name and email were not working
+- Fixed: Pagination was not working in eab_shortcode
+- Fixed: FB Integration in Events+ doesn't work after authorization
+- Fixed: FB authenticate reset was not working
+- Fixed: Events+ MarketPress Add-on Breaks Regular Paid Events
+- Fixed: Notice on undefined variable post_type when M2 and E+ are active together
+- Fixed: Remove meta field of the map from event when map is deleted from venue meta field
+- Fixed: eab_expired shortcode doesn't sort by event date but by the time the event was created.
+- Fixed: RSVP Payment status export for manually approved transactions
+
+----------------------------------------------------------------------
+1.9.5 - 2017-03-01
+----------------------------------------------------------------------
+- Added: Define "EAB_UPCOMING_EVENT_FROM_TODAY" to show *only* upcoming events in upcoming events calendar widget
+- Fixed: Paypal Sandbox is not working
+- Fixed: Cancel and Delete attendence link is not working from front end
+- Fixed: RSVP is not working, sometimes user is attending even when user clicked on Maybe or Not Attending
+- Fixed: API Instruction tooltip for Facebook, Twitter and Google+
+- Fixed: Users can't be added as attendee from front end
+- Fixed: Local timezone addon is not working for German locale
+- Fixed: No excerpt is showing in calendar shortcode
+- Fixed: Wrong URL when events slug is changed from dashboard
+- Fixed: Additional fiels can't be added in event settings
+- Fixed: Using manual payment, admin can approve once only
+- Fixed: Datepicker was not working in mobile device, chrome browser
+- Fixed: Social login style issue for UF themes
+- Fixed: Some notice generated in conflict with Google Maps plugin
+- Fixed: Some issues with calendar background colors
+
+----------------------------------------------------------------------
+1.9.4 - 2016-12-27
+----------------------------------------------------------------------
+- Version number fix
+
+----------------------------------------------------------------------
+1.9.3 - 2016-12-27
+----------------------------------------------------------------------
+- Added: New Upcoming events filter - eab_get_upcoming_events
+- Added: New filter added - eab_calendar_title
+- Added: Only one digit is allowed in hour field while creating a new event
+- Improved: Import events from Facebook is now compatible up to v2.8 (PHP version must be greater than 5.3)
+- Improved: Style issue in Facebook import addon settings
+- Fixed: Wrong URL in event calendar when event slug in main site is same as a subsite url
+- Fixed: Additional field addon fixed
+- Fixed: Date picker was not working in backend in mobile view
+- Fixed: Time On Events+ Calendar Wrong in calendar archive when local timezone addon is active
+- Fixed: Comment pagination
+- Fixed: For multidays event, time is not required
+- Fixed: When using manual payments in Events+ admin can only approve one time
+- Fixed: Set correct start time while importing from meetup.com
+- Fixed: Notice for calling a non-static method as static method
+- Fixed: Reset to default issue in colors addon
+- Fixed: Local time zone issue in cross browser
+- Fixed: Category and categories attribute fix for eab_archive shortcode in network mode
+- Fixed: Sometimes the calendar was breaking when the week start day is not Monday
+- Fixed: Conflict of asp.net tag
+- Fixed: Space is not allowed in start and end time in front page editing
+- Fixed: Conflict with WPMU DEV Directory plugin
+- Fixed: Issue with WPMU DEV Membership2 integration
+- Fixed: Conflict with WPMU DEV Membership2 - year archive page was not correct
+- Fixed: Conflict with WPML - attendees count and capacity
+- Fixed: Conflict with WPMU DEV Maps plugin - map was not removed once it was added
+- Fixed: Import from google events - start date-time issue
+- Fixed: MarketPress integration - compatible with mp_product CPT
+- Fixed: MarketPress integration - Selecting "maybe" in single event doesn't add event in the cart
+
+
+
+
+
+----------------------------------------------------------------------
+1.9.2 - 2016-04-13
+----------------------------------------------------------------------
+- Fixed: Conflict with changes introduced in WP 4.5.
+
+1.9.1 - 2015-11-13
+----------------------------------------------------------------------
+- Fixed: Times in calendar were always 12:00 am
+
+1.9 - 2015-11-10
+----------------------------------------------------------------------
+- Enhance: New Admin Icon
+- Enhance: Improved some admin styles
+- Enhance: Improved gCal button styles
+- Enhance: Wording changes for better UX
+- Enhance: Improved UI feature in Settings Page
+- Enhance: Some code refactoring in main file
+- Fix: some warnings/notices
+- Fix: PO file (missing some translations)
+- Fix: Monthly calendar dates were being displayed wrong
+- Fix: Weekly Calendar Module - Date Header was not correct
+- Fix: Line breaks missing from description line in exported iCal file
+- Fix: E+ and MarketPress interlinked but not usable
+- Fix: Price when processing Paypal Request
+- Fix: Event RSVPs attendees export
+- Fix: Recurrent rules generator
+- Fix: The URLs in screenshot doesnt have a trailing slash and in result shows 404 error, Events at the same time don't show on calendar
+- Fix: Updated Facebook Graph URL
+- Fix: Bug affecting newer versions of MySQL
+- Fix: Plugin was not sending password link
+- Fix: Weekly calendar month was not translatable
+- Fix: When "Alert RSVPs on event modification" add-on is activated on site then saving settings in Events dont work
+- Fix: Preview of Groupevents doesnt work as expected
+- Fix: Events at the same time dont show on calendar
+- Fix: Featured image issues and BuddyPress Events
+- Fix: Error message when posting a group event using BuddyPress
+- Fix: Fatal error when exporting BuddyPress fields in CSV
+
+1.8.2 - 2015-09-03
+----------------------------------------------------------------------
+- Fix some notices.
+- Fix event/product relationship maintenance.
+- Fix appearance settings hook by decoupling from template conditional.
+- Fix the calendar events sorting within individual day cells.
+- Fix event publish disabling action with WPML involved.
+- Fix GCal export timezone setup.
+- Fix event maps repeated insertion.
+- Fix widgets for compatibility.
+- Add MarketPress 3.0 compatibility layer.
+- Add visible tips to dedicated shortcodes help page.
+- Add new track calendar shortcode attribute.
+- Add optional local time conversion for GCal imported event times.
+- Add admin attendance addition form regardless of existing bookings.
+
+1.8.1.1 - 2015-08-07
+----------------------------------------------------------------------
+- Fix integration for Membership 2
+
+1.8.1 - 2015-06-09
+----------------------------------------------------------------------
+- Add integration for Membership 2
+
+1.8 - 2015-01-15
+----------------------------------------------------------------------
+- Fix for issue with `date_i18n` and UTC times with TZ offsets.
+- Fix for group updates on RSVP change.
+- Fix for initial Twitter connection dialog output.
+- Fix for maps integration.
+- Fix for archive shortcode pagination.
+- Added settings page and filterable add-ons selection.
+- Added admin attendance management.
+- Added group feed updates on event creation.
+
+1.7.7 - 2014-10-30
+----------------------------------------------------------------------
+- Fix for Twitter login issues.
+- Fix for iDevices touchend and :hover event.
+- Fix for front-end editing featured image replacement.
+- Added new allow_multiple_markers attribute to eab_events_map shortcode.
+
+1.7.6.1 - 2014-09-09
+----------------------------------------------------------------------
+- Fix for script pre-registration.
+- Added a global facade method for API scripts inclusion.
+
+1.7.6 - 2014-09-05
+----------------------------------------------------------------------
+- Fix for some shortcode styles injection when used outside content.
+- Allowing the future peeking method to modify the lookahead time.
+- Fix for multiline string shortening safety in generated excerpts.
+- Ensuring WordPress 4.0 compatibility.
+
+1.7.5 - 2014-06-21
+----------------------------------------------------------------------
+- Fix for the max capacity bug - add the case unlimited.
+- Fix for a potential XSS issue.
+- Fix for appearance conflict with Appointments+ tables.
+- Added initial boot-time dates validation.
+- Added "all" keyword for BP groups events shortcode (props Saurabh)
+
+1.7.4 - 2014-05-29
+----------------------------------------------------------------------
+- Fix for limited capacity checks on RSVP time (props @Hoang)
+- Fix for timestamp formats and front-end date parsing.
+- Added new features to the E-Newsletter integration add-on.
+- Added the RSVP with email add-on.
+- Allowing the top subset access for capabilities.
+
+1.7.3 - 2014-04-17
+----------------------------------------------------------------------
+- Fix for popup login/registration validation.
+- Fix for child themes path resolution.
+- Fix for javascript date parsing in old engines.
+- Added excerpt setting for calendar shortcode.
+- Added categories plural and singular arguments to countdown.
+- Added additional fields to attendees export.
+
+1.7.2 - 2014-01-10
+----------------------------------------------------------------------
+- Fix for singular events embed dependencies.
+- Fix for inventory tracking.
+- Fix for calendar widget categories navigation.
+- Additional DOW/time sanity check for explicit date conversion.
+- Added fifth day of the month recurring option to DOW model.
+- Added relative date core shortcodes argument.
+- Added the `with_thumbnail` calendar shortcode argument.
+- Added additional selectors in Colors add-on.
+- Added admin side name mapping.
+- Added meetup.com import add-on.
+- Added Additional registration fields add-on.
+- Added the non-paid email add-on (props Ashok).
+
+1.7.1.1 - 2013-09-12
+----------------------------------------------------------------------
+- Applying different level filters to expansion process.
+
+1.7.1 - 2013-09-11
+----------------------------------------------------------------------
+- Changes to widget categories selection.
+- Exposing the limited capacity settings.
+- Adding short title format for calendar shortcode.
+- Exposing event cancellation to front page editor.
+- Fix for children attendance getter.
+
+1.7 - 2013-09-07
+----------------------------------------------------------------------
+- Fix for permalink fetching method.
+- Mail headers fix and better MIME header format handling.
+- Performance update for query filtering.
+- Cache optimization for calendars and widgets.
+- Optional widget caching via `EAB_CALENDAR_USE_CACHE` define.
+- Fix for event redirection.
+- Twitter request time correction fix for broken servers.
+- Added the categories option for the calendar upcoming widget.
+- Added settings for variable exported event times calculus.
+- Added notification on RSVP add-on.
+- Added Colors add-on.
+- Added Maps Options overrides add-on.
+
+1.6.2 - 2013-05-22
+----------------------------------------------------------------------
+- Countdown shortcodes fixes and improvements.
+- Fixes for previews and today processing for calendar-based views.
+- Added the week count recurrence model.
+- Added the lookahead parameter to upcoming widget.
+
+1.6.1 - 2013-04-08
+----------------------------------------------------------------------
+- Fix for immediately processed orders.
+- Fix for admin side stylesheet inclusion.
+- Added multiple categories filtering in shortcodes.
+- Added event cancellation add-on.
+
+1.6 - 2013-04-03
+----------------------------------------------------------------------
+- Added "day of the week" recurrence model.
+- Added shortcode paging arguments.
+- Added MarketPress integration add-on.
+- Added separate granular settings for login button toggling.
+- Fix for counter updates for simple limited attendance checks.
+
+1.5.3 - 2013-01-16
+----------------------------------------------------------------------
+- Added event categories as CSS classes.
+- Added dates in feeds output.
+- Booking results ordered by timestamp.
+- Better networking prerequisites checks.
+- Fix for weekly calendar shortcode edge cases.
+- Fix for array return type collision.
+- Fix for membership level prices propagation.
+
+1.5.2 - 2013-01-04
+----------------------------------------------------------------------
+- Fix for maps existence check for subscribers.
+- Fix for Front-page editor jQuery UI dependencies.
+- Dynamically setting up default datepicker dates for new events.
+
+1.5.1.1 - 2012-12-15
+----------------------------------------------------------------------
+- Fix for event filter argument ordering.
+
+1.5.1 - 2012-12-14
+----------------------------------------------------------------------
+- Full contextual help support for shortcodes.
+- Allowing for custom query in default calendar archive template.
+- Adding WPML rewrite filtering in default filters.
+
+1.5 - 2012-12-07
+----------------------------------------------------------------------
+- Added RSVP email add-on.
+- Added RSVP Status Auto-reset add-on.
+- Added Google Calendar import add-on.
+- Added Facebook events importer add-on.
+- Added new shortcodes and attributes, and a shortcode help page.
+- Added inheriting data from add-ons to widget.
+- Added BuddyPress groups limiting to user groups.
+- Fix for front end editor page heuristics.
+- Fix for event category ordering.
+- Exposed date ordering direction for weeks ordering.
+- Better Ultimate Facebook integration.
+
+1.4.4 - 2012-10-31
+----------------------------------------------------------------------
+- Added "Activity auto-updates" add-on.
+- Fix for rewrite rule flushing.
+- Fix for message redirects, optional old behavior through a define.
+- Fix for group limiting issue in "Group events" add-on.
+- Added SEO plugin compatibility for "Noindex meta for Events" add-on.
+
+1.4.3 - 2012-10-17
+----------------------------------------------------------------------
+- Added Noindex meta for Events add-on.
+- Adding front editor support for Public Announcement events.
+- Fix for manual payments issue with custom templates.
+- Exposed more hooks (login URL redirection and PayPal IPN response).
+
+1.4.2 - 2012-10-12
+----------------------------------------------------------------------
+- Added network options to calendar upcoming widget.
+- Added Public Announcement Events add-on.
+- Forcing meta query ordering, with optional override.
+- Recurrence mode toggling on load fixes timestamp issues.
+
+1.4.1 - 2012-09-17
+----------------------------------------------------------------------
+- Exposing more hooks for extending and customization.
+- L10n improvements.
+- Removable multiple times.
+- Network-wide permalink fix.
+- Not forcing future dates only in the calendar selector.
+
+1.4 - 2012-08-17
+----------------------------------------------------------------------
+- Fix for FPE issue with missing Google Maps plugin.
+- Fix for recurring event instances inherit main event taxonomies.
+- Fix for events ordering.
+- Fix for floating point recurring events duration handling.
+- Laid down scope-based Exporter infrastructure.
+- Forced slug sanitization.
+- Integrated taxonomy parsing and calls into model.
+- Added no start/end time Events.
+- Added membership level-based ticket prices.
+- Added category selection to Front page editor.
+- Added "Default to all Events" add-on.
+- Added Attendees post column.
+- Added CSV exporter for attendees.
+- Added Events iCal export add-on.
+
+1.3 - 2012-05-14
+----------------------------------------------------------------------
+- Support for blog local time, instead of server local time
+- Support for WP date/time settings
+- Added Event and Next Event Countdown add-ons.
+- Added Next Event Shortcode add-on.
+- Added Event Controlled Redirect add-on.
+- Added Weekly Event Calendar add-on.
+- Avatar replacement for people logging in with Facebook/Twitter.
+- Filling in users first and last name metas from Facebook and Twitter.
+- Recording event metas on posted social messages so we never post twice to Facebook/Twitter for the same event.
+- Added category-like custom taxonomy.
+- Added category filter to upcoming events widget.
+- Defaulting to username if no other names apply for "Guest lists options" add-on.
+- Improvements in Help texts.
+- Support for multiple person attendance for an event
+- Support for registering to website from front end
+- Login with Google account
+
+1.2 - 2012-03-21
+----------------------------------------------------------------------
+- Fix for upcoming events widget.
+- Fix for events auto-archiving.
+- Added Membership integration add-on.
+- Added events auto-expiry add-ons.
+- Added manual payments add-on.
+- Added private group events option.
+
+1.1 - 2012-03-13
+----------------------------------------------------------------------
+- Fix for templates assumptions.
+- Improved Google Maps integration.
+- Improved widgets.
+- Improved BuddyPress integration.
+- Added recurring events.
+- Added new auto-scheduler.
+- Added limited capacity events add-on.
+- Added "My Events" add-on.
+- Added BuddyPress groups support add-on.
+- Added e-Newsletter integration add-on.
+- Added front pages editing add-on.
+- Added "Guest lists options" add-on.
+- Added capabilities editing add-on.
+
+1.0.1 - 2012-02-15
+----------------------------------------------------------------------
+- Fix for spacing and clearing issues.
+- Fix for author link for singular events.
+- Fix for singular event rewrites.
+- Fix for additional table checks.
+- Fix for custom loops.
+- Fix for PayPal integration issues.
+- Removed unneeded scripts.
+- Added PayPal sandbox mode support.
+- Added admin notice for bad permalink settings.
+- Added network upcoming events widget, relying on Post Indexer.
+
+
+1.0 - 2012-02-13
+----------------------------------------------------------------------
+- Initial release.
