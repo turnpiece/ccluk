@@ -20,24 +20,15 @@ input {
   }
 }
 
-article.post-password-required input[type=submit],
-i.bypostauthor cite span,
 a.button {
   background-color: $blue;
 }
 
 #secondary div.generic-button a,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
-.entry-header .entry-title a.button, a.bp-title-button,
-#search-members-form > label:after,
-#messages-bulk-manage, .boss-search-wrapper label:after,
-.groups-members-search label:after {
+.entry-header .entry-title a.button,
+#messages-bulk-manage, .boss-search-wrapper label:after {
   background-color: $blue;
-}
-
-#buddyboss-bbpress-media-attach, 
-#buddyboss-comment-media-attach {
-  background-color: $green;
 }
 
 #trigger-sidebar:hover .bb-side-icon {
@@ -47,73 +38,11 @@ a.button {
   }
 }
 
-.header-account-login .count, 
-.header-notifications a.header-button span b, 
-#aw-whats-new-submit-bbmedia {
-  background-color: $green;
-}
-
 .bb-sidebar-on .bb-side-icon {
   background: $green;
   &:after, &:before {
     background: $green;
   }
-}
-
-#primary .author-follow div.generic-button a:before
-#secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
-  background: $green;
-}
-
-#page #main {
-  .author-follow div.generic-button.loading a:before {
-    background: $green;
-  }
-}
-
-body #selectionSharerPopunder-inner a.action:hover {
-  background: $green;
-}
-
-.header-account-login .pop {
-  .boss-logout, a:hover {
-    color: $green;
-  }
-}
-
-.bboss_ajax_search_item .item .item-title, body .bb-global-search-ac li.bbls-category:hover a:after, .bb-global-search-ac.ui-menu .bbls-view_all_type-type a:hover:after, .bbp-topics-front ul.super-sticky div.bbp-topic-title-content:before {
-  color: $green;
-}
-
-.bbp-topics ul {
-  &.super-sticky div.bbp-topic-title-content:before, &.sticky div.bbp-topic-title-content:before {
-    color: $green;
-  }
-}
-
-.bbp-forum-content ul.sticky:before, .bbp-forum-data .last-activity a:hover, #onesocial-recommended-by .title, .bbp-forum-data .post-num, div.bbp-breadcrumb a:hover {
-  color: $green;
-}
-
-li {
-    &.bbp-forum-info a.bbp-forum-title,
-    &.bbp-topic-title a.bbp-topic-permalink {
-        &:before {
-            color: $green;
-        }
-    }
-}
-
-.info-group {
-    .members-list-filter li a {
-        &:hover,
-        &.selected {
-            color: $green;
-        }
-    }
-    .bb-follow-title span {
-        color: $green;
-    }
 }
 
 .dir-header span {
@@ -136,16 +65,12 @@ li {
   }
 }
 
-.posts-stream ul li h2 a:hover, .entry-meta a.read-more, .bb-comment-author {
+.posts-stream ul li h2 a:hover, 
+.entry-meta a.read-more, 
+.bb-comment-author {
   color: $green;
 }
 
-.author-follow div.generic-button {
-  &.pending_friend + span, &.following + span {
-    color: $green;
-  }
-}
- 
 .entry-content blockquote .author, 
 .comment-content blockquote .author, 
 .entry-header .entry-title a:hover, 
@@ -153,14 +78,7 @@ li {
   color: $green;
 }
 
-.widget {
-  #bbp-search-index-form button i:before {
-    color: $green;
-  }
-}
-
-.entry-meta a.read-more,
-.bb-user-notifications .avatar + a {
+.entry-meta a.read-more {
   color: $green;
 }
 
@@ -171,19 +89,7 @@ a {
   }
 }
 
-.bb-user-name,
-.dir-header .bb-count,
-.boss-author-name,
-.posts-stream ul li h3 a:hover {
-    color: $green;
-}
-
-.header-account-login .pop .count {
-  color: $green;
-}
-
-.footer-inner-top a:hover,
-.boss-group-invite-friend-list strong {
+.footer-inner-top a:hover {
   color: $green;
 }
 
@@ -194,7 +100,11 @@ a {
   }
 }
 
-.recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before {
+.recommend-title, 
+.liked .fa-heart, 
+.bookmarked .bb-helper-icon.fa-bookmark, 
+.fa.bb-helper-icon.fa-spinner.fa-spin, 
+.os-loader i, .breadcrumb-wrapper a:hover {
   color: $green;
 }
 
@@ -202,20 +112,7 @@ a {
   background-color: $green;
 }
 
-#onesocial_recommend {
-  &:after, &:before {
-    background-color: $green;
-  }
-}
-
-.posts-stream ul li time div:first-child {
-  &:after, &:before {
-    background-color: $green;
-  }
-  background-color: $green;
-}
-
-.group-join a:before, .author-follow a:before, .pagination .current, .bbp-pagination-links span {
+.pagination .current {
   background-color: $green;
 }
 
@@ -226,7 +123,8 @@ a {
   }
 }
 
-.sap-load-more-posts, .button-load-more-posts {
+.sap-load-more-posts, 
+.button-load-more-posts {
   background-color: $green;
 }
 
@@ -270,23 +168,6 @@ a {
   }
 }
 
-
-.header-notifications .pop, .header-account-login .pop {
-  border-color: $green;
-}
-
-.bbp-header li {
-  &.bbp-forum-info, &.bbp-topic-title {
-    border-color: $green;
-  }
-}
-
-.info-group {
-  .members-list-filter, .trigger-filter.active:before {
-    border-color: $green;
-  }
-}
-
 .entry-meta a.read-more,
 .sap-publish-popup.sap-publish-popup .sap-action-button,
 .sap-container-wrapper .sap-story-publish,
@@ -299,7 +180,8 @@ input[type="submit"] {
     box-shadow: 0 -2px 0 $green inset;
   }
   div > ul > {
-    .current-menu-item > a, .current-menu-ancestor > a {
+    .current-menu-item > a, 
+    .current-menu-ancestor > a {
       box-shadow: 0 -2px 0 $green inset;
     }
   }
@@ -312,16 +194,12 @@ input[type="submit"] {
 input {
   &[type="checkbox"] + {
     span:before, label:before, strong:before {
-      -webkit-box-shadow: 0px 0px 0px 2px $green;
-      -moz-box-shadow: 0px 0px 0px 2px $green;
-      box-shadow: 0px 0px 0px 2px $green;
+      @include box-shadow(0px 0px 0px 2px $green);
     }
   }
   &[type="radio"] + {
     span:before, label:before, strong:before {
-      -webkit-box-shadow: 0px 0px 0px 2px $green;
-      -moz-box-shadow: 0px 0px 0px 2px $green;
-      box-shadow: 0px 0px 0px 2px $green;
+      @include box-shadow(0px 0px 0px 2px $green);
     }
   }
 }
@@ -351,10 +229,6 @@ input {
   }
 }
 
-.bp-legacy div#item-body div.item-list-tabs ul li a span {
-  color: $green;
-}
-
 .is-desktop {
   .header-button:hover {
     background-color: $green;
@@ -378,21 +252,8 @@ body {
 }
 
 .site-content {
-  nav.nav-single, #comments {
-    background-color: $white;
-  }
-}
-
-.bp-legacy div#item-body, 
-.os-loader, 
-.medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li, 
-.sap-publish-popup {
-  background-color: $white;
-}
-
-.posts-stream {
-  background-color: $white;
-  .inner {
+  nav.nav-single, 
+  #comments {
     background-color: $white;
   }
 }
@@ -410,13 +271,6 @@ body {
   }
 }
 
-.sap-editor-wrap .sap-story-publish {
-  &:hover {
-    background-color: $white;
-  }
-  background-color: $white;
-}
-
 .main-navigation li ul {
   ul {
     background-color: $white;
@@ -424,30 +278,12 @@ body {
   background-color: $white;
 }
 
-.header-account-login .pop {
-  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .links li > .sub-menu, .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .links li > .sub-menu:before {
-    background-color: $white;
-  }
-}
-
-.header-notifications .pop, .header-account-login .pop, #whats-new-header:after, a.to-top, #onesocial-recommended-by:before, .bbp-forum-data:before {
-  background-color: $white;
-}
-
-#onesocial-recommended-by:after,
-.bbp-forum-data:after {
-  border-color: transparent $white transparent transparent;
-}
-
-.incom-bubble-style:before {
-  border-color: $white transparent transparent transparent;
-}
-
 div#sitewide-notice div#message p {
   background-color: $secondary_bg;
 }
 
-#header-search form, .site-header {
+#header-search form, 
+.site-header {
   background-color: $white;
 }
 

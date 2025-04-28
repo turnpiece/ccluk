@@ -61,44 +61,6 @@
   @include padding( .6, 1.2 );
 }
 
-@mixin bp-item-list-tabs() {
-	ul {
-		@include display-flex-box();
-    li {
-      position: relative;
-      @media screen and (min-width: 769px) {
-        padding-right: 25px;
-      }
-      a {
-        font-size: $font-size-tiny;
-        @media screen and (min-width: 769px) {
-          font-size: $font-size-sm;
-        }
-        @include inactive-tab();
-        @include border-radius(0);
-
-        > span {
-          position: absolute;
-          top: 0;
-          @include inactive-tab(0);
-        }
-      }
-      &:hover,
-      &:active,
-      &.current,
-      &.selected {
-        a {
-          @include active-tab();
-
-          > span {
-            @include active-tab();
-          }
-        }
-      }
-    }
-  }
-}
-
 @mixin display-flex-box( $align: center, $justify: center ) {
   @include display-flex();
 	-webkit-flex-wrap: wrap;
@@ -257,8 +219,7 @@
 @mixin mobile-styles() {
   &.single,
   &.archive,
-  &.page:not(.home-page),
-  &.blog:not(.bp-user) {
+  &.page:not(.home-page) {
     #primary,
     #secondary,
     .site-content {

@@ -173,7 +173,6 @@ body:not(.bb-sidebar-on) .home-inner-wrap #secondary {
 
 .archive .breadcrumb-wrapper,
 .page-template-social-authoring .breadcrumb-wrapper,
-.bp-user .breadcrumb-wrapper,
 .single-post .breadcrumb-wrapper {
   display: none;
 }
@@ -334,15 +333,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   font-size: 16px;
   margin-right: 10px;
 }
-#all-notificatios .pop span.notification-icon.friendship_accepted:before, #all-notificatios .pop span.notification-icon.friendship_request:before {
-  content: "\f0c0";
-}
-#all-notificatios .pop span.notification-icon.bbp_new_reply:before {
-  content: "\f211";
-}
-#all-notificatios .pop span.notification-icon.new_follow:before {
-  content: "\f234";
-}
 #all-notificatios .pop span.notification-icon.comment_reply:before, #all-notificatios .pop span.notification-icon.update_reply:before {
   content: "\f086";
 }
@@ -351,21 +341,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 }
 #all-notificatios .pop span.notification-icon.new_message:before {
   content: "\f27a";
-}
-#all-notificatios .pop span.notification-icon.group_invite:before {
-  content: "\f2b6";
-}
-#all-notificatios .pop span.notification-icon.membership_request_accepted:before, #all-notificatios .pop span.notification-icon.new_membership_request:before {
-  content: "\f2c2";
-}
-#all-notificatios .pop span.notification-icon.member_promoted_to_mod:before, #all-notificatios .pop span.notification-icon.member_promoted_to_admin:before {
-  content: "\f21b";
-}
-#all-notificatios .pop span.notification-icon.buddyboss_wall_like_notifier:before {
-  content: "\f004";
-}
-#all-notificatios .pop span.notification-icon.buddyboss_media_tagged:before {
-  content: "\f02c";
 }
 #all-notificatios .bb-adminbar-notifications > li {
   padding: 1px 0;
@@ -451,33 +426,15 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   top: 2px;
 }
 
-#masthead .header-notifications a#user-messages:hover span.count:before, #masthead .header-notifications a:hover span.pending-count:before {
-  color: #fff;
-}
-
 .header-notifications .pop ul {
   list-style: none;
   margin: 0;
   /*padding: 5px 20px;*/
 }
 
-.bb-user-notifications > li {
-  padding: 5px 0;
-}
-
 .header-notifications .bb-user-notifications a {
   display: inline-block;
   text-transform: capitalize;
-}
-
-.bb-user-notifications .avatar {
-  border-radius: 100%;
-  margin-right: 10px;
-  margin-top: -3px;
-}
-
-.header-notifications .bb-user-notifications .bb-message-link {
-  text-transform: lowercase;
 }
 
 .site-header {
@@ -494,8 +451,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 }
 .site-header #wp-admin-bar-root-default,
 .site-header #wp-admin-bar-search,
-.site-header #wp-admin-bar-my-account > a,
-.site-header #wp-admin-bar-bp-notifications {
+.site-header #wp-admin-bar-my-account > a {
   display: none;
 }
 
@@ -725,158 +681,6 @@ header-aside,
   position: absolute;
   right: 10px;
   top: 10px;
-}
-
-/* User Avatar and Links */
-.header-account-login {
-  box-shadow: none;
-  text-align: right;
-}
-
-.tablet .header-account-login > a {
-  position: relative;
-  z-index: -1;
-}
-
-.header-account-login .count {
-  background: #54ae68;
-  border-radius: 100%;
-  color: #fff !important;
-  display: inline-block;
-  font-size: 12px;
-  margin: 0 0 0 6px;
-  padding: 2px 5px;
-  position: absolute;
-}
-
-#masthead .header-account-login:hover {
-  background: transparent;
-}
-
-.header-account-login .pop {
-  background-color: #fff;
-  border-top: 2px solid;
-  right: 0;
-  opacity: 0;
-  position: absolute;
-  top: 69px;
-  transition: all 0.2s ease-in-out 0s;
-  text-align: left;
-  visibility: hidden;
-  min-width: 160px;
-  padding: 10px 0;
-  width: 100%;
-  z-index: 21;
-}
-
-.header-style-2 .header-account-login .pop {
-  right: -3px;
-}
-
-.tablet .header-account-login .pop.hover, body:not(.tablet) .header-account-login:hover .pop {
-  opacity: 1;
-  visibility: visible;
-}
-
-.header-account-login ul {
-  list-style: none;
-  margin: 0;
-}
-.header-account-login li {
-  position: relative;
-}
-.header-account-login .pop a, .header-account-login .pop .ab-item {
-  color: #333;
-  display: block;
-  font-size: 13px;
-  line-height: 1;
-  padding: 8px 20px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.header-account-login .pop a span b {
-  font-weight: normal;
-}
-.header-account-login a.boss-logout {
-  font-weight: 600;
-  margin-bottom: 2px;
-  margin-top: 12px;
-  padding-top: 20px;
-  position: relative;
-}
-
-.boss-logout:before {
-  background: rgba(0, 0, 0, 0.1);
-  content: " ";
-  height: 1px;
-  position: absolute;
-  top: 0;
-  width: calc(100% - 40px);
-}
-
-.header-account-login .dashboard-links {
-  margin: 0 0 12px;
-  padding: 0 0 12px;
-  position: relative;
-}
-.header-account-login .dashboard-links:before {
-  background: rgba(0, 0, 0, 0.1);
-  bottom: 0;
-  content: " ";
-  display: block;
-  height: 1px;
-  left: 0;
-  margin: 0 auto;
-  position: absolute;
-  right: 0;
-  width: calc(100% - 40px);
-}
-
-.adminbar-links.bp-inactive {
-  display: none;
-}
-.adminbar-links.bp-inactive + .boss-logout {
-  margin-top: 0;
-  padding-top: 10px;
-}
-.adminbar-links.bp-inactive + .boss-logout:before {
-  display: none;
-}
-
-#wp-admin-bar-user-actions {
-  display: none;
-}
-
-.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
-.header-account-login .pop .links li > .sub-menu {
-  background-color: #fff;
-  box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.2);
-  display: none;
-  left: -187px;
-  margin: 0;
-  padding: 10px 0;
-  position: absolute;
-  top: 0;
-  width: 187px;
-}
-.header-account-login .pop .bp_components .menupop:hover:not(#wp-admin-bar-my-account) > .ab-sub-wrapper,
-.header-account-login .pop .links li:hover > .sub-menu {
-  display: block;
-}
-.header-account-login .pop .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before,
-.header-account-login .pop .links li > .sub-menu:before {
-  background-color: #fff;
-  box-shadow: 2px -2px 2px -1px rgba(0, 0, 0, 0.1);
-  content: "";
-  display: block;
-  height: 12px;
-  position: absolute;
-  right: -5px;
-  top: 11px;
-  transform: rotate(45deg);
-  width: 12px;
-  z-index: 1;
 }
 
 /*--------------------------------------------------------------

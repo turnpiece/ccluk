@@ -407,9 +407,6 @@ body .buddyboss-select {
   height: auto;
   padding: 12px;
 }
-.widget-area .widget_bp_profile_search h4 {
-  font-size: 20px;
-}
 .widget-area .widget_search input[type=text],
 .widget-area .widget_display_search input[type=text] {
   background: transparent;
@@ -1475,17 +1472,15 @@ body.is-mobile.single .site-content, body.is-mobile.archive #primary,
 body.is-mobile.archive #secondary,
 body.is-mobile.archive .site-content, body.is-mobile.page:not(.home-page) #primary,
 body.is-mobile.page:not(.home-page) #secondary,
-body.is-mobile.page:not(.home-page) .site-content, body.is-mobile.blog:not(.bp-user) #primary,
-body.is-mobile.blog:not(.bp-user) #secondary,
-body.is-mobile.blog:not(.bp-user) .site-content {
+body.is-mobile.page:not(.home-page) .site-content {
   max-width: 600px;
   margin: 0 auto;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary {
+body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary {
   margin-top: 20px;
   margin-top: 2rem;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.is-mobile.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget {
   margin-bottom: 30px;
   margin-bottom: 3rem;
 }
@@ -1529,17 +1524,15 @@ MAXIMUM width of 1024 pixels (tablets)
   body.archive #secondary,
   body.archive .site-content, body.page:not(.home-page) #primary,
   body.page:not(.home-page) #secondary,
-  body.page:not(.home-page) .site-content, body.blog:not(.bp-user) #primary,
-  body.blog:not(.bp-user) #secondary,
-  body.blog:not(.bp-user) .site-content {
+  body.page:not(.home-page) .site-content {
     max-width: 600px;
     margin: 0 auto;
   }
-  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary, body.blog:not(.bp-user).page.page-sidebar-active #secondary {
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary {
     margin-top: 20px;
     margin-top: 2rem;
   }
-  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home-page).page.page-sidebar-active #secondary .widget, body.blog:not(.bp-user).page.page-sidebar-active #secondary .widget {
+  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home-page).page.page-sidebar-active #secondary .widget {
     margin-bottom: 30px;
     margin-bottom: 3rem;
   }
