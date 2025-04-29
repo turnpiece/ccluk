@@ -81,7 +81,7 @@ body.page-template-homepage {
 					font-size: $font-size-mid;
 					color: $white;
 					text-transform: uppercase;
-					border-radius: 10px;
+					@include border-radius(10px);
 				}
 
 				a > h4 {

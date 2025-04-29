@@ -210,7 +210,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 .sap-publish-popup.sap-publish-popup .button {
   background: rgba(0, 0, 0, 0);
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 40px;
+  @include border-radius(40px);
   color: rgba(0, 0, 0, 0.6);
   float: left;
   font-size: 15px;

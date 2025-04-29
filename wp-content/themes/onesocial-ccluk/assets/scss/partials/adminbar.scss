@@ -127,9 +127,7 @@ body {
       position: absolute;
       top: 19px;
       left: 24px;
-      -webkit-border-radius: 30px;
-      -moz-border-radius: 30px;
-      border-radius: 30px;
+      @include border-radius(30px);
     }
     a span {
       display: block;
@@ -186,7 +184,7 @@ body {
       line-height: 1;
       padding: 1px 6px;
       margin-left: 1px;
-      border-radius: 999px;
+      @include border-radius(999px);
     }
   }
 
@@ -203,7 +201,7 @@ body {
   line-height: 1;
   padding: 1px 6px;
   margin-left: 1px;
-  border-radius: 999px;
+  @include border-radius(999px);
   background-color: $red;
   position: absolute;
   top: 9px;
