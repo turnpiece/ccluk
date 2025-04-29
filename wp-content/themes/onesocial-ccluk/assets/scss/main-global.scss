@@ -1974,10 +1974,7 @@ div {
       width: 36px;
       margin: 4px;
       padding: 0px;
-      border-radius: 18px;
-      -webkit-border-radius: 18px;
-      -moz-border-radius: 18px;
-      border-radius: 18px;
+      @include border-radius(18px);
       &:hover {
         background-color: white;
         /* lighten more */
