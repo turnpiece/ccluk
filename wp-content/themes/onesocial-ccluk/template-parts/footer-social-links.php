@@ -8,27 +8,28 @@ $social_links = array(
 	'linkedin' => 'https://uk.linkedin.com/company/ccluk/'
 );
 
-if ( !empty( $social_links ) ) {
-	?>
+if (!empty($social_links)) {
+?>
 
 	<div id="footer-icons">
 
 		<ul class="social-icons"><?php
-			foreach ( $social_links as $key => $link ) {
-				if ( !empty( $link ) ) {
-					$href = ( $key == 'email' ) ? 'mailto:' . sanitize_email( $link ) : esc_url( $link );
-					?>
+									foreach ($social_links as $key => $link) {
+										if (!empty($link)) {
+											$href = ($key == 'email') ? 'mailto:' . sanitize_email($link) : esc_url($link);
+									?>
 					<li>
-						<a class="link-<?php echo $key; ?>" title="<?php echo $key; ?>" href="<?php echo $href; ?>" target="_blank">
+						<a class="bb-icon-<?php echo $key; ?>" title="<?php echo $key; ?>" href="<?php echo $href; ?>" target="_blank">
 							<span></span>
 						</a>
 					</li>
-					<?php
-				}
-			}
-		?></ul>
+			<?php
+										}
+									}
+			?>
+		</ul>
 
 	</div>
 
-	<?php
+<?php
 }

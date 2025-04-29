@@ -143,7 +143,7 @@ function buddyboss_onesocial_scripts_styles()
 
 
 	/*	 * **************************** STYLES ***************************** */
-
+	/*
 	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
 	// We will only load if our is latest.
 	$recent_fwver	 = (isset(wp_styles()->registered["fontawesome"])) ? wp_styles()->registered["fontawesome"]->ver : "0";
@@ -153,7 +153,7 @@ function buddyboss_onesocial_scripts_styles()
 		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/{$current_fwver}/css/font-awesome.min.css", false, $current_fwver);
 		wp_enqueue_style('fontawesome');
 	}
-
+	*/
 	$css_dest = '/css';
 	$css_compressed_dest = '/css-compressed';
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
@@ -193,7 +193,7 @@ function buddyboss_onesocial_scripts_styles()
 	wp_enqueue_script('ccluk-menu-js', $JS_URL . '/menu.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
 	// Google Analytics tracking
-	wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
+	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
 	// is adminbar fixed or floated
 	$adminbar_layout = 'fixed';
@@ -255,8 +255,8 @@ function buddyboss_onesocial_scripts_styles()
 	}
 
 	/* UI scripts */
-	wp_enqueue_script('jquery-ui-tooltip');
-	wp_enqueue_script('jquery-form');
+	//wp_enqueue_script('jquery-ui-tooltip');
+	//wp_enqueue_script('jquery-form');
 
 	/*
 	 * Adds JavaScript to pages with the comment form to support
@@ -276,7 +276,7 @@ function buddyboss_onesocial_scripts_styles()
 	wp_deregister_script( 'plupload' );
 	wp_enqueue_script( 'moxie', get_stylesheet_directory_uri() . '/js/plupload/moxie.min.js', array( 'jquery' ), '1.2.1' );
 	wp_enqueue_script( 'plupload', get_stylesheet_directory_uri() . '/js/plupload/plupload.dev.js', array( 'jquery', 'moxie' ), '2.1.2' );*/
-
+	/*
 	// Add BuddyBoss words that we need to use in JS to the end of the page
 	// so they can be translataed and still used.
 	$buddyboss_js_vars = array(
@@ -289,7 +289,7 @@ function buddyboss_onesocial_scripts_styles()
 	);
 
 	$buddyboss_js_vars = apply_filters('buddyboss_js_vars', $buddyboss_js_vars);
-
+	*/
 	$translation_array = array(
 		'only_mobile'	 => $only_mobile,
 		'view_desktop'	 => __('View as Desktop', 'onesocial'),
@@ -313,7 +313,7 @@ function buddyboss_onesocial_scripts_styles()
 		'postsNonce' => wp_create_nonce('ajax-posts-nonce')
 	));
 
-	wp_localize_script('ccluk-main', 'BuddyBossOptions', $buddyboss_js_vars);
+	//wp_localize_script('ccluk-main', 'BuddyBossOptions', $buddyboss_js_vars);
 	wp_enqueue_script('ccluk-main');
 
 	/* Custom CCL javascript */

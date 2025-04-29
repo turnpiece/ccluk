@@ -510,6 +510,8 @@ body.page-template-homepage #main .section .section-title h4 {
   font-size: 24px;
   color: #fff;
   text-transform: uppercase;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
   border-radius: 10px;
 }
 body.page-template-homepage #main .section .section-title a > h4 {
@@ -1199,6 +1201,8 @@ div#sitewide-notice div#message p {
   border: none;
   color: #fff;
   background-color: #22a7f0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
 }
 .single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:hover,

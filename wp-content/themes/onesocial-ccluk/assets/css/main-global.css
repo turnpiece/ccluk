@@ -1847,7 +1847,6 @@ div.footer-inner-bottom ul.social-icons li a {
   width: 36px;
   margin: 4px;
   padding: 0px;
-  border-radius: 18px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   border-radius: 18px;
@@ -1859,84 +1858,15 @@ div.footer-inner-bottom ul.social-icons li a:hover {
   /* darken */
 }
 div.footer-inner ul.social-icons li span:before {
-  font-family: "FontAwesome";
+  font-family: "onesocial";
   font-weight: normal;
   font-style: normal;
   text-rendering: auto;
   text-decoration: inherit;
-  speak: none;
   display: inline-block;
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
   vertical-align: middle;
-}
-
-.link-facebook span:before {
-  content: "\f09a";
-}
-
-.link-twitter span:before {
-  content: "\f099";
-}
-
-.link-linkedin span:before {
-  content: "\f0e1";
-}
-
-.link-google-plus span:before, .link-googleplus span:before {
-  content: "\f0d5";
-}
-
-.link-youtube span:before {
-  content: "\f16a";
-}
-
-.link-instagram span:before {
-  content: "\f16d";
-}
-
-.link-pinterest span:before {
-  content: "\f0d2";
-}
-
-.link-email span:before {
-  content: "\f003";
-}
-
-.link-dribbble span:before {
-  content: "\f17d";
-}
-
-.link-vk span:before {
-  content: "\f189";
-}
-
-.link-tumblr span:before {
-  content: "\f173";
-}
-
-.link-github span:before {
-  content: "\f113";
-}
-
-.link-flickr span:before {
-  content: "\f16e";
-}
-
-.link-skype span:before {
-  content: "\f17e";
-}
-
-.link-vimeo span:before {
-  content: "\f194";
-}
-
-.link-xing span:before {
-  content: "\f168";
-}
-
-.link-rss span:before {
-  content: "\f09e";
 }
 
 /*--------------------------------------------------------------
@@ -3463,7 +3393,7 @@ body article.error404 .entry-header {
 .sap-load-more-posts.loading:after,
 .button-load-more-posts.loading:after,
 .footer-widget a.loading:after {
-  font-family: "fontawesome";
+  font-family: "onesocial";
   font-weight: normal;
   font-style: normal;
   text-rendering: auto;
