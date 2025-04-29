@@ -552,7 +552,7 @@ body.page-template-homepage #main .section.banner .section-title-container > .se
 body.page-template-homepage #main .section.banner .section-title-container > .section-title p {
   color: #fff;
 }
-body.page-template-homepage #main .section.banner .section-title-container > .section-title .buttons > .button {
+body.page-template-homepage #main .section.banner .section-title-container > .section-title a.button {
   color: #fff;
   font-weight: 500;
   text-transform: uppercase;

@@ -655,7 +655,7 @@ header-aside,
 }
 .header-button i {
   position: relative;
-  top: 2px;
+  top: 40%;
 }
 .header-button.underlined .bb-icon-code {
   font-size: 26px;

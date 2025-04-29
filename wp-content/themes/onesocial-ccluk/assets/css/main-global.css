@@ -934,7 +934,7 @@ article.post-password-required input[type=submit],
 li.bypostauthor cite span,
 a.button {
   font-size: 12px;
-  line-height: 20px;
+  line-height: 1.4;
   text-align: center;
 }
 
@@ -2506,8 +2506,8 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 }
 
 body.page #primary article > .entry-header {
-  margin: 24px auto;
-  margin: 2.4rem auto;
+  margin: 10px auto;
+  margin: 1rem auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
@@ -2517,8 +2517,8 @@ body.page #primary article > .entry-header h1.entry-title {
 }
 
 body.archive #primary .archive-header, body.blog #primary .archive-header {
-  margin: 24px auto;
-  margin: 2.4rem auto;
+  margin: 10px auto;
+  margin: 1rem auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
 }
@@ -2818,8 +2818,8 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .single-post .entry-header,
 .single-ccluk_news .entry-header {
-  margin: 24px auto;
-  margin: 2.4rem auto;
+  margin: 10px auto;
+  margin: 1rem auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
   text-align: left;

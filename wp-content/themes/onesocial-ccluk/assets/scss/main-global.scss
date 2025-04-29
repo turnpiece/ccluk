@@ -998,7 +998,7 @@ article.post-password-required input[type=submit],
 li.bypostauthor cite span,
 a.button {
   font-size: $font-size-tiny;
-  line-height: 20px;
+  line-height: 1.4;
   text-align: center;
 }
 
@@ -2010,10 +2010,6 @@ div {
 
 .link-linkedin span:before {
   content: "\f0e1";
-}
-
-.link-google-plus span:before, .link-googleplus span:before {
-  content: "\f0d5";
 }
 
 .link-youtube span:before {

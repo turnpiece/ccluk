@@ -61,11 +61,8 @@ body {
   position: relative;
 }
 
-#inner-wrap {
-  /*    padding-top: 55px;*/
-}
-
-.nav-inner, .footer-inner {
+.nav-inner,
+.footer-inner {
   margin: 0 auto;
   padding: 0;
 }
@@ -75,7 +72,6 @@ body {
   min-height: 90%;
   min-width: 220px;
   padding-bottom: 30px;
-  padding-top: 60px;
 }
 
 .page-template-homepage .site {
@@ -117,37 +113,6 @@ body #content article {
 
 .site-content #comments article.comment {
   padding: 25px 0;
-}
-
-.bb-user-login-link {
-  background: transparent;
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 55px;
-  width: 55px;
-  overflow: hidden;
-  text-indent: -9999px;
-  z-index: 99;
-}
-
-body .mfp-bg.onesocial-popup {
-  position: fixed !important;
-  height: 100% !important;
-}
-
-.mfp-wrap {
-  -webkit-overflow-scrolling: touch;
-  -webkit-transform: translateZ(0);
-}
-
-html.mfp-helper {
-  height: 100%;
-}
-html.mfp-helper body {
-  overflow: hidden;
-  height: 100%;
-  -webkit-transform: translateZ(0);
 }
 
 /*--------------------------------------------------------------
@@ -261,6 +226,9 @@ header#masthead #header-aside, header#masthead #logo-area {
 }
 #mobile-header #searchsubmit:hover {
   box-shadow: none;
+}
+#mobile-header a#user-nav {
+  display: none;
 }
 
 /*--------------------------------------------------------------
@@ -1470,17 +1438,17 @@ body.is-mobile.single #primary,
 body.is-mobile.single #secondary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
 body.is-mobile.archive #secondary,
-body.is-mobile.archive .site-content, body.is-mobile.page:not(.home-page) #primary,
-body.is-mobile.page:not(.home-page) #secondary,
-body.is-mobile.page:not(.home-page) .site-content {
-  max-width: 600px;
+body.is-mobile.archive .site-content, body.is-mobile.page:not(.frontpage-page) #primary,
+body.is-mobile.page:not(.frontpage-page) #secondary,
+body.is-mobile.page:not(.frontpage-page) .site-content {
+  max-width: 700px;
   margin: 0 auto;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary {
+body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.frontpage-page).page.page-sidebar-active #secondary {
   margin-top: 20px;
   margin-top: 2rem;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home-page).page.page-sidebar-active #secondary .widget {
+body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.frontpage-page).page.page-sidebar-active #secondary .widget {
   margin-bottom: 30px;
   margin-bottom: 3rem;
 }
@@ -1522,17 +1490,17 @@ MAXIMUM width of 1024 pixels (tablets)
   body.single #secondary,
   body.single .site-content, body.archive #primary,
   body.archive #secondary,
-  body.archive .site-content, body.page:not(.home-page) #primary,
-  body.page:not(.home-page) #secondary,
-  body.page:not(.home-page) .site-content {
-    max-width: 600px;
+  body.archive .site-content, body.page:not(.frontpage-page) #primary,
+  body.page:not(.frontpage-page) #secondary,
+  body.page:not(.frontpage-page) .site-content {
+    max-width: 700px;
     margin: 0 auto;
   }
-  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home-page).page.page-sidebar-active #secondary {
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.frontpage-page).page.page-sidebar-active #secondary {
     margin-top: 20px;
     margin-top: 2rem;
   }
-  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home-page).page.page-sidebar-active #secondary .widget {
+  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.frontpage-page).page.page-sidebar-active #secondary .widget {
     margin-bottom: 30px;
     margin-bottom: 3rem;
   }
@@ -1644,10 +1612,11 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   body.page-template-homepage #main .section.banner.background-box .section-title-container {
     padding: 20px;
   }
-  body.page-template-homepage #main .section.banner.background-box .section-title-container .section-title h2 {
+  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title h2 {
     font-size: 24px;
   }
-  body.page-template-homepage #main .section.banner.background-box .section-title-container .section-title p {
+  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title p,
+  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title a.button {
     font-size: 15px;
   }
   .site .buddyboss-media-photos-wrap-container {

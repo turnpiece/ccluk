@@ -219,11 +219,11 @@
 @mixin mobile-styles() {
   &.single,
   &.archive,
-  &.page:not(.home-page) {
+  &.page:not(.frontpage-page) {
     #primary,
     #secondary,
     .site-content {
-      max-width: $content_w;
+      max-width: $content_w_large;
       @include centred-margin( 0 );
     }
     &.page.page-sidebar-active {
@@ -280,7 +280,7 @@
 }
 
 @mixin entry-header() {
-  @include centred-margin( 2.4 );
+  @include centred-margin( 1 );
   margin-bottom: 16px;
   margin-bottom: 1rem;
 

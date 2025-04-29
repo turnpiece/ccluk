@@ -22,11 +22,12 @@ body.page-template-homepage {
         .section.banner.background-box {
             .section-title-container {
                 padding: 20px;
-                .section-title {
+                > .section-title {
                     h2 {
                         font-size: $font-size-mid;
                     }
-                    p {
+                    p, 
+                    a.button {
                         font-size: $font-size-sm;
                     }
                 }
