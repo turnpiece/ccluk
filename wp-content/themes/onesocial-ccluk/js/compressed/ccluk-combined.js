@@ -94,14 +94,15 @@
           }
           // Resized to non-mobile resolution
           else if ( !is_mobile && mobile_modified ) {
-              $mobile_nav_wrap.css( { display: 'none' } );
+              //$mobile_nav_wrap.css( { display: 'none' } );
               $document.trigger( 'menu-close.buddyboss' );
           }
           // Resized back to mobile resolution
           else if ( is_mobile && mobile_modified ) {
+            /*
               $mobile_nav_wrap.css( {
                 display: 'block'
-              } );
+              } ); */
           }
       }
 
