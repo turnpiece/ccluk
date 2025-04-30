@@ -41,7 +41,9 @@
 
       var $window = $( window );
       var $document = $( document );
+      var $inner = $( '#inner-wrap' );
 
+      var is_mobile = false;
       var mobile_modified = false;
 
       /*------------------------------------------------------------------------------------------------------
