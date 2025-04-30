@@ -45,14 +45,14 @@
       /*------------------------------------------------------------------------------------------------------
        1.1 - Startup (Binds Events + Conditionals)
        --------------------------------------------------------------------------------------------------------*/
-
+      /*
       // Re-render layout on resize
       var throttle;
       $window.on( 'resize', function () {
           clearTimeout( throttle );
           throttle = setTimeout( do_render, 150 );
       } );
-
+      */
       function elementInViewport( el ) {
           var top = el.offsetTop;
           var left = el.offsetLeft;
@@ -154,7 +154,7 @@
           topSpace = 32;
       }
 
-      $( '.sticky-header #masthead' ).sticky( { topSpacing: topSpace } );
+      //$( '.sticky-header #masthead' ).sticky( { topSpacing: topSpace } );
 
   }
 
