@@ -42,6 +42,97 @@
       var $window = $( window );
       var $document = $( document );
 
+      var mobile_modified = false;
+
+      /*------------------------------------------------------------------------------------------------------
+      1.0 - Core Functions
+      --------------------------------------------------------------------------------------------------------*/
+
+      // get viewport size
+      function viewport() {
+        var e = window, a = 'inner';
+        if ( !( 'innerWidth' in window ) ) {
+            a = 'client';
+            e = document.documentElement || document.body;
+        }
+        return { width: e[ a + 'Width' ], height: e[ a + 'Height' ] };
+      }
+
+      /**
+       * Checks for supported mobile resolutions via media query and
+       * maximum window width.
+       *
+       * @return {boolean} True when screen size is mobile focused
+       */
+      function check_is_mobile() {
+          // The $mobile_check element refers to an empty div#mobile-check we
+          // hide or show with media queries. We use this to determine if we're
+          // on mobile resolution
+
+          if ( viewport().width <= 1024 ) {
+              $( 'body' ).removeClass( 'is-desktop' ).addClass( 'is-mobile' );
+          } else {
+              $( 'body' ).removeClass( 'is-mobile' ).addClass( 'is-desktop' );
+          }
+
+          is_mobile = $( 'body' ).hasClass( 'is-mobile' );
+      }
+
+      function render_layout() {
+
+          // If on small screens make sure the main page elements are
+          // full width vertically
+          if ( is_mobile && ( $inner.height() < $window.height() ) ) {
+              $( '#page' ).css( 'min-height', $window.height() - ( $( '#mobile-header' ).height() + $( '#colophon' ).height() ) );
+          }
+          
+          // Runs once, first time we experience a mobile resolution
+          if ( is_mobile && !mobile_modified ) {
+              mobile_modified = true;
+          }
+          // Resized to non-mobile resolution
+          else if ( !is_mobile && mobile_modified ) {
+              $mobile_nav_wrap.css( { display: 'none' } );
+              $document.trigger( 'menu-close.buddyboss' );
+          }
+          // Resized back to mobile resolution
+          else if ( is_mobile && mobile_modified ) {
+              $mobile_nav_wrap.css( {
+                display: 'block'
+              } );
+          }
+      }
+
+      /**
+       * Renders the layout, called when the page is loaded and on resize
+       *
+       * @return {void}
+       */
+      function do_render()
+      {
+          check_is_mobile();
+          render_layout();
+      }
+
+      /*------------------------------------------------------------------------------------------------------
+       1.1 - Startup (Binds Events + Conditionals)
+       --------------------------------------------------------------------------------------------------------*/
+
+      // Render layout
+      do_render();
+
+      // Re-render layout after everything's loaded
+      $window.on( 'load', function () {
+          do_render();
+      } );
+
+      // Re-render layout on resize
+      var throttle;
+      $window.resize( function () {
+          clearTimeout( throttle );
+          throttle = setTimeout( do_render, 150 );
+      } );
+ 
       /*------------------------------------------------------------------------------------------------------
        1.1 - Startup (Binds Events + Conditionals)
        --------------------------------------------------------------------------------------------------------*/
