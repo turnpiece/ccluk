@@ -131,51 +131,10 @@
 
       // Re-render layout on resize
       var throttle;
-      $window.resize( function () {
-          clearTimeout( throttle );
-          throttle = setTimeout( do_render, 150 );
-      } );
- 
-      /*------------------------------------------------------------------------------------------------------
-       1.1 - Startup (Binds Events + Conditionals)
-       --------------------------------------------------------------------------------------------------------*/
-      /*
-      // Re-render layout on resize
-      var throttle;
       $window.on( 'resize', function () {
           clearTimeout( throttle );
           throttle = setTimeout( do_render, 150 );
       } );
-      */
-      function elementInViewport( el ) {
-          var top = el.offsetTop;
-          var left = el.offsetLeft;
-          var width = el.offsetWidth;
-          var height = el.offsetHeight;
-
-          while ( el.offsetParent ) {
-              el = el.offsetParent;
-              top += el.offsetTop;
-              left += el.offsetLeft;
-          }
-
-          return (
-              top < ( window.pageYOffset + window.innerHeight ) &&
-              left < ( window.pageXOffset + window.innerWidth ) &&
-              ( top + height ) > window.pageYOffset &&
-              ( left + width ) > window.pageXOffset
-              );
-      }
-
-      var $images_out_of_viewport =
-          $( '#main-wrap img, .svg-graphic' ).filter( function ( index ) {
-          return !elementInViewport( this );
-      } );
-
-      $images_out_of_viewport.each( function () {
-          this.classList.add( "not-loaded" );
-      } );
-
 
       $window.on( 'load', function () {
           $( 'body' ).addClass( 'boss-page-loaded' );
@@ -218,7 +177,7 @@
               buttons_width = buttons_width + $( this ).width();
           } );
 
-          $search_form.width( $( '.header-wrapper' ).width() - 180 - buttons_width );
+          $search_form.width( $( '.header-wrapper' ).width() - 320 - buttons_width );
       }
 
       search_width();
@@ -247,9 +206,6 @@
       if ( $( '#wpadminbar' ).is( ':visible' ) ) {
           topSpace = 32;
       }
-
-      //$( '.sticky-header #masthead' ).sticky( { topSpacing: topSpace } );
-
   }
 
 
@@ -258,4 +214,64 @@
   // Boot 'er up
   App.init();
   
+} )( jQuery );
+
+( function ( $ ) {
+
+    var isTouch = !!( 'ontouchstart' in window ),
+        TorC = isTouch ? 'touchstart' : 'click';
+
+    $( '#main-nav' ).on( TorC, function ( e ) {
+        e.preventDefault();
+
+        var $body = $( 'body' ),
+            $page = $( '#main-wrap' ),
+            transitionEndNav = 'transitionend webkitTransitionEnd otransitionend MSTransitionEnd';
+
+        $( '#mobile-right-panel' ).css( { 'opacity': 1 } );
+
+        $page.on( transitionEndNav, function () {
+            if ( !$( 'body' ).hasClass( 'menu-visible-right' ) ) {
+                $( '#mobile-right-panel' ).removeAttr( 'style' );
+                $page.off( transitionEndNav );
+            }
+        } );
+
+        /* When the toggle menu link is clicked, animation starts */
+        $body.toggleClass( 'menu-visible-right' );
+
+
+    } );
+
+    $( '#user-nav' ).on( TorC, function ( e ) {
+        e.preventDefault();
+
+        var $body = $( 'body' ),
+            $page = $( '#main-wrap' ),
+            /* Cross browser support for CSS "transition end" event */
+            transitionEndNav = 'transitionend webkitTransitionEnd otransitionend MSTransitionEnd';
+
+        $( '#wpadminbar' ).css( { 'opacity': 1 } );
+
+        $page.on( transitionEndNav, function () {
+            if ( !$( 'body' ).hasClass( 'menu-visible-left' ) ) {
+                $( '#wpadminbar' ).removeAttr( 'style' );
+                $page.off( transitionEndNav );
+            }
+        } );
+
+        /* When the toggle menu link is clicked, animation starts */
+        $body.toggleClass( 'menu-visible-left' );
+
+    } );
+
+    $( document ).on( 'ready', function () {
+        $( '.bb-overlay' ).on( 'click', function () {
+            if ( $( 'body' ).hasClass( 'menu-visible-right' ) ) {
+                $( '#main-nav' ).trigger( TorC );
+            }
+        } );
+
+    } );
+
 } )( jQuery );

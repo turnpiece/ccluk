@@ -1847,7 +1847,6 @@ div.footer-inner-bottom ul.social-icons li a {
   width: 36px;
   margin: 4px;
   padding: 0px;
-  border-radius: 18px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   border-radius: 18px;
@@ -1881,10 +1880,6 @@ div.footer-inner ul.social-icons li span:before {
 
 .link-linkedin span:before {
   content: "\f0e1";
-}
-
-.link-google-plus span:before, .link-googleplus span:before {
-  content: "\f0d5";
 }
 
 .link-youtube span:before {
