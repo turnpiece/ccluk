@@ -46,7 +46,7 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 			<header class="entry-header<?php echo $header_class; ?>">
 
 				<!-- Search, Blog index, archives -->
-				<?php if (is_search() || is_archive() || is_home() || (buddyboss_is_bp_active() && bp_is_user())) : ?>
+				<?php if (is_search() || is_archive() || is_home()) : ?>
 
 					<h2 class="entry-title">
 						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
@@ -76,7 +76,7 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 	<?php } ?>
 
 	<!-- Search, Blog index, archives, Profile -->
-	<?php if (is_search() || is_archive() || is_home() || (buddyboss_is_bp_active() && bp_is_user())) : // Only display Excerpts for Search, Blog index, Profile and archives    
+	<?php if (is_search() || is_archive() || is_home()) : // Only display Excerpts for Search, Blog index, Profile and archives    
 	?>
 
 		<div class="entry-content entry-summary">
