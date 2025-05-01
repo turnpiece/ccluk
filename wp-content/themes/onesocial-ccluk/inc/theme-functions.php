@@ -144,9 +144,6 @@ function buddyboss_onesocial_scripts_styles()
 	// Google Analytics tracking
 	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
-	// is adminbar fixed or floated
-	$adminbar_layout = 'fixed';
-
 	if (is_phone()) {
 		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'all');
 		$only_mobile = true;
@@ -156,7 +153,7 @@ function buddyboss_onesocial_scripts_styles()
 	} else {
 		wp_enqueue_style('onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array('icons'), $version, 'screen and (min-width: 1025px)');
 		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		wp_enqueue_style('buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array('dashicons'), $version, 'screen and (min-width: 1025px)');
+		//wp_enqueue_style('buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array('dashicons'), $version, 'screen and (min-width: 1025px)');
 	}
 
 	// Media query fallback
@@ -180,25 +177,9 @@ function buddyboss_onesocial_scripts_styles()
 		wp_enqueue_script('comment-reply');
 	}
 
-	// Heartbeat
-	wp_enqueue_script('heartbeat');
-
-	$translation_array = array(
-		'only_mobile'	 => $only_mobile,
-		'view_desktop'	 => __('View as Desktop', 'onesocial'),
-		'view_mobile'	 => __('View as Mobile', 'onesocial'),
-		'yes'			 => __('Yes', 'onesocial'),
-		'no'			 => __('No', 'onesocial'),
-		'other'			 => __('Other', 'onesocial')
-	);
-
-	$transport_array = array(
-		'eh_url_path' => home_url()
-	);
-
 	$js = (defined('CCLUK_DEBUGGING') && CCLUK_DEBUGGING) ? '.js' : '.min.js';
 
-	wp_register_script('ccluk-main', get_stylesheet_directory_uri() . '/js/compressed/ccluk-combined' . $js, array('jquery', 'jquery-form'), $version, true);
+	wp_register_script('ccluk-main', get_stylesheet_directory_uri() . '/assets/js/ccluk' . $js, array('jquery', 'jquery-form'), $version, true);
 
 	wp_enqueue_script('ccluk-main');
 
