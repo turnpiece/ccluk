@@ -186,19 +186,6 @@ function ccluk_wsl_secure_avatar_check($user_id, $provider, $hybridauth_user_pro
     }
 }
 
-function ccluk_wsl_get_bp_avatar_filter($wsl_html, $user_id, $wsl_avatar, $html, $args)
-{
-    if (strpos($wsl_avatar, 'http://') !== false) {
-        $wsl_avatar = str_replace('http:', '', $wsl_avatar);
-        $img_class  = ('class="' . (!empty($args['class']) ? ($args['class'] . ' ') : '') . 'avatar-wordpress-social-login" ');
-        $img_width  = (!empty($args['width']) ? 'width="' . $args['width'] . '" ' : 'width="' . bp_core_avatar_full_width() . '" ');
-        $img_height = (!empty($args['height']) ? 'height="' . $args['height'] . '" ' : 'height="' . bp_core_avatar_full_height() . '" ');
-        $img_alt    = (!empty($args['alt']) ? 'alt="' . esc_attr($args['alt']) . '" ' : '');
-        $wsl_html = preg_replace('#<img[^>]+>#i', '<img src="' . $wsl_avatar . '" ' . $img_alt . $img_class . $img_height . $img_width . '/>', $html);
-    }
-    return $wsl_html;
-}
-
 function ccluk_wsl_get_wp_avatar_filter($wsl_html, $user_id, $wsl_avatar, $html, $mixed, $size, $default, $alt)
 {
     if (strpos($wsl_avatar, 'http://') !== false) {
@@ -329,16 +316,6 @@ function ccluk_the_user_link($author_id)
  */
 function ccluk_get_user_link($author_id)
 {
-    if (is_user_logged_in()) {
-        if (function_exists('bp_core_get_userlink')) {
-            $user_link = bp_core_get_userlink($author_id, false, true);
-            if (function_exists('buddyboss_sap'))
-                return $user_link . 'blog';
-            else
-                return $user_link;
-        }
-    }
-
     return get_author_posts_url($author_id);
 }
 

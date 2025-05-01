@@ -229,9 +229,6 @@ header#masthead #header-aside, header#masthead #logo-area {
 #mobile-header #searchsubmit:hover {
   box-shadow: none;
 }
-#mobile-header a#user-nav {
-  display: none;
-}
 
 /*--------------------------------------------------------------
 1.1.4 - Mobile Post Content

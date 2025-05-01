@@ -92,7 +92,7 @@ class BuddyBoss_Theme
 	 */
 	public function globals()
 	{
-		global $bp, $buddyboss_debug_log, $buddyboss_js_params;
+		global $buddyboss_debug_log, $buddyboss_js_params;
 
 		// Get theme path
 		$this->tpl_dir = get_stylesheet_directory();

@@ -46,14 +46,6 @@ function onesocial_setup()
 		'header-my-account'	 => __('My Profile', 'onesocial'),
 	));
 
-	// Adds wp_nav_menu() in two additional locations with BuddyPress activated.
-	if (function_exists('bp_is_active')) {
-		register_nav_menus(array(
-			'profile-menu'	 => __('Profile: Extra Links', 'onesocial'),
-			'group-menu'	 => __('Group: Extra Links', 'onesocial'),
-		));
-	}
-
 	/*
 	 * Enable support for Post Formats.
 	 * See http://codex.wordpress.org/Post_Formats
@@ -74,38 +66,6 @@ add_action('after_setup_theme', 'onesocial_setup');
  * @since OneSocial 1.0.0
  */
 add_filter('use_default_gallery_style', '__return_false');
-
-/**
- * Adds Profile menu to BuddyPress profiles
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_add_profile_menu()
-{
-	if (function_exists('bp_is_active')) {
-		if (has_nav_menu('profile-menu')) {
-			wp_nav_menu(array('container' => false, 'theme_location' => 'profile-menu', 'items_wrap' => '%3$s'));
-		}
-	}
-}
-
-add_action('bp_member_options_nav', 'buddyboss_add_profile_menu');
-
-/**
- * Adds Group menu to BuddyPress groups
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_add_group_menu()
-{
-	if (function_exists('bp_is_active')) {
-		if (has_nav_menu('group-menu')) {
-			wp_nav_menu(array('container' => false, 'theme_location' => 'group-menu', 'items_wrap' => '%3$s'));
-		}
-	}
-}
-
-add_action('bp_group_options_nav', 'buddyboss_add_group_menu');
 
 /**
  * Detecting phones
@@ -143,17 +103,7 @@ function buddyboss_onesocial_scripts_styles()
 
 
 	/*	 * **************************** STYLES ***************************** */
-	/*
-	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
-	// We will only load if our is latest.
-	$recent_fwver	 = (isset(wp_styles()->registered["fontawesome"])) ? wp_styles()->registered["fontawesome"]->ver : "0";
-	$current_fwver	 = "4.7.0";
-	if (version_compare($current_fwver, $recent_fwver, '>')) {
-		wp_deregister_style('fontawesome');
-		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/{$current_fwver}/css/font-awesome.min.css", false, $current_fwver);
-		wp_enqueue_style('fontawesome');
-	}
-	*/
+
 	$css_dest = '/css';
 	$css_compressed_dest = '/css-compressed';
 	$assets_dir = get_stylesheet_directory_uri() . '/assets';
@@ -319,17 +269,6 @@ function buddyboss_onesocial_scripts_styles()
 	/* Custom CCL javascript */
 	wp_register_script('onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
 	wp_enqueue_script('onesocial-custom');
-
-	/**
-	 * If we're on the BuddyPress messages component we need to load jQuery Migrate first
-	 * before bgiframe, so let's take care of that
-	 */
-	if (function_exists('bp_is_messages_component') && bp_is_messages_component() && bp_is_current_action('compose')) {
-		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-		wp_dequeue_script('bp-jquery-bgiframe');
-		wp_enqueue_script('bp-jquery-bgiframe', BP_PLUGIN_URL . "bp-messages/js/autocomplete/jquery.bgiframe{$min}.js", array(), bp_get_version());
-	}
 }
 
 add_action('wp_enqueue_scripts', 'buddyboss_onesocial_scripts_styles');
@@ -422,17 +361,14 @@ add_action('wp_head', 'buddyboss_remove_adminbar_inline_styles', 9);
 /**
  * Dynamically removes the no-js class from the <body> element.
  *
- * By default, the no-js class is added to the body (see bp_dtheme_add_no_js_body_class()). The
- * JavaScript in this function is loaded into the <body> element immediately after the <body> tag
- * (note that it's hooked to bp_before_header), and uses JavaScript to switch the 'no-js' body class
- * to 'js'. If your theme has styles that should only apply for JavaScript-enabled users, apply them
+ * By default, the no-js class is added to the body. The
+ * JavaScript in this function is loaded into the <body> element immediately after the <body> tag, 
+ * and uses JavaScript to switch the 'no-js' body class to 'js'. 
+ * If your theme has styles that should only apply for JavaScript-enabled users, apply them
  * to body.js.
  *
  * This technique is borrowed from WordPress, wp-admin/admin-header.php.
  *
- * @package BuddyPress
- * @since BuddyPress (1.5).1
- * @see bp_dtheme_add_nojs_body_class()
  */
 function buddyboss_remove_nojs_body_class()
 {
@@ -444,15 +380,6 @@ function buddyboss_remove_nojs_body_class()
 }
 
 add_action('buddyboss_before_header', 'buddyboss_remove_nojs_body_class');
-
-function buddyboss_members_latest_update_filter($latest)
-{
-	$latest = str_replace(array('- &quot;', '&quot;'), '', $latest);
-
-	return $latest;
-}
-
-add_filter('bp_get_activity_latest_update_excerpt', 'buddyboss_members_latest_update_filter');
 
 /**
  * Remove an anonymous object filter.
@@ -486,33 +413,6 @@ function buddyboss_remove_anonymous_object_filter($tag, $class, $method)
 			}
 		}
 	}
-}
-
-/**
- * Moves sitewide notices to the header
- *
- * Since BuddyPress doesn't give us access to BP_Legacy, let
- * us begin the hacking
- *
- * @since Boss 1.0.0
- */
-function buddyboss_fix_sitewide_notices()
-{
-	// Check if BP_Legacy is being used and messages are active
-	if (class_exists('BP_Legacy') && bp_is_active('messages')) {
-		buddyboss_remove_anonymous_object_filter('wp_footer', 'BP_Legacy', 'sitewide_notices');
-		add_action('buddyboss_inside_wrapper', 'buddyboss_print_sitewide_notices', 9999);
-	}
-}
-
-add_action('wp', 'buddyboss_fix_sitewide_notices');
-
-/**
- * Prints sitewide notices (used in the header, by default is in footer)
- */
-function buddyboss_print_sitewide_notices()
-{
-	@BP_Legacy::sitewide_notices();
 }
 
 /**
@@ -604,56 +504,6 @@ function buddyboss_widgets_init()
 		'after_title'	 => '</h3>'
 	));
 
-	// Area 6, located in the Individual Member Profile right column. Right column only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Member &rarr; Single Profile',
-		'id'			 => 'profile',
-		'description'	 => 'The Individual Profile widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
-	// Area 8, located in the Individual Group right column. Right column only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Group &rarr; Single Group',
-		'id'			 => 'group',
-		'description'	 => 'The Individual Group widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
-	// Area 9, located in the Activity Directory right column. Right column only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Activity &rarr; Directory',
-		'id'			 => 'activity',
-		'description'	 => 'The Activity Directory widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
-	// Area 10, located in the Forums Directory right column. Right column only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Forums &rarr; Directory & Single',
-		'id'			 => 'forums',
-		'description'	 => 'The Forums Directory widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
-	// Area 11, located in the Members Directory right column. Right column only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Blogs &rarr; Directory (multisite)',
-		'id'			 => 'blogs',
-		'description'	 => 'The Blogs Directory widget area (only for Multisite). Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
 	// Area 16, Only appears on serach results page.
 	register_sidebar(array(
 		'name'			 => 'Search Results',
@@ -767,10 +617,6 @@ function buddyboss_body_class($classes)
 		$classes[] = 'role-admin';
 	}
 
-	if (buddyboss_is_bp_active() && (bp_is_user_activity() || (bp_is_group_home() && bp_is_active('activity')) || bp_is_group_activity() || bp_is_current_component('activity'))) {
-		$classes[] = 'has-activity';
-	}
-
 	// Default layout class
 	if (is_phone()) {
 		$classes[] = 'is-mobile';
@@ -810,59 +656,15 @@ function buddyboss_body_class($classes)
 	}
 
 	// Page sidebar
-	if (is_active_sidebar('sidebar') && is_page() && !is_front_page() && !buddyboss_is_bp_active()) {
-		$classes[] = 'page-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
-	}
-
-	// Page sidebar
-	if (is_active_sidebar('sidebar') && is_page() && !is_front_page() && buddyboss_is_bp_active() && !bp_current_component() && !bp_is_user()) {
+	if (is_active_sidebar('sidebar') && is_page() && !is_front_page()) {
 		$classes[] = 'page-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	// Archive sidebar
 	if (
-		is_active_sidebar('sidebar') && is_archive() && !(function_exists('bbp_is_forum_archive') && bbp_is_forum_archive()) && !(function_exists('is_shop') && is_shop())
+		is_active_sidebar('sidebar') && is_archive()
 	) {
 		$classes[] = 'archive-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
-	}
-
-	// Blogs sidebar
-	$blogs_sidebar = 'left';
-	if (buddyboss_is_bp_active() && is_active_sidebar('blogs') && is_multisite() && bp_is_current_component('blogs') && !bp_is_user()) {
-		$classes[] = 'blogs-sidebar-active bb-has-sidebar sidebar-' . $blogs_sidebar;
-	}
-
-	// Activity sidebar
-	$activity_sidebar = 'left';
-	if (buddyboss_is_bp_active() && is_active_sidebar('activity') && bp_is_current_component('activity') && !bp_is_user()) {
-		$classes[] = 'activity-sidebar-active bb-has-sidebar sidebar-' . $activity_sidebar;
-	}
-
-	// Members sidebar
-	$profile_sidebar = 'left';
-	if (buddyboss_is_bp_active() && bp_is_user() && ('messages' != $bp->current_component) && ('settings' != $bp->current_component)) {
-		$sidebar_alignment	 = 'left';
-		$classes[]			 = 'profile-sidebar-active bb-has-sidebar sidebar-' . $profile_sidebar;
-	}
-
-	// Single group sidebar
-	$single_group_sidebar = 'left';
-	if (buddyboss_is_bp_active() && bp_is_group()) {
-		$classes[] = 'group-sidebar-active bb-has-sidebar sidebar-' . $single_group_sidebar;
-	}
-
-	// Forums sidebar
-	$forums = 'left';
-	if (is_active_sidebar('forums') && function_exists('is_bbpress') && is_bbpress() && !(function_exists('bp_is_user') && bp_is_user())) {
-		$classes[] = 'forums-sidebar-active bb-has-sidebar sidebar-' . $forums;
-	}
-
-	//Post create template
-	if (function_exists('buddyboss_sap') && buddyboss_is_bp_active()) {
-		$create_new_post_page = buddyboss_sap()->option('create-new-post');
-		if (!empty($create_new_post_page) && $create_new_post_page == get_the_ID()) {
-			$classes[] = 'page-template-sap-post-create-template';
-		}
 	}
 
 	//Adminbar
@@ -877,75 +679,6 @@ function buddyboss_body_class($classes)
 
 add_filter('body_class', 'buddyboss_body_class');
 
-
-/* * **************************** LOGIN FUNCTIONS ***************************** */
-
-function buddyboss_is_login_page()
-{
-	return in_array($GLOBALS['pagenow'], array('wp-login.php', 'wp-register.php'));
-}
-
-add_filter('login_redirect', 'buddyboss_redirect_previous_page', 10, 3);
-
-function buddyboss_redirect_previous_page($redirect_to, $request, $user)
-{
-	if (buddyboss_is_bp_active()) {
-		$bp_pages = bp_get_option('bp-pages');
-
-		$activate_page_id = !empty($bp_pages) && isset($bp_pages['activate']) ? $bp_pages['activate'] : null;
-
-		if ((int) $activate_page_id <= 0) {
-			return $redirect_to;
-		}
-
-		$activate_page = get_post($activate_page_id);
-
-		if (empty($activate_page) || empty($activate_page->post_name)) {
-			return $redirect_to;
-		}
-
-		$activate_page_slug = $activate_page->post_name;
-
-		if (strpos($request, '/' . $activate_page_slug) !== false) {
-			$redirect_to = home_url();
-		}
-	}
-
-	$request = isset($_SERVER["HTTP_REFERER"]) && !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : false;
-
-	if (!$request) {
-		return $redirect_to;
-	}
-
-	$req_parts	 = explode('/', $request);
-	$req_part	 = array_pop($req_parts);
-
-	if (substr($req_part, 0, 3) == 'wp-') {
-		return $redirect_to;
-	}
-
-	$request = str_replace(array('?loggedout=true', '&loggedout=true'), '', $request);
-
-	return $request;
-}
-
-/**
- * Custom Login Link
- *
- * @since OneSocial 1.0.0.8
- */
-function change_wp_login_url()
-{
-	return home_url();
-}
-
-function change_wp_login_title()
-{
-	get_option('blogname');
-}
-
-add_filter('login_headerurl', 'change_wp_login_url');
-add_filter('login_headertitle', 'change_wp_login_title');
 
 
 /* * **************************** ADMIN BAR FUNCTIONS ***************************** */
@@ -977,7 +710,6 @@ add_action('wp_before_admin_bar_render', 'remove_admin_bar_links');
  */
 function replace_howdy($wp_admin_bar)
 {
-
 	if (is_user_logged_in()) {
 
 		$my_account	 = $wp_admin_bar->get_node('my-account');
@@ -1013,36 +745,6 @@ if (!function_exists('buddyboss_add_gravatar')) {
 
 	add_filter('avatar_defaults', 'buddyboss_add_gravatar');
 }
-
-/**
- * Replace default group avatar
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_default_group_avatar($avatar)
-{
-	global $bp, $groups_template;
-	if (strpos($avatar, 'group-avatars')) {
-		return $avatar;
-	} else {
-		$custom_avatar	 = get_stylesheet_directory_uri() . '/images/avatar-group.png';
-		$alt			 = 'group avatar';
-
-		if ($groups_template) {
-			$alt = esc_attr($groups_template->group->name);
-		}
-
-		if ($bp->current_action == "") {
-			return '<img width="215" height="215" src="' . $custom_avatar . '" class="avatar" alt="' . $alt . '" />';
-		} else {
-			return '<img width="' . BP_AVATAR_FULL_WIDTH . '" height="' . BP_AVATAR_FULL_HEIGHT . '" src="' . $custom_avatar . '" class="avatar" alt="' . $alt . '" />';
-		}
-	}
-}
-
-add_filter('bp_get_group_avatar', 'buddyboss_default_group_avatar');
-add_filter('bp_get_new_group_avatar', 'buddyboss_default_group_avatar');
-
 
 /* * **************************** WORDPRESS FUNCTIONS ***************************** */
 
@@ -1082,36 +784,6 @@ function buddyboss_is_plugin_active($plugin)
 }
 
 /**
- * Add a View Profile link in Dashboard > Users panel
- *
- * @since OneSocial 1.0.0
- */
-function user_row_actions_bp_view($actions, $user_object)
-{
-	if (function_exists('bp_is_active')) {
-
-		$actions['view'] = '<a href="' . bp_core_get_user_domain($user_object->ID) . '">' . __('View Profile', 'onesocial') . '</a>';
-		return $actions;
-	}
-}
-
-add_filter('user_row_actions', 'user_row_actions_bp_view', 10, 2);
-
-/**
- * Function that checks if BuddyPress plugin is active
- *
- * @since OneSocial Theme 1.0.0
- */
-function buddyboss_is_bp_active()
-{
-	if (function_exists('bp_is_active')) {
-		return true;
-	} else {
-		return false;
-	}
-}
-
-/**
  * Add image size for posts
  *
  * @since OneSocial Theme 1.0.0
@@ -1139,7 +811,7 @@ function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
 			?>
 		</div>
 	</div>
-<?php
+	<?php
 }
 
 /**
@@ -1205,552 +877,6 @@ function buddyboss_ajax_posts()
 	die();
 }
 
-/**
- * Output a block of group members.
- *
- *
- */
-add_action('wp_ajax_nopriv_buddyboss_get_group_members', 'buddyboss_get_group_members');
-add_action('wp_ajax_buddyboss_get_group_members', 'buddyboss_get_group_members');
-
-
-function buddyboss_get_group_members()
-{
-
-	$nonce = $_POST['membersNonce'];
-
-	if (!wp_verify_nonce($nonce, 'ajax-members-nonce'))
-		die('Busted!');
-
-	$sort		 = $_POST['sort'];
-	$page		 = $_POST['page'];
-	$count_num	 = $_POST['count'];
-
-	//	if ( !$friend_ids = wp_cache_get( 'friends_friend_ids_' . bp_displayed_user_id(), 'bp' ) ) {
-
-	if ($page == 'single') {
-		//        $id = bp_displayed_user_id();
-	} else {
-		$id = $_POST['id'];
-	}
-
-	$members = groups_get_group_members(array(
-		'group_id' => $id
-	));
-
-	//		wp_cache_set( 'friends_friend_ids_' . bp_displayed_user_id(), $friend_ids, 'bp' );
-	//	}
-?>
-
-	<?php if ($members['members']) { ?>
-
-		<ul class="horiz-gallery">
-
-			<?php
-			$count	 = count($members['members']);
-			if ($count > $count_num)
-				$count	 = $count_num;
-			?>
-
-			<?php for ($i = 0; $i < $count; ++$i) { ?>
-
-				<li>
-					<a href="<?php echo bp_core_get_user_domain($members['members'][$i]->id) ?>"><?php echo bp_core_fetch_avatar(array('item_id' => $members['members'][$i]->id, 'type' => 'thumb')) ?></a>
-					<h5><?php echo bp_core_get_userlink($members['members'][$i]->id) ?></h5>
-				</li>
-
-			<?php } ?>
-
-			<li class="see-more">
-				<a href="<?php echo trailingslashit(bp_displayed_user_domain() . bp_get_friends_slug()) ?>" class="bb-icon-arrow-right-f"></a>
-			</li>
-
-		</ul>
-
-	<?php
-	}
-
-	die();
-}
-
-/**
- * Output a block of friends.
- *
- *
- */
-add_action('wp_ajax_nopriv_buddyboss_get_friends', 'buddyboss_ajax_friends');
-add_action('wp_ajax_buddyboss_get_friends', 'buddyboss_ajax_friends');
-
-function buddyboss_ajax_friends()
-{
-
-	$nonce = $_POST['friendsNonce'];
-
-	if (!wp_verify_nonce($nonce, 'ajax-friends-nonce'))
-		die('Busted!');
-
-	$sort		 = $_POST['sort'];
-	$page		 = $_POST['page'];
-	$count_num	 = $_POST['count'];
-
-	//	if ( !$friend_ids = wp_cache_get( 'friends_friend_ids_' . bp_displayed_user_id(), 'bp' ) ) {
-
-	echo buddyboss_get_friends($sort, $count_num);
-
-	die();
-}
-
-/**
- * Get the friends list
- * @param $sort
- * @param $count_num
- * @return string
- */
-function buddyboss_get_friends($sort, $count_num)
-{
-
-	$sort		= 'friends_get_' . $sort;
-	$friends 	= $sort(bp_displayed_user_id(), 5);
-
-	ob_start(); ?>
-
-	<?php if ($friends['users']) { ?>
-
-		<ul class="horiz-gallery">
-
-			<?php
-			$count	 = count($friends['users']);
-			if ($count > $count_num)
-				$count	 = $count_num;
-			?>
-
-			<?php for ($i = 0; $i < $count; ++$i) { ?>
-
-				<li>
-					<a href="<?php echo bp_core_get_user_domain($friends['users'][$i]->id) ?>"><?php echo bp_core_fetch_avatar(array('item_id' => $friends['users'][$i]->id, 'type' => 'thumb')) ?></a>
-					<h5><?php echo bp_core_get_userlink($friends['users'][$i]->id) ?></h5>
-				</li>
-
-			<?php } ?>
-
-			<li class="see-more">
-				<a href="<?php echo trailingslashit(bp_displayed_user_domain() . bp_get_friends_slug()) ?>" class="bb-icon-arrow-right-f"></a>
-			</li>
-
-		</ul>
-
-	<?php } else { ?>
-
-		<div id="message" class="info">
-			<p><?php bp_word_or_name(__("You haven't added any friend connections yet.", 'onesocial'), __("%s hasn't created any friend connections yet.", 'onesocial')) ?></p>
-		</div>
-
-	<?php
-	}
-
-	$friends_list = ob_get_clean();
-
-	return $friends_list;
-}
-
-/**
- * Get IDs of followers or following.
- *
- * @since 1.0.0
- *
- * @param int $user_id ID of user which followers or following we are fetching.
- * @param string What we want followers or following.
- * @param string Sort method.
- *
- * @return array
- */
-function get_follow($user_id, $group, $sort)
-{
-	global $bp, $wpdb;
-
-	$what_to_get = 'leader_id';
-	$from		 = 'follower_id';
-
-	if ($group == 'followers') {
-		$what_to_get = 'follower_id';
-		$from		 = 'leader_id';
-	}
-
-	$sql['select_main'] = "SELECT DISTINCT u.{$what_to_get}";
-
-	$sql['from'] = "FROM {$bp->follow->table_name} u LEFT JOIN {$wpdb->usermeta} um ON um.user_id = u.{$what_to_get}";
-
-	if ('alphabetically' == $sort) {
-		$sql['join_profiledata_alpha'] = "LEFT JOIN {$bp->profile->table_name_data} pd ON u.{$what_to_get} = pd.user_id";
-	}
-
-	$sql['where_active'] = $wpdb->prepare("WHERE u.{$from} = %d", $user_id);
-
-	if ('recently_active' == $sort || 'newest' == $sort) {
-		$sql['where_and'] = $wpdb->prepare("AND um.meta_key = %s", bp_get_user_meta_key('last_activity'));
-	}
-
-	if ('alphabetically' == $sort) {
-		$sql['where_alpha'] = "AND pd.field_id = 1";
-	}
-
-	switch ($sort) {
-		case 'recently_active':
-		default:
-			$sql[]	 = "ORDER BY um.meta_value DESC";
-			break;
-		case 'newest':
-			$sql[]	 = "ORDER BY u.leader_id DESC";
-			break;
-		case 'alphabetically':
-			$sql[]	 = "ORDER BY pd.value ASC";
-			break;
-	}
-
-	return $wpdb->get_col(join(' ', (array) $sql));
-}
-
-/**
- * Display followers or following.
- *
- * @since 1.0.0
- *
- * @param string What we want followers or following.
- *
- * @return html
- */
-add_action('wp_ajax_nopriv_buddyboss_get_follow', 'buddyboss_ajax_follow');
-add_action('wp_ajax_buddyboss_get_follow', 'buddyboss_ajax_follow');
-
-function buddyboss_ajax_follow()
-{
-	if (!class_exists('BP_Follow_Component')) {
-		return;
-	}
-
-	$nonce = $_POST['followNonce'];
-
-	if (!wp_verify_nonce($nonce, 'ajax-follow-nonce'))
-		die('Busted!');
-
-	$sort	 = isset($_POST['sort']) ? $_POST['sort'] : 'recently_active';
-	$group	 = $_POST['group'];
-
-	echo buddyboss_get_follow($sort, $group);
-
-	die();
-}
-
-/**
- * Get the follower/following list
- * @param $group
- * @param string $sort
- * @return string
- */
-function buddyboss_get_follow($group, $sort = 'recently_active')
-{
-
-	global $bp;
-
-	$follow = get_follow(bp_displayed_user_id(), $group, $sort);
-
-	ob_start(); ?>
-
-	<?php if ($follow) { ?>
-
-		<ul class="horiz-gallery">
-
-			<?php
-			$count	 = count($follow);
-			if ($count > 5)
-				$count	 = 5;
-			?>
-
-			<?php for ($i = 0; $i < $count; ++$i) { ?>
-
-				<li>
-					<a href="<?php echo bp_core_get_user_domain($follow[$i]) ?>"><?php echo bp_core_fetch_avatar(array('item_id' => $follow[$i], 'type' => 'thumb')) ?></a>
-					<h5><?php echo bp_core_get_userlink($follow[$i]) ?></h5>
-				</li>
-
-			<?php } ?>
-
-			<li class="see-more">
-				<?php
-				if ($group == 'followers') {
-					$slug = $bp->follow->followers->slug;
-				} else {
-					$slug = $bp->follow->following->slug;
-				}
-				?>
-				<a href="<?php echo trailingslashit(bp_displayed_user_domain() . $slug); ?>" class="bb-icon-arrow-right-f"></a>
-			</li>
-
-		</ul>
-
-	<?php } else { ?>
-
-		<div id="message" class="info">
-			<?php if ($group == 'followers') { ?>
-				<p><?php bp_word_or_name(__("You don't have any followers yet.", 'onesocial'), __("%s doesn't have any followers yet.", 'onesocial')) ?></p>
-			<?php } else { ?>
-				<p><?php bp_word_or_name(__("You don't have any following yet.", 'onesocial'), __("%s doesn't have any following yet.", 'onesocial')) ?></p>
-			<?php } ?>
-		</div>
-
-	<?php
-	}
-
-	$follow_list = ob_get_clean();
-
-	return $follow_list;
-}
-
-/**
- * Output a fancy description of the current forum, including total topics,
- * total replies, and last activity.
- *
- * @since OneSocial 1.0.0
- *
- * @param array $args Arguments passed to alter output
- * @uses bbp_get_single_forum_description() Return the eventual output
- */
-function buddyboss_bbp_single_forum_description($args = '')
-{
-	echo buddyboss_bbp_get_single_forum_description($args);
-}
-
-/**
- * Return a fancy description of the current forum, including total
- * topics, total replies, and last activity.
- *
- * @since OneSocial 1.0.0
- *
- * @param mixed $args This function supports these arguments:
- *  - forum_id: Forum id
- *  - before: Before the text
- *  - after: After the text
- *  - size: Size of the avatar
- * @uses bbp_get_forum_id() To get the forum id
- * @uses bbp_get_forum_topic_count() To get the forum topic count
- * @uses bbp_get_forum_reply_count() To get the forum reply count
- * @uses bbp_get_forum_freshness_link() To get the forum freshness link
- * @uses bbp_get_forum_last_active_id() To get the forum last active id
- * @uses bbp_get_author_link() To get the author link
- * @uses add_filter() To add the 'view all' filter back
- * @uses apply_filters() Calls 'bbp_get_single_forum_description' with
- *                        the description and args
- * @return string Filtered forum description
- */
-function buddyboss_bbp_get_single_forum_description($args = '')
-{
-
-	// Parse arguments against default values
-	$r = bbp_parse_args($args, array(
-		'forum_id'	 => 0,
-		'before'	 => '<div class="bbp-template-notice info"><p class="bbp-forum-description">',
-		'after'		 => '</p></div>',
-		'size'		 => 14,
-		'feed'		 => true
-	), 'get_single_forum_description');
-
-	// Validate forum_id
-	$forum_id = bbp_get_forum_id($r['forum_id']);
-
-	// Unhook the 'view all' query var adder
-	remove_filter('bbp_get_forum_permalink', 'bbp_add_view_all');
-
-	// Get some forum data
-	$tc_int		 = bbp_get_forum_topic_count($forum_id, false);
-	$rc_int		 = bbp_get_forum_reply_count($forum_id, false);
-	$topic_count = bbp_get_forum_topic_count($forum_id);
-	$reply_count = bbp_get_forum_reply_count($forum_id);
-	$last_active = bbp_get_forum_last_active_id($forum_id);
-
-	// Has replies
-	if (!empty($reply_count)) {
-		$reply_text = sprintf(_n('%s reply', '%s replies', $rc_int, 'onesocial'), $reply_count);
-	}
-
-	// Forum has active data
-	if (!empty($last_active)) {
-		$topic_text		 = bbp_get_forum_topics_link($forum_id);
-		$time_since		 = bbp_get_forum_freshness_link($forum_id);
-		$last_updated_by = bbp_get_author_link(array('post_id' => $last_active, 'size' => $r['size']));
-
-		// Forum has no last active data
-	} else {
-		$topic_text = sprintf(_n('%s topic', '%s topics', $tc_int, 'onesocial'), $topic_count);
-	}
-
-	// Forum has active data
-	if (!empty($last_active)) {
-
-		if (!empty($reply_count)) {
-
-			if (bbp_is_forum_category($forum_id)) {
-				$retstr = sprintf(__('<span class="post-num">%1$s and %2$s</span> <span class="last-activity">Last updated by %3$s %4$s</span>', 'onesocial'), $topic_text, $reply_text, $last_updated_by, $time_since);
-			} else {
-				$retstr = sprintf(__('<span class="post-num">%1$s and %2$s</span> <span class="last-activity">Last updated by %3$s %4$s<span>', 'onesocial'), $topic_text, $reply_text, $last_updated_by, $time_since);
-			}
-		} else {
-
-			if (bbp_is_forum_category($forum_id)) {
-				$retstr = sprintf(__('<span class="post-num">%1$s</span> <span class="last-activity">Last updated by %2$s %3$s</span>', 'onesocial'), $topic_text, $last_updated_by, $time_since);
-			} else {
-				$retstr = sprintf(__('<span class="post-num">%1$s</span> <span class="last-activity">Last updated by %2$s %3$s</span>', 'onesocial'), $topic_text, $last_updated_by, $time_since);
-			}
-		}
-
-		// Forum has no last active data
-	} else {
-
-		if (!empty($reply_count)) {
-
-			if (bbp_is_forum_category($forum_id)) {
-				$retstr = sprintf(__('<span class="post-num">%1$s and %2$s</span>', 'onesocial'), $topic_text, $reply_text);
-			} else {
-				$retstr = sprintf(__('<span class="post-num">%1$s and %2$s</span>', 'onesocial'), $topic_text, $reply_text);
-			}
-		} else {
-
-			if (!empty($topic_count)) {
-
-				if (bbp_is_forum_category($forum_id)) {
-					$retstr = sprintf(__('<span class="post-num">%1$s</span>', 'onesocial'), $topic_text);
-				} else {
-					$retstr = sprintf(__('<span class="post-num">%1$s</span>', 'onesocial'), $topic_text);
-				}
-			} else {
-				$retstr = __('<span class="post-num">0 topics and 0 posts</span>', 'onesocial');
-			}
-		}
-	}
-
-	// Add the 'view all' filter back
-	add_filter('bbp_get_forum_permalink', 'bbp_add_view_all');
-
-	// Combine the elements together
-	$retstr = $r['before'] . $retstr . $r['after'];
-
-	// Return filtered result
-	return apply_filters('bbp_get_single_forum_description', $retstr, $r);
-}
-
-/**
- * Output a fancy description of the current topic, including total topics,
- * total replies, and last activity.
- *
- * @since OneSocial 1.0.0
- *
- * @param array $args See {@link bbp_get_single_topic_description()}
- * @uses bbp_get_single_topic_description() Return the eventual output
- */
-function buddyboss_bbp_single_topic_description($args = '')
-{
-	echo buddyboss_bbp_get_single_topic_description($args);
-}
-
-/**
- * Return a fancy description of the current topic, including total topics,
- * total replies, and last activity.
- *
- * @since OneSocial 1.0.0
- *
- * @param mixed $args This function supports these arguments:
- *  - topic_id: Topic id
- *  - before: Before the text
- *  - after: After the text
- *  - size: Size of the avatar
- * @uses bbp_get_topic_id() To get the topic id
- * @uses bbp_get_topic_voice_count() To get the topic voice count
- * @uses bbp_get_topic_reply_count() To get the topic reply count
- * @uses bbp_get_topic_freshness_link() To get the topic freshness link
- * @uses bbp_get_topic_last_active_id() To get the topic last active id
- * @uses bbp_get_reply_author_link() To get the reply author link
- * @uses apply_filters() Calls 'bbp_get_single_topic_description' with
- *                        the description and args
- * @return string Filtered topic description
- */
-function buddyboss_bbp_get_single_topic_description($args = '')
-{
-
-	// Parse arguments against default values
-	$r = bbp_parse_args($args, array(
-		'topic_id'	 => 0,
-		'before'	 => '<div class="bbp-template-notice info"><p class="bbp-topic-description">',
-		'after'		 => '</p></div>',
-		'size'		 => 14
-	), 'get_single_topic_description');
-
-	// Validate topic_id
-	$topic_id = bbp_get_topic_id($r['topic_id']);
-
-	// Unhook the 'view all' query var adder
-	remove_filter('bbp_get_topic_permalink', 'bbp_add_view_all');
-
-	// Build the topic description
-	$vc_int		 = bbp_get_topic_voice_count($topic_id, true);
-	$voice_count = bbp_get_topic_voice_count($topic_id, false);
-	$reply_count = bbp_get_topic_replies_link($topic_id);
-	$time_since	 = bbp_get_topic_freshness_link($topic_id);
-
-	// Singular/Plural
-	$voice_count = sprintf(_n('%s voice', '%s voices', $vc_int, 'onesocial'), $voice_count);
-
-	// Topic has replies
-	$last_reply = bbp_get_topic_last_reply_id($topic_id);
-	if (!empty($last_reply)) {
-		$last_updated_by = bbp_get_author_link(array('post_id' => $last_reply, 'size' => $r['size']));
-		$retstr			 = sprintf(__('<span class="post-num">%1$s, %2$s</span> <span class="last-activity">Last updated by %3$s %4$s</span>', 'onesocial'), $reply_count, $voice_count, $last_updated_by, $time_since);
-
-		// Topic has no replies
-	} elseif (!empty($voice_count) && !empty($reply_count)) {
-		$retstr = sprintf(__('<span class="post-num">%1$s, %2$s</span>', 'onesocial'), $voice_count, $reply_count);
-
-		// Topic has no replies and no voices
-	} elseif (empty($voice_count) && empty($reply_count)) {
-		$retstr = sprintf(__('<span class="post-num">0 replies</span>', 'onesocial'), $voice_count, $reply_count);
-	}
-
-	// Add the 'view all' filter back
-	add_filter('bbp_get_topic_permalink', 'bbp_add_view_all');
-
-	// Combine the elements together
-	$retstr = $r['before'] . $retstr . $r['after'];
-
-	// Return filtered result
-	return apply_filters('bbp_get_single_topic_description', $retstr, $r);
-}
-
-/**
- * Add @handle to forum replies
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-function buddyboss_add_handle()
-{
-	echo '<span class="bbp-user-nicename"><span class="handle-sign">@</span>' . bp_core_get_username(bbp_get_reply_author_id(bbp_get_reply_id())) . '</span>';
-}
-
-add_action('bbp_theme_after_reply_author_details', 'buddyboss_add_handle');
-
-
-/**
- * Remove "Submenu" from profile navigation
- *
- * @since Creative 1.0.0
- *
- */
-function onesocial_bp_remove_nav_item()
-{
-	if (function_exists('bp_core_remove_subnav_item')) {
-		global $bp;
-		bp_core_remove_subnav_item($bp->profile->slug, 'change-cover-image');
-	}
-}
-add_action('wp', 'onesocial_bp_remove_nav_item');
 
 /* * **************************** ADMIN BAR FUNCTIONS ***************************** */
 
@@ -1800,25 +926,6 @@ function buddyboss_strip_unnecessary_admin_bar_nodes(&$wp_admin_bar)
 			}
 		}
 
-		if ($node->id == "my-account-activity-personal") {
-			if ($bp->current_component == "activity" and $bp->current_action == "just-me" and bp_displayed_user_id() == get_current_user_id()) {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-			}
-		}
-
-		if ($node->id == "my-account-xprofile-public") {
-			if ($bp->current_component == "profile" and $bp->current_action == "public" and bp_displayed_user_id() == get_current_user_id()) {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-			}
-		}
-
-		if ($node->id == "my-account-messages-inbox") {
-			$bb_adminbar_messages[] = $node;
-			if ($bp->current_component == "messages" and $bp->current_action == "inbox") {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-			}
-		}
-
 		//adding active for child link
 		if ($node->id == "my-account-settings-general") {
 			if (
@@ -1828,14 +935,6 @@ function buddyboss_strip_unnecessary_admin_bar_nodes(&$wp_admin_bar)
 				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
 			}
 		}
-
-		/*
-		  //add active class if it has viewing page href
-		  if(!empty($node->href)) {
-		  if("http://".$current_href == $node->href AND "https://".$current_href == $node->href ) {
-		  buddyboss_adminbar_item_add_active($wp_admin_bar,$name);
-		  }
-		  } */
 
 
 		//add active class if it has viewing page href
@@ -2017,34 +1116,6 @@ function buddyboss_adminbar_messages()
 }
 
 /**
- * Correct notification count in header notification
- *
- * @since OneSocial 1.0.0
- *
- */
-function buddyboss_js_correct_notification_count()
-{
-	if (!is_user_logged_in() || !buddyboss_is_bp_active() || !function_exists('bp_notifications_get_all_notifications_for_user')) {
-		return;
-	}
-
-	$notifications = bp_notifications_get_notifications_for_user(bp_loggedin_user_id());
-
-	if (!empty($notifications)) {
-		$count = count($notifications);
-	?>
-		<script type="text/javascript">
-			jQuery('document').ready(function($) {
-				$('.header-notifications .notification-link span.alert').html('<?php echo $count; ?>');
-			});
-		</script>
-		<?php
-	}
-}
-
-add_action('wp_footer', 'buddyboss_js_correct_notification_count');
-
-/**
  * Heartbeat settings
  *
  * @since OneSocial 1.0.0
@@ -2057,61 +1128,6 @@ function buddyboss_heartbeat_settings($settings)
 }
 
 add_filter('heartbeat_settings', 'buddyboss_heartbeat_settings');
-
-/**
- * Sending a heartbeat for notification updates
- *
- * @since OneSocial 1.0.0
- *
- */
-function buddyboss_notification_count_heartbeat($response, $data, $screen_id)
-{
-	$notifications = array();
-
-	if (function_exists("bp_friend_get_total_requests_count"))
-		$friend_request_count	 = bp_friend_get_total_requests_count();
-	if (function_exists("bp_notifications_get_all_notifications_for_user"))
-		$notifications			 = bp_notifications_get_all_notifications_for_user(get_current_user_id());
-
-	$notification_count = 0;
-
-	if (function_exists("bp_notifications_get_all_notifications_for_user")) {
-		$notifications = bp_notifications_get_notifications_for_user(get_current_user_id(), 'object');
-		$notification_count		 = $notifications ? count($notifications) : 0;
-		$notification_content	 = '';
-		if (!empty($notifications)) {
-			foreach ((array) $notifications as $notification) {
-				if (is_object($notification)) {
-					if (isset($notification->href) && isset($notification->content)) {
-						//$notification_content .= "<a href='". esc_url( $notification['link'] ) ."'>{$notification['text']}</a>";
-						$notification_content .= '<li>';
-						$notification_content .= '<a href="' . $notification->href . '"><span class="notification-icon ' . $notification->component_name . ' ' . $notification->component_action . '"></span><span class="notification-content">' . $notification->content . '</span></a>';
-						$notification_content .=  '</li>';
-					}
-				} else {
-					$notification_content .= $notification;
-				}
-			}
-		}
-
-		if (empty($notification_content))
-			$notification_content = '<a href="' . bp_loggedin_user_domain() . '' . BP_NOTIFICATIONS_SLUG . '/">' . __("No new notifications", "onesocial") . '</a>';
-	}
-	if (function_exists("messages_get_unread_count"))
-		$unread_message_count = messages_get_unread_count();
-
-	$response['bb_notification_count'] = array(
-		'friend_request'		 => @intval($friend_request_count),
-		'notification'			 => @intval($notification_count),
-		'notification_content'	 => @$notification_content,
-		'unread_message'		 => @intval($unread_message_count)
-	);
-
-	return $response;
-}
-
-// Logged in users:
-add_filter('heartbeat_received', 'buddyboss_notification_count_heartbeat', 10, 3);
 
 
 /**
@@ -2130,131 +1146,7 @@ function post_comment_form_avatar()
 	printf('<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())), get_avatar(get_current_user_id(), 85, '', get_the_author()));
 }
 
-/**
- * Places "Compose" to the first place on messages navigation links
- *
- * @since OneSocial 1.0.0
- *
- */
-function buddyboss_change_bp_tag_position()
-{
-	global $bp;
-	$version_compare = version_compare(BP_VERSION, '2.6', '<');
-	if ($version_compare) {
-		$bp->bp_options_nav['messages']['compose']['position'] = 10;
-		$bp->bp_options_nav['messages']['inbox']['position']	 = 11;
-		$bp->bp_options_nav['messages']['sentbox']['position'] = 30;
-		$bp->bp_options_nav['messages']['notices']['position'] = 40;
-	} else {
-		if (!empty($bp->messages)) {
-			$subnavs = array('compose' => 10, 'inbox' => 11, 'sentbox' => 30, 'notices' => 40,);
-			foreach ($subnavs as $subnav => $pos) {
-				$nav_args = array('position' => $pos);
-				$bp->members->nav->edit_nav($nav_args, $subnav, 'messages');
-			}
-		}
-	}
-}
 
-add_action('bp_init', 'buddyboss_change_bp_tag_position', 999);
-
-
-
-if (!function_exists('buddyboss_get_options_nav')) :
-
-	/**
-	 * Messages navigation
-	 *
-	 * @since Education 1.0.0
-	 * @since 1.1.2 updated
-	 */
-	function buddyboss_get_options_nav($parent_slug = '')
-	{
-		$bp = buddypress();
-
-		// If we are looking at a member profile, then the we can use the current
-		// component as an index. Otherwise we need to use the component's root_slug
-		$component_index = !empty($bp->displayed_user) ? bp_current_component() : bp_get_root_slug(bp_current_component());
-		$selected_item	 = bp_current_action();
-
-		if (!bp_is_single_item()) {
-			$options_nav = buddyboss_bp_options_nav($component_index);
-			if (empty($options_nav)) {
-				return false;
-			} else {
-				$the_index = $component_index;
-			}
-		} else {
-			$current_item = bp_current_item();
-
-			if (!empty($parent_slug)) {
-				$current_item	 = $parent_slug;
-				$selected_item	 = bp_action_variable(0);
-			}
-
-			$options_nav = buddyboss_bp_options_nav($current_item);
-			if (empty($options_nav)) {
-				return false;
-			} else {
-				$the_index = $current_item;
-			}
-		}
-		global $wpdb;
-
-		$user_id = get_current_user_id();
-
-		$sentbox = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_messages} WHERE sender_id = " . $user_id);
-		$inbox	 = '';
-		$starred = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_recipients} m LEFT JOIN {$bp->messages->table_name_meta} mt ON m.id=mt.message_id WHERE mt.meta_key = 'starred_by_user' AND mt.meta_value = {$user_id}");
-		$notices = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_notices}");
-
-		//Is buddyboss-inbox activated?
-		$bb_inbox_active = function_exists('buddyboss_messages') ? true : false;
-
-		//let buddyboss inbox plugin to add message count
-		$unread_count = (int) $wpdb->get_var($wpdb->prepare("SELECT SUM(unread_count) FROM {$bp->messages->table_name_recipients} WHERE user_id = %d AND is_deleted = 0 AND sender_only = 0", $user_id));
-
-		if (!$bb_inbox_active) {
-			$inbox = $unread_count;
-		}
-
-		$number_of_items = array('<i class="bb-icon-messages"></i>', $inbox, $starred, $sentbox, $notices);
-
-		//Fill 0 for vacant draft count
-		if ($bb_inbox_active) {
-			$user_drafts = bbm_get_user_draft_ids();
-			if (empty($user_drafts)) {
-				$number_of_items[] = 0;
-			}
-		}
-
-		$i = 0;
-		// Loop through each navigation item
-		$subnav_items = (array) buddyboss_bp_options_nav($the_index);
-		foreach ($subnav_items as $subnav_item) {
-			if (empty($subnav_item['user_has_access'])) {
-				$i++;
-				continue;
-			}
-
-			// If the current action or an action variable matches the nav item id, then add a highlight CSS class.
-			if ($subnav_item['slug'] == $selected_item) {
-				$selected = ' class="current selected"';
-			} else {
-				$selected = '';
-			}
-
-			// List type depends on our current component
-			$list_type = bp_is_group() ? 'groups' : 'personal';
-
-			// echo out the final list item
-			echo apply_filters('bb_get_options_nav_' . $subnav_item['css_id'], '<li id="' . $subnav_item['css_id'] . '-' . $list_type . '-li" ' . $selected . '><a id="' . $subnav_item['css_id'] . '" href="' . $subnav_item['link'] . '">' . $subnav_item['name'] . '<span>' . $number_of_items[$i] . '</span></a></li>', $subnav_item, $selected_item);
-
-			$i++;
-		}
-	}
-
-endif;
 
 /**
  * Messages date function
@@ -2272,7 +1164,7 @@ function buddyboss_format_time($time, $just_date = true, $localize_time = true)
 	// Get GMT offset from root blog
 	$root_blog_offset = false;
 	if (!empty($localize_time)) {
-		$root_blog_offset = get_blog_option(bp_get_root_blog_id(), 'gmt_offset');
+		$root_blog_offset = get_option('gmt_offset');
 	}
 
 	// Calculate offset time
@@ -2290,154 +1182,8 @@ function buddyboss_format_time($time, $just_date = true, $localize_time = true)
 		$date = sprintf(__('%1$s at %2$s', 'buddypress'), $date, $time);
 	}
 
-	return apply_filters('bp_format_time', $date);
+	return $date;
 }
-
-if (!function_exists('bb_get_new_group_invite_friend_list')) :
-
-	/**
-	 * Overrides buddypress function bp_get_new_group_invite_friend_list
-	 *
-	 * @since OneSocial Theme 1.0.0
-	 *
-	 */
-	function bb_get_new_group_invite_friend_list($args = '')
-	{
-		$bp = buddypress();
-
-		if (!bp_is_active('friends')) {
-			return false;
-		}
-
-		$defaults = array(
-			'group_id'	 => false,
-			'separator'	 => 'li'
-		);
-
-		$r = wp_parse_args($args, $defaults);
-		extract($r, EXTR_SKIP);
-
-		if (empty($group_id)) {
-			$group_id = !empty($bp->groups->new_group_id) ? $bp->groups->new_group_id : $bp->groups->current_group->id;
-		}
-
-		if ($friends = friends_get_friends_invite_list(bp_loggedin_user_id(), $group_id)) {
-			$invites = groups_get_invites_for_group(bp_loggedin_user_id(), $group_id);
-
-			for ($i = 0, $count = count($friends); $i < $count; ++$i) {
-				$checked = '';
-
-				if (!empty($invites)) {
-					if (in_array($friends[$i]['id'], $invites)) {
-						$checked = ' checked="checked"';
-					}
-				}
-
-				$items[] = '<' . $separator . '><input' . $checked . ' type="checkbox" name="friends[]" id="f-' . $friends[$i]['id'] . '" value="' . esc_attr($friends[$i]['id']) . '" /><strong>' . bp_core_fetch_avatar(array('item_id' => $friends[$i]['id'], 'type' => 'full', 'width' => '50', 'height' => '50')) . $friends[$i]['full_name'] . '</strong></' . $separator . '>';
-			}
-		}
-
-		if (!empty($items)) {
-			return implode("\n", (array) $items);
-		}
-
-		return false;
-	}
-
-endif;
-
-
-/**
- * Add title to notes
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_action('incom_cancel_x_before', 'onesocial_add_notes_title');
-add_action('sap_incom_cancel_x_before', 'onesocial_add_notes_title');
-
-function onesocial_add_notes_title()
-{
-	echo '<span class="notes-title">' . __('Notes', 'onesocial') . '</span>';
-}
-
-/**
- * Remove plugin info
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_filter('incom_plugin_info', 'onesocial_remove_plugin_info');
-add_filter('sap_incom_plugin_info', 'onesocial_remove_plugin_info');
-
-function onesocial_remove_plugin_info()
-{
-	return '';
-}
-
-/**
- * Remove plugin info
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_filter('incom_comment_form_args', 'onesocial_fileter_note_form');
-add_filter('sap_incom_comment_form_args', 'onesocial_fileter_note_form');
-
-function onesocial_fileter_note_form()
-{
-	$user			 = wp_get_current_user();
-	$user_identity	 = $user->exists() ? $user->display_name : '';
-
-	$args = array(
-		'id_form'				 => 'incom-commentform',
-		'comment_form_before'	 => '',
-		'comment_notes_before'	 => '',
-		'comment_notes_after'	 => '',
-		'label_submit'			 => __('Save', 'onesocial'),
-		'title_reply'			 => '',
-		'title_reply_to'		 => '',
-		'logged_in_as'			 => '<p class="logged-in-as">' .
-			sprintf(__('Logged in as <a href="%1$s">%2$s</a>.', 'onesocial'), admin_url('profile.php'), $user_identity) . '</p>',
-		'user_identity'			 => $user_identity,
-		'comment_field'			 => '<p class="comment-form-comment"><label for="comment">' . $user_identity .
-			'</label><textarea id="sap-comment" name="comment" cols="45" rows="2" aria-required="true" placeholder="' . __('Leave a note', 'onesocial') . '">' .
-			'</textarea></p>',
-	);
-
-	return $args;
-}
-
-/**
- * Returns xprofile fields list
- *
- * @since OneSocial Theme 1.0.0
- */
-function buddyboss_customizer_xprofile_field_choices()
-{
-	$options = array();
-
-	if (function_exists('bp_is_active')) {
-		if (bp_is_active('xprofile') && bp_has_profile(array('user_id' => bp_loggedin_user_id()))) {
-			while (bp_profile_groups()) {
-				bp_the_profile_group();
-				if (bp_profile_group_has_fields()) {
-					while (bp_profile_fields()) {
-						bp_the_profile_field();
-						$options[bp_get_the_profile_field_id()] = bp_get_the_profile_field_name();
-					}
-				}
-			}
-		}
-	}
-
-	return $options;
-}
-
-/**
- * Remove Output the "Add Friend" button in the member loop.
- */
-remove_action('bp_directory_members_actions', 'bp_member_add_friend_button');
 
 /**
  * Estimate time required to read the article
@@ -2459,34 +1205,6 @@ function boss_estimated_reading_time($post_content)
 
 	return $estimated_time;
 }
-
-/**
- * Change group excerpt length
- * group-description
- */
-function boss_custom_group_excerpt()
-{
-	global $groups_template;
-
-	$group = $groups_template->group;
-
-	if (isset($group->description)) {
-		return bp_create_excerpt($group->description, 125);
-	}
-}
-
-add_filter('bp_get_group_description_excerpt', 'boss_custom_group_excerpt');
-
-// Search default text
-if (!function_exists('boss_bp_get_search_default_text')) {
-
-	function boss_bp_get_search_default_text($param)
-	{
-		return __('Type to Search', 'onesocial');
-	}
-}
-
-add_filter('bp_get_search_default_text', 'boss_bp_get_search_default_text');
 
 // Custom Excerpt
 if (!function_exists('onesocial_custom_excerpt')) {
@@ -2513,14 +1231,6 @@ function onesocial_excerpt_more()
 
 add_filter('excerpt_more', 'onesocial_excerpt_more');
 
-// BuddyPress excerpt append.
-function onesocial_bp_excerpt_append_text()
-{
-	return '&hellip;';
-}
-
-add_filter('bp_excerpt_append_text', 'onesocial_bp_excerpt_append_text');
-
 function onesocial_custom_excerpt_length()
 {
 	return 15;
@@ -2546,7 +1256,7 @@ if (!function_exists('buddyboss_comment')) {
 		switch ($comment->comment_type) {
 			case 'pingback':
 			case 'trackback':
-		?>
+	?>
 
 				<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
 					<p><?php _e('Pingback:', 'onesocial'); ?> <?php comment_author_link(); ?> <?php edit_comment_link(__('(Edit)', 'onesocial'), '<span class="edit-link">', '</span>'); ?></p>
@@ -2594,55 +1304,12 @@ if (!function_exists('buddyboss_comment')) {
 							<?php comment_reply_link(array_merge($args, array('reply_text' => __('Reply <span>&darr;</span>', 'onesocial'), 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
 						</div><!-- .reply -->
 					</article><!-- #comment-## -->
-				<?php
+	<?php
 				break;
 		} // end comment_type check
 	}
 }
 
-function boss_get_new_group_invite_friend_list($args = '')
-{
-	$bp			 = buddypress();
-	$alt_avatar	 = esc_url(get_stylesheet_directory_uri()) . '/images/avatar-member.png';
-
-	if (!bp_is_active('friends')) {
-		return false;
-	}
-
-	$defaults = array(
-		'group_id'	 => false,
-		'separator'	 => 'li'
-	);
-
-	$r = wp_parse_args($args, $defaults);
-	extract($r, EXTR_SKIP);
-
-	if (empty($group_id)) {
-		$group_id = !empty($bp->groups->new_group_id) ? $bp->groups->new_group_id : $bp->groups->current_group->id;
-	}
-
-	if ($friends = friends_get_friends_invite_list(bp_loggedin_user_id(), $group_id)) {
-		$invites = groups_get_invites_for_group(bp_loggedin_user_id(), $group_id);
-
-		for ($i = 0, $count = count($friends); $i < $count; ++$i) {
-			$checked = '';
-
-			if (!empty($invites)) {
-				if (in_array($friends[$i]['id'], $invites)) {
-					$checked = ' checked="checked"';
-				}
-			}
-
-			$items[] = '<' . $separator . '><input' . $checked . ' type="checkbox" name="friends[]" id="f-' . $friends[$i]['id'] . '" value="' . esc_attr($friends[$i]['id']) . '" /> ' . bp_get_activity_avatar(array('user_id' => $friends[$i]['id'], 'width' => '50', 'alt' => $alt_avatar)) . $friends[$i]['full_name'] . '</' . $separator . '>';
-		}
-	}
-
-	if (!empty($items)) {
-		return implode("\n", (array) $items);
-	}
-
-	return false;
-}
 
 function onesocial_theme_wrapper_start()
 {
@@ -2701,297 +1368,68 @@ if (!function_exists('buddyboss_admin_bar_remove_links')) {
 	add_action('wp_before_admin_bar_render', 'buddyboss_admin_bar_remove_links');
 }
 
+/**
+ * Return the tags onesocial_trim_excerpt allow
+ * @return string
+ */
+function onesocial_excerpt_allowedtags()
+{
+	// Add custom tags to this string
+	return '<em>,<i>,<br>,<p>,<a>';
+}
 
 /**
- * Output markup listing group admins.
- *
- * @param object|bool $group Optional. Group object.
- *                           Default: current group in loop.
+ * Return OneSocial custom excerpt that will allow few tags
+ * @param $wpse_excerpt
+ * @return mixed|string|void
  */
-if (!function_exists('buddyboss_group_list_admins')) {
+function onesocial_trim_excerpt($wpse_excerpt)
+{
 
-	function buddyboss_group_list_admins($group = false)
-	{
-		global $groups_template;
+	$raw_excerpt = $wpse_excerpt;
 
-		if (empty($group)) {
-			$group = &$groups_template->group;
-		}
+	if ('' == $wpse_excerpt) {
 
-		// fetch group admins if 'populate_extras' flag is false
-		if (empty($group->args['populate_extras'])) {
-			$query = new BP_Group_Member_Query(array(
-				'group_id'	 => $group->id,
-				'group_role' => 'admin',
-				'type'		 => 'first_joined',
-			));
+		$wpse_excerpt = get_the_content('');
+		$wpse_excerpt = strip_shortcodes($wpse_excerpt);
+		$wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
+		$wpse_excerpt = str_replace(']]>', ']]>', $wpse_excerpt);
+		$wpse_excerpt = strip_tags($wpse_excerpt, onesocial_excerpt_allowedtags()); /*IF you need to allow just certain tags. Delete if all tags are allowed */
 
-			if (!empty($query->results)) {
-				$group->admins = $query->results;
-			}
-		}
+		//Set the excerpt word count and only break after sentence is complete.
+		$excerpt_length 	= apply_filters('excerpt_length', 55);
+		$tokens 			= array();
+		$excerpt_output 	= '';
+		$count 				= 0;
 
-		if (!empty($group->admins)) {
-				?>
-				<ul id="group-admins">
-					<?php foreach ((array) $group->admins as $admin) { ?>
-						<li>
-							<a class="group-admin-container" href="<?php echo bp_core_get_user_domain($admin->user_id, $admin->user_nicename, $admin->user_login) ?>">
-								<?php echo bp_core_fetch_avatar(array('item_id' => $admin->user_id, 'email' => $admin->user_email, 'alt' => sprintf(__('Profile picture of %s', 'buddypress'), bp_core_get_user_displayname($admin->user_id)))) ?>
-								<h5 class="group-admin-name"><?php echo bp_core_get_user_displayname($admin->user_id); ?></h5>
-							</a>
-						</li>
-					<?php } ?>
-				</ul>
-			<?php } else { ?>
-				<span class="activity"><?php _e('No Admins', 'onesocial') ?></span>
-			<?php } ?>
-			<?php
-		}
-	}
+		// Divide the string into tokens; HTML tags, or words, followed by any whitespace
+		preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
 
-	/**
-	 * Output markup listing group mod.
-	 *
-	 * @param object|bool $group Optional. Group object.
-	 *                           Default: current group in loop.
-	 */
-	if (!function_exists('buddyboss_group_list_mods')) {
-
-		function buddyboss_group_list_mods($group = false)
-		{
-			global $groups_template;
-
-			if (empty($group)) {
-				$group = &$groups_template->group;
-			}
-
-			// fetch group mods if 'populate_extras' flag is false
-			if (empty($group->args['populate_extras'])) {
-				$query = new BP_Group_Member_Query(array(
-					'group_id'	 => $group->id,
-					'group_role' => 'mod',
-					'type'		 => 'first_joined',
-				));
-
-				if (!empty($query->results)) {
-					$group->mods = $query->results;
-				}
-			}
-
-			if (!empty($group->mods)) :
-			?>
-
-				<ul id="group-mods">
-
-					<?php foreach ((array) $group->mods as $mod) { ?>
-
-						<li>
-							<a href="<?php echo bp_core_get_user_domain($mod->user_id, $mod->user_nicename, $mod->user_login) ?>"><?php echo bp_core_fetch_avatar(array('item_id' => $mod->user_id, 'email' => $mod->user_email, 'alt' => sprintf(__('Profile picture of %s', 'buddypress'), bp_core_get_user_displayname($mod->user_id)))) ?></a>
-							<h5 class="group-admin-name"><?php echo bp_core_get_user_displayname($mod->user_id); ?></h5>
-						</li>
-
-					<?php } ?>
-
-				</ul>
-
-			<?php else : ?>
-
-				<span class="activity"><?php _e('No Mods', 'onesocial') ?></span>
-
-			<?php
-			endif;
-		}
-	}
-
-	if (!function_exists('onesocial_xprofile_cover_image')) {
-
-		function onesocial_xprofile_cover_image($settings = array())
-		{
-			$settings['height'] = '350';
-
-			return $settings;
-		}
-
-		add_filter('bp_before_groups_cover_image_settings_parse_args', 'onesocial_xprofile_cover_image', 10, 1);
-	}
-
-	function onesocial_categorized_blog()
-	{
-		if (false === ($all_the_cool_cats = get_transient('onesocial_categories'))) {
-			// Create an array of all the categories that are attached to posts.
-			$all_the_cool_cats = get_categories(array(
-				'fields'	 => 'ids',
-				'hide_empty' => 1,
-				// We only need to know if there is more than one category.
-				'number'	 => 2,
-			));
-
-			// Count the number of categories that are attached to the posts.
-			$all_the_cool_cats = count($all_the_cool_cats);
-
-			set_transient('onesocial_categories', $all_the_cool_cats);
-		}
-
-		if ($all_the_cool_cats > 1) {
-			// This blog has more than 1 category so tmsrvd_categorized_blog should return true.
-			return true;
-		} else {
-			// This blog has only 1 category so tmsrvd_categorized_blog should return false.
-			return false;
-		}
-	}
-
-	function onesocial_entry_categories()
-	{
-		/* translators: used between list items, there is a space after the comma */
-		$categories_list = get_the_category_list(__(', ', 'onesocial'));
-		if ($categories_list && onesocial_categorized_blog()) {
-			echo sprintf('<span class="cat-links"> %s %2$s</span>', __('in', 'onesocial'), $categories_list);
-		}
-	}
-
-	function onesocial_posted_on()
-	{
-		printf('<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url(get_permalink()), esc_attr(get_the_time()), esc_attr(get_the_date('c')), esc_html(get_the_date('M j, Y')));
-	}
-
-	global $BUDDYBOSS_BM;
-
-
-	if (!function_exists('buddyboss_bp_options_nav')):
-		/**
-		 * Support legacy buddypress nav items manipulation
-		 */
-		function buddyboss_bp_options_nav($component_index = false, $current_item = false)
-		{
-			$secondary_nav_items = false;
-
-			$bp = buddypress();
-
-			$version_compare = version_compare(BP_VERSION, '2.6', '<');
-			if ($version_compare) {
-				/**
-				 * @todo In future updates, remove the version compare check completely and get rid of legacy code
-				 */
-
-				//legacy code
-				$secondary_nav_items = isset($bp->bp_options_nav[$component_index]) ? $bp->bp_options_nav[$component_index] : false;
-			} else {
-				//new navigation apis
-
-				// Default to the Members nav.
-				if (!bp_is_single_item()) {
-					$secondary_nav_items = $bp->members->nav->get_secondary(array('parent_slug' => $component_index));
-				} else {
-					$component_index =  $component_index ? $component_index : bp_current_component();
-					$current_item = $current_item ? $current_item : bp_current_item();
-
-					// If the nav is not defined by the parent component, look in the Members nav.
-					if (! isset($bp->{$component_index}->nav)) {
-						$secondary_nav_items = $bp->members->nav->get_secondary(array('parent_slug' => $current_item));
-					} else {
-						$secondary_nav_items = $bp->{$component_index}->nav->get_secondary(array('parent_slug' => $current_item));
-					}
-				}
-			}
-
-			return $secondary_nav_items;
-		}
-	endif;
-
-	// BuddyPress Group Email Subscription support
-	if (function_exists('ass_loader')) {
-		remove_action('bp_directory_groups_actions', 'ass_group_subscribe_button');
-		add_action('bb_after_group_content', 'ass_group_subscribe_button');
-	}
-
-	//Search Form for Groups Manage Members Screens (Trac https://buddypress.trac.wordpress.org/ticket/6385)
-	add_action('bp_before_group_admin_form',    'onesocial_theme_group_manage_members_add_search', 5);
-
-	/**
-	 * Add a search box to a single group's manage members screen.
-	 *
-	 * @since 2.7.0
-	 *
-	 * @return string HTML for the search form.
-	 */
-	function onesocial_theme_group_manage_members_add_search()
-	{
-		if (bp_is_action_variable('manage-members')) :
-
-			//Remove legacy search box to a single group's manage members screen.
-			remove_action('bp_before_group_admin_form', 'bp_legacy_theme_group_manage_members_add_search');
-			?>
-			<div id="members-dir-search" class="dir-search no-ajax boss-search-wrapper" role="search">
-				<?php bp_directory_members_search_form(); ?>
-			</div>
-	<?php
-		endif;
-	}
-
-	/**
-	 * Return the tags onesocial_trim_excerpt allow
-	 * @return string
-	 */
-	function onesocial_excerpt_allowedtags()
-	{
-		// Add custom tags to this string
-		return '<em>,<i>,<br>,<p>,<a>';
-	}
-
-	/**
-	 * Return OneSocial custom excerpt that will allow few tags
-	 * @param $wpse_excerpt
-	 * @return mixed|string|void
-	 */
-	function onesocial_trim_excerpt($wpse_excerpt)
-	{
-
-		$raw_excerpt = $wpse_excerpt;
-
-		if ('' == $wpse_excerpt) {
-
-			$wpse_excerpt = get_the_content('');
-			$wpse_excerpt = strip_shortcodes($wpse_excerpt);
-			$wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
-			$wpse_excerpt = str_replace(']]>', ']]>', $wpse_excerpt);
-			$wpse_excerpt = strip_tags($wpse_excerpt, onesocial_excerpt_allowedtags()); /*IF you need to allow just certain tags. Delete if all tags are allowed */
-
-			//Set the excerpt word count and only break after sentence is complete.
-			$excerpt_length 	= apply_filters('excerpt_length', 55);
-			$tokens 			= array();
-			$excerpt_output 	= '';
-			$count 				= 0;
-
-			// Divide the string into tokens; HTML tags, or words, followed by any whitespace
-			preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
-
-			foreach ($tokens[0] as $token) {
-
-				if ($count >= $excerpt_length) {
-					// Limit reached, continue until , ; ? . or ! occur at the end
-					$excerpt_output .= trim($token);
-					break;
-				}
-
-				// Add words to complete sentence
-				$count++;
-
-				// Append what's left of the token
-				$excerpt_output .= $token;
-			}
-
-			$wpse_excerpt = trim(force_balance_tags($excerpt_output));
+		foreach ($tokens[0] as $token) {
 
 			if ($count >= $excerpt_length) {
-				$excerpt_end 	= '...';
-				$excerpt_more 	= apply_filters('excerpt_more', ' ' . $excerpt_end);
-				$wpse_excerpt 	.= $excerpt_more; /*Add read more in new paragraph */
+				// Limit reached, continue until , ; ? . or ! occur at the end
+				$excerpt_output .= trim($token);
+				break;
 			}
 
-			return $wpse_excerpt;
+			// Add words to complete sentence
+			$count++;
+
+			// Append what's left of the token
+			$excerpt_output .= $token;
 		}
 
-		return apply_filters('onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt);
+		$wpse_excerpt = trim(force_balance_tags($excerpt_output));
+
+		if ($count >= $excerpt_length) {
+			$excerpt_end 	= '...';
+			$excerpt_more 	= apply_filters('excerpt_more', ' ' . $excerpt_end);
+			$wpse_excerpt 	.= $excerpt_more; /*Add read more in new paragraph */
+		}
+
+		return $wpse_excerpt;
 	}
+
+	return apply_filters('onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt);
+}
