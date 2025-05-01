@@ -64,12 +64,6 @@ class CCLUK_Customizer
 			$this->homepage_banner(140);
 
 			/*------------------------------------------------------------------------*/
-			/*  Homepage: Join
-	    /*------------------------------------------------------------------------*/
-
-			$this->homepage_join(150);
-
-			/*------------------------------------------------------------------------*/
 			/*  Homepage: Newsletter signup
 	    /*------------------------------------------------------------------------*/
 
@@ -413,73 +407,6 @@ class CCLUK_Customizer
 		}
 	}
 
-	private function homepage_join($priority = 160)
-	{
-
-		$section = 'homepage_join';
-
-		$this->add_homepage_panel(
-			$section,
-			esc_html__('Homepage: Join', 'onesocial'),
-			esc_html__('The join CCL UK section on the homepage', 'onesocial'),
-			$priority
-		);
-
-		$this->standard_settings($section, 'join');
-
-		// Title
-		$this->add_setting(
-			$section . '_title',
-			'sanitize_text_field',
-			sprintf(__('Join %s', 'onesocial'), get_bloginfo('name'))
-		);
-
-		$this->customize->add_control(
-			$section . '_title',
-			array(
-				'label' 		=> esc_html__('Section Title', 'onesocial'),
-				'section' 		=> $section . '_settings',
-				'description'   => '',
-			)
-		);
-
-		// Source page settings
-		$this->add_setting(
-			$section . '_source_page',
-			'sanitize_number'
-		);
-
-		$this->customize->add_control(
-			$section . '_source_page',
-			array(
-				'label'     	=> esc_html__('Button Link', 'onesocial'),
-				'section' 		=> $section . '_settings',
-				'type'          => 'select',
-				'priority'      => 10,
-				'choices'       => $this->option_pages,
-				'description'   => esc_html__('Select a page to link to.', 'onesocial'),
-			)
-		);
-
-		$this->add_content_section($section);
-
-		$this->add_setting(
-			$section . '_text',
-			'sanitize_text',
-			__('If you want to be part of a movement lobbying for effective action on climate change, click the button and join us.', 'onesocial')
-		);
-
-		$this->customize->add_control(new CCLUK_Editor_Custom_Control(
-			$this->customize,
-			$section . '_text',
-			array(
-				'label' 		=> esc_html__('Text', 'onesocial'),
-				'section' 		=> $section . '_content',
-				'description'   => __('Text that will go alongside the join button', 'onesocial')
-			)
-		));
-	}
-
 	private function homepage_newsletter($priority = 160)
 	{
 
@@ -671,7 +598,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_intro',
 			array(
-				'label' 		=> sprintf(esc_html__('Introduction', 'onesocial'), $box),
+				'label' 		=> esc_html__('Introduction', 'onesocial'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)

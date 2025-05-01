@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The template for displaying WordPress pages, including HTML from BuddyPress templates.
+ * The template for displaying the front page of the site
  *
  * @package WordPress
  * @subpackage OneSocial Theme

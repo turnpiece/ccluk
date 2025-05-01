@@ -20,14 +20,13 @@
 global $post;
 
 $post_infinite			 = true;
-$boss_activity_infinite	 = true;
 
 // don't remove this filter, marketplace plugin uses it
-$show_footer = apply_filters('onesocial_show_footer', !((is_archive() || is_home()) && $post_infinite && !(function_exists('is_shop') && is_shop()) && !(function_exists('is_product_category') && is_product_category()) && !(function_exists('is_product_tag') && is_product_tag())) || ($activity == 'activity' && $boss_activity_infinite));
+$show_footer = apply_filters('onesocial_show_footer', !((is_archive() || is_home()) && $post_infinite));
 
 if ($show_footer) : ?>
 
-	<footer id="colophon" class="<?php echo $style; ?>">
+	<footer id="colophon">
 
 		<?php get_template_part('template-parts/footer', 'widgets'); ?>
 

@@ -2,7 +2,6 @@
 
 /**
  * @package OneSocial Child Theme
- * The parent theme functions are located at /onesocial/buddyboss-inc/theme-functions.php
  * Add your own functions in this file.
  */
 
@@ -10,15 +9,15 @@ define('CCLUK_DEBUGGING', false);
 define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 
 /**
- * To view theme functions, navigate to /buddyboss-inc/theme.php
+ * To view theme functions, navigate to /inc/theme.php
  *
  * @package OneSocial Theme
  */
-$init_file = get_stylesheet_directory() . '/buddyboss-inc/init.php';
+$init_file = get_stylesheet_directory() . '/inc/init.php';
 
 if (!file_exists($init_file)) {
 
-    $err_msg = __('OneSocial cannot find the starter file, should be located at: *wp root*/wp-content/themes/onesocial-ccluk/buddyboss-inc/init.php', 'onesocial');
+    $err_msg = __('Cannot find the starter file, should be located at: *wp root*/wp-content/themes/onesocial-ccluk/inc/init.php', 'onesocial');
 
     wp_die($err_msg);
 }
@@ -226,9 +225,6 @@ function ccluk_create_news_post_type()
             'menu_position' => 4
         )
     );
-
-    // add to Buddypress activity stream
-    #add_post_type_support('ccluk_news', 'buddypress-activity');
 }
 add_action('init', 'ccluk_create_news_post_type');
 
