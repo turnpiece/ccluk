@@ -9,6 +9,8 @@
  */
 get_header();
 
+ccluk_load_section('banner');
+
 if (have_posts() && get_the_content() != '') : // insert whatever content is on the home page 
 ?>
 
@@ -30,7 +32,6 @@ do_action('ccluk_frontpage_before_section_parts');
 if (! has_action('ccluk_frontpage_section_parts')) {
 
         $sections = apply_filters('ccluk_frontpage_sections_order', array(
-                'banner',
                 'about',
                 'news',
                 'newsletter',
