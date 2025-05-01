@@ -241,8 +241,9 @@ header#masthead #header-aside, header#masthead #logo-area {
   margin-left: 0;
 }
 
-.entry-content, .entry-summary, .mu_register {
-  font-size: 14px;
+.entry-content,
+.entry-summary {
+  font-size: 18px;
 }
 
 .pagination {
