@@ -46,14 +46,6 @@ function onesocial_setup()
 		'header-my-account'	 => __('My Profile', 'onesocial'),
 	));
 
-	// Adds wp_nav_menu() in two additional locations with BuddyPress activated.
-	if (function_exists('bp_is_active')) {
-		register_nav_menus(array(
-			'profile-menu'	 => __('Profile: Extra Links', 'onesocial'),
-			'group-menu'	 => __('Group: Extra Links', 'onesocial'),
-		));
-	}
-
 	/*
 	 * Enable support for Post Formats.
 	 * See http://codex.wordpress.org/Post_Formats
@@ -74,38 +66,6 @@ add_action('after_setup_theme', 'onesocial_setup');
  * @since OneSocial 1.0.0
  */
 add_filter('use_default_gallery_style', '__return_false');
-
-/**
- * Adds Profile menu to BuddyPress profiles
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_add_profile_menu()
-{
-	if (function_exists('bp_is_active')) {
-		if (has_nav_menu('profile-menu')) {
-			wp_nav_menu(array('container' => false, 'theme_location' => 'profile-menu', 'items_wrap' => '%3$s'));
-		}
-	}
-}
-
-add_action('bp_member_options_nav', 'buddyboss_add_profile_menu');
-
-/**
- * Adds Group menu to BuddyPress groups
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_add_group_menu()
-{
-	if (function_exists('bp_is_active')) {
-		if (has_nav_menu('group-menu')) {
-			wp_nav_menu(array('container' => false, 'theme_location' => 'group-menu', 'items_wrap' => '%3$s'));
-		}
-	}
-}
-
-add_action('bp_group_options_nav', 'buddyboss_add_group_menu');
 
 /**
  * Detecting phones
@@ -143,16 +103,6 @@ function buddyboss_onesocial_scripts_styles()
 
 
 	/*	 * **************************** STYLES ***************************** */
-
-	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
-	// We will only load if our is latest.
-	$recent_fwver	 = (isset(wp_styles()->registered["fontawesome"])) ? wp_styles()->registered["fontawesome"]->ver : "0";
-	$current_fwver	 = "4.7.0";
-	if (version_compare($current_fwver, $recent_fwver, '>')) {
-		wp_deregister_style('fontawesome');
-		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/{$current_fwver}/css/font-awesome.min.css", false, $current_fwver);
-		wp_enqueue_style('fontawesome');
-	}
 
 	$css_dest = '/css';
 	$css_compressed_dest = '/css-compressed';
@@ -319,17 +269,6 @@ function buddyboss_onesocial_scripts_styles()
 	/* Custom CCL javascript */
 	wp_register_script('onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
 	wp_enqueue_script('onesocial-custom');
-
-	/**
-	 * If we're on the BuddyPress messages component we need to load jQuery Migrate first
-	 * before bgiframe, so let's take care of that
-	 */
-	if (function_exists('bp_is_messages_component') && bp_is_messages_component() && bp_is_current_action('compose')) {
-		$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-
-		wp_dequeue_script('bp-jquery-bgiframe');
-		wp_enqueue_script('bp-jquery-bgiframe', BP_PLUGIN_URL . "bp-messages/js/autocomplete/jquery.bgiframe{$min}.js", array(), bp_get_version());
-	}
 }
 
 add_action('wp_enqueue_scripts', 'buddyboss_onesocial_scripts_styles');
@@ -445,15 +384,6 @@ function buddyboss_remove_nojs_body_class()
 
 add_action('buddyboss_before_header', 'buddyboss_remove_nojs_body_class');
 
-function buddyboss_members_latest_update_filter($latest)
-{
-	$latest = str_replace(array('- &quot;', '&quot;'), '', $latest);
-
-	return $latest;
-}
-
-add_filter('bp_get_activity_latest_update_excerpt', 'buddyboss_members_latest_update_filter');
-
 /**
  * Remove an anonymous object filter.
  *
@@ -486,33 +416,6 @@ function buddyboss_remove_anonymous_object_filter($tag, $class, $method)
 			}
 		}
 	}
-}
-
-/**
- * Moves sitewide notices to the header
- *
- * Since BuddyPress doesn't give us access to BP_Legacy, let
- * us begin the hacking
- *
- * @since Boss 1.0.0
- */
-function buddyboss_fix_sitewide_notices()
-{
-	// Check if BP_Legacy is being used and messages are active
-	if (class_exists('BP_Legacy') && bp_is_active('messages')) {
-		buddyboss_remove_anonymous_object_filter('wp_footer', 'BP_Legacy', 'sitewide_notices');
-		add_action('buddyboss_inside_wrapper', 'buddyboss_print_sitewide_notices', 9999);
-	}
-}
-
-add_action('wp', 'buddyboss_fix_sitewide_notices');
-
-/**
- * Prints sitewide notices (used in the header, by default is in footer)
- */
-function buddyboss_print_sitewide_notices()
-{
-	@BP_Legacy::sitewide_notices();
 }
 
 /**
@@ -767,10 +670,6 @@ function buddyboss_body_class($classes)
 		$classes[] = 'role-admin';
 	}
 
-	if (buddyboss_is_bp_active() && (bp_is_user_activity() || (bp_is_group_home() && bp_is_active('activity')) || bp_is_group_activity() || bp_is_current_component('activity'))) {
-		$classes[] = 'has-activity';
-	}
-
 	// Default layout class
 	if (is_phone()) {
 		$classes[] = 'is-mobile';
@@ -810,59 +709,15 @@ function buddyboss_body_class($classes)
 	}
 
 	// Page sidebar
-	if (is_active_sidebar('sidebar') && is_page() && !is_front_page() && !buddyboss_is_bp_active()) {
-		$classes[] = 'page-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
-	}
-
-	// Page sidebar
-	if (is_active_sidebar('sidebar') && is_page() && !is_front_page() && buddyboss_is_bp_active() && !bp_current_component() && !bp_is_user()) {
+	if (is_active_sidebar('sidebar') && is_page() && !is_front_page()) {
 		$classes[] = 'page-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	// Archive sidebar
 	if (
-		is_active_sidebar('sidebar') && is_archive() && !(function_exists('bbp_is_forum_archive') && bbp_is_forum_archive()) && !(function_exists('is_shop') && is_shop())
+		is_active_sidebar('sidebar') && is_archive()
 	) {
 		$classes[] = 'archive-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
-	}
-
-	// Blogs sidebar
-	$blogs_sidebar = 'left';
-	if (buddyboss_is_bp_active() && is_active_sidebar('blogs') && is_multisite() && bp_is_current_component('blogs') && !bp_is_user()) {
-		$classes[] = 'blogs-sidebar-active bb-has-sidebar sidebar-' . $blogs_sidebar;
-	}
-
-	// Activity sidebar
-	$activity_sidebar = 'left';
-	if (buddyboss_is_bp_active() && is_active_sidebar('activity') && bp_is_current_component('activity') && !bp_is_user()) {
-		$classes[] = 'activity-sidebar-active bb-has-sidebar sidebar-' . $activity_sidebar;
-	}
-
-	// Members sidebar
-	$profile_sidebar = 'left';
-	if (buddyboss_is_bp_active() && bp_is_user() && ('messages' != $bp->current_component) && ('settings' != $bp->current_component)) {
-		$sidebar_alignment	 = 'left';
-		$classes[]			 = 'profile-sidebar-active bb-has-sidebar sidebar-' . $profile_sidebar;
-	}
-
-	// Single group sidebar
-	$single_group_sidebar = 'left';
-	if (buddyboss_is_bp_active() && bp_is_group()) {
-		$classes[] = 'group-sidebar-active bb-has-sidebar sidebar-' . $single_group_sidebar;
-	}
-
-	// Forums sidebar
-	$forums = 'left';
-	if (is_active_sidebar('forums') && function_exists('is_bbpress') && is_bbpress() && !(function_exists('bp_is_user') && bp_is_user())) {
-		$classes[] = 'forums-sidebar-active bb-has-sidebar sidebar-' . $forums;
-	}
-
-	//Post create template
-	if (function_exists('buddyboss_sap') && buddyboss_is_bp_active()) {
-		$create_new_post_page = buddyboss_sap()->option('create-new-post');
-		if (!empty($create_new_post_page) && $create_new_post_page == get_the_ID()) {
-			$classes[] = 'page-template-sap-post-create-template';
-		}
 	}
 
 	//Adminbar
@@ -889,28 +744,6 @@ add_filter('login_redirect', 'buddyboss_redirect_previous_page', 10, 3);
 
 function buddyboss_redirect_previous_page($redirect_to, $request, $user)
 {
-	if (buddyboss_is_bp_active()) {
-		$bp_pages = bp_get_option('bp-pages');
-
-		$activate_page_id = !empty($bp_pages) && isset($bp_pages['activate']) ? $bp_pages['activate'] : null;
-
-		if ((int) $activate_page_id <= 0) {
-			return $redirect_to;
-		}
-
-		$activate_page = get_post($activate_page_id);
-
-		if (empty($activate_page) || empty($activate_page->post_name)) {
-			return $redirect_to;
-		}
-
-		$activate_page_slug = $activate_page->post_name;
-
-		if (strpos($request, '/' . $activate_page_slug) !== false) {
-			$redirect_to = home_url();
-		}
-	}
-
 	$request = isset($_SERVER["HTTP_REFERER"]) && !empty($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : false;
 
 	if (!$request) {
@@ -1014,36 +847,6 @@ if (!function_exists('buddyboss_add_gravatar')) {
 	add_filter('avatar_defaults', 'buddyboss_add_gravatar');
 }
 
-/**
- * Replace default group avatar
- *
- * @since OneSocial 1.0.0
- */
-function buddyboss_default_group_avatar($avatar)
-{
-	global $bp, $groups_template;
-	if (strpos($avatar, 'group-avatars')) {
-		return $avatar;
-	} else {
-		$custom_avatar	 = get_stylesheet_directory_uri() . '/images/avatar-group.png';
-		$alt			 = 'group avatar';
-
-		if ($groups_template) {
-			$alt = esc_attr($groups_template->group->name);
-		}
-
-		if ($bp->current_action == "") {
-			return '<img width="215" height="215" src="' . $custom_avatar . '" class="avatar" alt="' . $alt . '" />';
-		} else {
-			return '<img width="' . BP_AVATAR_FULL_WIDTH . '" height="' . BP_AVATAR_FULL_HEIGHT . '" src="' . $custom_avatar . '" class="avatar" alt="' . $alt . '" />';
-		}
-	}
-}
-
-add_filter('bp_get_group_avatar', 'buddyboss_default_group_avatar');
-add_filter('bp_get_new_group_avatar', 'buddyboss_default_group_avatar');
-
-
 /* * **************************** WORDPRESS FUNCTIONS ***************************** */
 
 /**
@@ -1080,22 +883,6 @@ function buddyboss_is_plugin_active($plugin)
 {
 	return in_array($plugin, (array) get_option('active_plugins', array()));
 }
-
-/**
- * Add a View Profile link in Dashboard > Users panel
- *
- * @since OneSocial 1.0.0
- */
-function user_row_actions_bp_view($actions, $user_object)
-{
-	if (function_exists('bp_is_active')) {
-
-		$actions['view'] = '<a href="' . bp_core_get_user_domain($user_object->ID) . '">' . __('View Profile', 'onesocial') . '</a>';
-		return $actions;
-	}
-}
-
-add_filter('user_row_actions', 'user_row_actions_bp_view', 10, 2);
 
 /**
  * Function that checks if BuddyPress plugin is active
@@ -2159,103 +1946,6 @@ function buddyboss_change_bp_tag_position()
 add_action('bp_init', 'buddyboss_change_bp_tag_position', 999);
 
 
-
-if (!function_exists('buddyboss_get_options_nav')) :
-
-	/**
-	 * Messages navigation
-	 *
-	 * @since Education 1.0.0
-	 * @since 1.1.2 updated
-	 */
-	function buddyboss_get_options_nav($parent_slug = '')
-	{
-		$bp = buddypress();
-
-		// If we are looking at a member profile, then the we can use the current
-		// component as an index. Otherwise we need to use the component's root_slug
-		$component_index = !empty($bp->displayed_user) ? bp_current_component() : bp_get_root_slug(bp_current_component());
-		$selected_item	 = bp_current_action();
-
-		if (!bp_is_single_item()) {
-			$options_nav = buddyboss_bp_options_nav($component_index);
-			if (empty($options_nav)) {
-				return false;
-			} else {
-				$the_index = $component_index;
-			}
-		} else {
-			$current_item = bp_current_item();
-
-			if (!empty($parent_slug)) {
-				$current_item	 = $parent_slug;
-				$selected_item	 = bp_action_variable(0);
-			}
-
-			$options_nav = buddyboss_bp_options_nav($current_item);
-			if (empty($options_nav)) {
-				return false;
-			} else {
-				$the_index = $current_item;
-			}
-		}
-		global $wpdb;
-
-		$user_id = get_current_user_id();
-
-		$sentbox = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_messages} WHERE sender_id = " . $user_id);
-		$inbox	 = '';
-		$starred = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_recipients} m LEFT JOIN {$bp->messages->table_name_meta} mt ON m.id=mt.message_id WHERE mt.meta_key = 'starred_by_user' AND mt.meta_value = {$user_id}");
-		$notices = (int) $wpdb->query("SELECT * FROM {$bp->messages->table_name_notices}");
-
-		//Is buddyboss-inbox activated?
-		$bb_inbox_active = function_exists('buddyboss_messages') ? true : false;
-
-		//let buddyboss inbox plugin to add message count
-		$unread_count = (int) $wpdb->get_var($wpdb->prepare("SELECT SUM(unread_count) FROM {$bp->messages->table_name_recipients} WHERE user_id = %d AND is_deleted = 0 AND sender_only = 0", $user_id));
-
-		if (!$bb_inbox_active) {
-			$inbox = $unread_count;
-		}
-
-		$number_of_items = array('<i class="bb-icon-messages"></i>', $inbox, $starred, $sentbox, $notices);
-
-		//Fill 0 for vacant draft count
-		if ($bb_inbox_active) {
-			$user_drafts = bbm_get_user_draft_ids();
-			if (empty($user_drafts)) {
-				$number_of_items[] = 0;
-			}
-		}
-
-		$i = 0;
-		// Loop through each navigation item
-		$subnav_items = (array) buddyboss_bp_options_nav($the_index);
-		foreach ($subnav_items as $subnav_item) {
-			if (empty($subnav_item['user_has_access'])) {
-				$i++;
-				continue;
-			}
-
-			// If the current action or an action variable matches the nav item id, then add a highlight CSS class.
-			if ($subnav_item['slug'] == $selected_item) {
-				$selected = ' class="current selected"';
-			} else {
-				$selected = '';
-			}
-
-			// List type depends on our current component
-			$list_type = bp_is_group() ? 'groups' : 'personal';
-
-			// echo out the final list item
-			echo apply_filters('bb_get_options_nav_' . $subnav_item['css_id'], '<li id="' . $subnav_item['css_id'] . '-' . $list_type . '-li" ' . $selected . '><a id="' . $subnav_item['css_id'] . '" href="' . $subnav_item['link'] . '">' . $subnav_item['name'] . '<span>' . $number_of_items[$i] . '</span></a></li>', $subnav_item, $selected_item);
-
-			$i++;
-		}
-	}
-
-endif;
-
 /**
  * Messages date function
  *
@@ -2293,152 +1983,6 @@ function buddyboss_format_time($time, $just_date = true, $localize_time = true)
 	return apply_filters('bp_format_time', $date);
 }
 
-if (!function_exists('bb_get_new_group_invite_friend_list')) :
-
-	/**
-	 * Overrides buddypress function bp_get_new_group_invite_friend_list
-	 *
-	 * @since OneSocial Theme 1.0.0
-	 *
-	 */
-	function bb_get_new_group_invite_friend_list($args = '')
-	{
-		$bp = buddypress();
-
-		if (!bp_is_active('friends')) {
-			return false;
-		}
-
-		$defaults = array(
-			'group_id'	 => false,
-			'separator'	 => 'li'
-		);
-
-		$r = wp_parse_args($args, $defaults);
-		extract($r, EXTR_SKIP);
-
-		if (empty($group_id)) {
-			$group_id = !empty($bp->groups->new_group_id) ? $bp->groups->new_group_id : $bp->groups->current_group->id;
-		}
-
-		if ($friends = friends_get_friends_invite_list(bp_loggedin_user_id(), $group_id)) {
-			$invites = groups_get_invites_for_group(bp_loggedin_user_id(), $group_id);
-
-			for ($i = 0, $count = count($friends); $i < $count; ++$i) {
-				$checked = '';
-
-				if (!empty($invites)) {
-					if (in_array($friends[$i]['id'], $invites)) {
-						$checked = ' checked="checked"';
-					}
-				}
-
-				$items[] = '<' . $separator . '><input' . $checked . ' type="checkbox" name="friends[]" id="f-' . $friends[$i]['id'] . '" value="' . esc_attr($friends[$i]['id']) . '" /><strong>' . bp_core_fetch_avatar(array('item_id' => $friends[$i]['id'], 'type' => 'full', 'width' => '50', 'height' => '50')) . $friends[$i]['full_name'] . '</strong></' . $separator . '>';
-			}
-		}
-
-		if (!empty($items)) {
-			return implode("\n", (array) $items);
-		}
-
-		return false;
-	}
-
-endif;
-
-
-/**
- * Add title to notes
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_action('incom_cancel_x_before', 'onesocial_add_notes_title');
-add_action('sap_incom_cancel_x_before', 'onesocial_add_notes_title');
-
-function onesocial_add_notes_title()
-{
-	echo '<span class="notes-title">' . __('Notes', 'onesocial') . '</span>';
-}
-
-/**
- * Remove plugin info
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_filter('incom_plugin_info', 'onesocial_remove_plugin_info');
-add_filter('sap_incom_plugin_info', 'onesocial_remove_plugin_info');
-
-function onesocial_remove_plugin_info()
-{
-	return '';
-}
-
-/**
- * Remove plugin info
- *
- * @since OneSocial Theme 1.0.0
- *
- */
-add_filter('incom_comment_form_args', 'onesocial_fileter_note_form');
-add_filter('sap_incom_comment_form_args', 'onesocial_fileter_note_form');
-
-function onesocial_fileter_note_form()
-{
-	$user			 = wp_get_current_user();
-	$user_identity	 = $user->exists() ? $user->display_name : '';
-
-	$args = array(
-		'id_form'				 => 'incom-commentform',
-		'comment_form_before'	 => '',
-		'comment_notes_before'	 => '',
-		'comment_notes_after'	 => '',
-		'label_submit'			 => __('Save', 'onesocial'),
-		'title_reply'			 => '',
-		'title_reply_to'		 => '',
-		'logged_in_as'			 => '<p class="logged-in-as">' .
-			sprintf(__('Logged in as <a href="%1$s">%2$s</a>.', 'onesocial'), admin_url('profile.php'), $user_identity) . '</p>',
-		'user_identity'			 => $user_identity,
-		'comment_field'			 => '<p class="comment-form-comment"><label for="comment">' . $user_identity .
-			'</label><textarea id="sap-comment" name="comment" cols="45" rows="2" aria-required="true" placeholder="' . __('Leave a note', 'onesocial') . '">' .
-			'</textarea></p>',
-	);
-
-	return $args;
-}
-
-/**
- * Returns xprofile fields list
- *
- * @since OneSocial Theme 1.0.0
- */
-function buddyboss_customizer_xprofile_field_choices()
-{
-	$options = array();
-
-	if (function_exists('bp_is_active')) {
-		if (bp_is_active('xprofile') && bp_has_profile(array('user_id' => bp_loggedin_user_id()))) {
-			while (bp_profile_groups()) {
-				bp_the_profile_group();
-				if (bp_profile_group_has_fields()) {
-					while (bp_profile_fields()) {
-						bp_the_profile_field();
-						$options[bp_get_the_profile_field_id()] = bp_get_the_profile_field_name();
-					}
-				}
-			}
-		}
-	}
-
-	return $options;
-}
-
-/**
- * Remove Output the "Add Friend" button in the member loop.
- */
-remove_action('bp_directory_members_actions', 'bp_member_add_friend_button');
-
 /**
  * Estimate time required to read the article
  *
@@ -2459,34 +2003,6 @@ function boss_estimated_reading_time($post_content)
 
 	return $estimated_time;
 }
-
-/**
- * Change group excerpt length
- * group-description
- */
-function boss_custom_group_excerpt()
-{
-	global $groups_template;
-
-	$group = $groups_template->group;
-
-	if (isset($group->description)) {
-		return bp_create_excerpt($group->description, 125);
-	}
-}
-
-add_filter('bp_get_group_description_excerpt', 'boss_custom_group_excerpt');
-
-// Search default text
-if (!function_exists('boss_bp_get_search_default_text')) {
-
-	function boss_bp_get_search_default_text($param)
-	{
-		return __('Type to Search', 'onesocial');
-	}
-}
-
-add_filter('bp_get_search_default_text', 'boss_bp_get_search_default_text');
 
 // Custom Excerpt
 if (!function_exists('onesocial_custom_excerpt')) {

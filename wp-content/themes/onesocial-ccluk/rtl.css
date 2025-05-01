@@ -44,15 +44,6 @@ body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:hover+li a {
     content: "\f104";
 }
 
-#bbpress-forums ul.bbp-threaded-replies:before {
-    -moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
-}
-
 /*
  * Brackets displays wrongly for right to left display style
  * http://stackoverflow.com/questions/5741522/brackets-displays-wrongly-for-right-to-left-display-style
@@ -78,12 +69,6 @@ a.prev.page-numbers {
     transform: rotate(180deg);
 }
 
-.woocommerce-pagination a.next.page-numbers,
-.woocommerce-pagination a.prev.page-numbers {
-    -webkit-transform: none;
-    transform: none;
-}
-
 #posts-carousel .arrows a:before {
     display: inline-block;
     -webkit-transform: rotate(180deg);
@@ -103,17 +88,4 @@ body .bb-global-search-ac.ui-autocomplete {
 
 #posts-carousel li {
     float: left;
-}
-
-@media screen and (min-width: 769px) {
-    .woocommerce ul.products li.product,
-    .woocommerce-page ul.products li.product {
-        float: right;
-        margin: 0 0 2.992em 3.8%;
-    }
-
-    .woocommerce ul.products li.last,
-    .woocommerce-page ul.products li.last {
-        margin-left: 0;
-    }
 }
