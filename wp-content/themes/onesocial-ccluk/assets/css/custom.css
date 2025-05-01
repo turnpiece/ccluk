@@ -21,20 +21,6 @@ textarea,
   padding: 0.6rem 1.2rem;
 }
 
-#pass-strength-result {
-  margin-top: -25px;
-  float: right;
-}
-#pass-strength-result.bad, #pass-strength-result.short {
-  color: #f25d65;
-}
-#pass-strength-result.good {
-  color: #f8d750;
-}
-#pass-strength-result.strong {
-  color: #2ac987;
-}
-
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
   margin-bottom: 16px;
 }
@@ -62,11 +48,6 @@ a:hover,
   margin: 2rem 0rem;
 }
 
-#save_as_draft:hover {
-  color: #000;
-  background-color: #54ae68;
-}
-
 .widget-area .widget h3.widgettitle,
 .widget-area .widget p,
 .widget-area .widget li,
@@ -88,7 +69,6 @@ a:hover,
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;
@@ -211,7 +191,6 @@ a.button {
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;
@@ -234,7 +213,7 @@ a.cta {
   padding-right: 10.8rem;
   margin: 10px 30px;
   margin: 1rem 3rem;
-  font-size: 24px;
+  font-size: 28px;
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
@@ -244,7 +223,7 @@ a.cta {
 }
 a.cta:after {
   font-family: "FontAwesome";
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 100;
   color: #fff;
   content: "\f054";
@@ -447,7 +426,7 @@ body.page-template-homepage #main .section {
   padding: 2rem 0rem;
 }
 body.page-template-homepage #main .section#primary {
-  padding: 0;
+  max-width: 600px;
 }
 body.page-template-homepage #main .section .section-content {
   max-width: 1170px;
@@ -477,7 +456,7 @@ body.page-template-homepage #main .section .section-content .list-item > .entry-
 body.page-template-homepage #main .section .section-content .list-item > .entry-header .entry-title {
   margin-top: 12px;
   line-height: 1.4;
-  font-size: 24px;
+  font-size: 28px;
   color: #54ae68;
 }
 body.page-template-homepage #main .section .section-content .list-item > .entry-header > a {
@@ -486,6 +465,9 @@ body.page-template-homepage #main .section .section-content .list-item > .entry-
 }
 body.page-template-homepage #main .section .section-content .list-item > .entry-header > a > .entry-title {
   color: #22a7f0;
+}
+body.page-template-homepage #main .section .section-content .list-item > .entry-header > a > .entry-title:hover {
+  color: #54ae68;
 }
 body.page-template-homepage #main .section .section-content .list-item > .entry-header img.wp-post-image {
   margin: 0;
@@ -500,25 +482,26 @@ body.page-template-homepage #main .section .section-content .list-item .action .
 }
 body.page-template-homepage #main .section .section-title {
   text-align: center;
-  max-width: 420px;
+  max-width: 600px;
   margin: 0 auto;
 }
 body.page-template-homepage #main .section .section-title h4 {
-  background-color: #54ae68;
+  color: #54ae68;
   padding: 15px 30px;
   margin: 10px 30px;
-  font-size: 24px;
+  font-size: 28px;
   color: #fff;
   text-transform: uppercase;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+  border-bottom: 1px solid;
+}
+body.page-template-homepage #main .section .section-title a {
+  display: block;
 }
 body.page-template-homepage #main .section .section-title a > h4 {
-  background-color: #22a7f0;
+  color: #22a7f0;
 }
 body.page-template-homepage #main .section .section-title a > h4:hover {
-  background-color: #54ae68;
+  color: #54ae68;
 }
 body.page-template-homepage #main .section .section-title.icon {
   display: block;
@@ -587,11 +570,14 @@ body.page-template-homepage #main .section.banner.background .section-title-cont
 body.page-template-homepage #main .section.banner.background .section-title-container > .section-title, body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title {
   align-self: center;
   position: relative;
-  max-width: 650px;
+  max-width: 600px;
 }
 body.page-template-homepage #main .section.banner.text-left .section-title-container, body.page-template-homepage #main .section.banner.text-right .section-title-container {
   background-color: #54ae68;
   color: #fff;
+}
+body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title a.button, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title a.button {
+  margin-left: 0;
 }
 body.page-template-homepage #main .section.banner.background .section-content img {
   opacity: 0.5;
@@ -707,7 +693,7 @@ body.page-template-homepage #main .section.join .section-content, body.page-temp
 }
 body.page-template-homepage #main .section.join .section-content .intro, body.page-template-homepage #main .section.newsletter .section-content .intro, body.page-template-homepage #main .section.embed .section-content .intro {
   color: #fff;
-  font-size: 24px;
+  font-size: 28px;
 }
 body.page-template-homepage #main .section.join .section-content .list-item, body.page-template-homepage #main .section.newsletter .section-content .list-item, body.page-template-homepage #main .section.embed .section-content .list-item {
   width: auto;
@@ -747,7 +733,6 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;
@@ -780,7 +765,6 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;
@@ -856,7 +840,6 @@ body.page-template-homepage .homepage-section-title > h4 {
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;
@@ -1272,7 +1255,6 @@ body.single-give_forms #secondary {
   border-radius: 5px;
   background-image: none;
   background-color: #22a7f0;
-  border: none;
   text-shadow: none;
   box-shadow: none;
   padding: 6px 10px;

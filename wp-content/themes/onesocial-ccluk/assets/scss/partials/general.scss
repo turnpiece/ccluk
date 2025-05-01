@@ -18,21 +18,6 @@ textarea,
     @include input-field();
 }
 
-#pass-strength-result {
-    margin-top: -25px;
-    float: right;
-
-    &.bad, &.short {
-        color: #f25d65;
-    }
-    &.good {
-        color: #f8d750;
-    }
-    &.strong {
-        color: #2ac987;
-    }
-}
-
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
     margin-bottom: 16px;
 }
@@ -56,11 +41,6 @@ a,
     background-color: $blue_bg;
     @include padding(2, 5);
     @include margin(2, 0);
-}
-
-#save_as_draft:hover {
-    color: $black;
-    background-color: $green;
 }
 
 .widget-area {

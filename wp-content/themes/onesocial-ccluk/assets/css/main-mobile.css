@@ -1466,7 +1466,7 @@ MAXIMUM width of 1024 pixels (tablets)
   }
   body .entry-title,
   body h2 {
-    font-size: 24px;
+    font-size: 28px;
   }
   body.page #secondary.widget-area {
     margin: 20px auto;
@@ -1612,7 +1612,7 @@ MAXIMUM width of 520 pixels (large phones and smaller)
     padding: 20px;
   }
   body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title h2 {
-    font-size: 24px;
+    font-size: 28px;
   }
   body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title p,
   body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title a.button {

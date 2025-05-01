@@ -12,7 +12,7 @@ body.page-template-homepage {
 			@include padding( 2, 0 );
 
 			&#primary {
-				padding: 0;
+				max-width: $content_w;
 			}
 
 			.section-content {
@@ -43,6 +43,10 @@ body.page-template-homepage {
 
 							> .entry-title {
 								color: $blue;
+
+								&:hover {
+									color: $green;
+								}
 							}
 						}
 
@@ -71,24 +75,28 @@ body.page-template-homepage {
 
 			.section-title {
 				text-align: center;
-				max-width: 420px;
+				max-width: $content_w;
 				margin: 0 auto;
 
 				h4 {
-					background-color: $green;
+					color: $green;
 					padding: 15px 30px;
 					margin: 10px 30px;
 					font-size: $font-size-mid;
 					color: $white;
 					text-transform: uppercase;
-					@include border-radius(10px);
+					border-bottom: 1px solid;
 				}
 
-				a > h4 {
-					background-color: $blue;
+				a {
+					display: block;
 
-					&:hover {
-						background-color: $green;
+					> h4 {
+						color: $blue;
+	
+						&:hover {
+							color: $green;
+						}
 					}
 				}
 
@@ -118,7 +126,6 @@ body.page-template-homepage {
 						object-fit: cover;
 					}
 				}
-
 				.section-title-container {
 					display: flex;
 					padding: 0;
@@ -172,7 +179,7 @@ body.page-template-homepage {
 						> .section-title {
 							align-self: center;
 							position: relative;
-							max-width: 650px;
+							max-width: $content_w;
 						}
 					}
 				}
@@ -182,6 +189,10 @@ body.page-template-homepage {
 					.section-title-container {
 						background-color: $green;
 						color: $white;
+
+						> .section-title a.button {
+							margin-left: 0;
+						}
 					}
 				}
 
