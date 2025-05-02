@@ -32,7 +32,7 @@
 
 	<div id="main-wrap">
 
-		<?php do_action('onesocial_before_header'); ?>
+		<?php do_action('ccluk_before_header'); ?>
 
 		<header id="masthead" class="site-header" data-infinite="on">
 			<div class="header-wrapper">

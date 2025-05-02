@@ -22,7 +22,7 @@ global $post;
 $post_infinite			 = true;
 
 // don't remove this filter, marketplace plugin uses it
-$show_footer = apply_filters('onesocial_show_footer', !((is_archive() || is_home()) && $post_infinite));
+$show_footer = apply_filters('ccluk_show_footer', !((is_archive() || is_home()) && $post_infinite));
 
 if ($show_footer) : ?>
 
