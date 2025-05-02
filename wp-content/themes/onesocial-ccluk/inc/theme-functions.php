@@ -45,13 +45,6 @@ function onesocial_setup()
 		'secondary-menu'	 => __('Footer Menu', 'onesocial')
 	));
 
-	/*
-	 * Enable support for Post Formats.
-	 * See http://codex.wordpress.org/Post_Formats
-	 */
-	//	add_theme_support( 'post-formats', array(
-	//		'aside', 'image', 'video', 'quote', 'link',
-	//	) );
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
 	add_theme_support('post-thumbnails');
 	set_post_thumbnail_size(845, 9999); // Unlimited height, soft crop
@@ -87,12 +80,7 @@ function is_phone()
 function buddyboss_onesocial_scripts_styles()
 {
 
-	global $bp, $onesocial, $buddyboss_js_params;
-
 	$ext = 'css';
-
-	// Used in js file to detect if we are using only mobile layout
-	$only_mobile = false;
 
 	/**
 	 * Assign the OneSocial version to a var
@@ -125,11 +113,6 @@ function buddyboss_onesocial_scripts_styles()
 	 */
 	wp_enqueue_style('ccluk-custom', $CSS_URL . '/custom.css', array('onesocial-main-global'), $version);
 
-	if (is_user_logged_in()) {
-		// styles for logged in members
-		wp_enqueue_style('ccluk-members', $CSS_URL . '/members.css', array('ccluk-custom'), $version);
-	}
-
 	// load fonts
 	wp_enqueue_style('ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap');
 
@@ -144,16 +127,10 @@ function buddyboss_onesocial_scripts_styles()
 	// Google Analytics tracking
 	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
-	if (is_phone()) {
+	if (is_phone() || wp_is_mobile()) {
 		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'all');
-		$only_mobile = true;
-	} elseif (wp_is_mobile()) {
-		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'all');
-		$only_mobile = true;
 	} else {
 		wp_enqueue_style('onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array('icons'), $version, 'screen and (min-width: 1025px)');
-		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		//wp_enqueue_style('buddyboss-wp-adminbar-desktop-' . $adminbar_layout, $CSS_URL . '/adminbar-desktop-' . $adminbar_layout . '.css', array('dashicons'), $version, 'screen and (min-width: 1025px)');
 	}
 
 	// Media query fallback
@@ -201,23 +178,7 @@ function ccluk_remove_block_editor_assets()
 	// Optionally remove Gutenberg scripts if they're being enqueued
 	wp_dequeue_script('wp-block-library');
 }
-add_action('wp_enqueue_scripts', 'ccluk_remove_block_editor_assets', 100);
-
-/**
- * Admin styles
- */
-function onesocial_admin_assets()
-{
-	/**
-	 * Assign theme version to a var
-	 */
-	$theme		= wp_get_theme();
-	$version	= $theme['Version'];
-
-	wp_enqueue_style('buddyboss-bm-main-admin-css', get_stylesheet_directory_uri() . '/css/admin.css', array(), $version, 'all');
-}
-
-add_action('admin_enqueue_scripts', 'onesocial_admin_assets');
+//add_action('wp_enqueue_scripts', 'ccluk_remove_block_editor_assets', 100);
 
 function escapeJavaScriptText($string)
 {
@@ -594,47 +555,6 @@ add_filter('body_class', 'buddyboss_body_class');
 
 
 
-/* * **************************** ADMIN BAR FUNCTIONS ***************************** */
-
-/**
- * Remove certain admin bar links
- *
- * @since OneSocial 1.0.0
- */
-function remove_admin_bar_links()
-{
-	if (is_admin()) { //nothing to do on admin
-		return;
-	}
-	global $wp_admin_bar;
-	$wp_admin_bar->remove_menu('wp-logo');
-
-	if (!current_user_can('administrator')):
-		$wp_admin_bar->remove_menu('site-name');
-	endif;
-}
-
-add_action('wp_before_admin_bar_render', 'remove_admin_bar_links');
-
-/**
- * Replace admin bar "Howdy" text
- *
- * @since OneSocial 1.0.0
- */
-function replace_howdy($wp_admin_bar)
-{
-	if (is_user_logged_in()) {
-
-		$my_account	 = $wp_admin_bar->get_node('my-account');
-		$newtitle	 = str_replace('Howdy,', '', $my_account->title);
-		$wp_admin_bar->add_node(array(
-			'id'	 => 'my-account',
-			'title'	 => $newtitle,
-		));
-	}
-}
-
-add_filter('admin_bar_menu', 'replace_howdy', 25);
 
 
 /* * **************************** AVATAR FUNCTIONS ***************************** */

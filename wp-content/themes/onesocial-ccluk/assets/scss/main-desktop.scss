@@ -278,7 +278,7 @@ body {
 }
 
 #secondary .widget {
-  border-bottom: 1px solid $divider_color;
+  border-bottom: 3px solid $divider_color;
   margin-bottom: 0;
   padding: 70px 0;
   position: relative;
@@ -363,7 +363,7 @@ body {
   position: relative;
   .pop {
     background-color: $white;
-    border-top: 2px solid;
+    border-top: 3px solid;
     font-size: 13px;
     left: 0;
     opacity: 0;
@@ -559,7 +559,7 @@ header-aside,
   display: inline-block;
   position: relative;
   &:last-child {
-    border-right: 1px solid $divider_color;
+    border-right: 3px solid $divider_color;
   }
   form {
     > div {
@@ -573,7 +573,7 @@ header-aside,
     z-index: 32;
     /* Should be greater than 31 */
     background-color: $white;
-    /* border-left: 1px solid rgba(0,0,0,0.1); */
+    /* border-left: 3px solid rgba(0,0,0,0.1); */
   }
 }
 
@@ -590,9 +590,9 @@ header-aside,
     padding: 20px 80px 20px 30px;
     font-size: 18px;
     font-weight: 300;
-    border-left: 1px solid $divider_color;
+    border-left: 3px solid $divider_color;
     border-radius: 0;
-    border-bottom: 1px solid $divider_color;
+    border-bottom: 3px solid $divider_color;
   }
   #searchsubmit {
     position: absolute;
@@ -669,7 +669,7 @@ header-aside,
   height: 70px;
   line-height: 70px;
   width: 66px;
-  border-left: 1px solid $divider_color;
+  border-left: 3px solid $divider_color;
   text-align: center;
   color: $dark;
   display: inline-block;
@@ -814,7 +814,7 @@ header-aside,
     display: block;
   }
   li ul.sub-menu {
-    border: 1px solid $green;
+    border: 3px solid $green;
     li {
       a {
         border: none;
@@ -1000,7 +1000,7 @@ li.hideshow > ul li {
 .post-author {
   .entry-date time {
     display: inline-block;
-    border-bottom: 1px solid $divider_color;
+    border-bottom: 3px solid $divider_color;
   }
   .load-more-posts {
     color: rgba(0, 0, 0, 0.2);
@@ -1031,7 +1031,7 @@ li.hideshow > ul li {
       width: auto;
       background-color: $white;
       padding: 4px 6px 4px;
-      border: 1px solid $divider_color;
+      border: 3px solid $divider_color;
       opacity: 0;
       visibility: hidden;
       min-width: 90px;
@@ -1092,7 +1092,7 @@ a.to-top {
   width: 28px;
   display: block;
   border-radius: 50%;
-  border: 1px solid $divider_color;
+  border: 3px solid $divider_color;
   text-align: center;
   z-index: 1;
   background-color: $white;
@@ -1194,7 +1194,7 @@ body.single-post #page {
     padding: 0 15px;
   }
   #comments .inner {
-    border-top: 1px solid $divider_color;
+    border-top: 3px solid $divider_color;
   }
 }
 

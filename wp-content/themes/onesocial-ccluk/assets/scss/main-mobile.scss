@@ -108,7 +108,7 @@ body {
     padding: 15px 0;
     overflow: hidden;
     margin: 0;
-    border-bottom: 1px solid $light;
+    border-bottom: 3px solid $light;
   }
 }
 
@@ -120,7 +120,7 @@ body {
     padding: 15px 0;
     overflow: hidden;
     margin: 0;
-    border-bottom: 1px solid $light;
+    border-bottom: 3px solid $light;
   }
 }
 
@@ -317,7 +317,7 @@ body .buddyboss-select {
   margin: 0 10px 10px 0;
   background-color: $white;
   float: left;
-  border: 1px solid $light;
+  border: 3px solid $light;
   &:after {
     font-family: "onesocial" !important;
     font-style: normal !important;
@@ -543,7 +543,7 @@ body {
     padding-top: 0;
   }
   #content article.boss-create-post-wrapper {
-    border-bottom: 1px solid $light;
+    border-bottom: 3px solid $light;
     margin-bottom: 20px;
     padding: 20px 0;
   }
@@ -970,7 +970,7 @@ body.open-right #mobile-right-panel {
     position: relative;
     width: 240px;
     a {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 3px solid rgba(255, 255, 255, 0.1);
       padding: 14px 25px;
       line-height: 1.6;
       font-size: 15px;
@@ -1493,7 +1493,7 @@ Responsive media queries (mobile styles)
       display: none;
     }
     #all-notificatios + .header-button {
-      border-left: 1px solid $light;
+      border-left: 3px solid $light;
     }
   }
 }

@@ -9,7 +9,6 @@ MINIMUM width of 1200 pixels (large desktops)
 body.page-template-homepage {
 	#main {
 		.section {
-
 			&.feature {
 				.section-content {
 					max-width: 1170px;
@@ -36,10 +35,6 @@ body.page-template-homepage {
 			&.banner {
 				.section-title-container > .section-title {
 					max-width: 900px;
-
-					h2 {
-						font-size: $font-size-big;
-					}
 				}
 			}
 		}

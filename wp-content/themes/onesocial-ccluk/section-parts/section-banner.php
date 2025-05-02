@@ -73,12 +73,16 @@ if (
             <div class="section-content"><?php echo $image ?></div>
 
             <script>
-                jQuery(document).ready(function($) {
+                (function($) {
                     $content = $('#<?php echo $id ?>').find('.section-content');
                     $(window).on('load resize', function() {
                         if ($content.height() > $content.find('img').height()) {
                             $content.find('img').height($content.height());
                         }
+                        <?php if ($layout != 'background-box') : ?>
+                            $textbox = $('#<?php echo $id ?>').find('.section-title-container');
+                            $textbox.height($content.height());
+                        <?php endif; ?>
                     })
                 })
             </script>

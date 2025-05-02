@@ -274,7 +274,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 }
 
 #secondary .widget {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 0;
   padding: 70px 0;
   position: relative;
@@ -353,7 +353,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 }
 .header-notifications .pop {
   background-color: #fff;
-  border-top: 2px solid;
+  border-top: 3px solid;
   font-size: 13px;
   left: 0;
   opacity: 0;
@@ -540,7 +540,7 @@ header-aside,
   position: relative;
 }
 #header-search:last-child {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 3px solid rgba(0, 0, 0, 0.1);
 }
 #header-search form {
   height: 100%;
@@ -550,7 +550,7 @@ header-aside,
   z-index: 32;
   /* Should be greater than 31 */
   background-color: #fff;
-  /* border-left: 1px solid rgba(0,0,0,0.1); */
+  /* border-left: 3px solid rgba(0,0,0,0.1); */
 }
 #header-search form > div {
   height: 100%;
@@ -568,9 +568,9 @@ header-aside,
   padding: 20px 80px 20px 30px;
   font-size: 18px;
   font-weight: 300;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 #header-search form #searchsubmit {
   position: absolute;
@@ -642,7 +642,7 @@ header-aside,
   height: 70px;
   line-height: 70px;
   width: 66px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   color: #333;
   display: inline-block;
@@ -769,7 +769,7 @@ header-aside,
   display: block;
 }
 .main-navigation li ul.sub-menu {
-  border: 1px solid #54ae68;
+  border: 3px solid #54ae68;
 }
 .main-navigation li ul.sub-menu li a {
   border: none;
@@ -931,7 +931,7 @@ li.hideshow > ul li a {
 
 .post-author .entry-date time {
   display: inline-block;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 .post-author .load-more-posts {
   color: rgba(0, 0, 0, 0.2);
@@ -963,7 +963,7 @@ li.hideshow > ul li a {
   width: auto;
   background-color: #fff;
   padding: 4px 6px 4px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
   min-width: 90px;
@@ -1018,7 +1018,7 @@ a.to-top {
   width: 28px;
   display: block;
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   text-align: center;
   z-index: 1;
   background-color: #fff;
@@ -1116,7 +1116,7 @@ body.single-post #page {
   padding: 0 15px;
 }
 .single-post #comments .inner {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
 }
 
 /*--------------------------------------------------------------
@@ -1166,8 +1166,5 @@ Media queries
   }
   body.page-template-homepage #main .section.banner .section-title-container > .section-title {
     max-width: 900px;
-  }
-  body.page-template-homepage #main .section.banner .section-title-container > .section-title h2 {
-    font-size: 48px;
   }
 }

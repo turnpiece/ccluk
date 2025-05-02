@@ -341,7 +341,7 @@ input::-webkit-input-placeholder, input:-ms-input-placeholder, input::-ms-input-
  * Define consistent border, margin, and padding.
  */
 fieldset {
-  border: 1px solid #54ae68;
+  border: 3px solid #54ae68;
   margin: 0 0 26px;
   padding: 15px 20px 0;
 }
@@ -584,7 +584,7 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid #54ae68;
+  border-bottom: 3px solid #54ae68;
   padding: 13px;
   text-align: left;
 }
@@ -628,7 +628,7 @@ td:last-child {
 pre {
   color: #fff;
   background: #54ae68;
-  border: 1px solid #000;
+  border: 3px solid #000;
   font-size: 0.85rem;
   max-width: 100%;
   overflow: auto;
@@ -659,7 +659,7 @@ code {
   font-size: 80%;
   color: #fff;
   background: #54ae68;
-  border: 1px solid #000;
+  border: 3px solid #000;
   border-radius: 3px;
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
@@ -833,7 +833,7 @@ input[type=checkbox]:checked + span:after, input[type=checkbox]:checked + label:
   line-height: 1;
 }
 input[type=radio]:checked + span:before, input[type=radio]:checked + label:before, input[type=radio]:checked + strong:before {
-  border: 2px solid #fff;
+  border: 3px solid #fff;
   padding: 3px;
   background-color: #333;
 }
@@ -858,7 +858,7 @@ input[type=button],
 input[type=reset],
 button {
   background-color: #22a7f0;
-  border: 1px solid;
+  border: 3px solid;
   color: #fff;
   cursor: pointer;
   font-size: 18px;
@@ -924,7 +924,7 @@ a.button:active,
 input[type=submit] {
   border: none;
   color: #54ae68;
-  border-top: 1px solid #54ae68;
+  border-top: 3px solid #54ae68;
   padding: 0;
   padding-top: 20px;
   background-color: transparent;
@@ -1254,7 +1254,7 @@ img.wp-smiley, .rsswidget img {
 }
 
 .author-info {
-  border-top: 1px solid #ededed;
+  border-top: 3px solid #ededed;
   margin: 24px 0;
   padding-top: 24px;
   overflow: hidden;
@@ -1317,7 +1317,7 @@ a:before, a:after {
 body.search .page-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
-  border-bottom: 1px solid #54ae68;
+  border-bottom: 3px solid #54ae68;
 }
 body.search .page-header h1.entry-title {
   font-size: 48px;
@@ -1582,7 +1582,7 @@ img.avatar {
 .widget .tagcloud a {
   font-size: 12px !important;
   color: #999;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   display: inline-block;
   margin-right: 5px;
   padding: 5px 10px;
@@ -1592,7 +1592,7 @@ img.avatar {
 }
 .widget .tagcloud a:hover {
   color: #333;
-  border: 1px solid #333;
+  border: 3px solid #333;
 }
 
 /* Calendar Widget */
@@ -1667,7 +1667,7 @@ img.avatar {
 }
 .widget .item-options a {
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   display: inline-block;
   font-size: 13px;
@@ -1952,13 +1952,13 @@ div.footer-inner ul.social-icons li span:before {
 .widget_mc4wp_form_widget form p input[type=email] {
   width: 100%;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.11);
+  border: 3px solid rgba(0, 0, 0, 0.11);
 }
 
 .widget.widget_newsletterwidget form p input[type=email], .widget.widget_newsletterwidget form div input[type=email] {
   width: 100%;
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.11);
+  border: 3px solid rgba(0, 0, 0, 0.11);
 }
 
 .widget_mc4wp_form_widget form p input[type=email] {
@@ -2432,7 +2432,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 
 .entry-meta a.read-more {
   color: #54ae68;
-  border-top: 1px solid #54ae68;
+  border-top: 3px solid #54ae68;
   padding-top: 26px;
   display: inline-block;
   font-weight: 400;
@@ -2457,7 +2457,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
   display: none;
 }
 .posts-stream .title {
-  border: 1px solid;
+  border: 3px solid;
   display: inline-block;
   font-family: inherit;
   font-size: 10px;
@@ -2477,7 +2477,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 }
 .posts-stream ul li {
   padding: 35px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 .posts-stream ul li::after {
   clear: both;
@@ -2508,7 +2508,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 }
 .posts-stream ul li time div:first-child:after {
   content: "";
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   display: block;
   width: 4px;
   background-color: #54ae68;
@@ -2518,7 +2518,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 }
 .posts-stream ul li time div:first-child:before {
   content: "";
-  border: 1px solid #fff;
+  border: 3px solid #fff;
   display: block;
   width: 4px;
   background-color: #54ae68;
@@ -2563,7 +2563,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 }
 .archive article,
 .search article {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   padding: 30px 0 10px;
   position: relative;
 }
@@ -2580,7 +2580,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 }
 
 .bookmarked-post {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   padding: 70px 0;
   position: relative;
 }
@@ -2627,7 +2627,7 @@ article.format-aside h1 a:hover {
 article.format-aside .aside {
   padding: 24px 24px 0;
   background-color: #d2e0f9;
-  border-left: 22px solid #a8bfe8;
+  border-left: 23px solid #a8bfe8;
 }
 article.format-aside blockquote:last-child, article.format-aside p:last-child {
   margin-bottom: 0;
@@ -2637,7 +2637,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 7.0 - Single Posts
 --------------------------------------------------------------*/
 .post-author-info {
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
 }
 .post-author-info .inner {
   display: table;
@@ -2901,7 +2901,7 @@ article.format-quote .entry-content blockquote {
 .comments-area article {
   margin: 0;
   padding: 70px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
 }
 .comments-area .comment:first-child article {
   border-top: 0;
@@ -2960,7 +2960,7 @@ article.format-quote .entry-content blockquote {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
-  border: 1px solid #007cbd;
+  border: 3px solid #007cbd;
 }
 .comments-area li.bypostauthor cite span {
   padding: 5px 6px;
@@ -3083,7 +3083,7 @@ a.comment-reply-link, a.comment-edit-link {
 }
 
 body:not(.logged-in) #respond form textarea {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 26px;
 }
 
@@ -3145,7 +3145,7 @@ body.logged-in #respond .form-submit {
   float: none;
   width: auto;
   padding-top: 24px;
-  border-top: 1px solid #54ae68;
+  border-top: 3px solid #54ae68;
 }
 .template-front-page .widget-area .widget li {
   margin: 8px 0 0;
@@ -3221,7 +3221,7 @@ body article.error404 .entry-header {
 
 #posts-carousel {
   padding-top: 85px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 3px solid rgba(0, 0, 0, 0.1);
   max-width: 356px;
   margin: 0 auto 90px;
 }
@@ -3322,7 +3322,7 @@ body article.error404 .entry-header {
 }
 
 .entry-content .results-group-title {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   font-size: 35px;
   margin-bottom: 70px;
   padding: 0 0 20px;
@@ -3487,7 +3487,7 @@ p#item-desc {
   color: #fff;
   font-weight: 500;
   background-color: #333;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 0;
   font-size: 10px;
   font-family: inherit;
@@ -3591,14 +3591,14 @@ p#item-desc {
 .entry-tags a {
   text-transform: none;
   font-weight: 300;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   padding: 4px 10px;
   color: #838383;
   display: inline-block;
   margin: 0 10px 10px 0;
 }
 .entry-tags span {
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
   display: inline-block;
   margin: -4px -10px -4px 10px;
   padding: 4px 11px;
@@ -3715,7 +3715,7 @@ img {
 
 .sap-container-wrapper .sap-story-publish {
   background: #fff;
-  border-top: 1px solid;
+  border-top: 3px solid;
   box-sizing: border-box;
   float: none;
   font-size: 14px;
@@ -3753,7 +3753,7 @@ img {
 
 /* Icon */
 .sl-icon {
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
   color: #333;
   display: inline-block;
@@ -3768,7 +3768,7 @@ img {
 }
 .sl-icon:before {
   background-color: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 3px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
   content: "";
   display: block;

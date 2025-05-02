@@ -13,6 +13,8 @@ body.page-template-homepage {
 
 			&#primary {
 				max-width: $content_w;
+				@include padding( 2, 1 );
+				margin: 0 auto;
 			}
 
 			.section-content {
@@ -75,7 +77,6 @@ body.page-template-homepage {
 
 			.section-title {
 				text-align: center;
-				max-width: $content_w;
 				margin: 0 auto;
 
 				h4 {
@@ -85,7 +86,7 @@ body.page-template-homepage {
 					font-size: $font-size-mid;
 					color: $white;
 					text-transform: uppercase;
-					border-bottom: 1px solid;
+					border-bottom: 3px solid;
 				}
 
 				a {
@@ -112,12 +113,12 @@ body.page-template-homepage {
 			}
 
 			&.banner {
-
 				position: relative;
 				padding: 0;
 				min-height: 400px;
 				max-height: 600px;
 				overflow: hidden;
+				background-color: $green;
 
 				.section-content {
 					min-height: 400px;
@@ -141,7 +142,6 @@ body.page-template-homepage {
 
 						a.button {
 							color: $white;
-							font-weight: 500;
 							text-transform: uppercase;
 							margin: 10px;
 							font-size: $font-size-std;
@@ -184,18 +184,6 @@ body.page-template-homepage {
 					}
 				}
 
-				&.text-left,
-				&.text-right {
-					.section-title-container {
-						background-color: $green;
-						color: $white;
-
-						> .section-title a.button {
-							margin-left: 0;
-						}
-					}
-				}
-
 				&.background {
 					.section-content img {
 						opacity: 0.5;
@@ -228,12 +216,14 @@ body.page-template-homepage {
 						}
 					}
 					.section-title-container {
+						background-color: $green;
+						color: $white;
 						width: 50%;
 						min-height: 400px;
 						float: left;
 
 						> .section-title {
-							margin: 50px 8%;
+							margin: 25px 8%;
 							h2,
 							p {
 								text-align: left;

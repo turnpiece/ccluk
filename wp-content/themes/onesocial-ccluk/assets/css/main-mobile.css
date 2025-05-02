@@ -98,7 +98,7 @@ body #content article {
   padding: 15px 0;
   overflow: hidden;
   margin: 0;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 3px solid #aaa;
 }
 
 .site-content nav.nav-single, .site-content #comments {
@@ -108,7 +108,7 @@ body #content article {
   padding: 15px 0;
   overflow: hidden;
   margin: 0;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 3px solid #aaa;
 }
 
 .site-content #comments article.comment {
@@ -290,7 +290,7 @@ body .buddyboss-select {
   margin: 0 10px 10px 0;
   background-color: #fff;
   float: left;
-  border: 1px solid #aaa;
+  border: 3px solid #aaa;
 }
 .buddyboss-select-inner:after {
   font-family: "onesocial" !important;
@@ -500,7 +500,7 @@ body #content article {
   padding-top: 0;
 }
 body #content article.boss-create-post-wrapper {
-  border-bottom: 1px solid #aaa;
+  border-bottom: 3px solid #aaa;
   margin-bottom: 20px;
   padding: 20px 0;
 }
@@ -906,7 +906,7 @@ body.open-right #mobile-right-panel {
   width: 240px;
 }
 #mobile-right-panel li a {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.1);
   padding: 14px 25px;
   line-height: 1.6;
   font-size: 15px;
@@ -1335,7 +1335,7 @@ Responsive media queries (mobile styles)
     display: none;
   }
   #header-aside-inner #all-notificatios + .header-button {
-    border-left: 1px solid #aaa;
+    border-left: 3px solid #aaa;
   }
 }
 @media screen and (max-width: 622px) {
@@ -1609,14 +1609,14 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   .single-post .entry-header.has-image h1 {
     font-size: 36px;
   }
-  body.page-template-homepage #main .section.banner.background-box .section-title-container {
+  body.page-template-homepage #main .section.banner .section-title-container {
     padding: 20px;
   }
-  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title h2 {
+  body.page-template-homepage #main .section.banner .section-title-container > .section-title h2 {
     font-size: 28px;
   }
-  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title p,
-  body.page-template-homepage #main .section.banner.background-box .section-title-container > .section-title a.button {
+  body.page-template-homepage #main .section.banner .section-title-container > .section-title p,
+  body.page-template-homepage #main .section.banner .section-title-container > .section-title a.button {
     font-size: 15px;
   }
   .site .buddyboss-media-photos-wrap-container {

@@ -14,7 +14,7 @@
     padding: 2px 5px;
     min-width: 13px;
     text-decoration: none;
-    border: 2px solid #ccc;
+    border: 3px solid #ccc;
     border-radius: 0;
     font-weight: bold;
     font-size: 12px;
@@ -64,7 +64,7 @@
       font-size: 11px;
       font-weight: 900;
       display: block;
-      border-bottom: 1px solid $divider_color;
+      border-bottom: 3px solid $divider_color;
       padding-bottom: 9px;
       margin-bottom: 20px;
     }
@@ -209,7 +209,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 
 .sap-publish-popup.sap-publish-popup .button {
   background: rgba(0, 0, 0, 0);
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(0, 0, 0, 0.2);
   @include border-radius(40px);
   color: rgba(0, 0, 0, 0.6);
   float: left;
@@ -224,7 +224,7 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 }
 
 .sap-editor-toolbar .toggle-sap-widgets.toggle-sap-widgets {
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 3px solid rgba(0, 0, 0, 0.2);
   border-radius: 100%;
   height: 40px;
   margin: 0;
@@ -266,18 +266,18 @@ body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-c
 }
 
 .sap-widget .selectize-input {
-  border: 1px solid $secondary_bg;
+  border: 3px solid $secondary_bg;
   border-radius: 0;
   box-shadow: none;
   &:focus {
-    border: 1px solid $secondary_bg;
+    border: 3px solid $secondary_bg;
     border-radius: 0;
     box-shadow: none;
   }
 }
 
 .sap-arrow-dropdown.sap-arrow-dropdown {
-  border-left: 1px solid $secondary_bg;
+  border-left: 3px solid $secondary_bg;
   font-size: 13px;
   line-height: 1.4;
   margin-left: 5px;

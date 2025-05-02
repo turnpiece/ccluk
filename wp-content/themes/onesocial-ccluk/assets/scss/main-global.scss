@@ -374,7 +374,7 @@ input, textarea {
  */
 
 fieldset {
-  border: 1px solid $green;
+  border: 3px solid $green;
   margin: 0 0 26px;
   padding: 15px 20px 0;
 }
@@ -629,7 +629,7 @@ table {
 }
 
 th, td {
-  border-bottom: 1px solid $green;
+  border-bottom: 3px solid $green;
   padding: 13px;
   text-align: left;
 }
@@ -677,7 +677,7 @@ td:last-child {
 pre {
   color: $white;
   background: $green;
-  border: 1px solid $black;
+  border: 3px solid $black;
   font-size: 0.85rem;
   max-width: 100%;
   overflow: auto;
@@ -710,7 +710,7 @@ code {
   font-size: 80%;
   color: $white;
   background: $green;
-  border: 1px solid $black;
+  border: 3px solid $black;
   border-radius: 3px;
   font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 }
@@ -905,7 +905,7 @@ input {
   }
   &[type="radio"]:checked + {
     span:before, label:before, strong:before {
-      border: 2px solid $white;
+      border: 3px solid $white;
       padding: 3px;
       background-color: $dark;
     }
@@ -935,7 +935,7 @@ input[type="button"],
 input[type="reset"],
 button {
   background-color: $blue;
-  border: 1px solid;
+  border: 3px solid;
   color: $white;
   cursor: pointer;
   font-size: $font-size-min;
@@ -989,7 +989,7 @@ a.button,
 input[type="submit"] {
   border: none;
   color: $green;
-  border-top: 1px solid $green;
+  border-top: 3px solid $green;
   padding: 0;
   padding-top: 20px;
   background-color: transparent;
@@ -1349,7 +1349,7 @@ img.wp-smiley, .rsswidget img {
 }
 
 .author-info {
-  border-top: 1px solid #ededed;
+  border-top: 3px solid #ededed;
   margin: 24px 0;
   padding-top: 24px;
   overflow: hidden;
@@ -1695,7 +1695,7 @@ img.avatar {
   a {
     font-size: $font-size-tiny !important;
     color: #999;
-    border: 1px solid $divider_color;
+    border: 3px solid $divider_color;
     display: inline-block;
     margin-right: 5px;
     padding: 5px 10px;
@@ -1704,7 +1704,7 @@ img.avatar {
     background-color: $white;
     &:hover {
       color: $dark;
-      border: 1px solid $dark;
+      border: 3px solid $dark;
     }
   }
 }
@@ -1791,7 +1791,7 @@ img.avatar {
     margin-bottom: 25px;
     a {
       background: transparent;
-      border: 1px solid $divider_color;
+      border: 3px solid $divider_color;
       color: rgba(0, 0, 0, 0.4);
       display: inline-block;
       font-size: 13px;
@@ -2091,14 +2091,14 @@ div {
 .widget_mc4wp_form_widget form p input[type="email"] {
   width: 100%;
   background-color: $white;
-  border: 1px solid rgba(0, 0, 0, 0.11);
+  border: 3px solid rgba(0, 0, 0, 0.11);
 }
 
 .widget.widget_newsletterwidget form {
   p input[type="email"], div input[type="email"] {
     width: 100%;
     background-color: $white;
-    border: 1px solid rgba(0, 0, 0, 0.11);
+    border: 3px solid rgba(0, 0, 0, 0.11);
   }
 }
 
@@ -2600,7 +2600,7 @@ body {
 
 .entry-meta a.read-more {
   color: $green;
-  border-top: 1px solid $green;
+  border-top: 3px solid $green;
   padding-top: 26px;
   display: inline-block;
   font-weight: 400;
@@ -2624,7 +2624,7 @@ body {
 .posts-stream {
   display: none;
   .title {
-    border: 1px solid;
+    border: 3px solid;
     display: inline-block;
     font-family: inherit;
     font-size: 10px;
@@ -2643,7 +2643,7 @@ body {
     padding: 0;
     li {
       padding: 35px 0;
-      border-bottom: 1px solid $divider_color;
+      border-bottom: 3px solid $divider_color;
       &::after {
         clear: both;
         content: "";
@@ -2671,7 +2671,7 @@ body {
           position: relative;
           &:after {
             content: '';
-            border: 1px solid $white;
+            border: 3px solid $white;
             display: block;
             width: 4px;
             background-color: $green;
@@ -2681,7 +2681,7 @@ body {
           }
           &:before {
             content: '';
-            border: 1px solid $white;
+            border: 3px solid $white;
             display: block;
             width: 4px;
             background-color: $green;
@@ -2733,7 +2733,7 @@ body {
     }
   }
   article {
-    border-bottom: 1px solid $divider_color;
+    border-bottom: 3px solid $divider_color;
     padding: 30px 0 10px;
     position: relative;
   }
@@ -2751,7 +2751,7 @@ body {
 }
 
 .bookmarked-post {
-  border-bottom: 1px solid $divider_color;
+  border-bottom: 3px solid $divider_color;
   padding: 70px 0;
   position: relative;
   &:last-child {
@@ -2803,7 +2803,7 @@ article.format-aside {
   .aside {
     padding: 24px 24px 0;
     background-color: #d2e0f9;
-    border-left: 22px solid #a8bfe8;
+    border-left: 23px solid #a8bfe8;
   }
   blockquote:last-child, p:last-child {
     margin-bottom: 0;
@@ -2815,7 +2815,7 @@ article.format-aside {
 --------------------------------------------------------------*/
 
 .post-author-info {
-  border-top: 1px solid $divider_color;
+  border-top: 3px solid $divider_color;
   .inner {
     display: table;
     width: 100%;
@@ -3074,7 +3074,7 @@ article {
   article {
     margin: 0;
     padding: 70px 0;
-    border-top: 1px solid $divider_color;
+    border-top: 3px solid $divider_color;
   }
   .comment:first-child article {
     border-top: 0;
@@ -3132,7 +3132,7 @@ article {
       -moz-border-radius: 3px;
       -webkit-border-radius: 3px;
       border-radius: 3px;
-      border: 1px solid #007cbd;
+      border: 3px solid #007cbd;
     }
   }
   li.bypostauthor cite span {
@@ -3264,7 +3264,7 @@ a {
 }
 
 body:not(.logged-in) #respond form textarea {
-  border-bottom: 1px solid $divider_color;
+  border-bottom: 3px solid $divider_color;
   margin-bottom: 26px;
 }
 
@@ -3328,7 +3328,7 @@ body.logged-in #respond .form-submit {
     float: none;
     width: auto;
     padding-top: 24px;
-    border-top: 1px solid $green;
+    border-top: 3px solid $green;
     .widget li {
       margin: 8px 0 0;
       font-size: 13px;
@@ -3410,7 +3410,7 @@ body article.error404 .entry-header {
 
 #posts-carousel {
   padding-top: 85px;
-  border-top: 1px solid $divider_color;
+  border-top: 3px solid $divider_color;
   max-width: 356px;
   margin: 0 auto 90px;
   h2.title {
@@ -3515,7 +3515,7 @@ body article.error404 .entry-header {
 }
 
 .entry-content .results-group-title {
-  border-bottom: 1px solid $divider_color;
+  border-bottom: 3px solid $divider_color;
   font-size: 35px;
   margin-bottom: 70px;
   padding: 0 0 20px;
@@ -3700,7 +3700,7 @@ p#item-desc {
     color: $white;
     font-weight: 500;
     background-color: $dark;
-    border: 1px solid $divider_color;
+    border: 3px solid $divider_color;
     border-radius: 0;
     font-size: 10px;
     font-family: inherit;
@@ -3812,14 +3812,14 @@ p#item-desc {
   a {
     text-transform: none;
     font-weight: 300;
-    border: 1px solid $divider_color;
+    border: 3px solid $divider_color;
     padding: 4px 10px;
     color: $gray;
     display: inline-block;
     margin: 0 10px 10px 0;
   }
   span {
-    border-left: 1px solid $divider_color;
+    border-left: 3px solid $divider_color;
     display: inline-block;
     margin: -4px -10px -4px 10px;
     padding: 4px 11px;
@@ -3939,7 +3939,7 @@ img {
 
 .sap-container-wrapper .sap-story-publish {
   background: $white;
-  border-top: 1px solid;
+  border-top: 3px solid;
   box-sizing: border-box;
   float: none;
   font-size: 14px;
@@ -3981,7 +3981,7 @@ img {
 /* Icon */
 
 .sl-icon {
-  border: 1px solid $divider_color;
+  border: 3px solid $divider_color;
   border-radius: 50%;
   color: $dark;
   display: inline-block;
@@ -3995,7 +3995,7 @@ img {
   vertical-align: top;
   &:before {
     background-color: $white;
-    border: 1px solid $divider_color;
+    border: 3px solid $divider_color;
     border-radius: 2px;
     content: "";
     display: block;
