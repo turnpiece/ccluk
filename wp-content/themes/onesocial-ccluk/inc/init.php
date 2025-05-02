@@ -57,11 +57,6 @@ class BuddyBoss_Theme
 		$this->globals();
 
 		/**
-		 * Load BuddyBoss options
-		 */
-		$this->options();
-
-		/**
 		 * Load required theme files
 		 */
 		$this->includes();
@@ -93,14 +88,6 @@ class BuddyBoss_Theme
 	}
 
 	/**
-	 * Load options
-	 */
-	public function options()
-	{
-		$opt = get_option('buddyboss_theme_options');
-	}
-
-	/**
 	 * Includes
 	 */
 	public function includes()
@@ -110,11 +97,6 @@ class BuddyBoss_Theme
 
 		// Ajax file
 		require_once($this->inc_dir . '/ajax-load-posts.php');
-
-		// Recommend Posts
-		if (! function_exists('buddyboss_sap')) {
-			require_once($this->inc_dir . '/recommend-posts.php');
-		}
 
 		//Cache update hook
 		require_once($this->inc_dir . '/cache-update-hook.php');
