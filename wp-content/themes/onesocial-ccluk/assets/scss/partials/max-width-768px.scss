@@ -2,21 +2,19 @@
      &.page-template-homepage {
         #main {
             .section.banner {
-                min-height: 260px;
+                max-height: 100%;
                 &.text-left,
                 &.text-right {
+                    flex-direction: column;
                     .section-content {
-                        display: none;
+                        order: 1;
                     }
                     .section-title-container {
-                        width: 100%;
-                        min-height: auto;
-                        float: none;
+                        order: 2;
                         > .section-title {
-                            margin-left: auto;
-                            margin-right: auto;
+                            @include margin(2);
                             h2,
-                            p {
+                            p, {
                                 text-align: center;
                             }
                         }

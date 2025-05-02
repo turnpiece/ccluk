@@ -41,11 +41,10 @@ if (
         $image = get_the_post_thumbnail($home, 'ccluk-hero');
     }
 
-    if (!empty($image)) :
-?>
+    if (!empty($image)) : ?>
         <section id="<?php echo $id ?>" class="section site-content banner <?php echo $layout ?>">
             <?php if (!empty($heading)) : ?>
-                <header class="section-title-container">
+                <header class="section-title-container banner-box">
                     <div class="section-title">
                         <a href="<?php echo get_permalink($page) ?>" class="page-link">
                             <h2><?php echo $heading ?></h2>
@@ -70,23 +69,7 @@ if (
                 </header>
             <?php endif; ?>
 
-            <div class="section-content"><?php echo $image ?></div>
-
-            <script>
-                (function($) {
-                    $content = $('#<?php echo $id ?>').find('.section-content');
-                    $(window).on('load resize', function() {
-                        if ($content.height() > $content.find('img').height()) {
-                            $content.find('img').height($content.height());
-                        }
-                        <?php if ($layout != 'background-box') : ?>
-                            $textbox = $('#<?php echo $id ?>').find('.section-title-container');
-                            $textbox.height($content.height());
-                        <?php endif; ?>
-                    })
-                })
-            </script>
-
+            <div class="section-content banner-box"><?php echo $image ?></div>
         </section>
 <?php endif;
 endif; ?>

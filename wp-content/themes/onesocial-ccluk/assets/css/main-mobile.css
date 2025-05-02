@@ -1560,19 +1560,20 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
   body.page-template-homepage #main .section.banner {
-    min-height: 260px;
+    max-height: 100%;
+  }
+  body.page-template-homepage #main .section.banner.text-left, body.page-template-homepage #main .section.banner.text-right {
+    flex-direction: column;
   }
   body.page-template-homepage #main .section.banner.text-left .section-content, body.page-template-homepage #main .section.banner.text-right .section-content {
-    display: none;
+    order: 1;
   }
   body.page-template-homepage #main .section.banner.text-left .section-title-container, body.page-template-homepage #main .section.banner.text-right .section-title-container {
-    width: 100%;
-    min-height: auto;
-    float: none;
+    order: 2;
   }
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px 10px;
+    margin: 2rem 1rem;
   }
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title h2,
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title p, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title h2,
@@ -1647,13 +1648,6 @@ MAXIMUM width of 480 pixels (phones)
   body #mobile-header .right-btn:before {
     line-height: 35px;
     font-size: 15px;
-  }
-  body .bb-slider-container {
-    top: 0;
-    margin-bottom: 0;
-  }
-  body .bb-slider-container .title {
-    font-size: 21px !important;
   }
   body h1, body h2, body h3, body h4, body h5, body h6 {
     color: inherit;

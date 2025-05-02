@@ -120,6 +120,7 @@
   @include padding( .6, 1 );
   color: $white;
   font-weight: bold;
+  text-wrap: balance;
   &:hover {
     color: $hover_color;
     background-color: $hover_bg;

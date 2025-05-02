@@ -75,6 +75,7 @@ a:hover,
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
@@ -201,6 +202,7 @@ a.button {
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
 }
 a.button:hover {
   color: #fff;
@@ -529,9 +531,6 @@ body.page-template-homepage #main .section.banner {
   overflow: hidden;
   background-color: #54ae68;
 }
-body.page-template-homepage #main .section.banner .section-content {
-  min-height: 400px;
-}
 body.page-template-homepage #main .section.banner .section-content > img {
   display: block;
   object-fit: cover;
@@ -543,10 +542,15 @@ body.page-template-homepage #main .section.banner .section-title-container {
 }
 body.page-template-homepage #main .section.banner .section-title-container > .section-title {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 body.page-template-homepage #main .section.banner .section-title-container > .section-title h2,
 body.page-template-homepage #main .section.banner .section-title-container > .section-title p {
   color: #fff;
+}
+body.page-template-homepage #main .section.banner .section-title-container > .section-title .buttons {
+  margin-top: auto;
 }
 body.page-template-homepage #main .section.banner .section-title-container > .section-title a.button {
   color: #fff;
@@ -597,20 +601,26 @@ body.page-template-homepage #main .section.banner.background-box .section-title-
   max-height: 95%;
   padding: 30px;
 }
+body.page-template-homepage #main .section.banner.text-left, body.page-template-homepage #main .section.banner.text-right {
+  display: flex;
+  flex-direction: row; /* Side by side by default */
+  flex-wrap: wrap;
+}
+body.page-template-homepage #main .section.banner.text-left .banner-box, body.page-template-homepage #main .section.banner.text-right .banner-box {
+  box-sizing: border-box;
+  flex: 1;
+}
 body.page-template-homepage #main .section.banner.text-left .section-content, body.page-template-homepage #main .section.banner.text-right .section-content {
-  float: right;
-  width: 50%;
+  order: 2;
 }
 body.page-template-homepage #main .section.banner.text-left .section-content > img, body.page-template-homepage #main .section.banner.text-right .section-content > img {
   width: 100%;
   height: 100%;
 }
 body.page-template-homepage #main .section.banner.text-left .section-title-container, body.page-template-homepage #main .section.banner.text-right .section-title-container {
+  order: 1;
   background-color: #54ae68;
   color: #fff;
-  width: 50%;
-  min-height: 400px;
-  float: left;
 }
 body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
   margin: 25px 8%;
@@ -621,10 +631,10 @@ body.page-template-homepage #main .section.banner.text-right .section-title-cont
   text-align: left;
 }
 body.page-template-homepage #main .section.banner.text-right .section-content {
-  float: left;
+  order: 1;
 }
 body.page-template-homepage #main .section.banner.text-right .section-title-container {
-  float: right;
+  order: 2;
 }
 body.page-template-homepage #main .section.feature .section-content {
   max-width: 580px;
@@ -684,11 +694,6 @@ body.page-template-homepage #main .section.posts .section-content {
   max-width: 1020px;
   text-align: center;
 }
-body.page-template-homepage #main .section.twitter .section-content {
-  max-width: 400px;
-  margin: 15px auto;
-  margin: 1.5rem auto;
-}
 body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.newsletter .section-content, body.page-template-homepage #main .section.embed .section-content {
   justify-content: space-around;
   -webkit-align-items: start;
@@ -744,6 +749,7 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
   float: right;
 }
 body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type=submit]:hover, body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type=submit]:hover, body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type=submit]:hover {
@@ -780,6 +786,7 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   height: auto;
   line-height: 1;
@@ -859,6 +866,7 @@ body.page-template-homepage .homepage-section-title > h4 {
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
 }
 body.page-template-homepage .homepage-section-title > h4:hover {
   color: #fff;
@@ -1278,6 +1286,7 @@ body.single-give_forms #secondary {
   padding: 0.6rem 1rem;
   color: #fff;
   font-weight: bold;
+  text-wrap: balance;
 }
 .give-form .give-donation-submit input[type=submit].give-btn:hover,
 .give-form button.give-btn:hover {

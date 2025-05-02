@@ -537,6 +537,7 @@ h1, h2, h3, h4, .site-header .site-title {
     font-family: $font-heading;
     font-weight: 700;
     font-style: normal;
+    text-wrap: balance;
 }
 
 h1{
@@ -609,12 +610,6 @@ ul, ol, dd {
   margin-left: 1.625rem;
 }
 
-li > {
-  ul, ol {
-    /*margin-bottom: 0;*/
-  }
-}
-
 /**
  * Tables
  */
@@ -667,9 +662,6 @@ td:last-child {
   font-size: $font-size-min;
 }
 
-/**
- * Not strictly a paragraph, but probably doesn't need its own section.
- */
 /**
  * CODE
  */
@@ -814,14 +806,12 @@ textarea:focus {
 
 button {
   line-height: normal;
+  text-wrap: balance;
 }
 
 input {
   &[type="text"], &[type="tel"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
     line-height: normal;
-  }
-  &[type="text"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
-    /* padding: 10px 12px; */
   }
 }
 

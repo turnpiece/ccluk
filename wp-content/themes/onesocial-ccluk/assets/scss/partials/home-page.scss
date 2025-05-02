@@ -121,7 +121,6 @@ body.page-template-homepage {
 				background-color: $green;
 
 				.section-content {
-					min-height: 400px;
 					> img {
 						display: block;
 						object-fit: cover;
@@ -134,10 +133,16 @@ body.page-template-homepage {
 
 					> .section-title {
 						position: relative;
+						display: flex;
+						flex-direction: column;
 
 						h2,
 						p {
 							color: $white;
+						}
+
+						.buttons{
+							margin-top: auto;
 						}
 
 						a.button {
@@ -207,20 +212,24 @@ body.page-template-homepage {
 
 				&.text-left,
 				&.text-right {
+					display: flex;
+					flex-direction: row; /* Side by side by default */
+					flex-wrap: wrap;
+					.banner-box {
+						box-sizing: border-box;
+						flex: 1;
+					}
 					.section-content {
-						float: right;
-						width: 50%;
+						order: 2;
 						> img {
 							width: 100%;
 							height: 100%;
 						}
 					}
 					.section-title-container {
+						order: 1;
 						background-color: $green;
 						color: $white;
-						width: 50%;
-						min-height: 400px;
-						float: left;
 
 						> .section-title {
 							margin: 25px 8%;
@@ -234,10 +243,10 @@ body.page-template-homepage {
 
 				&.text-right {
 					.section-content {
-						float: left;
+						order: 1;
 					}
 					.section-title-container {
-						float: right;
+						order: 2;
 					}
 				}
 			}
@@ -303,19 +312,10 @@ body.page-template-homepage {
 				}
 			}
 
-			&.twitter {
-				.section-content {
-					max-width: 400px;
-					@include centred-margin();
-				}
-			}
-
 			&.join,
 			&.newsletter,
 			&.embed {
-
 				.section-content {
-
 					justify-content: space-around;
 					@include align-items( start );
 					@include padding( 1, 0 );
