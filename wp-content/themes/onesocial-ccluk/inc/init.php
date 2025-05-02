@@ -2,12 +2,12 @@
 
 /**
  * @package WordPress
- * @subpackage OneSocial Theme
- * @since OneSocial 1.0.0
+ * @subpackage CCLUK Theme
+ * @since CCLUK 2.6.7
  */
-/* * **************************** MAIN BUDDYBOSS THEME CLASS ***************************** */
+/* * **************************** MAIN CCLUK THEME CLASS ***************************** */
 
-class BuddyBoss_Theme
+class CCLUK_Theme
 {
 
 	/**
@@ -35,18 +35,6 @@ class BuddyBoss_Theme
 	public $inc_url;
 
 	/**
-	 * BuddyBoss options array
-	 * @var array
-	 */
-	public $opt;
-
-	/**
-	 * BuddyBoss modules array
-	 * @var array
-	 */
-	public $mods;
-
-	/**
 	 * Constructor
 	 */
 	public function __construct()
@@ -67,8 +55,6 @@ class BuddyBoss_Theme
 	 */
 	public function globals()
 	{
-		global $buddyboss_js_params;
-
 		// Get theme path
 		$this->tpl_dir = get_stylesheet_directory();
 
@@ -80,11 +66,6 @@ class BuddyBoss_Theme
 
 		// Get includes url
 		$this->inc_url = $this->tpl_url . '/inc';
-
-		// Child themes can add variables to this array for JS on the front end
-		if (empty($buddyboss_js_params)) {
-			$buddyboss_js_params = array();
-		}
 	}
 
 	/**
@@ -101,61 +82,6 @@ class BuddyBoss_Theme
 		//Cache update hook
 		require_once($this->inc_dir . '/cache-update-hook.php');
 	}
-
-	function backend_should_load()
-	{
-
-		if (is_admin()) {
-			return true;
-		}
-
-		$onesocial_typography = get_transient("onesocial_typography");
-
-		if (empty($onesocial_typography)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Utility function for loading modules
-	 */
-	public function add_mod($mod_info)
-	{
-		if (!isset($mod_info['name'])) {
-			wp_die(__('Module does not have the proper info array', 'onesocial'));
-		}
-
-		$this->mods[$mod_info['name']] = $mod_info;
-
-		return true;
-	}
-
-	/**
-	 * Check if a module is active
-	 */
-	public function is_active($name)
-	{
-		$active = false;
-
-		// Check for active module
-		if (isset($this->mods[$name]) && isset($this->mods[$name]['active']) && $this->mods[$name]['active'] == true) {
-			$active = true;
-		}
-
-		// Check for active module (old way, soon to be deprecated)
-		if (isset($this->opt['mod_' . $name])) {
-			return $this->opt['mod_' . $name];
-		}
-
-		return $active;
-	}
 }
 
-$GLOBALS['onesocial'] = new BuddyBoss_Theme;
-
-function onesocial()
-{
-	return $GLOBALS['onesocial'];
-}
+new CCLUK_Theme;

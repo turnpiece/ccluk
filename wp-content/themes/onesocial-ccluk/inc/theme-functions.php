@@ -7,7 +7,7 @@
  * Sets up the content width value based on the theme's design and stylesheet.
  */
 global $content_width;
-$content_width = (isset($content_width)) ? $content_width : 1400;
+$content_width = (isset($content_width)) ? $content_width : 700;
 
 /**
  * Sets up theme defaults and registers the various WordPress features that OneSocial supports.
@@ -20,7 +20,7 @@ $content_width = (isset($content_width)) ? $content_width : 1400;
  *
  * @since OneSocial 1.0.0
  */
-function onesocial_setup()
+function ccluk_setup()
 {
 	// Makes OneSocial available for translation.
 	load_theme_textdomain('onesocial', get_template_directory() . '/languages');
@@ -50,7 +50,7 @@ function onesocial_setup()
 	set_post_thumbnail_size(845, 9999); // Unlimited height, soft crop
 }
 
-add_action('after_setup_theme', 'onesocial_setup');
+add_action('after_setup_theme', 'ccluk_setup');
 
 /**
  * Disable gallery style
@@ -77,7 +77,7 @@ function is_phone()
  *
  * @since OneSocial 1.0.0
  */
-function buddyboss_onesocial_scripts_styles()
+function ccluk_scripts_styles()
 {
 
 	$ext = 'css';
@@ -165,7 +165,7 @@ function buddyboss_onesocial_scripts_styles()
 	wp_enqueue_script('onesocial-custom');
 }
 
-add_action('wp_enqueue_scripts', 'buddyboss_onesocial_scripts_styles');
+add_action('wp_enqueue_scripts', 'ccluk_scripts_styles');
 
 // remove block editor scripts and styles
 function ccluk_remove_block_editor_assets()
