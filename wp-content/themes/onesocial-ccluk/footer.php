@@ -54,14 +54,6 @@ if ($show_footer) : ?>
 
 				</div>
 
-				<?php if (onesocial_get_option('boss_layout_switcher')) { ?>
-					<form id="switch-mode" name="switch-mode" method="post" action="">
-						<input type="submit" value="View as Desktop" tabindex="1" id="switch_submit" name="submit" />
-						<input type="hidden" id="switch_mode" name="switch_mode" value="desktop" />
-						<?php wp_nonce_field('switcher_action', 'switcher_nonce_field'); ?>
-					</form>
-				<?php } ?>
-
 				<?php get_template_part('template-parts/footer-social-links'); ?>
 
 			</div><!-- .footer-inner -->
