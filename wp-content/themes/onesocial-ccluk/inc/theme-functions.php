@@ -389,7 +389,7 @@ function buddyboss_widgets_init()
 		'after_title'	 => '</h4>'
 	));
 
-
+	/*
 	// Area 12, located in the Footer column 1. Only appears if widgets are added.
 	register_sidebar(array(
 		'name'			 => 'Footer #1',
@@ -430,6 +430,7 @@ function buddyboss_widgets_init()
 		'before_title'	 => '<h4 class="widgettitle">',
 		'after_title'	 => '</h4>'
 	));
+*/
 }
 
 add_action('widgets_init', 'buddyboss_widgets_init');
@@ -516,7 +517,6 @@ function buddyboss_body_class($classes)
 	}
 
 	$page_for_posts	 = get_option('page_for_posts');
-	$front_page		 = get_option('page_on_front');
 
 	// Home sidebar
 	if (is_active_sidebar('home-sidebar') && is_front_page()) {
@@ -554,9 +554,6 @@ function buddyboss_body_class($classes)
 add_filter('body_class', 'buddyboss_body_class');
 
 
-
-
-
 /* * **************************** AVATAR FUNCTIONS ***************************** */
 
 /**
@@ -585,7 +582,7 @@ if (!function_exists('buddyboss_add_gravatar')) {
  * BuddyBoss Previous Logo Support
  *
  * @since OneSocial 1.0.0
- */
+ *
 function buddyboss_set_previous_logo()
 {
 
@@ -605,17 +602,7 @@ function buddyboss_set_previous_logo()
 }
 
 add_action('after_setup_theme', 'buddyboss_set_previous_logo');
-
-/**
- * Checks if a plugin is active.
- *
- * @since OneSocial 1.0.0
  */
-function buddyboss_is_plugin_active($plugin)
-{
-	return in_array($plugin, (array) get_option('active_plugins', array()));
-}
-
 /**
  * Add image size for posts
  *
@@ -710,259 +697,6 @@ function buddyboss_ajax_posts()
 	die();
 }
 
-
-/* * **************************** ADMIN BAR FUNCTIONS ***************************** */
-
-/**
- * Strip all waste and unuseful nodes and keep components only and memory for notification
- * @since OneSocial 1.0.0
- * */
-function buddyboss_strip_unnecessary_admin_bar_nodes(&$wp_admin_bar)
-{
-	ccluk_debug(__FUNCTION__);
-
-	global $admin_bar_myaccount, $bb_adminbar_notifications, $bb_adminbar_messages, $bp;
-
-	$dontalter_adminbar = apply_filters('onesocial_prevent_adminbar_processing', is_admin());
-	if ($dontalter_adminbar) { //nothing to do on admin
-		return;
-	}
-	$nodes = $wp_admin_bar->get_nodes();
-
-	$bb_adminbar_notifications[] = @$nodes["bp-notifications"];
-
-	$current_href = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-
-	foreach ($nodes as $name => $node) {
-
-		if ($node->parent == "bp-notifications") {
-			$bb_adminbar_notifications[] = $node;
-		}
-
-		if ($node->parent == "" || $node->parent == "top-secondary" and $node->id != "top-secondary") {
-			if ($node->id == "my-account") {
-				continue;
-			}
-		}
-
-		//adding active for parent link
-		if (
-			$node->id == "my-account-xprofile-edit" ||
-			$node->id == "my-account-groups-create"
-		) {
-
-			if (
-				strpos("http://" . $current_href, $node->href) !== false ||
-				strpos("https://" . $current_href, $node->href) !== false
-			) {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-			}
-		}
-
-		//adding active for child link
-		if ($node->id == "my-account-settings-general") {
-			if (
-				$bp->current_component == "settings" ||
-				$bp->current_action == "general"
-			) {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-			}
-		}
-
-
-		//add active class if it has viewing page href
-		if (!empty($node->href)) {
-			if (
-				("http://" . $current_href == $node->href || "https://" . $current_href == $node->href) ||
-				($node->id = 'my-account-xprofile-edit' && strpos("http://" . $current_href, $node->href) === 0)
-			) {
-				buddyboss_adminbar_item_add_active($wp_admin_bar, $name);
-				//add active class to its parent
-				if ($node->parent != '') {
-					foreach ($nodes as $name_inner => $node_inner) {
-						if ($node_inner->id == $node->parent) {
-							buddyboss_adminbar_item_add_active($wp_admin_bar, $name_inner);
-							break;
-						}
-					}
-				}
-			}
-		}
-	}
-}
-add_action('admin_bar_menu', 'buddyboss_strip_unnecessary_admin_bar_nodes', 999);
-
-function buddyboss_adminbar_item_add_active(&$wp_admin_bar, $name)
-{
-	ccluk_debug(__FUNCTION__ . ' ' . $name);
-	$gnode = $wp_admin_bar->get_node($name);
-	if ($gnode) {
-		$gnode->meta["class"] = isset($gnode->meta["class"]) ? $gnode->meta["class"] . " active" : " active";
-		$wp_admin_bar->add_node($gnode); //update
-	}
-}
-
-/**
- * Store adminbar specific nodes to use later for buddyboss
- * @since OneSocial 1.0.0
- * */
-function buddyboss_memory_admin_bar_nodes()
-{
-
-	ccluk_debug(__FUNCTION__);
-
-	static $bb_memory_admin_bar_step;
-	global $bb_adminbar_myaccount;
-
-	$dontalter_adminbar = apply_filters('onesocial_prevent_adminbar_processing', is_admin());
-	if ($dontalter_adminbar) { //nothing to do on admin
-		ccluk_debug('do not alter admin bar');
-		return;
-	}
-
-	if (!empty($bb_adminbar_myaccount)) { //avoid multiple run
-		ccluk_debug('admin bar empty');
-		return false;
-	}
-
-	if (empty($bb_memory_admin_bar_step)) {
-		ccluk_debug('setting up admin bar');
-		$bb_memory_admin_bar_step = 1;
-		ob_start();
-	} else {
-		ccluk_debug('outputting admin bar');
-		$admin_bar_output = ob_get_contents();
-		ob_end_clean();
-
-		echo $admin_bar_output;
-
-		//strip some waste
-		$admin_bar_output = str_replace(array(
-			'id="wpadminbar"',
-			'role="navigation"',
-			'class ',
-			'class="nojq nojs"',
-			'class="quicklinks" id="wp-toolbar"',
-			'id="wp-admin-bar-top-secondary" class="ab-top-secondary ab-top-menu"',
-		), '', $admin_bar_output);
-
-		//remove screen shortcut link
-		$admin_bar_output	 = @explode('<a class="screen-reader-shortcut"', $admin_bar_output, 2);
-		$admin_bar_output2	 = "";
-		if (count($admin_bar_output) > 1) {
-			$admin_bar_output2 = @explode("</a>", $admin_bar_output[1], 2);
-			if (count($admin_bar_output2) > 1) {
-				$admin_bar_output2 = $admin_bar_output2[1];
-			}
-		}
-		$admin_bar_output = $admin_bar_output[0] . $admin_bar_output2;
-
-		//remove screen logout link
-		$admin_bar_output	 = @explode('<a class="screen-reader-shortcut"', $admin_bar_output, 2);
-		$admin_bar_output2	 = "";
-		if (count($admin_bar_output) > 1) {
-			$admin_bar_output2 = @explode("</a>", $admin_bar_output[1], 2);
-			if (count($admin_bar_output2) > 1) {
-				$admin_bar_output2 = $admin_bar_output2[1];
-			}
-		}
-		$admin_bar_output = $admin_bar_output[0] . $admin_bar_output2;
-
-		//remove script tag
-		$admin_bar_output	 = @explode('<script', $admin_bar_output, 2);
-		$admin_bar_output2	 = "";
-		if (count($admin_bar_output) > 1) {
-			$admin_bar_output2 = @explode("</script>", $admin_bar_output[1], 2);
-			if (count($admin_bar_output2) > 1) {
-				$admin_bar_output2 = $admin_bar_output2[1];
-			}
-		}
-		$admin_bar_output = $admin_bar_output[0] . $admin_bar_output2;
-
-		//remove user details
-		$admin_bar_output	 = @explode('<a class="ab-item"', $admin_bar_output, 2);
-		$admin_bar_output2	 = "";
-		if (count($admin_bar_output) > 1) {
-			$admin_bar_output2 = @explode("</a>", $admin_bar_output[1], 2);
-			if (count($admin_bar_output2) > 1) {
-				$admin_bar_output2 = $admin_bar_output2[1];
-			}
-		}
-		$admin_bar_output = $admin_bar_output[0] . $admin_bar_output2;
-
-		//add active class into vieving link item
-		$current_link = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-
-		ccluk_vardump($admin_bar_output);
-
-		$bb_adminbar_myaccount = $admin_bar_output;
-	}
-}
-
-add_action("wp_before_admin_bar_render", "buddyboss_memory_admin_bar_nodes");
-add_action("wp_after_admin_bar_render", "buddyboss_memory_admin_bar_nodes");
-
-/**
- * Get adminbar myaccount section output
- * Note :- this function can be overwrite with child-theme.
- * @since OneSocial 1.0.0
- *
- * */
-function buddyboss_adminbar_myaccount()
-{
-	ccluk_debug(__FUNCTION__);
-	global $bb_adminbar_myaccount;
-	echo $bb_adminbar_myaccount;
-}
-
-/**
- * Removing 3rd party hooks
- */
-if (!function_exists('onesocial_remove_hooks')) {
-
-	function onesocial_remove_hooks()
-	{
-		// Bookmark Button Single Post
-		remove_filter('the_content', 'sap_add_bookmark_button_after_post');
-
-		// Recommend Button Single Post
-		remove_filter('the_content', 'sap_add_recommend_button_after_post');
-	}
-
-	add_action('init', 'onesocial_remove_hooks');
-}
-
-/**
- * Get Notification from admin bar
- * @since OneSocial 1.0.0
- * */
-function buddyboss_adminbar_notification()
-{
-	global $bb_adminbar_notifications;
-	return @$bb_adminbar_notifications;
-}
-
-function buddyboss_adminbar_messages()
-{
-	global $bb_adminbar_messages;
-	return @$bb_adminbar_messages;
-}
-
-/**
- * Heartbeat settings
- *
- * @since OneSocial 1.0.0
- *
- */
-function buddyboss_heartbeat_settings($settings)
-{
-	$settings['interval'] = 5; //pulse on each 20 sec.
-	return $settings;
-}
-
-add_filter('heartbeat_settings', 'buddyboss_heartbeat_settings');
-
-
 /**
  * Add avatar to comment form
  *
@@ -978,8 +712,6 @@ function post_comment_form_avatar()
 
 	printf('<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())), get_avatar(get_current_user_id(), 85, '', get_the_author()));
 }
-
-
 
 /**
  * Messages date function
@@ -1083,7 +815,6 @@ if (!function_exists('buddyboss_comment')) {
 
 	function buddyboss_comment($comment, $args, $depth)
 	{
-
 		$GLOBALS['comment'] = $comment;
 
 		switch ($comment->comment_type) {
@@ -1141,64 +872,6 @@ if (!function_exists('buddyboss_comment')) {
 				break;
 		} // end comment_type check
 	}
-}
-
-
-function onesocial_theme_wrapper_start()
-{
-	// Fixed - Sidebar moved to the bottom of shop page (Not needed)
-	//		if ( is_active_sidebar( 'woo_sidebar' ) ) {
-	//			echo '<div class="page-right-sidebar">';
-	//		} else {
-	//			echo '<div class="page-full-width">';
-	//		}
-
-	echo '<div id="primary" class="site-content">';
-	echo '<div id="content" role="main" class="woo-content">';
-}
-
-function onesocial_theme_wrapper_end()
-{
-	echo '</div><!-- .woo-content -->';
-	echo '</div><!-- #primary -->';
-	$show_sidebar = apply_filters('onesocial_show_woo_sidebar', true);
-	if (is_active_sidebar('woo_sidebar') && $show_sidebar) {
-		echo '<div id="secondary" class="widget-area" role="complementary">';
-		dynamic_sidebar('woo_sidebar');
-		echo '</div><!-- #secondary -->';
-	}
-	// Fixed - Sidebar moved to the bottom of shop page (Not needed)
-	// echo '</div>';
-}
-
-/**
- * Add image size for cover photo.
- *
- * @since OneSocial 1.0.0
- */
-if (!function_exists('boss_cover_thumbnail')) :
-
-	add_action('after_setup_theme', 'boss_cover_thumbnail');
-
-	function boss_cover_thumbnail()
-	{
-		add_image_size('boss-cover-image', 1500, 500, true);
-	}
-
-endif;
-
-/**
- * Remove change cover image option from adminbar.
- */
-if (!function_exists('buddyboss_admin_bar_remove_links')) {
-
-	function buddyboss_admin_bar_remove_links()
-	{
-		global $wp_admin_bar;
-		$wp_admin_bar->remove_node('my-account-xprofile-change-cover-image');
-	}
-
-	add_action('wp_before_admin_bar_render', 'buddyboss_admin_bar_remove_links');
 }
 
 /**
@@ -1265,43 +938,4 @@ function onesocial_trim_excerpt($wpse_excerpt)
 	}
 
 	return apply_filters('onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt);
-}
-
-/**
- * Get OneSocial theme options
- *
- * @param string $id Option ID.
- * @param string $param Option type.
- *
- * @return $output False on failure, Option.
- */
-if (!function_exists('onesocial_get_option')) {
-
-	function onesocial_get_option($id, $param = null)
-	{
-
-		global $onesocial_options;
-
-		/* Check if options are set */
-		if (!isset($onesocial_options)) {
-			$onesocial_options = get_option('onesocial_options', array());
-		}
-
-		/* Check if array subscript exist in options */
-		if (empty($onesocial_options[$id])) {
-			return false;
-		}
-
-		/**
-		 * If $param exists,  then
-		 * 1. It should be 'string'.
-		 * 2. '$onesocial_options[ $id ]' should be array.
-		 * 3. '$param' array key exists.
-		 */
-		if (!empty($param) && is_string($param) && (!is_array($onesocial_options[$id]) || !array_key_exists($param, $onesocial_options[$id]))) {
-			return false;
-		}
-
-		return empty($param) ? $onesocial_options[$id] : $onesocial_options[$id][$param];
-	}
 }
