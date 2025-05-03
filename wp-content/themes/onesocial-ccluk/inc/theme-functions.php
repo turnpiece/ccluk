@@ -218,21 +218,6 @@ function buddyboss_scripts_jquery_migrate()
 add_action('wp_enqueue_scripts', 'buddyboss_scripts_jquery_migrate', 0);
 
 /**
- * Removes CSS in the header so we can control the admin bar and be responsive
- *
- */
-function buddyboss_remove_adminbar_inline_styles()
-{
-	if (!is_admin()) {
-
-		remove_action('wp_head', 'wp_admin_bar_header');
-		remove_action('wp_head', '_admin_bar_bump_cb');
-	}
-}
-
-add_action('wp_head', 'buddyboss_remove_adminbar_inline_styles', 9);
-
-/**
  * Dynamically removes the no-js class from the <body> element.
  *
  * By default, the no-js class is added to the body. The
@@ -254,40 +239,6 @@ function buddyboss_remove_nojs_body_class()
 }
 
 add_action('buddyboss_before_header', 'buddyboss_remove_nojs_body_class');
-
-/**
- * Remove an anonymous object filter.
- *
- * @param string $tag Hook name.
- * @param string $class Class name
- * @param string $method Method name
- * @return void
- */
-function buddyboss_remove_anonymous_object_filter($tag, $class, $method)
-{
-	$filters = $GLOBALS['wp_filter'][$tag];
-
-	if (empty($filters)) {
-		return;
-	}
-
-	foreach ($filters as $priority => $filter) {
-		foreach ($filter as $identifier => $function) {
-			if (
-				is_array($function)
-				&& is_array($function['function'])
-				&& is_a($function['function'][0], $class)
-				&& $method === $function['function'][1]
-			) {
-				remove_filter(
-					$tag,
-					array($function['function'][0], $method),
-					$priority
-				);
-			}
-		}
-	}
-}
 
 /**
  * Load admin bar in header (fixes JetPack chart issue)
@@ -433,41 +384,6 @@ function buddyboss_widgets_init()
 */
 }
 
-add_action('widgets_init', 'buddyboss_widgets_init');
-
-if (!function_exists('buddyboss_entry_meta')) {
-
-	/**
-	 * Prints HTML with meta information for current post: categories, tags, permalink, author, and date.
-	 *
-	 * Create your own buddyboss_entry_meta() to override in a child theme.
-	 *
-	 * @since OneSocial 1.0.0
-	 */
-	function buddyboss_entry_meta()
-	{
-		// Translators: used between list items, there is a space after the comma.
-		$categories_list = get_the_category_list(__(', ', 'onesocial'));
-
-		// Translators: used between list items, there is a space after the comma.
-		$tag_list = get_the_tag_list('', __(', ', 'onesocial'));
-
-		$date = sprintf('<a href="%1$s" title="%2$s" rel="bookmark" class="meta-item"><time class="entry-date" datetime="%3$s">%4$s</time></a>', esc_url(get_permalink()), esc_attr(get_the_time()), esc_attr(get_the_date('c')), esc_html(get_the_date()));
-		$author = sprintf('<span class="author vcard meta-item"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s%4$s</a></span>', esc_url(get_author_posts_url(get_the_author_meta('ID'))), esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())), get_avatar(get_the_author_meta('ID'), 30, '', get_the_author()), get_the_author());
-
-		echo $author;
-		echo $date;
-		echo '<span class="meta-item">' . $categories_list . '</span>';
-
-		$post_format		 = get_post_format(get_the_ID());
-		$post_format_link	 = get_post_format_link($post_format);
-
-		if ($post_format_link) {
-			printf('<span class="post-format">Post Format: <a href="%s">%s</a></span>', $post_format_link, $post_format);
-		}
-	}
-}
-
 /**
  * Extends the default WordPress body classes.
  *
@@ -478,7 +394,7 @@ if (!function_exists('buddyboss_entry_meta')) {
  */
 function buddyboss_body_class($classes)
 {
-	global $bp, $wp_customize;
+	global $wp_customize;
 
 	if (!empty($wp_customize)) {
 		$classes[] = 'wp-customizer';
@@ -579,31 +495,6 @@ if (!function_exists('buddyboss_add_gravatar')) {
 /* * **************************** WORDPRESS FUNCTIONS ***************************** */
 
 /**
- * BuddyBoss Previous Logo Support
- *
- * @since OneSocial 1.0.0
- *
-function buddyboss_set_previous_logo()
-{
-
-	// If there was a logo uploaded prior to upgrading to BuddyBoss 3.1,
-	// set it as the new logo to be used in the Theme Customizer
-
-	$previous_logo	 = '';
-	$previous_logo	 = get_option("buddyboss_custom_logo");
-
-	if ($previous_logo != '') {
-		set_theme_mod('buddyboss_logo', $previous_logo);
-	}
-
-	// Remove the previous logo option afterwards
-
-	delete_option("buddyboss_custom_logo");
-}
-
-add_action('after_setup_theme', 'buddyboss_set_previous_logo');
- */
-/**
  * Add image size for posts
  *
  * @since OneSocial Theme 1.0.0
@@ -632,69 +523,6 @@ function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
 		</div>
 	</div>
 	<?php
-}
-
-/**
- * Get posts by ajax
- *
- * @since OneSocial Theme 1.0.0
- */
-add_action('wp_ajax_nopriv_buddyboss_ajax_posts', 'buddyboss_ajax_posts');
-add_action('wp_ajax_buddyboss_ajax_posts', 'buddyboss_ajax_posts');
-
-function buddyboss_ajax_posts()
-{
-
-	$nonce = $_POST['postsNonce'];
-
-	if (!wp_verify_nonce($nonce, 'ajax-posts-nonce')) {
-		die('Busted!');
-	}
-
-	$data_target = $_POST['data_target'];
-	$page		 = $_POST['page'];
-	$sort		 = (isset($_POST['sort'])) ? $_POST['sort'] : 'latests';
-	$per_page	 = -1;
-
-	if ($page == 'blog') {
-		$per_page = 3;
-	}
-
-	if ($sort === 'recommended') {
-		$args = array(
-			'author'		 => $_POST['author'],
-			'posts_per_page' => $per_page,
-			'orderby'		 => 'meta_value',
-			'meta_key'		 => '_post_like_count',
-			'orderby'		 => 'meta_value_num',
-			'order'			 => 'DESC',
-		);
-	} else {
-		$args = array(
-			'author'		 => $_POST['author'],
-			'posts_per_page' => $per_page
-		);
-	}
-
-	$posts = new WP_Query($args);
-
-	ob_start();
-
-	if ($posts->have_posts()) {
-		$function = 'buddyboss_more_posts_' . $page;
-		$function($posts, $sort, $posts->post_count, $data_target);
-	} else {
-		_e('No stories found', 'onesocial');
-	}
-
-	$html = ob_get_contents();
-	ob_end_clean();
-
-	wp_reset_postdata();
-
-	echo $html;
-
-	die();
 }
 
 /**

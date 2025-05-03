@@ -17,10 +17,6 @@
 		}
 		?>
 
-		<div class="entry-meta">
-			<?php buddyboss_entry_meta(); ?>
-		</div><!-- .entry-meta -->
-
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
