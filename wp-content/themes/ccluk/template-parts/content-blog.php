@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package CCLUK Theme
+ * @package CCL UK Theme
  */
 ?>
 

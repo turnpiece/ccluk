@@ -5,7 +5,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package CCLUK Theme
+ * @package CCL UK Theme
  */
 get_header();
 

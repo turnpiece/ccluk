@@ -6,7 +6,7 @@
  * Description: Use this page template for a page with VC plugin.
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  * @since CCLUK 1.0.0
  */
 get_header();

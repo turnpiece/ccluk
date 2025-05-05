@@ -4,7 +4,7 @@
  * The template for displaying 404 pages (Not Found).
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  */
 get_header();
 ?>

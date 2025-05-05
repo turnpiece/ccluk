@@ -4,7 +4,7 @@
  * The template for displaying a "No posts found" message.
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  */
 ?>
 

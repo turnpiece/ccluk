@@ -1,10 +1,11 @@
 <?php
+
 /**
  *
  * Template Name: No Sidebar
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  *
  */
 get_header();
@@ -14,9 +15,10 @@ get_header();
 
 	<div id="content" role="main">
 
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', 'page' ); ?>
-		<?php endwhile; // end of the loop.  ?>
+		<?php while (have_posts()) : the_post(); ?>
+			<?php get_template_part('template-parts/content', 'page'); ?>
+		<?php endwhile; // end of the loop.  
+		?>
 
 	</div>
 </div>

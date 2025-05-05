@@ -6,7 +6,7 @@
  * Displays all of the <head> section and everything up until <div id="main">
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  */
 ?>
 <!DOCTYPE html>

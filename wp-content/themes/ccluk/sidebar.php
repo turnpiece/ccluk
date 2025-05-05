@@ -4,8 +4,8 @@
  * The sidebar containing the widget area for WordPress blog posts and pages.
  *
  * @package WordPress
- * @subpackage CCLUK Theme
- * @since CCLUK Theme 1.0.0
+ * @subpackage CCL UK Theme
+ * @since CCL UK Theme 1.0.0
  */
 
 $show_sidebar = apply_filters('onesocial_show_page_sidebar', true);

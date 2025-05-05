@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package CCLUK Theme
+ * @package CCL UK Theme
  */
 /**
  * Sets up the content width value based on the theme's design and stylesheet.
@@ -303,7 +303,7 @@ add_filter('wp_page_menu_args', 'buddyboss_page_menu_args');
 /**
  * Registers all of our widget areas.
  *
- * @since CCLUK Theme 1.0.0
+ * @since CCL UK Theme 1.0.0
  */
 function buddyboss_widgets_init()
 {
@@ -497,7 +497,7 @@ if (!function_exists('buddyboss_add_gravatar')) {
 /**
  * Add image size for posts
  *
- * @since CCLUK Theme 1.0.0
+ * @since CCL UK Theme 1.0.0
  */
 add_image_size('post-thumb', 845, 312, true);
 add_image_size('medium-thumb', 360, 216, true);
@@ -506,7 +506,7 @@ add_image_size('large-thumb', 9999, 800, true);
 /**
  * Show more posts on profile
  *
- * @since CCLUK Theme 1.0.0
+ * @since CCL UK Theme 1.0.0
  */
 function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
 {

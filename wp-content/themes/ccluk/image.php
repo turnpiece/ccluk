@@ -6,8 +6,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage CCLUK Theme
- * @since CCLUK Theme 1.0.0
+ * @subpackage CCL UK Theme
+ * @since CCL UK Theme 1.0.0
  */
 
 get_header(); ?>

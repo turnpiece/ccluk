@@ -7,7 +7,7 @@
  * #main and #page div elements.
  *
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  */
 ?>
 </div><!-- #main .wrapper -->

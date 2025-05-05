@@ -35,9 +35,9 @@ function ccluk_theme_info()
     if ($number_count > 0) {
         $update_label = sprintf(_n('%1$s action required', '%1$s actions required', $number_count, 'ccluk'), $number_count);
         $count = "<span class='update-plugins count-" . esc_attr($number_count) . "' title='" . esc_attr($update_label) . "'><span class='update-count'>" . number_format_i18n($number_count) . "</span></span>";
-        $menu_title = sprintf(esc_html__('CCLUK Theme %s', 'ccluk'), $count);
+        $menu_title = sprintf(esc_html__('CCL UK Theme %s', 'ccluk'), $count);
     } else {
-        $menu_title = esc_html__('CCLUK Theme', 'ccluk');
+        $menu_title = esc_html__('CCL UK Theme', 'ccluk');
     }
 
     add_theme_page(esc_html__('CCLUK Dashboard', 'ccluk'), $menu_title, 'edit_theme_options', 'ft_onepress', 'ccluk_theme_info_page');

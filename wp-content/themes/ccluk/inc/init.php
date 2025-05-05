@@ -2,7 +2,7 @@
 
 /**
  * @package WordPress
- * @subpackage CCLUK Theme
+ * @subpackage CCL UK Theme
  * @since CCLUK 2.6.7
  */
 /* * **************************** MAIN CCLUK THEME CLASS ***************************** */

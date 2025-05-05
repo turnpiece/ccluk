@@ -4,8 +4,8 @@
  * The default template for displaying content. Used for both single and index/archive/search.
  *
  * @package WordPress
- * @subpackage CCLUK Theme
- * @since CCLUK Theme 1.0.0
+ * @subpackage CCL UK Theme
+ * @since CCL UK Theme 1.0.0
  */
 ?>
 

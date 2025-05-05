@@ -11,7 +11,7 @@ define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 /**
  * To view theme functions, navigate to /inc/theme.php
  *
- * @package CCLUK Theme
+ * @package CCL UK Theme
  */
 $init_file = get_stylesheet_directory() . '/inc/init.php';
 
@@ -60,7 +60,7 @@ add_filter('pre_get_posts', 'ccluk_show_cpt_archives');
  * Custom Pagination
  * Credits: http://www.kriesi.at/archives/how-to-build-a-wordpress-post-pagination-without-plugin
  *
- * @since CCLUK Theme 1.0.0
+ * @since CCL UK Theme 1.0.0
  */
 function ccluk_pagination()
 {

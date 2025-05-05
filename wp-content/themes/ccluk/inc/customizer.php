@@ -1,7 +1,7 @@
 <?php
 
 /**
- * CCLUK Theme Customizer.
+ * CCL UK Theme Customizer.
  *
  * @package CCLUK
  */
