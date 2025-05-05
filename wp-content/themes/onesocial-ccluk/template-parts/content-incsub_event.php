@@ -19,7 +19,7 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 	<?php if (is_search() || is_archive() || is_home()) : ?>
 
 		<div class="posts-stream">
-			<div class="loader"><?php _e('Loading...', 'onesocial'); ?></div>
+			<div class="loader"><?php _e('Loading...', 'ccluk'); ?></div>
 		</div>
 
 	<?php endif; ?>
@@ -49,7 +49,7 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 				<?php if (is_search() || is_archive() || is_home()) : ?>
 
 					<h2 class="entry-title">
-						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
+						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
 					</h2>
 					<!-- Single blog post -->
 				<?php else : ?>
@@ -98,8 +98,8 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 		<div class="entry-main">
 
 			<div class="entry-content">
-				<?php the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'onesocial')); ?>
-				<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'onesocial'), 'after' => '</div>')); ?>
+				<?php the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'ccluk')); ?>
+				<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'ccluk'), 'after' => '</div>')); ?>
 			</div><!-- .entry-content -->
 
 			<footer class="entry-meta">
@@ -108,12 +108,12 @@ $date = mysql2date(get_option('time_format') . ' \o\n l ' . get_option('date_for
 						<?php
 						$terms = wp_get_post_tags(get_the_ID());
 						if ($terms) { ?>
-							<h3><?php _e('Tagged in', 'onesocial'); ?></h3><?php
-																			foreach ($terms as $t) {
-																				echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
-																			}
+							<h3><?php _e('Tagged in', 'ccluk'); ?></h3><?php
+																		foreach ($terms as $t) {
+																			echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
 																		}
-																			?>
+																	}
+																		?>
 					</div>
 
 					<?php if (get_post_status(get_the_ID()) == 'publish') { ?>

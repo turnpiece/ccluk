@@ -15,7 +15,7 @@
 	<?php if (is_search() || is_archive() || is_home()) : ?>
 
 		<div class="posts-stream">
-			<div class="loader"><?php _e('Loading...', 'onesocial'); ?></div>
+			<div class="loader"><?php _e('Loading...', 'ccluk'); ?></div>
 		</div>
 
 	<?php endif; ?>
@@ -45,7 +45,7 @@
 				<?php if (is_search() || is_archive() || is_home()) : ?>
 
 					<h2 class="entry-title">
-						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
+						<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
 					</h2>
 					<!-- Single blog post -->
 				<?php else : ?>
@@ -93,8 +93,8 @@
 	<?php else : ?>
 		<div class="entry-main">
 			<div class="entry-content">
-				<?php the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'onesocial')); ?>
-				<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'onesocial'), 'after' => '</div>')); ?>
+				<?php the_content(__('Continue reading <span class="meta-nav">&rarr;</span>', 'ccluk')); ?>
+				<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'ccluk'), 'after' => '</div>')); ?>
 			</div><!-- .entry-content -->
 
 			<footer class="entry-meta">
@@ -104,12 +104,12 @@
 						$terms = wp_get_post_tags(get_the_ID());
 						if ($terms) {
 						?>
-							<h3><?php _e('Tagged in', 'onesocial'); ?></h3><?php
-																			foreach ($terms as $t) {
-																				echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
-																			}
+							<h3><?php _e('Tagged in', 'ccluk'); ?></h3><?php
+																		foreach ($terms as $t) {
+																			echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
 																		}
-																			?>
+																	}
+																		?>
 					</div>
 
 					<?php if (get_post_status(get_the_ID()) == 'publish') { ?>
@@ -134,7 +134,7 @@
 										?>
 											<a id="bookmarkme" href="#siteLoginBox" class="bookmark-it onesocial-login-popup-link">
 												<span class="fa bb-helper-icon fa-bookmark-o"></span>
-												<span><?php _e('Bookmark', 'onesocial'); ?></span>
+												<span><?php _e('Bookmark', 'ccluk'); ?></span>
 											</a><?php
 											}
 												?>
@@ -146,7 +146,7 @@
 					<?php } ?>
 				</div>
 
-				<?php edit_post_link(__('Edit', 'onesocial'), '<span class="edit-link">', '</span>');    ?>
+				<?php edit_post_link(__('Edit', 'ccluk'), '<span class="edit-link">', '</span>');    ?>
 
 			</footer><!-- .entry-meta -->
 		</div>

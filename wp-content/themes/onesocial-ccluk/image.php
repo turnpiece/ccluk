@@ -25,7 +25,7 @@ get_header(); ?>
 						<?php
 						$metadata = wp_get_attachment_metadata();
 						printf(
-							__('<span class="meta-prep meta-prep-entry-date">Published </span> <span class="entry-date"><time class="entry-date" datetime="%1$s">%2$s</time></span> at <a href="%3$s" title="Link to full-size image">%4$s &times; %5$s</a> in <a href="%6$s" title="Return to %7$s" rel="gallery">%8$s</a>.', 'onesocial'),
+							__('<span class="meta-prep meta-prep-entry-date">Published </span> <span class="entry-date"><time class="entry-date" datetime="%1$s">%2$s</time></span> at <a href="%3$s" title="Link to full-size image">%4$s &times; %5$s</a> in <a href="%6$s" title="Return to %7$s" rel="gallery">%8$s</a>.', 'ccluk'),
 							esc_attr(get_the_date('c')),
 							esc_html(get_the_date()),
 							esc_url(wp_get_attachment_url()),
@@ -36,12 +36,12 @@ get_header(); ?>
 							get_the_title($post->post_parent)
 						);
 						?>
-						<?php edit_post_link(__('Edit', 'onesocial'), '<span class="edit-link">', '</span>'); ?>
+						<?php edit_post_link(__('Edit', 'ccluk'), '<span class="edit-link">', '</span>'); ?>
 					</footer><!-- .entry-meta -->
 
 					<nav id="image-navigation" class="navigation" role="navigation">
-						<span class="previous-image"><?php previous_image_link(false, __('&larr; Previous', 'onesocial')); ?></span>
-						<span class="next-image"><?php next_image_link(false, __('Next &rarr;', 'onesocial')); ?></span>
+						<span class="previous-image"><?php previous_image_link(false, __('&larr; Previous', 'ccluk')); ?></span>
+						<span class="next-image"><?php next_image_link(false, __('Next &rarr;', 'ccluk')); ?></span>
 					</nav><!-- #image-navigation -->
 
 				</div>
@@ -77,9 +77,9 @@ get_header(); ?>
 							endif;
 							?>
 							<a href="<?php echo esc_url($next_attachment_url); ?>" title="<?php the_title_attribute(); ?>" rel="attachment"><?php
-																																				$attachment_size = apply_filters('buddyboss_attachment_size', array(960, 960));
-																																				echo wp_get_attachment_image($post->ID, $attachment_size);
-																																				?></a>
+																																			$attachment_size = apply_filters('buddyboss_attachment_size', array(960, 960));
+																																			echo wp_get_attachment_image($post->ID, $attachment_size);
+																																			?></a>
 
 							<?php if (! empty($post->post_excerpt)) : ?>
 								<div class="entry-caption">
@@ -92,7 +92,7 @@ get_header(); ?>
 
 					<div class="entry-description">
 						<?php the_content(); ?>
-						<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'onesocial'), 'after' => '</div>')); ?>
+						<?php wp_link_pages(array('before' => '<div class="page-links">' . __('Pages:', 'ccluk'), 'after' => '</div>')); ?>
 					</div><!-- .entry-description -->
 
 				</div><!-- .entry-content -->

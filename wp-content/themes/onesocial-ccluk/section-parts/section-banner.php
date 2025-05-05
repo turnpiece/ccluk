@@ -14,7 +14,7 @@ if (
 <!-- get banner -->
 <?php if ($page = get_theme_mod($slug . '_page')) :
 
-    $id = get_theme_mod($slug . '_id', esc_html__('banner', 'onesocial'));
+    $id = get_theme_mod($slug . '_id', esc_html__('banner', 'ccluk'));
     $heading = get_theme_mod($slug . '_heading');
     $text = get_theme_mod($slug . '_text');
     $image_url = get_theme_mod($slug . '_image');

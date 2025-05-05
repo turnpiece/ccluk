@@ -3,20 +3,20 @@
 		<?php if (is_multisite()): ?>
 			<?php if (is_super_admin()): ?>
 				<li class="menupop">
-					<a class="ab-item" href="<?php echo admin_url('my-sites.php'); ?>"><?php _e('Sites', 'onesocial'); ?></a>
+					<a class="ab-item" href="<?php echo admin_url('my-sites.php'); ?>"><?php _e('Sites', 'ccluk'); ?></a>
 					<div class="ab-sub-wrapper">
 						<ul class="ab-submenu">
 							<li class="menupop network-menu">
-								<a class="ab-item" href="<?php echo network_admin_url(); ?>"><?php _e('Network Admin', 'onesocial'); ?></a>
+								<a class="ab-item" href="<?php echo network_admin_url(); ?>"><?php _e('Network Admin', 'ccluk'); ?></a>
 								<div class="ab-sub-wrapper">
 									<ul class="ab-submenu">
 										<li>
-											<a href="<?php echo network_admin_url(); ?>"><?php _e('Dashboard', 'onesocial'); ?></a>
-											<a href="<?php echo network_admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'onesocial'); ?></a>
-											<a href="<?php echo network_admin_url('sites.php'); ?>"><?php _e('Sites', 'onesocial'); ?></a>
-											<a href="<?php echo network_admin_url('users.php'); ?>"><?php _e('Users', 'onesocial'); ?></a>
-											<a href="<?php echo network_admin_url('themes.php'); ?>"><?php _e('Themes', 'onesocial'); ?></a>
-											<a href="<?php echo network_admin_url('plugins.php'); ?>"><?php _e('Plugins', 'onesocial'); ?></a>
+											<a href="<?php echo network_admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('sites.php'); ?>"><?php _e('Sites', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('users.php'); ?>"><?php _e('Users', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('themes.php'); ?>"><?php _e('Themes', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('plugins.php'); ?>"><?php _e('Plugins', 'ccluk'); ?></a>
 										</li>
 									</ul>
 								</div>
@@ -34,11 +34,11 @@
 									<div class="ab-sub-wrapper">
 										<ul class="ab-submenu">
 											<li>
-												<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'onesocial'); ?></a>
-												<a href="<?php echo admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'onesocial'); ?></a>
-												<a href="<?php echo admin_url('users.php'); ?>"><?php _e('Users', 'onesocial'); ?></a>
-												<a href="<?php echo admin_url('themes.php'); ?>"><?php _e('Themes', 'onesocial'); ?></a>
-												<a href="<?php echo admin_url('plugins.php'); ?>"><?php _e('Plugins', 'onesocial'); ?></a>
+												<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
+												<a href="<?php echo admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
+												<a href="<?php echo admin_url('users.php'); ?>"><?php _e('Users', 'ccluk'); ?></a>
+												<a href="<?php echo admin_url('themes.php'); ?>"><?php _e('Themes', 'ccluk'); ?></a>
+												<a href="<?php echo admin_url('plugins.php'); ?>"><?php _e('Plugins', 'ccluk'); ?></a>
 											</li>
 										</ul>
 									</div>
@@ -54,24 +54,24 @@
 				</li>
 			<?php endif; ?>
 			<li class="menupop">
-				<a class="ab-item" href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'onesocial'); ?></a>
+				<a class="ab-item" href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
 				<div class="ab-sub-wrapper">
 					<ul class="ab-submenu">
 						<li>
-							<a href="<?php echo admin_url('post-new.php'); ?>"><?php _e('Write Blog', 'onesocial'); ?></a>
-							<a href="<?php echo admin_url('post-new.php?post_type=ccluk_news'); ?>"><?php _e('Write News', 'onesocial'); ?></a>
+							<a href="<?php echo admin_url('post-new.php'); ?>"><?php _e('Write Blog', 'ccluk'); ?></a>
+							<a href="<?php echo admin_url('post-new.php?post_type=ccluk_news'); ?>"><?php _e('Write News', 'ccluk'); ?></a>
 						</li>
 					</ul>
 				</div>
 			</li>
 		<?php else: ?>
 			<li class="menupop">
-				<a class="ab-item" href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'onesocial'); ?></a>
+				<a class="ab-item" href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
 				<div class="ab-sub-wrapper">
 					<ul class="ab-submenu">
 						<li>
-							<a href="<?php echo admin_url('post-new.php'); ?>"><?php _e('Write Blog', 'onesocial'); ?></a>
-							<a href="<?php echo admin_url('post-new.php?post_type=ccluk_news'); ?>"><?php _e('Write News', 'onesocial'); ?></a>
+							<a href="<?php echo admin_url('post-new.php'); ?>"><?php _e('Write Blog', 'ccluk'); ?></a>
+							<a href="<?php echo admin_url('post-new.php?post_type=ccluk_news'); ?>"><?php _e('Write News', 'ccluk'); ?></a>
 						</li>
 					</ul>
 				</div>

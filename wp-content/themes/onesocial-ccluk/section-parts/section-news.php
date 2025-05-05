@@ -10,8 +10,8 @@ $q = new WP_Query(
 if ($q->have_posts()) : ?>
     <section id="news" class="section site-content posts">
         <header class="section-title">
-            <a href="/news" title="<?php bloginfo('name') ?> <?php _e('News', 'onesocial') ?>">
-                <h4><?php _e("News", 'onesocial') ?></h4>
+            <a href="/news" title="<?php bloginfo('name') ?> <?php _e('News', 'ccluk') ?>">
+                <h4><?php _e("News", 'ccluk') ?></h4>
             </a>
         </header>
         <div class="section-content">
@@ -21,7 +21,7 @@ if ($q->have_posts()) : ?>
             wp_reset_postdata(); ?>
         </div>
         <footer class="section-footer">
-            <a href="/news"><?php _e('More news', 'onesocial') ?> &raquo;</a>
+            <a href="/news"><?php _e('More news', 'ccluk') ?> &raquo;</a>
         </footer>
     </section>
 <?php endif; ?>

@@ -406,7 +406,7 @@ class Onepress_Customize_Repeatable_Control extends WP_Customize_Control
         }
 
         $this->changeable =  isset($args['changeable']) && $args['changeable'] == 'no' ? 'no' : 'yes';
-        $this->default_empty_title =  isset($args['default_empty_title']) && $args['default_empty_title'] != '' ? $args['default_empty_title'] : esc_html__('Item', 'onesocial');
+        $this->default_empty_title =  isset($args['default_empty_title']) && $args['default_empty_title'] != '' ? $args['default_empty_title'] : esc_html__('Item', 'ccluk');
     }
 
     public function merge_data($array_value, $array_default)
@@ -509,7 +509,7 @@ class Onepress_Customize_Repeatable_Control extends WP_Customize_Control
             <ul class="list-repeatable"></ul>
         </div>
         <div class="repeatable-actions">
-            <span class="button-secondary add-new-repeat-item"><?php _e('Add an item', 'onesocial'); ?></span>
+            <span class="button-secondary add-new-repeat-item"><?php _e('Add an item', 'ccluk'); ?></span>
         </div>
     <?php
     }
@@ -525,7 +525,7 @@ class Onepress_Customize_Repeatable_Control extends WP_Customize_Control
                         <a class="widget-action" href="#"></a>
                     </div>
                     <div class="widget-title">
-                        <h4 class="live-title"><?php _e('Item', 'onesocial'); ?></h4>
+                        <h4 class="live-title"><?php _e('Item', 'ccluk'); ?></h4>
                     </div>
                 </div>
 
@@ -641,9 +641,9 @@ class Onepress_Customize_Repeatable_Control extends WP_Customize_Control
                                                                                                                                                                                                 <# } #>
 
                                                                                                                                                                                                     <div class="actions">
-                                                                                                                                                                                                        <button class="button remove-button " <# if ( ! field.value.url ){ #> style="display:none"; <# } #> type="button"><?php _e('Remove', 'onesocial') ?></button>
-                                                                                                                                                                                                        <button class="button upload-button" data-media="{{field.media}}" data-add-txt="<?php esc_attr_e('Add', 'onesocial'); ?>" data-change-txt="<?php esc_attr_e('Change', 'onesocial'); ?>" type="button">
-                                                                                                                                                                                                            <# if ( ! field.value.url ){ #> <?php _e('Add', 'onesocial'); ?> <# } else { #> <?php _e('Change', 'onesocial'); ?> <# } #>
+                                                                                                                                                                                                        <button class="button remove-button " <# if ( ! field.value.url ){ #> style="display:none"; <# } #> type="button"><?php _e('Remove', 'ccluk') ?></button>
+                                                                                                                                                                                                        <button class="button upload-button" data-media="{{field.media}}" data-add-txt="<?php esc_attr_e('Add', 'ccluk'); ?>" data-change-txt="<?php esc_attr_e('Change', 'ccluk'); ?>" type="button">
+                                                                                                                                                                                                            <# if ( ! field.value.url ){ #> <?php _e('Add', 'ccluk'); ?> <# } else { #> <?php _e('Change', 'ccluk'); ?> <# } #>
                                                                                                                                                                                                         </button>
                                                                                                                                                                                                         <div style="clear:both"></div>
                                                                                                                                                                                                     </div>
@@ -661,9 +661,9 @@ class Onepress_Customize_Repeatable_Control extends WP_Customize_Control
                                                                         <div class="widget-control-actions">
                                                                             <div class="alignleft">
                                                                                 <span class="remove-btn-wrapper">
-                                                                                    <a href="#" class="repeat-control-remove" title=""><?php _e('Remove', 'onesocial'); ?></a> |
+                                                                                    <a href="#" class="repeat-control-remove" title=""><?php _e('Remove', 'ccluk'); ?></a> |
                                                                                 </span>
-                                                                                <a href="#" class="repeat-control-close"><?php _e('Close', 'onesocial'); ?></a>
+                                                                                <a href="#" class="repeat-control-close"><?php _e('Close', 'ccluk'); ?></a>
                                                                             </div>
                                                                             <br class="clear">
                                                                         </div>

@@ -48,7 +48,7 @@ class CCLUK_Customizer
 		do_action(self::SLUG . '_customize_before_register', $this->customize);
 
 		$pages = get_pages();
-		$this->option_pages[0] = esc_html__('Select page', 'onesocial');
+		$this->option_pages[0] = esc_html__('Select page', 'ccluk');
 		foreach ($pages as $p) {
 			$this->option_pages[$p->ID] = $p->post_title;
 		}
@@ -219,7 +219,7 @@ class CCLUK_Customizer
 			$name . '_settings',
 			array(
 				'priority'    => 3,
-				'title'       => esc_html__('Section Settings', 'onesocial'),
+				'title'       => esc_html__('Section Settings', 'ccluk'),
 				'description' => '',
 				'panel'       => $name,
 			)
@@ -234,13 +234,13 @@ class CCLUK_Customizer
 		$this->customize->add_control($name . '_audience', array(
 			'type' => 'radio',
 			'section' => $name . '_settings',
-			'label' => __('Audience', 'onesocial'),
+			'label' => __('Audience', 'ccluk'),
 			'description' => __('Who do you want to see this section?'),
 			'choices' => array(
-				'all' => __('Everyone', 'onesocial'),
-				'logged_in' => __('Only logged in users', 'onesocial'),
-				'logged_out' => __('Only logged out users', 'onesocial'),
-				'none' => __('No one', 'onesocial')
+				'all' => __('Everyone', 'ccluk'),
+				'logged_in' => __('Only logged in users', 'ccluk'),
+				'logged_out' => __('Only logged out users', 'ccluk'),
+				'none' => __('No one', 'ccluk')
 			),
 		));
 
@@ -256,9 +256,9 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$name . '_id',
 			array(
-				'label' 		=> esc_html__('Section ID:', 'onesocial'),
+				'label' 		=> esc_html__('Section ID:', 'ccluk'),
 				'section' 		=> $name . '_settings',
-				'description'   => esc_html__('The section id, we will use this for link anchor.', 'onesocial')
+				'description'   => esc_html__('The section id, we will use this for link anchor.', 'ccluk')
 			)
 		);
 	}
@@ -277,7 +277,7 @@ class CCLUK_Customizer
 			$section . '_content',
 			array(
 				'priority'    => 6,
-				'title'       => esc_html__('Section Content', 'onesocial'),
+				'title'       => esc_html__('Section Content', 'ccluk'),
 				'description' => '',
 				'panel'       => empty($panel) ? $section : $panel,
 			)
@@ -291,8 +291,8 @@ class CCLUK_Customizer
 
 		$this->add_homepage_panel(
 			$section,
-			esc_html__('Homepage: Banner', 'onesocial'),
-			esc_html__('Set the banner image and content', 'onesocial'),
+			esc_html__('Homepage: Banner', 'ccluk'),
+			esc_html__('Set the banner image and content', 'ccluk'),
 			$priority
 		);
 
@@ -307,12 +307,12 @@ class CCLUK_Customizer
 		$this->customize->add_control($section . '_layout', array(
 			'type' => 'radio',
 			'section' => $section . '_settings',
-			'label' => __('Layout', 'onesocial'),
+			'label' => __('Layout', 'ccluk'),
 			'choices' => array(
-				'text-left' => __('Text on left, image on right', 'onesocial'),
-				'text-right' => __('Text on right, image on left', 'onesocial'),
-				'background' => __('Centred text over darkened background image', 'onesocial'),
-				'background-box' => __('Centred text box over background image', 'onesocial'),
+				'text-left' => __('Text on left, image on right', 'ccluk'),
+				'text-right' => __('Text on right, image on left', 'ccluk'),
+				'background' => __('Centred text over darkened background image', 'ccluk'),
+				'background-box' => __('Centred text box over background image', 'ccluk'),
 			),
 		));
 
@@ -327,7 +327,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_heading',
 			array(
-				'label' 		=> esc_html__('Heading', 'onesocial'),
+				'label' 		=> esc_html__('Heading', 'ccluk'),
 				'section' 		=> $section . '_content'
 			)
 		));
@@ -341,9 +341,9 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_text',
 			array(
-				'label' 		=> esc_html__('Text', 'onesocial'),
+				'label' 		=> esc_html__('Text', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Text that will go over the image', 'onesocial')
+				'description'   => __('Text that will go over the image', 'ccluk')
 			)
 		));
 
@@ -353,12 +353,12 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_page',
 			array(
-				'label'     	=> esc_html__('Page', 'onesocial'),
+				'label'     	=> esc_html__('Page', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'type'          => 'select',
 				'priority'      => 10,
 				'choices'       => $this->option_pages,
-				'description'   => esc_html__('Select the page you want to link to.', 'onesocial'),
+				'description'   => esc_html__('Select the page you want to link to.', 'ccluk'),
 			)
 		);
 
@@ -369,7 +369,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_image',
 			array(
-				'label'             => __('Image', 'onesocial'),
+				'label'             => __('Image', 'ccluk'),
 				'section'           => $section . '_content',
 				'settings'          => $section . '_image',
 			)
@@ -382,12 +382,12 @@ class CCLUK_Customizer
 			$this->customize->add_control(
 				$section . '_button_' . $i . '_page',
 				array(
-					'label'     	=> esc_html__('Button ' . $i . ' Page', 'onesocial'),
+					'label'     	=> esc_html__('Button ' . $i . ' Page', 'ccluk'),
 					'section' 		=> $section . '_content',
 					'type'          => 'select',
 					'priority'      => 10,
 					'choices'       => $this->option_pages,
-					'description'   => esc_html__('Select the page you want the button to link to.', 'onesocial'),
+					'description'   => esc_html__('Select the page you want the button to link to.', 'ccluk'),
 				)
 			);
 
@@ -400,7 +400,7 @@ class CCLUK_Customizer
 				$this->customize,
 				$section . '_button_' . $i . '_text',
 				array(
-					'label' 		=> esc_html__('Button ' . $i . ' Text', 'onesocial'),
+					'label' 		=> esc_html__('Button ' . $i . ' Text', 'ccluk'),
 					'section' 		=> $section . '_content'
 				)
 			));
@@ -414,8 +414,8 @@ class CCLUK_Customizer
 
 		$this->add_homepage_panel(
 			$section,
-			esc_html__('Homepage: Newsletter', 'onesocial'),
-			esc_html__('The newsletter section on the homepage', 'onesocial'),
+			esc_html__('Homepage: Newsletter', 'ccluk'),
+			esc_html__('The newsletter section on the homepage', 'ccluk'),
 			$priority
 		);
 
@@ -426,32 +426,32 @@ class CCLUK_Customizer
 		$this->add_setting(
 			$section . '_text',
 			'sanitize_text',
-			__('If you want to know what we\'re up to, signup for our newsletter.', 'onesocial')
+			__('If you want to know what we\'re up to, signup for our newsletter.', 'ccluk')
 		);
 
 		$this->customize->add_control(new CCLUK_Editor_Custom_Control(
 			$this->customize,
 			$section . '_text',
 			array(
-				'label' 		=> esc_html__('Text', 'onesocial'),
+				'label' 		=> esc_html__('Text', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Text that will go alongside the form', 'onesocial')
+				'description'   => __('Text that will go alongside the form', 'ccluk')
 			)
 		));
 
 		$this->add_setting(
 			$section . '_privacy_text',
 			'sanitize_text',
-			__('We respect your privacy.', 'onesocial')
+			__('We respect your privacy.', 'ccluk')
 		);
 
 		$this->customize->add_control(new CCLUK_Editor_Custom_Control(
 			$this->customize,
 			$section . '_privacy_text',
 			array(
-				'label' 		=> esc_html__('Privacy text', 'onesocial'),
+				'label' 		=> esc_html__('Privacy text', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Text linking to the privacy policy', 'onesocial'),
+				'description'   => __('Text linking to the privacy policy', 'ccluk'),
 			)
 		));
 	}
@@ -463,8 +463,8 @@ class CCLUK_Customizer
 
 		$this->add_homepage_panel(
 			$section,
-			esc_html__('Homepage: Embed HTML', 'onesocial'),
-			esc_html__('Embed some HTML code such as for a mailing list signup form', 'onesocial'),
+			esc_html__('Homepage: Embed HTML', 'ccluk'),
+			esc_html__('Embed some HTML code such as for a mailing list signup form', 'ccluk'),
 			$priority
 		);
 
@@ -479,7 +479,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_title',
 			array(
-				'label' 		=> esc_html__('Section Title', 'onesocial'),
+				'label' 		=> esc_html__('Section Title', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'description'   => '',
 			)
@@ -496,9 +496,9 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_text',
 			array(
-				'label' 		=> esc_html__('Text', 'onesocial'),
+				'label' 		=> esc_html__('Text', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Text that will go alongside the embedded HTML', 'onesocial')
+				'description'   => __('Text that will go alongside the embedded HTML', 'ccluk')
 			)
 		));
 
@@ -508,9 +508,9 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_embed',
 			array(
-				'label' 		=> esc_html__('HTML code', 'onesocial'),
+				'label' 		=> esc_html__('HTML code', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Paste in the HTML code for whatever you want to embed', 'onesocial')
+				'description'   => __('Paste in the HTML code for whatever you want to embed', 'ccluk')
 			)
 		));
 
@@ -523,9 +523,9 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_link_text',
 			array(
-				'label' 		=> esc_html__('Privacy text', 'onesocial'),
+				'label' 		=> esc_html__('Privacy text', 'ccluk'),
 				'section' 		=> $section . '_content',
-				'description'   => __('Text linking to the page you select below.', 'onesocial'),
+				'description'   => __('Text linking to the page you select below.', 'ccluk'),
 			)
 		));
 
@@ -535,12 +535,12 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_link_page',
 			array(
-				'label'     	=> esc_html__('Page', 'onesocial'),
+				'label'     	=> esc_html__('Page', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'type'          => 'select',
 				'priority'      => 10,
 				'choices'       => $this->option_pages,
-				'description'   => esc_html__('Select the page you want to link to. If you\'ve pasted in HTML code for a newsletter signup form then you\'ll need to link to the page your privacy policy is on.', 'onesocial'),
+				'description'   => esc_html__('Select the page you want to link to. If you\'ve pasted in HTML code for a newsletter signup form then you\'ll need to link to the page your privacy policy is on.', 'ccluk'),
 			)
 		);
 	}
@@ -552,7 +552,7 @@ class CCLUK_Customizer
 
 		$this->add_homepage_panel(
 			$section,
-			esc_html__('Homepage: About', 'onesocial'),
+			esc_html__('Homepage: About', 'ccluk'),
 			'',
 			$priority
 		);
@@ -563,13 +563,13 @@ class CCLUK_Customizer
 		$this->add_setting(
 			$section . '_title',
 			'sanitize_text_field',
-			esc_html__('About Us', 'onesocial')
+			esc_html__('About Us', 'ccluk')
 		);
 
 		$this->customize->add_control(
 			$section . '_title',
 			array(
-				'label' 		=> esc_html__('Section Title', 'onesocial'),
+				'label' 		=> esc_html__('Section Title', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'description'   => '',
 			)
@@ -581,12 +581,12 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_source_page',
 			array(
-				'label'     	=> esc_html__('Title Link', 'onesocial'),
+				'label'     	=> esc_html__('Title Link', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'type'          => 'select',
 				'priority'      => 10,
 				'choices'       => $this->option_pages,
-				'description'   => esc_html__('Select a page the title will link to.', 'onesocial'),
+				'description'   => esc_html__('Select a page the title will link to.', 'ccluk'),
 			)
 		);
 
@@ -598,7 +598,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_intro',
 			array(
-				'label' 		=> esc_html__('Introduction', 'onesocial'),
+				'label' 		=> esc_html__('Introduction', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -613,7 +613,7 @@ class CCLUK_Customizer
 				$this->customize,
 				$section . '_box_' . $box,
 				array(
-					'label' 		=> sprintf(esc_html__('Box %d content', 'onesocial'), $box),
+					'label' 		=> sprintf(esc_html__('Box %d content', 'ccluk'), $box),
 					'section' 		=> $section . '_content',
 					'description'   => '',
 				)
@@ -627,9 +627,9 @@ class CCLUK_Customizer
 			$this->customize,
 			'homepage_about_footer',
 			array(
-				'label' 		=> sprintf(esc_html__('Footer', 'onesocial'), $box),
+				'label' 		=> sprintf(esc_html__('Footer', 'ccluk'), $box),
 				'section' 		=> self::SLUG . '_homepage_about_content',
-				'description'   => __('Appears below the two boxes', 'onesocial')
+				'description'   => __('Appears below the two boxes', 'ccluk')
 			)
 		));
 	}
@@ -641,7 +641,7 @@ class CCLUK_Customizer
 
 		$this->add_homepage_panel(
 			$section,
-			esc_html__('Homepage: Contact', 'onesocial'),
+			esc_html__('Homepage: Contact', 'ccluk'),
 			'',
 			$priority
 		);
@@ -652,25 +652,25 @@ class CCLUK_Customizer
 		$this->add_setting(
 			$section . '_title',
 			'sanitize_text_field',
-			esc_html__('Get in touch', 'onesocial')
+			esc_html__('Get in touch', 'ccluk')
 		);
 
 		$this->customize->add_control(
 			$section . '_title',
 			array(
-				'label'     => esc_html__('Section Title', 'onesocial'),
+				'label'     => esc_html__('Section Title', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'description'   => '',
 			)
 		);
 
 		// Sub Title
-		$this->add_setting($section . '_subtitle', 'sanitize_text_field', esc_html__('Section subtitle', 'onesocial'));
+		$this->add_setting($section . '_subtitle', 'sanitize_text_field', esc_html__('Section subtitle', 'ccluk'));
 
 		$this->customize->add_control(
 			$section . '_subtitle',
 			array(
-				'label'     => esc_html__('Section Subtitle', 'onesocial'),
+				'label'     => esc_html__('Section Subtitle', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'description'   => '',
 			)
@@ -683,7 +683,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_desc',
 			array(
-				'label' 		=> esc_html__('Section Description', 'onesocial'),
+				'label' 		=> esc_html__('Section Description', 'ccluk'),
 				'section' 		=> $section . '_settings',
 				'description'   => '',
 			)
@@ -700,7 +700,7 @@ class CCLUK_Customizer
 			array(
 				'section'     => $section . '_content',
 				'type'        => 'custom_message',
-				'description' => wp_kses_post('In order to display contact form please install <a target="_blank" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a> plugin and then copy the contact form shortcode and paste it here, the shortcode will be like this <code>[contact-form-7 id="xxxx" title="Example Contact Form"]</code>', 'onesocial')
+				'description' => wp_kses_post('In order to display contact form please install <a target="_blank" href="https://wordpress.org/plugins/contact-form-7/">Contact Form 7</a> plugin and then copy the contact form shortcode and paste it here, the shortcode will be like this <code>[contact-form-7 id="xxxx" title="Example Contact Form"]</code>', 'ccluk')
 			)
 		));
 
@@ -710,7 +710,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_cf7',
 			array(
-				'label'     	=> esc_html__('Contact Form 7 Shortcode.', 'onesocial'),
+				'label'     	=> esc_html__('Contact Form 7 Shortcode.', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -723,9 +723,9 @@ class CCLUK_Customizer
 			$section . '_cf7_disable',
 			array(
 				'type'        => 'checkbox',
-				'label'       => esc_html__('Hide contact form completely.', 'onesocial'),
+				'label'       => esc_html__('Hide contact form completely.', 'ccluk'),
 				'section'     => $section . '_content',
-				'description' => esc_html__('Check this box to hide contact form.', 'onesocial'),
+				'description' => esc_html__('Check this box to hide contact form.', 'ccluk'),
 			)
 		);
 
@@ -736,7 +736,7 @@ class CCLUK_Customizer
 			$this->customize,
 			$section . '_text',
 			array(
-				'label'     	=> esc_html__('Contact Text', 'onesocial'),
+				'label'     	=> esc_html__('Contact Text', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -762,7 +762,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_address_title',
 			array(
-				'label'     	=> esc_html__('Contact Box Title', 'onesocial'),
+				'label'     	=> esc_html__('Contact Box Title', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -777,7 +777,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_address',
 			array(
-				'label'     => esc_html__('Address', 'onesocial'),
+				'label'     => esc_html__('Address', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -792,7 +792,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_phone',
 			array(
-				'label'     	=> esc_html__('Phone', 'onesocial'),
+				'label'     	=> esc_html__('Phone', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -807,7 +807,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_email',
 			array(
-				'label'     	=> esc_html__('Email', 'onesocial'),
+				'label'     	=> esc_html__('Email', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)
@@ -822,7 +822,7 @@ class CCLUK_Customizer
 		$this->customize->add_control(
 			$section . '_fax',
 			array(
-				'label'     	=> esc_html__('Fax', 'onesocial'),
+				'label'     	=> esc_html__('Fax', 'ccluk'),
 				'section' 		=> $section . '_content',
 				'description'   => '',
 			)

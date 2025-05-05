@@ -16,7 +16,7 @@
 get_header();
 ?>
 
-<a href="#" id="trigger-sidebar" class="" title="<?php _e('Toggle Sidebar', 'onesocial'); ?>">
+<a href="#" id="trigger-sidebar" class="" title="<?php _e('Toggle Sidebar', 'ccluk'); ?>">
 	<span class="bb-side-icon" aria-hidden="true"></span>
 </a>
 

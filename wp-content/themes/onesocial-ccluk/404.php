@@ -16,8 +16,8 @@ get_header();
 		<article id="post-0" class="post error404 no-results not-found">
 
 			<header class="entry-header">
-				<h1 class="entry-title"><?php _e('404', 'onesocial'); ?></h1>
-				<p><?php _e('We’re sorry, We seem to have lost this page, but We don’t want to lose You.', 'onesocial'); ?></p>
+				<h1 class="entry-title"><?php _e('404', 'ccluk'); ?></h1>
+				<p><?php _e('We’re sorry, We seem to have lost this page, but We don’t want to lose You.', 'ccluk'); ?></p>
 			</header>
 
 			<div class="entry-content">
@@ -34,7 +34,7 @@ get_header();
 					<div id="posts-carousel">
 
 						<div class="clearfix bb-carousel-header">
-							<h2 class="title"><?php _e('Latest Articles', 'onesocial'); ?></h2>
+							<h2 class="title"><?php _e('Latest Articles', 'ccluk'); ?></h2>
 
 							<span class="arrows">
 								<a href="#" id="prev" class="bb-icon-chevron-left"></a>
@@ -66,7 +66,7 @@ get_header();
 
 											<?php endif; ?>
 
-											<h3><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
+											<h3><a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a></h3>
 										</div>
 
 										<footer class="entry-meta">
@@ -76,7 +76,7 @@ get_header();
 													printf(
 														'<a class="url fn n author" href="%1$s" title="%2$s" rel="author">%3$s</a>',
 														esc_url(get_author_posts_url(get_the_author_meta('ID'))),
-														esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())),
+														esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())),
 														get_avatar(get_the_author_meta('ID'), 75, '', get_the_author())
 													);
 													?>
@@ -84,13 +84,13 @@ get_header();
 
 												<div class="table-cell">
 													<?php
-													$categories_list = get_the_category_list(__(', ', 'onesocial'));
-													printf(__('In %s', 'onesocial'), $categories_list);
+													$categories_list = get_the_category_list(__(', ', 'ccluk'));
+													printf(__('In %s', 'ccluk'), $categories_list);
 													printf(
 														'%1$s<a class="url fn n" href="%2$s" title="%3$s" rel="author">%4$s</a>',
-														__(', by ', 'onesocial'),
+														__(', by ', 'ccluk'),
 														esc_url(get_author_posts_url(get_the_author_meta('ID'))),
-														esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())),
+														esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())),
 														get_the_author()
 													);
 													printf(
@@ -104,7 +104,7 @@ get_header();
 												</div>
 											</div>
 
-											<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'onesocial'); ?></a>
+											<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'ccluk'); ?></a>
 										</footer>
 
 									</article>

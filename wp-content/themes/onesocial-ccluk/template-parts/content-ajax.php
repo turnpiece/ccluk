@@ -12,7 +12,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<div class="posts-stream">
-		<div class="loader"><?php _e('Loading...', 'onesocial'); ?></div>
+		<div class="loader"><?php _e('Loading...', 'ccluk'); ?></div>
 	</div>
 
 	<div class="header-area">
@@ -48,7 +48,7 @@
 		<!-- Title -->
 		<header class="entry-header<?php echo $header_class; ?>">
 			<h2 class="entry-title">
-				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
+				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" rel="bookmark"><?php the_title(); ?></a>
 			</h2>
 		</header><!-- .entry-header -->
 
@@ -64,8 +64,8 @@
 		<?php the_excerpt(); ?>
 
 		<footer class="entry-meta">
-			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'onesocial'); ?></a>
-			<span class="sep"><?php _e('.', 'onesocial') ?></span>
+			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'ccluk'); ?></a>
+			<span class="sep"><?php _e('.', 'ccluk') ?></span>
 			<span><?php echo ccluk_estimated_reading_time($post_content); ?></span>
 			<a href="#" class="to-top bb-icon-arrow-top-f"></a>
 		</footer><!-- .entry-meta -->

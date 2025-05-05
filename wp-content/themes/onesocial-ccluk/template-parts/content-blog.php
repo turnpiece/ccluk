@@ -32,8 +32,8 @@
 		<?php the_excerpt(); ?>
 
 		<footer class="entry-meta">
-			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'onesocial'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'onesocial'); ?></a>
-			<span class="sep"><?php _e('.', 'onesocial') ?></span>
+			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'ccluk'); ?></a>
+			<span class="sep"><?php _e('.', 'ccluk') ?></span>
 			<span><?php echo ccluk_estimated_reading_time(get_the_content()); ?></span>
 			<a href="#" class="to-top bb-icon-arrow-top-f"></a>
 		</footer><!-- .entry-meta -->

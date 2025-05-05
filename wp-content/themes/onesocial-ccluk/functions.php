@@ -17,7 +17,7 @@ $init_file = get_stylesheet_directory() . '/inc/init.php';
 
 if (!file_exists($init_file)) {
 
-    $err_msg = __('Cannot find the starter file, should be located at: *wp root*/wp-content/themes/onesocial-ccluk/inc/init.php', 'onesocial');
+    $err_msg = __('Cannot find the starter file, should be located at: *wp root*/wp-content/themes/onesocial-ccluk/inc/init.php', 'ccluk');
 
     wp_die($err_msg);
 }
@@ -89,7 +89,7 @@ function ccluk_pagination()
     }
 
     $class     = ' post-infinite-scroll';
-    $label     = __('Load More', 'onesocial');
+    $label     = __('Load More', 'ccluk');
 
     if (!is_single() && ($nextpage <= $max_page)) {
         /**
@@ -141,10 +141,10 @@ function ccluk_theme_setup()
      */
 
     // Translate text from the PARENT theme.
-    load_theme_textdomain('onesocial', get_stylesheet_directory() . '/languages');
+    load_theme_textdomain('ccluk', get_stylesheet_directory() . '/languages');
 
     // Translate text from the CHILD theme only.
-    // Change 'onesocial' instances in all child theme files to 'ccluk_theme'.
+    // Change 'ccluk' instances in all child theme files to 'ccluk_theme'.
     // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
 
     // add class to front page
@@ -278,7 +278,7 @@ function ccluk_admin_assets()
     /**
      * Assign the CCLUK version to a var
      */
-    $theme               = wp_get_theme('onesocial');
+    $theme               = wp_get_theme('ccluk');
     $onesocial_version   = $theme['Version'];
 
     wp_enqueue_style('ccluk-main-admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), $onesocial_version, 'all');

@@ -12,7 +12,7 @@ if (
 )
     return;
 
-$id         = get_theme_mod($slug . '_id', esc_html__('embed', 'onesocial'));
+$id         = get_theme_mod($slug . '_id', esc_html__('embed', 'ccluk'));
 $embed      = get_theme_mod($slug . '_embed');
 $disable    = get_theme_mod($slug . '_disable') == 1 ? true : false;
 $title      = get_theme_mod($slug . '_title');

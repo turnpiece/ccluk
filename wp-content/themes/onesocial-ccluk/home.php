@@ -23,7 +23,7 @@ get_header();
 		<div id="content" role="main">
 
 			<header class="archive-header dir-header">
-				<h1 class="archive-title"><?php _e('Blog', 'onesocial') ?></h1>
+				<h1 class="archive-title"><?php _e('Blog', 'ccluk') ?></h1>
 			</header><!-- .archive-header -->
 
 			<!-- Display blog posts -->

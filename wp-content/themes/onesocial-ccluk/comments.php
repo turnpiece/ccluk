@@ -32,7 +32,7 @@ if (post_password_required())
 			?>
 
 			<?php if (have_comments()) : ?>
-				<h3 class="comments-title"><?php _e('Responses', 'onesocial'); ?></h3>
+				<h3 class="comments-title"><?php _e('Responses', 'ccluk'); ?></h3>
 			<?php endif; ?>
 
 			<?php
@@ -40,8 +40,8 @@ if (post_password_required())
 				'title_reply'			 => '',
 				'logged_in_as'			 => '',
 				'comment_notes_after'	 => '',
-				'comment_field'			 => '<div class="comment-form-comment"><span class="bb-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __('Write a response...', 'onesocial') . '"></textarea></div>',
-				'label_submit'			 => __('Comment', 'onesocial')
+				'comment_field'			 => '<div class="comment-form-comment"><span class="bb-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __('Write a response...', 'ccluk') . '"></textarea></div>',
+				'label_submit'			 => __('Comment', 'ccluk')
 			);
 			?>
 
@@ -60,9 +60,9 @@ if (post_password_required())
 				<?php if (get_comment_pages_count() > 1 && get_option('page_comments')) : // are there comments to navigate through  
 				?>
 					<nav id="comment-nav-below" class="navigation" role="navigation">
-						<h1 class="assistive-text section-heading"><?php _e('Comment navigation', 'onesocial'); ?></h1>
-						<div class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'onesocial')); ?></div>
-						<div class="nav-next"><?php next_comments_link(__('Newer Comments &rarr;', 'onesocial')); ?></div>
+						<h1 class="assistive-text section-heading"><?php _e('Comment navigation', 'ccluk'); ?></h1>
+						<div class="nav-previous"><?php previous_comments_link(__('&larr; Older Comments', 'ccluk')); ?></div>
+						<div class="nav-next"><?php next_comments_link(__('Newer Comments &rarr;', 'ccluk')); ?></div>
 					</nav>
 				<?php endif; // check for comment navigation  
 				?>
@@ -73,7 +73,7 @@ if (post_password_required())
 				 */
 				if (!comments_open() && get_comments_number()) :
 				?>
-					<p class="nocomments"><?php _e('Comments are closed.', 'onesocial'); ?></p>
+					<p class="nocomments"><?php _e('Comments are closed.', 'ccluk'); ?></p>
 				<?php endif; ?>
 
 			<?php endif; // have_comments() 

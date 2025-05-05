@@ -15,18 +15,18 @@
 	if (current_user_can('edit_posts')) :
 	?>
 
-		<h2 class="entry-title"><?php _e('No posts to display', 'onesocial'); ?></h2>
+		<h2 class="entry-title"><?php _e('No posts to display', 'ccluk'); ?></h2>
 
 		<div class="entry-content">
-			<p><?php printf(__('Ready to publish your first post? <a href="%s">Get started here</a>.', 'onesocial'), admin_url('post-new.php')); ?></p>
+			<p><?php printf(__('Ready to publish your first post? <a href="%s">Get started here</a>.', 'ccluk'), admin_url('post-new.php')); ?></p>
 		</div><!-- .entry-content -->
 
 	<?php else : ?>
 
-		<h2 class="entry-title"><?php _e('Nothing Found', 'onesocial'); ?></h2>
+		<h2 class="entry-title"><?php _e('Nothing Found', 'ccluk'); ?></h2>
 
 		<div class="entry-content">
-			<p><?php _e('Apologies, but no results were found.', 'onesocial'); ?></p>
+			<p><?php _e('Apologies, but no results were found.', 'ccluk'); ?></p>
 		</div>
 
 	<?php endif; ?>

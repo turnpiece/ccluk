@@ -23,7 +23,7 @@ $content_width = (isset($content_width)) ? $content_width : 700;
 function ccluk_setup()
 {
 	// Makes CCLUK available for translation.
-	load_theme_textdomain('onesocial', get_template_directory() . '/languages');
+	load_theme_textdomain('ccluk', get_template_directory() . '/languages');
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
@@ -41,8 +41,8 @@ function ccluk_setup()
 
 	// Adds wp_nav_menu() in two locations
 	register_nav_menus(array(
-		'primary-menu'		 => __('Titlebar', 'onesocial'),
-		'secondary-menu'	 => __('Footer Menu', 'onesocial')
+		'primary-menu'		 => __('Titlebar', 'ccluk'),
+		'secondary-menu'	 => __('Footer Menu', 'ccluk')
 	));
 
 	// This theme uses a custom image size for featured images, displayed on "standard" posts.
@@ -280,7 +280,7 @@ function buddyboss_wp_title($title, $sep)
 
 	// Add a page number if necessary.
 	if ($paged >= 2 || $page >= 2)
-		$title = "$title $sep " . sprintf(__('Page %s', 'onesocial'), max($paged, $page));
+		$title = "$title $sep " . sprintf(__('Page %s', 'ccluk'), max($paged, $page));
 
 	return $title;
 }
@@ -512,7 +512,7 @@ function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
 {
 ?>
 	<div class="wrap">
-		<h3 class="title black"><?php _e('Articles', 'onesocial'); ?><span><?php echo $count; ?></span></h3>
+		<h3 class="title black"><?php _e('Articles', 'ccluk'); ?><span><?php echo $count; ?></span></h3>
 		<div class="inner">
 			<?php
 			while ($posts->have_posts()) {
@@ -538,7 +538,7 @@ function post_comment_form_avatar()
 
 	$user_link = ccluk_get_user_link(get_current_user_id());
 
-	printf('<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())), get_avatar(get_current_user_id(), 85, '', get_the_author()));
+	printf('<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())), get_avatar(get_current_user_id(), 85, '', get_the_author()));
 }
 
 /**
@@ -591,9 +591,9 @@ function ccluk_estimated_reading_time($post_content)
 	$seconds = floor($words % 120 / (120 / 60));
 
 	if (1 <= $minutes) {
-		$estimated_time = $minutes . __(' min read', 'onesocial');
+		$estimated_time = $minutes . __(' min read', 'ccluk');
 	} else {
-		$estimated_time = $seconds . __(' sec read', 'onesocial');
+		$estimated_time = $seconds . __(' sec read', 'ccluk');
 	}
 
 	return $estimated_time;
@@ -629,7 +629,7 @@ if (!function_exists('ccluk_comment')) {
 	?>
 
 				<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
-					<p><?php _e('Pingback:', 'onesocial'); ?> <?php comment_author_link(); ?> <?php edit_comment_link(__('(Edit)', 'onesocial'), '<span class="edit-link">', '</span>'); ?></p>
+					<p><?php _e('Pingback:', 'ccluk'); ?> <?php comment_author_link(); ?> <?php edit_comment_link(__('(Edit)', 'ccluk'), '<span class="edit-link">', '</span>'); ?></p>
 				<?php
 				break;
 			default:
@@ -642,27 +642,27 @@ if (!function_exists('ccluk_comment')) {
 							$author_id	 = $comment->user_id;
 							$user_link	 = ccluk_get_user_link($author_id);
 
-							printf('<span class="authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'onesocial'), get_the_author())), get_avatar($author_id, 85, '', get_the_author()));
+							printf('<span class="authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())), get_avatar($author_id, 85, '', get_the_author()));
 
 							//echo get_avatar( $comment, 44 );
 							printf(
 								'<cite class="fn">%1$s %2$s</cite>',
 								get_comment_author_link(),
 								// If current post author is also comment author, make it known visually.
-								($comment->user_id === $post->post_author) ? '<span> ' . __('Post author', 'onesocial') . '</span>' : ''
+								($comment->user_id === $post->post_author) ? '<span> ' . __('Post author', 'ccluk') . '</span>' : ''
 							);
 							printf(
 								'<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
 								esc_url(get_comment_link($comment->comment_ID)),
 								get_comment_time('c'),
 								/* translators: 1: date, 2: time */
-								sprintf(__('%1$s at %2$s', 'onesocial'), get_comment_date(), get_comment_time())
+								sprintf(__('%1$s at %2$s', 'ccluk'), get_comment_date(), get_comment_time())
 							);
 							?>
 						</header><!-- .comment-meta -->
 
 						<?php if ('0' == $comment->comment_approved) : ?>
-							<p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'onesocial'); ?></p>
+							<p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'ccluk'); ?></p>
 						<?php endif; ?>
 
 						<section class="comment-content comment">
@@ -670,8 +670,8 @@ if (!function_exists('ccluk_comment')) {
 						</section><!-- .comment-content -->
 
 						<div class="reply">
-							<?php edit_comment_link(__('Edit', 'onesocial'), '<span class="edit-link">', '</span>'); ?>
-							<?php comment_reply_link(array_merge($args, array('reply_text' => __('Reply <span>&darr;</span>', 'onesocial'), 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+							<?php edit_comment_link(__('Edit', 'ccluk'), '<span class="edit-link">', '</span>'); ?>
+							<?php comment_reply_link(array_merge($args, array('reply_text' => __('Reply <span>&darr;</span>', 'ccluk'), 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
 						</div><!-- .reply -->
 					</article><!-- #comment-## -->
 	<?php

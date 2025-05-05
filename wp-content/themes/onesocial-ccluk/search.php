@@ -14,7 +14,7 @@ get_header();
 <div id="primary" class="site-content">
 
 	<header class="page-header dir-header">
-		<h1 class="page-title"><?php printf(__('Results for: %s', 'onesocial'), '<span>' . get_search_query() . '</span>'); ?></h1>
+		<h1 class="page-title"><?php printf(__('Results for: %s', 'ccluk'), '<span>' . get_search_query() . '</span>'); ?></h1>
 	</header>
 
 	<div id="content" role="main" class="search-content-wrap">
