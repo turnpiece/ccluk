@@ -1,5 +1,5 @@
 /*
-Theme Name: OneSocial
+Theme Name: CCLUK
 Description: Adds support for languages written in a Right To Left (RTL) direction.
 It's easy, just a matter of overwriting all the horizontal positioning attributes
 of your CSS stylesheet in a separate stylesheet file named rtl.css.
@@ -8,14 +8,14 @@ See http://codex.wordpress.org/Right_to_Left_Language_Support
 */
 
 body {
-    direction: rtl;
-    unicode-bidi: embed;
+  direction: rtl;
+  unicode-bidi: embed;
 }
 
 caption,
 th,
 td {
-    text-align: right;
+  text-align: right;
 }
 
 /* Fixed Pagination Issue */
@@ -25,23 +25,29 @@ html body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li a,
 html body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li span,
 html body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li a,
 html body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li span {
-    margin-left: 0;
+  margin-left: 0;
 }
 
-.pagination .pagination-links li.current+li a,
-.pagination .pagination-links li:focus+li a,
-.pagination .pagination-links li:hover+li a,
-body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li.current+li a,
-body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li:focus+li a,
-body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li:hover+li a,
-body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li.current+li a,
-body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:focus+li a,
-body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:hover+li a {
-    border-right-color: #e1e1e1;
+.pagination .pagination-links li.current + li a,
+.pagination .pagination-links li:focus + li a,
+.pagination .pagination-links li:hover + li a,
+body.bb-marketplace
+  .woocommerce
+  nav.woocommerce-pagination
+  ul
+  li.current
+  + li
+  a,
+body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li:focus + li a,
+body.bb-marketplace .woocommerce nav.woocommerce-pagination ul li:hover + li a,
+body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li.current + li a,
+body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:focus + li a,
+body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:hover + li a {
+  border-right-color: #e1e1e1;
 }
 
 .main-navigation li ul li.menu-item-has-children > a:after {
-    content: "\f104";
+  content: "\f104";
 }
 
 /*
@@ -49,15 +55,16 @@ body.bb-marketplace.woocommerce nav.woocommerce-pagination ul li:hover+li a {
  * http://stackoverflow.com/questions/5741522/brackets-displays-wrongly-for-right-to-left-display-style
  */
 .woocommerce ul.products li.product h3:after {
-    content: '\200E‎';
+  content: "\200E‎";
 }
 
-.bb-slider-container .slidePrev:before, .bb-slider-container .slideNext:before {
-    content: "\f105";
+.bb-slider-container .slidePrev:before,
+.bb-slider-container .slideNext:before {
+  content: "\f105";
 }
 
 .bb-slider-container .slideNext:before {
-    content: "\f104";
+  content: "\f104";
 }
 
 #main ul.horiz-gallery .see-more,
@@ -65,27 +72,27 @@ a.page-numbers[title="←"],
 a.page-numbers[title="→"],
 a.next.page-numbers,
 a.prev.page-numbers {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 #posts-carousel .arrows a:before {
-    display: inline-block;
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
+  display: inline-block;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .fancybox-overlay .fancybox-skin .fancybox-close {
-    right: auto;
+  right: auto;
 }
 
 body .bb-global-search-ac.ui-autocomplete {
-    left: auto !important;
-    right: 23px !important;
-    margin: 0 auto;
-    max-width: 90%;
+  left: auto !important;
+  right: 23px !important;
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 #posts-carousel li {
-    float: left;
+  float: left;
 }
