@@ -4,8 +4,8 @@
  * The template for displaying the front page of the site
  *
  * @package WordPress
- * @subpackage OneSocial Theme
- * @since OneSocial Theme 1.0.0
+ * @subpackage CCLUK Theme
+ * @since CCLUK Theme 1.0.0
  */
 get_header();
 

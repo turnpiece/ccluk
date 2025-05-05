@@ -7,7 +7,7 @@
  * #main and #page div elements.
  *
  * @package WordPress
- * @subpackage OneSocial Theme
+ * @subpackage CCLUK Theme
  */
 ?>
 </div><!-- #main .wrapper -->

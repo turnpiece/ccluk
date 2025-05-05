@@ -5,7 +5,7 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package OneSocial Theme
+ * @package CCLUK Theme
  */
 get_header();
 

@@ -8,8 +8,8 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage OneSocial Theme
- * @since OneSocial Theme 1.0.0
+ * @subpackage CCLUK Theme
+ * @since CCLUK Theme 1.0.0
  */
 get_header();
 ?>

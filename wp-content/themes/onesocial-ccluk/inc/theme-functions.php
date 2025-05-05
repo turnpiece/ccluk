@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package OneSocial Theme
+ * @package CCLUK Theme
  */
 /**
  * Sets up the content width value based on the theme's design and stylesheet.
@@ -10,7 +10,7 @@ global $content_width;
 $content_width = (isset($content_width)) ? $content_width : 700;
 
 /**
- * Sets up theme defaults and registers the various WordPress features that OneSocial supports.
+ * Sets up theme defaults and registers the various WordPress features that CCLUK supports.
  *
  * @uses load_theme_textdomain() For translation/localization support.
  * @uses add_editor_style() To add a Visual Editor stylesheet.
@@ -18,11 +18,11 @@ $content_width = (isset($content_width)) ? $content_width : 700;
  * @uses register_nav_menu() To add support for navigation menus.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  */
 function ccluk_setup()
 {
-	// Makes OneSocial available for translation.
+	// Makes CCLUK available for translation.
 	load_theme_textdomain('onesocial', get_template_directory() . '/languages');
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
@@ -55,14 +55,14 @@ add_action('after_setup_theme', 'ccluk_setup');
 /**
  * Disable gallery style
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  */
 add_filter('use_default_gallery_style', '__return_false');
 
 /**
  * Detecting phones
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  * from detectmobilebrowsers.com
  */
 function is_phone()
@@ -75,7 +75,7 @@ function is_phone()
 /**
  * Enqueues scripts and styles for front-end.
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  */
 function ccluk_scripts_styles()
 {
@@ -83,7 +83,7 @@ function ccluk_scripts_styles()
 	$ext = 'css';
 
 	/**
-	 * Assign the OneSocial version to a var
+	 * Assign the CCLUK version to a var
 	 */
 	$theme		= wp_get_theme();
 	$version	= $theme['Version'];
@@ -98,7 +98,7 @@ function ccluk_scripts_styles()
 	$CSS_URL = $assets_dir . (!CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest);
 	$JS_URL = $assets_dir . '/js';
 
-	// OneSocial icon fonts.
+	// CCLUK icon fonts.
 	wp_register_style('icons', $CSS_URL . '/onesocial-icons.css', array(), $version, 'all');
 	wp_enqueue_style('icons');
 
@@ -257,7 +257,7 @@ add_action('wp', 'buddyboss_admin_bar_in_header');
  * Creates a nicely formatted and more specific title element text
  * for output in head of document, based on current view.
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  *
  * @param string $title Default title text for current view.
  * @param string $sep Optional separator.
@@ -290,7 +290,7 @@ function buddyboss_wp_title($title, $sep)
 /**
  * Makes our wp_nav_menu() fallback -- wp_page_menu() -- show a home link.
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  */
 function buddyboss_page_menu_args($args)
 {
@@ -303,7 +303,7 @@ add_filter('wp_page_menu_args', 'buddyboss_page_menu_args');
 /**
  * Registers all of our widget areas.
  *
- * @since OneSocial Theme 1.0.0
+ * @since CCLUK Theme 1.0.0
  */
 function buddyboss_widgets_init()
 {
@@ -387,7 +387,7 @@ function buddyboss_widgets_init()
 /**
  * Extends the default WordPress body classes.
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  *
  * @param array Existing class values.
  * @return array Filtered class values.
@@ -475,7 +475,7 @@ add_filter('body_class', 'buddyboss_body_class');
 /**
  * Replace default member avatar
  *
- * @since OneSocial 1.0.0
+ * @since CCLUK 1.0.0
  */
 if (!function_exists('buddyboss_add_gravatar')) {
 
@@ -497,7 +497,7 @@ if (!function_exists('buddyboss_add_gravatar')) {
 /**
  * Add image size for posts
  *
- * @since OneSocial Theme 1.0.0
+ * @since CCLUK Theme 1.0.0
  */
 add_image_size('post-thumb', 845, 312, true);
 add_image_size('medium-thumb', 360, 216, true);
@@ -506,7 +506,7 @@ add_image_size('large-thumb', 9999, 800, true);
 /**
  * Show more posts on profile
  *
- * @since OneSocial Theme 1.0.0
+ * @since CCLUK Theme 1.0.0
  */
 function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
 {
@@ -583,7 +583,7 @@ function buddyboss_format_time($time, $just_date = true, $localize_time = true)
  *
  * @return string
  */
-function boss_estimated_reading_time($post_content)
+function ccluk_estimated_reading_time($post_content)
 {
 
 	$words	 = str_word_count(strip_tags($post_content));
@@ -599,35 +599,13 @@ function boss_estimated_reading_time($post_content)
 	return $estimated_time;
 }
 
-// Custom Excerpt
-if (!function_exists('onesocial_custom_excerpt')) {
-
-	function onesocial_custom_excerpt($content, $limit)
-	{
-		$excerpt = explode(' ', $content, $limit);
-		if (count($excerpt) >= $limit) {
-			array_pop($excerpt);
-			$excerpt = implode(" ", $excerpt) . '&hellip;';
-		} else {
-			$excerpt = implode(" ", $excerpt);
-		}
-		$excerpt = preg_replace('`\[[^\]]*\]`', '', $excerpt);
-		return $excerpt;
-	}
-}
-
 // Change more
-function onesocial_excerpt_more()
+function ccluk_excerpt_more()
 {
 	return '&hellip;';
 }
 
-add_filter('excerpt_more', 'onesocial_excerpt_more');
-
-function onesocial_custom_excerpt_length()
-{
-	return 15;
-}
+add_filter('excerpt_more', 'ccluk_excerpt_more');
 
 /**
  * Template for comments and pingbacks.
@@ -713,13 +691,12 @@ function ccluk_excerpt_allowedtags()
 }
 
 /**
- * Return OneSocial custom excerpt that will allow few tags
+ * Return CCLUK custom excerpt that will allow few tags
  * @param $wpse_excerpt
  * @return mixed|string|void
  */
 function ccluk_trim_excerpt($wpse_excerpt)
 {
-
 	$raw_excerpt = $wpse_excerpt;
 
 	if ('' == $wpse_excerpt) {

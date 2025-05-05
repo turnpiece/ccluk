@@ -11,7 +11,7 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package WordPress
- * @subpackage OneSocial Theme
+ * @subpackage CCLUK Theme
  */
 get_header();
 ?>

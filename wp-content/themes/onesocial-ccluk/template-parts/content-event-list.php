@@ -4,8 +4,8 @@
  * The template used for displaying page content
  *
  * @package WordPress
- * @subpackage OneSocial Theme
- * @since OneSocial Theme 1.0.0
+ * @subpackage CCLUK Theme
+ * @since CCLUK Theme 1.0.0
  */
 
 $datetime = get_post_meta(get_the_ID(), 'incsub_event_start', true);

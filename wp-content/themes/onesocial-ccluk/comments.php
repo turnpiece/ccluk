@@ -9,8 +9,8 @@
  * located in the functions.php file.
  *
  * @package WordPress
- * @subpackage OneSocial Theme
- * @since OneSocial Theme 1.0.0
+ * @subpackage CCLUK Theme
+ * @since CCLUK Theme 1.0.0
  */
 /*
  * If the current post is protected by a password and

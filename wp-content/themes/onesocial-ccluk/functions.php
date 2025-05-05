@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package OneSocial Child Theme
+ * @package CCLUK Child Theme
  * Add your own functions in this file.
  */
 
@@ -11,7 +11,7 @@ define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 /**
  * To view theme functions, navigate to /inc/theme.php
  *
- * @package OneSocial Theme
+ * @package CCLUK Theme
  */
 $init_file = get_stylesheet_directory() . '/inc/init.php';
 
@@ -60,7 +60,7 @@ add_filter('pre_get_posts', 'ccluk_show_cpt_archives');
  * Custom Pagination
  * Credits: http://www.kriesi.at/archives/how-to-build-a-wordpress-post-pagination-without-plugin
  *
- * @since OneSocial Theme 1.0.0
+ * @since CCLUK Theme 1.0.0
  */
 function ccluk_pagination()
 {
@@ -130,7 +130,7 @@ add_filter('pre_get_document_title', 'ccluk_override_post_title', 99);
 /**
  * Sets up theme defaults
  *
- * @since OneSocial Child Theme 1.0.0
+ * @since CCLUK Child Theme 1.0.0
  */
 function ccluk_theme_setup()
 {
@@ -276,7 +276,7 @@ function ccluk_admin_assets()
 {
 
     /**
-     * Assign the OneSocial version to a var
+     * Assign the CCLUK version to a var
      */
     $theme               = wp_get_theme('onesocial');
     $onesocial_version   = $theme['Version'];
