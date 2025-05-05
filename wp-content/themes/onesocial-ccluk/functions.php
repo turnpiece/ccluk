@@ -137,11 +137,10 @@ function ccluk_theme_setup()
     /**
      * Makes child theme available for translation.
      * Translations can be added into the /languages/ directory.
-     * Read more at: http://www.buddyboss.com/tutorials/language-translations/
      */
 
     // Translate text from the PARENT theme.
-    load_theme_textdomain('ccluk', get_stylesheet_directory() . '/languages');
+    #load_theme_textdomain('ccluk', get_stylesheet_directory() . '/languages');
 
     // Translate text from the CHILD theme only.
     // Change 'ccluk' instances in all child theme files to 'ccluk_theme'.
