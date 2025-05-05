@@ -633,15 +633,15 @@ function onesocial_custom_excerpt_length()
  * Template for comments and pingbacks.
  *
  * To override this walker in a child theme without modifying the comments template
- * simply create your own buddyboss_comment(), and that function will be used instead.
+ * simply create your own ccluk_comment(), and that function will be used instead.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
  * @since Twenty Twelve 1.0
  */
-if (!function_exists('buddyboss_comment')) {
+if (!function_exists('ccluk_comment')) {
 
-	function buddyboss_comment($comment, $args, $depth)
+	function ccluk_comment($comment, $args, $depth)
 	{
 		$GLOBALS['comment'] = $comment;
 
@@ -703,10 +703,10 @@ if (!function_exists('buddyboss_comment')) {
 }
 
 /**
- * Return the tags onesocial_trim_excerpt allow
+ * Return the tags ccluk_trim_excerpt allow
  * @return string
  */
-function onesocial_excerpt_allowedtags()
+function ccluk_excerpt_allowedtags()
 {
 	// Add custom tags to this string
 	return '<em>,<i>,<br>,<p>,<a>';
@@ -717,7 +717,7 @@ function onesocial_excerpt_allowedtags()
  * @param $wpse_excerpt
  * @return mixed|string|void
  */
-function onesocial_trim_excerpt($wpse_excerpt)
+function ccluk_trim_excerpt($wpse_excerpt)
 {
 
 	$raw_excerpt = $wpse_excerpt;
@@ -728,7 +728,7 @@ function onesocial_trim_excerpt($wpse_excerpt)
 		$wpse_excerpt = strip_shortcodes($wpse_excerpt);
 		$wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
 		$wpse_excerpt = str_replace(']]>', ']]>', $wpse_excerpt);
-		$wpse_excerpt = strip_tags($wpse_excerpt, onesocial_excerpt_allowedtags()); /*IF you need to allow just certain tags. Delete if all tags are allowed */
+		$wpse_excerpt = strip_tags($wpse_excerpt, ccluk_excerpt_allowedtags()); /*IF you need to allow just certain tags. Delete if all tags are allowed */
 
 		//Set the excerpt word count and only break after sentence is complete.
 		$excerpt_length 	= apply_filters('excerpt_length', 55);
@@ -765,5 +765,5 @@ function onesocial_trim_excerpt($wpse_excerpt)
 		return $wpse_excerpt;
 	}
 
-	return apply_filters('onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt);
+	return apply_filters('ccluk_trim_excerpt', $wpse_excerpt, $raw_excerpt);
 }
