@@ -136,6 +136,10 @@ body.page-template-homepage {
 						display: flex;
 						flex-direction: column;
 
+						h2 {
+							font-size: $font-size-std;
+						}
+
 						h2,
 						p {
 							color: $white;

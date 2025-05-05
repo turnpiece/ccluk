@@ -547,6 +547,9 @@ body.page-template-homepage #main .section.banner .section-title-container > .se
   display: flex;
   flex-direction: column;
 }
+body.page-template-homepage #main .section.banner .section-title-container > .section-title h2 {
+  font-size: 21px;
+}
 body.page-template-homepage #main .section.banner .section-title-container > .section-title h2,
 body.page-template-homepage #main .section.banner .section-title-container > .section-title p {
   color: #fff;
