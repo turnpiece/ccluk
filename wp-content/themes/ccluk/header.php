@@ -45,7 +45,7 @@
 		<?php get_template_part('template-parts/header-mobile'); ?>
 
 		<?php
-		$show_single_header	 = apply_filters('onesocial_single_header', (is_single()));
+		$show_single_header	 = apply_filters('ccluk_single_header', (is_single()));
 		if ($show_single_header) {
 			get_template_part('template-parts/header-single');
 		}

@@ -12,7 +12,7 @@
 									<ul class="ab-submenu">
 										<li>
 											<a href="<?php echo network_admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
-											<a href="<?php echo network_admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
+											<a href="<?php echo network_admin_url('admin.php?page=ccluk_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
 											<a href="<?php echo network_admin_url('sites.php'); ?>"><?php _e('Sites', 'ccluk'); ?></a>
 											<a href="<?php echo network_admin_url('users.php'); ?>"><?php _e('Users', 'ccluk'); ?></a>
 											<a href="<?php echo network_admin_url('themes.php'); ?>"><?php _e('Themes', 'ccluk'); ?></a>
@@ -35,7 +35,7 @@
 										<ul class="ab-submenu">
 											<li>
 												<a href="<?php echo admin_url(); ?>"><?php _e('Dashboard', 'ccluk'); ?></a>
-												<a href="<?php echo admin_url('admin.php?page=onesocial_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
+												<a href="<?php echo admin_url('admin.php?page=ccluk_options'); ?>"><?php _e('CCLUK Options', 'ccluk'); ?></a>
 												<a href="<?php echo admin_url('users.php'); ?>"><?php _e('Users', 'ccluk'); ?></a>
 												<a href="<?php echo admin_url('themes.php'); ?>"><?php _e('Themes', 'ccluk'); ?></a>
 												<a href="<?php echo admin_url('plugins.php'); ?>"><?php _e('Plugins', 'ccluk'); ?></a>

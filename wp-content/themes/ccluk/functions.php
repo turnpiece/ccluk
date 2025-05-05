@@ -17,7 +17,7 @@ $init_file = get_stylesheet_directory() . '/inc/init.php';
 
 if (!file_exists($init_file)) {
 
-    $err_msg = __('Cannot find the starter file, should be located at: *wp root*/wp-content/themes/onesocial-ccluk/inc/init.php', 'ccluk');
+    $err_msg = __('Cannot find the starter file, should be located at: *wp root*/wp-content/themes/ccluk/inc/init.php', 'ccluk');
 
     wp_die($err_msg);
 }
@@ -158,53 +158,6 @@ add_action('after_setup_theme', 'ccluk_theme_setup');
 
 /****************************** CUSTOM FUNCTIONS ******************************/
 
-// Add your own custom functions here
-
-/*
- *
- * WordPress Social Login hooks
- * 
- * secure avatar fix
- * updates an http:// image to //
- * 
- */
-function ccluk_wsl_secure_avatar_fix($user_id, $provider, $redirect_to, $adapter, $hybridauth_user_profile, $wp_user)
-{
-    // check for insecure avatar
-    if ($hybridauth_user_profile->photoURL && strpos($hybridauth_user_profile->photoURL, 'http://') !== false) {
-        $hybridauth_user_profile->photoURL = str_replace('http:', '', $hybridauth_user_profile->photoURL);
-    }
-}
-
-function ccluk_wsl_secure_avatar_check($user_id, $provider, $hybridauth_user_profile, $redirect_to)
-{
-    // check for insecure avatar
-    if ($hybridauth_user_profile->photoURL && strpos($hybridauth_user_profile->photoURL, 'http://') !== false) {
-        update_user_meta($user_id, 'wsl_current_user_image', str_replace('http:', '', $hybridauth_user_profile->photoURL));
-    }
-}
-
-function ccluk_wsl_get_wp_avatar_filter($wsl_html, $user_id, $wsl_avatar, $html, $mixed, $size, $default, $alt)
-{
-    if (strpos($wsl_avatar, 'http://') !== false) {
-        $wsl_avatar = str_replace('http:', '', $wsl_avatar);
-        $wsl_html = '<img alt="' . $alt . '" src="' . $wsl_avatar . '" class="avatar avatar-wordpress-social-login avatar-' . $size . ' photo" height="' . $size . '" width="' . $size . '" />';
-    }
-    return $wsl_html;
-}
-
-function ccluk_login_styles()
-{ ?>
-    <style type="text/css">
-        .login #loginform input[type=text],
-        .login #loginform input[type=password] {
-            font-size: 21px;
-            border-bottom: 1px solid #54ae68;
-        }
-    </style>
-<?php }
-
-add_action('login_enqueue_scripts', 'ccluk_login_styles');
 
 // create news post type
 function ccluk_create_news_post_type()
@@ -273,14 +226,13 @@ if (! function_exists('ccluk_posted_on')) {
  */
 function ccluk_admin_assets()
 {
-
     /**
      * Assign the CCLUK version to a var
      */
-    $theme               = wp_get_theme('ccluk');
-    $onesocial_version   = $theme['Version'];
+    $theme = wp_get_theme('ccluk');
+    $ccluk_version = $theme['Version'];
 
-    wp_enqueue_style('ccluk-main-admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), $onesocial_version, 'all');
+    wp_enqueue_style('ccluk-main-admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), $ccluk_version, 'all');
 }
 add_action('admin_enqueue_scripts', 'ccluk_admin_assets');
 

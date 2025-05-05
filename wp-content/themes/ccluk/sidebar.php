@@ -8,7 +8,7 @@
  * @since CCL UK Theme 1.0.0
  */
 
-$show_sidebar = apply_filters('onesocial_show_page_sidebar', true);
+$show_sidebar = apply_filters('ccluk_show_page_sidebar', true);
 
 if ($show_sidebar) {
     if (is_active_sidebar('search') && is_search()) { ?>
