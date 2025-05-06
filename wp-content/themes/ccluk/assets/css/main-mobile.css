@@ -703,6 +703,22 @@ body, .left-btn, .right-btn, #main-wrap {
   z-index: 3;
 }
 
+/** Modern browsers will ignore click events when menus are open **/
+/** Fallback to JS transitions **/
+html.buddyboss-js-transitions body #mobile-header,
+html.buddyboss-js-transitions body #main-wrap,
+html.buddyboss-js-transitions body #masthead,
+html.buddyboss-js-transitions body #wpadminbar {
+  /* modern browsers */
+  -webkit-transform: none !important;
+  -moz-transform: none !important;
+  transform: none !important;
+  -webkit-animation: none !important;
+  -moz-animation: none !important;
+  animation: none !important;
+  opacity: 1;
+}
+
 /*--------------------------------------------------------------
 1.1.2 - Mobile Header
 --------------------------------------------------------------*/
