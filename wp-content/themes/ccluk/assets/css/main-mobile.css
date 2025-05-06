@@ -123,7 +123,7 @@ body #content article {
   padding-right: 15px;
 }
 
-.bb-side-icon {
+.ccluk-side-icon {
   display: none;
 }
 
@@ -1493,7 +1493,7 @@ MAXIMUM width of 1024 pixels (tablets)
   #secondary.widget-area {
     border-left: none;
   }
-  .bb-has-sidebar #main {
+  .ccluk-has-sidebar #main {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -1508,7 +1508,7 @@ MAXIMUM width of 1024 pixels (tablets)
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .bb-has-sidebar .search-content {
+  .ccluk-has-sidebar .search-content {
     max-width: 100%;
   }
   #secondary {
@@ -1522,7 +1522,7 @@ MAXIMUM width of 1024 pixels (tablets)
   .site-content #secondary {
     padding: 0;
   }
-  .bb-has-sidebar #trigger-sidebar {
+  .ccluk-has-sidebar #trigger-sidebar {
     display: none;
   }
   .home-inner-wrap #secondary {

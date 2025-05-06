@@ -9,10 +9,6 @@
   }
 }
 
-.footer-widget #switch-mode input[type="submit"] {
-  background-color: $blue;
-}
-
 input {
   &[type="button"],
   &[type="reset"] {
@@ -27,21 +23,14 @@ a.button {
 #secondary div.generic-button a,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button,
-#messages-bulk-manage, .boss-search-wrapper label:after {
+.boss-search-wrapper label:after {
   background-color: $blue;
 }
 
-#trigger-sidebar:hover .bb-side-icon {
+#trigger-sidebar:hover .ccluk-side-icon {
   background-color: $green;
   &:before, &:after {
     background-color: $green;
-  }
-}
-
-.bb-sidebar-on .bb-side-icon {
-  background: $green;
-  &:after, &:before {
-    background: $green;
   }
 }
 
@@ -111,14 +100,6 @@ a {
 .button-load-more-posts {
   background-color: $green;
 }
-
-#fwslider {
-  .readmore a, 
-  .progress {
-    background-color: $green;
-  }
-}
-
 
 @-webkit-keyframes load1 {
   0%,

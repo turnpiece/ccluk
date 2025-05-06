@@ -2026,7 +2026,7 @@ div.footer-inner ul.social-icons li span:before {
 /*--------------------------------------------------------------
 4.0 - Main content and comment content
 --------------------------------------------------------------*/
-.bb-side-icon {
+.ccluk-side-icon {
   background: #333;
   display: block;
   height: 2px;
@@ -2035,7 +2035,7 @@ div.footer-inner ul.social-icons li span:before {
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
 }
-.bb-side-icon:before, .bb-side-icon:after {
+.ccluk-side-icon:before, .ccluk-side-icon:after {
   position: absolute;
   display: block;
   left: 0;
@@ -2044,7 +2044,7 @@ div.footer-inner ul.social-icons li span:before {
   background-color: #333;
   content: " ";
 }
-.bb-side-icon:before {
+.ccluk-side-icon:before {
   top: -8px;
   -webkit-transform-origin: top left;
   -ms-transform-origin: top left;
@@ -2052,7 +2052,7 @@ div.footer-inner ul.social-icons li span:before {
   -webkit-transition: -webkit-transform 0.3s, width 0.3s, top 0.3s;
   transition: transform 0.3s, width 0.3s, top 0.3s;
 }
-.bb-side-icon:after {
+.ccluk-side-icon:after {
   bottom: -8px;
   -webkit-transform-origin: bottom left;
   -ms-transform-origin: bottom left;
@@ -2061,19 +2061,19 @@ div.footer-inner ul.social-icons li span:before {
   transition: transform 0.3s, width 0.3s, bottom 0.3s;
 }
 
-.bb-sidebar-on .bb-side-icon {
+.bb-sidebar-on .ccluk-side-icon {
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
   background: #54ae68;
 }
-.bb-sidebar-on .bb-side-icon:before {
+.bb-sidebar-on .ccluk-side-icon:before {
   top: 0;
   transform: translateX(0) translateY(0) rotate(-45deg);
   width: 50%;
   background: #54ae68;
 }
-.bb-sidebar-on .bb-side-icon:after {
+.bb-sidebar-on .ccluk-side-icon:after {
   bottom: 0;
   transform: translateX(0) translateY(0) rotate(45deg);
   width: 50%;

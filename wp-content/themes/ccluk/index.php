@@ -17,7 +17,7 @@ get_header();
 ?>
 
 <a href="#" id="trigger-sidebar" class="" title="<?php _e('Toggle Sidebar', 'ccluk'); ?>">
-	<span class="bb-side-icon" aria-hidden="true"></span>
+	<span class="ccluk-side-icon" aria-hidden="true"></span>
 </a>
 
 <div class="home-inner-wrap">
