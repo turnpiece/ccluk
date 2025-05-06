@@ -195,7 +195,7 @@ function escapeJavaScriptText($string)
  * So we dont need to do anything for WP versions greater than 3.9.
  *
  */
-function buddyboss_scripts_jquery_migrate()
+function ccluk_scripts_jquery_migrate()
 {
 	global $wp_version;
 
@@ -215,7 +215,7 @@ function buddyboss_scripts_jquery_migrate()
 	wp_enqueue_script('jquery-migrate', false, array('jquery'));
 }
 
-add_action('wp_enqueue_scripts', 'buddyboss_scripts_jquery_migrate', 0);
+add_action('wp_enqueue_scripts', 'ccluk_scripts_jquery_migrate', 0);
 
 /**
  * Dynamically removes the no-js class from the <body> element.
@@ -229,7 +229,7 @@ add_action('wp_enqueue_scripts', 'buddyboss_scripts_jquery_migrate', 0);
  * This technique is borrowed from WordPress, wp-admin/admin-header.php.
  *
  */
-function buddyboss_remove_nojs_body_class()
+function ccluk_remove_nojs_body_class()
 {
 ?><script type="text/JavaScript">//<![CDATA[
 		(function(){var c=document.body.className;c=c.replace(/no-js/,'js');document.body.className=c;})();
@@ -238,20 +238,20 @@ function buddyboss_remove_nojs_body_class()
 <?php
 }
 
-add_action('buddyboss_before_header', 'buddyboss_remove_nojs_body_class');
+add_action('ccluk_before_header', 'ccluk_remove_nojs_body_class');
 
 /**
  * Load admin bar in header (fixes JetPack chart issue)
  */
-function buddyboss_admin_bar_in_header()
+function ccluk_admin_bar_in_header()
 {
 	if (!is_admin()) {
 		remove_action('wp_footer', 'wp_admin_bar_render', 1000);
-		add_action('buddyboss_before_header', 'wp_admin_bar_render');
+		add_action('ccluk_before_header', 'wp_admin_bar_render');
 	}
 }
 
-add_action('wp', 'buddyboss_admin_bar_in_header');
+add_action('wp', 'ccluk_admin_bar_in_header');
 
 /**
  * Creates a nicely formatted and more specific title element text
@@ -263,7 +263,7 @@ add_action('wp', 'buddyboss_admin_bar_in_header');
  * @param string $sep Optional separator.
  * @return string Filtered title.
  */
-function buddyboss_wp_title($title, $sep)
+function ccluk_wp_title($title, $sep)
 {
 	global $paged, $page;
 
@@ -285,27 +285,27 @@ function buddyboss_wp_title($title, $sep)
 	return $title;
 }
 
-//add_filter( 'wp_title', 'buddyboss_wp_title', 10, 2 );
+//add_filter( 'wp_title', 'ccluk_wp_title', 10, 2 );
 
 /**
  * Makes our wp_nav_menu() fallback -- wp_page_menu() -- show a home link.
  *
  * @since CCLUK 1.0.0
  */
-function buddyboss_page_menu_args($args)
+function ccluk_page_menu_args($args)
 {
 	$args['show_home'] = true;
 	return $args;
 }
 
-add_filter('wp_page_menu_args', 'buddyboss_page_menu_args');
+add_filter('wp_page_menu_args', 'ccluk_page_menu_args');
 
 /**
  * Registers all of our widget areas.
  *
  * @since CCL UK Theme 1.0.0
  */
-function buddyboss_widgets_init()
+function ccluk_widgets_init()
 {
 	// Area 1, located in the pages and posts right column.
 	register_sidebar(array(
@@ -392,7 +392,7 @@ function buddyboss_widgets_init()
  * @param array Existing class values.
  * @return array Filtered class values.
  */
-function buddyboss_body_class($classes)
+function ccluk_body_class($classes)
 {
 	global $wp_customize;
 
@@ -467,7 +467,7 @@ function buddyboss_body_class($classes)
 	return array_unique($classes);
 }
 
-add_filter('body_class', 'buddyboss_body_class');
+add_filter('body_class', 'ccluk_body_class');
 
 
 /* * **************************** AVATAR FUNCTIONS ***************************** */
@@ -477,9 +477,9 @@ add_filter('body_class', 'buddyboss_body_class');
  *
  * @since CCLUK 1.0.0
  */
-if (!function_exists('buddyboss_add_gravatar')) {
+if (!function_exists('ccluk_add_gravatar')) {
 
-	function buddyboss_add_gravatar($avatar_defaults)
+	function ccluk_add_gravatar($avatar_defaults)
 	{
 		$myavatar = get_stylesheet_directory_uri() . '/images/avatar-member.png';
 		//$myavatar = '//upload.wikimedia.org/wikipedia/en/b/b0/Avatar-Teaser-Poster.jpg';
@@ -489,7 +489,7 @@ if (!function_exists('buddyboss_add_gravatar')) {
 		return $avatar_defaults;
 	}
 
-	add_filter('avatar_defaults', 'buddyboss_add_gravatar');
+	add_filter('avatar_defaults', 'ccluk_add_gravatar');
 }
 
 /* * **************************** WORDPRESS FUNCTIONS ***************************** */
@@ -508,7 +508,7 @@ add_image_size('large-thumb', 9999, 800, true);
  *
  * @since CCL UK Theme 1.0.0
  */
-function buddyboss_more_posts_profile($posts, $sort, $count, $data_target)
+function ccluk_more_posts_profile($posts, $sort, $count, $data_target)
 {
 ?>
 	<div class="wrap">
@@ -547,7 +547,7 @@ function post_comment_form_avatar()
  * @since Education 1.0.0
  *
  */
-function buddyboss_format_time($time, $just_date = true, $localize_time = true)
+function ccluk_format_time($time, $just_date = true, $localize_time = true)
 {
 
 	if (!isset($time) || !is_numeric($time)) {

@@ -6,7 +6,7 @@
 
 		<?php
 		if (has_nav_menu('primary-menu')) {
-			$args = array('theme_location' => 'primary-menu', 'menu_class' => 'nav-menu onsocial-primary-menu clearfix');
+			$args = array('theme_location' => 'primary-menu', 'menu_class' => 'nav-menu ccluk-primary-menu clearfix');
 			wp_nav_menu($args);
 		}
 		?>
