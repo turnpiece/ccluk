@@ -216,18 +216,7 @@ input {
       color: $green;
     }
   }
-  .header-notifications {
-    a {
-      &#user-messages span.count:before,
-      span.pending-count:before {
-        color: $green;
-      }
-    }
-    .pop a:hover {
-      color: $green;
-    }
-  }
-}
+s}
 
 .is-desktop {
   .header-button:hover {
@@ -285,10 +274,6 @@ div#sitewide-notice div#message p {
 #header-search form, 
 .site-header {
   background-color: $white;
-}
-
-.buddyboss-select-inner span {
-  font-size: $font-size-sm;
 }
 
 /***************** Desktop ******************/

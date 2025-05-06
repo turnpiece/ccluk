@@ -1374,8 +1374,7 @@ img.wp-smiley, .rsswidget img {
 
 body {
   &.no-adminbar {
-    &:not(.logged-in),
-    &.is-desktop {
+    &:not(.logged-in) {
       #wpadminbar {
         display: none !important;
       }
@@ -1398,15 +1397,9 @@ body {
 a {
   outline: none;
   text-decoration: none;
-  -webkit-transition: all .15s ease-in-out;
-  -moz-transition: all .15s ease-in-out;
-  -o-transition: all .15s ease-in-out;
-  transition: all .15s ease-in-out;
+  @include ease-in-out();
   &:before, &:after {
-    -webkit-transition: all .15s ease-in-out;
-    -moz-transition: all .15s ease-in-out;
-    -o-transition: all .15s ease-in-out;
-    transition: all .15s ease-in-out;
+    @include ease-in-out();
   }
 }
 
@@ -4016,29 +4009,7 @@ img {
   float: right;
 }
 
-#sitewide-notice:empty {
-  display: none;
-}
-
-.bb-overlay {
-  background: none;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  display: none;
-  z-index: 9999;
-}
-
-.menu-visible-left, 
-.menu-visible-right {
-  .bb-overlay {
-    display: block;
-  }
-}
-
-.menu-visible-left #mobile-right-panel, 
-.menu-visible-right #wpadminbar {
+.menu-visible-left #mobile-right-panel {
   visibility: hidden;
 }
 
@@ -4047,11 +4018,8 @@ img {
   font-family: dashicons;
 }
 
-
-/* Hover Effect */
-
-.bookmark-it:hover .bb-helper-icon {
-  background-color: $secondary_bg;
+body.logged-in #wpadminbar {
+  display: none;
 }
 
 .sl-button:hover .sl-count {
@@ -4059,14 +4027,6 @@ img {
   &:before, &:after {
     background-color: $secondary_bg;
   }
-}
-
-/* Subscribe to comments */
-
-label[for='subscribe-reloaded'] .buddyboss-select {
-  margin: 0 0 0 20px;
-  position: relative;
-  top: 3px;
 }
 
 /*--------------------------------------------------------------

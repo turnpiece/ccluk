@@ -138,12 +138,6 @@ function ccluk_scripts_styles()
 		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'screen and (max-width: 1024px)');
 	}
 
-	// Load our own adminbar (Toolbar) styles.
-	if (!is_admin()) {
-		// Deregister the built-in adminbar stylesheet
-		wp_deregister_style('admin-bar');
-	}
-
 	/*	 * **************************** SCRIPTS ***************************** */
 
 	/*

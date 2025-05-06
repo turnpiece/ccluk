@@ -8,9 +8,7 @@ input[type="email"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-textarea,
-.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]),
-.popup-content input:not([type=checkbox]):not([type=radio]):not([type=button]) {
+textarea {
     background-color: $white;
     border-width: 1px 1px 1px 1px;
     border-color: $green;
@@ -148,8 +146,6 @@ a,
     }
 }
 
-#save_as_draft,
-.popup-content .button:not(.ed_button),
 input[type=submit] {
     border: none;
     padding: 10px 20px 10px 20px;
