@@ -115,31 +115,8 @@
 					<?php if (get_post_status(get_the_ID()) == 'publish') { ?>
 						<!-- /.entry-tags -->
 						<div class="entry-share col">
-							<?php
-							if (function_exists('get_simple_likes_button')  && is_singular('post')) {
-								echo get_simple_likes_button(get_the_ID());
-							}
-							?>
 
 							<ul class="helper-links">
-
-								<?php if (function_exists('sap_get_bookmark_button') && is_singular('post') && is_user_logged_in()) { ?>
-									<li>
-										<?php
-										$button = sap_get_bookmark_button();
-
-										if (!empty($button)) {
-											echo $button;
-										} else {
-										?>
-											<a id="bookmarkme" href="#siteLoginBox" class="bookmark-it onesocial-login-popup-link">
-												<span class="fa bb-helper-icon fa-bookmark-o"></span>
-												<span><?php _e('Bookmark', 'ccluk'); ?></span>
-											</a><?php
-											}
-												?>
-									</li>
-								<?php } ?>
 
 								<?php if (function_exists('ADDTOANY_SHARE_SAVE_KIT')) { ?>
 									<li>

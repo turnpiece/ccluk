@@ -123,19 +123,15 @@ a {
   }
 }
 
-.sap-load-more-posts, 
 .button-load-more-posts {
   background-color: $green;
 }
 
 #fwslider {
-  .readmore a, .progress {
+  .readmore a, 
+  .progress {
     background-color: $green;
   }
-}
-
-.toggle-sap-widgets:hover .cls-1 {
-  fill: $green;
 }
 
 
@@ -169,8 +165,6 @@ a {
 }
 
 .entry-meta a.read-more,
-.sap-publish-popup.sap-publish-popup .sap-action-button,
-.sap-container-wrapper .sap-story-publish,
 input[type="submit"] {
   border-color: $blue;
 }
@@ -207,16 +201,13 @@ input {
 /********** Desktop  *************/
 
 .is-desktop {
-  .buddyboss-select-inner span {
-    color: $green;
-  }
   .post-author .load-more-posts {
     &:hover,
     a:hover {
       color: $green;
     }
   }
-s}
+}
 
 .is-desktop {
   .header-button:hover {
@@ -247,28 +238,11 @@ body {
   }
 }
 
-.sl-count {
-  &:after, 
-  &:before {
-    background-color: $white;
-  }
-}
-
-.sl-icon {
-  &:after, &:before {
-    background-color: $white;
-  }
-}
-
 .main-navigation li ul {
   ul {
     background-color: $white;
   }
   background-color: $white;
-}
-
-div#sitewide-notice div#message p {
-  background-color: $secondary_bg;
 }
 
 #header-search form, 

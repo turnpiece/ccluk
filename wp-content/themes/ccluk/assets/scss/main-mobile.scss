@@ -913,13 +913,6 @@ body.open-right .right-btn:before {
   }
 }
 
-.menu-visible-left {
-  #main-wrap, #colophon {
-    transform: translate(240px, 0);
-    -webkit-transform: translate(240px, 0);
-  }
-}
-
 /*--------------------------------------------------------------
 1.1.4.2 - Right Menu (Pages) Layout
 --------------------------------------------------------------*/
@@ -941,10 +934,6 @@ body.open-right .right-btn:before {
   #mobile-right-panel {
     opacity: 1;
   }
-}
-
-.menu-visible-left #mobile-right-panel {
-  opacity: 0;
 }
 
 /* Nav Expanding Open Effect */
