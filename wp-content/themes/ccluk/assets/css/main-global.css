@@ -1276,21 +1276,6 @@ img.wp-smiley, .rsswidget img {
 /*--------------------------------------------------------------
 3.1 - Body, links, basics
 --------------------------------------------------------------*/
-body.no-adminbar:not(.logged-in) #wpadminbar {
-  display: none !important;
-}
-body:not(.no-adminbar).admin-bar, body.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
-  margin-top: 32px !important;
-}
-body.logged-in.is-mobile.admin-bar {
-  margin-top: 0 !important;
-}
-
-.mfp-wrap.mfp-ready ~ #wpadminbar {
-  opacity: 0;
-  visibility: hidden;
-}
-
 a {
   outline: none;
   text-decoration: none;
@@ -2876,252 +2861,6 @@ article.format-quote .entry-content blockquote {
 }
 
 /*--------------------------------------------------------------
-9.0 - Comments
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-9.1 - Comment area
---------------------------------------------------------------*/
-.comments-title {
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 1.5;
-  text-transform: uppercase;
-  margin-top: 62px;
-  margin-bottom: 60px;
-}
-
-.comments-area article {
-  margin: 0;
-  padding: 70px 0;
-  border-top: 3px solid rgba(0, 0, 0, 0.1);
-}
-.comments-area .comment:first-child article {
-  border-top: 0;
-  padding-top: 0;
-}
-.comments-area article header {
-  margin: 0 0 37px;
-  overflow: hidden;
-  position: relative;
-}
-.comments-area article header img {
-  float: left;
-  padding: 0;
-  line-height: 0;
-  border-radius: 50%;
-  max-width: 45px;
-}
-.comments-area article header cite, .comments-area article header time {
-  display: block;
-  margin-left: 75px;
-}
-.comments-area article header cite {
-  font-style: normal;
-  font-size: 18px;
-  line-height: 1.42857143;
-  margin-bottom: 5px;
-  text-transform: capitalize;
-}
-.comments-area article header time {
-  line-height: 1.7;
-  text-decoration: none;
-  font-size: 12px;
-  color: #999;
-}
-.comments-area article header a {
-  text-decoration: none;
-  color: #5e5e5e;
-}
-.comments-area article header a:hover {
-  color: #333;
-}
-.comments-area article header cite a {
-  color: #54ae68;
-  font-weight: 400;
-  margin-right: 3px;
-}
-.comments-area article header h4 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 400;
-  color: #fff;
-  background-color: #0088d0;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  border: 3px solid #007cbd;
-}
-.comments-area li.bypostauthor cite span {
-  padding: 5px 6px;
-  font-size: 10px;
-  line-height: 1;
-}
-
-.commentlist {
-  margin-left: 0;
-}
-.commentlist li {
-  list-style: none;
-}
-
-a.comment-reply-link, a.comment-edit-link {
-  color: inherit;
-  font-size: 14px;
-  line-height: 14px;
-  margin-right: 20px;
-  padding: 5px 0;
-}
-
-.commentlist .edit-link {
-  display: inline-block;
-}
-.commentlist .pingback {
-  line-height: 1.7;
-  margin-bottom: 24px;
-}
-
-.comment-edit-link:before, .comment-reply-link:before {
-  display: inline-block;
-  font-size: 15px;
-  font-family: "onesocial";
-  margin-right: 10px;
-  position: relative;
-  top: 3px;
-}
-
-.comment-edit-link:before {
-  content: "T";
-}
-
-.comment-reply-link:before {
-  content: "K";
-}
-.comment-reply-link span {
-  display: none;
-}
-
-/*--------------------------------------------------------------
-9.2 - Comment form
---------------------------------------------------------------*/
-#comments {
-  clear: left;
-  margin-bottom: 15px;
-}
-
-.comments-title + #respond {
-  margin-top: 0px;
-  margin-bottom: 70px;
-}
-
-#respond {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-#respond h3#reply-title {
-  float: right;
-  font-size: 16px;
-  line-height: 1.5;
-  margin: 15px 0 0;
-}
-#respond #cancel-comment-reply-link {
-  color: #e85c41;
-  font-size: 12px;
-  font-weight: 400;
-  position: relative;
-  z-index: 2;
-}
-#respond p.must-log-in {
-  margin: 12px 0 15px;
-}
-#respond form {
-  margin: 0;
-  position: relative;
-}
-#respond form p input[type=submit] {
-  font-size: 14px;
-}
-#respond form p.logged-in-as {
-  margin-bottom: 24px;
-}
-#respond form label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.71429;
-}
-#respond form input[type=text] {
-  font-size: 12px;
-  line-height: 1.7;
-  padding: 10px;
-  width: 100%;
-}
-#respond form textarea {
-  font-size: 12px;
-  line-height: 1.7;
-  padding: 10px;
-  width: 100%;
-  padding: 15px 0;
-  border: none;
-  font-size: 18px;
-  color: #333;
-  min-height: 30px;
-  margin: 5px 0 0;
-  resize: none;
-  overflow: hidden;
-}
-
-body:not(.logged-in) #respond form textarea {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 26px;
-}
-
-.attached-image {
-  color: #444;
-  letter-spacing: 0.05em;
-}
-.attached-image i {
-  margin-right: 8px;
-}
-
-body.logged-in #respond .comment-form-comment {
-  padding-left: 75px;
-  position: relative;
-}
-
-#respond form p.form-allowed-tags {
-  margin: 0;
-  font-size: 12px;
-  line-height: 2;
-  color: #5e5e5e;
-}
-
-.commentlist #respond {
-  margin-bottom: 70px;
-}
-
-.required {
-  color: #e85c41;
-}
-
-.comment-avatar {
-  position: absolute;
-  z-index: 1;
-}
-.comment-avatar img {
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-}
-
-body.logged-in #respond .form-submit {
-  margin-left: 75px;
-}
-
-/*--------------------------------------------------------------
 10.0 - Front page template
 --------------------------------------------------------------*/
 .entry-page-image {
@@ -3197,14 +2936,6 @@ body article.error404 .entry-header {
   color: #333;
   text-align: center;
   padding: 0 24px;
-}
-
-.caroufredsel_wrapper ul {
-  list-style: none;
-  margin: 0;
-}
-.caroufredsel_wrapper .entry-meta {
-  font-size: 14px;
 }
 
 .bb-carousel-header {
@@ -3309,10 +3040,6 @@ body article.error404 .entry-header {
   margin: 0 auto;
 }
 
-.bb-search-result-group .horiz-gallery {
-  margin: 0;
-}
-
 .entry-content .results-group-title {
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
   font-size: 35px;
@@ -3356,7 +3083,6 @@ body article.error404 .entry-header {
   font-style: normal;
   text-rendering: auto;
   text-decoration: inherit;
-  speak: none;
   display: inline-block;
   line-height: 1;
   content: "\f110";
@@ -3433,12 +3159,6 @@ body article.error404 .entry-header {
   text-decoration: none;
 }
 
-p#item-desc {
-  font-size: 15px;
-  margin-bottom: 34px;
-  font-weight: lighter;
-}
-
 #secondary div.generic-button {
   margin: 10px 10px 0 0;
   display: inline-block;
@@ -3455,77 +3175,6 @@ p#item-desc {
   display: inline-block;
   float: none;
   vertical-align: top;
-}
-
-#sort-posts-form {
-  float: right;
-  display: inline-block;
-}
-
-#item-posts {
-  position: relative;
-}
-#item-posts #sort-posts-form #sort-submit {
-  display: none;
-}
-#item-posts .to-top {
-  display: none;
-}
-#item-posts h3 {
-  display: inline-block;
-  padding: 5px 9px;
-  line-height: 1.7;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 500;
-  background-color: #333;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0;
-  font-size: 10px;
-  font-family: inherit;
-  text-transform: uppercase;
-  margin: 0 10px 0 0;
-  vertical-align: top;
-}
-#item-posts h3 span {
-  margin-left: 3px;
-  color: #54ae68;
-}
-#item-posts .inner {
-  margin-left: -15px;
-  margin-right: -15px;
-  margin-bottom: 40px;
-  margin-top: 25px;
-  overflow: hidden;
-  clear: both;
-  display: block;
-  display: -moz-box;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-flow: row wrap;
-  -ms-flex-flow: row wrap;
-  flex-flow: row wrap;
-}
-#item-posts .inner article {
-  padding: 15px 15px 40px;
-  width: 50%;
-}
-#item-posts .inner article .entry-header h1 {
-  font-size: 26px;
-}
-
-.boss-member-meta {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  min-width: 1px;
-  /* Firefox-34-ignoring-max-width-for-flexbox */
-}
-.boss-member-meta .button {
-  margin-bottom: 3px;
 }
 
 .sap-blog-post-wrapper .header-area {
@@ -3615,10 +3264,9 @@ p#item-desc {
 }
 
 img {
-  -webkit-transition: opacity 0.6s ease;
   -moz-transition: opacity 0.6s ease;
   -o-transition: opacity 0.6s ease;
-  -ms-transition: opacity 0.6s ease;
+  -webkit-transition: opacity 0.6s ease;
   transition: opacity 0.6s ease;
 }
 
@@ -3649,43 +3297,12 @@ img {
   visibility: hidden;
 }
 
-.fancybox-overlay .fancybox-skin .fancybox-close {
-  background: #e33d41 none repeat scroll 0 0;
-  height: 32px;
-  line-height: 32px;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 32px;
-}
-.fancybox-overlay .fancybox-skin .fancybox-close:before {
-  color: #fff;
-  content: "b";
-  display: inline-block;
-  font-family: "onesocial";
-  font-size: 10px;
-  font-weight: bold;
-}
-
-.bb-global-search-ac.ui-menu .ui-menu-item {
-  background-color: transparent !important;
-}
-
 .widgettitle:empty {
   display: none;
 }
 
 .verification-content {
   text-align: center;
-}
-
-.mfp-wrap .verification-content button.mfp-close {
-  font-size: 32px !important;
-  font-weight: 300;
-}
-
-#main .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li a {
-  line-height: 25px;
 }
 
 #avatar-to-crop img,
@@ -3723,72 +3340,6 @@ img {
     margin-left: -50px;
   }
 }
-/* Wrapper */
-.sl-wrapper a {
-  border-bottom: 0 !important;
-  text-decoration: none !important;
-}
-
-.sl-button {
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1;
-  padding: 0;
-  vertical-align: top;
-}
-
-/* Colors */
-.sl-count {
-  color: #9b9b9b;
-}
-
-/* Icon */
-.sl-icon {
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  color: #333;
-  display: inline-block;
-  font-size: 20px;
-  height: 44px;
-  line-height: 44px;
-  margin-right: 10px;
-  text-align: center;
-  width: 44px;
-  position: relative;
-  vertical-align: top;
-}
-.sl-icon:before {
-  background-color: #fff;
-  border: 3px solid rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  content: "";
-  display: block;
-  height: 8px;
-  right: -4px;
-  position: absolute;
-  top: 17px;
-  transform: rotate(45deg);
-  width: 8px;
-}
-.sl-icon:after {
-  background: white;
-  border-radius: 100%;
-  content: "";
-  height: 16px;
-  position: absolute;
-  right: 0;
-  top: 13px;
-  width: 5px;
-  z-index: 1;
-}
-
-.sl-wrapper {
-  margin-bottom: 20px;
-  position: relative;
-  float: right;
-}
-
 .menu-visible-left #mobile-right-panel {
   visibility: hidden;
 }
@@ -3796,10 +3347,6 @@ img {
 .dashicons,
 .dashicons-before:before {
   font-family: dashicons;
-}
-
-body.logged-in #wpadminbar {
-  display: none;
 }
 
 .sl-button:hover .sl-count {

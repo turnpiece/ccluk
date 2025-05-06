@@ -739,8 +739,7 @@ body {
 html.buddyboss-js-transitions body {
   #mobile-header, 
   #main-wrap, 
-  #masthead, 
-  #wpadminbar {
+  #masthead {
     /* modern browsers */
     -webkit-transform: none !important;
     -moz-transform: none !important;
@@ -938,16 +937,9 @@ body.open-right .right-btn:before {
   z-index: 1;
 }
 
-.menu-visible-left #wpadminbar {
-  opacity: 1;
-}
-
 .menu-visible-right {
   #mobile-right-panel {
     opacity: 1;
-  }
-  #wpadminbar {
-    opacity: 0;
   }
 }
 

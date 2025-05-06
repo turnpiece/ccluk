@@ -690,8 +690,7 @@ body.open-left, body.open-right {
 /** Fallback to JS transitions **/
 html.buddyboss-js-transitions body #mobile-header,
 html.buddyboss-js-transitions body #main-wrap,
-html.buddyboss-js-transitions body #masthead,
-html.buddyboss-js-transitions body #wpadminbar {
+html.buddyboss-js-transitions body #masthead {
   /* modern browsers */
   -webkit-transform: none !important;
   -moz-transform: none !important;
@@ -877,15 +876,8 @@ body.open-right .right-btn:before {
   z-index: 1;
 }
 
-.menu-visible-left #wpadminbar {
-  opacity: 1;
-}
-
 .menu-visible-right #mobile-right-panel {
   opacity: 1;
-}
-.menu-visible-right #wpadminbar {
-  opacity: 0;
 }
 
 .menu-visible-left #mobile-right-panel {

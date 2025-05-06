@@ -193,12 +193,6 @@
             }, 500 );
 
         } );
-
-        // Sticky Header
-        var topSpace = 0;
-        if ( $( '#wpadminbar' ).is( ':visible' ) ) {
-            topSpace = 32;
-        }
     }
 
 

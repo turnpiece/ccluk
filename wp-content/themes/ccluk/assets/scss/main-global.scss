@@ -1372,28 +1372,6 @@ img.wp-smiley, .rsswidget img {
 3.1 - Body, links, basics
 --------------------------------------------------------------*/
 
-body {
-  &.no-adminbar {
-    &:not(.logged-in) {
-      #wpadminbar {
-        display: none !important;
-      }
-    }
-  }
-  &:not(.no-adminbar).admin-bar,
-  &.logged-in.is-desktop.admin-bar:not(.no-adminbar) {
-    margin-top: 32px !important;
-  }
-  &.logged-in.is-mobile.admin-bar {
-    margin-top: 0 !important;
-  }
-}
-
-.mfp-wrap.mfp-ready ~ #wpadminbar {
-  opacity: 0;
-  visibility: hidden;
-}
-
 a {
   outline: none;
   text-decoration: none;
@@ -3038,262 +3016,6 @@ article {
 }
 
 /*--------------------------------------------------------------
-9.0 - Comments
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-9.1 - Comment area
---------------------------------------------------------------*/
-
-.comments-title {
-  font-family: inherit;
-  font-size: 13px;
-  line-height: 1.5;
-  text-transform: uppercase;
-  margin-top: 62px;
-  margin-bottom: 60px;
-}
-
-.comments-area {
-  article {
-    margin: 0;
-    padding: 70px 0;
-    border-top: 3px solid $divider_color;
-  }
-  .comment:first-child article {
-    border-top: 0;
-    padding-top: 0;
-  }
-  article header {
-    margin: 0 0 37px;
-    overflow: hidden;
-    position: relative;
-    img {
-      float: left;
-      padding: 0;
-      line-height: 0;
-      border-radius: 50%;
-      max-width: 45px;
-    }
-    cite, time {
-      display: block;
-      margin-left: 75px;
-    }
-    cite {
-      font-style: normal;
-      font-size: 18px;
-      line-height: 1.42857143;
-      margin-bottom: 5px;
-      text-transform: capitalize;
-    }
-    time {
-      line-height: 1.7;
-      text-decoration: none;
-      font-size: $font-size-tiny;
-      color: #999;
-    }
-    a {
-      text-decoration: none;
-      color: #5e5e5e;
-      &:hover {
-        color: $dark;
-      }
-    }
-    cite a {
-      color: $green;
-      font-weight: 400;
-      margin-right: 3px;
-    }
-    h4 {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 6px 12px;
-      font-size: $font-size-tiny;
-      font-weight: 400;
-      color: $white;
-      background-color: #0088d0;
-      -moz-border-radius: 3px;
-      -webkit-border-radius: 3px;
-      border-radius: 3px;
-      border: 3px solid #007cbd;
-    }
-  }
-  li.bypostauthor cite span {
-    padding: 5px 6px;
-    font-size: 10px;
-    line-height: 1;
-  }
-}
-
-.commentlist {
-  margin-left: 0;
-  li {
-    list-style: none;
-  }
-}
-
-a {
-  &.comment-reply-link, &.comment-edit-link {
-    color: inherit;
-    font-size: 14px;
-    line-height: 14px;
-    margin-right: 20px;
-    padding: 5px 0;
-  }
-}
-
-.commentlist {
-  .edit-link {
-    display: inline-block;
-  }
-  .pingback {
-    line-height: 1.7;
-    margin-bottom: 24px;
-  }
-}
-
-.comment-edit-link:before, .comment-reply-link:before {
-  display: inline-block;
-  font-size: 15px;
-  font-family: 'onesocial';
-  margin-right: 10px;
-  position: relative;
-  top: 3px;
-}
-
-.comment-edit-link:before {
-  content: "T";
-}
-
-.comment-reply-link {
-  &:before {
-    content: "K";
-  }
-  span {
-    display: none;
-  }
-}
-
-/*--------------------------------------------------------------
-9.2 - Comment form
---------------------------------------------------------------*/
-
-#comments {
-  clear: left;
-  margin-bottom: 15px;
-}
-
-.comments-title + #respond {
-  margin-top: 0px;
-  margin-bottom: 70px;
-}
-
-#respond {
-  @include border-radius( 3px );
-  h3#reply-title {
-    float: right;
-    font-size: 16px;
-    line-height: 1.5;
-    margin: 15px 0 0;
-  }
-  #cancel-comment-reply-link {
-    color: $red;
-    font-size: $font-size-tiny;
-    font-weight: 400;
-    position: relative;
-    z-index: 2;
-  }
-  p.must-log-in {
-    margin: 12px 0 15px;
-  }
-  form {
-    margin: 0;
-    position: relative;
-    p {
-      input[type="submit"] {
-        font-size: 14px;
-      }
-      &.logged-in-as {
-        margin-bottom: 24px;
-      }
-    }
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.71429;
-    }
-    input[type="text"] {
-      font-size: $font-size-tiny;
-      line-height: 1.7;
-      padding: 10px;
-      width: 100%;
-    }
-    textarea {
-      font-size: $font-size-tiny;
-      line-height: 1.7;
-      padding: 10px;
-      width: 100%;
-      padding: 15px 0;
-      border: none;
-      font-size: 18px;
-      color: $dark;
-      min-height: 30px;
-      margin: 5px 0 0;
-      resize: none;
-      overflow: hidden;
-    }
-  }
-}
-
-body:not(.logged-in) #respond form textarea {
-  border-bottom: 3px solid $divider_color;
-  margin-bottom: 26px;
-}
-
-.attached-image {
-  color: #444;
-  letter-spacing: 0.05em;
-  i {
-    margin-right: 8px;
-  }
-}
-
-body.logged-in #respond .comment-form-comment {
-  padding-left: 75px;
-  position: relative;
-}
-
-#respond form p.form-allowed-tags {
-  margin: 0;
-  font-size: $font-size-tiny;
-  line-height: 2;
-  color: #5e5e5e;
-}
-
-.commentlist #respond {
-  margin-bottom: 70px;
-}
-
-.required {
-  color: $red;
-}
-
-.comment-avatar {
-  position: absolute;
-  z-index: 1;
-  img {
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-  }
-}
-
-body.logged-in #respond .form-submit {
-  margin-left: 75px;
-}
-
-/*--------------------------------------------------------------
 10.0 - Front page template
 --------------------------------------------------------------*/
 
@@ -3374,16 +3096,6 @@ body article.error404 .entry-header {
     color: $dark;
     text-align: center;
     padding: 0 24px;
-  }
-}
-
-.caroufredsel_wrapper {
-  ul {
-    list-style: none;
-    margin: 0;
-  }
-  .entry-meta {
-    font-size: 14px;
   }
 }
 
@@ -3493,10 +3205,6 @@ body article.error404 .entry-header {
   margin: 0 auto;
 }
 
-.bb-search-result-group .horiz-gallery {
-  margin: 0;
-}
-
 .entry-content .results-group-title {
   border-bottom: 3px solid $divider_color;
   font-size: 35px;
@@ -3547,7 +3255,6 @@ body article.error404 .entry-header {
   font-style: normal;
   text-rendering: auto;
   text-decoration: inherit;
-  speak: none;
   display: inline-block;
   line-height: 1;
   content: "\f110";
@@ -3637,12 +3344,6 @@ body article.error404 .entry-header {
   text-decoration: none;
 }
 
-p#item-desc {
-  font-size: 15px;
-  margin-bottom: 34px;
-  font-weight: lighter;
-}
-
 #secondary div.generic-button {
   margin: 10px 10px 0 0;
   display: inline-block;
@@ -3660,75 +3361,6 @@ p#item-desc {
   display: inline-block;
   float: none;
   vertical-align: top;
-}
-
-#sort-posts-form {
-  float: right;
-  display: inline-block;
-}
-
-#item-posts {
-  position: relative;
-  #sort-posts-form #sort-submit {
-    display: none;
-  }
-  .to-top {
-    display: none;
-  }
-  h3 {
-    display: inline-block;
-    padding: 5px 9px;
-    line-height: 1.7;
-    text-decoration: none;
-    color: $white;
-    font-weight: 500;
-    background-color: $dark;
-    border: 3px solid $divider_color;
-    border-radius: 0;
-    font-size: 10px;
-    font-family: inherit;
-    text-transform: uppercase;
-    margin: 0 10px 0 0;
-    vertical-align: top;
-
-    span {
-      margin-left: 3px;
-      color: $green;
-    }
-  }
-
-  .inner {
-    margin-left: -15px;
-    margin-right: -15px;
-    margin-bottom: 40px;
-    margin-top: 25px;
-    overflow: hidden;
-    clear: both;
-    display: block;
-    @include display-flex();
-    -webkit-flex-flow: row wrap;
-    -ms-flex-flow: row wrap;
-    flex-flow: row wrap;
-    article {
-      padding: 15px 15px 40px;
-      width: 50%;
-      .entry-header h1 {
-        font-size: 26px;
-      }
-    }
-  }
-}
-
-.boss-member-meta {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  min-width: 1px;
-  /* Firefox-34-ignoring-max-width-for-flexbox */
-  .button {
-    margin-bottom: 3px;
-  }
 }
 
 .sap-blog-post-wrapper {
@@ -3831,11 +3463,7 @@ p#item-desc {
 }
 
 img {
-  -webkit-transition: opacity 0.6s ease;
-  -moz-transition: opacity 0.6s ease;
-  -o-transition: opacity 0.6s ease;
-  -ms-transition: opacity 0.6s ease;
-  transition: opacity 0.6s ease;
+  @include transition(opacity 0.6s ease);
 }
 
 #main-wrap img.loaded {
@@ -3863,43 +3491,12 @@ img {
   }
 }
 
-.fancybox-overlay .fancybox-skin .fancybox-close {
-  background: #e33d41 none repeat scroll 0 0;
-  height: 32px;
-  line-height: 32px;
-  right: 0;
-  text-align: center;
-  top: 0;
-  width: 32px;
-  &:before {
-    color: $white;
-    content: "b";
-    display: inline-block;
-    font-family: "onesocial";
-    font-size: 10px;
-    font-weight: bold;
-  }
-}
-
-.bb-global-search-ac.ui-menu .ui-menu-item {
-  background-color: transparent !important;
-}
-
 .widgettitle:empty {
   display: none;
 }
 
 .verification-content {
   text-align: center;
-}
-
-.mfp-wrap .verification-content button.mfp-close {
-  font-size: 32px !important;
-  font-weight: 300;
-}
-
-#main .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li a {
-  line-height: 25px;
 }
 
 #avatar-to-crop img, 
@@ -3939,76 +3536,6 @@ img {
   }
 }
 
-/* Wrapper */
-
-.sl-wrapper a {
-  border-bottom: 0 !important;
-  text-decoration: none !important;
-}
-
-.sl-button {
-  display: inline-block;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1;
-  padding: 0;
-  vertical-align: top;
-}
-
-/* Colors */
-
-.sl-count {
-  color: #9b9b9b;
-}
-
-/* Icon */
-
-.sl-icon {
-  border: 3px solid $divider_color;
-  border-radius: 50%;
-  color: $dark;
-  display: inline-block;
-  font-size: 20px;
-  height: 44px;
-  line-height: 44px;
-  margin-right: 10px;
-  text-align: center;
-  width: 44px;
-  position: relative;
-  vertical-align: top;
-  &:before {
-    background-color: $white;
-    border: 3px solid $divider_color;
-    border-radius: 2px;
-    content: "";
-    display: block;
-    height: 8px;
-    right: -4px;
-    position: absolute;
-    top: 17px;
-    transform: rotate(45deg);
-    width: 8px;
-  }
-  &:after {
-    background: white;
-    border-radius: 100%;
-    content: "";
-    height: 16px;
-    position: absolute;
-    right: 0;
-    top: 13px;
-    width: 5px;
-    z-index: 1;
-  }
-}
-
-
-.sl-wrapper {
-  margin-bottom: 20px;
-  position: relative;
-  float: right;
-}
-
 .menu-visible-left #mobile-right-panel {
   visibility: hidden;
 }
@@ -4016,10 +3543,6 @@ img {
 .dashicons, 
 .dashicons-before:before {
   font-family: dashicons;
-}
-
-body.logged-in #wpadminbar {
-  display: none;
 }
 
 .sl-button:hover .sl-count {
