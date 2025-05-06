@@ -12,10 +12,14 @@
                     .section-title-container {
                         order: 2;
                         > .section-title {
+                            width: 100%;
                             @include margin(2);
                             h2,
                             p, {
                                 text-align: center;
+                            }
+                            a.button {
+                                display: inline-block;
                             }
                         }
                     }

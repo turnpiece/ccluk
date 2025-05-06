@@ -42,7 +42,7 @@ if (
     }
 
     if (!empty($image)) : ?>
-        <section id="<?php echo $id ?>" class="section site-content banner <?php echo $layout ?>">
+        <section id="<?php echo $id ?>" class="section banner <?php echo $layout ?>">
             <?php if (!empty($heading)) : ?>
                 <header class="section-title-container banner-box">
                     <div class="section-title">
