@@ -12,6 +12,8 @@
                     .section-title-container {
                         order: 2;
                         > .section-title {
+                            width: 100%;
+                            text-align: center;
                             @include margin(2);
                             h2,
                             p, {

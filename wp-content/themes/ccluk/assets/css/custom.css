@@ -509,7 +509,7 @@ body.page-template-homepage #main .section .section-title h4 {
   border-bottom: 3px solid;
 }
 body.page-template-homepage #main .section .section-title a {
-  display: block;
+  display: inline-block;
 }
 body.page-template-homepage #main .section .section-title a > h4 {
   color: #22a7f0;
@@ -628,7 +628,7 @@ body.page-template-homepage #main .section.banner.text-left .section-title-conta
   color: #fff;
 }
 body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
-  margin: 25px 8%;
+  margin: 10%;
 }
 body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title h2,
 body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title p, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title h2,

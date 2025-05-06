@@ -90,7 +90,7 @@ body.page-template-homepage {
 				}
 
 				a {
-					display: block;
+					display: inline-block;
 
 					> h4 {
 						color: $blue;
@@ -236,7 +236,7 @@ body.page-template-homepage {
 						color: $white;
 
 						> .section-title {
-							margin: 25px 8%;
+							margin: 10%;
 							h2,
 							p {
 								text-align: left;

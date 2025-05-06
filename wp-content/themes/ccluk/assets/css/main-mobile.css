@@ -1572,6 +1572,8 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
     order: 2;
   }
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
+    width: 100%;
+    text-align: center;
     margin: 20px 10px;
     margin: 2rem 1rem;
   }
