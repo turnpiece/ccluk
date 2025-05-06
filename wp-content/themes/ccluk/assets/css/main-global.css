@@ -1896,18 +1896,18 @@ div.footer-inner ul.social-icons li span:before {
   padding: 0 10px;
 }
 
-.widget.onesocial_social_links li {
+.widget.ccluk_social_links li {
   display: block;
   text-align: left;
 }
-.widget.onesocial_social_links li a span {
+.widget.ccluk_social_links li a span {
   width: 16px;
   margin-right: 17px;
   display: inline-block;
   text-align: center;
   color: #333;
 }
-.widget.onesocial_social_links li a i {
+.widget.ccluk_social_links li a i {
   font-style: normal;
   text-transform: capitalize;
   vertical-align: middle;
@@ -2034,7 +2034,7 @@ div.footer-inner ul.social-icons li span:before {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.widget.onesocial_social_links .social-icons span {
+.widget.ccluk_social_links .social-icons span {
   font-family: FontAwesome;
 }
 
