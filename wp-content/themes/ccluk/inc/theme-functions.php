@@ -415,7 +415,7 @@ function ccluk_body_class($classes)
 	// Search sidebar
 	if (is_active_sidebar('search') && is_search()) {
 		$search_sidebar_alignment	 = 'right';
-		$classes[]					 = 'search-sidebar-active bb-has-sidebar sidebar-' . $search_sidebar_alignment;
+		$classes[]					 = 'search-sidebar-active ccluk-has-sidebar sidebar-' . $search_sidebar_alignment;
 	}
 
 	$page_sidebar		 = 'right';
@@ -423,7 +423,7 @@ function ccluk_body_class($classes)
 
 	// Home sidebar
 	if (is_active_sidebar('sidebar') && is_home() && !is_front_page()) {
-		$classes[] = 'page-sidebar-active home-page bb-has-sidebar sidebar-' . $sidebar_alignment;
+		$classes[] = 'page-sidebar-active home-page ccluk-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	$page_for_posts	 = get_option('page_for_posts');
@@ -431,24 +431,24 @@ function ccluk_body_class($classes)
 	// Home sidebar
 	if (is_active_sidebar('home-sidebar') && is_front_page()) {
 		$home_sidebar_alignment	 = 'right';
-		$classes[]				 = 'homepage-sidebar-active frontpage-page bb-has-sidebar sidebar-' . $home_sidebar_alignment;
+		$classes[]				 = 'homepage-sidebar-active frontpage-page ccluk-has-sidebar sidebar-' . $home_sidebar_alignment;
 	}
 
 	// Blog sidebar
 	if (is_active_sidebar('sidebar') && !is_front_page() && is_home() && isset($page_for_posts) && $page_for_posts != 0) {
-		$classes[] = 'page-sidebar-active home-page bb-has-sidebar sidebar-' . $sidebar_alignment;
+		$classes[] = 'page-sidebar-active home-page ccluk-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	// Page sidebar
 	if (is_active_sidebar('sidebar') && is_page() && !is_front_page()) {
-		$classes[] = 'page-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
+		$classes[] = 'page-sidebar-active ccluk-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	// Archive sidebar
 	if (
 		is_active_sidebar('sidebar') && is_archive()
 	) {
-		$classes[] = 'archive-sidebar-active bb-has-sidebar sidebar-' . $sidebar_alignment;
+		$classes[] = 'archive-sidebar-active ccluk-has-sidebar sidebar-' . $sidebar_alignment;
 	}
 
 	//Adminbar
