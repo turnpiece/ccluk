@@ -1787,13 +1787,11 @@ div.footer-inner ul.social-icons li span:before {
 .footer-style-2 .footer-inner-top {
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
-  font-family: "Lato";
   font-weight: 400;
 }
 .footer-style-2 .footer-widget a {
   color: rgba(0, 0, 0, 0.65);
   font-size: 14px;
-  font-family: "Lato";
   font-weight: 400;
 }
 .footer-style-2 .footer-widget .widget h4.widgettitle {
@@ -1835,7 +1833,8 @@ div.footer-inner ul.social-icons li span:before {
   line-height: 1.3;
 }
 
-.widget_mc4wp_form_widget .mc4wp-form-fields, .widget.widget_newsletterwidget form {
+.widget_mc4wp_form_widget .mc4wp-form-fields,
+.widget.widget_newsletterwidget form {
   display: table;
   width: 100%;
 }
@@ -1856,7 +1855,8 @@ div.footer-inner ul.social-icons li span:before {
   width: 100%;
 }
 
-.widget_mc4wp_form_widget .table, .widget.widget_newsletterwidget form {
+.widget_mc4wp_form_widget .table,
+.widget.widget_newsletterwidget form {
   margin-top: 18px;
 }
 
