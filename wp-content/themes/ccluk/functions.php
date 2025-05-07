@@ -32,6 +32,9 @@ add_image_size('ccluk-medium', 750, 1000, false);
 add_image_size('ccluk-hero', 1200, 800, true);
 add_image_size('ccluk-feature', 580, 387, true);
 
+// don't show the admin bar
+add_filter('show_admin_bar', '__return_false');
+
 /**
  * Customizer additions.
  */

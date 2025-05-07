@@ -23,7 +23,7 @@
 
 	<!-- Title -->
 	<header class="entry-header<?php echo $header_class; ?>">
-		<h1 class="entry-title"><?php the_title(); ?><?php if (function_exists('sap_edit_post_link')) sap_edit_post_link(); ?></h1>
+		<h1 class="entry-title"><?php the_title(); ?></h1>
 
 		<?php if (is_singular(array('post', 'ccluk_news'))) : ?>
 			<div class="post-author-info">

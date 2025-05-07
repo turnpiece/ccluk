@@ -83,13 +83,6 @@ body:not(.single-post) footer.entry-meta {
   display: none;
 }
 
-#item-posts footer.entry-meta {
-  display: block;
-}
-#item-posts .to-top {
-  display: none;
-}
-
 /* Page Content */
 body #content article {
   clear: left;
@@ -123,7 +116,7 @@ body #content article {
   padding-right: 15px;
 }
 
-.bb-side-icon {
+.ccluk-side-icon {
   display: none;
 }
 
@@ -298,7 +291,6 @@ body .buddyboss-select {
   font-weight: normal !important;
   font-variant: normal !important;
   text-transform: none !important;
-  speak: none;
   display: block;
   line-height: 1;
   content: "P";
@@ -618,14 +610,6 @@ body.error404 footer.entry-meta {
   }
 }
 /*--------------------------------------------------------------
-1.2.1 - Profile Posts
---------------------------------------------------------------*/
-@media screen and (max-width: 680px) {
-  #item-posts .inner article {
-    width: 100%;
-  }
-}
-/*--------------------------------------------------------------
 1.1.6 - Forms
 --------------------------------------------------------------*/
 /* General */
@@ -670,9 +654,6 @@ body.error404 footer.entry-meta {
   color: #fff;
 }
 
-/*----------------------------------------------------------------
->>> ADMINBAR
-----------------------------------------------------------------*/
 /*--------------------------------------------------------------
 1.1 - All mobile devices
 --------------------------------------------------------------*/
@@ -684,7 +665,9 @@ body.open-left, body.open-right {
 }
 
 /** Discourage mobile touch/tap highlights **/
-body, .left-btn, .right-btn, #main-wrap {
+body,
+.right-btn,
+#main-wrap {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
@@ -698,25 +681,10 @@ body, .left-btn, .right-btn, #main-wrap {
   /* For some Androids */
 }
 
-.left-btn, .right-btn {
+.right-btn {
+  touch-action: none;
   -ms-touch-action: none;
   z-index: 3;
-}
-
-/** Modern browsers will ignore click events when menus are open **/
-/** Fallback to JS transitions **/
-html.buddyboss-js-transitions body #mobile-header,
-html.buddyboss-js-transitions body #main-wrap,
-html.buddyboss-js-transitions body #masthead,
-html.buddyboss-js-transitions body #wpadminbar {
-  /* modern browsers */
-  -webkit-transform: none !important;
-  -moz-transform: none !important;
-  transform: none !important;
-  -webkit-animation: none !important;
-  -moz-animation: none !important;
-  animation: none !important;
-  opacity: 1;
 }
 
 /*--------------------------------------------------------------
@@ -726,14 +694,11 @@ html.buddyboss-js-transitions body #wpadminbar {
 #main-wrap,
 #colophon {
   height: 100%;
-  /*left: 0;*/
-  /*perspective: 1000px;*/
   position: relative;
   transition: transform 0.35s ease 0s;
 }
 
 #mobile-header {
-  /*z-index: 2;*/
   z-index: 2001;
   /*Increase due to cover image*/
 }
@@ -800,10 +765,6 @@ body.open-right .right-btn:before {
   opacity: 0.5;
 }
 
-#ab-pending-notifications + #ab-pending-notifications {
-  display: none;
-}
-
 /***
  * If the menu-visible class is present then
  * shift the #main-wrap 240px from the right edge
@@ -812,14 +773,10 @@ body.open-right .right-btn:before {
  * .right classes are not present the CSS
  * transform does not apply to #main-wrap.
  */
-.menu-visible-right #main-wrap, .menu-visible-right #colophon {
+.menu-visible-right #main-wrap,
+.menu-visible-right #colophon {
   transform: translate(-240px, 0);
   -webkit-transform: translate(-240px, 0);
-}
-
-.menu-visible-left #main-wrap, .menu-visible-left #colophon {
-  transform: translate(240px, 0);
-  -webkit-transform: translate(240px, 0);
 }
 
 /*--------------------------------------------------------------
@@ -838,19 +795,8 @@ body.open-right .right-btn:before {
   z-index: 1;
 }
 
-.menu-visible-left #wpadminbar {
-  opacity: 1;
-}
-
 .menu-visible-right #mobile-right-panel {
   opacity: 1;
-}
-.menu-visible-right #wpadminbar {
-  opacity: 0;
-}
-
-.menu-visible-left #mobile-right-panel {
-  opacity: 0;
 }
 
 /* Nav Expanding Open Effect */
@@ -1326,11 +1272,9 @@ Mobile Header
 #mobile-header h1 a {
   color: #000;
 }
-#mobile-header .left-btn,
 #mobile-header .right-btn {
   padding-top: 8px;
 }
-#mobile-header .left-btn:before,
 #mobile-header .right-btn:before {
   color: #333;
   font-size: 21px;
@@ -1456,7 +1400,7 @@ MAXIMUM width of 1024 pixels (tablets)
   #secondary.widget-area {
     border-left: none;
   }
-  .bb-has-sidebar #main {
+  .ccluk-has-sidebar #main {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -1471,7 +1415,7 @@ MAXIMUM width of 1024 pixels (tablets)
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .bb-has-sidebar .search-content {
+  .ccluk-has-sidebar .search-content {
     max-width: 100%;
   }
   #secondary {
@@ -1485,7 +1429,7 @@ MAXIMUM width of 1024 pixels (tablets)
   .site-content #secondary {
     padding: 0;
   }
-  .bb-has-sidebar #trigger-sidebar {
+  .ccluk-has-sidebar #trigger-sidebar {
     display: none;
   }
   .home-inner-wrap #secondary {
@@ -1527,6 +1471,9 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title p, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title h2,
   body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title p {
     text-align: center;
+  }
+  body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title a.button, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title a.button {
+    display: inline-block;
   }
   body.page #primary article > .entry-header h1.entry-title {
     font-size: 36px;
@@ -1588,10 +1535,6 @@ MAXIMUM width of 480 pixels (phones)
     max-height: 44px;
     max-width: 200px;
     margin: 10px auto;
-  }
-  body #mobile-header .left-btn {
-    height: 35px;
-    width: 35px;
   }
   body #mobile-header .right-btn:before {
     line-height: 35px;

@@ -39,7 +39,7 @@ body {
 #secondary.widget-area {
     border-left: none;
 }
-.bb-has-sidebar #main {
+.ccluk-has-sidebar #main {
     -webkit-flex-wrap: wrap;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -56,7 +56,7 @@ body {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-.bb-has-sidebar {
+.ccluk-has-sidebar {
     .search-content {
         max-width: 100%;
     }
@@ -72,7 +72,7 @@ body {
 .site-content #secondary {
     padding: 0;
 }
-.bb-has-sidebar #trigger-sidebar {
+.ccluk-has-sidebar #trigger-sidebar {
     display: none;
 }
 .home-inner-wrap #secondary {

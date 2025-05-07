@@ -10,9 +10,7 @@ input[type=email],
 input[type=password],
 input[type=email],
 input[type=number],
-textarea,
-.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]),
-.popup-content input:not([type=checkbox]):not([type=radio]):not([type=button]) {
+textarea {
   background-color: #fff;
   border-width: 1px 1px 1px 1px;
   border-color: #54ae68;
@@ -152,8 +150,6 @@ a:hover,
   color: #22a7f0;
 }
 
-#save_as_draft,
-.popup-content .button:not(.ed_button),
 input[type=submit] {
   border: none;
   padding: 10px 20px 10px 20px;
@@ -163,11 +159,7 @@ input[type=submit] {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
-#save_as_draft:hover, #save_as_draft:active,
-.popup-content .button:not(.ed_button):hover,
-.popup-content .button:not(.ed_button):active,
-input[type=submit]:hover,
-input[type=submit]:active {
+input[type=submit]:hover, input[type=submit]:active {
   background-color: #54ae68;
 }
 
@@ -937,10 +929,6 @@ body.page-template-homepage .slick-slide img {
   background-color: #22a7f0;
 }
 
-.footer-widget #switch-mode input[type=submit] {
-  background-color: #22a7f0;
-}
-
 input[type=button], input[type=reset] {
   background-color: #22a7f0;
 }
@@ -952,22 +940,15 @@ a.button {
 #secondary div.generic-button a,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button,
-#messages-bulk-manage, .boss-search-wrapper label:after {
+.boss-search-wrapper label:after {
   background-color: #22a7f0;
 }
 
-#trigger-sidebar:hover .bb-side-icon {
+#trigger-sidebar:hover .ccluk-side-icon {
   background-color: #54ae68;
 }
-#trigger-sidebar:hover .bb-side-icon:before, #trigger-sidebar:hover .bb-side-icon:after {
+#trigger-sidebar:hover .ccluk-side-icon:before, #trigger-sidebar:hover .ccluk-side-icon:after {
   background-color: #54ae68;
-}
-
-.bb-sidebar-on .bb-side-icon {
-  background: #54ae68;
-}
-.bb-sidebar-on .bb-side-icon:after, .bb-sidebar-on .bb-side-icon:before {
-  background: #54ae68;
 }
 
 .dir-header span {
@@ -1011,21 +992,6 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 
-.sap-container-wrapper .sap-story-publish {
-  color: #54ae68;
-}
-.sap-container-wrapper .sap-story-publish:hover {
-  color: #54ae68;
-}
-
-.recommend-title,
-.liked .fa-heart,
-.bookmarked .bb-helper-icon.fa-bookmark,
-.fa.bb-helper-icon.fa-spinner.fa-spin,
-.os-loader i, .breadcrumb-wrapper a:hover {
-  color: #54ae68;
-}
-
 #mobile-header {
   background-color: #54ae68;
 }
@@ -1041,17 +1007,8 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   background-color: #54ae68;
 }
 
-.sap-load-more-posts,
 .button-load-more-posts {
   background-color: #54ae68;
-}
-
-#fwslider .readmore a, #fwslider .progress {
-  background-color: #54ae68;
-}
-
-.toggle-sap-widgets:hover .cls-1 {
-  fill: #54ae68;
 }
 
 @-webkit-keyframes load1 {
@@ -1075,8 +1032,6 @@ a.comment-reply-link:hover, a.comment-edit-link:hover {
   }
 }
 .entry-meta a.read-more,
-.sap-publish-popup.sap-publish-popup .sap-action-button,
-.sap-container-wrapper .sap-story-publish,
 input[type=submit] {
   border-color: #22a7f0;
 }
@@ -1105,18 +1060,8 @@ input[type=radio] + span:before, input[type=radio] + label:before, input[type=ra
 }
 
 /********** Desktop  *************/
-.is-desktop .buddyboss-select-inner span {
-  color: #54ae68;
-}
 .is-desktop .post-author .load-more-posts:hover,
 .is-desktop .post-author .load-more-posts a:hover {
-  color: #54ae68;
-}
-.is-desktop .header-notifications a#user-messages span.count:before,
-.is-desktop .header-notifications a span.pending-count:before {
-  color: #54ae68;
-}
-.is-desktop .header-notifications .pop a:hover {
   color: #54ae68;
 }
 
@@ -1142,14 +1087,6 @@ body #content article {
   background-color: #fff;
 }
 
-.sl-count:after, .sl-count:before {
-  background-color: #fff;
-}
-
-.sl-icon:after, .sl-icon:before {
-  background-color: #fff;
-}
-
 .main-navigation li ul {
   background-color: #fff;
 }
@@ -1157,17 +1094,9 @@ body #content article {
   background-color: #fff;
 }
 
-div#sitewide-notice div#message p {
-  background-color: #f9f9f9;
-}
-
 #header-search form,
 .site-header {
   background-color: #fff;
-}
-
-.buddyboss-select-inner span {
-  font-size: 15px;
 }
 
 /***************** Desktop ******************/

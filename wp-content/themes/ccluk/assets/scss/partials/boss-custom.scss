@@ -9,10 +9,6 @@
   }
 }
 
-.footer-widget #switch-mode input[type="submit"] {
-  background-color: $blue;
-}
-
 input {
   &[type="button"],
   &[type="reset"] {
@@ -27,21 +23,14 @@ a.button {
 #secondary div.generic-button a,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button,
-#messages-bulk-manage, .boss-search-wrapper label:after {
+.boss-search-wrapper label:after {
   background-color: $blue;
 }
 
-#trigger-sidebar:hover .bb-side-icon {
+#trigger-sidebar:hover .ccluk-side-icon {
   background-color: $green;
   &:before, &:after {
     background-color: $green;
-  }
-}
-
-.bb-sidebar-on .bb-side-icon {
-  background: $green;
-  &:after, &:before {
-    background: $green;
   }
 }
 
@@ -93,21 +82,6 @@ a {
   color: $green;
 }
 
-.sap-container-wrapper .sap-story-publish {
-  color: $green;
-  &:hover {
-    color: $green;
-  }
-}
-
-.recommend-title, 
-.liked .fa-heart, 
-.bookmarked .bb-helper-icon.fa-bookmark, 
-.fa.bb-helper-icon.fa-spinner.fa-spin, 
-.os-loader i, .breadcrumb-wrapper a:hover {
-  color: $green;
-}
-
 #mobile-header {
   background-color: $green;
 }
@@ -123,21 +97,9 @@ a {
   }
 }
 
-.sap-load-more-posts, 
 .button-load-more-posts {
   background-color: $green;
 }
-
-#fwslider {
-  .readmore a, .progress {
-    background-color: $green;
-  }
-}
-
-.toggle-sap-widgets:hover .cls-1 {
-  fill: $green;
-}
-
 
 @-webkit-keyframes load1 {
   0%,
@@ -169,8 +131,6 @@ a {
 }
 
 .entry-meta a.read-more,
-.sap-publish-popup.sap-publish-popup .sap-action-button,
-.sap-container-wrapper .sap-story-publish,
 input[type="submit"] {
   border-color: $blue;
 }
@@ -207,23 +167,9 @@ input {
 /********** Desktop  *************/
 
 .is-desktop {
-  .buddyboss-select-inner span {
-    color: $green;
-  }
   .post-author .load-more-posts {
     &:hover,
     a:hover {
-      color: $green;
-    }
-  }
-  .header-notifications {
-    a {
-      &#user-messages span.count:before,
-      span.pending-count:before {
-        color: $green;
-      }
-    }
-    .pop a:hover {
       color: $green;
     }
   }
@@ -258,19 +204,6 @@ body {
   }
 }
 
-.sl-count {
-  &:after, 
-  &:before {
-    background-color: $white;
-  }
-}
-
-.sl-icon {
-  &:after, &:before {
-    background-color: $white;
-  }
-}
-
 .main-navigation li ul {
   ul {
     background-color: $white;
@@ -278,17 +211,9 @@ body {
   background-color: $white;
 }
 
-div#sitewide-notice div#message p {
-  background-color: $secondary_bg;
-}
-
 #header-search form, 
 .site-header {
   background-color: $white;
-}
-
-.buddyboss-select-inner span {
-  font-size: $font-size-sm;
 }
 
 /***************** Desktop ******************/

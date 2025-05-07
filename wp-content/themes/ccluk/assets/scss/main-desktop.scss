@@ -125,7 +125,7 @@ body.page #comments {
   z-index: 11;
 }
 
-.bb-has-sidebar #trigger-sidebar {
+.ccluk-has-sidebar #trigger-sidebar {
   display: block;
 }
 
@@ -158,67 +158,18 @@ body {
 }
 
 #main,
-.breadcrumb-wrapper, 
 .header-style-2 .header-wrapper, 
 .footer-inner {
   margin: 0 auto;
   max-width: 1170px;
 }
 
-.breadcrumb-wrapper {
-  color: $gray;
-  font-size: 13px;
-  padding: 90px 15px 15px;
-  text-align: center;
-}
-
-.archive .breadcrumb-wrapper, 
-.page-template-social-authoring .breadcrumb-wrapper, 
-.single-post .breadcrumb-wrapper {
-  display: none;
-}
-
-.breadcrumb-wrapper a {
-  color: #000;
-  font-weight: 600;
-}
-
-.breadcrumb_last, 
-.breadcrumb-wrapper a {
-  margin: 0 8px;
-}
-
-body:not(.archive):not(.page-template-social-authoring) .breadcrumb-wrapper ~ #page {
-  padding-top: 0;
-}
-
-.breadcrumb-wrapper > p {
-  margin: 0;
-}
-
 body.single-item.groups #main {
   max-width: 100%;
 }
 
-.sidebar-left {
-  #main, 
-  .home-inner-wrap, 
-  .search-content-wrap {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: reverse;
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
-  }
-  #secondary {
-    margin-right: 70px;
-  }
-}
-
 #primary {
-  /*height: 100%;*/
   margin-right: 0;
-  /*padding: 0 15px;*/
   position: relative;
   width: auto;
   z-index: 10;
@@ -249,7 +200,7 @@ body.single-item.groups #main {
   /* Firefox-34-ignoring-max-width-for-flexbox */
 }
 
-.bb-has-sidebar {
+.ccluk-has-sidebar {
   .search-content {
     max-width: $content_w_large;
   }
@@ -322,6 +273,10 @@ body {
 /*--------------------------------------------------------------
 1.1.4 - Header
 --------------------------------------------------------------*/
+
+#mobile-right-panel {
+  display: none;
+}
 
 .site-header {
   background-color: $secondary_bg;
@@ -695,7 +650,6 @@ header-aside,
         text-rendering: auto;
         content: "\f105";
         -webkit-font-smoothing: antialiased;
-        speak: none;
         vertical-align: top;
         float: right;
         font-size: 16px;

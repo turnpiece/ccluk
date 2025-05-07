@@ -173,34 +173,29 @@
           buttons_width = buttons_width + $(this).width();
         });
 
-      $search_form.width($(".header-wrapper").width() - 320 - buttons_width);
-    }
+            $search_form.width( $( '.header-wrapper' ).width() - 320 - buttons_width );
+        }
 
-    search_width();
-    $window.on("resize", function () {
-      search_width();
-    });
+        search_width();
+        $window.on( 'resize', function () {
+            search_width();
+        } );
 
-    /*--------------------------------------------------------------------------------------------------------
+
+        /*--------------------------------------------------------------------------------------------------------
         3.14 - To Top Button
         --------------------------------------------------------------------------------------------------------*/
-    //Scroll Effect
-    $(".to-top").on("click", function (event) {
-      event.preventDefault();
+        //Scroll Effect
+        $( '.to-top' ).on( 'click', function ( event ) {
 
-      //, 'easeInOutExpo'
-      $("html, body").stop().animate(
-        {
-          scrollTop: "0px",
-        },
-        500
-      );
-    });
+            event.preventDefault();
 
-    // Sticky Header
-    var topSpace = 0;
-    if ($("#wpadminbar").is(":visible")) {
-      topSpace = 32;
+            //, 'easeInOutExpo'
+            $( 'html, body' ).stop().animate( {
+                scrollTop: "0px"
+            }, 500 );
+
+        } );
     }
   };
 
