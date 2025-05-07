@@ -10,24 +10,25 @@
 
 $show_sidebar = apply_filters('ccluk_show_page_sidebar', true);
 
-if ($show_sidebar) {
-    if (is_active_sidebar('search') && is_search()) { ?>
+if ($show_sidebar) :
+    if (is_active_sidebar('search') && is_search()) : ?>
 
         <div id="secondary" class="widget-area" role="complementary">
             <?php dynamic_sidebar('search'); ?>
-        </div><?php
+        </div>
 
-            } elseif (is_active_sidebar('home-sidebar') && is_front_page()) { ?>
+    <?php elseif (is_active_sidebar('home-sidebar') && is_front_page()) : ?>
 
         <div id="secondary" class="widget-area" role="complementary">
             <?php dynamic_sidebar('home-sidebar'); ?>
-        </div><?php
+        </div>
 
-            } elseif (is_active_sidebar('sidebar') && !is_front_page() && ! is_search()) { ?>
+    <?php elseif (is_active_sidebar('sidebar') && !is_front_page() && ! is_search()) : ?>
 
         <div id="secondary" class="widget-area" role="complementary">
             <?php dynamic_sidebar('sidebar'); ?>
-        </div><?php
+        </div>
 
-            }
-        }
+    <?php endif; ?>
+
+<?php endif;

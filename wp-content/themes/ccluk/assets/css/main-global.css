@@ -2900,22 +2900,6 @@ body article.error404 .entry-header {
   margin-left: 15px;
 }
 
-.search_results .to-top,
-.search_results .load-more-posts,
-.search_results .author-middle,
-.search_results .author-follow {
-  display: none;
-}
-.search_results .edit-link {
-  display: none;
-}
-.search_results .bboss_search_item_post .entry-title {
-  margin: 0;
-}
-.search_results .bboss_search_item_post .entry-summary p {
-  margin: 0 0 26px;
-}
-
 .search-content-wrap .pagination-below {
   padding-top: 70px;
 }
@@ -2923,7 +2907,6 @@ body article.error404 .entry-header {
 /*--------------------------------------------------------------
 7.0 - Ajax Loading
 --------------------------------------------------------------*/
-.sap-load-more-posts.loading:after,
 .button-load-more-posts.loading:after,
 .footer-widget a.loading:after {
   font-family: "onesocial";

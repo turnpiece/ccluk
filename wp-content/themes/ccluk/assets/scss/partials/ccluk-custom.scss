@@ -97,10 +97,6 @@ a {
   }
 }
 
-.button-load-more-posts {
-  background-color: $green;
-}
-
 @-webkit-keyframes load1 {
   0%,
         80%,
@@ -167,13 +163,6 @@ input {
 /********** Desktop  *************/
 
 .is-desktop {
-  .post-author .load-more-posts {
-    &:hover,
-    a:hover {
-      color: $green;
-    }
-  }
-
   .header-button:hover {
     background-color: $green;
   }

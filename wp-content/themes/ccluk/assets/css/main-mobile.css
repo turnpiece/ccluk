@@ -627,7 +627,7 @@ body.error404 footer.entry-meta {
 .button-load-more-posts {
   margin: 0;
   display: block;
-  background-color: #54ae68;
+  background-color: #22a7f0;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -636,13 +636,13 @@ body.error404 footer.entry-meta {
   text-align: center;
   text-decoration: none;
   padding: 10px 14px;
-  -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
   border-radius: 3px;
 }
 .button-load-more-posts:hover {
   outline: none;
-  color: #fff;
+  background-color: #54ae68;
   text-decoration: none;
   /* Darken */
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
