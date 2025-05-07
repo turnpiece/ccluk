@@ -179,10 +179,6 @@ input[type=submit]:hover, input[type=submit]:active {
   line-height: 1.6;
 }
 
-div.footer-inner-bottom {
-  padding-bottom: 80px;
-}
-
 a.button {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -1064,7 +1060,6 @@ input[type=radio] + span:before, input[type=radio] + label:before, input[type=ra
 .is-desktop .post-author .load-more-posts a:hover {
   color: #54ae68;
 }
-
 .is-desktop .header-button:hover {
   background-color: #54ae68;
 }

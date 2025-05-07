@@ -60,18 +60,9 @@ if ($show_footer) : ?>
 
 		</div><!-- .footer-inner-bottom -->
 
-		<!-- Don't delete this -->
-		<div class="bb-overlay"></div>
-
 	</footer>
 
 <?php endif; ?>
-
-<?php
-
-// Lost Password
-get_template_part('template-parts/site-lost-password');
-?>
 
 <?php wp_footer(); ?>
 

@@ -452,7 +452,7 @@ html,
 .site-header #wp-admin-bar-shortcode-secondary .alert,
 .entry-meta .comments-link a,
 .entry-meta,
-.generic-button, .bb-meta,
+.generic-button,
 .footer-style-2 .footer-inner-top,
 .footer-style-2 .footer-widget a {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
@@ -691,8 +691,9 @@ label {
   color: #54ae68;
 }
 
-input[type=text], input[type=tel], input[type=email], input[type=password], input[type=email], input[type=number] {
+input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number] {
   font-size: 18px;
+  line-height: normal;
   border: none;
   font-family: inherit;
   font-weight: 300;
@@ -703,46 +704,9 @@ input[type=text], input[type=tel], input[type=email], input[type=password], inpu
   padding-top: 4px;
   background-color: transparent;
 }
-
-textarea {
-  font-size: 18px;
-  border: none;
-  font-family: inherit;
-  font-weight: 300;
-  appearance: none;
-  -webkit-appearance: none;
-  padding-bottom: 18px;
-  padding-top: 4px;
-  background-color: transparent;
-}
-
-input[type=text]:focus, input[type=search]:focus, input[type=tel]:focus, input[type=email]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus {
-  /* color: #484848; */
+input[type=text]:focus, input[type=tel]:focus, input[type=email]:focus, input[type=password]:focus, input[type=number]:focus {
   outline: none;
 }
-
-textarea:focus {
-  /* color: #484848; */
-  outline: none;
-}
-
-button {
-  line-height: normal;
-  text-wrap: balance;
-}
-
-input[type=text], input[type=tel], input[type=email], input[type=password], input[type=email], input[type=number] {
-  line-height: normal;
-}
-
-textarea {
-  padding: 12px 0;
-  font-size: 100%;
-  overflow: auto;
-  vertical-align: top;
-}
-
-/* Override Webkit autofill */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
   color: #2a2a2a !important;
@@ -809,6 +773,29 @@ input[type=radio]:checked + span:before, input[type=radio]:checked + label:befor
   border: 3px solid #fff;
   padding: 3px;
   background-color: #333;
+}
+
+textarea {
+  font-size: 18px;
+  border: none;
+  font-family: inherit;
+  font-weight: 300;
+  appearance: none;
+  -webkit-appearance: none;
+  padding-bottom: 18px;
+  padding-top: 4px;
+  background-color: transparent;
+  padding: 12px 0;
+  overflow: auto;
+  vertical-align: top;
+}
+textarea:focus {
+  outline: none;
+}
+
+button {
+  line-height: normal;
+  text-wrap: balance;
 }
 
 /*--------------------------------------------------------------
@@ -1652,15 +1639,8 @@ footer[role=contentinfo] {
   z-index: 2;
 }
 
-.footer-inner-top {
-  color: rgba(0, 0, 0, 0.4);
-}
-.footer-inner-top a {
-  color: rgba(0, 0, 0, 0.4);
-}
-
 div.footer-inner-bottom {
-  padding: 30px 0;
+  padding: 10px 0;
   font-size: 13px;
   clear: left;
   color: rgba(225, 225, 225, 0.8);
@@ -2013,25 +1993,6 @@ div.footer-inner ul.social-icons li span:before {
   transform-origin: bottom left;
   -webkit-transition: -webkit-transform 0.3s, width 0.3s, bottom 0.3s;
   transition: transform 0.3s, width 0.3s, bottom 0.3s;
-}
-
-.bb-sidebar-on .ccluk-side-icon {
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-  background: #54ae68;
-}
-.bb-sidebar-on .ccluk-side-icon:before {
-  top: 0;
-  transform: translateX(0) translateY(0) rotate(-45deg);
-  width: 50%;
-  background: #54ae68;
-}
-.bb-sidebar-on .ccluk-side-icon:after {
-  bottom: 0;
-  transform: translateX(0) translateY(0) rotate(45deg);
-  width: 50%;
-  background: #54ae68;
 }
 
 .entry-title {
@@ -2878,7 +2839,7 @@ body article.error404 .entry-header {
   width: 308px;
   z-index: 1;
 }
-.error404 .entry-header p {
+.error404 .entry-content p {
   font-size: 19px;
   font-weight: 700;
   color: #333;

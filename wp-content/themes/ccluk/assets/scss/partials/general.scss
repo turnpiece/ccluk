@@ -175,10 +175,6 @@ input[type=submit] {
     line-height: 1.6;
 }
 
-div.footer-inner-bottom {
-    padding-bottom: 80px;
-}
-
 a.button {
     @include button();
 }

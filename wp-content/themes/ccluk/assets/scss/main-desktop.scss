@@ -134,9 +134,6 @@ body {
     display: block;
     position: relative;
   }
-  &:not(.bb-sidebar-on) .home-inner-wrap #secondary {
-    display: none;
-  }
 }
 
 .sidebar-left #trigger-sidebar {
@@ -368,9 +365,6 @@ body {
   display: table-cell;
   vertical-align: bottom;
   width: 100%;
-  .bb-menu-button i:before {
-    content: "\f141";
-  }
 }
 
 header-aside,
@@ -382,9 +376,6 @@ header-aside,
 #header-search {
   display: inline-block;
   position: relative;
-  &:last-child {
-    border-right: 3px solid $divider_color;
-  }
   form {
     > div {
       height: 100%;
@@ -412,22 +403,19 @@ header-aside,
     height: 100%;
     width: 100%;
     padding: 20px 80px 20px 30px;
-    font-size: 18px;
+    font-size: $font-size-std;
     font-weight: 300;
-    border-left: 3px solid $divider_color;
     border-radius: 0;
-    border-bottom: 3px solid $divider_color;
   }
   #searchsubmit {
     position: absolute;
     right: 0px;
     top: -1px;
-    /* margin-top: -10px; */
     height: 100%;
     width: 64px;
     border-radius: 0;
-    background-color: transparent;
-    color: $dark;
+    background-color: $green;
+    color: $white;
     z-index: 1;
     line-height: 70px;
     padding: 0;
@@ -462,17 +450,17 @@ header-aside,
     position: absolute;
     top: 0;
     right: 0;
-    height: 12px;
-    width: 12px;
+    height: 18px;
+    width: 18px;
     background-color: $dark_red;
     padding: 0;
     line-height: 13px;
     color: $white;
-    font-size: 6px;
+    font-size: 13px;
     z-index: 2;
-    border-radius: 0;
+    border-radius: 50%;
     font-family: inherit;
-    margin: 10px;
+    margin: 4px;
     outline: none;
     text-align: center;
   }
@@ -516,7 +504,7 @@ header-aside,
     background-color: $green;
   }
   #search-open {
-      font-size: 18px;
+    font-size: 18px;
   }
 }
 
@@ -753,11 +741,6 @@ header-aside,
       }
     }
   }
-}
-
-.commentlist .children {
-  margin-left: 60px;
-  margin-bottom: 0;
 }
 
 div.footer-inner.widget-area {
