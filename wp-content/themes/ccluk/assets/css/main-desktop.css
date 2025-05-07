@@ -361,10 +361,6 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
   content: "\f141";
 }
 
-#item-nav .bb-menu-button i:before {
-  content: "\f078";
-}
-
 header-aside,
 #logo-area {
   display: table-cell;

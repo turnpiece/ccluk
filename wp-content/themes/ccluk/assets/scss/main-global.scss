@@ -340,36 +340,6 @@ input, textarea {
 }
 
 /**
- * Address Firefox 4+ setting `line-height` on `input` using `!important` in
- * the UA stylesheet.
- */
-
-/**
- * It's recommended that you don't attempt to style these elements.
- * Firefox's implementation doesn't respect box-sizing, padding, or width.
- *
- * 1. Address box sizing set to `content-box` in IE 8/9/10.
- * 2. Remove excess padding in IE 8/9/10.
- */
-
-/**
- * Fix the cursor style for Chrome's increment/decrement buttons. For certain
- * `font-size` values of the `input`, it causes the cursor style of the
- * decrement button to change from `default` to `text`.
- */
-
-/**
- * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
- * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
- */
-
-/**
- * Remove inner padding and search cancel button in Safari and Chrome on OS X.
- * Safari (but not Chrome) clips the cancel button when the search input has
- * padding (and `textfield` appearance).
- */
-
-/**
  * Define consistent border, margin, and padding.
  */
 
@@ -520,7 +490,6 @@ html,
 .entry-meta .comments-link a,
 .entry-meta,
 .generic-button, .bb-meta,
-#item-photos,
 .footer-style-2 .footer-inner-top,
 .footer-style-2 .footer-widget a{
     font-family: $font-default;
@@ -749,7 +718,10 @@ hr {
 2.0 - Repeatable patterns
 --------------------------------------------------------------*/
 
-.clear:after, .wrapper:after, .format-status .entry-header:after, .site-content article:after, #item-header:after {
+.clear:after, 
+.wrapper:after, 
+.format-status .entry-header:after, 
+.site-content article:after {
   content: "";
   display: table;
   clear: both;
@@ -3326,22 +3298,16 @@ body article.error404 .entry-header {
 9.2 - Headers
 --------------------------------------------------------------*/
 
-#secondary div#item-header-content h1 {
-  font-size: 24px;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
 #secondary .user-nicename {
   line-height: 1.2;
   font-size: 15px;
   margin: 0px 0 26px;
   color: $green;
-}
 
-#secondary .user-nicename a {
-  color: $blue;
-  text-decoration: none;
+  a {
+    color: $blue;
+    text-decoration: none;
+  }
 }
 
 #secondary div.generic-button {
@@ -3357,43 +3323,8 @@ body article.error404 .entry-header {
   display: none;
 }
 
-.sap-new-post.sap-new-post {
-  display: inline-block;
-  float: none;
-  vertical-align: top;
-}
-
-.sap-blog-post-wrapper {
-  .header-area {
-    position: relative;
-  }
-  .entry-post-thumbnail {
-    margin-bottom: 24px;
-    position: absolute;
-    top: 0;
-  }
-  .entry-title {
-    font-size: 22px;
-    line-height: 1.4;
-    margin-bottom: 22px;
-  }
-  .post-date {
-    color: #9b9b9b;
-    margin-bottom: 20px;
-  }
-}
-
-.sap-post-meta {
-  overflow: hidden;
-}
-
 .entry-header .entry-title .post-edit-link.button {
   margin-left: 20px;
-}
-
-#sap-widget-container .category_hierarchy_ul li {
-  margin: 6px 0;
-  padding: 0 2px;
 }
 
 .category_hierarchy_ul input[type=checkbox] + {

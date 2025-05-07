@@ -1,10 +1,3 @@
-@mixin easeInOut {
-	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	-o-transition: all 0.5s ease-in-out;
-	transition: all 0.5s ease-in-out;
-}
-
 @mixin border-radius($x) {
 	-webkit-border-radius: $x;
 	-moz-border-radius: $x;
@@ -254,25 +247,6 @@
   box-shadow: $args;
 }
 
-@mixin button-colours() {
-  border-color: #eee;
-  color: #bbb;
-}
-
-@mixin active-tab() {
-	color: $white;
-	background-color: $green;
-	border-color: $green;
-}
-
-@mixin inactive-tab( $border-size: 1px ) {
-	background-color: $white;
-	border: $border-size solid;
-	border-color: $white;
-	color: $blue;
-	font-weight: 600;
-}
-
 @mixin placeholder-colour() {
 	&::-webkit-input-placeholder,
 	&:-ms-input-placeholder,
@@ -312,11 +286,4 @@
 @mixin subnav-item-selected() {
   color: $green;
   background-color: $white;
-}
-
-@mixin calc-width( $x ) {
-  width: -moz-calc(#{$x});
-  width: -webkit-calc(#{$x});
-  width: -o-calc(#{$x});
-  width: calc(#{$x});
 }
