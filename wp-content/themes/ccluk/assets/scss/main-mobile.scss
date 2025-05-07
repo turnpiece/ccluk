@@ -315,7 +315,6 @@ body .buddyboss-select {
     font-weight: normal !important;
     font-variant: normal !important;
     text-transform: none !important;
-    speak: none;
     display: block;
     line-height: 1;
     content: "P";
@@ -729,6 +728,7 @@ body,
 }
 
 .right-btn {
+  touch-action: none;
   -ms-touch-action: none;
   z-index: 3;
 }
@@ -741,14 +741,11 @@ body,
 #main-wrap, 
 #colophon {
   height: 100%;
-  /*left: 0;*/
-  /*perspective: 1000px;*/
   position: relative;
   transition: transform 0.35s ease 0s;
 }
 
 #mobile-header {
-  /*z-index: 2;*/
   z-index: 2001;
   /*Increase due to cover image*/
 
@@ -817,10 +814,6 @@ body.open-right .right-btn:before {
   opacity: 0.5;
 }
 
-#ab-pending-notifications + #ab-pending-notifications {
-  display: none;
-}
-
 /***
  * If the menu-visible class is present then
  * shift the #main-wrap 240px from the right edge
@@ -831,7 +824,8 @@ body.open-right .right-btn:before {
  */
 
 .menu-visible-right {
-  #main-wrap, #colophon {
+  #main-wrap, 
+  #colophon {
     transform: translate(-240px, 0);
     -webkit-transform: translate(-240px, 0);
   }
