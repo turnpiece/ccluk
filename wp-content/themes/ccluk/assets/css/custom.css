@@ -221,17 +221,6 @@ a.cta {
   text-align: center;
   position: relative;
 }
-a.cta:after {
-  font-family: "FontAwesome";
-  font-size: 28px;
-  font-weight: 100;
-  color: #fff;
-  content: "\f054";
-  position: absolute;
-  right: 30px;
-  line-height: 30px;
-  top: calc(50% - 15px);
-}
 a.cta:hover {
   background-color: #54ae68;
 }

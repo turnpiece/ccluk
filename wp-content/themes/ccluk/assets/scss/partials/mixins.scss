@@ -167,17 +167,6 @@
   font-weight: 700;
   text-align: center;
   position: relative;
-  &:after {
-    font-family: "FontAwesome";
-    font-size: $font-size-mid;
-    font-weight: 100;
-    color: $white;
-    content: "\f054";
-    position: absolute;
-    right: 30px;
-    line-height: 30px;
-    top: calc(50% - 15px);
-  }
   &:hover {
     background-color: $green;
   }

@@ -2003,41 +2003,7 @@ div {
   }
 }
 
-.widget_mc4wp_form_widget form p button {
-  font-size: 0;
-  &:before {
-    content: "\f0e0";
-    font-size: 14px;
-  }
-  width: 46px;
-  height: 46px;
-  line-height: 1;
-  background-color: $green;
-  color: $white;
-  /* font-size: 0; */
-  font-family: FontAwesome;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 0;
-  border: none;
-}
-
 .widget.widget_newsletterwidget form {
-  p input[type="submit"], div input[type="submit"] {
-    width: 46px;
-    height: 46px;
-    line-height: 1;
-    background-color: $green;
-    color: $white;
-    /* font-size: 0; */
-    font-family: FontAwesome;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding: 0;
-    border: none;
-  }
   p input[type="submit"], div input[type="submit"] {
     height: 44px;
   }
@@ -2045,9 +2011,7 @@ div {
     vertical-align: bottom;
   }
   p input[type="submit"]:hover, div input[type="submit"]:hover {
-    -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+    @include darken();
   }
 }
 
@@ -2069,23 +2033,6 @@ div {
   width: 100%;
   margin-top: 7px;
   display: block;
-}
-
-.widget {
-  &.widget_newsletterwidget form {
-    p input[type="submit"]:before, div input[type="submit"]:before {
-      content: "\f0e0";
-      display: inline-block;
-      font: normal normal normal 14px/1 FontAwesome;
-      font-size: inherit;
-      text-rendering: auto;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-  }
-  &.ccluk_social_links .social-icons span {
-    font-family: FontAwesome;
-  }
 }
 
 /*--------------------------------------------------------------
@@ -2195,27 +2142,13 @@ div {
   }
 }
 
-.entry-meta .comments-link {
-  margin-left: 4px;
-  &:before {
-    font-family: 'FontAwesome';
-    font-weight: normal;
-    font-style: normal;
-    text-rendering: auto;
-    text-decoration: inherit;
-    display: inline-block;
-    line-height: 1;
-    content: "\f0e5";
-    -webkit-font-smoothing: antialiased;
-    margin-right: 2px;
-  }
-}
-
-.comments-link a, .entry-meta a {
+.comments-link a, 
+.entry-meta a {
   color: #999;
 }
 
-.comments-link a:hover, .entry-meta a:hover {
+.comments-link a:hover, 
+.entry-meta a:hover {
   color: #666;
 }
 

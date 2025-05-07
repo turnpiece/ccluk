@@ -1880,40 +1880,6 @@ div.footer-inner ul.social-icons li span:before {
   padding: 12px 20px;
 }
 
-.widget_mc4wp_form_widget form p button {
-  font-size: 0;
-  width: 46px;
-  height: 46px;
-  line-height: 1;
-  background-color: #54ae68;
-  color: #fff;
-  /* font-size: 0; */
-  font-family: FontAwesome;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 0;
-  border: none;
-}
-.widget_mc4wp_form_widget form p button:before {
-  content: "\f0e0";
-  font-size: 14px;
-}
-
-.widget.widget_newsletterwidget form p input[type=submit], .widget.widget_newsletterwidget form div input[type=submit] {
-  width: 46px;
-  height: 46px;
-  line-height: 1;
-  background-color: #54ae68;
-  color: #fff;
-  /* font-size: 0; */
-  font-family: FontAwesome;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 0;
-  border: none;
-}
 .widget.widget_newsletterwidget form p input[type=submit], .widget.widget_newsletterwidget form div input[type=submit] {
   height: 44px;
 }
@@ -1942,19 +1908,6 @@ div.footer-inner ul.social-icons li span:before {
   width: 100%;
   margin-top: 7px;
   display: block;
-}
-
-.widget.widget_newsletterwidget form p input[type=submit]:before, .widget.widget_newsletterwidget form div input[type=submit]:before {
-  content: "\f0e0";
-  display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
-  font-size: inherit;
-  text-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-.widget.ccluk_social_links .social-icons span {
-  font-family: FontAwesome;
 }
 
 /*--------------------------------------------------------------
@@ -2062,27 +2015,13 @@ div.footer-inner ul.social-icons li span:before {
   margin-right: 10px;
 }
 
-.entry-meta .comments-link {
-  margin-left: 4px;
-}
-.entry-meta .comments-link:before {
-  font-family: "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  text-decoration: inherit;
-  display: inline-block;
-  line-height: 1;
-  content: "\f0e5";
-  -webkit-font-smoothing: antialiased;
-  margin-right: 2px;
-}
-
-.comments-link a, .entry-meta a {
+.comments-link a,
+.entry-meta a {
   color: #999;
 }
 
-.comments-link a:hover, .entry-meta a:hover {
+.comments-link a:hover,
+.entry-meta a:hover {
   color: #666;
 }
 

@@ -595,18 +595,6 @@ header-aside,
   color: #54ae68;
   background-color: #fff;
 }
-.main-navigation li ul.sub-menu li.menu-item-has-children > a:after {
-  font-family: "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  content: "\f105";
-  -webkit-font-smoothing: antialiased;
-  vertical-align: top;
-  float: right;
-  font-size: 16px;
-  line-height: 1;
-}
 .main-navigation li ul.sub-menu div > ul > .current-menu-item > a,
 .main-navigation li ul.sub-menu div > ul > .current-menu-ancestor > a {
   color: #fff;
