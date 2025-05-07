@@ -222,7 +222,7 @@
 @mixin mobile-styles() {
   &.single,
   &.archive,
-  &.page:not(.frontpage-page) {
+  &.page:not(.home) {
     #primary,
     #secondary,
     .site-content {

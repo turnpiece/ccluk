@@ -83,13 +83,6 @@ body:not(.single-post) footer.entry-meta {
   display: none;
 }
 
-#item-posts footer.entry-meta {
-  display: block;
-}
-#item-posts .to-top {
-  display: none;
-}
-
 /* Page Content */
 body #content article {
   clear: left;
@@ -621,14 +614,6 @@ body.error404 footer.entry-meta {
   }
 }
 /*--------------------------------------------------------------
-1.2.1 - Profile Posts
---------------------------------------------------------------*/
-@media screen and (max-width: 680px) {
-  #item-posts .inner article {
-    width: 100%;
-  }
-}
-/*--------------------------------------------------------------
 1.1.6 - Forms
 --------------------------------------------------------------*/
 /* General */
@@ -673,9 +658,6 @@ body.error404 footer.entry-meta {
   color: #fff;
 }
 
-/*----------------------------------------------------------------
->>> ADMINBAR
-----------------------------------------------------------------*/
 /*--------------------------------------------------------------
 1.1 - All mobile devices
 --------------------------------------------------------------*/
@@ -690,7 +672,8 @@ body.open-left, body.open-right {
 /** Fallback to JS transitions **/
 html.buddyboss-js-transitions body #mobile-header,
 html.buddyboss-js-transitions body #main-wrap,
-html.buddyboss-js-transitions body #masthead {
+html.buddyboss-js-transitions body #masthead,
+html.buddyboss-js-transitions body #wpadminbar {
   /* modern browsers */
   -webkit-transform: none !important;
   -moz-transform: none !important;
@@ -702,7 +685,9 @@ html.buddyboss-js-transitions body #masthead {
 }
 
 /** Discourage mobile touch/tap highlights **/
-body, .left-btn, .right-btn, #main-wrap {
+body,
+.right-btn,
+#main-wrap {
   -webkit-tap-highlight-color: transparent;
   /* For some Androids */
 }
@@ -716,29 +701,17 @@ body, .left-btn, .right-btn, #main-wrap {
   /* For some Androids */
 }
 
-.left-btn, .right-btn {
+.right-btn {
   -ms-touch-action: none;
   z-index: 3;
-}
-
-/** Swipe helper **/
-#buddyboss-swipe-area {
-  -webkit-tap-highlight-color: transparent;
-  /* For some Androids */
-  -ms-touch-action: none;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 9999;
-  cursor: pointer;
-  display: none;
 }
 
 /*--------------------------------------------------------------
 1.1.2 - Mobile Header
 --------------------------------------------------------------*/
 /* left and right starting point */
-#main-wrap, #colophon {
+#main-wrap,
+#colophon {
   height: 100%;
   /*left: 0;*/
   /*perspective: 1000px;*/
@@ -770,30 +743,6 @@ body, .left-btn, .right-btn, #main-wrap {
 #colophon {
   position: relative;
   z-index: 1;
-}
-
-/*--------------------------------------------------------------
-1.1.3 - Left Slide Drawer
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-1.1.3.1 - Left Button
---------------------------------------------------------------*/
-.left-btn {
-  position: absolute;
-  height: 35px;
-  width: 35px;
-  padding: 0;
-  top: 5px;
-  left: 10px;
-  cursor: pointer;
-  display: block;
-  -webkit-tap-highlight-color: transparent;
-  /* For some Androids */
-}
-.left-btn > img {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
 }
 
 /*--------------------------------------------------------------
@@ -1363,11 +1312,9 @@ Mobile Header
 #mobile-header h1 a {
   color: #000;
 }
-#mobile-header .left-btn,
 #mobile-header .right-btn {
   padding-top: 8px;
 }
-#mobile-header .left-btn:before,
 #mobile-header .right-btn:before {
   color: #333;
   font-size: 21px;
@@ -1421,17 +1368,17 @@ body.is-mobile.single #primary,
 body.is-mobile.single #secondary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
 body.is-mobile.archive #secondary,
-body.is-mobile.archive .site-content, body.is-mobile.page:not(.frontpage-page) #primary,
-body.is-mobile.page:not(.frontpage-page) #secondary,
-body.is-mobile.page:not(.frontpage-page) .site-content {
+body.is-mobile.archive .site-content, body.is-mobile.page:not(.home) #primary,
+body.is-mobile.page:not(.home) #secondary,
+body.is-mobile.page:not(.home) .site-content {
   max-width: 700px;
   margin: 0 auto;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.frontpage-page).page.page-sidebar-active #secondary {
+body.is-mobile.single.page.page-sidebar-active #secondary, body.is-mobile.archive.page.page-sidebar-active #secondary, body.is-mobile.page:not(.home).page.page-sidebar-active #secondary {
   margin-top: 20px;
   margin-top: 2rem;
 }
-body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.frontpage-page).page.page-sidebar-active #secondary .widget {
+body.is-mobile.single.page.page-sidebar-active #secondary .widget, body.is-mobile.archive.page.page-sidebar-active #secondary .widget, body.is-mobile.page:not(.home).page.page-sidebar-active #secondary .widget {
   margin-bottom: 30px;
   margin-bottom: 3rem;
 }
@@ -1473,17 +1420,17 @@ MAXIMUM width of 1024 pixels (tablets)
   body.single #secondary,
   body.single .site-content, body.archive #primary,
   body.archive #secondary,
-  body.archive .site-content, body.page:not(.frontpage-page) #primary,
-  body.page:not(.frontpage-page) #secondary,
-  body.page:not(.frontpage-page) .site-content {
+  body.archive .site-content, body.page:not(.home) #primary,
+  body.page:not(.home) #secondary,
+  body.page:not(.home) .site-content {
     max-width: 700px;
     margin: 0 auto;
   }
-  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.frontpage-page).page.page-sidebar-active #secondary {
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home).page.page-sidebar-active #secondary {
     margin-top: 20px;
     margin-top: 2rem;
   }
-  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.frontpage-page).page.page-sidebar-active #secondary .widget {
+  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home).page.page-sidebar-active #secondary .widget {
     margin-bottom: 30px;
     margin-bottom: 3rem;
   }
@@ -1556,6 +1503,7 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
   }
   body.page-template-homepage #main .section.banner.text-left .section-title-container > .section-title, body.page-template-homepage #main .section.banner.text-right .section-title-container > .section-title {
     width: 100%;
+    text-align: center;
     margin: 20px 10px;
     margin: 2rem 1rem;
   }
@@ -1627,10 +1575,6 @@ MAXIMUM width of 480 pixels (phones)
     max-height: 44px;
     max-width: 200px;
     margin: 10px auto;
-  }
-  body #mobile-header .left-btn {
-    height: 35px;
-    width: 35px;
   }
   body #mobile-header .right-btn:before {
     line-height: 35px;
