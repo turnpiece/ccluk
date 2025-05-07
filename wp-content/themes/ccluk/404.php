@@ -37,8 +37,8 @@ get_header();
 							<h2 class="title"><?php _e('Latest Articles', 'ccluk'); ?></h2>
 
 							<span class="arrows">
-								<a href="#" id="prev" class="bb-icon-chevron-left"></a>
-								<a href="#" id="next" class="bb-icon-chevron-right"></a>
+								<a href="#" id="prev" class="ccluk-icon-chevron-left"></a>
+								<a href="#" id="next" class="ccluk-icon-chevron-right"></a>
 							</span>
 						</div>
 

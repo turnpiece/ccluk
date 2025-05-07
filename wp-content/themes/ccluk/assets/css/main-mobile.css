@@ -1189,7 +1189,7 @@ div#register-page .register-section, div#register-page .security-question-sectio
     font-size: 14px;
   }
 }
-#page .boss-tooltip:after {
+#page .ccluk-tooltip:after {
   left: auto;
   right: -5px;
 }

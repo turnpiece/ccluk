@@ -269,6 +269,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 /*--------------------------------------------------------------
 1.1.4 - Header
 --------------------------------------------------------------*/
+#mobile-header,
 #mobile-right-panel {
   display: none;
 }
@@ -483,11 +484,12 @@ header-aside,
   position: relative;
   vertical-align: bottom;
   z-index: 31;
+  background-color: #22a7f0;
 }
 .header-button i {
   position: relative;
 }
-.header-button.underlined .bb-icon-code {
+.header-button.underlined .ccluk-icon-code {
   font-size: 26px;
 }
 .header-button:hover {

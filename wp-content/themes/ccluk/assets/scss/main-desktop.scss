@@ -274,6 +274,7 @@ body {
 1.1.4 - Header
 --------------------------------------------------------------*/
 
+#mobile-header,
 #mobile-right-panel {
   display: none;
 }
@@ -501,11 +502,12 @@ header-aside,
   position: relative;
   vertical-align: bottom;
   z-index: 31;
+  background-color: $blue;
   i {
     position: relative;
   }
   &.underlined {
-    .bb-icon-code {
+    .ccluk-icon-code {
       font-size: 26px;
     }
   }

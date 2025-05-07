@@ -67,7 +67,7 @@
 			<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr(sprintf(__('Permalink to %s', 'ccluk'), the_title_attribute('echo=0'))); ?>" class="read-more"><?php _e('Continue reading', 'ccluk'); ?></a>
 			<span class="sep"><?php _e('.', 'ccluk') ?></span>
 			<span><?php echo ccluk_estimated_reading_time($post_content); ?></span>
-			<a href="#" class="to-top bb-icon-arrow-top-f"></a>
+			<a href="#" class="to-top ccluk-icon-arrow-top-f"></a>
 		</footer><!-- .entry-meta -->
 
 	</div><!-- .entry-content -->

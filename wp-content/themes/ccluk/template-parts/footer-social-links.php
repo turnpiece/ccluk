@@ -19,7 +19,7 @@ if (!empty($social_links)) {
 											$href = ($key == 'email') ? 'mailto:' . sanitize_email($link) : esc_url($link);
 									?>
 					<li>
-						<a class="bb-icon-<?php echo $key; ?>" title="<?php echo $key; ?>" href="<?php echo $href; ?>" target="_blank">
+						<a class="ccluk-icon-<?php echo $key; ?>" title="<?php echo $key; ?>" href="<?php echo $href; ?>" target="_blank">
 							<span></span>
 						</a>
 					</li>
