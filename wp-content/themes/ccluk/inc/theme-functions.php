@@ -297,7 +297,7 @@ add_filter('wp_page_menu_args', 'ccluk_page_menu_args');
 /**
  * Registers all of our widget areas.
  *
- * @since CCL UK Theme 1.0.0
+ * @since CCL UK Theme 2.7.0
  */
 function ccluk_widgets_init()
 {
@@ -311,72 +311,8 @@ function ccluk_widgets_init()
 		'before_title'	 => '<h3 class="widgettitle">',
 		'after_title'	 => '</h3>'
 	));
-
-	// Area 2, located in the homepage right column.
-	register_sidebar(array(
-		'name'			 => 'Homepage',
-		'id'			 => 'home-sidebar',
-		'description'	 => 'The Homepage widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h3 class="widgettitle">',
-		'after_title'	 => '</h3>'
-	));
-
-	// Area 16, Only appears on serach results page.
-	register_sidebar(array(
-		'name'			 => 'Search Results',
-		'id'			 => 'search',
-		'description'	 => 'The search widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h4 class="widgettitle">',
-		'after_title'	 => '</h4>'
-	));
-
-	/*
-	// Area 12, located in the Footer column 1. Only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Footer #1',
-		'id'			 => 'footer-1',
-		'description'	 => 'The first footer widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h4 class="widgettitle">',
-		'after_title'	 => '</h4>'
-	));
-	// Area 13, located in the Footer column 2. Only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Footer #2',
-		'id'			 => 'footer-2',
-		'description'	 => 'The second footer widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h4 class="widgettitle">',
-		'after_title'	 => '</h4>'
-	));
-	// Area 14, located in the Footer column 3. Only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Footer #3',
-		'id'			 => 'footer-3',
-		'description'	 => 'The third footer widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h4 class="widgettitle">',
-		'after_title'	 => '</h4>'
-	));
-	// Area 15, located in the Footer column 4. Only appears if widgets are added.
-	register_sidebar(array(
-		'name'			 => 'Footer #4',
-		'id'			 => 'footer-4',
-		'description'	 => 'The fourth footer widget area. Only appears if widgets are added.',
-		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
-		'after_widget'	 => '</aside>',
-		'before_title'	 => '<h4 class="widgettitle">',
-		'after_title'	 => '</h4>'
-	));
-*/
 }
+add_action('widgets_init', 'ccluk_widgets_init');
 
 /**
  * Extends the default WordPress body classes.
