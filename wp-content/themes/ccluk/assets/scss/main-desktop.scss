@@ -47,9 +47,6 @@ html.js {
 #colophon {
   /* '.push' must be the same height as 'footer' */
   min-height: 80px;
-  &.footer-style-2 {
-    min-height: inherit;
-  }
 }
 
 #main-wrap {
@@ -76,7 +73,8 @@ body.page #comments {
 }
 
 .archive-header {
-  .page-title, .archive-title {
+  .page-title, 
+  .archive-title {
     line-height: 1;
   }
 }
@@ -86,7 +84,8 @@ body.page #comments {
   display: table;
 }
 
-.table-cell, #header-aside {
+.table-cell, 
+#header-aside {
   display: table-cell;
   vertical-align: middle;
 }
@@ -157,8 +156,8 @@ body {
 #main,
 .header-style-2 .header-wrapper, 
 .footer-inner {
-  margin: 0 auto;
-  max-width: 1170px;
+  @include centred-margin();
+  max-width: $content_w_max;
 }
 
 body.single-item.groups #main {

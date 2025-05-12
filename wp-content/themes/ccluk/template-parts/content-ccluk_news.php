@@ -102,36 +102,15 @@
 					<div class="entry-tags col">
 						<?php
 						$terms = wp_get_post_tags(get_the_ID());
-						if ($terms) {
-						?>
-							<h3><?php _e('Tagged in', 'ccluk'); ?></h3><?php
-																		foreach ($terms as $t) {
-																			echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
-																		}
-																	}
-																		?>
+						if ($terms) : ?>
+							<h3><?php _e('Tagged in', 'ccluk'); ?></h3>
+						<?php
+							foreach ($terms as $t) {
+								echo '<a href="' . get_tag_link($t->term_id) . '">' . $t->name . '<span>' . $t->count . '</span></a>';
+							}
+						endif; ?>
 					</div>
-
-					<?php if (get_post_status(get_the_ID()) == 'publish') { ?>
-						<!-- /.entry-tags -->
-						<div class="entry-share col">
-
-							<ul class="helper-links">
-
-								<?php if (function_exists('ADDTOANY_SHARE_SAVE_KIT')) { ?>
-									<li>
-										<?php ADDTOANY_SHARE_SAVE_KIT(array('use_current_page' => true)); ?>
-									</li><?php
-										}
-											?>
-							</ul>
-						</div>
-						<!-- /.entry-share -->
-					<?php } ?>
 				</div>
-
-				<?php //edit_post_link( __( 'Edit', 'ccluk' ), '<span class="edit-link">', '</span>' );    
-				?>
 
 			</footer><!-- .entry-meta -->
 		</div>

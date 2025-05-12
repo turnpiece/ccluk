@@ -11,7 +11,7 @@ body.page-template-homepage {
 		.section {
 			&.feature {
 				.section-content {
-					max-width: 1170px;
+					max-width: $content_w_max;
 
 					article {
 						.list-item {

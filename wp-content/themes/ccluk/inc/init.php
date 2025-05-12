@@ -11,25 +11,25 @@ class CCLUK_Theme
 {
 
 	/**
-	 * BuddyBoss parent/main theme path
+	 * CCL UK parent/main theme path
 	 * @var string
 	 */
 	public $tpl_dir;
 
 	/**
-	 * BuddyBoss parent theme url
+	 * CCL UK parent theme url
 	 * @var string
 	 */
 	public $tpl_url;
 
 	/**
-	 * BuddyBoss includes path
+	 * CCL UK includes path
 	 * @var string
 	 */
 	public $inc_dir;
 
 	/**
-	 * BuddyBoss includes url
+	 * CCL UK includes url
 	 * @var string
 	 */
 	public $inc_url;

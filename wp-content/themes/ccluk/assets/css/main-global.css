@@ -42,32 +42,6 @@ This is the Global stylesheet, served to all devices.
         10.2 - Comment form
 11.0 - Front page template
 12.0 - 404 template
-----------------------------------------------------------------
->>> BUDDYPRESS
-----------------------------------------------------------------
-1.0 - Pagination
-2.0 - Images
-3.0 - Activity
-4.0 - Directories - Members, Groups, Blogs, Forums
-        4.1 - Search Forms
-        4.2 - Create Group
-5.0 - Errors / Success Messages
-6.0 - Forms
-        6.1 - Post Form
-7.0 - Ajax Loading
-8.0 - Forums (Legacy), Tables and Topics
-9.0 - BuddyPress Components
-9.1 - Recent activity
-9.2 - Headers
-9.3 - Item Lists
-9.4 - Object Items
-9.5 - Profile
-    9.5.1 - Private Messaging Threads
-    9.5.2 - Extended Profiles
-12.0 - Registration
-13.0 - IE 10
-14.0 - Legacy BuddyPress (below BuddyPress 1.7)
-15.0 - Custom media queries
 
 ----------------------------------------------------------------
 >>> PLUGINS
@@ -78,8 +52,6 @@ This is the Global stylesheet, served to all devices.
 8.0 - SI CAPTCHA Anti-Spam
 9.0 - Invite Anyone
 12.0 - Social Articles
-16.0 - BuddyBoss Media
-17.0 - BuddyBoss Global Search
 20.0 - Inline Comments
 */
 /*----------------------------------------------------------------
@@ -272,7 +244,8 @@ input[type=reset], input[type=submit] {
 /**
  * Re-set default cursor for disabled elements.
  */
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 
@@ -432,14 +405,6 @@ img {
   opacity: 0;
 }
 
-.fancybox-wrap img {
-  opacity: 1;
-}
-
-#main-wrap .sap-editor-area-wrapper img {
-  opacity: 1;
-}
-
 /*--------------------------------------------------------------
 # Typography
 --------------------------------------------------------------*/
@@ -452,9 +417,7 @@ html,
 .site-header #wp-admin-bar-shortcode-secondary .alert,
 .entry-meta .comments-link a,
 .entry-meta,
-.generic-button,
-.footer-style-2 .footer-inner-top,
-.footer-style-2 .footer-widget a {
+.generic-button {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -479,8 +442,7 @@ h1 {
   text-align: center;
 }
 
-h2,
-.sap-editor-area-wrapper .sap-editable-title {
+h2 {
   font-family: Ubuntu, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
@@ -1131,13 +1093,6 @@ img.wp-smiley, .rsswidget img {
   flex: 0 0 100%;
 }
 
-.sap-pagination {
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 1 100%;
-  -ms-flex: 1 1 100%;
-  flex: 1 1 100%;
-}
-
 .pagination span, .pagination a {
   background-color: #22a7f0;
   color: #fff;
@@ -1569,33 +1524,6 @@ img.avatar {
   text-align: right;
 }
 
-/* Twitter Widget */
-.widget_twitter li {
-  list-style-type: none;
-}
-.widget_twitter .timesince {
-  display: block;
-  text-align: right;
-}
-
-/* BuddyBoss Profile Login Widget */
-.widget-area .widget #sidebarme {
-  overflow: hidden;
-}
-.widget-area .widget #sidebarme img.avatar {
-  float: left;
-}
-.widget-area .widget #sidebarme ul.sidebarme-quicklinks {
-  margin: 3px 0 0 64px;
-  word-wrap: break-word;
-}
-.widget-area .widget #sidebarme ul.sidebarme-quicklinks li.sidebarme-username {
-  font-weight: 600;
-}
-.widget-area .widget #sidebarme ul.sidebarme-quicklinks li.sidebarme-profile {
-  text-transform: capitalize;
-}
-
 /* Avatar Widgets */
 .widget .avatar-block {
   margin: -2px;
@@ -1775,44 +1703,6 @@ div.footer-inner ul.social-icons li span:before {
   font-size: 14px;
 }
 
-.footer-style-2 .footer-widget {
-  max-width: 320px;
-}
-.footer-style-2 .footer-inner.widget-area {
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-}
-.footer-style-2 .footer-inner-top {
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-  font-weight: 400;
-}
-.footer-style-2 .footer-widget a {
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
-  font-weight: 400;
-}
-.footer-style-2 .footer-widget .widget h4.widgettitle {
-  margin-bottom: 21px;
-  font-size: 17px;
-}
-.footer-style-2 .footer-widget a:hover {
-  text-decoration: underline;
-}
-.footer-style-2 .widget #footer-icons {
-  float: none;
-}
-.footer-style-2 .widget #footer-icons .social-icons {
-  margin: 20px -5px;
-  text-align: left;
-}
-.footer-style-2 .social-icons > li {
-  display: inline-block;
-  padding: 0 10px;
-}
-
 .widget.ccluk_social_links li {
   display: block;
   text-align: left;
@@ -1849,12 +1739,6 @@ div.footer-inner ul.social-icons li span:before {
   width: 100%;
 }
 
-.widget.widget_newsletterwidget form p, .widget.widget_newsletterwidget form div {
-  display: table-cell;
-  vertical-align: middle;
-  width: 100%;
-}
-
 .widget_mc4wp_form_widget .table,
 .widget.widget_newsletterwidget form {
   margin-top: 18px;
@@ -1866,44 +1750,40 @@ div.footer-inner ul.social-icons li span:before {
   border: 3px solid rgba(0, 0, 0, 0.11);
 }
 
+.widget.widget_newsletterwidget form p, .widget.widget_newsletterwidget form div {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
 .widget.widget_newsletterwidget form p input[type=email], .widget.widget_newsletterwidget form div input[type=email] {
+  padding: 12px 20px;
   width: 100%;
   background-color: #fff;
   border: 3px solid rgba(0, 0, 0, 0.11);
 }
-
-.widget_mc4wp_form_widget form p input[type=email] {
-  padding: 14px 20px;
-}
-
-.widget.widget_newsletterwidget form p input[type=email], .widget.widget_newsletterwidget form div input[type=email] {
-  padding: 12px 20px;
-}
-
 .widget.widget_newsletterwidget form p input[type=submit], .widget.widget_newsletterwidget form div input[type=submit] {
   height: 44px;
-}
-.widget.widget_newsletterwidget form p:last-child, .widget.widget_newsletterwidget form div:last-child {
-  vertical-align: bottom;
 }
 .widget.widget_newsletterwidget form p input[type=submit]:hover, .widget.widget_newsletterwidget form div input[type=submit]:hover {
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
 }
+.widget.widget_newsletterwidget form p:last-child, .widget.widget_newsletterwidget form div:last-child {
+  vertical-align: bottom;
+  width: 46px;
+  position: relative;
+  left: -1px;
+}
 
+.widget_mc4wp_form_widget form p input[type=email] {
+  padding: 14px 20px;
+}
 .widget_mc4wp_form_widget form p:last-child {
   width: 46px;
   position: relative;
   left: -1px;
 }
-
-.widget.widget_newsletterwidget form p:last-child, .widget.widget_newsletterwidget form div:last-child {
-  width: 46px;
-  position: relative;
-  left: -1px;
-}
-
 .widget_mc4wp_form_widget form .mc4wp-alert p:last-child {
   width: 100%;
   margin-top: 7px;
@@ -2101,7 +1981,8 @@ article.sticky .featured-post {
   font-size: 18px;
 }
 
-.entry-content blockquote p:last-child, .comment-content blockquote p:last-child {
+.entry-content blockquote p:last-child,
+.comment-content blockquote p:last-child {
   margin-bottom: 0;
 }
 
@@ -2116,7 +1997,8 @@ img.aligncenter {
   margin-bottom: 12px;
 }
 
-.page #comments .inner, .page .page-right-sidebar .site-content article.page {
+.page #comments .inner,
+.page .page-right-sidebar .site-content article.page {
   padding-right: 30px;
 }
 
@@ -2219,7 +2101,9 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .article-outher {
   position: relative;
-  margin-bottom: 30px;
+  max-width: 600px;
+  margin: 10px auto;
+  margin: 1rem auto;
 }
 
 .archive-header, .page-header {
@@ -2377,9 +2261,10 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
   color: inherit;
 }
 
-/* Standard blog */
-.blog .site-content {
-  max-width: 780px;
+/* Standard blog and archive pages */
+.blog .site-content,
+.archive.post-type-archive .site-content {
+  max-width: 1170px;
 }
 
 .archive .site-content a.to-top,
@@ -2402,15 +2287,6 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 
 .archive-header + article.type-post {
   padding-top: 40px;
-}
-
-.bookmarked-post {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-  padding: 70px 0;
-  position: relative;
-}
-.bookmarked-post:last-child {
-  border-bottom: 0;
 }
 
 /*--------------------------------------------------------------
@@ -2596,31 +2472,6 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
   width: 100%;
 }
 
-.helper-links {
-  margin: 0 0 10px;
-}
-.helper-links li {
-  display: inline-block;
-  margin-right: 15px;
-  text-align: center;
-  vertical-align: top;
-}
-
-.fa.bb-helper-icon.fa-bookmark.fa-spinner.fa-spin {
-  font-size: 18px;
-}
-
-.bookmark-it.bookmark-it .bb-helper-icon,
-.bookmark-link-container.bookmark-link-container {
-  margin-right: 0;
-}
-
-.helper-links span {
-  color: #9b9b9b;
-  display: block;
-  font-size: 12px;
-}
-
 /*--------------------------------------------------------------
 8.0 - Post formats
 --------------------------------------------------------------*/
@@ -2796,18 +2647,6 @@ body article.error404 .entry-header {
 .search_results {
   max-width: 600px;
   margin: 0 auto;
-}
-
-.entry-content .results-group-title {
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-  font-size: 35px;
-  margin-bottom: 70px;
-  padding: 0 0 20px;
-}
-
-.ac-reply-cancel {
-  color: inherit;
-  margin-left: 15px;
 }
 
 .search-content-wrap .pagination-below {
@@ -3006,41 +2845,6 @@ img {
   text-align: center;
 }
 
-#avatar-to-crop img,
-#avatar-crop-pane img {
-  opacity: 1;
-}
-
-.loading-msg .bb_global_search_spinner {
-  margin: 0 10px 0 0 !important;
-  display: inline-block !important;
-  position: relative !important;
-  top: 5px !important;
-}
-
-.sap-container {
-  position: relative;
-  /*font-family: 'Lato', sans-serif;*/
-}
-
-.sap-container-wrapper .sap-story-publish {
-  background: #fff;
-  border-top: 3px solid;
-  box-sizing: border-box;
-  float: none;
-  font-size: 14px;
-  padding: 12px 0 0;
-}
-.sap-container-wrapper .sap-story-publish:hover {
-  background: #fff;
-  box-shadow: none;
-}
-
-@media screen and (min-width: 1140px) {
-  .wrapper .medium-editor-insert-plugin .medium-insert-buttons {
-    margin-left: -50px;
-  }
-}
 .dashicons,
 .dashicons-before:before {
   font-family: dashicons;

@@ -1,5 +1,5 @@
 /**
- * Main BuddyBoss Class
+ * Main Javascript Class
  *
  * Opens and closes search form etc.
  *
@@ -33,7 +33,7 @@
   /** --------------------------------------------------------------- */
 
   /**
-   * BuddyPress Responsive Help
+   * Responsive Help
    */
   Responsive.domReady = function () {
     var $window = $(window);

@@ -104,7 +104,8 @@ body {
 }
 
 .site-content {
-  nav.nav-single, #comments {
+  nav.nav-single, 
+  #comments {
     clear: left;
     overflow: hidden;
     background-color: $white;
@@ -155,7 +156,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 input {
-  &[type="text"], &[type="email"], &[type="password"], &[type="email"], &[type="number"] {
+  &[type="text"], 
+  &[type="email"], 
+  &[type="password"], 
+  &[type="email"], 
+  &[type="number"] {
     background-color: $white;
   }
 }
@@ -169,7 +174,8 @@ textarea {
 --------------------------------------------------------------*/
 
 header#masthead {
-  #header-aside, #logo-area {
+  #header-aside, 
+  #logo-area {
     display: none;
   }
 }
@@ -290,73 +296,6 @@ body.archive #content article.type-post {
 }
 
 /*--------------------------------------------------------------
-1.1.5 - Dropdowns
---------------------------------------------------------------*/
-
-body .buddyboss-select {
-  float: none;
-}
-
-.buddyboss-select-inner {
-  display: block;
-  width: 100%;
-  clear: both;
-  padding: 0;
-  margin: 0;
-  font-size: 13px;
-  position: relative;
-  margin: 0 10px 10px 0;
-  background-color: $white;
-  float: left;
-  border: 3px solid $light;
-  &:after {
-    font-family: "onesocial" !important;
-    font-style: normal !important;
-    font-weight: normal !important;
-    font-variant: normal !important;
-    text-transform: none !important;
-    display: block;
-    line-height: 1;
-    content: "P";
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-    color: $blue;
-    position: absolute;
-    right: 12px;
-    top: 12px;
-  }
-  select {
-    cursor: pointer;
-    height: 37px;
-    width: 100%;
-    opacity: 0;
-    border: none;
-    /* overrides browser default */
-    margin: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 5;
-  }
-}
-
-.buddyboss-select-inner span {
-  float: left;
-  font-weight: 600;
-  height: 37px;
-  line-height: 37px;
-  padding: 0 30px 0 15px;
-  padding-right: 30px;
-  text-transform: none;
-}
-
-.datebox .buddyboss-select {
-  &:first-child, &:nth-child(2) {
-    margin-right: 0;
-  }
-}
-
-/*--------------------------------------------------------------
 1.1.6 - Widgets
 --------------------------------------------------------------*/
 
@@ -381,7 +320,7 @@ body .buddyboss-select {
       font-size: 20px;
     }
     p, li, .textwidget {
-      font-size: 14px;
+      font-size: $font-size-sm;
     }
     input {
       &[type="text"],
@@ -415,7 +354,7 @@ body .buddyboss-select {
 
 div {
   &.footer-inner-bottom {
-    font-size: 14px;
+    font-size: $font-size-sm;
     div.footer-inner {
       padding: 0 20px;
       -webkit-box-orient: vertical;
@@ -439,17 +378,6 @@ div {
         margin: 0 3px;
       }
     }
-  }
-}
-
-/*----------------------------------------------------------------
-1.1.8 - Home Template
-----------------------------------------------------------------*/
-
-.article-outher {
-  margin-bottom: 20px;
-  .entry-summary p {
-    margin-bottom: 14px;
   }
 }
 
@@ -1270,52 +1198,7 @@ body.register .page-full-width {
 }
 
 .datebox {
-@include display-flex();
-  .buddyboss-select {
-    &:nth-child(2), &:nth-child(3) {
-      padding-top: 25px;
-    }
-  }
-}
-
-body.register .page-full-width .entry-title {
-  font-size: 34px;
-  margin-bottom: 20px;
-}
-
-div#register-page {
-  .register-section, .security-question-section {
-    border: 0;
-    box-shadow: none;
-    padding: 0;
-  }
-}
-
-#page .boss-editor-area-container .sap-editor-area-wrapper .medium-insert-active, 
-.page-template-sap-post-create-template .sap-editor-area-wrapper .medium-insert-active {
-  padding-left: 40px;
-}
-
-.boss-editor-area-container .medium-insert-buttons {
-  left: 0 !important;
-  margin-top: -5px;
-}
-
-.page-template-sap-post-create-template .boss-create-post-container {
-  max-width: 100%;
-  padding: 30px 20px;
-}
-
-.sap-editor-area-wrapper .sap-editable-title.sap-editable-title {
-  font-size: 26px;
-}
-
-@media screen and (max-width: 400px) {
-  .sap-publish-popup.sap-publish-popup .button {
-    padding: 8px 10px;
-    margin-right: 2px;
-    font-size: 14px;
-  }
+  @include display-flex();
 }
 
 #page .ccluk-tooltip:after {

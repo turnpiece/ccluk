@@ -346,7 +346,12 @@ a:hover {
 }
 
 .archive.post-type-archive .site-content {
+  max-width: 1170px;
+}
+.archive.post-type-archive .site-content .article-outher {
   max-width: 600px;
+  margin: 10px auto;
+  margin: 1rem auto;
 }
 
 .archive #content > .archive-header h1,
@@ -726,6 +731,7 @@ body.page-template-homepage #main .section .section-content .list-item .action .
 body.page-template-homepage #main .section .section-title {
   text-align: center;
   margin: 0 auto;
+  max-width: 1170px;
 }
 body.page-template-homepage #main .section .section-title h4 {
   color: #54ae68;
@@ -1185,10 +1191,6 @@ a.button {
 }
 
 .dir-header span {
-  color: #54ae68;
-}
-
-#posts-carousel footer a, #posts-carousel h3 a:hover {
   color: #54ae68;
 }
 

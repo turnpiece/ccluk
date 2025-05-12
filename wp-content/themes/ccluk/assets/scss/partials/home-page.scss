@@ -18,7 +18,7 @@ body.page-template-homepage {
 			}
 
 			.section-content {
-				max-width: 1170px;
+				max-width: $content_w_max;
 				margin: 0 auto;
 				@include display-flex-box( flex-start );
 
@@ -78,6 +78,7 @@ body.page-template-homepage {
 			.section-title {
 				text-align: center;
 				margin: 0 auto;
+				max-width: $content_w_max;
 
 				h4 {
 					color: $green;

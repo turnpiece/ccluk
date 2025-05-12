@@ -94,7 +94,8 @@ body #content article {
   border-bottom: 3px solid #aaa;
 }
 
-.site-content nav.nav-single, .site-content #comments {
+.site-content nav.nav-single,
+.site-content #comments {
   clear: left;
   overflow: hidden;
   background-color: #fff;
@@ -151,7 +152,8 @@ textarea {
 /*--------------------------------------------------------------
 1.1.2 - Desktop Header
 --------------------------------------------------------------*/
-header#masthead #header-aside, header#masthead #logo-area {
+header#masthead #header-aside,
+header#masthead #logo-area {
   display: none;
 }
 
@@ -266,70 +268,6 @@ body.archive #content article.type-post {
   }
 }
 /*--------------------------------------------------------------
-1.1.5 - Dropdowns
---------------------------------------------------------------*/
-body .buddyboss-select {
-  float: none;
-}
-
-.buddyboss-select-inner {
-  display: block;
-  width: 100%;
-  clear: both;
-  padding: 0;
-  margin: 0;
-  font-size: 13px;
-  position: relative;
-  margin: 0 10px 10px 0;
-  background-color: #fff;
-  float: left;
-  border: 3px solid #aaa;
-}
-.buddyboss-select-inner:after {
-  font-family: "onesocial" !important;
-  font-style: normal !important;
-  font-weight: normal !important;
-  font-variant: normal !important;
-  text-transform: none !important;
-  display: block;
-  line-height: 1;
-  content: "P";
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
-  color: #22a7f0;
-  position: absolute;
-  right: 12px;
-  top: 12px;
-}
-.buddyboss-select-inner select {
-  cursor: pointer;
-  height: 37px;
-  width: 100%;
-  opacity: 0;
-  border: none;
-  /* overrides browser default */
-  margin: 0;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 5;
-}
-
-.buddyboss-select-inner span {
-  float: left;
-  font-weight: 600;
-  height: 37px;
-  line-height: 37px;
-  padding: 0 30px 0 15px;
-  padding-right: 30px;
-  text-transform: none;
-}
-
-.datebox .buddyboss-select:first-child, .datebox .buddyboss-select:nth-child(2) {
-  margin-right: 0;
-}
-
-/*--------------------------------------------------------------
 1.1.6 - Widgets
 --------------------------------------------------------------*/
 #secondary {
@@ -355,7 +293,7 @@ body .buddyboss-select {
   font-size: 20px;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
-  font-size: 14px;
+  font-size: 15px;
 }
 .widget-area .widget input[type=text], .widget-area .widget input[type=password], .widget-area .widget input[type=number] {
   background-color: #fff;
@@ -379,7 +317,7 @@ body .buddyboss-select {
 1.1.7 - Mobile Footer
 --------------------------------------------------------------*/
 div.footer-inner-bottom {
-  font-size: 14px;
+  font-size: 15px;
 }
 div.footer-inner-bottom div.footer-inner {
   padding: 0 20px;
@@ -401,16 +339,6 @@ div.footer-inner ul.footer-menu {
 }
 div.footer-inner ul.footer-menu li {
   margin: 0 3px;
-}
-
-/*----------------------------------------------------------------
-1.1.8 - Home Template
-----------------------------------------------------------------*/
-.article-outher {
-  margin-bottom: 20px;
-}
-.article-outher .entry-summary p {
-  margin-bottom: 14px;
 }
 
 .post-author {
@@ -1141,47 +1069,7 @@ body.register .page-full-width {
   display: -ms-flexbox;
   display: flex;
 }
-.datebox .buddyboss-select:nth-child(2), .datebox .buddyboss-select:nth-child(3) {
-  padding-top: 25px;
-}
 
-body.register .page-full-width .entry-title {
-  font-size: 34px;
-  margin-bottom: 20px;
-}
-
-div#register-page .register-section, div#register-page .security-question-section {
-  border: 0;
-  box-shadow: none;
-  padding: 0;
-}
-
-#page .boss-editor-area-container .sap-editor-area-wrapper .medium-insert-active,
-.page-template-sap-post-create-template .sap-editor-area-wrapper .medium-insert-active {
-  padding-left: 40px;
-}
-
-.boss-editor-area-container .medium-insert-buttons {
-  left: 0 !important;
-  margin-top: -5px;
-}
-
-.page-template-sap-post-create-template .boss-create-post-container {
-  max-width: 100%;
-  padding: 30px 20px;
-}
-
-.sap-editor-area-wrapper .sap-editable-title.sap-editable-title {
-  font-size: 26px;
-}
-
-@media screen and (max-width: 400px) {
-  .sap-publish-popup.sap-publish-popup .button {
-    padding: 8px 10px;
-    margin-right: 2px;
-    font-size: 14px;
-  }
-}
 #page .ccluk-tooltip:after {
   left: auto;
   right: -5px;
