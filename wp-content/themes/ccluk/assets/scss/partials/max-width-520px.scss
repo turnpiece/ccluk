@@ -17,29 +17,6 @@
     font-size: $font-size-lg;
 }
 
-body.page-template-homepage {
-    #main {
-        .section.banner {
-            .section-title-container {
-                padding: 20px;
-                > .section-title {
-                    h2 {
-                        font-size: $font-size-mid;
-                    }
-                    p, 
-                    a.button {
-                        font-size: $font-size-sm;
-                    }
-                }
-            }
-        }
-    }
-}
-
-.site .buddyboss-media-photos-wrap-container {
-    max-width: 400px;
-}
-
 .wp-block-media-text.is-stacked-on-mobile {
     max-width: 300px;
     margin-left: auto;
