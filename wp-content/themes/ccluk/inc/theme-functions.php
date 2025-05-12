@@ -241,7 +241,7 @@ function ccluk_remove_nojs_body_class()
 		(function(){var c=document.body.className;c=c.replace(/no-js/,'js');document.body.className=c;})();
 		$=jQuery.noConflict();
 		//]]></script>
-<?php
+	<?php
 }
 
 add_action('ccluk_before_header', 'ccluk_remove_nojs_body_class');
@@ -411,29 +411,6 @@ function ccluk_body_class($classes)
 
 add_filter('body_class', 'ccluk_body_class');
 
-
-/* * **************************** AVATAR FUNCTIONS ***************************** */
-
-/**
- * Replace default member avatar
- *
- * @since CCLUK 1.0.0
- */
-if (!function_exists('ccluk_add_gravatar')) {
-
-	function ccluk_add_gravatar($avatar_defaults)
-	{
-		$myavatar = get_stylesheet_directory_uri() . '/images/avatar-member.png';
-		//$myavatar = '//upload.wikimedia.org/wikipedia/en/b/b0/Avatar-Teaser-Poster.jpg';
-
-		$avatar_defaults[$myavatar] = 'BuddyBoss Man';
-
-		return $avatar_defaults;
-	}
-
-	add_filter('avatar_defaults', 'ccluk_add_gravatar');
-}
-
 /* * **************************** WORDPRESS FUNCTIONS ***************************** */
 
 /**
@@ -444,81 +421,6 @@ if (!function_exists('ccluk_add_gravatar')) {
 add_image_size('post-thumb', 845, 312, true);
 add_image_size('medium-thumb', 360, 216, true);
 add_image_size('large-thumb', 9999, 800, true);
-
-/**
- * Show more posts on profile
- *
- * @since CCL UK Theme 1.0.0
- */
-function ccluk_more_posts_profile($posts, $sort, $count, $data_target)
-{
-?>
-	<div class="wrap">
-		<h3 class="title black"><?php _e('Articles', 'ccluk'); ?><span><?php echo $count; ?></span></h3>
-		<div class="inner">
-			<?php
-			while ($posts->have_posts()) {
-				$posts->the_post();
-				get_template_part('template-parts/content', get_post_format());
-			}
-			?>
-		</div>
-	</div>
-	<?php
-}
-
-/**
- * Add avatar to comment form
- *
- * @since Education 1.0.0
- *
- */
-add_action('comment_form_logged_in_after', 'post_comment_form_avatar');
-
-function post_comment_form_avatar()
-{
-
-	$user_link = ccluk_get_user_link(get_current_user_id());
-
-	printf('<span class="comment-avatar authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())), get_avatar(get_current_user_id(), 85, '', get_the_author()));
-}
-
-/**
- * Messages date function
- *
- * @since Education 1.0.0
- *
- */
-function ccluk_format_time($time, $just_date = true, $localize_time = true)
-{
-
-	if (!isset($time) || !is_numeric($time)) {
-		return false;
-	}
-
-	// Get GMT offset from root blog
-	$root_blog_offset = false;
-	if (!empty($localize_time)) {
-		$root_blog_offset = get_option('gmt_offset');
-	}
-
-	// Calculate offset time
-	$time_offset = $time + ($root_blog_offset * 3600);
-
-	// Current date (January 1, 2010)
-	$date = date_i18n('M j', $time_offset);
-
-	// Should we show the time also?
-	if (empty($just_date)) {
-		// Current time (9:50pm)
-		$time = date_i18n(get_option('time_format'), $time_offset);
-
-		// Return string formatted with date and time
-		$date = sprintf(__('%1$s at %2$s', 'buddypress'), $date, $time);
-	}
-
-	return $date;
-}
 
 /**
  * Estimate time required to read the article
@@ -620,69 +522,4 @@ if (!function_exists('ccluk_comment')) {
 				break;
 		} // end comment_type check
 	}
-}
-
-/**
- * Return the tags ccluk_trim_excerpt allow
- * @return string
- */
-function ccluk_excerpt_allowedtags()
-{
-	// Add custom tags to this string
-	return '<em>,<i>,<br>,<p>,<a>';
-}
-
-/**
- * Return CCLUK custom excerpt that will allow few tags
- * @param $wpse_excerpt
- * @return mixed|string|void
- */
-function ccluk_trim_excerpt($wpse_excerpt)
-{
-	$raw_excerpt = $wpse_excerpt;
-
-	if ('' == $wpse_excerpt) {
-
-		$wpse_excerpt = get_the_content('');
-		$wpse_excerpt = strip_shortcodes($wpse_excerpt);
-		$wpse_excerpt = apply_filters('the_content', $wpse_excerpt);
-		$wpse_excerpt = str_replace(']]>', ']]>', $wpse_excerpt);
-		$wpse_excerpt = strip_tags($wpse_excerpt, ccluk_excerpt_allowedtags()); /*IF you need to allow just certain tags. Delete if all tags are allowed */
-
-		//Set the excerpt word count and only break after sentence is complete.
-		$excerpt_length 	= apply_filters('excerpt_length', 55);
-		$tokens 			= array();
-		$excerpt_output 	= '';
-		$count 				= 0;
-
-		// Divide the string into tokens; HTML tags, or words, followed by any whitespace
-		preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
-
-		foreach ($tokens[0] as $token) {
-
-			if ($count >= $excerpt_length) {
-				// Limit reached, continue until , ; ? . or ! occur at the end
-				$excerpt_output .= trim($token);
-				break;
-			}
-
-			// Add words to complete sentence
-			$count++;
-
-			// Append what's left of the token
-			$excerpt_output .= $token;
-		}
-
-		$wpse_excerpt = trim(force_balance_tags($excerpt_output));
-
-		if ($count >= $excerpt_length) {
-			$excerpt_end 	= '...';
-			$excerpt_more 	= apply_filters('excerpt_more', ' ' . $excerpt_end);
-			$wpse_excerpt 	.= $excerpt_more; /*Add read more in new paragraph */
-		}
-
-		return $wpse_excerpt;
-	}
-
-	return apply_filters('ccluk_trim_excerpt', $wpse_excerpt, $raw_excerpt);
 }

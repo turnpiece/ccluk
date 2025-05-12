@@ -2,7 +2,7 @@
 Contributors: Paul Jenkins
 Requires at least: 3.8
 Tested up to: 6.8
-Version: 2.7.1
+Version: 2.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
