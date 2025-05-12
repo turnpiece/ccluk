@@ -1746,7 +1746,7 @@ div {
       height: 36px;
       width: 36px;
       margin: 4px;
-      padding: 0px;
+      padding: 6px;
       @include border-radius(18px);
       &:hover {
         background-color: white;
@@ -1755,17 +1755,6 @@ div {
         /* darken */
       }
     }
-  }
-  &.footer-inner ul.social-icons li span:before {
-    font-family: 'onesocial';
-    font-weight: normal;
-    font-style: normal;
-    text-rendering: auto;
-    text-decoration: inherit;
-    display: inline-block;
-    -webkit-font-smoothing: antialiased;
-    font-size: 14px;
-    vertical-align: middle;
   }
 }
 

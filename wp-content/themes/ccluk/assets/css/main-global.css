@@ -1651,7 +1651,7 @@ div.footer-inner-bottom ul.social-icons li a {
   height: 36px;
   width: 36px;
   margin: 4px;
-  padding: 0px;
+  padding: 6px;
   -webkit-border-radius: 18px;
   -moz-border-radius: 18px;
   border-radius: 18px;
@@ -1661,17 +1661,6 @@ div.footer-inner-bottom ul.social-icons li a:hover {
   /* lighten more */
   color: rgba(0, 0, 0, 0.5);
   /* darken */
-}
-div.footer-inner ul.social-icons li span:before {
-  font-family: "onesocial";
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  text-decoration: inherit;
-  display: inline-block;
-  -webkit-font-smoothing: antialiased;
-  font-size: 14px;
-  vertical-align: middle;
 }
 
 /*--------------------------------------------------------------

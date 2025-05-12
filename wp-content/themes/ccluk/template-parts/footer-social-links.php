@@ -20,7 +20,7 @@ if (!empty($social_links)) {
 									?>
 					<li>
 						<a class="ccluk-icon-<?php echo $key; ?>" title="<?php echo $key; ?>" href="<?php echo $href; ?>" target="_blank">
-							<span></span>
+							<i data-lucide="<?php echo $key; ?>"></i>
 						</a>
 					</li>
 			<?php

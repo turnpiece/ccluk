@@ -150,8 +150,28 @@ function ccluk_scripts_styles()
 	wp_register_script('ccluk-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
 	wp_enqueue_script('ccluk-custom');
 }
-
 add_action('wp_enqueue_scripts', 'ccluk_scripts_styles');
+
+function ccluk_enqueue_lucide_icons()
+{
+?>
+	<script>
+		// Dynamically load the script and initialize when ready
+		(function() {
+			var script = document.createElement('script');
+			script.src = 'https://unpkg.com/lucide@latest';
+			script.onload = function() {
+				if (window.lucide) {
+					lucide.createIcons();
+				}
+			};
+			document.body.appendChild(script);
+		})();
+	</script>
+<?php
+}
+add_action('wp_footer', 'ccluk_enqueue_lucide_icons', 100);
+
 
 // remove block editor scripts and styles
 function ccluk_remove_block_editor_assets()

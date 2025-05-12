@@ -408,18 +408,20 @@ header-aside,
   }
   #searchsubmit {
     position: absolute;
-    right: 0px;
-    top: -1px;
+    right: 0;
+    top: 0;
     height: 100%;
     width: 64px;
-    border-radius: 0;
     background-color: $green;
     color: $white;
     z-index: 1;
     line-height: 70px;
     padding: 0;
-    vertical-align: baseline;
-    font-size: 18px;
+    border: 0;
+    font-size: 35px;
+    &:hover {
+      @include darken();
+    }
   }
 }
 
@@ -429,39 +431,6 @@ header-aside,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
     color: rgba(0, 0, 0, 0.3);
-  }
-}
-
-/* firefox 19+ */
-/* ie */
-
-#header-search {
-  form #searchsubmit {
-    i {
-      position: relative;
-      top: 3px;
-    }
-    &:hover {
-      @include box-shadow(none);
-    }
-  }
-  #search-close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 18px;
-    width: 18px;
-    background-color: $dark_red;
-    padding: 0;
-    line-height: 13px;
-    color: $white;
-    font-size: 13px;
-    z-index: 2;
-    border-radius: 50%;
-    font-family: inherit;
-    margin: 4px;
-    outline: none;
-    text-align: center;
   }
 }
 
@@ -483,7 +452,7 @@ header-aside,
   text-align: center;
   color: $dark;
   display: inline-block;
-  font-size: 15px;
+  font-size: 35px;
   text-transform: uppercase;
   font-weight: 600;
   position: relative;
@@ -493,17 +462,12 @@ header-aside,
   i {
     position: relative;
   }
-  &.underlined {
-    .ccluk-icon-code {
-      font-size: 26px;
-    }
-  }
   &:hover {
     color: $white;
     background-color: $green;
   }
   #search-open {
-    font-size: 18px;
+    font-size: $font-size-mid;
   }
 }
 

@@ -147,11 +147,6 @@
       }, 301);
     });
 
-    $("#search-close").on("click", function (e) {
-      e.preventDefault();
-      $search_form.fadeOut();
-    });
-
     $document.on("click", function (e) {
       var container = $("#header-search");
 
