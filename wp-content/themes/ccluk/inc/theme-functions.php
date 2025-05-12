@@ -79,9 +79,6 @@ function is_phone()
  */
 function ccluk_scripts_styles()
 {
-
-	$ext = 'css';
-
 	/**
 	 * Assign the CCLUK version to a var
 	 */
@@ -89,7 +86,7 @@ function ccluk_scripts_styles()
 	$version	= $theme['Version'];
 
 
-	/*	 * **************************** STYLES ***************************** */
+	/****************************** STYLES ******************************/
 
 	$css_dest = '/css';
 	$css_compressed_dest = '/css-compressed';
@@ -99,7 +96,7 @@ function ccluk_scripts_styles()
 	$JS_URL = $assets_dir . '/js';
 
 	// Activate our main stylesheets.
-	wp_enqueue_style('onesocial-main-global', $CSS_URL . '/main-global.css', array('icons'), $version, 'all');
+	wp_enqueue_style('ccluk-main-global', $CSS_URL . '/main-global.css', '', $version, 'all');
 
 	/*
 	 * Custom styles
@@ -107,7 +104,7 @@ function ccluk_scripts_styles()
 	 * need to ensure this stylesheet loads after the parent stylesheets
 	 *
 	 */
-	wp_enqueue_style('ccluk-custom', $CSS_URL . '/custom.css', array('onesocial-main-global'), $version);
+	wp_enqueue_style('ccluk-custom', $CSS_URL . '/custom.css', array('ccluk-main-global'), $version);
 
 	// load fonts
 	wp_enqueue_style('ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap');
@@ -124,14 +121,14 @@ function ccluk_scripts_styles()
 	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
 	if (is_phone() || wp_is_mobile()) {
-		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'all');
+		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'all');
 	} else {
-		wp_enqueue_style('onesocial-main-desktop', $CSS_URL . '/main-desktop.css', array('icons'), $version, 'screen and (min-width: 1025px)');
+		wp_enqueue_style('ccluk-main-desktop', $CSS_URL . '/main-desktop.css', array('ccluk-main-global'), $version, 'screen and (min-width: 1025px)');
 	}
 
 	// Media query fallback
-	if (!wp_script_is('onesocial-main-mobile', 'enqueued')) {
-		wp_enqueue_style('onesocial-main-mobile', $CSS_URL . '/main-mobile.' . $ext, array('icons'), $version, 'screen and (max-width: 1024px)');
+	if (!wp_script_is('ccluk-main-mobile', 'enqueued')) {
+		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'screen and (max-width: 1024px)');
 	}
 
 	/*	 * **************************** SCRIPTS ***************************** */
@@ -147,12 +144,11 @@ function ccluk_scripts_styles()
 	$js = (defined('CCLUK_DEBUGGING') && CCLUK_DEBUGGING) ? '.js' : '.min.js';
 
 	wp_register_script('ccluk-main', get_stylesheet_directory_uri() . '/assets/js/ccluk' . $js, array('jquery', 'jquery-form'), $version, true);
-
 	wp_enqueue_script('ccluk-main');
 
 	/* Custom CCL javascript */
-	wp_register_script('onesocial-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
-	wp_enqueue_script('onesocial-custom');
+	wp_register_script('ccluk-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
+	wp_enqueue_script('ccluk-custom');
 }
 
 add_action('wp_enqueue_scripts', 'ccluk_scripts_styles');

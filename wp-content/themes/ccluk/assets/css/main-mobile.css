@@ -568,13 +568,6 @@ body.error404 footer.entry-meta {
   body article.error404 .entry-header {
     margin-bottom: 62px;
   }
-  #posts-carousel {
-    padding-top: 35px;
-    margin-bottom: 40px;
-  }
-  #posts-carousel .entry-post-thumbnail {
-    height: 140px;
-  }
   .single-post .entry-post-thumbnail {
     height: auto;
     margin-bottom: 0;
