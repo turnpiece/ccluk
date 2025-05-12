@@ -98,10 +98,6 @@ function ccluk_scripts_styles()
 	$CSS_URL = $assets_dir . (!CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest);
 	$JS_URL = $assets_dir . '/js';
 
-	// CCLUK icon fonts.
-	wp_register_style('icons', $CSS_URL . '/onesocial-icons.css', array(), $version, 'all');
-	wp_enqueue_style('icons');
-
 	// Activate our main stylesheets.
 	wp_enqueue_style('onesocial-main-global', $CSS_URL . '/main-global.css', array('icons'), $version, 'all');
 
