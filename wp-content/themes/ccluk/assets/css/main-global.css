@@ -2765,6 +2765,14 @@ body article.error404 .entry-header {
   padding: 4px 11px;
 }
 
+/*--------------------------------------------------------------
+BLOCKS
+--------------------------------------------------------------*/
+.wp-block-heading {
+  color: #54ae68;
+  font-weight: 400;
+}
+
 /*----------------------------------------------------------------
 >>> PLUGINS
 ----------------------------------------------------------------*/
@@ -2823,18 +2831,6 @@ img {
 
 .verification-content {
   text-align: center;
-}
-
-.dashicons,
-.dashicons-before:before {
-  font-family: dashicons;
-}
-
-.sl-button:hover .sl-count {
-  background-color: #f9f9f9;
-}
-.sl-button:hover .sl-count:before, .sl-button:hover .sl-count:after {
-  background-color: #f9f9f9;
 }
 
 /*--------------------------------------------------------------

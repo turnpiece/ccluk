@@ -2923,6 +2923,15 @@ body article.error404 .entry-header {
 }
 
 
+/*--------------------------------------------------------------
+BLOCKS
+--------------------------------------------------------------*/
+.wp-block-heading {
+  color: $green;
+  font-weight: 400;
+}
+
+
 /*----------------------------------------------------------------
 >>> PLUGINS
 ----------------------------------------------------------------*/
@@ -2978,18 +2987,6 @@ img {
 
 .verification-content {
   text-align: center;
-}
-
-.dashicons, 
-.dashicons-before:before {
-  font-family: dashicons;
-}
-
-.sl-button:hover .sl-count {
-  background-color: $secondary_bg;
-  &:before, &:after {
-    background-color: $secondary_bg;
-  }
 }
 
 /*--------------------------------------------------------------
