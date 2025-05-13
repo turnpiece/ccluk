@@ -223,11 +223,4 @@
     $body.toggleClass("menu-visible-right");
   });
 
-  $(document).on("ready", function () {
-    $(".bb-overlay").on("click", function () {
-      if ($("body").hasClass("menu-visible-right")) {
-        $("#main-nav").trigger(TorC);
-      }
-    });
-  });
 })(jQuery);

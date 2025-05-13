@@ -924,17 +924,12 @@ a.button {
   color: #54ae68;
 }
 
-.comments-area article header cite a {
-  color: #54ae68;
-}
-
 .post-author-info .entry-meta a:not(.entry-date), .post-author-info .author-name a:hover {
   color: #54ae68;
 }
 
 .posts-stream ul li h2 a:hover,
-.entry-meta a.read-more,
-.bb-comment-author {
+.entry-meta a.read-more {
   color: #54ae68;
 }
 
@@ -946,10 +941,6 @@ a.button {
 }
 
 .entry-meta a.read-more {
-  color: #54ae68;
-}
-
-a.comment-reply-link:hover, a.comment-edit-link:hover {
   color: #54ae68;
 }
 

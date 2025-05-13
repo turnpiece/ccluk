@@ -24,6 +24,17 @@ body.page #comments {
   }
 }
 
+.comments-area article header cite a {
+  color: $green;
+}
+
+a {
+  &.comment-reply-link:hover, 
+  &.comment-edit-link:hover {
+    color: $green;
+  }
+}
+
 .comments-title {
   font-family: inherit;
   font-size: 13px;

@@ -40,7 +40,7 @@ if (post_password_required())
 				'title_reply'			 => '',
 				'logged_in_as'			 => '',
 				'comment_notes_after'	 => '',
-				'comment_field'			 => '<div class="comment-form-comment"><span class="bb-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __('Write a response...', 'ccluk') . '"></textarea></div>',
+				'comment_field'			 => '<div class="comment-form-comment"><span class="ccluk-user-name">' . $user_identity . '</span><textarea id="comment" name="comment" cols="45" rows="2" aria-required="true" required="required" placeholder="' . __('Write a response...', 'ccluk') . '"></textarea></div>',
 				'label_submit'			 => __('Comment', 'ccluk')
 			);
 			?>

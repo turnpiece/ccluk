@@ -38,10 +38,6 @@ a.button {
   color: $green;
 }
 
-.comments-area article header cite a {
-  color: $green;
-}
-
 .post-author-info {
   .entry-meta a:not(.entry-date), .author-name a:hover {
     color: $green;
@@ -49,8 +45,7 @@ a.button {
 }
 
 .posts-stream ul li h2 a:hover, 
-.entry-meta a.read-more, 
-.bb-comment-author {
+.entry-meta a.read-more {
   color: $green;
 }
 
@@ -63,13 +58,6 @@ a.button {
 
 .entry-meta a.read-more {
   color: $green;
-}
-
-a {
-  &.comment-reply-link:hover, 
-  &.comment-edit-link:hover {
-    color: $green;
-  }
 }
 
 .footer-inner-top a:hover {
