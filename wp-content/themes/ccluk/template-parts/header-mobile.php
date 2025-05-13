@@ -11,7 +11,7 @@ $logo	 = $logo_id ? wp_get_attachment_image($logo_id, 'medium', '', array('class
 
 	<div class="mobile-header-inner">
 		<!-- Right button -->
-		<a href="#" id="main-nav" class="right-btn onesocial-mobile-button" data-position="right">Menu</a>
+		<a href="#" id="main-nav" class="right-btn" data-position="right" title="Menu"><i data-lucide="menu"></i></a>
 	</div>
 
 	<div id="mobile-logo">

@@ -691,7 +691,7 @@ body,
 .right-btn {
   position: absolute;
   height: 55px;
-  font-size: 0;
+  font-size: 30px;
   padding: 0 14px;
   top: 0;
   right: 0;
@@ -704,20 +704,6 @@ body,
 body.open-right .right-btn {
   /* Click anywhere in header to close it */
   width: 100%;
-}
-
-.right-btn:before {
-  font-family: 'onesocial';
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  content: "B";
-  -webkit-font-smoothing: antialiased;
-  font-size: 28px;
-  line-height: 55px;
-  margin-top: 2px;
-  color: $white;
-  float: right;
 }
 
 body.open-right .right-btn:before {

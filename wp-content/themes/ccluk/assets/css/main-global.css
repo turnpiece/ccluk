@@ -2647,15 +2647,6 @@ body article.error404 .entry-header {
 --------------------------------------------------------------*/
 .button-load-more-posts.loading:after,
 .footer-widget a.loading:after {
-  font-family: "onesocial";
-  font-weight: normal;
-  font-style: normal;
-  text-rendering: auto;
-  text-decoration: inherit;
-  display: inline-block;
-  line-height: 1;
-  content: "\f110";
-  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   color: #fff;
   text-decoration: none;
