@@ -21,7 +21,6 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
     1.1.11 - Search Template
 1.2 - Custom media queries (desktops and laptops)
     1.2.1 - Basic Structure
-
     1.2.3 - Widgets
     1.2.4 - Footer
 
@@ -32,7 +31,6 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 
 @import "partials/variables";
 @import "partials/mixins";
-
 
 html, body {
   background-color: $white;
@@ -53,10 +51,6 @@ html.js {
   margin: 0 auto;
   min-height: calc(100% - 80px);
   /*margin: 0 auto -104px;  the bottom margin is the negative value of the footer's height */
-}
-
-body.page #comments {
-  padding: 0 0 50px 0;
 }
 
 .site {
@@ -476,7 +470,8 @@ header-aside,
 --------------------------------------------------------------*/
 
 .main-navigation {
-  ul.nav-menu, div.nav-menu > ul {
+  ul.nav-menu, 
+  div.nav-menu > ul {
     text-align: left;
     width: 100%;
   }
@@ -631,15 +626,6 @@ header-aside,
   a {
     margin: 0;
     padding: 8px 15px;
-  }
-}
-
-#respond form {
-  input[type="text"] {
-    width: 46.333333333%;
-  }
-  textarea.blog-textarea {
-    width: 79.666666667%;
   }
 }
 
@@ -933,9 +919,6 @@ body.single-post #page {
     margin: 70px auto 30px;
     max-width: 780px;
     padding: 0 15px;
-  }
-  #comments .inner {
-    border-top: 3px solid $divider_color;
   }
 }
 

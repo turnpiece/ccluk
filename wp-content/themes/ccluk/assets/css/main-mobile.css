@@ -1280,19 +1280,6 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   .single-post .entry-header.has-image h1 {
     font-size: 36px;
   }
-  body.page-template-homepage #main .section.banner .section-title-container {
-    padding: 20px;
-  }
-  body.page-template-homepage #main .section.banner .section-title-container > .section-title h2 {
-    font-size: 28px;
-  }
-  body.page-template-homepage #main .section.banner .section-title-container > .section-title p,
-  body.page-template-homepage #main .section.banner .section-title-container > .section-title a.button {
-    font-size: 15px;
-  }
-  .site .buddyboss-media-photos-wrap-container {
-    max-width: 400px;
-  }
   .wp-block-media-text.is-stacked-on-mobile {
     max-width: 300px;
     margin-left: auto;
