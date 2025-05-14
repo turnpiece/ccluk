@@ -1284,10 +1284,6 @@ MAXIMUM width of 480 pixels (phones)
     max-width: 200px;
     margin: 10px auto;
   }
-  body #mobile-header .right-btn:before {
-    line-height: 35px;
-    font-size: 15px;
-  }
   body h1, body h2, body h3, body h4, body h5, body h6 {
     color: inherit;
   }
