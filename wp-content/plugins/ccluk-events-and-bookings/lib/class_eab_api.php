@@ -4,6 +4,8 @@ class Eab_Api
 {
 
 	private $_data;
+	private $openid;
+	private $_google_user_cache;
 
 	public function __construct()
 	{
