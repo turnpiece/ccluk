@@ -1,12 +1,17 @@
+@use "sass:math";
+
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+@mixin font-size($px, $base: 16) {
+  font-size: rem($px, $base);
+}
+
 @mixin border-radius($x) {
 	-webkit-border-radius: $x;
 	-moz-border-radius: $x;
 	border-radius: $x;
-}
-
-@mixin font-size($sizeValue: 1.8) {
-  font-size: ($sizeValue * 10) + px;
-  font-size: $sizeValue + rem;
 }
 
 @mixin margin($y: 1, $x: 1) {

@@ -78,6 +78,14 @@ html, body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
+html {
+  font-size: 16px; /* 1rem = 16px */
+}
+
+body {
+  font-size: 1rem; /* 16px */
+}
+
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -421,7 +429,7 @@ html,
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 /*------------------------------------*\
@@ -437,7 +445,7 @@ h1, h2, h3, h4, .site-header .site-title {
 h1 {
   font-weight: 700;
   font-style: normal;
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1.85714;
   text-align: center;
 }
@@ -446,7 +454,7 @@ h2 {
   font-family: Ubuntu, Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 36px;
+  font-size: 2.25rem;
   line-height: 1.3;
 }
 
@@ -456,7 +464,7 @@ h3 {
 }
 
 h4 {
-  font-size: 28px;
+  font-size: 1.75rem;
   line-height: 1.3;
 }
 
@@ -464,7 +472,7 @@ h5 {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 21px;
+  font-size: 1.3125rem;
   line-height: 1.44444;
 }
 
@@ -472,7 +480,7 @@ h6 {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.625;
 }
 
@@ -552,7 +560,7 @@ td:last-child {
 .comment-content,
 #respond form textarea,
 .bb-comment-author {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 /**
@@ -654,7 +662,7 @@ label {
 }
 
 input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number] {
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: normal;
   border: none;
   font-family: inherit;
@@ -738,7 +746,7 @@ input[type=radio]:checked + span:before, input[type=radio]:checked + label:befor
 }
 
 textarea {
-  font-size: 18px;
+  font-size: 1.125rem;
   border: none;
   font-family: inherit;
   font-weight: 300;
@@ -783,7 +791,7 @@ button {
   border: 3px solid;
   color: #fff;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 1.125rem;
   text-align: center;
   text-decoration: none;
   padding: 6px 14px;
@@ -822,7 +830,7 @@ button:active {
 article.post-password-required input[type=submit],
 li.bypostauthor cite span,
 a.button {
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 1.4;
   text-align: center;
 }
@@ -991,14 +999,14 @@ embed, iframe, object, video {
 }
 .wp-caption .wp-caption-text {
   font-style: italic;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 2;
   color: #757575;
 }
 
 .gallery-caption, .entry-caption {
   font-style: italic;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 2;
   color: #757575;
 }
@@ -1220,7 +1228,7 @@ body.search .page-header {
   border-bottom: 3px solid #54ae68;
 }
 body.search .page-header h1.entry-title {
-  font-size: 48px;
+  font-size: 3rem;
   padding-bottom: 15px;
   color: #54ae68;
 }
@@ -1442,7 +1450,7 @@ img.avatar {
 
 .widget .item-meta {
   color: #999;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-top: 3px;
   overflow: hidden;
 }
@@ -1471,7 +1479,7 @@ img.avatar {
 
 .widget_recent_entries .post-date, .widget_rss .rss-date {
   color: #aaa;
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-left: 12px;
 }
 
@@ -1480,7 +1488,7 @@ img.avatar {
   /*letter-spacing: 12px;*/
 }
 .widget .tagcloud a {
-  font-size: 12px !important;
+  font-size: 0.75rem !important;
   color: #999;
   border: 3px solid rgba(0, 0, 0, 0.1);
   display: inline-block;
@@ -1557,7 +1565,7 @@ img.avatar {
 --------------------------------------------------------------*/
 footer[role=contentinfo] {
   clear: both;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 2;
   width: 100%;
   margin-left: auto;
@@ -1601,7 +1609,7 @@ div.footer-inner-bottom .footer-inner {
   padding: 4px;
 }
 .footer-widget .widget .item-options a {
-  font-size: 12px;
+  font-size: 0.75rem;
   margin-right: 4px;
   padding: 4px 8px;
 }
@@ -1685,7 +1693,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 
 .widget span.activity {
   color: rgba(0, 0, 0, 0.3);
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 .footer-inner .item-title {
@@ -1849,7 +1857,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
   margin-left: 10px;
 }
 .entry-header.has-image .entry-title a.post-edit-link {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .entry-header .entry-title a.post-edit-link:hover {
   color: inherit;
@@ -2063,12 +2071,12 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 }
 
 .post-author .name {
-  font-size: 21px;
+  font-size: 1.3125rem;
   display: inline-block;
   min-height: 50px;
 }
 .post-author .post-date {
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #54ae68;
   margin-left: 60px;
   margin-top: -15px;
@@ -2080,7 +2088,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .author-details .author-middle .author-bio {
   color: #333;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.3;
   margin-bottom: 26px;
@@ -2106,7 +2114,7 @@ body.page #primary article > .entry-header {
   margin-bottom: 1rem;
 }
 body.page #primary article > .entry-header h1.entry-title {
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1.4;
 }
 
@@ -2117,13 +2125,13 @@ body.archive #primary .archive-header, body.blog #primary .archive-header {
   margin-bottom: 1rem;
 }
 body.archive #primary .archive-header h1.entry-title, body.blog #primary .archive-header h1.entry-title {
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1.4;
 }
 
 .archive-meta {
   color: #757575;
-  font-size: 12px;
+  font-size: 0.75rem;
   line-height: 2;
   margin-top: 22px;
 }
@@ -2365,7 +2373,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .post-author-info .entry-meta {
   color: #838383;
-  font-size: 12px;
+  font-size: 0.75rem;
   display: block;
 }
 .post-author-info .entry-meta a:not(.entry-date) {
@@ -2415,7 +2423,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .single-post .entry-header h1.entry-title,
 .single-ccluk_news .entry-header h1.entry-title {
-  font-size: 48px;
+  font-size: 3rem;
   line-height: 1.4;
 }
 .single-post .entry-header h1,
@@ -2532,7 +2540,7 @@ article.format-quote .entry-content blockquote {
   margin: 0;
 }
 .format-status .entry-header h2 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: 400;
   line-height: 2;
   margin: 0;
@@ -2747,7 +2755,7 @@ body article.error404 .entry-header {
 .entry-tags h3 {
   margin-bottom: 40px;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 .entry-tags a {
   text-transform: none;

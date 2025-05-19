@@ -228,7 +228,7 @@ header#masthead #logo-area {
 
 .entry-content,
 .entry-summary {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .pagination {
@@ -283,7 +283,7 @@ body.archive #content article.type-post {
   font-size: 20px;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 .widget-area .widget input[type=text], .widget-area .widget input[type=password], .widget-area .widget input[type=number] {
   background-color: #fff;
@@ -307,7 +307,7 @@ body.archive #content article.type-post {
 1.1.7 - Mobile Footer
 --------------------------------------------------------------*/
 div.footer-inner-bottom {
-  font-size: 15px;
+  font-size: 0.9375rem;
 }
 div.footer-inner-bottom div.footer-inner {
   padding: 0 20px;
@@ -1038,7 +1038,7 @@ Mobile Header
 }
 #mobile-header .right-btn:before {
   color: #333;
-  font-size: 21px;
+  font-size: 1.3125rem;
 }
 #mobile-header #mobile-logo img {
   max-height: 70px;
@@ -1118,7 +1118,7 @@ MAXIMUM width of 1024 pixels (tablets)
   }
   body .entry-title,
   body h2 {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
   body.page #secondary.widget-area {
     margin: 20px auto;
@@ -1135,7 +1135,7 @@ MAXIMUM width of 1024 pixels (tablets)
     border-bottom: none;
   }
   body.register div#register-page p {
-    font-size: 15px;
+    font-size: 0.9375rem;
   }
   body.single #primary,
   body.single #secondary,
@@ -1237,7 +1237,7 @@ MAXIMUM width of 768 pixels (vertical tablets & large phones)
     display: inline-block;
   }
   body.page #primary article > .entry-header h1.entry-title {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
   html.js {
     margin-top: 0 !important;
@@ -1252,7 +1252,7 @@ MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/
 @media screen and (max-width: 520px) {
   .single-ccluk_news .entry-header.has-image h1 {
-    font-size: 36px;
+    font-size: 2.25rem;
     max-height: 200px;
     overflow: auto;
     padding: 0;
@@ -1261,10 +1261,10 @@ MAXIMUM width of 520 pixels (large phones and smaller)
     right: 0;
   }
   .dir-header {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
   .single-post .entry-header.has-image h1 {
-    font-size: 36px;
+    font-size: 2.25rem;
   }
   .wp-block-media-text.is-stacked-on-mobile {
     max-width: 300px;

@@ -385,7 +385,7 @@ header-aside,
   height: 100%;
   width: 100%;
   padding: 20px 80px 20px 30px;
-  font-size: 21px;
+  font-size: 1.3125rem;
   font-weight: 300;
   border-radius: 0;
 }
@@ -451,7 +451,7 @@ header-aside,
   background-color: #54ae68;
 }
 .header-button #search-open {
-  font-size: 28px;
+  font-size: 1.75rem;
 }
 
 /*--------------------------------------------------------------
@@ -869,7 +869,7 @@ body.single-post #page {
 --------------------------------------------------------------*/
 body.search h1.entry-title {
   margin: 20px 0 50px;
-  font-size: 48px;
+  font-size: 3rem;
 }
 
 /*--------------------------------------------------------------
@@ -899,7 +899,7 @@ Media queries
     width: 540px;
   }
   body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
-    font-size: 48px;
+    font-size: 3rem;
   }
   body.page-template-homepage #main .section.banner .section-title-container > .section-title {
     max-width: 900px;

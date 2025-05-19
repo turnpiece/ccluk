@@ -29,8 +29,7 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
 
-@import "partials/variables";
-@import "partials/mixins";
+@import "partials/init";
 
 html, body {
   background-color: $white;
