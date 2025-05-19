@@ -83,14 +83,6 @@ html, body {
   font-family: $font-default;
 }
 
-html {
-  font-size: 16px; /* 1rem = 16px */
-}
-
-body {
-  font-size: 1rem; /* 16px */
-}
-
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -372,7 +364,7 @@ optgroup {
 html {
   box-sizing: border-box;
   /* [2] */
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.625;
   /* [3] */
   /* [4] */
@@ -405,6 +397,7 @@ html {
  */
 
 body {
+  font-size: 1rem;
   background: $white;
   /* [1] */
   margin: 0;
@@ -493,7 +486,7 @@ h2 {
     line-height: 1.3;
 }
 h3{
-    font-size: 26px;
+    font-size: $font-size-mid;
     line-height: 1.08333;
 }
 h4{
@@ -516,14 +509,14 @@ h6{
 }
 
 .site-header .site-title{
-    font-size: 28px;
+    font-size: $font-size-mid;
 }
 
 .post-author-info .author-name a {
     font-family: $font-default;
     font-weight: 700;
     font-style: normal;
-    font-size: 20px;
+    font-size: $font-size-min;
 }
 
 .single-post .entry-content,
@@ -536,7 +529,7 @@ h6{
     font-family: $font-default;
     font-weight: 400;
     font-style: normal;
-    font-size: 20px;
+    font-size: $font-size-min;
 }
 
 /**
@@ -607,7 +600,7 @@ pre {
   color: $white;
   background: $green;
   border: 3px solid $black;
-  font-size: 0.85rem;
+  font-size: $font-size-sm;
   max-width: 100%;
   overflow: auto;
   /* Contain overflow in all browsers. */
@@ -793,7 +786,7 @@ input {
     &:checked + {
       span:after, label:after, strong:after {
         content: "\2713";
-        font-size: 17px;
+        font-size: $font-size-sm;
         position: absolute;
         top: 0;
         left: -21px;
@@ -973,7 +966,7 @@ li.bypostauthor cite span {
   position: absolute;
   left: 50%;
   margin-left: -25px;
-  font-size: 11px;
+  font-size: $font-size-tiny;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -1269,12 +1262,6 @@ img.wp-smiley, .rsswidget img {
   overflow: hidden;
 }
 
-.author-description p {
-  color: #757575;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
 .author.archive {
   .author-info {
     border-top: 0;
@@ -1283,10 +1270,6 @@ img.wp-smiley, .rsswidget img {
   .author-avatar {
     margin-top: 0;
   }
-}
-
-.bb-article-author {
-  clear: both;
 }
 
 /*--------------------------------------------------------------
@@ -1300,7 +1283,8 @@ a {
   outline: none;
   text-decoration: none;
   @include ease-in-out();
-  &:before, &:after {
+  &:before, 
+  &:after {
     @include ease-in-out();
   }
 }
@@ -1426,7 +1410,7 @@ section[role="banner"] {
     margin-bottom: 40px;
     word-wrap: break-word;
     h3.widgettitle {
-      font-size: 13px;
+      font-size: $font-size-tiny;
       padding: 0;
       line-height: 1.5;
       font-family: inherit;
@@ -1440,16 +1424,18 @@ section[role="banner"] {
       margin-left: 1.2em;
     }
     p, li, .textwidget {
-      font-size: 14px;
+      font-size: $font-size-sm;
     }
     p {
-      margin-bottom: 14px;
+      margin-bottom: $font-size-sm;
     }
     li {
       margin-bottom: 5px;
     }
     input {
-      &[type="text"], &[type="password"], &[type="number"] {
+      &[type="text"], 
+      &[type="password"], 
+      &[type="number"] {
         width: 100%;
       }
     }
@@ -1599,7 +1585,7 @@ img.avatar {
 #wp-calendar {
   margin: 0;
   width: 100%;
-  font-size: 13px;
+  font-size: $font-size-tiny;
   line-height: 1.8;
   color: #686868;
   th, td, caption {
@@ -1644,7 +1630,7 @@ img.avatar {
       border: 3px solid $divider_color;
       color: rgba(0, 0, 0, 0.4);
       display: inline-block;
-      font-size: 13px;
+      font-size: $font-size-tiny;
       letter-spacing: 0.025rem;
       margin-right: 10px;
       padding: 6px 10px;
@@ -1674,7 +1660,7 @@ footer[role="contentinfo"] {
 div {
   &.footer-inner-bottom {
     padding: 10px 0;
-    font-size: 13px;
+    font-size: $font-size-tiny;
     clear: left;
     color: rgba(225, 225, 225, 0.8);
     a {
@@ -1777,12 +1763,12 @@ div {
   }
   h4.widgettitle {
     font-family: inherit;
-    font-size: 18px;
+    font-size: $font-size-min;
     line-height: 1.4;
     margin-bottom: 40px;
   }
   p, li, .textwidget {
-    font-size: 13px;
+    font-size: $font-size-tiny;
     /*line-height: 1.8;*/
   }
 }
@@ -1793,7 +1779,7 @@ div {
 }
 
 .footer-inner .item-title {
-  font-size: 14px;
+  font-size: $font-size-sm;
 }
 
 .widget {
@@ -1930,7 +1916,7 @@ div {
 }
 
 .entry-title {
-  font-size: 30px;
+  font-size: $font-size-mid;
   font-weight: 900;
   line-height: 1.2;
 }
@@ -1954,7 +1940,7 @@ div {
       border-color: inherit;
       border-radius: 50px;
       padding: 5px 9px;
-      font-size: 10px;
+      font-size: $font-size-tiny;
       font-weight: 400;
       vertical-align: middle;
       margin-left: 10px;
@@ -1973,7 +1959,7 @@ div {
   .entry-meta {
     color: $green;
     clear: left;
-    font-size: 16px;
+    font-size: $font-size-sm;
   }
 }
 
@@ -2009,7 +1995,7 @@ div {
 
 footer.entry-meta {
   clear: left;
-  font-size: 13px;
+  font-size: $font-size-tiny;
   margin-top: 24px;
 }
 
@@ -2030,7 +2016,7 @@ article.sticky .featured-post {
   border-top: 4px double #ededed;
   border-bottom: 4px double #ededed;
   color: #999;
-  font-size: 13px;
+  font-size: $font-size-tiny;
   line-height: 3.692307692;
   margin-bottom: 24px;
   text-align: center;
@@ -2063,31 +2049,18 @@ article.sticky .featured-post {
   }
 }
 
-.comment-content p {
-  margin: 0 75px 32px;
-  line-height: 1.2;
-  font-size: 18px;
-}
-
-.comment .reply {
-  margin-left: 75px;
-}
-
 .entry-content {
   blockquote .author {
     color: $green;
-    font-size: 18px;
+    font-size: $font-size-min;
   }
 }
 
-.comment-content blockquote .author {
-  color: $green;
-  font-size: 18px;
-}
-
-.entry-content blockquote p:last-child, 
-.comment-content blockquote p:last-child {
-  margin-bottom: 0;
+.entry-content, 
+.comment-content {
+  blockquote p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 img {
@@ -2223,8 +2196,9 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   @include centred-margin(1);
 }
 
-.archive-header, .page-header {
-  font-size: 40px;
+.archive-header, 
+.page-header {
+  font-size: $font-size-lg;
 }
 
 body.page {
@@ -2280,101 +2254,6 @@ body {
 
 .posts-stream {
   display: none;
-  .title {
-    border: 3px solid;
-    display: inline-block;
-    font-family: inherit;
-    font-size: 10px;
-    font-weight: 400;
-    margin: 0;
-    padding: 4px 7px;
-    text-transform: uppercase;
-  }
-  .inner {
-    display: none;
-    background-color: $white;
-  }
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    li {
-      padding: 35px 0;
-      border-bottom: 3px solid $divider_color;
-      &::after {
-        clear: both;
-        content: "";
-        display: table;
-      }
-      &:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
-      }
-      > a {
-        float: left;
-        margin-right: 30px;
-        margin-top: 5px;
-        text-align: center;
-      }
-      time div {
-        width: 35px;
-        &:first-child {
-          background-color: $green;
-          color: $white;
-          font-size: 9px;
-          font-weight: 400;
-          padding: 4px 0 2px;
-          text-transform: uppercase;
-          position: relative;
-          &:after {
-            content: '';
-            border: 3px solid $white;
-            display: block;
-            width: 4px;
-            background-color: $green;
-            height: 5px;
-            position: absolute;
-            top: -3px;
-          }
-          &:before {
-            content: '';
-            border: 3px solid $white;
-            display: block;
-            width: 4px;
-            background-color: $green;
-            height: 5px;
-            position: absolute;
-            top: -3px;
-            left: 5px;
-          }
-          &:after {
-            right: 5px;
-          }
-        }
-        &:nth-child(2) {
-          background-color: $dark;
-          color: $white;
-          font-size: 19px;
-          font-weight: 700;
-          line-height: 1.4;
-          padding: 0;
-        }
-        &:nth-child(3) {
-          font-size: 9px;
-          font-weight: 400;
-          padding: 3px 2px;
-          color: #999;
-        }
-      }
-      h3 {
-        overflow: hidden;
-        a {
-          font-size: 20px;
-          color: inherit;
-        }
-      }
-    }
-  }
 }
 
 /* Standard blog and archive pages */
@@ -2398,11 +2277,13 @@ body {
     position: relative;
   }
 
-  &.tag .site-content, 
-  &.date .site-content, 
-  &.author .site-content, 
-  &.category .site-content {
-    max-width: 650px;
+  &.tag, 
+  &.date, 
+  &.author, 
+  &.category {
+    .site-content {
+      max-width: $content_w;
+    }
   }
 }
 
@@ -2488,7 +2369,7 @@ article.format-aside {
   }
   .author-name a {
     color: $dark;
-    font-size: 18px;
+    font-size: $font-size-min;
     margin-bottom: 6px;
     display: inline-block;
     font-weight: 700;
@@ -2498,7 +2379,7 @@ article.format-aside {
   }
   .author-bio {
     color: $dark;
-    font-size: 15px;
+    font-size: $font-size-sm;
     margin-bottom: 15px;
   }
   .entry-meta {
@@ -2562,7 +2443,7 @@ article.format-aside {
           top: 20px;
       }
       .entry-meta {
-          font-size: 16px;
+          font-size: $font-size-sm;
           padding-top: 0;
       }
       .entry-meta,
@@ -2593,12 +2474,12 @@ article.format-aside {
 article {
   &.format-image footer {
     h1 {
-      font-size: 13px;
+      font-size: $font-size-sm;
       line-height: 1.8;
       font-weight: 400;
     }
     h2 {
-      font-size: 11px;
+      font-size: $font-size-tiny;
       line-height: 2.181818182;
     }
     a h2 {
@@ -2609,7 +2490,7 @@ article {
     header {
       padding: 0 10px;
       float: right;
-      font-size: 11px;
+      font-size: $font-size-tiny;
       line-height: 2.181818182;
       font-weight: 600;
       font-style: italic;
@@ -2624,7 +2505,7 @@ article {
       max-width: 80%;
       float: left;
       a {
-        font-size: 22px;
+        font-size: $font-size-std;
         line-height: 1.090909091;
         text-decoration: none;
       }
@@ -2638,7 +2519,7 @@ article {
     blockquote {
       display: block;
       padding: 24px 24px 0;
-      font-size: 15px;
+      font-size: $font-size-sm;
       line-height: 1.6;
       font-style: normal;
       color: #6a6a6a;
@@ -2657,7 +2538,7 @@ article {
     display: inline-block;
   }
   h1 {
-    font-size: 15px;
+    font-size: $font-size-sm;
     font-weight: 400;
     line-height: 1.6;
     margin: 0;
@@ -2701,7 +2582,7 @@ article {
     border-top: 3px solid $green;
     .widget li {
       margin: 8px 0 0;
-      font-size: 13px;
+      font-size: $font-size-tiny;
       line-height: 1.7;
       list-style-type: square;
       list-style-position: inside;
@@ -2734,7 +2615,7 @@ body article.error404 .entry-header {
 
 .error404 {
   .entry-title {
-    font-size: 240px;
+    font-size: $font-size-huge;
     text-align: center;
     position: relative;
     line-height: 1;
@@ -2756,7 +2637,7 @@ body article.error404 .entry-header {
     }
   }
   .entry-content p {
-    font-size: 19px;
+    font-size: $font-size-min;
     font-weight: 700;
     color: $dark;
     text-align: center;

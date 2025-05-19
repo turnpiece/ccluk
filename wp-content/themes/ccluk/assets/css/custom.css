@@ -169,7 +169,7 @@ input[type=submit]:hover, input[type=submit]:active {
 .entry-caption,
 .gallery-caption,
 .wp-caption .wp-caption-text {
-  font-size: 14px;
+  font-size: 0.9375rem;
   line-height: 1.6;
 }
 
@@ -868,7 +868,7 @@ body.page-template-homepage .slick-slide img {
 #findYourMP form {
   width: 80%;
   margin: 0 auto;
-  font-size: 20px;
+  font-size: 1.3125rem;
 }
 
 #findYourMP form label {

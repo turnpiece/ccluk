@@ -286,3 +286,18 @@ body.logged-in #respond .comment-form-comment {
   margin-left: 60px;
   margin-bottom: 0;
 }
+
+.comment-content p {
+  margin: 0 75px 32px;
+  line-height: 1.2;
+  font-size: $font-size-min;
+}
+
+.comment .reply {
+  margin-left: 75px;
+}
+
+.comment-content blockquote .author {
+  color: $green;
+  font-size: 18px;
+}

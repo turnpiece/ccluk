@@ -122,7 +122,7 @@ body #content article {
 
 .entry-title {
   font-weight: 400;
-  font-size: 22px;
+  font-size: 1.3125rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -200,7 +200,7 @@ header#masthead #logo-area {
 #mobile-header #searchsubmit {
   background: none;
   color: black;
-  font-size: 20px;
+  font-size: 1.3125rem;
   line-height: 26px;
   position: absolute;
   right: 70px;
@@ -269,7 +269,7 @@ body.archive #content article.type-post {
 }
 
 .footer-widget .widget h4.widgettitle {
-  font-size: 20px;
+  font-size: 1.3125rem;
 }
 
 .widget-area {
@@ -280,7 +280,7 @@ body.archive #content article.type-post {
   padding: 10px 0;
 }
 .widget-area .widget h3 {
-  font-size: 20px;
+  font-size: 1.3125rem;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
   font-size: 0.9375rem;
@@ -447,7 +447,7 @@ aside.post-author:after {
   margin-bottom: 0;
 }
 .single-post .entry-header.has-image h1 {
-  font-size: 45px;
+  font-size: 3rem;
 }
 
 /*----------------------------------------------------------------
@@ -474,7 +474,7 @@ body.error404 footer.entry-meta {
     padding-right: 15px;
   }
   .error404 .entry-title {
-    font-size: 159px;
+    font-size: 10rem;
     max-width: 306px;
     margin: 0 auto 25px;
   }
@@ -491,7 +491,7 @@ body.error404 footer.entry-meta {
     margin-bottom: 0;
   }
   .single-post .entry-header.has-image h1 {
-    font-size: 30px;
+    font-size: 1.75rem;
     max-height: 200px;
     overflow: auto;
     padding: 0;
@@ -499,7 +499,7 @@ body.error404 footer.entry-meta {
 }
 @media screen and (max-width: 350px) {
   .error404 .entry-title {
-    font-size: 142px;
+    font-size: 10rem;
   }
 }
 @media screen and (max-width: 460px) {
@@ -542,7 +542,7 @@ body.error404 footer.entry-meta {
   border: none;
   color: #fff;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 0.9375rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -643,7 +643,7 @@ body,
 .right-btn {
   position: absolute;
   height: 55px;
-  font-size: 30px;
+  font-size: 1.75rem;
   padding: 0 14px;
   top: 0;
   right: 0;
@@ -713,7 +713,7 @@ body.open-right #mobile-right-panel {
   border-bottom: 3px solid rgba(255, 255, 255, 0.1);
   padding: 14px 25px;
   line-height: 1.6;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #fff;
   text-decoration: none;
   display: block;
@@ -735,7 +735,7 @@ body.open-right #mobile-right-panel {
 }
 #mobile-right-panel .submenu-btn {
   color: rgba(255, 255, 255, 0.75);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 600;
   height: 52px;
   line-height: 52px;
@@ -1308,7 +1308,7 @@ MAXIMUM width of 480 pixels (phones)
     padding-top: 55px;
   }
   .single-post .entry-header.has-image h1 {
-    font-size: 24px;
+    font-size: 1.3125rem;
   }
   .single-attachment .entry-header,
   .single-post .entry-header:not(.has-image) {

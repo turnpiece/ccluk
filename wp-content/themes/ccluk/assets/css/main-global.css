@@ -78,14 +78,6 @@ html, body {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-html {
-  font-size: 16px; /* 1rem = 16px */
-}
-
-body {
-  font-size: 1rem; /* 16px */
-}
-
 article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
   display: block;
 }
@@ -342,7 +334,7 @@ optgroup {
 html {
   box-sizing: border-box;
   /* [2] */
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.625;
   /* [3] */
   /* [4] */
@@ -373,6 +365,7 @@ html {
  * 2. Remove default margin. [normalize.css]
  */
 body {
+  font-size: 1rem;
   background: #fff;
   /* [1] */
   margin: 0;
@@ -459,7 +452,7 @@ h2 {
 }
 
 h3 {
-  font-size: 26px;
+  font-size: 1.75rem;
   line-height: 1.08333;
 }
 
@@ -485,14 +478,14 @@ h6 {
 }
 
 .site-header .site-title {
-  font-size: 28px;
+  font-size: 1.75rem;
 }
 
 .post-author-info .author-name a {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 20px;
+  font-size: 1.125rem;
 }
 
 .single-post .entry-content,
@@ -505,7 +498,7 @@ h6 {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 20px;
+  font-size: 1.125rem;
 }
 
 /**
@@ -570,7 +563,7 @@ pre {
   color: #fff;
   background: #54ae68;
   border: 3px solid #000;
-  font-size: 0.85rem;
+  font-size: 0.9375rem;
   max-width: 100%;
   overflow: auto;
   /* Contain overflow in all browsers. */
@@ -733,7 +726,7 @@ input[type=checkbox] + span:before, input[type=checkbox] + label:before, input[t
 }
 input[type=checkbox]:checked + span:after, input[type=checkbox]:checked + label:after, input[type=checkbox]:checked + strong:after {
   content: "✓";
-  font-size: 17px;
+  font-size: 0.9375rem;
   position: absolute;
   top: 0;
   left: -21px;
@@ -897,7 +890,7 @@ li.bypostauthor cite span {
   position: absolute;
   left: 50%;
   margin-left: -25px;
-  font-size: 11px;
+  font-size: 0.75rem;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -1183,22 +1176,12 @@ img.wp-smiley, .rsswidget img {
   overflow: hidden;
 }
 
-.author-description p {
-  color: #757575;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
 .author.archive .author-info {
   border-top: 0;
   margin: 0 0 48px;
 }
 .author.archive .author-avatar {
   margin-top: 0;
-}
-
-.bb-article-author {
-  clear: both;
 }
 
 /*--------------------------------------------------------------
@@ -1347,7 +1330,7 @@ section[role=banner] {
   word-wrap: break-word;
 }
 .widget-area .widget h3.widgettitle {
-  font-size: 13px;
+  font-size: 0.75rem;
   padding: 0;
   line-height: 1.5;
   font-family: inherit;
@@ -1359,10 +1342,10 @@ section[role=banner] {
   margin-left: 1.2em;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
-  font-size: 14px;
+  font-size: 0.9375rem;
 }
 .widget-area .widget p {
-  margin-bottom: 14px;
+  margin-bottom: 0.9375rem;
 }
 .widget-area .widget li {
   margin-bottom: 5px;
@@ -1507,7 +1490,7 @@ img.avatar {
 #wp-calendar {
   margin: 0;
   width: 100%;
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 1.8;
   color: #686868;
 }
@@ -1551,7 +1534,7 @@ img.avatar {
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   display: inline-block;
-  font-size: 13px;
+  font-size: 0.75rem;
   letter-spacing: 0.025rem;
   margin-right: 10px;
   padding: 6px 10px;
@@ -1577,7 +1560,7 @@ footer[role=contentinfo] {
 
 div.footer-inner-bottom {
   padding: 10px 0;
-  font-size: 13px;
+  font-size: 0.75rem;
   clear: left;
   color: rgba(225, 225, 225, 0.8);
 }
@@ -1682,12 +1665,12 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 }
 .footer-widget .widget h4.widgettitle {
   font-family: inherit;
-  font-size: 18px;
+  font-size: 1.125rem;
   line-height: 1.4;
   margin-bottom: 40px;
 }
 .footer-widget .widget p, .footer-widget .widget li, .footer-widget .widget .textwidget {
-  font-size: 13px;
+  font-size: 0.75rem;
   /*line-height: 1.8;*/
 }
 
@@ -1697,7 +1680,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 }
 
 .footer-inner .item-title {
-  font-size: 14px;
+  font-size: 0.9375rem;
 }
 
 .widget.ccluk_social_links li {
@@ -1826,7 +1809,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 }
 
 .entry-title {
-  font-size: 30px;
+  font-size: 1.75rem;
   font-weight: 900;
   line-height: 1.2;
 }
@@ -1851,7 +1834,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
   border-color: inherit;
   border-radius: 50px;
   padding: 5px 9px;
-  font-size: 10px;
+  font-size: 0.75rem;
   font-weight: 400;
   vertical-align: middle;
   margin-left: 10px;
@@ -1869,7 +1852,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 .entry-header .entry-meta {
   color: #54ae68;
   clear: left;
-  font-size: 16px;
+  font-size: 0.9375rem;
 }
 
 .entry-meta,
@@ -1904,7 +1887,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 
 footer.entry-meta {
   clear: left;
-  font-size: 13px;
+  font-size: 0.75rem;
   margin-top: 24px;
 }
 
@@ -1925,7 +1908,7 @@ article.sticky .featured-post {
   border-top: 4px double #ededed;
   border-bottom: 4px double #ededed;
   color: #999;
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 3.692307692;
   margin-bottom: 24px;
   text-align: center;
@@ -1958,24 +1941,9 @@ article.sticky .featured-post {
   line-height: 1.5;
 }
 
-.comment-content p {
-  margin: 0 75px 32px;
-  line-height: 1.2;
-  font-size: 18px;
-}
-
-.comment .reply {
-  margin-left: 75px;
-}
-
 .entry-content blockquote .author {
   color: #54ae68;
-  font-size: 18px;
-}
-
-.comment-content blockquote .author {
-  color: #54ae68;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .entry-content blockquote p:last-child,
@@ -2103,8 +2071,9 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   margin: 1rem auto;
 }
 
-.archive-header, .page-header {
-  font-size: 40px;
+.archive-header,
+.page-header {
+  font-size: 2.25rem;
 }
 
 body.page #primary article > .entry-header {
@@ -2162,101 +2131,6 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 .posts-stream {
   display: none;
 }
-.posts-stream .title {
-  border: 3px solid;
-  display: inline-block;
-  font-family: inherit;
-  font-size: 10px;
-  font-weight: 400;
-  margin: 0;
-  padding: 4px 7px;
-  text-transform: uppercase;
-}
-.posts-stream .inner {
-  display: none;
-  background-color: #fff;
-}
-.posts-stream ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.posts-stream ul li {
-  padding: 35px 0;
-  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-}
-.posts-stream ul li::after {
-  clear: both;
-  content: "";
-  display: table;
-}
-.posts-stream ul li:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-.posts-stream ul li > a {
-  float: left;
-  margin-right: 30px;
-  margin-top: 5px;
-  text-align: center;
-}
-.posts-stream ul li time div {
-  width: 35px;
-}
-.posts-stream ul li time div:first-child {
-  background-color: #54ae68;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 400;
-  padding: 4px 0 2px;
-  text-transform: uppercase;
-  position: relative;
-}
-.posts-stream ul li time div:first-child:after {
-  content: "";
-  border: 3px solid #fff;
-  display: block;
-  width: 4px;
-  background-color: #54ae68;
-  height: 5px;
-  position: absolute;
-  top: -3px;
-}
-.posts-stream ul li time div:first-child:before {
-  content: "";
-  border: 3px solid #fff;
-  display: block;
-  width: 4px;
-  background-color: #54ae68;
-  height: 5px;
-  position: absolute;
-  top: -3px;
-  left: 5px;
-}
-.posts-stream ul li time div:first-child:after {
-  right: 5px;
-}
-.posts-stream ul li time div:nth-child(2) {
-  background-color: #333;
-  color: #fff;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.4;
-  padding: 0;
-}
-.posts-stream ul li time div:nth-child(3) {
-  font-size: 9px;
-  font-weight: 400;
-  padding: 3px 2px;
-  color: #999;
-}
-.posts-stream ul li h3 {
-  overflow: hidden;
-}
-.posts-stream ul li h3 a {
-  font-size: 20px;
-  color: inherit;
-}
 
 /* Standard blog and archive pages */
 .blog .site-content,
@@ -2279,7 +2153,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 .search.date .site-content,
 .search.author .site-content,
 .search.category .site-content {
-  max-width: 650px;
+  max-width: 600px;
 }
 
 .archive-header + article.type-post {
@@ -2358,7 +2232,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .post-author-info .author-name a {
   color: #333;
-  font-size: 18px;
+  font-size: 1.125rem;
   margin-bottom: 6px;
   display: inline-block;
   font-weight: 700;
@@ -2368,7 +2242,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .post-author-info .author-bio {
   color: #333;
-  font-size: 15px;
+  font-size: 0.9375rem;
   margin-bottom: 15px;
 }
 .post-author-info .entry-meta {
@@ -2449,7 +2323,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .single-post .entry-header .post-author-info .entry-meta,
 .single-ccluk_news .entry-header .post-author-info .entry-meta {
-  font-size: 16px;
+  font-size: 0.9375rem;
   padding-top: 0;
 }
 .single-post .entry-header .post-author-info .entry-meta a,
@@ -2476,12 +2350,12 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 8.1 - Image posts
 --------------------------------------------------------------*/
 article.format-image footer h1 {
-  font-size: 13px;
+  font-size: 0.9375rem;
   line-height: 1.8;
   font-weight: 400;
 }
 article.format-image footer h2 {
-  font-size: 11px;
+  font-size: 0.75rem;
   line-height: 2.181818182;
 }
 article.format-image footer a h2 {
@@ -2490,7 +2364,7 @@ article.format-image footer a h2 {
 article.format-link header {
   padding: 0 10px;
   float: right;
-  font-size: 11px;
+  font-size: 0.75rem;
   line-height: 2.181818182;
   font-weight: 600;
   font-style: italic;
@@ -2506,7 +2380,7 @@ article.format-link .entry-content {
   float: left;
 }
 article.format-link .entry-content a {
-  font-size: 22px;
+  font-size: 1.3125rem;
   line-height: 1.090909091;
   text-decoration: none;
 }
@@ -2517,7 +2391,7 @@ article.format-quote .entry-content p {
 article.format-quote .entry-content blockquote {
   display: block;
   padding: 24px 24px 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.6;
   font-style: normal;
   color: #6a6a6a;
@@ -2534,7 +2408,7 @@ article.format-quote .entry-content blockquote {
   display: inline-block;
 }
 .format-status .entry-header h1 {
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.6;
   margin: 0;
@@ -2576,7 +2450,7 @@ article.format-quote .entry-content blockquote {
 }
 .template-front-page .widget-area .widget li {
   margin: 8px 0 0;
-  font-size: 13px;
+  font-size: 0.75rem;
   line-height: 1.7;
   list-style-type: square;
   list-style-position: inside;
@@ -2605,7 +2479,7 @@ body article.error404 .entry-header {
 }
 
 .error404 .entry-title {
-  font-size: 240px;
+  font-size: 10rem;
   text-align: center;
   position: relative;
   line-height: 1;
@@ -2627,7 +2501,7 @@ body article.error404 .entry-header {
   z-index: 1;
 }
 .error404 .entry-content p {
-  font-size: 19px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #333;
   text-align: center;

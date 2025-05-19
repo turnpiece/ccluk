@@ -314,7 +314,7 @@ body.template-front-page .site-content, body.single-attachment .site-content, bo
 
 .site-header p.site-description {
   clear: left;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-style: normal;
   font-weight: 300;
   color: #666;
@@ -366,10 +366,8 @@ header-aside,
   position: absolute;
   right: 0;
   display: none;
-  z-index: 32;
-  /* Should be greater than 31 */
+  z-index: 32; /* Should be greater than 31 */
   background-color: #fff;
-  /* border-left: 3px solid rgba(0,0,0,0.1); */
 }
 #header-search form > div {
   height: 100%;
@@ -493,18 +491,18 @@ header-aside,
   word-wrap: break-word;
   color: rgba(0, 0, 0, 0.5);
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 0.75rem;
 }
 .main-navigation .nav-menu > li > a {
   display: block;
-  line-height: 13px;
+  line-height: 0.75rem;
   margin: 0 15px;
   padding: 32px 0 25px;
 }
 .main-navigation li {
   margin: 0;
   float: left;
-  font-size: 14px;
+  font-size: 0.9375rem;
   line-height: 1;
   position: relative;
 }
@@ -683,7 +681,7 @@ li.hideshow > ul li a {
 }
 .post-author .load-more-posts {
   color: rgba(0, 0, 0, 0.2);
-  font-size: 14px;
+  font-size: 0.9375rem;
   left: 73px;
   line-height: 1;
   max-height: 15px;
@@ -704,7 +702,7 @@ li.hideshow > ul li a {
 }
 .post-author .load-more-posts a {
   text-transform: uppercase;
-  font-size: 10px;
+  font-size: 0.75rem;
   color: #333;
   clear: both;
   display: inline-block;
@@ -775,7 +773,7 @@ a.to-top {
   -o-transition: all 0.3s;
   transition: all 0.3s;
   color: #333;
-  font-size: 11px;
+  font-size: 0.75rem;
 }
 
 article:hover a.to-top {

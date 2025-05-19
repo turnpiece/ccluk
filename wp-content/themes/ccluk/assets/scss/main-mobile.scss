@@ -133,7 +133,7 @@ body {
 
 .entry-title {
   font-weight: 400;
-  font-size: 22px;
+  font-size: $font-size-std;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -222,7 +222,7 @@ header#masthead {
   #searchsubmit {
     background: none;
     color: black;
-    font-size: 20px;
+    font-size: $font-size-std;
     line-height: 26px;
     position: absolute;
     right: 70px;
@@ -299,7 +299,7 @@ body.archive #content article.type-post {
 }
 
 .footer-widget .widget h4.widgettitle {
-  font-size: 20px;
+  font-size: $font-size-std;
 }
 
 .widget-area {
@@ -308,7 +308,7 @@ body.archive #content article.type-post {
     margin: 0;
     padding: 10px 0;
     h3 {
-      font-size: 20px;
+      font-size: $font-size-std;
     }
     p, li, .textwidget {
       font-size: $font-size-sm;
@@ -493,7 +493,7 @@ aside.post-author {
     margin-bottom: 0;
   }
   .entry-header.has-image h1 {
-    font-size: 45px;
+    font-size: $font-size-big;
   }
 }
 
@@ -527,7 +527,7 @@ body {
     padding-right: 15px;
   }
   .error404 .entry-title {
-    font-size: 159px;
+    font-size: $font-size-huge;
     max-width: 306px;
     margin: 0 auto 25px;
     &:before {
@@ -545,7 +545,7 @@ body {
       margin-bottom: 0;
     }
     .entry-header.has-image h1 {
-      font-size: 30px;
+      font-size: $font-size-mid;
       max-height: 200px;
       overflow: auto;
       padding: 0;
@@ -555,7 +555,7 @@ body {
 
 @media screen and (max-width: 350px) {
   .error404 .entry-title {
-    font-size: 142px;
+    font-size: $font-size-huge;
   }
 }
 
@@ -690,7 +690,7 @@ body,
 .right-btn {
   position: absolute;
   height: 55px;
-  font-size: 30px;
+  font-size: $font-size-mid;
   padding: 0 14px;
   top: 0;
   right: 0;
@@ -767,7 +767,7 @@ body.open-right #mobile-right-panel {
       border-bottom: 3px solid rgba(255, 255, 255, 0.1);
       padding: 14px 25px;
       line-height: 1.6;
-      font-size: 15px;
+      font-size: $font-size-sm;
       color: $white;
       text-decoration: none;
       display: block;
@@ -790,7 +790,7 @@ body.open-right #mobile-right-panel {
   }
   .submenu-btn {
     color: rgba(255, 255, 255, 0.75);
-    font-size: 18px;
+    font-size: $font-size-min;
     font-weight: 600;
     height: 52px;
     line-height: 52px;
