@@ -350,9 +350,6 @@ body.page.page-sidebar-active .default-page + #secondary, body.page.page-sidebar
 body.page.page-sidebar-active #main #primary article > .entry-header > .entry-title {
   text-align: left;
 }
-body.page.page-template-page-nosidebar #main {
-  max-width: 600px;
-}
 body.page.page-template-page-nosidebar #secondary {
   display: none;
 }

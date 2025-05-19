@@ -36,10 +36,6 @@ body.page {
 	}
 
    	&.page-template-page-nosidebar {
-		#main {
-			max-width: $content_w;
-		}
-
 		#secondary {
 			display: none;
 		}
