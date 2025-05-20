@@ -1,0 +1,146 @@
+#site-navigation {
+  display: table-cell;
+  vertical-align: bottom;
+  width: 100%;
+}
+.main-navigation {
+  ul.nav-menu, 
+  div.nav-menu > ul {
+    text-align: left;
+    width: 100%;
+  }
+  ul {
+    margin: 0;
+    text-indent: 0;
+
+  li {
+    a {
+      color: $blue;
+    }
+  .nav-menu {
+    > li {
+      &:hover,
+      &.current-menu-item,
+      &.current-menu-ancestor {
+        background-color: $green;
+        > a {
+          color: $white;
+        }
+      }
+    &.horizontal-responsive-menu {
+      width: 120%;
+  .nav-inner div > ul.open {
+    overflow: visible;
+      display: inline-block;
+      text-decoration: none;
+      line-height: 1;
+      white-space: nowrap;
+      word-wrap: break-word;
+      color: rgba(0, 0, 0, 0.5);
+      text-transform: uppercase;
+      font-size: $font-size-tiny;
+    display: inline-block;
+    text-decoration: none;
+  .nav-menu > li {
+    > a {
+      display: block;
+      line-height: $font-size-tiny;
+      margin: 0 15px;
+      padding: 32px 0 25px;
+    &.current_menu_item, 
+    &.current_page_item, 
+    a:hover {
+      color: $dark;
+    float: left;
+    font-size: $font-size-sm;
+    line-height: 1;
+    position: relative;
+    ul {
+      display: none;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 100%;
+      z-index: 1000;
+      background-color: $white;
+      border-width: 0 1px 1px 1px;
+      border-style: solid;
+      border-color: $green;
+      &.sub-menu:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        top: -2px;
+        height: 2px;
+        display: block;
+      ul {
+        top: -1px;
+        left: 100%;
+        border-width: 1px;
+        background-color: $white;
+  ul li:hover > ul {
+    display: block;
+  li ul.sub-menu {
+    border: 3px solid $green;
+    li {
+      a {
+        border: none;
+        line-height: 1.4;
+        padding: 12px 10px 12px 15px;
+        width: 220px;
+        white-space: normal;
+        @include subnav-item();
+        
+        &:hover {
+          @include subnav-item-selected();
+      &.current-menu-item {
+    div > ul {
+      > {
+        .current-menu-item, 
+        .current-menu-ancestor {
+          > a {
+            color: $white;
+          }
+      ul > .current-menu-item > a {
+        color: $white;
+    li.hideshow ul {
+      border: 0;
+      padding: 5px 0;
+#site-navigation .hideshow li {
+  margin: 0;
+  a {
+    padding: 8px 15px;
+  .main-navigation {
+      &.nav-menu {
+        padding-bottom: 30px;
+  #site-navigation {
+    display: none;
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}
+}

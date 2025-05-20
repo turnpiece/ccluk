@@ -1,0 +1,84 @@
+/* styles for pages */
+
+body.page {
+	#primary {
+		article {
+			.entry-header {
+				@include page-header();
+			}
+			&.has-post-thumbnail {
+				> .entry-header {
+					border-bottom: none;
+					padding-bottom: 0;
+
+					img {
+						@include margin( 1.2, 0 ); 
+					}
+				}
+			}
+		}
+	}
+
+	&.page-sidebar-active {
+		#secondary, 
+		.default-page+#secondary,
+		&.page-template #secondary {
+			@include margin-top( 5 );
+		}
+
+		#main {
+			#primary {
+				article > .entry-header > .entry-title {
+					text-align: left;
+				}
+			}
+		}
+	}
+
+   	&.page-template-page-nosidebar {
+		#secondary {
+			display: none;
+		}
+	}
+
+	#content {
+		.row {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	#secondary {
+		.widget_subpages {
+			width: 18.1250rem;
+
+			ul > li {
+
+				a {
+					display: inline-block;
+					border-left: 0.6250rem solid;
+					padding-left: 0.9375rem;
+					font-weight: 400;
+					font-size: $font-size-sm;
+
+					&:hover {
+						color: $green;
+					}
+				}
+
+				&.widget_subpages_current_page {
+					> a {
+						color: $green;
+						pointer-events: none;
+			  			cursor: default;
+					}
+				}
+
+				ul {
+					margin-top: 0.6250rem;
+					margin-top: 1rem;
+				}
+			}
+		}
+	}
+}
