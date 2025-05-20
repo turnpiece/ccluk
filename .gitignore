@@ -87,7 +87,7 @@ Thumbs.db
 # "themes" directory
 wp-content/*
 wp-content/themes/*
-!wp-content/themes/onesocial-ccluk
+!wp-content/themes/ccluk
 
 # ignore all plugins except custom ccluk ones
 wp-content/plugins/*
@@ -102,4 +102,4 @@ wp-content/themes/twenty*/
 .sassbuilder-config
 .libsass.json
 .sassbuilder-config.json
-wp-content/themes/onesocial
+
