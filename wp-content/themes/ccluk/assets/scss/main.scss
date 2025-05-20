@@ -1,15 +1,9 @@
-// Main SCSS - Consolidated
+@import "partials/init";
 
-@import "partials/variables";
-@import "partials/mixins";
-@import "partials/fonts";
+@import "main-global";
 
-// Base layout and resets
-@import "partials/header";
+@media (max-width: 1024px) {
+	@import "main-mobile";
+}
 
-// Placeholder for other sections
-// @import "partials/navigation";
-// @import "partials/page";
-// @import "partials/footer";
-// @import "partials/home";
-// @import "partials/responsive";
+@import "main-desktop";

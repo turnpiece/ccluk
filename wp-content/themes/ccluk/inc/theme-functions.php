@@ -96,7 +96,7 @@ function ccluk_scripts_styles()
 	$JS_URL = $assets_dir . '/js';
 
 	// Activate our main stylesheets.
-	wp_enqueue_style('ccluk-main-global', $CSS_URL . '/main-global.css', '', $version, 'all');
+	wp_enqueue_style('ccluk-main', $CSS_URL . '/main.css', '', $version, 'all');
 
 	/*
 	 * Custom styles
@@ -116,7 +116,7 @@ function ccluk_scripts_styles()
 	 *
 	 */
 	wp_enqueue_script('ccluk-menu-js', $JS_URL . '/menu.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
-
+	/*
 	// Google Analytics tracking
 	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
@@ -125,12 +125,12 @@ function ccluk_scripts_styles()
 	} else {
 		wp_enqueue_style('ccluk-main-desktop', $CSS_URL . '/main-desktop.css', array('ccluk-main-global'), $version, 'screen and (min-width: 1025px)');
 	}
-
+	
 	// Media query fallback
 	if (!wp_script_is('ccluk-main-mobile', 'enqueued')) {
 		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'screen and (max-width: 1024px)');
 	}
-
+*/
 	/*	 * **************************** SCRIPTS ***************************** */
 
 	/*

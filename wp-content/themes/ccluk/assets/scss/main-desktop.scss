@@ -3,33 +3,10 @@
 /*--------------------------------------------------------------
 This is the Desktop stylesheet, served to laptops and desktop devices.
 ----------------------------------------------------------------
->>> TABLE OF CONTENTS:
-----------------------------------------------------------------
->>> WORDPRESS
-----------------------------------------------------------------
-1.1 - All Desktops
-    1.1.1 - Basic Structure
-    1.1.2 - Sidebars
-    1.1.3 - Footer Widgets
-    1.1.4 - Header
-    1.1.5 - Navigation
-    1.1.6 - Blog
-    1.1.7 - Single Post
-    1.1.8 - Sliding Panels
 
-    1.1.10 - Dropdowns
-    1.1.11 - Search Template
-1.2 - Custom media queries (desktops and laptops)
-    1.2.1 - Basic Structure
-    1.2.3 - Widgets
-    1.2.4 - Footer
-
-*/
 /*--------------------------------------------------------------
 1.1.1 - Basic Structure
 --------------------------------------------------------------*/
-
-@import "partials/init";
 
 html, body {
   background-color: $white;
