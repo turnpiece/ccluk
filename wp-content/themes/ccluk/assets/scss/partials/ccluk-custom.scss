@@ -1,0 +1,192 @@
+.widget_mc4wp_form_widget form p input[type="submit"] {
+  background-color: $blue;
+}
+
+.widget.widget_newsletterwidget form {
+  div input[type="submit"],
+  p input[type="submit"] {
+    background-color: $blue;
+  }
+}
+
+input {
+  &[type="button"],
+  &[type="reset"] {
+    background-color: $blue;
+  }
+}
+
+a.button {
+  background-color: $blue;
+}
+
+#secondary div.generic-button a,
+.select2-container--default .select2-results__option--highlighted[aria-selected],
+.entry-header .entry-title a.button,
+.boss-search-wrapper label:after {
+  background-color: $blue;
+}
+
+#trigger-sidebar:hover .ccluk-side-icon {
+  background-color: $green;
+  &:before, &:after {
+    background-color: $green;
+  }
+}
+
+.dir-header span {
+  color: $green;
+}
+
+.post-author-info {
+  .entry-meta a:not(.entry-date), .author-name a:hover {
+    color: $green;
+  }
+}
+
+.posts-stream ul li h2 a:hover, 
+.entry-meta a.read-more {
+  color: $green;
+}
+
+.entry-content blockquote .author, 
+.comment-content blockquote .author, 
+.entry-header .entry-title a:hover, 
+.widget_search #searchform button i:before {
+  color: $green;
+}
+
+.entry-meta a.read-more {
+  color: $green;
+}
+
+.footer-inner-top a:hover {
+  color: $green;
+}
+
+#mobile-header {
+  background-color: $green;
+}
+
+.pagination .current {
+  background-color: $green;
+}
+
+.loader {
+  background-color: $green;
+  &:before, &:after {
+    background-color: $green;
+  }
+}
+
+@-webkit-keyframes load1 {
+  0%,
+        80%,
+        100% {
+    box-shadow: 0 0 green;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+
+@keyframes load1 {
+  0%,
+        80%,
+        100% {
+    box-shadow: 0 0 green;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+.entry-meta a.read-more,
+input[type="submit"] {
+  border-color: $blue;
+}
+
+.main-navigation {
+  .nav-menu > li:hover > a {
+    box-shadow: 0 -2px 0 $green inset;
+  }
+  div > ul > {
+    .current-menu-item > a, 
+    .current-menu-ancestor > a {
+      box-shadow: 0 -2px 0 $green inset;
+    }
+  }
+}
+
+.header-button.underlined {
+  box-shadow: 0 -1px 0 $green inset;
+}
+
+input {
+  &[type="checkbox"] + {
+    span:before, label:before, strong:before {
+      @include box-shadow(0px 0px 0px 2px $green);
+    }
+  }
+  &[type="radio"] + {
+    span:before, label:before, strong:before {
+      @include box-shadow(0px 0px 0px 2px $green);
+    }
+  }
+}
+
+/********** Desktop  *************/
+
+.is-desktop {
+  .header-button:hover {
+    background-color: $green;
+  }
+}
+
+.formatted-content {
+  background-color: $white;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .side-panel {
+    background-color: $white;
+  }
+}
+
+body {
+  #content article {
+    background-color: $white;
+  }
+}
+
+.site-content {
+  nav.nav-single, 
+  #comments {
+    background-color: $white;
+  }
+}
+
+.main-navigation li ul {
+  ul {
+    background-color: $white;
+  }
+  background-color: $white;
+}
+
+#header-search form, 
+.site-header {
+  background-color: $white;
+}
+
+/***************** Desktop ******************/
+
+.footer-inner-bottom {
+  background-color: $dark;
+}

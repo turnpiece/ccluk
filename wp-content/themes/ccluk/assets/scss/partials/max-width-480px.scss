@@ -1,0 +1,60 @@
+body {
+	background-color: $white;
+
+	#mobile-header {
+		#mobile-logo {
+			img {
+				max-height: 44px;
+				max-width: 200px;
+				margin: 10px auto;
+			}
+		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+	}
+
+	a.cta {
+		@include padding-right( 6.8 );
+	}
+
+	.entry-content {
+		blockquote {
+			img {
+				margin-left: 0;
+				margin-right: 0;
+				width: 100%;
+			}
+		}
+	}
+}
+
+body.admin-bar.admin-bar.admin-bar {
+  margin-top: 0 !important;
+}
+
+.single-post {
+	.header-area {
+		clear: both;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.entry-header.has-image {
+		h1 {
+			font-size: $font-size-std;
+		}
+		padding-top: 55px;
+	}
+}
+
+.single-attachment .entry-header, 
+.single-post .entry-header:not(.has-image) {
+	margin: 90px auto 10px;
+	padding: 0 15px;
+}
+
+.site-header .site-title {
+	width: 160px;
+}

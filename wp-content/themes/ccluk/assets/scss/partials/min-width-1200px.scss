@@ -1,0 +1,42 @@
+/*--------------------------------------------------------------
+MINIMUM width of 1200 pixels (large desktops)
+--------------------------------------------------------------*/
+
+#site-navigation {
+  width: 600px;
+}
+
+body.page-template-homepage {
+	#main {
+		.section {
+			&.feature {
+				.section-content {
+					max-width: $content_w_max;
+
+					article {
+						.list-item {
+							&.entry-image {
+								width: 580px;
+								text-align: right;
+							}
+
+							&.entry-content {
+								width: 540px;
+
+								.entry-title {
+									font-size: $font-size-big;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			&.banner {
+				.section-title-container > .section-title {
+					max-width: 900px;
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,7 @@
+body.page-template-homepage {
+    #main {
+        .section {
+            @include padding(3, 0);
+        }
+    }
+}

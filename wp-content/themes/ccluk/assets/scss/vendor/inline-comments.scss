@@ -1,0 +1,187 @@
+
+/*--------------------------------------------------------------
+20.0 - Inline Comments
+--------------------------------------------------------------*/
+
+#incom_wrapper .incom-bubble-style {
+  background: transparent;
+  z-index: 21;
+  a {
+    color: $gray;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 13px;
+    padding: 2px 5px;
+    min-width: 13px;
+    text-decoration: none;
+    border: 3px solid #ccc;
+    border-radius: 0;
+    font-weight: bold;
+    font-size: 12px;
+  }
+}
+
+.incom-bubble-style:before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 8px 0 0;
+  border-color: #fff transparent transparent transparent;
+  display: block;
+  z-index: 5;
+  margin-top: -5px;
+  left: 5px;
+  top: 100%;
+}
+
+#incom_wrapper {
+  .incom-bubble-style:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 8px 0 0;
+    border-color: #ccc transparent transparent transparent;
+    display: block;
+    z-index: 4;
+    margin-top: 0px;
+    left: 3px;
+    top: 100%;
+  }
+  .incom-comments-wrapper {
+    border-left: 0;
+    margin-left: -10px;
+    margin-top: 40px;
+    max-width: 250px;
+    padding: 5px;
+    z-index: 21;
+    font-family: inherit;
+    .notes-title {
+      text-transform: uppercase;
+      font-size: 11px;
+      font-weight: 900;
+      display: block;
+      border-bottom: 3px solid $divider_color;
+      padding-bottom: 9px;
+      margin-bottom: 20px;
+    }
+    .incom-cancel-x {
+      color: $dark_red;
+      opacity: 1;
+      font-size: 28px;
+      line-height: 22px;
+      -ms-transform: rotate(45deg);
+      /* IE 9 */
+      -webkit-transform: rotate(45deg);
+      /* Chrome, Safari, Opera */
+      transform: rotate(45deg);
+      position: absolute;
+      top: -7px;
+      right: -4px;
+      &:before {
+        content: '+';
+        font-family: "Times";
+        speak: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      img {
+        display: none !important;
+      }
+    }
+    .comment {
+      padding-left: 0;
+      padding-top: 0;
+      border-bottom: none;
+    }
+    .comment-avatar img {
+      width: 34px;
+      height: 34px;
+    }
+  }
+}
+
+body.logged-in + #incom_wrapper .incom-comments-wrapper #respond .comment-form-comment {
+  padding-left: 56px;
+  padding-top: 5px;
+}
+
+.comments-and-form {
+  min-height: 80px;
+  position: relative;
+}
+
+.form-submit.selectionShareable {
+  margin: 0;
+}
+
+#incom_wrapper {
+  #respond form textarea {
+    font-family: inherit;
+    font-size: 13px;
+    margin-top: 0;
+    padding-bottom: 20px;
+  }
+  .incom-comments-wrapper input[type="submit"] {
+    width: auto;
+    font-size: 13px;
+  }
+}
+
+.incom-comments-wrapper #respond.comment-respond form {
+  border-bottom: none;
+}
+
+.incom-cancel-link {
+  bottom: 0;
+  color: #929292;
+  font-size: 13px;
+  left: 60px;
+  position: absolute;
+}
+
+#incom_wrapper .incom-comments-wrapper .children {
+  padding-left: 15px;
+  padding-top: 12px;
+}
+
+.incom-comments-wrapper {
+  .vcard img {
+    vertical-align: text-bottom;
+    margin-right: 4px;
+  }
+  .comment-author {
+    padding-bottom: 10px;
+  }
+  .incom-reply {
+    padding: 0;
+    margin-top: 6px;
+    a.comment-reply-link {
+      padding: 0;
+      background-color: transparent;
+    }
+  }
+  .incom-div-comment {
+    margin-bottom: 10px;
+  }
+}
+
+/* Comment Attachment */
+
+.comment-form-url.comment-form-attachment {
+  display: none;
+}
+
+.comment-form-comment .boss-insert-buttons {
+  display: none;
+  left: 0;
+  top: 70px;
+}
+
+.comment-form-attachment + .comment-form-comment .boss-insert-buttons {
+  display: block;
+}

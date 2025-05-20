@@ -3,11 +3,13 @@
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/fonts";
-@import "partials/base";
 
+// Base layout and resets
 @import "partials/header";
-@import "partials/navigation";
-@import "partials/page";
-@import "partials/footer";
-@import "partials/home";
-@import "partials/responsive";
+
+// Placeholder for other sections
+// @import "partials/navigation";
+// @import "partials/page";
+// @import "partials/footer";
+// @import "partials/home";
+// @import "partials/responsive";
