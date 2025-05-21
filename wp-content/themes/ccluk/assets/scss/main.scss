@@ -8,15 +8,15 @@
 @import "vendor/related-posts";
 
 // Global styles (applied to all devices)
-@import "partials/responsive/main-global";
+@import "partials/responsive/global";
 
 // Responsive styles
 @media (max-width: 1023px) {
-	@import "partials/responsive/main-mobile";
+	@import "partials/responsive/mobile";
 }
 
 @media (min-width: 1024px) {
-	@import "partials/responsive/main-desktop";
+	@import "partials/responsive/desktop";
 }
 
 // Custom styles

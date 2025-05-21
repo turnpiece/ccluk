@@ -2885,6 +2885,107 @@ MINIMUM width of 481 pixels (phones and larger)
 }
 @media (max-width: 1023px) {
   /*--------------------------------------------------------------
+  Mobile Header
+  --------------------------------------------------------------*/
+  #mobile-header {
+    background-color: #fff !important;
+    padding-top: 8px;
+    height: 70px;
+  }
+  #mobile-header h1 {
+    color: #000;
+  }
+  #mobile-header h1 a {
+    color: #000;
+  }
+  #mobile-header .right-btn {
+    padding-top: 8px;
+  }
+  #mobile-header .right-btn:before {
+    color: #333;
+    font-size: 1.3125rem;
+  }
+  #mobile-header #mobile-logo img {
+    max-height: 70px;
+    max-width: 300px;
+    margin: 5px auto;
+  }
+  /*--------------------------------------------------------------
+  Mobile Menu
+  --------------------------------------------------------------*/
+  #mobile-right-panel li {
+    width: 100%;
+  }
+  #mobile-right-panel li > a {
+    font-weight: 600;
+  }
+  #mobile-right-panel li a {
+    color: #22a7f0;
+  }
+  #mobile-right-panel li a:hover {
+    color: #54ae68;
+  }
+  #mobile-right-panel li.current-menu-item, #mobile-right-panel li:hover {
+    background-color: #fff;
+  }
+  #mobile-right-panel li.current-menu-item > a, #mobile-right-panel li:hover > a {
+    color: #54ae68;
+  }
+  #mobile-right-panel li.current-menu-item .sub-menu, #mobile-right-panel li:hover .sub-menu {
+    background-color: #333;
+  }
+  #mobile-right-panel .sub-menu li a {
+    font-weight: 400;
+    padding-left: 40px;
+  }
+  #mobile-right-panel .submenu-btn {
+    color: #22a7f0;
+    right: 20px;
+  }
+  #mobile-right-panel .submenu-btn:hover {
+    color: #54ae68;
+  }
+  /*--------------------------------------------------------------
+  Is mobile
+  --------------------------------------------------------------*/
+  body.single #primary,
+  body.single #secondary,
+  body.single .site-content, body.archive #primary,
+  body.archive #secondary,
+  body.archive .site-content, body.page:not(.home) #primary,
+  body.page:not(.home) #secondary,
+  body.page:not(.home) .site-content,
+  body.is-mobile.single #primary,
+  body.is-mobile.single #secondary,
+  body.is-mobile.single .site-content,
+  body.is-mobile.archive #primary,
+  body.is-mobile.archive #secondary,
+  body.is-mobile.archive .site-content,
+  body.is-mobile.page:not(.home) #primary,
+  body.is-mobile.page:not(.home) #secondary,
+  body.is-mobile.page:not(.home) .site-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home).page.page-sidebar-active #secondary,
+  body.is-mobile.single.page.page-sidebar-active #secondary,
+  body.is-mobile.archive.page.page-sidebar-active #secondary,
+  body.is-mobile.page:not(.home).page.page-sidebar-active #secondary {
+    margin-top: 20px;
+    margin-top: 2rem;
+  }
+  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home).page.page-sidebar-active #secondary .widget,
+  body.is-mobile.single.page.page-sidebar-active #secondary .widget,
+  body.is-mobile.archive.page.page-sidebar-active #secondary .widget,
+  body.is-mobile.page:not(.home).page.page-sidebar-active #secondary .widget {
+    margin-bottom: 30px;
+    margin-bottom: 3rem;
+  }
+  body #main-wrap,
+  body.is-mobile #main-wrap {
+    padding-top: 70px;
+  }
+  /*--------------------------------------------------------------
   This is the Mobile stylesheet, served to phones and tablets.
   ----------------------------------------------------------------
   >>> TABLE OF CONTENTS:
@@ -2949,7 +3050,6 @@ MINIMUM width of 481 pixels (phones and larger)
   }
   .page-template-homepage .site {
     padding-top: 40px;
-    /* This cause Header on Mobile overlaps Slider - Home Page */
   }
   body:not(.single-post) footer.entry-meta {
     display: none;
@@ -3190,15 +3290,6 @@ MINIMUM width of 481 pixels (phones and larger)
   /* Register Page */
   /*--------------------------------------------------------------
   Responsive media queries (mobile styles)
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  Mobile Header
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  Mobile Menu
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  Is mobile
   --------------------------------------------------------------*/
 }
 @media screen and (max-width: 1023px) and (max-width: 400px) {
@@ -3840,98 +3931,6 @@ MINIMUM width of 481 pixels (phones and larger)
   }
 }
 @media (max-width: 1023px) {
-  #mobile-header {
-    background-color: #fff !important;
-    padding-top: 8px;
-    height: 70px;
-  }
-  #mobile-header h1 {
-    color: #000;
-  }
-  #mobile-header h1 a {
-    color: #000;
-  }
-  #mobile-header .right-btn {
-    padding-top: 8px;
-  }
-  #mobile-header .right-btn:before {
-    color: #333;
-    font-size: 1.3125rem;
-  }
-  #mobile-header #mobile-logo img {
-    max-height: 70px;
-    max-width: 300px;
-    margin: 5px auto;
-  }
-  #mobile-right-panel li {
-    width: 100%;
-  }
-  #mobile-right-panel li > a {
-    font-weight: 600;
-  }
-  #mobile-right-panel li a {
-    color: #22a7f0;
-  }
-  #mobile-right-panel li a:hover {
-    color: #54ae68;
-  }
-  #mobile-right-panel li.current-menu-item, #mobile-right-panel li:hover {
-    background-color: #fff;
-  }
-  #mobile-right-panel li.current-menu-item > a, #mobile-right-panel li:hover > a {
-    color: #54ae68;
-  }
-  #mobile-right-panel li.current-menu-item .sub-menu, #mobile-right-panel li:hover .sub-menu {
-    background-color: #333;
-  }
-  #mobile-right-panel .sub-menu li a {
-    font-weight: 400;
-    padding-left: 40px;
-  }
-  #mobile-right-panel .submenu-btn {
-    color: #22a7f0;
-    right: 20px;
-  }
-  #mobile-right-panel .submenu-btn:hover {
-    color: #54ae68;
-  }
-  body.single #primary,
-  body.single #secondary,
-  body.single .site-content, body.archive #primary,
-  body.archive #secondary,
-  body.archive .site-content, body.page:not(.home) #primary,
-  body.page:not(.home) #secondary,
-  body.page:not(.home) .site-content,
-  body.is-mobile.single #primary,
-  body.is-mobile.single #secondary,
-  body.is-mobile.single .site-content,
-  body.is-mobile.archive #primary,
-  body.is-mobile.archive #secondary,
-  body.is-mobile.archive .site-content,
-  body.is-mobile.page:not(.home) #primary,
-  body.is-mobile.page:not(.home) #secondary,
-  body.is-mobile.page:not(.home) .site-content {
-    max-width: 700px;
-    margin: 0 auto;
-  }
-  body.single.page.page-sidebar-active #secondary, body.archive.page.page-sidebar-active #secondary, body.page:not(.home).page.page-sidebar-active #secondary,
-  body.is-mobile.single.page.page-sidebar-active #secondary,
-  body.is-mobile.archive.page.page-sidebar-active #secondary,
-  body.is-mobile.page:not(.home).page.page-sidebar-active #secondary {
-    margin-top: 20px;
-    margin-top: 2rem;
-  }
-  body.single.page.page-sidebar-active #secondary .widget, body.archive.page.page-sidebar-active #secondary .widget, body.page:not(.home).page.page-sidebar-active #secondary .widget,
-  body.is-mobile.single.page.page-sidebar-active #secondary .widget,
-  body.is-mobile.archive.page.page-sidebar-active #secondary .widget,
-  body.is-mobile.page:not(.home).page.page-sidebar-active #secondary .widget {
-    margin-bottom: 30px;
-    margin-bottom: 3rem;
-  }
-  body #main-wrap,
-  body.is-mobile #main-wrap {
-    padding-top: 70px;
-  }
   body div.footer-inner-bottom .footer-inner {
     -webkit-flex-flow: column nowrap;
     -ms-flex-flow: column nowrap;
