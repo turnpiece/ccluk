@@ -93,8 +93,7 @@ body {
 }
 
 .site-content {
-  nav.nav-single, 
-  #comments {
+  nav.nav-single {
     clear: left;
     overflow: hidden;
     background-color: $white;

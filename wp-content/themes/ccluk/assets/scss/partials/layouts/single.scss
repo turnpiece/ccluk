@@ -44,39 +44,4 @@
             }
         }
     }
-
-    .comments-area {
-        #respond {
-            form {
-                input[type=text],
-                input[type=email],
-                textarea {
-                    border: 3px solid $green;
-                    @include padding();
-                }
-
-                p {
-                    input[type=submit] {
-                        margin-top: 5px;
-                        float: right;
-                    }
-                }
-            }
-        }
-
-        article {
-            @include padding( 2.5, 0 );
-
-            header {
-                @include margin-bottom( .6 );
-            }
-
-            .comment-content {
-                p {
-                    line-height: 1.5;
-                    @include margin-bottom( 1 );
-                }
-            }
-        }
-    }
 }

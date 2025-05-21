@@ -1,5 +1,5 @@
 // Base styles and variables
-@import "partials/init";
+@import "partials/base/init";
 
 // Vendor styles
 @import "vendor/events";
@@ -8,16 +8,21 @@
 @import "vendor/related-posts";
 
 // Global styles (applied to all devices)
-@import "partials/main-global";
+@import "partials/responsive/main-global";
 
 // Responsive styles
 @media (max-width: 1024px) {
-	@import "partials/main-mobile";
+	@import "partials/responsive/main-mobile";
 }
 
 @media (min-width: 1025px) {
-	@import "partials/main-desktop";
+	@import "partials/responsive/main-desktop";
 }
 
-// Custom overrides (should be used sparingly)
-@import "partials/custom";
+// Custom styles
+@import "partials/components/general";
+@import "partials/layouts/single";
+@import "partials/layouts/page";
+@import "partials/pages/home-page";
+@import "partials/pages/find-your-mp";
+@import "partials/components/ccluk-custom";

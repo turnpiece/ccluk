@@ -2964,8 +2964,7 @@ MINIMUM width of 481 pixels (phones and larger)
     margin: 0;
     border-bottom: 3px solid #aaa;
   }
-  .site-content nav.nav-single,
-  .site-content #comments {
+  .site-content nav.nav-single {
     clear: left;
     overflow: hidden;
     background-color: #fff;
@@ -4935,7 +4934,6 @@ MINIMUM width of 481 pixels (phones and larger)
     max-width: 900px;
   }
 }
-/** Import partials **/
 .site {
   padding-top: 0;
 }
@@ -5216,44 +5214,6 @@ a.cta:hover {
 .single-post .entry-tags a:hover,
 .single-give_forms .entry-tags a:hover {
   background-color: #54ae68;
-}
-.single .comments-area #respond form input[type=text],
-.single .comments-area #respond form input[type=email],
-.single .comments-area #respond form textarea,
-.single-post .comments-area #respond form input[type=text],
-.single-post .comments-area #respond form input[type=email],
-.single-post .comments-area #respond form textarea,
-.single-give_forms .comments-area #respond form input[type=text],
-.single-give_forms .comments-area #respond form input[type=email],
-.single-give_forms .comments-area #respond form textarea {
-  border: 3px solid #54ae68;
-  padding: 10px 10px;
-  padding: 1rem 1rem;
-}
-.single .comments-area #respond form p input[type=submit],
-.single-post .comments-area #respond form p input[type=submit],
-.single-give_forms .comments-area #respond form p input[type=submit] {
-  margin-top: 5px;
-  float: right;
-}
-.single .comments-area article,
-.single-post .comments-area article,
-.single-give_forms .comments-area article {
-  padding: 25px 0px;
-  padding: 2.5rem 0rem;
-}
-.single .comments-area article header,
-.single-post .comments-area article header,
-.single-give_forms .comments-area article header {
-  margin-bottom: 6px;
-  margin-bottom: 0.6rem;
-}
-.single .comments-area article .comment-content p,
-.single-post .comments-area article .comment-content p,
-.single-give_forms .comments-area article .comment-content p {
-  line-height: 1.5;
-  margin-bottom: 10px;
-  margin-bottom: 1rem;
 }
 
 /* styles for pages */

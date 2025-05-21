@@ -1,10 +1,8 @@
 /*--------------------------------------------------------------
-9.0 - Comments
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-9.1 - Comment area
+Comments Styles
 --------------------------------------------------------------*/
 
+/* Comment Area */
 #respond form {
   input[type="text"] {
     width: 46.333333333%;
@@ -166,10 +164,7 @@ a {
   }
 }
 
-/*--------------------------------------------------------------
-9.2 - Comment form
---------------------------------------------------------------*/
-
+/* Comment Form */
 #comments {
   clear: left;
   margin-bottom: 15px;
@@ -281,7 +276,6 @@ body.logged-in #respond .comment-form-comment {
   }
 }
 
-
 .commentlist .children {
   margin-left: 60px;
   margin-bottom: 0;
@@ -300,4 +294,21 @@ body.logged-in #respond .comment-form-comment {
 .comment-content blockquote .author {
   color: $green;
   font-size: 18px;
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+  .site-content #comments article.comment {
+    padding: 25px 0;
+  }
+  
+  .site-content #comments {
+    clear: left;
+    overflow: hidden;
+    background-color: $white;
+    padding: 15px 0;
+    overflow: hidden;
+    margin: 0;
+    border-bottom: 3px solid $light;
+  }
 }
