@@ -40,9 +40,6 @@ This is the Mobile stylesheet, served to phones and tablets.
         1.2.2.3 - Right: Content Open
         1.2.2.4 - Right: Content close
 */
-/*----------------------------------------------------------------
->>> WORDPRESS
-----------------------------------------------------------------*/
 /** Variables **/
 /*--------------------------------------------------------------
 1.0 - All mobile devices
@@ -147,6 +144,9 @@ textarea {
 /*--------------------------------------------------------------
 1.1.2 - Desktop Header
 --------------------------------------------------------------*/
+header#masthead {
+  display: none;
+}
 header#masthead #header-aside,
 header#masthead #logo-area {
   display: none;

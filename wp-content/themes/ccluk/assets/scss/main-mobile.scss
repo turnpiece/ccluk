@@ -42,11 +42,6 @@ This is the Mobile stylesheet, served to phones and tablets.
         1.2.2.3 - Right: Content Open
         1.2.2.4 - Right: Content close
 */
-/*----------------------------------------------------------------
->>> WORDPRESS
-----------------------------------------------------------------*/
-
-@import "partials/init";
 
 /*--------------------------------------------------------------
 1.0 - All mobile devices
@@ -168,6 +163,8 @@ textarea {
 --------------------------------------------------------------*/
 
 header#masthead {
+  display: none;
+
   #header-aside, 
   #logo-area {
     display: none;
