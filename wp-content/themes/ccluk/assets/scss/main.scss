@@ -1,13 +1,23 @@
+// Base styles and variables
 @import "partials/init";
 
-@import "main-global";
+// Vendor styles
+@import "vendor/events";
+@import "vendor/give";
+@import "vendor/catapult-cookie-bar";
+@import "vendor/related-posts";
 
+// Global styles (applied to all devices)
+@import "partials/main-global";
+
+// Responsive styles
 @media (max-width: 1024px) {
-	@import "main-mobile";
+	@import "partials/main-mobile";
 }
 
 @media (min-width: 1025px) {
-	@import "main-desktop";
+	@import "partials/main-desktop";
 }
 
-@import "custom";
+// Custom overrides (should be used sparingly)
+@import "partials/custom";

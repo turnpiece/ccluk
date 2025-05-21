@@ -1132,53 +1132,9 @@ Responsive media queries (mobile styles)
   }
 }
 
-@import "partials/mobile";
-
-/*--------------------------------------------------------------
-MAXIMUM width of 1024 pixels (tablets)
---------------------------------------------------------------*/
-@media screen and (max-width: 1024px) {
-
-	@import "partials/max-width-1024px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 768 pixels (vertical tablets & large phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 768px) {
-
-	@import "partials/max-width-768px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 520 pixels (large phones and smaller)
---------------------------------------------------------------*/
-@media screen and (max-width: 520px) {
-
-	@import "partials/max-width-520px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 480 pixels (phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 480px) {
-
-	@import "partials/max-width-480px";
-
-}
-
-
-/*--------------------------------------------------------------
-MAXIMUM width of 320 pixels (small phones)
---------------------------------------------------------------*/
-@media screen and (max-width: 480px) {
-
-	@import "partials/max-width-320px";
-
-}
+@import "mobile";
+@import "max-width-1024px";
+@import "max-width-768px";
+@import "max-width-520px";
+@import "max-width-480px";
+@import "max-width-320px";

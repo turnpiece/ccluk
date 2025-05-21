@@ -910,11 +910,5 @@ body.search h1.entry-title {
 Media queries
 --------------------------------------------------------------*/
 
-
-@media screen and (min-width: 1025px) {
-    @import 'partials/min-width-1025px';
-}
-
-@media screen and (min-width: 1200px) {
-    @import 'partials/min-width-1200px';
-}
+@import "min-width-1025px";
+@import "min-width-1200px";

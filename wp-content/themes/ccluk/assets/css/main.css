@@ -1,5 +1,162 @@
 @charset "UTF-8";
 /** Variables **/
+.single-incsub_event .entry-header {
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
+  border-bottom: 3px solid #54ae68;
+}
+.single-incsub_event .entry-header h1.entry-title {
+  font-size: 3rem;
+  padding-bottom: 15px;
+  color: #54ae68;
+}
+.single-incsub_event .entry-header a > .entry-title {
+  color: #22a7f0;
+}
+.single-incsub_event .header-area {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.single-incsub_event #wpmudevevents-wrapper {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentheader {
+  padding-top: 0;
+}
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta {
+  color: #54ae68;
+  margin: 10px 0px;
+  margin: 1rem 0rem;
+  margin-top: 10px;
+  padding-top: 0;
+}
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal {
+  float: right;
+  margin: 2px 0px;
+  margin: 0.2rem 0rem;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  background-color: #22a7f0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:hover,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:hover {
+  background-color: #54ae68;
+}
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:before,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical > span,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:before,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal > span {
+  color: #fff;
+  border-color: #fff;
+}
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:after,
+.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:after {
+  color: #fff;
+  border-color: #fff transparent;
+}
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-buttons,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-user {
+  display: none;
+}
+.single-incsub_event #wpmudevevents-wrapper div.message {
+  border: none;
+}
+.single-incsub_event #wpmudevevents-wrapper div.message.success {
+  color: #fff;
+  background-color: #54ae68;
+}
+
+.incsub_event .entry-header .entry-meta,
+.post-type-archive-incsub_event .entry-header .entry-meta {
+  font-size: 1.3125rem;
+}
+
+/* styles for GIve donation pages */
+body.single-give_forms .entry-header {
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
+  border-bottom: 3px solid #54ae68;
+}
+body.single-give_forms .entry-header h1.entry-title {
+  font-size: 3rem;
+  padding-bottom: 15px;
+  color: #54ae68;
+}
+body.single-give_forms .entry-header a > .entry-title {
+  color: #22a7f0;
+}
+body.single-give_forms #main {
+  max-width: 600px;
+}
+body.single-give_forms #main #content .header-area {
+  max-width: 600px;
+  margin: 15px auto;
+  margin: 1.5rem auto;
+}
+body.single-give_forms #secondary {
+  display: none;
+}
+
+.give-form .give-donation-submit input[type=submit].give-btn,
+.give-form button.give-btn {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  background-image: none;
+  background-color: #22a7f0;
+  text-shadow: none;
+  box-shadow: none;
+  padding: 6px 10px;
+  padding: 0.6rem 1rem;
+  color: #fff;
+  font-weight: bold;
+  text-wrap: balance;
+  max-width: 400px;
+}
+.give-form .give-donation-submit input[type=submit].give-btn:hover,
+.give-form button.give-btn:hover {
+  color: #fff;
+  background-color: #54ae68;
+  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+}
+
+[id*=give-form] .give-recurring-donors-choice label {
+  font-size: inherit;
+}
+
+#catapult-cookie-bar a.ctcc-more-info-link {
+  text-decoration: underline;
+}
+
+.crp_related > h3 {
+  float: none;
+}
+.crp_related ul {
+  list-style-type: none;
+}
+.crp_related ul li {
+  position: relative;
+  min-height: 110px;
+}
+.crp_related ul li .crp_thumb {
+  margin-right: 10px;
+}
+.crp_related ul li .crp_title {
+  position: absolute;
+  left: 235px;
+  top: 0;
+}
+
 /*--------------------------------------------------------------
 This is the Global stylesheet, served to all devices.
 ----------------------------------------------------------------
@@ -61,7 +218,6 @@ This is the Global stylesheet, served to all devices.
 /*--------------------------------------------------------------
 # Variables
 --------------------------------------------------------------*/
-/** Variables **/
 /*--------------------------------------------------------------
 # Normalize
 --------------------------------------------------------------*/
@@ -3045,21 +3201,6 @@ MINIMUM width of 481 pixels (phones and larger)
   /*--------------------------------------------------------------
   Is mobile
   --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  MAXIMUM width of 1024 pixels (tablets)
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  MAXIMUM width of 768 pixels (vertical tablets & large phones)
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  MAXIMUM width of 520 pixels (large phones and smaller)
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  MAXIMUM width of 480 pixels (phones)
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  MAXIMUM width of 320 pixels (small phones)
-  --------------------------------------------------------------*/
 }
 @media screen and (max-width: 1024px) and (max-width: 400px) {
   .gallery-columns-5 .gallery-item,
@@ -3792,8 +3933,6 @@ MINIMUM width of 481 pixels (phones and larger)
   body.is-mobile #main-wrap {
     padding-top: 70px;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 1024px) {
   body div.footer-inner-bottom .footer-inner {
     -webkit-flex-flow: column nowrap;
     -ms-flex-flow: column nowrap;
@@ -3888,8 +4027,6 @@ MINIMUM width of 481 pixels (phones and larger)
   .archive.author .archive-header .author-avatar {
     top: 0;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 768px) {
   body.page-template-homepage #main .section.banner {
     max-height: 100%;
   }
@@ -3926,8 +4063,6 @@ MINIMUM width of 481 pixels (phones and larger)
     clear: both;
     width: 100%;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 520px) {
   .single-ccluk_news .entry-header.has-image h1 {
     font-size: 2.25rem;
     max-height: 200px;
@@ -3948,8 +4083,6 @@ MINIMUM width of 481 pixels (phones and larger)
     margin-left: auto;
     margin-right: auto;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 480px) {
   body {
     background-color: #fff;
   }
@@ -3992,8 +4125,6 @@ MINIMUM width of 481 pixels (phones and larger)
   .site-header .site-title {
     width: 160px;
   }
-}
-@media screen and (max-width: 1024px) and (max-width: 480px) {
   #mobile-header #mobile-logo img {
     max-width: 200px;
   }
@@ -4777,14 +4908,10 @@ MINIMUM width of 481 pixels (phones and larger)
   /*--------------------------------------------------------------
   Media queries
   --------------------------------------------------------------*/
-}
-@media screen and (min-width: 1025px) and (min-width: 1025px) {
   body.page-template-homepage #main .section {
     padding: 30px 0px;
     padding: 3rem 0rem;
   }
-}
-@media screen and (min-width: 1025px) and (min-width: 1200px) {
   /*--------------------------------------------------------------
   MINIMUM width of 1200 pixels (large desktops)
   --------------------------------------------------------------*/
@@ -4809,7 +4936,6 @@ MINIMUM width of 481 pixels (phones and larger)
   }
 }
 /** Import partials **/
-/** Variables **/
 .site {
   padding-top: 0;
 }
@@ -5851,162 +5977,4 @@ body #content article {
 /***************** Desktop ******************/
 .footer-inner-bottom {
   background-color: #333;
-}
-
-/** Styles for plugins etc. **/
-.single-incsub_event .entry-header {
-  margin: 12px 0px;
-  margin: 1.2rem 0rem;
-  border-bottom: 3px solid #54ae68;
-}
-.single-incsub_event .entry-header h1.entry-title {
-  font-size: 3rem;
-  padding-bottom: 15px;
-  color: #54ae68;
-}
-.single-incsub_event .entry-header a > .entry-title {
-  color: #22a7f0;
-}
-.single-incsub_event .header-area {
-  max-width: 600px;
-  margin: 0 auto;
-}
-.single-incsub_event #wpmudevevents-wrapper {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentheader {
-  padding-top: 0;
-}
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta {
-  color: #54ae68;
-  margin: 10px 0px;
-  margin: 1rem 0rem;
-  margin-top: 10px;
-  padding-top: 0;
-}
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal {
-  float: right;
-  margin: 2px 0px;
-  margin: 0.2rem 0rem;
-  -moz-box-shadow: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border: none;
-  color: #fff;
-  background-color: #22a7f0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:hover,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:hover {
-  background-color: #54ae68;
-}
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:before,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical > span,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:before,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal > span {
-  color: #fff;
-  border-color: #fff;
-}
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_ical:after,
-.single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta a.export_to_gcal:after {
-  color: #fff;
-  border-color: #fff transparent;
-}
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-buttons,
-.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-user {
-  display: none;
-}
-.single-incsub_event #wpmudevevents-wrapper div.message {
-  border: none;
-}
-.single-incsub_event #wpmudevevents-wrapper div.message.success {
-  color: #fff;
-  background-color: #54ae68;
-}
-
-.incsub_event .entry-header .entry-meta,
-.post-type-archive-incsub_event .entry-header .entry-meta {
-  font-size: 1.3125rem;
-}
-
-/* styles for GIve donation pages */
-body.single-give_forms .entry-header {
-  margin: 12px 0px;
-  margin: 1.2rem 0rem;
-  border-bottom: 3px solid #54ae68;
-}
-body.single-give_forms .entry-header h1.entry-title {
-  font-size: 3rem;
-  padding-bottom: 15px;
-  color: #54ae68;
-}
-body.single-give_forms .entry-header a > .entry-title {
-  color: #22a7f0;
-}
-body.single-give_forms #main {
-  max-width: 600px;
-}
-body.single-give_forms #main #content .header-area {
-  max-width: 600px;
-  margin: 15px auto;
-  margin: 1.5rem auto;
-}
-body.single-give_forms #secondary {
-  display: none;
-}
-
-.give-form .give-donation-submit input[type=submit].give-btn,
-.give-form button.give-btn {
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  border-radius: 15px;
-  background-image: none;
-  background-color: #22a7f0;
-  text-shadow: none;
-  box-shadow: none;
-  padding: 6px 10px;
-  padding: 0.6rem 1rem;
-  color: #fff;
-  font-weight: bold;
-  text-wrap: balance;
-  max-width: 400px;
-}
-.give-form .give-donation-submit input[type=submit].give-btn:hover,
-.give-form button.give-btn:hover {
-  color: #fff;
-  background-color: #54ae68;
-  -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-  box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-}
-
-[id*=give-form] .give-recurring-donors-choice label {
-  font-size: inherit;
-}
-
-#catapult-cookie-bar a.ctcc-more-info-link {
-  text-decoration: underline;
-}
-
-.crp_related > h3 {
-  float: none;
-}
-.crp_related ul {
-  list-style-type: none;
-}
-.crp_related ul li {
-  position: relative;
-  min-height: 110px;
-}
-.crp_related ul li .crp_thumb {
-  margin-right: 10px;
-}
-.crp_related ul li .crp_title {
-  position: absolute;
-  left: 235px;
-  top: 0;
 }
