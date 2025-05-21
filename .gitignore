@@ -108,4 +108,4 @@ wp-content/plugins/*
 .sassbuilder-config
 .libsass.json
 .sassbuilder-config.json
-
+.DS_Store
