@@ -86,6 +86,7 @@ Mobile Menu
 Is mobile
 --------------------------------------------------------------*/
 
+body,
 body.is-mobile {
 	@include mobile-styles();
 }

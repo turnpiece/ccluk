@@ -6,6 +6,8 @@
 	@import "main-mobile";
 }
 
-@import "main-desktop";
+@media (min-width: 1025px) {
+	@import "main-desktop";
+}
 
 @import "custom";
