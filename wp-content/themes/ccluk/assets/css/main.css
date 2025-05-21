@@ -2883,7 +2883,7 @@ MINIMUM width of 481 pixels (phones and larger)
     width: 320px;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   /*--------------------------------------------------------------
   This is the Mobile stylesheet, served to phones and tablets.
   ----------------------------------------------------------------
@@ -3201,7 +3201,7 @@ MINIMUM width of 481 pixels (phones and larger)
   Is mobile
   --------------------------------------------------------------*/
 }
-@media screen and (max-width: 1024px) and (max-width: 400px) {
+@media screen and (max-width: 1023px) and (max-width: 400px) {
   .gallery-columns-5 .gallery-item,
   .gallery-columns-6 .gallery-item,
   .gallery-columns-7 .gallery-item,
@@ -3210,7 +3210,7 @@ MINIMUM width of 481 pixels (phones and larger)
     max-width: 100%;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   #secondary {
     padding: 0 15px;
   }
@@ -3382,7 +3382,7 @@ MINIMUM width of 481 pixels (phones and larger)
     display: block;
   }
 }
-@media screen and (max-width: 1024px) and (max-width: 520px) {
+@media screen and (max-width: 1023px) and (max-width: 520px) {
   #primary {
     padding-left: 10px;
     padding-right: 10px;
@@ -3415,12 +3415,12 @@ MINIMUM width of 481 pixels (phones and larger)
     padding: 0;
   }
 }
-@media screen and (max-width: 1024px) and (max-width: 350px) {
+@media screen and (max-width: 1023px) and (max-width: 350px) {
   .error404 .entry-title {
     font-size: 10rem;
   }
 }
-@media screen and (max-width: 1024px) and (max-width: 460px) {
+@media screen and (max-width: 1023px) and (max-width: 460px) {
   .author-top .author .url img {
     width: 50px;
     height: 50px;
@@ -3438,7 +3438,7 @@ MINIMUM width of 481 pixels (phones and larger)
     display: none;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   ::-webkit-input-placeholder,
   :-moz-placeholder,
   ::-moz-placeholder,
@@ -3793,12 +3793,12 @@ MINIMUM width of 481 pixels (phones and larger)
     max-width: 100%;
   }
 }
-@media screen and (max-width: 1024px) and (min-width: 500px) {
+@media screen and (max-width: 1023px) and (min-width: 500px) {
   #wp-calendar {
     max-width: 500px;
   }
 }
-@media screen and (max-width: 1024px) and (min-width: 481px) and (max-width: 900px) {
+@media screen and (max-width: 1023px) and (min-width: 481px) and (max-width: 900px) {
   div.footer-inner.widget-area {
     -webkit-flex-flow: row wrap;
     -ms-flex-flow: row wrap;
@@ -3811,7 +3811,7 @@ MINIMUM width of 481 pixels (phones and larger)
     flex: 1 1 50%;
   }
 }
-@media screen and (max-width: 1024px) and (max-width: 630px) {
+@media screen and (max-width: 1023px) and (max-width: 630px) {
   div.footer-inner.widget-area {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -3820,7 +3820,7 @@ MINIMUM width of 481 pixels (phones and larger)
     flex-direction: column;
   }
 }
-@media screen and (max-width: 1024px) and (max-width: 622px) {
+@media screen and (max-width: 1023px) and (max-width: 622px) {
   .popup-content .col {
     float: none;
     padding: 0;
@@ -3833,13 +3833,13 @@ MINIMUM width of 481 pixels (phones and larger)
     padding-top: 40px;
   }
 }
-@media screen and (max-width: 1024px) and (min-width: 400px) and (max-width: 622px) {
+@media screen and (max-width: 1023px) and (min-width: 400px) and (max-width: 622px) {
   .wp-social-login-provider-list a:before {
     padding-right: 4%;
     padding-left: 0;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
   #mobile-header {
     background-color: #fff !important;
     padding-top: 8px;
@@ -4131,7 +4131,7 @@ MINIMUM width of 481 pixels (phones and larger)
     margin-top: 15px;
   }
 }
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
   /*--------------------------------------------------------------
   This is the Desktop stylesheet, served to laptops and desktop devices.
   ----------------------------------------------------------------
@@ -5908,7 +5908,7 @@ input[type=radio] + span:before, input[type=radio] + label:before, input[type=ra
   background-color: #fff;
 }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {
+@media screen and (max-width: 1023px) and (min-width: 768px) {
   .side-panel {
     background-color: #fff;
   }

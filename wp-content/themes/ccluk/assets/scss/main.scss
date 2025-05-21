@@ -11,11 +11,11 @@
 @import "partials/responsive/main-global";
 
 // Responsive styles
-@media (max-width: 1024px) {
+@media (max-width: 1023px) {
 	@import "partials/responsive/main-mobile";
 }
 
-@media (min-width: 1025px) {
+@media (min-width: 1024px) {
 	@import "partials/responsive/main-desktop";
 }
 
