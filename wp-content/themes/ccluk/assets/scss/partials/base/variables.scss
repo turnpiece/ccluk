@@ -1,14 +1,25 @@
-
 /** Variables **/
 
-$white: #fff;
-$black: #000;
+// Colors now managed by theme.json
+// Using CSS custom properties for theme.json values
+:root {
+  --wp--preset--color--primary: #54ae68;
+  --wp--preset--color--secondary: #22a7f0;
+  --wp--preset--color--white: #fff;
+  --wp--preset--color--black: #000;
+}
+
+// Map old variable names to new CSS custom properties
+$white: var(--wp--preset--color--white);
+$black: var(--wp--preset--color--black);
+$green: var(--wp--preset--color--primary);
+$blue: var(--wp--preset--color--secondary);
+
+// Additional colors not in theme.json
 $light: #aaa;
 $dark: #333;
 $gray: #838383;
-$green: #54ae68;
 $dark_green: #217B35;
-$blue: #22a7f0;
 $dark_blue: #00418A;
 $red: #e85c41;
 $dark_red: #B5290E;
@@ -17,6 +28,16 @@ $green_bg: rgba(84, 174, 104, 0.9);
 $white_bg: rgba(255, 255, 255, 0.9);
 $divider_color: rgba(0, 0, 0, 0.1);
 $secondary_bg: #f9f9f9;
+
+// Layout
 $content_w: 600px;
 $content_w_large: 700px;
 $content_w_max: 1170px;
+
+// Typography
+$font-family-base: var(--wp--preset--font-family--open-sans);
+$font-size-base: var(--wp--preset--font-size--base);
+$font-size-small: var(--wp--preset--font-size--small);
+$font-size-medium: var(--wp--preset--font-size--medium);
+$font-size-large: var(--wp--preset--font-size--large);
+$font-size-xlarge: var(--wp--preset--font-size--xlarge);
