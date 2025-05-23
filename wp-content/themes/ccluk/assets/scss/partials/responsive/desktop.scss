@@ -1,5 +1,3 @@
-// Main Desktop
-
 /*--------------------------------------------------------------
 This is the Desktop stylesheet, served to laptops and desktop devices.
 ----------------------------------------------------------------
@@ -11,7 +9,7 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 html, body {
   background-color: $white;
   height: 100%;
-  /* sticky footer */
+  overflow-x: hidden;
 }
 
 html.js {
@@ -32,6 +30,7 @@ html.js {
 .site {
   margin: auto;
   position: relative;
+  overflow-x: hidden;
 }
 
 .single-item.groups .site {
@@ -70,7 +69,7 @@ html.js {
 }
 
 .header-inner-center {
-@include display-flex();
+  @include display-flex();
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
@@ -80,6 +79,12 @@ html.js {
   max-width: 780px;
   padding: 0 30px;
   width: 100%;
+  position: relative;
+}
+
+#header-aside {
+  width: 200px;
+  white-space: nowrap;
 }
 
 /*--------------------------------------------------------------
@@ -256,18 +261,12 @@ body {
     position: absolute;
     width: 100%;
   }
-  #wp-admin-bar-root-default,
-  #wp-admin-bar-search,
-  #wp-admin-bar-my-account > a {
-    display: none;
-  }
 }
 
 .header-wrapper {
   padding: 0 15px;
   position: relative;
   display: table;
-  /* Removed `!important` due to some issues with dropdown */
   width: 100%;
 }
 
@@ -327,35 +326,46 @@ body {
 
 #logo-area {
   padding-right: 20px;
-  width: 180px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 #site-navigation {
   display: table-cell;
   vertical-align: bottom;
-  width: 100%;
+  width: auto;
+  flex: 1;
 }
 
-header-aside,
-#logo-area {
-  display: table-cell;
-  vertical-align: middle;
+#header-aside {
+  width: 200px;
+  white-space: nowrap;
+}
+
+#header-aside-inner {
+  float: right;
+  display: table;
+  display: -moz-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 #header-search {
   display: inline-block;
   position: relative;
   form {
-    > div {
-      height: 100%;
-      position: relative;
-    }
     height: 100%;
     position: absolute;
     right: 0;
     display: none;
-    z-index: 32; /* Should be greater than 31 */
+    z-index: 32;
     background-color: $white;
+  }
+  form > div {
+    height: 100%;
+    position: relative;
   }
 }
 
@@ -388,7 +398,9 @@ header-aside,
     border: 0;
     font-size: 35px;
     &:hover {
-      @include darken();
+      -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+      -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
     }
   }
 }
@@ -400,17 +412,6 @@ header-aside,
   &:-moz-placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
-}
-
-#header-aside {
-  width: 200px;
-  white-space: nowrap;
-}
-
-#header-aside-inner {
-  float: right;
-  display: table;
-  @include display-flex();
 }
 
 .header-button {
@@ -435,7 +436,7 @@ header-aside,
     background-color: $green;
   }
   #search-open {
-    font-size: $font-size-mid;
+    font-size: 28px;
   }
 }
 

@@ -58,6 +58,9 @@ body.page-template-homepage {
 					}
 
 					.entry-content {
+						font-size: var(--wp--preset--font-size--medium);
+						line-height: 1.6;
+
 						.item-meta {
 							.activity {
 								font-size: 85%;

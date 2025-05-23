@@ -223,265 +223,6 @@ This is the Global stylesheet, served to all devices.
 >>> WORDPRESS
 ----------------------------------------------------------------*/
 /*--------------------------------------------------------------
-# Variables
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-# Normalize
---------------------------------------------------------------*/
-/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-/* Note: This file is updated by S@G@R, To remove ducplication of styles. */
-/* HTML5 display definitions
-   ========================================================================== */
-/**
- * Correct `block` display not defined for any HTML5 element in IE 8/9.
- * Correct `block` display not defined for `details` or `summary` in IE 10/11
- * and Firefox.
- * Correct `block` display not defined for `main` in IE 11.
- */
-html, body {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
-
-article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
-  display: block;
-}
-
-/**
- * 1. Correct `inline-block` display not defined in IE 8/9.
- * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
- */
-audio, canvas, progress, video {
-  display: inline-block;
-  /* 1 */
-  vertical-align: baseline;
-  /* 2 */
-}
-
-/**
- * Prevent modern browsers from displaying `audio` without controls.
- * Remove excess height in iOS 5 devices.
- */
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-/**
- * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
- */
-[hidden], template {
-  display: none;
-}
-
-/* Text-level semantics
-   ========================================================================== */
-/**
- * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
- */
-abbr[title] {
-  border-bottom: 1px dotted;
-}
-
-/**
- * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
- */
-b, strong {
-  font-weight: bold;
-}
-
-/**
- * Address styling not present in Safari and Chrome.
- */
-dfn {
-  font-style: italic;
-}
-
-/**
- * Address styling not present in IE 8/9.
- */
-mark {
-  background: #ff0;
-  color: #000;
-}
-
-/**
- * Address inconsistent and variable font size in all browsers.
- */
-small {
-  font-size: 80%;
-}
-
-/**
- * Prevent `sub` and `sup` affecting `line-height` in all browsers.
- */
-sub {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-/* Embedded content
-   ========================================================================== */
-/**
- * Correct overflow not hidden in IE 9/10/11.
- */
-svg:not(:root) {
-  overflow: hidden;
-}
-
-/* Forms
-   ========================================================================== */
-/**
- * Known limitation: by default, Chrome and Safari on OS X allow very limited
- * styling of `select`, unless a `border` property is set.
- */
-/**
- * 1. Correct color not being inherited.
- *    Known issue: affects color of disabled elements.
- * 2. Correct font properties not being inherited.
- * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
- */
-button, input, optgroup, select, textarea {
-  color: inherit;
-  /* 1 */
-  font: inherit;
-  /* 2 */
-  margin: 0;
-  /* 3 */
-}
-
-/**
- * Address `overflow` set to `hidden` in IE 8/9/10/11.
- */
-button {
-  overflow: visible;
-  text-transform: none;
-}
-
-/**
- * Address inconsistent `text-transform` inheritance for `button` and `select`.
- * All other form control elements do not inherit `text-transform` values.
- * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
- * Correct `select` style inheritance in Firefox.
- */
-select {
-  text-transform: none;
-}
-
-/**
- * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
- *    and `video` controls.
- * 2. Correct inability to style clickable `input` types in iOS.
- * 3. Improve usability and consistency of cursor style between image-type
- *    `input` and others.
- */
-button, html input[type=button] {
-  appearance: button;
-  -webkit-appearance: button;
-  /* 2 */
-  cursor: pointer;
-  /* 3 */
-}
-
-input[type=reset], input[type=submit] {
-  appearance: button;
-  -webkit-appearance: button;
-  /* 2 */
-  cursor: pointer;
-  /* 3 */
-}
-
-/**
- * Re-set default cursor for disabled elements.
- */
-button[disabled],
-html input[disabled] {
-  cursor: default;
-}
-
-/**
- * Remove inner padding and border in Firefox 4+.
- */
-button::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-
-input {
-  line-height: normal;
-}
-input::-moz-focus-inner {
-  border: 0;
-  padding: 0;
-}
-input[type=checkbox], input[type=radio] {
-  box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */
-}
-input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
-  height: auto;
-}
-input[type=search] {
-  appearance: textfield;
-  -webkit-appearance: textfield;
-  /* 1 */
-  box-sizing: content-box;
-  /* 2 */
-}
-input[type=search]::-webkit-search-cancel-button, input[type=search]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-input::-webkit-input-placeholder, input:-ms-input-placeholder, input::-ms-input-placeholder, input::placeholder, textarea::-webkit-input-placeholder, textarea:-ms-input-placeholder, textarea::-ms-input-placeholder, textarea::placeholder {
-  color: var(--wp--preset--color--primary);
-}
-
-/**
- * Define consistent border, margin, and padding.
- */
-fieldset {
-  border: 3px solid var(--wp--preset--color--primary);
-  margin: 0 0 26px;
-  padding: 15px 20px 0;
-}
-
-/**
- * 1. Correct `color` not being inherited in IE 8/9/10/11.
- * 2. Remove padding so people aren't caught out if they zero out fieldsets.
- */
-legend {
-  border: 0;
-  /* 1 */
-  padding: 0;
-  /* 2 */
-}
-
-/**
- * Don't inherit the `font-weight` (applied by a rule above).
- * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
- */
-optgroup {
-  font-weight: bold;
-}
-
-/* Note: This file is updated by S@G@R, To remove ducplication of styles. */
-/*--------------------------------------------------------------
 # Elements
 --------------------------------------------------------------*/
 /**
@@ -498,7 +239,7 @@ optgroup {
 html {
   box-sizing: border-box;
   /* [2] */
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.625;
   /* [3] */
   /* [4] */
@@ -519,137 +260,86 @@ html {
   box-sizing: inherit;
   /* [1] */
 }
+
 *:before, *:after {
   box-sizing: inherit;
   /* [1] */
 }
 
-/**
- * 1. Fallback for when there is no custom background color defined. [WordPress]
- * 2. Remove default margin. [normalize.css]
- */
-body {
-  font-size: 1rem;
-  background: var(--wp--preset--color--white);
-  /* [1] */
-  margin: 0;
-  /* [2] */
-}
-body.mce-content-body {
-  font-family: inherit;
-  margin: 15px;
-}
-body #main-wrap {
-  background-color: var(--wp--preset--color--white);
-}
-
-/**
- * 1. Remove border when inside `a` element in IE 8/9/10. [normalize.css]
- * 2. Offset `alt` text from surrounding copy.
- * 3. Make sure images are scaled correctly.
- * 4. Fluid images for responsive purposes.
- * 5. Setting `vertical-align` removes the whitespace that appears under `img`
- *    elements when they are dropped into a page as-is. Safer alternative to
- *    using `display: block;`.
- *
- */
-img {
-  border: 0;
-  /* [1] */
-  font-style: italic;
-  /* [2] */
-  height: auto;
-  /* [3] */
-  max-width: 100%;
-  /* [4] */
-  vertical-align: middle;
-  /* [5] */
-}
-
-#main-wrap img.not-loaded {
-  opacity: 0;
-}
-
 /*--------------------------------------------------------------
-# Typography
+# Base Styles
 --------------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
-  margin: 0 0 26px;
-  padding: 0;
+html, body {
+  font-family: var(--wp--preset--font-family--open-sans);
+  font-size: var(--wp--preset--font-size--base);
+  line-height: 1.6;
+  color: var(--wp--preset--color--black);
+  background: var(--wp--preset--color--white);
 }
 
-html,
-.site-header #wp-admin-bar-shortcode-secondary .alert,
-.entry-meta .comments-link a,
-.entry-meta,
-.generic-button {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.125rem;
+a {
+  color: var(--wp--preset--color--secondary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+a:hover {
+  color: var(--wp--preset--color--primary);
 }
 
-/*------------------------------------*\
-    #HEADINGS
-\*------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--wp--preset--font-family--open-sans);
+  color: var(--wp--preset--color--black);
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
 h1, h2, h3, h4, .site-header .site-title {
   font-family: Ubuntu, Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  text-wrap: balance;
 }
 
 h1 {
-  font-weight: 700;
-  font-style: normal;
   font-size: 3rem;
-  line-height: 1.85714;
+  line-height: 1.2;
+  font-weight: 700;
   text-align: center;
 }
 
 h2 {
-  font-family: Ubuntu, Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 2.25rem;
+  font-size: var(--wp--preset--font-size--large);
   line-height: 1.3;
+  font-weight: 700;
 }
 
 h3 {
-  font-size: 1.75rem;
-  line-height: 1.08333;
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.4;
+  font-weight: 700;
 }
 
 h4 {
-  font-size: 1.75rem;
-  line-height: 1.3;
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.4;
+  font-weight: 700;
 }
 
 h5 {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: var(--wp--preset--font-size--base);
+  line-height: 1.4;
   font-weight: 700;
-  font-style: normal;
-  font-size: 1.3125rem;
-  line-height: 1.44444;
 }
 
 h6 {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: var(--wp--preset--font-size--small);
+  line-height: 1.6;
   font-weight: 700;
-  font-style: normal;
-  font-size: 1.125rem;
-  line-height: 1.625;
 }
 
 .site-header .site-title {
-  font-size: 1.75rem;
+  font-size: var(--wp--preset--font-size--medium);
 }
 
 .post-author-info .author-name a {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--small);
 }
 
 .single-post .entry-content,
@@ -659,10 +349,8 @@ h6 {
 .comment-content,
 #respond form textarea,
 .bb-comment-author {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.6;
 }
 
 /**
@@ -708,26 +396,13 @@ td:last-child {
 }
 
 /**
- * Paragraphs
- */
-.single-post .entry-content,
-.archive .entry-content,
-.default-page .entry-content,
-.entry-summary,
-.comment-content,
-#respond form textarea,
-.bb-comment-author {
-  font-size: 1.125rem;
-}
-
-/**
  * CODE
  */
 pre {
   color: var(--wp--preset--color--white);
   background: var(--wp--preset--color--primary);
   border: 3px solid var(--wp--preset--color--black);
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--small);
   max-width: 100%;
   overflow: auto;
   /* Contain overflow in all browsers. */
@@ -739,9 +414,6 @@ pre code.bash {
   display: block;
   margin: 0;
   padding: 0;
-}
-pre code code.bash {
-  font-size: inherit;
 }
 pre > code {
   background: transparent;
@@ -819,7 +491,7 @@ label {
 }
 
 input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number] {
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--small);
   line-height: normal;
   border: none;
   font-family: inherit;
@@ -890,7 +562,7 @@ input[type=checkbox] + span:before, input[type=checkbox] + label:before, input[t
 }
 input[type=checkbox]:checked + span:after, input[type=checkbox]:checked + label:after, input[type=checkbox]:checked + strong:after {
   content: "✓";
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--small);
   position: absolute;
   top: 0;
   left: -21px;
@@ -903,7 +575,7 @@ input[type=radio]:checked + span:before, input[type=radio]:checked + label:befor
 }
 
 textarea {
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--small);
   border: none;
   font-family: inherit;
   font-weight: 300;
@@ -948,15 +620,13 @@ button {
   border: 3px solid;
   color: var(--wp--preset--color--white);
   cursor: pointer;
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--small);
   text-align: center;
   text-decoration: none;
   padding: 6px 14px;
   appearance: none;
   -moz-appearance: none;
-  /* Firefox */
   -webkit-appearance: none;
-  /* Safari and Chrome */
   display: inline-block;
   font-weight: 300;
   font-family: inherit;
@@ -987,7 +657,7 @@ button:active {
 article.post-password-required input[type=submit],
 li.bypostauthor cite span,
 a.button {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 1.4;
   text-align: center;
 }
@@ -1003,7 +673,7 @@ a.button:active,
   outline: none;
   color: var(--wp--preset--color--white);
   text-decoration: none;
-  background-color: var(--wp--preset--color--secondary);
+  background-color: var(--wp--preset--color--primary);
 }
 
 /* All buttons (mostly submit) without background */
@@ -1017,9 +687,7 @@ input[type=submit] {
   background-color: transparent;
   appearance: none;
   -moz-appearance: none;
-  /* Firefox */
   -webkit-appearance: none;
-  /* Safari and Chrome */
   display: inline-block;
   font-weight: 300;
   width: auto;
@@ -1054,7 +722,7 @@ li.bypostauthor cite span {
   position: absolute;
   left: 50%;
   margin-left: -25px;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
@@ -1156,14 +824,14 @@ embed, iframe, object, video {
 }
 .wp-caption .wp-caption-text {
   font-style: italic;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2;
   color: #757575;
 }
 
 .gallery-caption, .entry-caption {
   font-style: italic;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2;
   color: #757575;
 }
@@ -1494,7 +1162,7 @@ section[role=banner] {
   word-wrap: break-word;
 }
 .widget-area .widget h3.widgettitle {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   padding: 0;
   line-height: 1.5;
   font-family: inherit;
@@ -1506,10 +1174,10 @@ section[role=banner] {
   margin-left: 1.2em;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
 }
 .widget-area .widget p {
-  margin-bottom: 0.9375rem;
+  margin-bottom: var(--wp--preset--font-size--sm);
 }
 .widget-area .widget li {
   margin-bottom: 5px;
@@ -1597,7 +1265,7 @@ img.avatar {
 
 .widget .item-meta {
   color: #999;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   margin-top: 3px;
   overflow: hidden;
 }
@@ -1626,7 +1294,7 @@ img.avatar {
 
 .widget_recent_entries .post-date, .widget_rss .rss-date {
   color: #aaa;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   margin-left: 12px;
 }
 
@@ -1635,7 +1303,7 @@ img.avatar {
   /*letter-spacing: 12px;*/
 }
 .widget .tagcloud a {
-  font-size: 0.75rem !important;
+  font-size: var(--wp--preset--font-size--tiny) !important;
   color: #999;
   border: 3px solid rgba(0, 0, 0, 0.1);
   display: inline-block;
@@ -1654,7 +1322,7 @@ img.avatar {
 #wp-calendar {
   margin: 0;
   width: 100%;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 1.8;
   color: #686868;
 }
@@ -1698,7 +1366,7 @@ img.avatar {
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.4);
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   letter-spacing: 0.025rem;
   margin-right: 10px;
   padding: 6px 10px;
@@ -1712,7 +1380,7 @@ img.avatar {
 --------------------------------------------------------------*/
 footer[role=contentinfo] {
   clear: both;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2;
   width: 100%;
   margin-left: auto;
@@ -1724,7 +1392,7 @@ footer[role=contentinfo] {
 
 div.footer-inner-bottom {
   padding: 10px 0;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   clear: left;
   color: rgba(225, 225, 225, 0.8);
 }
@@ -1756,7 +1424,7 @@ div.footer-inner-bottom .footer-inner {
   padding: 4px;
 }
 .footer-widget .widget .item-options a {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   margin-right: 4px;
   padding: 4px 8px;
 }
@@ -1829,22 +1497,22 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 }
 .footer-widget .widget h4.widgettitle {
   font-family: inherit;
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--min);
   line-height: 1.4;
   margin-bottom: 40px;
 }
 .footer-widget .widget p, .footer-widget .widget li, .footer-widget .widget .textwidget {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   /*line-height: 1.8;*/
 }
 
 .widget span.activity {
   color: rgba(0, 0, 0, 0.3);
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
 }
 
 .footer-inner .item-title {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
 }
 
 .widget.ccluk_social_links li {
@@ -1973,7 +1641,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 }
 
 .entry-title {
-  font-size: 1.75rem;
+  font-size: var(--wp--preset--font-size--large);
   font-weight: 900;
   line-height: 1.2;
 }
@@ -1998,13 +1666,13 @@ div.footer-inner-bottom ul.social-icons li a:hover {
   border-color: inherit;
   border-radius: 50px;
   padding: 5px 9px;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   font-weight: 400;
   vertical-align: middle;
   margin-left: 10px;
 }
 .entry-header.has-image .entry-title a.post-edit-link {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
 }
 .entry-header .entry-title a.post-edit-link:hover {
   color: inherit;
@@ -2016,7 +1684,8 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 .entry-header .entry-meta {
   color: var(--wp--preset--color--primary);
   clear: left;
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--small);
+  line-height: 1.6;
 }
 
 .entry-meta,
@@ -2051,7 +1720,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 
 footer.entry-meta {
   clear: left;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   margin-top: 24px;
 }
 
@@ -2072,7 +1741,7 @@ article.sticky .featured-post {
   border-top: 4px double #ededed;
   border-bottom: 4px double #ededed;
   color: #999;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 3.692307692;
   margin-bottom: 24px;
   text-align: center;
@@ -2107,7 +1776,7 @@ article.sticky .featured-post {
 
 .entry-content blockquote .author {
   color: var(--wp--preset--color--primary);
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--min);
 }
 
 .entry-content blockquote p:last-child,
@@ -2208,7 +1877,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
   min-height: 50px;
 }
 .post-author .post-date {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   color: var(--wp--preset--color--primary);
   margin-left: 60px;
   margin-top: -15px;
@@ -2220,7 +1889,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .author-details .author-middle .author-bio {
   color: #333;
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   font-weight: 400;
   line-height: 1.3;
   margin-bottom: 26px;
@@ -2237,7 +1906,16 @@ single .entry-post-thumbnail:not(.category-thumb) img {
 
 .archive-header,
 .page-header {
-  font-size: 2.25rem;
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+h1.archive-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
 }
 
 body.page #primary article > .entry-header {
@@ -2264,7 +1942,7 @@ body.archive #primary .archive-header h1.entry-title, body.blog #primary .archiv
 
 .archive-meta {
   color: #757575;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2;
   margin-top: 22px;
 }
@@ -2396,7 +2074,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .post-author-info .author-name a {
   color: #333;
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--min);
   margin-bottom: 6px;
   display: inline-block;
   font-weight: 700;
@@ -2406,12 +2084,12 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .post-author-info .author-bio {
   color: #333;
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   margin-bottom: 15px;
 }
 .post-author-info .entry-meta {
   color: #838383;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   display: block;
 }
 .post-author-info .entry-meta a:not(.entry-date) {
@@ -2487,7 +2165,7 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 }
 .single-post .entry-header .post-author-info .entry-meta,
 .single-ccluk_news .entry-header .post-author-info .entry-meta {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   padding-top: 0;
 }
 .single-post .entry-header .post-author-info .entry-meta a,
@@ -2514,12 +2192,12 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
 8.1 - Image posts
 --------------------------------------------------------------*/
 article.format-image footer h1 {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   line-height: 1.8;
   font-weight: 400;
 }
 article.format-image footer h2 {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2.181818182;
 }
 article.format-image footer a h2 {
@@ -2528,7 +2206,7 @@ article.format-image footer a h2 {
 article.format-link header {
   padding: 0 10px;
   float: right;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 2.181818182;
   font-weight: 600;
   font-style: italic;
@@ -2544,7 +2222,7 @@ article.format-link .entry-content {
   float: left;
 }
 article.format-link .entry-content a {
-  font-size: 1.3125rem;
+  font-size: var(--wp--preset--font-size--std);
   line-height: 1.090909091;
   text-decoration: none;
 }
@@ -2555,7 +2233,7 @@ article.format-quote .entry-content p {
 article.format-quote .entry-content blockquote {
   display: block;
   padding: 24px 24px 0;
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   line-height: 1.6;
   font-style: normal;
   color: #6a6a6a;
@@ -2572,13 +2250,13 @@ article.format-quote .entry-content blockquote {
   display: inline-block;
 }
 .format-status .entry-header h1 {
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--sm);
   font-weight: 400;
   line-height: 1.6;
   margin: 0;
 }
 .format-status .entry-header h2 {
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   font-weight: 400;
   line-height: 2;
   margin: 0;
@@ -2614,7 +2292,7 @@ article.format-quote .entry-content blockquote {
 }
 .template-front-page .widget-area .widget li {
   margin: 8px 0 0;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
   line-height: 1.7;
   list-style-type: square;
   list-style-position: inside;
@@ -2643,7 +2321,7 @@ body article.error404 .entry-header {
 }
 
 .error404 .entry-title {
-  font-size: 10rem;
+  font-size: var(--wp--preset--font-size--huge);
   text-align: center;
   position: relative;
   line-height: 1;
@@ -2665,7 +2343,7 @@ body article.error404 .entry-header {
   z-index: 1;
 }
 .error404 .entry-content p {
-  font-size: 1.125rem;
+  font-size: var(--wp--preset--font-size--min);
   font-weight: 700;
   color: #333;
   text-align: center;
@@ -2793,7 +2471,7 @@ body article.error404 .entry-header {
 .entry-tags h3 {
   margin-bottom: 40px;
   font-family: inherit;
-  font-size: 0.75rem;
+  font-size: var(--wp--preset--font-size--tiny);
 }
 .entry-tags a {
   text-transform: none;
@@ -2890,6 +2568,12 @@ MINIMUM width of 481 pixels (phones and larger)
     width: 320px;
   }
 }
+.section-title h2, .section-title h3, .section-title h4 {
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
 @media (max-width: 1023px) {
   /*--------------------------------------------------------------
   Mobile Header
@@ -4148,7 +3832,7 @@ MINIMUM width of 481 pixels (phones and larger)
   html, body {
     background-color: var(--wp--preset--color--white);
     height: 100%;
-    /* sticky footer */
+    overflow-x: hidden;
   }
   html.js {
     margin-top: 0 !important;
@@ -4165,6 +3849,7 @@ MINIMUM width of 481 pixels (phones and larger)
   .site {
     margin: auto;
     position: relative;
+    overflow-x: hidden;
   }
   .single-item.groups .site {
     padding-top: 0;
@@ -4207,6 +3892,11 @@ MINIMUM width of 481 pixels (phones and larger)
     max-width: 780px;
     padding: 0 30px;
     width: 100%;
+    position: relative;
+  }
+  #header-aside {
+    width: 200px;
+    white-space: nowrap;
   }
   /*--------------------------------------------------------------
   1.1.2 - Sidebars
@@ -4361,16 +4051,10 @@ MINIMUM width of 481 pixels (phones and larger)
     position: absolute;
     width: 100%;
   }
-  .site-header #wp-admin-bar-root-default,
-  .site-header #wp-admin-bar-search,
-  .site-header #wp-admin-bar-my-account > a {
-    display: none;
-  }
   .header-wrapper {
     padding: 0 15px;
     position: relative;
     display: table;
-    /* Removed `!important` due to some issues with dropdown */
     width: 100%;
   }
   .site-header .site-name {
@@ -4420,17 +4104,27 @@ MINIMUM width of 481 pixels (phones and larger)
   }
   #logo-area {
     padding-right: 20px;
-    width: 180px;
+    display: table-cell;
+    vertical-align: middle;
   }
   #site-navigation {
     display: table-cell;
     vertical-align: bottom;
-    width: 100%;
+    width: auto;
+    flex: 1;
   }
-  header-aside,
-  #logo-area {
-    display: table-cell;
-    vertical-align: middle;
+  #header-aside {
+    width: 200px;
+    white-space: nowrap;
+  }
+  #header-aside-inner {
+    float: right;
+    display: table;
+    display: -moz-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
   }
   #header-search {
     display: inline-block;
@@ -4441,7 +4135,7 @@ MINIMUM width of 481 pixels (phones and larger)
     position: absolute;
     right: 0;
     display: none;
-    z-index: 32; /* Should be greater than 31 */
+    z-index: 32;
     background-color: var(--wp--preset--color--white);
   }
   #header-search form > div {
@@ -4482,19 +4176,6 @@ MINIMUM width of 481 pixels (phones and larger)
   .search-wrap input::-webkit-input-placeholder, .search-wrap input::-moz-placeholder, .search-wrap input:-ms-input-placeholder, .search-wrap input:-moz-placeholder {
     color: rgba(0, 0, 0, 0.3);
   }
-  #header-aside {
-    width: 200px;
-    white-space: nowrap;
-  }
-  #header-aside-inner {
-    float: right;
-    display: table;
-    display: -moz-box;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-  }
   .header-button {
     height: 70px;
     line-height: 70px;
@@ -4518,7 +4199,7 @@ MINIMUM width of 481 pixels (phones and larger)
     background-color: var(--wp--preset--color--primary);
   }
   .header-button #search-open {
-    font-size: 1.75rem;
+    font-size: 28px;
   }
   /*--------------------------------------------------------------
   1.1.5 - Navigation
@@ -5343,6 +5024,10 @@ body.page-template-homepage #main .section .section-content .list-item > .entry-
 }
 body.page-template-homepage #main .section .section-content .list-item > .entry-header img.wp-post-image {
   margin: 0;
+}
+body.page-template-homepage #main .section .section-content .list-item .entry-content {
+  font-size: var(--wp--preset--font-size--medium);
+  line-height: 1.6;
 }
 body.page-template-homepage #main .section .section-content .list-item .entry-content .item-meta .activity {
   font-size: 85%;
