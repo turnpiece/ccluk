@@ -280,14 +280,14 @@ html, body {
 a {
   color: var(--wp--preset--color--secondary);
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
+  transition: color var(--wp--custom--transition--duration) var(--wp--custom--transition--timing);
 }
 a:hover {
   color: var(--wp--preset--color--primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--wp--preset--font-family--open-sans);
+  font-family: var(--wp--preset--font-family--ubuntu);
   color: var(--wp--preset--color--black);
   margin: 0 0 1rem;
   line-height: 1.2;
@@ -335,7 +335,18 @@ h6 {
 }
 
 .site-header .site-title {
-  font-size: var(--wp--preset--font-size--medium);
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: 700;
+}
+
+.site-header .site-title {
+  font-family: var(--wp--preset--font-family--ubuntu);
+  font-size: var(--wp--preset--font-size--large);
+  font-weight: 700;
+}
+.site-header p.site-description {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--gray);
 }
 
 .post-author-info .author-name a {
@@ -1174,7 +1185,7 @@ section[role=banner] {
   margin-left: 1.2em;
 }
 .widget-area .widget p, .widget-area .widget li, .widget-area .widget .textwidget {
-  font-size: var(--wp--preset--font-size--sm);
+  font-size: var(--wp--preset--font-size--small);
 }
 .widget-area .widget p {
   margin-bottom: var(--wp--preset--font-size--sm);
@@ -1264,7 +1275,7 @@ img.avatar {
 }
 
 .widget .item-meta {
-  color: #999;
+  color: var(--wp--preset--color--gray);
   font-size: var(--wp--preset--font-size--tiny);
   margin-top: 3px;
   overflow: hidden;
@@ -1294,7 +1305,7 @@ img.avatar {
 
 .widget_recent_entries .post-date,
 .widget_rss .rss-date {
-  color: #aaa;
+  color: var(--wp--preset--color--gray);
   font-size: var(--wp--preset--font-size--tiny);
   margin-left: 12px;
 }
@@ -1305,8 +1316,8 @@ img.avatar {
 }
 .widget .tagcloud a {
   font-size: var(--wp--preset--font-size--tiny) !important;
-  color: #999;
-  border: 3px solid rgba(0, 0, 0, 0.1);
+  color: var(--wp--preset--color--gray);
+  border: var(--wp--custom--border--width) solid var(--wp--preset--color--light-gray);
   display: inline-block;
   margin-right: 5px;
   padding: 5px 10px;
@@ -1315,8 +1326,8 @@ img.avatar {
   background-color: var(--wp--preset--color--white);
 }
 .widget .tagcloud a:hover {
-  color: #333;
-  border: 3px solid #333;
+  color: var(--wp--preset--color--black);
+  border-color: var(--wp--preset--color--black);
 }
 
 /* Calendar Widget */
@@ -1325,7 +1336,7 @@ img.avatar {
   width: 100%;
   font-size: var(--wp--preset--font-size--tiny);
   line-height: 1.8;
-  color: #686868;
+  color: var(--wp--preset--color--gray);
 }
 #wp-calendar th, #wp-calendar td, #wp-calendar caption {
   text-align: center;
@@ -1689,7 +1700,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 .entry-header .entry-meta {
   color: var(--wp--preset--color--primary);
   clear: left;
-  font-size: 0.9375rem;
+  font-size: var(--wp--preset--font-size--small);
   line-height: 1.6;
 }
 
@@ -1726,7 +1737,7 @@ div.footer-inner-bottom ul.social-icons li a:hover {
 footer.entry-meta {
   clear: left;
   font-size: var(--wp--preset--font-size--tiny);
-  margin-top: 24px;
+  margin-top: var(--wp--custom--spacing--medium);
 }
 
 .entry-summary footer.entry-meta {
@@ -2584,30 +2595,54 @@ MINIMUM width of 481 pixels (phones and larger)
   Mobile Header
   --------------------------------------------------------------*/
   #mobile-header {
-    background-color: var(--wp--preset--color--white) !important;
+    background-color: var(--wp--preset--color--white);
     padding-top: 8px;
     height: 70px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2001;
   }
-  #mobile-header h1 {
-    color: var(--wp--preset--color--black);
+  #mobile-header .mobile-header-inner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
   }
-  #mobile-header h1 a {
-    color: var(--wp--preset--color--black);
-  }
-  #mobile-header .right-btn {
-    padding-top: 8px;
-  }
-  #mobile-header .right-btn:before {
-    color: #333;
-    font-size: 1.3125rem;
+  #mobile-header #mobile-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
   }
   #mobile-header #mobile-logo img {
     max-height: 70px;
     max-width: 300px;
-    margin: 5px auto;
     height: auto;
     width: auto;
     display: block;
+  }
+  #mobile-header #mobile-logo h1 {
+    margin: 0;
+    line-height: 70px;
+  }
+  #mobile-header #mobile-logo h1 a {
+    color: var(--wp--preset--color--black);
+  }
+  #mobile-header .right-btn {
+    position: relative;
+    z-index: 3;
+    margin-left: auto;
+  }
+  #mobile-header .right-btn:before {
+    color: var(--wp--preset--color--black);
+    font-size: 1.3125rem;
   }
   /*--------------------------------------------------------------
   Mobile Menu
@@ -2619,30 +2654,30 @@ MINIMUM width of 481 pixels (phones and larger)
     font-weight: 600;
   }
   #mobile-right-panel li a {
-    color: var(--wp--preset--color--secondary);
+    color: var(--wp--preset--color--white);
   }
   #mobile-right-panel li a:hover {
-    color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--secondary);
   }
   #mobile-right-panel li.current-menu-item, #mobile-right-panel li:hover {
-    background-color: var(--wp--preset--color--white);
+    background-color: rgba(255, 255, 255, 0.1);
   }
   #mobile-right-panel li.current-menu-item > a, #mobile-right-panel li:hover > a {
-    color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--secondary);
   }
   #mobile-right-panel li.current-menu-item .sub-menu, #mobile-right-panel li:hover .sub-menu {
-    background-color: #333;
+    background-color: rgba(0, 0, 0, 0.2);
   }
   #mobile-right-panel .sub-menu li a {
     font-weight: 400;
     padding-left: 40px;
   }
   #mobile-right-panel .submenu-btn {
-    color: var(--wp--preset--color--secondary);
+    color: var(--wp--preset--color--white);
     right: 20px;
   }
   #mobile-right-panel .submenu-btn:hover {
-    color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--secondary);
   }
   /*--------------------------------------------------------------
   Is mobile
@@ -2820,65 +2855,66 @@ MINIMUM width of 481 pixels (phones and larger)
   /*--------------------------------------------------------------
   1.1.3 - Mobile Header
   --------------------------------------------------------------*/
-  #mobile-header {
+  /* Removing duplicate mobile header styles */
+  /* #mobile-header {
     height: 55px;
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
-  }
-  #mobile-header h1 {
-    text-align: center;
-    font-size: 23px;
-    line-height: 55px;
-    height: 55px;
-    font-weight: 600;
-    display: block;
-    text-decoration: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    margin: 0 60px;
-    color: var(--wp--preset--color--white);
-  }
-  #mobile-header h1 a {
-    color: var(--wp--preset--color--white);
-    text-decoration: none;
-  }
-  #mobile-header .searchform {
-    margin: 0 auto;
-    padding: 8px 70px;
-    position: relative;
-    transition: padding 0.4s;
-  }
-  #mobile-header .searchform.animate-form {
-    padding: 8px 10px;
-    z-index: 6;
-  }
-  #mobile-header .searchform input[type=text] {
-    border: 0;
-    font-size: 16px;
-    height: 38px;
-    padding: 0 10px;
-    width: 100%;
-  }
-  #mobile-header #searchsubmit {
-    background: none;
-    color: black;
-    font-size: 1.3125rem;
-    line-height: 26px;
-    position: absolute;
-    right: 70px;
-    top: 10px;
-    transition: right 0.4s;
-    border: 0;
-  }
-  #mobile-header .animate-form #searchsubmit {
-    right: 10px;
-  }
-  #mobile-header #searchsubmit:hover {
-    box-shadow: none;
-  }
+    h1 {
+      text-align: center;
+      font-size: 23px;
+      line-height: 55px;
+      height: 55px;
+      font-weight: 600;
+      display: block;
+      text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin: 0 60px;
+      color: $white;
+      a {
+        color: $white;
+        text-decoration: none;
+      }
+    }
+    .searchform {
+      margin: 0 auto;
+      padding: 8px 70px;
+      position: relative;
+      transition: padding 0.4s;
+      &.animate-form {
+        padding: 8px 10px;
+        z-index: 6;
+      }
+    }
+    .searchform input[type="text"] {
+      border: 0;
+      font-size: 16px;
+      height: 38px;
+      padding: 0 10px;
+      width: 100%;
+    }
+    #searchsubmit {
+      background: none;
+      color: black;
+      font-size: $font-size-std;
+      line-height: 26px;
+      position: absolute;
+      right: 70px;
+      top: 10px;
+      transition: right 0.4s;
+      border: 0;
+    }
+    .animate-form #searchsubmit {
+      right: 10px;
+    }
+    #searchsubmit:hover {
+      box-shadow: none;
+    }
+  } */
   /*--------------------------------------------------------------
   1.1.4 - Mobile Post Content
   --------------------------------------------------------------*/
@@ -4079,11 +4115,11 @@ MINIMUM width of 481 pixels (phones and larger)
     display: none;
   }
   .site-header {
-    background-color: #f9f9f9;
+    background-color: var(--wp--preset--color--light-gray);
     position: relative;
   }
   .site-header:after {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--wp--preset--color--light-gray);
     bottom: 0;
     content: " ";
     height: 1px;
@@ -4208,8 +4244,6 @@ MINIMUM width of 481 pixels (phones and larger)
     font-size: 35px;
   }
   #header-search form #searchsubmit:hover {
-    -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-    -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
     box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   }
   .search-wrap input::-webkit-input-placeholder, .search-wrap input::-moz-placeholder, .search-wrap input:-ms-input-placeholder, .search-wrap input:-moz-placeholder {
@@ -4220,7 +4254,7 @@ MINIMUM width of 481 pixels (phones and larger)
     line-height: 70px;
     width: 66px;
     text-align: center;
-    color: #333;
+    color: var(--wp--preset--color--black);
     display: inline-block;
     font-size: 35px;
     text-transform: uppercase;
@@ -4296,7 +4330,7 @@ MINIMUM width of 481 pixels (phones and larger)
   }
   .main-navigation li.current_menu_item, .main-navigation li.current_page_item,
   .main-navigation li a:hover {
-    color: #333;
+    color: var(--wp--preset--color--black);
   }
   .main-navigation li ul {
     display: none;
@@ -4677,6 +4711,20 @@ MINIMUM width of 481 pixels (phones and larger)
     margin-left: 60px;
     margin-top: -15px;
     margin-bottom: 10px;
+  }
+  .post-author .post-date:hover {
+    color: var(--wp--preset--color--secondary);
+  }
+  .archive .entry-header .entry-meta,
+  .blog .entry-header .entry-meta {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--primary);
+    clear: left;
+    line-height: 1.6;
+  }
+  .post-author .post-date {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--primary);
   }
   .post-author .post-date:hover {
     color: var(--wp--preset--color--secondary);
@@ -5604,10 +5652,6 @@ a.button {
   color: var(--wp--preset--color--primary);
 }
 
-#mobile-header {
-  background-color: var(--wp--preset--color--primary);
-}
-
 .pagination .current {
   background-color: var(--wp--preset--color--primary);
 }
@@ -5621,21 +5665,21 @@ a.button {
 
 @-webkit-keyframes load1 {
   0%, 80%, 100% {
-    box-shadow: 0 0 green;
+    box-shadow: 0 0 var(--wp--preset--color--primary);
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em green;
+    box-shadow: 0 -2em var(--wp--preset--color--primary);
     height: 5em;
   }
 }
 @keyframes load1 {
   0%, 80%, 100% {
-    box-shadow: 0 0 green;
+    box-shadow: 0 0 var(--wp--preset--color--primary);
     height: 4em;
   }
   40% {
-    box-shadow: 0 -2em green;
+    box-shadow: 0 -2em var(--wp--preset--color--primary);
     height: 5em;
   }
 }

@@ -7,7 +7,7 @@ This is the Desktop stylesheet, served to laptops and desktop devices.
 --------------------------------------------------------------*/
 
 html, body {
-  background-color: $white;
+  background-color: var(--wp--preset--color--white);
   height: 100%;
   overflow-x: hidden;
 }
@@ -253,10 +253,10 @@ body {
 }
 
 .site-header {
-  background-color: $secondary_bg;
+  background-color: var(--wp--preset--color--light-gray);
   position: relative;
   &:after {
-    background: $divider_color;
+    background: var(--wp--preset--color--light-gray);
     bottom: 0;
     content: ' ';
     height: 1px;
@@ -392,16 +392,14 @@ body {
     top: 0;
     height: 100%;
     width: 64px;
-    background-color: $green;
-    color: $white;
+    background-color: var(--wp--preset--color--primary);
+    color: var(--wp--preset--color--white);
     z-index: 1;
     line-height: 70px;
     padding: 0;
     border: 0;
     font-size: 35px;
     &:hover {
-      -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
-      -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
       box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
     }
   }
@@ -421,7 +419,7 @@ body {
   line-height: 70px;
   width: 66px;
   text-align: center;
-  color: $dark;
+  color: var(--wp--preset--color--black);
   display: inline-block;
   font-size: 35px;
   text-transform: uppercase;
@@ -434,8 +432,8 @@ body {
     position: relative;
   }
   &:hover {
-    color: $white;
-    background-color: $green;
+    color: var(--wp--preset--color--white);
+    background-color: var(--wp--preset--color--primary);
   }
   #search-open {
     font-size: 28px;
@@ -459,7 +457,7 @@ body {
 
   li {
     a {
-      color: $blue;
+      color: var(--wp--preset--color--secondary);
     }
   }
   .nav-menu {
@@ -467,10 +465,10 @@ body {
       &:hover,
       &.current-menu-item,
       &.current-menu-ancestor {
-        background-color: $green;
+        background-color: var(--wp--preset--color--primary);
 
         > a {
-          color: $white;
+          color: var(--wp--preset--color--white);
         }
       }
     }
@@ -508,7 +506,7 @@ body {
     &.current_menu_item, 
     &.current_page_item, 
     a:hover {
-      color: $dark;
+      color: var(--wp--preset--color--black);
     }
     margin: 0;
     float: left;
@@ -937,5 +935,23 @@ Media queries
   margin-bottom: 10px;
   &:hover {
     color: $blue;
+  }
+}
+
+.archive .entry-header .entry-meta,
+.blog .entry-header .entry-meta {
+  font-size: var(--wp--preset--font-size--small);
+  color: var(--wp--preset--color--primary);
+  clear: left;
+  line-height: 1.6;
+}
+
+.post-author {
+  .post-date {
+    font-size: var(--wp--preset--font-size--small);
+    color: var(--wp--preset--color--primary);
+    &:hover {
+      color: var(--wp--preset--color--secondary);
+    }
   }
 }

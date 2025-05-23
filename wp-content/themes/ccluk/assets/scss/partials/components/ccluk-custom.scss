@@ -1,81 +1,77 @@
 .widget_mc4wp_form_widget form p input[type="submit"] {
-  background-color: $blue;
+  background-color: var(--wp--preset--color--secondary);
 }
 
 .widget.widget_newsletterwidget form {
   div input[type="submit"],
   p input[type="submit"] {
-    background-color: $blue;
+    background-color: var(--wp--preset--color--secondary);
   }
 }
 
 input {
   &[type="button"],
   &[type="reset"] {
-    background-color: $blue;
+    background-color: var(--wp--preset--color--secondary);
   }
 }
 
 a.button {
-  background-color: $blue;
+  background-color: var(--wp--preset--color--secondary);
 }
 
 #secondary div.generic-button a,
 .select2-container--default .select2-results__option--highlighted[aria-selected],
 .entry-header .entry-title a.button,
 .boss-search-wrapper label:after {
-  background-color: $blue;
+  background-color: var(--wp--preset--color--secondary);
 }
 
 #trigger-sidebar:hover .ccluk-side-icon {
-  background-color: $green;
+  background-color: var(--wp--preset--color--primary);
   &:before, &:after {
-    background-color: $green;
+    background-color: var(--wp--preset--color--primary);
   }
 }
 
 .dir-header span {
-  color: $green;
+  color: var(--wp--preset--color--primary);
 }
 
 .post-author-info {
   .entry-meta a:not(.entry-date), .author-name a:hover {
-    color: $green;
+    color: var(--wp--preset--color--primary);
   }
 }
 
 .posts-stream ul li h2 a:hover, 
 .entry-meta a.read-more {
-  color: $green;
+  color: var(--wp--preset--color--primary);
 }
 
 .entry-content blockquote .author, 
 .comment-content blockquote .author, 
 .entry-header .entry-title a:hover, 
 .widget_search #searchform button i:before {
-  color: $green;
+  color: var(--wp--preset--color--primary);
 }
 
 .entry-meta a.read-more {
-  color: $green;
+  color: var(--wp--preset--color--primary);
 }
 
 .footer-inner-top a:hover {
-  color: $green;
-}
-
-#mobile-header {
-  background-color: $green;
+  color: var(--wp--preset--color--primary);
 }
 
 .pagination .current {
-  background-color: $green;
+  background-color: var(--wp--preset--color--primary);
 }
 
 .loader {
-  background-color: $green;
+  background-color: var(--wp--preset--color--primary);
   &:before, &:after {
-    background-color: $green;
+    background-color: var(--wp--preset--color--primary);
   }
 }
 
@@ -83,61 +79,60 @@ a.button {
   0%,
         80%,
         100% {
-    box-shadow: 0 0 green;
+    box-shadow: 0 0 var(--wp--preset--color--primary);
     height: 4em;
   }
 
   40% {
-    box-shadow: 0 -2em green;
+    box-shadow: 0 -2em var(--wp--preset--color--primary);
     height: 5em;
   }
 }
-
 
 @keyframes load1 {
   0%,
         80%,
         100% {
-    box-shadow: 0 0 green;
+    box-shadow: 0 0 var(--wp--preset--color--primary);
     height: 4em;
   }
 
   40% {
-    box-shadow: 0 -2em green;
+    box-shadow: 0 -2em var(--wp--preset--color--primary);
     height: 5em;
   }
 }
 
 .entry-meta a.read-more,
 input[type="submit"] {
-  border-color: $blue;
+  border-color: var(--wp--preset--color--secondary);
 }
 
 .main-navigation {
   .nav-menu > li:hover > a {
-    box-shadow: 0 -2px 0 $green inset;
+    box-shadow: 0 -2px 0 var(--wp--preset--color--primary) inset;
   }
   div > ul > {
     .current-menu-item > a, 
     .current-menu-ancestor > a {
-      box-shadow: 0 -2px 0 $green inset;
+      box-shadow: 0 -2px 0 var(--wp--preset--color--primary) inset;
     }
   }
 }
 
 .header-button.underlined {
-  box-shadow: 0 -1px 0 $green inset;
+  box-shadow: 0 -1px 0 var(--wp--preset--color--primary) inset;
 }
 
 input {
   &[type="checkbox"] + {
     span:before, label:before, strong:before {
-      @include box-shadow(0px 0px 0px 2px $green);
+      @include box-shadow(0px 0px 0px 2px var(--wp--preset--color--primary));
     }
   }
   &[type="radio"] + {
     span:before, label:before, strong:before {
-      @include box-shadow(0px 0px 0px 2px $green);
+      @include box-shadow(0px 0px 0px 2px var(--wp--preset--color--primary));
     }
   }
 }
@@ -146,7 +141,7 @@ input {
 
 .is-desktop {
   .header-button:hover {
-    background-color: $green;
+    background-color: var(--wp--preset--color--primary);
   }
 }
 

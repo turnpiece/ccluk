@@ -140,30 +140,38 @@
       event.preventDefault();
       $("html, body").stop().animate({ scrollTop: "0px" }, 500);
     });
+
+    /**
+     * Mobile Navigation
+     */
+    const $body = $("body");
+    const $page = $("#main-wrap");
+    const $mobilePanel = $("#mobile-right-panel");
+    const transitionEndNav = "transitionend webkitTransitionEnd otransitionend MSTransitionEnd";
+
+    $(".right-btn").on("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      $mobilePanel.css({ opacity: 1 });
+
+      $page.on(transitionEndNav, function () {
+        if (!$body.hasClass("menu-visible-right")) {
+          $mobilePanel.removeAttr("style");
+          $page.off(transitionEndNav);
+        }
+      });
+
+      $body.toggleClass("menu-visible-right");
+    });
+
+    // Close menu when clicking outside
+    $document.on("click", (e) => {
+      if ($body.hasClass("menu-visible-right") && !$(e.target).closest("#mobile-right-panel, .right-btn").length) {
+        $body.removeClass("menu-visible-right");
+      }
+    });
   };
 
   App.init();
-
-  const isTouch = !!("ontouchstart" in window);
-  const TorC = isTouch ? "touchstart" : "click";
-
-  $("#main-nav").on(TorC, (e) => {
-    e.preventDefault();
-
-    const $body = $("body");
-    const $page = $("#main-wrap");
-    const transitionEndNav =
-      "transitionend webkitTransitionEnd otransitionend MSTransitionEnd";
-
-    $("#mobile-right-panel").css({ opacity: 1 });
-
-    $page.on(transitionEndNav, function () {
-      if (!$body.hasClass("menu-visible-right")) {
-        $("#mobile-right-panel").removeAttr("style");
-        $page.off(transitionEndNav);
-      }
-    });
-
-    $body.toggleClass("menu-visible-right");
-  });
 })(jQuery);
