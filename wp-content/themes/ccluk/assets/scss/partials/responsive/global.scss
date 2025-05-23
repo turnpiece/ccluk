@@ -1192,7 +1192,8 @@ img.avatar {
   margin: 12px 0;
 }
 
-.widget_recent_entries .post-date, .widget_rss .rss-date {
+.widget_recent_entries .post-date, 
+.widget_rss .rss-date {
   color: #aaa;
   font-size: var(--wp--preset--font-size--tiny);
   margin-left: 12px;
@@ -1598,7 +1599,7 @@ div {
   .entry-meta {
     color: $green;
     clear: left;
-    font-size: var(--wp--preset--font-size--small);
+    font-size: $font-size-sm;
     line-height: 1.6;
   }
 }
@@ -1807,7 +1808,7 @@ single .entry-post-thumbnail:not(.category-thumb) img {
     min-height: 50px;
   }
   .post-date {
-    font-size: var(--wp--preset--font-size--sm);
+    font-size: $font-size-sm;
     color: $green;
     margin-left: 60px;
     margin-top: -15px;

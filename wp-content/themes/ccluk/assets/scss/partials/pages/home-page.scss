@@ -324,8 +324,8 @@ body.page-template-homepage {
 			&.embed {
 				.section-content {
 					justify-content: space-around;
-					@include align-items( start );
-					@include padding( 1, 0 );
+					@include flex-align-start();
+					@include padding(1, 0);
 
 					.intro {
 						color: $white;
@@ -334,7 +334,7 @@ body.page-template-homepage {
 					.list-item {
 						width: auto;
 						max-width: 450px;
-						@include margin( 1, 1 );
+						@include margin(1, 1);
 
 						.privacy-policy,
 						.link-text {

@@ -98,18 +98,6 @@ function ccluk_scripts_styles()
 	// Activate our main stylesheets.
 	wp_enqueue_style('ccluk-main', $CSS_URL . '/main.css', '', $version, 'all');
 
-	/*
-	 * Old styles
-	 *
-	 * for layout testing
-	 *
-	 */
-	//wp_enqueue_style('ccluk-global', $assets_dir . '/css/main-global.css', null, $version);
-	//wp_enqueue_style('ccluk-desktop', $assets_dir . '/css/main-desktop.css', null, $version);
-	//wp_enqueue_style('ccluk-custom', $assets_dir . '/css/custom.css', null, $version);
-
-
-
 	// load fonts
 	wp_enqueue_style('ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap');
 
@@ -120,21 +108,7 @@ function ccluk_scripts_styles()
 	 *
 	 */
 	wp_enqueue_script('ccluk-menu-js', $JS_URL . '/menu.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
-	/*
-	// Google Analytics tracking
-	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
 
-	if (is_phone() || wp_is_mobile()) {
-		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'all');
-	} else {
-		wp_enqueue_style('ccluk-main-desktop', $CSS_URL . '/main-desktop.css', array('ccluk-main-global'), $version, 'screen and (min-width: 1025px)');
-	}
-	
-	// Media query fallback
-	if (!wp_script_is('ccluk-main-mobile', 'enqueued')) {
-		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'screen and (max-width: 1024px)');
-	}
-*/
 	/*	 * **************************** SCRIPTS ***************************** */
 
 	/*

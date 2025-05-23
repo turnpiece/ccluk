@@ -125,7 +125,8 @@ body {
 #main,
 .home-inner-wrap {
   @include display-flex();
-  @include flex-flow( row wrap );
+  @include flex-row();
+  @include flex-wrap();
 }
 
 #main,
@@ -159,7 +160,8 @@ body.single-item.groups #main {
 
 .search-content-wrap {
   @include display-flex();
-  @include flex-flow( row wrap );
+  @include flex-row();
+  @include flex-wrap();
 }
 
 .search-content {
@@ -906,10 +908,34 @@ body.search h1.entry-title {
     font-size: $font-size-big;
 }
 
+.entry-date {
+  font-size: 1rem;
+}
 
 /*--------------------------------------------------------------
 Media queries
 --------------------------------------------------------------*/
 
-@import "min-width-1024px";
-@import "min-width-1200px";
+@media screen and (min-width: 1024px) {
+  @import "min-width-1024px";
+}
+
+@media screen and (min-width: 1200px) {
+  @import "min-width-1200px";
+}
+
+.archive .post-date,
+.blog .post-date {
+  font-size: $font-size-sm;
+}
+
+.post-author .post-date {
+  font-size: $font-size-sm;
+  color: $green;
+  margin-left: 60px;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  &:hover {
+    color: $blue;
+  }
+}

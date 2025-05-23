@@ -1,6 +1,7 @@
 body {
      div.footer-inner-bottom .footer-inner {
-      @include flex-column-nowrap();
+      @include display-flex();
+      @include flex-column();
      }
 
      .entry-title,
@@ -11,11 +12,11 @@ body {
     &.page {
         #secondary.widget-area {
             @include centred-margin( 2 );
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            align-items: flex-start;
+            @include display-flex();
+            @include flex-row();
+            @include flex-wrap();
+            @include flex-evenly();
+            @include flex-align-start();
 
             .widget {
                 width: 320px;
@@ -40,15 +41,18 @@ body {
     border-left: none;
 }
 .ccluk-has-sidebar #main {
-    @include flex-wrap;
+    @include display-flex();
+    @include flex-wrap();
 }
 .sidebar-left {
     #main, .search-content-wrap {
-        @include flex-wrap;
+        @include display-flex();
+        @include flex-wrap();
     }
 }
 .search-content-wrap {
-    @include flex-wrap;
+    @include display-flex();
+    @include flex-wrap();
 }
 .ccluk-has-sidebar {
     .search-content {
