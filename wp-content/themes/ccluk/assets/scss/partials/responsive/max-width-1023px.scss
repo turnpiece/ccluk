@@ -40,21 +40,15 @@ body {
     border-left: none;
 }
 .ccluk-has-sidebar #main {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    @include flex-wrap;
 }
 .sidebar-left {
     #main, .search-content-wrap {
-          -webkit-flex-wrap: wrap;
-          -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+        @include flex-wrap;
     }
 }
 .search-content-wrap {
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    @include flex-wrap;
 }
 .ccluk-has-sidebar {
     .search-content {

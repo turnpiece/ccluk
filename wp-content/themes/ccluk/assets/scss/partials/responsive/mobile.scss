@@ -3,9 +3,9 @@ Mobile Header
 --------------------------------------------------------------*/
 
 #mobile-header {
-    background-color: $white !important;
-    padding-top: 8px;
-    height: 70px;
+  background-color: $white !important;
+  padding-top: 8px;
+  height: 70px;
 
 	h1 {
 	    color: $black;
@@ -29,6 +29,9 @@ Mobile Header
 			max-height: 70px;
 			max-width: 300px;
 			margin: 5px auto;
+      height: auto;
+      width: auto;
+      display: block;
 		}
 	}
 }
@@ -741,27 +744,6 @@ body,
   transition: transform 0.35s ease 0s;
 }
 
-#mobile-header {
-  z-index: 2001;
-  /*Increase due to cover image*/
-
-  #mobile-logo {
-    text-align: center;
-    img {
-      max-height: 40px;
-      max-width: 200px;
-      height: auto;
-      width: auto;
-      margin: 8px auto;
-      display: block;
-    }
-  }
-}
-
-#main-wrap {
-  z-index: 2;
-}
-
 #colophon {
   position: relative;
   z-index: 1;
@@ -855,12 +837,12 @@ body.open-right #mobile-right-panel {
       padding: 14px 25px;
       line-height: 1.6;
       font-size: $font-size-sm;
-      color: $white;
+      color: $blue;
       text-decoration: none;
       display: block;
-      color: rgba(255, 255, 255, 0.75);
       &:active, &:hover {
-        color: rgba(255, 255, 255, 0.75);
+        color: $green;
+        background-color: $white;
       }
     }
     &:hover a {
@@ -869,14 +851,13 @@ body.open-right #mobile-right-panel {
   }
   .sub-menu {
     background: rgba(0, 0, 0, 0.2);
-    /*display: none;*/
     overflow: hidden;
   }
   .menu-item-has-children > a {
     padding-right: 32px;
   }
   .submenu-btn {
-    color: rgba(255, 255, 255, 0.75);
+    color: $blue;
     font-size: $font-size-min;
     font-weight: 600;
     height: 52px;
@@ -887,6 +868,9 @@ body.open-right #mobile-right-panel {
     top: 0;
     width: 40px;
     z-index: 2;
+    &:hover {
+      color: $green;
+    }
   }
 }
 
@@ -1222,8 +1206,22 @@ Responsive media queries (mobile styles)
   }
 }
 
-@import "max-width-1023px";
-@import "max-width-768px";
-@import "max-width-520px";
-@import "max-width-480px";
-@import "max-width-320px"; 
+@media screen and (max-width: 1023px) {
+  @import "max-width-1023px";
+}
+
+@media screen and (max-width: 768px) {
+  @import "max-width-768px";
+}
+
+@media screen and (max-width: 520px) {
+  @import "max-width-520px";
+}
+
+@media screen and (max-width: 480px) {
+  @import "max-width-480px";
+}
+
+@media screen and (max-width: 320px) {
+  @import "max-width-320px";
+} 

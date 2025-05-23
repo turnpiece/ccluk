@@ -99,12 +99,16 @@ function ccluk_scripts_styles()
 	wp_enqueue_style('ccluk-main', $CSS_URL . '/main.css', '', $version, 'all');
 
 	/*
-	 * Custom styles
+	 * Old styles
 	 *
-	 * need to ensure this stylesheet loads after the parent stylesheets
+	 * for layout testing
 	 *
 	 */
-	wp_enqueue_style('ccluk-custom', $CSS_URL . '/custom.css', array('ccluk-main-global'), $version);
+	//wp_enqueue_style('ccluk-global', $assets_dir . '/css/main-global.css', null, $version);
+	//wp_enqueue_style('ccluk-desktop', $assets_dir . '/css/main-desktop.css', null, $version);
+	//wp_enqueue_style('ccluk-custom', $assets_dir . '/css/custom.css', null, $version);
+
+
 
 	// load fonts
 	wp_enqueue_style('ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap');

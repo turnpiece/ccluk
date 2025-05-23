@@ -349,7 +349,7 @@ h6 {
 .comment-content,
 #respond form textarea,
 .bb-comment-author {
-  font-size: var(--wp--preset--font-size--medium);
+  font-size: 1.125rem;
   line-height: 1.6;
 }
 
@@ -2600,6 +2600,9 @@ MINIMUM width of 481 pixels (phones and larger)
     max-height: 70px;
     max-width: 300px;
     margin: 5px auto;
+    height: auto;
+    width: auto;
+    display: block;
   }
   /*--------------------------------------------------------------
   Mobile Menu
@@ -3283,24 +3286,6 @@ MINIMUM width of 481 pixels (phones and larger)
     position: relative;
     transition: transform 0.35s ease 0s;
   }
-  #mobile-header {
-    z-index: 2001;
-    /*Increase due to cover image*/
-  }
-  #mobile-header #mobile-logo {
-    text-align: center;
-  }
-  #mobile-header #mobile-logo img {
-    max-height: 40px;
-    max-width: 200px;
-    height: auto;
-    width: auto;
-    margin: 8px auto;
-    display: block;
-  }
-  #main-wrap {
-    z-index: 2;
-  }
   #colophon {
     position: relative;
     z-index: 1;
@@ -3360,27 +3345,26 @@ MINIMUM width of 481 pixels (phones and larger)
     padding: 14px 25px;
     line-height: 1.6;
     font-size: 0.9375rem;
-    color: var(--wp--preset--color--white);
+    color: var(--wp--preset--color--secondary);
     text-decoration: none;
     display: block;
-    color: rgba(255, 255, 255, 0.75);
   }
   #mobile-right-panel li a:active, #mobile-right-panel li a:hover {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--wp--preset--color--primary);
+    background-color: var(--wp--preset--color--white);
   }
   #mobile-right-panel li:hover a {
     box-shadow: none;
   }
   #mobile-right-panel .sub-menu {
     background: rgba(0, 0, 0, 0.2);
-    /*display: none;*/
     overflow: hidden;
   }
   #mobile-right-panel .menu-item-has-children > a {
     padding-right: 32px;
   }
   #mobile-right-panel .submenu-btn {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--wp--preset--color--secondary);
     font-size: 1.125rem;
     font-weight: 600;
     height: 52px;
@@ -3391,6 +3375,9 @@ MINIMUM width of 481 pixels (phones and larger)
     top: 0;
     width: 40px;
     z-index: 2;
+  }
+  #mobile-right-panel .submenu-btn:hover {
+    color: var(--wp--preset--color--primary);
   }
   .main-navigation ul {
     margin: 0;
@@ -3621,7 +3608,7 @@ MINIMUM width of 481 pixels (phones and larger)
     padding-left: 0;
   }
 }
-@media (max-width: 1023px) {
+@media screen and (max-width: 1023px) and (max-width: 1023px) {
   body div.footer-inner-bottom .footer-inner {
     -webkit-flex-flow: column nowrap;
     -ms-flex-flow: column nowrap;
@@ -3716,6 +3703,8 @@ MINIMUM width of 481 pixels (phones and larger)
   .archive.author .archive-header .author-avatar {
     top: 0;
   }
+}
+@media screen and (max-width: 1023px) and (max-width: 768px) {
   body.page-template-homepage #main .section.banner {
     max-height: 100%;
   }
@@ -3752,6 +3741,8 @@ MINIMUM width of 481 pixels (phones and larger)
     clear: both;
     width: 100%;
   }
+}
+@media screen and (max-width: 1023px) and (max-width: 520px) {
   .single-ccluk_news .entry-header.has-image h1 {
     font-size: 2.25rem;
     max-height: 200px;
@@ -3772,6 +3763,8 @@ MINIMUM width of 481 pixels (phones and larger)
     margin-left: auto;
     margin-right: auto;
   }
+}
+@media screen and (max-width: 1023px) and (max-width: 480px) {
   body {
     background-color: var(--wp--preset--color--white);
   }
@@ -3814,6 +3807,8 @@ MINIMUM width of 481 pixels (phones and larger)
   .site-header .site-title {
     width: 160px;
   }
+}
+@media screen and (max-width: 1023px) and (max-width: 320px) {
   #mobile-header #mobile-logo img {
     max-width: 200px;
   }
@@ -4240,11 +4235,11 @@ MINIMUM width of 481 pixels (phones and larger)
     word-wrap: break-word;
     color: rgba(0, 0, 0, 0.5);
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 0.9375rem;
   }
   .main-navigation .nav-menu > li > a {
     display: block;
-    line-height: 0.75rem;
+    line-height: 0.9375rem;
     margin: 0 15px;
     padding: 32px 0 25px;
   }
@@ -4860,6 +4855,12 @@ a.cta:hover {
 .single-give_forms .header-area .entry-header {
   padding-left: 15px;
   padding-right: 15px;
+}
+.single .entry-content,
+.single-post .entry-content,
+.single-give_forms .entry-content {
+  font-size: 1.125rem;
+  line-height: 1.6;
 }
 .single .entry-content li,
 .single-post .entry-content li,

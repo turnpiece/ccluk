@@ -11,6 +11,8 @@
     }
     
     .entry-content {
+        font-size: $font-size-min;
+        line-height: 1.6;
 
         li {
             @include margin-bottom( 1.3 );
