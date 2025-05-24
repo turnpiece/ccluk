@@ -1,0 +1,110 @@
+// Block-based header styles
+.site-header {
+    background-color: var(--wp--preset--color--white);
+    padding: 0;
+    position: relative;
+    z-index: 100;
+
+    .header-wrapper {
+        align-items: center;
+        gap: var(--wp--custom--spacing--medium);
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        gap: var(--wp--custom--spacing--small);
+
+        .wp-block-site-logo {
+            margin: 0;
+        }
+
+        .wp-block-site-title {
+            margin: 0;
+            font-size: var(--wp--preset--font-size--large);
+            line-height: 1.2;
+        }
+    }
+
+    .header-nav {
+        margin: 0;
+        
+        .wp-block-navigation__container {
+            gap: var(--wp--custom--spacing--medium);
+        }
+
+        .wp-block-navigation-item {
+            font-size: var(--wp--preset--font-size--small);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+    }
+
+    .header-aside {
+        gap: var(--wp--custom--spacing--medium);
+        align-items: center;
+
+        .wp-block-search {
+            margin: 0;
+        }
+
+        .wp-block-social-links {
+            margin: 0;
+        }
+    }
+
+    .header-mobile {
+        display: none;
+        padding: var(--wp--custom--spacing--small) 0;
+        border-top: 1px solid var(--wp--preset--color--light-gray);
+        margin-top: var(--wp--custom--spacing--small);
+
+        .wp-block-buttons {
+            margin: 0;
+        }
+    }
+}
+
+// Mobile styles
+@media (max-width: 768px) {
+    .site-header {
+        .header-wrapper {
+            flex-wrap: wrap;
+        }
+
+        .header-nav {
+            order: 3;
+            width: 100%;
+            margin-top: var(--wp--custom--spacing--small);
+        }
+
+        .header-aside {
+            .wp-block-search {
+                display: none;
+            }
+        }
+
+        .header-mobile {
+            display: block;
+        }
+    }
+}
+
+// Sticky header
+.is-sticky .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+} 
