@@ -83,7 +83,7 @@ html.js {
 }
 
 #header-aside {
-  width: 200px;
+  min-width: 70px;
   white-space: nowrap;
 }
 
@@ -337,11 +337,6 @@ body {
   vertical-align: bottom;
   width: auto;
   flex: 1;
-}
-
-#header-aside {
-  width: 200px;
-  white-space: nowrap;
 }
 
 #header-aside-inner {
