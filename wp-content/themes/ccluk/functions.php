@@ -5,7 +5,7 @@
  * Add your own functions in this file.
  */
 
-define('CCLUK_DEBUGGING', false);
+define('CCLUK_DEBUGGING', true);
 define('CCLUK_JOIN_URL', 'https://community.citizensclimate.org/join');
 
 /**
@@ -148,6 +148,25 @@ function ccluk_theme_setup()
     // Translate text from the CHILD theme only.
     // Change 'ccluk' instances in all child theme files to 'ccluk_theme'.
     // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
+
+    // Add block theme support
+    add_theme_support('block-templates');
+    add_theme_support('wp-block-styles');
+    add_theme_support('editor-styles');
+    
+    // Add custom logo support
+    add_theme_support('custom-logo', array(
+        'height'      => 100,
+        'width'       => 300,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ));
+
+    // Register navigation menus
+    register_nav_menus(array(
+        'main-menu' => __('Main Menu', 'ccluk'),
+        'social' => __('Social Links', 'ccluk')
+    ));
 
     // add class to front page
     if (is_front_page()) {
@@ -308,3 +327,57 @@ add_action('wp_before_admin_bar_render', function() {
     global $wp_admin_bar;
     $wp_admin_bar->remove_menu('comments');
 });
+
+/**
+ * Load a block template part with dynamic content
+ *
+ * @param string $slug The template part slug
+ * @return string|false The template part content or false if not found
+ */
+function get_block_template_part($slug) {
+    $template_path = get_stylesheet_directory() . '/parts/' . $slug . '.html';
+    
+    if (file_exists($template_path)) {
+        $content = file_get_contents($template_path);
+        if ($content !== false) {
+            // Replace dynamic content placeholders
+            $content = str_replace(
+                array(
+                    '{{join_url}}'
+                ),
+                array(
+                    esc_url(CCLUK_JOIN_URL)
+                ),
+                $content
+            );
+            
+            // Add debug output
+            if (CCLUK_DEBUGGING) {
+                error_log('Loading block template: ' . $template_path);
+                error_log('Menu locations: ' . print_r(get_nav_menu_locations(), true));
+            }
+            
+            return do_blocks($content);
+        }
+    }
+    
+    return false;
+}
+
+// Add debug output for menu locations
+add_action('wp_footer', function() {
+    if (CCLUK_DEBUGGING) {
+        echo '<!-- Debug: Menu Locations -->';
+        echo '<!-- ' . print_r(get_nav_menu_locations(), true) . ' -->';
+        echo '<!-- Debug: Main Menu Items -->';
+        $menu_items = wp_get_nav_menu_items('main-menu');
+        echo '<!-- ' . print_r($menu_items, true) . ' -->';
+    }
+});
+
+// Add debug for menu registration
+add_action('after_setup_theme', function() {
+    if (CCLUK_DEBUGGING) {
+        error_log('Menu locations after registration: ' . print_r(get_nav_menu_locations(), true));
+    }
+}, 20);

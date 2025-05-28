@@ -34,15 +34,16 @@
 
 		<?php do_action('ccluk_before_header'); ?>
 
-		<header id="masthead" class="site-header" data-infinite="on">
-			<div class="header-wrapper">
-				<?php get_template_part('template-parts/header-logo'); ?>
-				<?php get_template_part('template-parts/header-nav'); ?>
-				<?php get_template_part('template-parts/header-aside'); ?>
-			</div>
-		</header>
-
-		<?php get_template_part('template-parts/header-mobile'); ?>
+		<?php
+		// Load the block template part
+		$template_part = get_block_template_part('header');
+		if ($template_part) {
+			echo $template_part;
+		} else {
+			// Fallback to the old header if block template part isn't available
+			get_template_part('template-parts/header', 'fallback');
+		}
+		?>
 
 		<?php
 		$show_single_header	 = apply_filters('ccluk_single_header', (is_single()));

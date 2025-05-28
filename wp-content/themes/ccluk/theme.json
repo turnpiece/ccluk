@@ -14,6 +14,11 @@
           "name": "Secondary"
         },
         {
+          "slug": "blue",
+          "color": "#22a7f0",
+          "name": "Blue"
+        },
+        {
           "slug": "white",
           "color": "#ffffff",
           "name": "White"

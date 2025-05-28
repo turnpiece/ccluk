@@ -47,6 +47,20 @@ class CCLUK_Customizer
 		 */
 		do_action(self::SLUG . '_customize_before_register', $this->customize);
 
+		// Add Site Identity section
+		$this->customize->add_section('title_tagline', array(
+			'title'    => __('Site Identity', 'ccluk'),
+			'priority' => 20,
+		));
+
+		// Add custom logo control
+		$this->customize->add_control(new WP_Customize_Media_Control($this->customize, 'custom_logo', array(
+			'label'    => __('Logo', 'ccluk'),
+			'section'  => 'title_tagline',
+			'settings' => 'custom_logo',
+			'priority' => 8,
+		)));
+
 		$pages = get_pages();
 		$this->option_pages[0] = esc_html__('Select page', 'ccluk');
 		foreach ($pages as $p) {

@@ -60,52 +60,80 @@ Mobile Header
   }
 }
 
+@media screen and (max-width: 1023px) {
+  .header-aside {
+    .wp-block-search {
+      &.is-style-outline {
+        .wp-block-search__input {
+          font-size: 16px;
+          height: 38px;
+        }
+
+        .wp-block-search__button {
+          width: 38px;
+          height: 38px;
+          
+          svg {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
 /*--------------------------------------------------------------
 Mobile Menu
 --------------------------------------------------------------*/
 
-#mobile-right-panel {
-	li {
-		width: 100%;
-		> a {
-			font-weight: 600;
-		}
-		a {
-			color: var(--wp--preset--color--white);
-			&:hover {
-				color: var(--wp--preset--color--secondary);
-			}
-		}
-		&.current-menu-item,
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.1);
-			> a {
-				color: var(--wp--preset--color--secondary);
-			}
+.wp-block-navigation {
+  &.header-nav {
+    @media screen and (max-width: 1023px) {
+      display: none;
+    }
+  }
+}
 
-			.sub-menu {
-				background-color: rgba(0, 0, 0, 0.2);
-			}
-		}
-	}
+.wp-block-navigation__responsive-container {
+  &.is-menu-open {
+    .wp-block-navigation__container {
+      padding: 30px 0;
+    }
 
-	.sub-menu {
-		li {
-			a {
-				font-weight: 400;
-				padding-left: 40px;
-			}
-		}
-	}
+    .wp-block-navigation-item {
+      width: 100%;
+      
+      > a {
+        font-weight: 600;
+        color: var(--wp--preset--color--white);
+        
+        &:hover {
+          color: var(--wp--preset--color--secondary);
+        }
+      }
 
-	.submenu-btn {
-		color: var(--wp--preset--color--white);
-		right: 20px;
+      &.current-menu-item,
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        
+        > a {
+          color: var(--wp--preset--color--secondary);
+        }
+      }
 
-		&:hover {
-			color: var(--wp--preset--color--secondary);
-		}
-	}
+      .wp-block-navigation__submenu-container {
+        background-color: rgba(0, 0, 0, 0.2);
+        
+        .wp-block-navigation-item {
+          a {
+            font-weight: 400;
+            padding-left: 40px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /*--------------------------------------------------------------

@@ -100,38 +100,32 @@
     /**
      * Search
      */
-    const $search_form = $("#header-search").find("form");
+    const $searchForm = $('.wp-block-search.is-style-outline');
+    const $searchInput = $searchForm.find('.wp-block-search__input');
+    const $searchButton = $searchForm.find('.wp-block-search__button');
 
-    $("#search-open").on("click", (e) => {
+    // Hide search input initially
+    $searchInput.hide();
+
+    // Toggle search input when search button is clicked
+    $searchButton.on('click', function(e) {
       e.preventDefault();
-      $search_form.fadeIn();
-      setTimeout(() => {
-        $search_form.find("#s").trigger("focus");
-      }, 301);
+      e.stopPropagation();
+      $searchForm.toggleClass('is-open');
+      $searchInput.slideToggle(300, function() {
+        if ($searchInput.is(':visible')) {
+          $searchInput.focus();
+        }
+      });
     });
 
-    $document.on("click", (e) => {
-      const container = $("#header-search");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-        $search_form.fadeOut();
+    // Close search when clicking outside
+    $document.on('click', function(e) {
+      if (!$searchForm.is(e.target) && $searchForm.has(e.target).length === 0) {
+        $searchForm.removeClass('is-open');
+        $searchInput.slideUp(300);
       }
     });
-
-    const search_width = () => {
-      let buttons_width = 0;
-      $("#header-search")
-        .nextAll("div, a")
-        .each(function () {
-          buttons_width += $(this).width();
-        });
-
-      $search_form.width($(
-        ".header-wrapper"
-      ).width() - 320 - buttons_width);
-    };
-
-    search_width();
-    $window.on("resize", search_width);
 
     /**
      * To Top Button
