@@ -150,11 +150,41 @@ The theme provides various hooks for customization:
 
 ### Building Assets
 
-The theme uses SCSS for styling. To compile:
+The theme uses SCSS for styling and includes a modern build process with npm and Sass.
 
-1. Install Node.js and npm
+#### Prerequisites
+
+- Node.js (v16 or higher)
+- npm
+
+#### Setup
+
+1. Navigate to the theme directory: `cd wp-content/themes/ccluk`
 2. Install dependencies: `npm install`
-3. Compile SCSS: `npm run build` (if build script is configured)
+
+#### Available Scripts
+
+- `npm run build` - Build CSS for production (expanded + compressed)
+- `npm run dev` - Start development mode with file watching
+- `npm run build:css` - Compile SCSS to CSS only
+- `npm run watch` - Alias for `npm run dev`
+
+#### Development Workflow
+
+```bash
+# Start development with file watching
+npm run dev
+
+# Build for production
+npm run build
+```
+
+The build process will:
+
+- Compile SCSS from `/assets/scss/` to `/assets/css/main.css` (expanded)
+- Generate compressed version at `/assets/css-compressed/main.css` (minified)
+- Watch for changes during development
+- Generate source maps for debugging
 
 ### Debugging
 
