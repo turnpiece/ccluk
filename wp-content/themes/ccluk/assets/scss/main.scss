@@ -1,0 +1,28 @@
+// Base styles and variables
+@import "partials/base/init";
+
+// Vendor styles
+@import "vendor/events";
+@import "vendor/give";
+@import "vendor/catapult-cookie-bar";
+@import "vendor/related-posts";
+
+// Global styles (applied to all devices)
+@import "partials/responsive/global";
+
+// Responsive styles
+@media (max-width: 1023px) {
+	@import "partials/responsive/mobile";
+}
+
+@media (min-width: 1024px) {
+	@import "partials/responsive/desktop";
+}
+
+// Custom styles
+@import "partials/components/general";
+@import "partials/layouts/single";
+@import "partials/layouts/page";
+@import "partials/pages/home-page";
+@import "partials/pages/find-your-mp";
+@import "partials/components/ccluk-custom";

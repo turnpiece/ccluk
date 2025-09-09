@@ -81,19 +81,26 @@ Thumbs.db
 *.tar
 *.zip
 
-# ignore everything in the "wp-content" directory, except:
-# custom plugins and themes
+# Ignore everything in wp-content
 wp-content/*
-!wp-content/
-wp-content/themes/*
-!wp-content/themes/
-!wp-content/themes/onesocial-ccluk
 
-# ignore all plugins except custom ccluk ones
-wp-content/plugins/*
+# But not the themes folder
+!wp-content/themes/
+
+# Ignore all themes
+wp-content/themes/*
+
+# Except the CCLUK theme
+!wp-content/themes/ccluk/
+
+# Ignore the plugins folder
 !wp-content/plugins/
+
+# Ignore all plugins
+wp-content/plugins/*
+
+#Except CCLUK plugins
 !wp-content/plugins/ccluk*
-!wp-content/plugins/bp-custom.php
 
 # ignore node/grunt dependency directories
 /node_modules/
@@ -101,3 +108,4 @@ wp-content/plugins/*
 .sassbuilder-config
 .libsass.json
 .sassbuilder-config.json
+.DS_Store

@@ -1,0 +1,50 @@
+ body {
+     &.page-template-homepage {
+        #main {
+            .section.banner {
+                max-height: 100%;
+                &.text-left,
+                &.text-right {
+                    flex-direction: column;
+                    .section-content {
+                        order: 1;
+                    }
+                    .section-title-container {
+                        order: 2;
+                        > .section-title {
+                            width: 100%;
+                            text-align: center;
+                            @include margin(2);
+                            h2,
+                            p, {
+                                text-align: center;
+                            }
+                            a.button {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.page {
+        #primary {
+            article {
+                > .entry-header h1.entry-title {
+                    font-size: $font-size-lg;
+                }
+            }
+        }
+    }
+}
+
+html.js {
+  margin-top: 0 !important;
+}
+
+.col.col {
+  clear: both;
+  width: 100%;
+}

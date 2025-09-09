@@ -1,0 +1,34 @@
+{
+  "version": 2,
+  "settings": {
+    "typography": {
+      "fontSizes": [
+        {
+          "slug": "small",
+          "size": "0.875rem",
+          "name": "Small"
+        },
+        {
+          "slug": "base",
+          "size": "1rem",
+          "name": "Base"
+        },
+        {
+          "slug": "medium",
+          "size": "1.125rem",
+          "name": "Medium"
+        },
+        {
+          "slug": "large",
+          "size": "2rem",
+          "name": "Large"
+        },
+        {
+          "slug": "xlarge",
+          "size": "2.25rem",
+          "name": "Extra Large"
+        }
+      ]
+    }
+  }
+}

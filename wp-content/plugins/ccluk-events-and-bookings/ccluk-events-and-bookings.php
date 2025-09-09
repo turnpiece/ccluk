@@ -31,7 +31,7 @@ class Eab_EventsHub
 	 * @TODO Update version number for new releases
 	 * @var	string
 	 */
-	const CURRENT_VERSION 		= '1.9.91';
+	const CURRENT_VERSION 		= '1.9.92';
 
 	/**
 	 * Translation domain
@@ -86,8 +86,6 @@ class Eab_EventsHub
 	 */
 	function __construct()
 	{
-		global $wpdb, $wp_version;
-
 		// Actions
 		add_action('init', array($this, 'init'), 0);
 		add_action('init', array($this, 'process_rsvps'), 99); // Bind this a bit later, so BP can load up
@@ -1529,10 +1527,6 @@ class Eab_EventsHub
 		return $views;
 	}
 
-
-
-
-
 	function widgets_init()
 	{
 		require_once EAB_PLUGIN_DIR . 'lib/widgets/Widget.class.php';
@@ -1658,27 +1652,29 @@ Eab_AddonHandler::serve();
 require_once EAB_PLUGIN_DIR . 'lib/default_filters.php';
 
 if (is_admin()) {
-	require_once EAB_PLUGIN_DIR . 'lib/class_eab_admin_tutorial.php';
-	Eab_AdminTutorial::serve();
+	add_action('admin_init', function () {
+		require_once EAB_PLUGIN_DIR . 'lib/class_eab_admin_tutorial.php';
+		Eab_AdminTutorial::serve();
 
-	require_once EAB_PLUGIN_DIR . 'lib/contextual_help/class_eab_admin_help.php';
-	Eab_AdminHelp::serve();
+		require_once EAB_PLUGIN_DIR . 'lib/contextual_help/class_eab_admin_help.php';
+		Eab_AdminHelp::serve();
 
-	// Dashboard notification
-	global $wpmudev_notices;
-	if (!is_array($wpmudev_notices)) {
-		$wpmudev_notices = array();
-	}
-	$wpmudev_notices[] = array(
-		'id' 		=> 249,
-		'name' 		=> 'Events +',
-		'screens' 	=> array(
-			'incsub_event_page_eab_welcome',
-			'incsub_event_page_eab_settings',
-			'incsub_event_page_eab_shortcodes',
-		),
-	);
-	require_once EAB_PLUGIN_DIR . 'lib/wpmudev-dash-notification.php';
+		// Dashboard notification
+		global $wpmudev_notices;
+		if (!is_array($wpmudev_notices)) {
+			$wpmudev_notices = array();
+		}
+		$wpmudev_notices[] = array(
+			'id' 		=> 249,
+			'name' 		=> 'Events +',
+			'screens' 	=> array(
+				'incsub_event_page_eab_welcome',
+				'incsub_event_page_eab_settings',
+				'incsub_event_page_eab_shortcodes',
+			),
+		);
+		require_once EAB_PLUGIN_DIR . 'lib/wpmudev-dash-notification.php';
+	});
 }
 
 

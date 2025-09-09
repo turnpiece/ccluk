@@ -1,0 +1,525 @@
+<?php
+
+/**
+ * @package CCL UK Theme
+ */
+/**
+ * Sets up the content width value based on the theme's design and stylesheet.
+ */
+global $content_width;
+$content_width = (isset($content_width)) ? $content_width : 700;
+
+/**
+ * Sets up theme defaults and registers the various WordPress features that CCLUK supports.
+ *
+ * @uses load_theme_textdomain() For translation/localization support.
+ * @uses add_editor_style() To add a Visual Editor stylesheet.
+ * @uses add_theme_support() To add support for post thumbnails and automatic feed links.
+ * @uses register_nav_menu() To add support for navigation menus.
+ * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
+ *
+ * @since CCLUK 1.0.0
+ */
+function ccluk_setup()
+{
+	// Makes CCLUK available for translation.
+	load_theme_textdomain('ccluk', get_template_directory() . '/languages');
+
+	// This theme styles the visual editor with editor-style.css to match the theme style.
+	add_editor_style();
+
+	// Adds RSS feed links to <head> for posts and comments.
+	add_theme_support('automatic-feed-links');
+
+	/*
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support('title-tag');
+
+	// Adds wp_nav_menu() in two locations
+	register_nav_menus(array(
+		'primary-menu'		 => __('Titlebar', 'ccluk'),
+		'secondary-menu'	 => __('Footer Menu', 'ccluk')
+	));
+
+	// This theme uses a custom image size for featured images, displayed on "standard" posts.
+	add_theme_support('post-thumbnails');
+	set_post_thumbnail_size(845, 9999); // Unlimited height, soft crop
+}
+
+add_action('after_setup_theme', 'ccluk_setup');
+
+/**
+ * Disable gallery style
+ *
+ * @since CCLUK 1.0.0
+ */
+add_filter('use_default_gallery_style', '__return_false');
+
+/**
+ * Detecting phones
+ *
+ * @since CCLUK 1.0.0
+ * from detectmobilebrowsers.com
+ */
+function is_phone()
+{
+	$useragent = $_SERVER['HTTP_USER_AGENT'];
+	if (preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i', $useragent) || preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i', substr($useragent, 0, 4)))
+		return true;
+}
+
+/**
+ * Enqueues scripts and styles for front-end.
+ *
+ * @since CCLUK 1.0.0
+ */
+function ccluk_scripts_styles()
+{
+	/**
+	 * Assign the CCLUK version to a var
+	 */
+	$theme		= wp_get_theme();
+	$version	= $theme['Version'];
+
+
+	/****************************** STYLES ******************************/
+
+	$css_dest = '/css';
+	$css_compressed_dest = '/css-compressed';
+	$assets_dir = get_stylesheet_directory_uri() . '/assets';
+
+	$CSS_URL = $assets_dir . (!CCLUK_DEBUGGING ? $css_compressed_dest : $css_dest);
+	$JS_URL = $assets_dir . '/js';
+
+	// Activate our main stylesheets.
+	wp_enqueue_style('ccluk-main', $CSS_URL . '/main.css', '', $version, 'all');
+
+	/*
+	 * Custom styles
+	 *
+	 * need to ensure this stylesheet loads after the parent stylesheets
+	 *
+	 */
+	wp_enqueue_style('ccluk-custom', $CSS_URL . '/custom.css', array('ccluk-main-global'), $version);
+
+	// load fonts
+	wp_enqueue_style('ccluk-fonts', 'https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i|Ubuntu:700&display=swap');
+
+	/*
+	 * Scripts
+	 *
+	 * need to ensure this script loads after the parent scripts
+	 *
+	 */
+	wp_enqueue_script('ccluk-menu-js', $JS_URL . '/menu.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
+	/*
+	// Google Analytics tracking
+	//wp_enqueue_script('ccluk-ga-tracking-js', $JS_URL . '/ga-tracking.' . (CCLUK_DEBUGGING ? '' : 'min.') . 'js', array('jquery'));
+
+	if (is_phone() || wp_is_mobile()) {
+		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'all');
+	} else {
+		wp_enqueue_style('ccluk-main-desktop', $CSS_URL . '/main-desktop.css', array('ccluk-main-global'), $version, 'screen and (min-width: 1025px)');
+	}
+	
+	// Media query fallback
+	if (!wp_script_is('ccluk-main-mobile', 'enqueued')) {
+		wp_enqueue_style('ccluk-main-mobile', $CSS_URL . '/main-mobile.css', array('ccluk-main-global'), $version, 'screen and (max-width: 1024px)');
+	}
+*/
+	/*	 * **************************** SCRIPTS ***************************** */
+
+	/*
+	 * Adds JavaScript to pages with the comment form to support
+	 * sites with threaded comments (when in use).
+	 */
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
+	}
+
+	$js = (defined('CCLUK_DEBUGGING') && CCLUK_DEBUGGING) ? '.js' : '.min.js';
+
+	wp_register_script('ccluk-main', get_stylesheet_directory_uri() . '/assets/js/ccluk' . $js, array('jquery', 'jquery-form'), $version, true);
+	wp_enqueue_script('ccluk-main');
+
+	/* Custom CCL javascript */
+	wp_register_script('ccluk-custom', get_stylesheet_directory_uri() . '/assets/js/custom' . $js, array('jquery'), $version, true);
+	wp_enqueue_script('ccluk-custom');
+}
+add_action('wp_enqueue_scripts', 'ccluk_scripts_styles');
+
+function ccluk_enqueue_lucide_icons()
+{
+?>
+	<script>
+		// Dynamically load the script and initialize when ready
+		(function() {
+			var script = document.createElement('script');
+			script.src = 'https://unpkg.com/lucide@latest';
+			script.onload = function() {
+				if (window.lucide) {
+					lucide.createIcons();
+				}
+			};
+			document.body.appendChild(script);
+		})();
+	</script>
+<?php
+}
+add_action('wp_footer', 'ccluk_enqueue_lucide_icons', 100);
+
+
+// remove block editor scripts and styles
+function ccluk_remove_block_editor_assets()
+{
+	// Remove block library CSS
+	wp_dequeue_style('wp-block-library');
+	wp_dequeue_style('wp-block-library-theme');
+	wp_dequeue_style('wc-block-style'); // If you use WooCommerce
+
+	// Optionally remove Gutenberg scripts if they're being enqueued
+	wp_dequeue_script('wp-block-library');
+}
+//add_action('wp_enqueue_scripts', 'ccluk_remove_block_editor_assets', 100);
+
+function escapeJavaScriptText($string)
+{
+	$string	 = str_replace(array("\n", '"'), array('', '\"'), $string);
+	$string	 = preg_replace('/\s+/', ' ', trim($string));
+	return $string;
+}
+
+/**
+ * We need to enqueue jQuery migrate before anything else for legacy
+ * plugin support.
+ * WordPress version 3.9 onwards already includes jquery 1.11.n version, which we required,
+ * and jquery migrate is also properly enqueued.
+ * So we dont need to do anything for WP versions greater than 3.9.
+ *
+ */
+function ccluk_scripts_jquery_migrate()
+{
+	global $wp_version;
+
+	if ($wp_version >= 3.9) {
+		return;
+	}
+
+	// Deregister the built-in version of jQuery
+	wp_deregister_script('jquery');
+
+	// Register jQuery. If browsing on a secure connection, use HTTPS.
+	wp_register_script('jquery', "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js", false, null);
+	// Activate the jQuery script
+	wp_enqueue_script('jquery');
+
+	// Activate the jQuery Migrate script from WordPress
+	wp_enqueue_script('jquery-migrate', false, array('jquery'));
+}
+
+add_action('wp_enqueue_scripts', 'ccluk_scripts_jquery_migrate', 0);
+
+/**
+ * Dynamically removes the no-js class from the <body> element.
+ *
+ * By default, the no-js class is added to the body. The
+ * JavaScript in this function is loaded into the <body> element immediately after the <body> tag, 
+ * and uses JavaScript to switch the 'no-js' body class to 'js'. 
+ * If your theme has styles that should only apply for JavaScript-enabled users, apply them
+ * to body.js.
+ *
+ * This technique is borrowed from WordPress, wp-admin/admin-header.php.
+ *
+ */
+function ccluk_remove_nojs_body_class()
+{
+?><script type="text/JavaScript">//<![CDATA[
+		(function(){var c=document.body.className;c=c.replace(/no-js/,'js');document.body.className=c;})();
+		$=jQuery.noConflict();
+		//]]></script>
+	<?php
+}
+
+add_action('ccluk_before_header', 'ccluk_remove_nojs_body_class');
+
+/**
+ * Load admin bar in header (fixes JetPack chart issue)
+ */
+function ccluk_admin_bar_in_header()
+{
+	if (!is_admin()) {
+		remove_action('wp_footer', 'wp_admin_bar_render', 1000);
+		add_action('ccluk_before_header', 'wp_admin_bar_render');
+	}
+}
+
+add_action('wp', 'ccluk_admin_bar_in_header');
+
+/**
+ * Creates a nicely formatted and more specific title element text
+ * for output in head of document, based on current view.
+ *
+ * @since CCLUK 1.0.0
+ *
+ * @param string $title Default title text for current view.
+ * @param string $sep Optional separator.
+ * @return string Filtered title.
+ */
+function ccluk_wp_title($title, $sep)
+{
+	global $paged, $page;
+
+	if (is_feed())
+		return $title;
+
+	// Add the site name.
+	$title .= get_bloginfo('name');
+
+	// Add the site description for the home/front page.
+	$site_description	 = get_bloginfo('description', 'display');
+	if ($site_description && (is_home() || is_front_page()))
+		$title				 = "$title $sep $site_description";
+
+	// Add a page number if necessary.
+	if ($paged >= 2 || $page >= 2)
+		$title = "$title $sep " . sprintf(__('Page %s', 'ccluk'), max($paged, $page));
+
+	return $title;
+}
+
+//add_filter( 'wp_title', 'ccluk_wp_title', 10, 2 );
+
+/**
+ * Makes our wp_nav_menu() fallback -- wp_page_menu() -- show a home link.
+ *
+ * @since CCLUK 1.0.0
+ */
+function ccluk_page_menu_args($args)
+{
+	$args['show_home'] = true;
+	return $args;
+}
+
+add_filter('wp_page_menu_args', 'ccluk_page_menu_args');
+
+/**
+ * Registers all of our widget areas.
+ *
+ * @since CCL UK Theme 2.7.0
+ */
+function ccluk_widgets_init()
+{
+	// Area 1, located in the pages and posts right column.
+	register_sidebar(array(
+		'name'			 => 'Page Sidebar',
+		'id'			 => 'sidebar',
+		'description'	 => 'The default Page/Post widget area.',
+		'before_widget'	 => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget'	 => '</aside>',
+		'before_title'	 => '<h3 class="widgettitle">',
+		'after_title'	 => '</h3>'
+	));
+}
+add_action('widgets_init', 'ccluk_widgets_init');
+
+/**
+ * Extends the default WordPress body classes.
+ *
+ * @since CCLUK 1.0.0
+ *
+ * @param array Existing class values.
+ * @return array Filtered class values.
+ */
+function ccluk_body_class($classes)
+{
+	global $wp_customize;
+
+	if (!empty($wp_customize)) {
+		$classes[] = 'wp-customizer';
+	}
+
+	if (!is_multi_author()) {
+		$classes[] = 'single-author';
+	}
+
+	if (current_user_can('manage_options')) {
+		$classes[] = 'role-admin';
+	}
+
+	// Default layout class
+	if (is_phone()) {
+		$classes[] = 'is-mobile';
+	} elseif (wp_is_mobile()) {
+		$classes[] = 'is-mobile';
+		$classes[] = 'tablet';
+	} else {
+		$classes[] = 'is-desktop';
+	}
+
+	// Search sidebar
+	if (is_active_sidebar('search') && is_search()) {
+		$search_sidebar_alignment	 = 'right';
+		$classes[]					 = 'search-sidebar-active ccluk-has-sidebar sidebar-' . $search_sidebar_alignment;
+	}
+
+	$page_sidebar		 = 'right';
+	$sidebar_alignment	 = ($page_sidebar) ? $page_sidebar : 'right';
+
+	// Home sidebar
+	if (is_active_sidebar('sidebar') && is_home() && !is_front_page()) {
+		$classes[] = 'page-sidebar-active home-page ccluk-has-sidebar sidebar-' . $sidebar_alignment;
+	}
+
+	$page_for_posts	 = get_option('page_for_posts');
+
+	// Home sidebar
+	if (is_active_sidebar('home-sidebar') && is_front_page()) {
+		$home_sidebar_alignment	 = 'right';
+		$classes[]				 = 'homepage-sidebar-active frontpage-page ccluk-has-sidebar sidebar-' . $home_sidebar_alignment;
+	}
+
+	// Blog sidebar
+	if (is_active_sidebar('sidebar') && !is_front_page() && is_home() && isset($page_for_posts) && $page_for_posts != 0) {
+		$classes[] = 'page-sidebar-active home-page ccluk-has-sidebar sidebar-' . $sidebar_alignment;
+	}
+
+	// Page sidebar
+	if (is_active_sidebar('sidebar') && is_page() && !is_front_page()) {
+		$classes[] = 'page-sidebar-active ccluk-has-sidebar sidebar-' . $sidebar_alignment;
+	}
+
+	// Archive sidebar
+	if (
+		is_active_sidebar('sidebar') && is_archive()
+	) {
+		$classes[] = 'archive-sidebar-active ccluk-has-sidebar sidebar-' . $sidebar_alignment;
+	}
+
+	//Adminbar
+	$classes[] = 'no-adminbar';
+
+	// header class
+	$header_style	 = 'header-style-1';
+	$classes[]		 = $header_style;
+
+	return array_unique($classes);
+}
+
+add_filter('body_class', 'ccluk_body_class');
+
+/* * **************************** WORDPRESS FUNCTIONS ***************************** */
+
+/**
+ * Add image size for posts
+ *
+ * @since CCL UK Theme 1.0.0
+ */
+add_image_size('post-thumb', 845, 312, true);
+add_image_size('medium-thumb', 360, 216, true);
+add_image_size('large-thumb', 9999, 800, true);
+
+/**
+ * Estimate time required to read the article
+ *
+ * @return string
+ */
+function ccluk_estimated_reading_time($post_content)
+{
+
+	$words	 = str_word_count(strip_tags($post_content));
+	$minutes = floor($words / 120);
+	$seconds = floor($words % 120 / (120 / 60));
+
+	if (1 <= $minutes) {
+		$estimated_time = $minutes . __(' min read', 'ccluk');
+	} else {
+		$estimated_time = $seconds . __(' sec read', 'ccluk');
+	}
+
+	return $estimated_time;
+}
+
+// Change more
+function ccluk_excerpt_more()
+{
+	return '&hellip;';
+}
+
+add_filter('excerpt_more', 'ccluk_excerpt_more');
+
+/**
+ * Template for comments and pingbacks.
+ *
+ * To override this walker in a child theme without modifying the comments template
+ * simply create your own ccluk_comment(), and that function will be used instead.
+ *
+ * Used as a callback by wp_list_comments() for displaying the comments.
+ *
+ * @since Twenty Twelve 1.0
+ */
+if (!function_exists('ccluk_comment')) {
+
+	function ccluk_comment($comment, $args, $depth)
+	{
+		$GLOBALS['comment'] = $comment;
+
+		switch ($comment->comment_type) {
+			case 'pingback':
+			case 'trackback':
+	?>
+
+				<li <?php comment_class(); ?> id="comment-<?php comment_ID(); ?>">
+					<p><?php _e('Pingback:', 'ccluk'); ?> <?php comment_author_link(); ?> <?php edit_comment_link(__('(Edit)', 'ccluk'), '<span class="edit-link">', '</span>'); ?></p>
+				<?php
+				break;
+			default:
+				global $post;
+				?>
+				<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
+					<article id="comment-<?php comment_ID(); ?>" class="comment">
+						<header class="comment-meta comment-author vcard">
+							<?php
+							$author_id	 = $comment->user_id;
+							$user_link	 = ccluk_get_user_link($author_id);
+
+							printf('<span class="authors-avatar vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr(sprintf(__('View all posts by %s', 'ccluk'), get_the_author())), get_avatar($author_id, 85, '', get_the_author()));
+
+							//echo get_avatar( $comment, 44 );
+							printf(
+								'<cite class="fn">%1$s %2$s</cite>',
+								get_comment_author_link(),
+								// If current post author is also comment author, make it known visually.
+								($comment->user_id === $post->post_author) ? '<span> ' . __('Post author', 'ccluk') . '</span>' : ''
+							);
+							printf(
+								'<a href="%1$s"><time datetime="%2$s">%3$s</time></a>',
+								esc_url(get_comment_link($comment->comment_ID)),
+								get_comment_time('c'),
+								/* translators: 1: date, 2: time */
+								sprintf(__('%1$s at %2$s', 'ccluk'), get_comment_date(), get_comment_time())
+							);
+							?>
+						</header><!-- .comment-meta -->
+
+						<?php if ('0' == $comment->comment_approved) : ?>
+							<p class="comment-awaiting-moderation"><?php _e('Your comment is awaiting moderation.', 'ccluk'); ?></p>
+						<?php endif; ?>
+
+						<section class="comment-content comment">
+							<?php comment_text(); ?>
+						</section><!-- .comment-content -->
+
+						<div class="reply">
+							<?php edit_comment_link(__('Edit', 'ccluk'), '<span class="edit-link">', '</span>'); ?>
+							<?php comment_reply_link(array_merge($args, array('reply_text' => __('Reply <span>&darr;</span>', 'ccluk'), 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+						</div><!-- .reply -->
+					</article><!-- #comment-## -->
+	<?php
+				break;
+		} // end comment_type check
+	}
+}
