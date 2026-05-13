@@ -17,11 +17,11 @@
   max-width: 600px;
   margin: 0 auto;
 }
-.single-incsub_event #wpmudevevents-wrapper {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-}
 .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-contentheader {
   padding-top: 0;
+}
+.single-incsub_event #wpmudevevents-wrapper {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 .single-incsub_event #wpmudevevents-wrapper .wpmudevevents-contentmeta {
   color: #54ae68;
@@ -414,12 +414,12 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
-input {
-  line-height: normal;
-}
 input::-moz-focus-inner {
   border: 0;
   padding: 0;
+}
+input {
+  line-height: normal;
 }
 input[type=checkbox], input[type=radio] {
   box-sizing: border-box;
@@ -1042,17 +1042,6 @@ li.bypostauthor cite span {
   animation: load1 1s infinite ease-in-out;
   width: 1em;
   height: 4em;
-  text-indent: -9999em;
-  margin: 8em auto 0;
-  position: absolute;
-  left: 50%;
-  margin-left: -25px;
-  font-size: 0.75rem;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
 }
 .loader:before, .loader:after {
   background-color: #54ae68;
@@ -1070,6 +1059,19 @@ li.bypostauthor cite span {
   left: -1.5em;
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
+}
+.loader {
+  text-indent: -9999em;
+  margin: 8em auto 0;
+  position: absolute;
+  left: 50%;
+  margin-left: -25px;
+  font-size: 0.75rem;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
 }
 .loader:after {
   left: 1.5em;
@@ -2053,12 +2055,12 @@ footer.entry-meta {
   margin-top: 0;
 }
 
-.attachment-header {
-  margin-bottom: 26px;
-}
 .attachment-header footer.entry-meta {
   margin-top: 0;
   margin-bottom: 20px;
+}
+.attachment-header {
+  margin-bottom: 26px;
 }
 
 article.sticky .featured-post {
@@ -2447,15 +2449,18 @@ article.format-aside blockquote:last-child, article.format-aside p:last-child {
   margin: 1rem auto;
   margin-bottom: 16px;
   margin-bottom: 1rem;
-  text-align: left;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .single-post .entry-header h1.entry-title,
 .single-ccluk_news .entry-header h1.entry-title {
   font-size: 3rem;
   line-height: 1.4;
+}
+.single-post .entry-header,
+.single-ccluk_news .entry-header {
+  text-align: left;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .single-post .entry-header h1,
 .single-ccluk_news .entry-header h1 {
@@ -3206,91 +3211,6 @@ MINIMUM width of 481 pixels (phones and larger)
   .gallery {
     margin: 0 -10px 20px;
   }
-  /*--------------------------------------------------------------
-  1.1.6 - Widgets
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.1.7 - Mobile Footer
-  --------------------------------------------------------------*/
-  /*----------------------------------------------------------------
-  1.1.9 - 404 Template
-  ----------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2 - Custom media queries
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.1.6 - Forms
-  --------------------------------------------------------------*/
-  /* General */
-  /* Placeholders */
-  /*--------------------------------------------------------------
-  1.1.7 - Buttons
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.1 - All mobile devices
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.1.1 - Layout
-  --------------------------------------------------------------*/
-  /** Discourage mobile touch/tap highlights **/
-  /*--------------------------------------------------------------
-  1.1.2 - Mobile Header
-  --------------------------------------------------------------*/
-  /* left and right starting point */
-  /*--------------------------------------------------------------
-  1.1.4 - Right Slide Drawer
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.1.4.1 - Right Button
-  --------------------------------------------------------------*/
-  /***
-   * If the menu-visible class is present then
-   * shift the #main-wrap 240px from the right edge
-   * via position: absolute to keep it in the
-   * open position. When .animating, .left and
-   * .right classes are not present the CSS
-   * transform does not apply to #main-wrap.
-   */
-  /*--------------------------------------------------------------
-  1.1.4.2 - Right Menu (Pages) Layout
-  --------------------------------------------------------------*/
-  /* Nav Expanding Open Effect */
-  /*--------------------------------------------------------------
-  1.1.4.5 - Right Menu (Page) Content
-  --------------------------------------------------------------*/
-  /* Current Page */
-  /* Bottom padding */
-  /*--------------------------------------------------------------
-  1.2 - Animations
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.1 - Left Animation
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.1.1 - Left: Menu Open
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.2 - Right Animation
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.2.1 - Right: Menu Open
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.2.2 - Right: Menu Close
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  2.2.3 - Right: Content Open
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  1.2.2.4 - Right: Content close
-  --------------------------------------------------------------*/
-  /*--------------------------------------------------------------
-  >>>PLUGINS
-  --------------------------------------------------------------*/
-  /* Register Page */
-  /*--------------------------------------------------------------
-  Responsive media queries (mobile styles)
-  --------------------------------------------------------------*/
 }
 @media screen and (max-width: 1023px) and (max-width: 400px) {
   .gallery-columns-5 .gallery-item,
@@ -3302,6 +3222,9 @@ MINIMUM width of 481 pixels (phones and larger)
   }
 }
 @media (max-width: 1023px) {
+  /*--------------------------------------------------------------
+  1.1.6 - Widgets
+  --------------------------------------------------------------*/
   #secondary {
     padding: 0 15px;
   }
@@ -3341,6 +3264,9 @@ MINIMUM width of 481 pixels (phones and larger)
   .widget-area .widget input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 50px #fff inset;
   }
+  /*--------------------------------------------------------------
+  1.1.7 - Mobile Footer
+  --------------------------------------------------------------*/
   div.footer-inner-bottom {
     font-size: 0.9375rem;
   }
@@ -3465,6 +3391,9 @@ MINIMUM width of 481 pixels (phones and larger)
   .single-post .entry-header.has-image h1 {
     font-size: 3rem;
   }
+  /*----------------------------------------------------------------
+  1.1.9 - 404 Template
+  ----------------------------------------------------------------*/
   body.error404 #content article {
     padding: 0;
     border: 0;
@@ -3472,6 +3401,9 @@ MINIMUM width of 481 pixels (phones and larger)
   body.error404 footer.entry-meta {
     display: block;
   }
+  /*--------------------------------------------------------------
+  1.2 - Custom media queries
+  --------------------------------------------------------------*/
 }
 @media screen and (max-width: 1023px) and (max-width: 520px) {
   #primary {
@@ -3530,12 +3462,20 @@ MINIMUM width of 481 pixels (phones and larger)
   }
 }
 @media (max-width: 1023px) {
+  /*--------------------------------------------------------------
+  1.1.6 - Forms
+  --------------------------------------------------------------*/
+  /* General */
+  /* Placeholders */
   ::-webkit-input-placeholder,
   :-moz-placeholder,
   ::-moz-placeholder,
   :-ms-input-placeholder {
     color: #888;
   }
+  /*--------------------------------------------------------------
+  1.1.7 - Buttons
+  --------------------------------------------------------------*/
   .button-load-more-posts {
     margin: 0;
     display: block;
@@ -3564,9 +3504,16 @@ MINIMUM width of 481 pixels (phones and larger)
   .button-load-more-posts.loading:after {
     color: #fff;
   }
+  /*--------------------------------------------------------------
+  1.1 - All mobile devices
+  --------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  1.1.1 - Layout
+  --------------------------------------------------------------*/
   body.open-left, body.open-right {
     cursor: pointer;
   }
+  /** Discourage mobile touch/tap highlights **/
   body,
   .right-btn,
   #main-wrap {
@@ -3586,6 +3533,10 @@ MINIMUM width of 481 pixels (phones and larger)
     -ms-touch-action: none;
     z-index: 3;
   }
+  /*--------------------------------------------------------------
+  1.1.2 - Mobile Header
+  --------------------------------------------------------------*/
+  /* left and right starting point */
   #main-wrap,
   #colophon {
     height: 100%;
@@ -3614,6 +3565,12 @@ MINIMUM width of 481 pixels (phones and larger)
     position: relative;
     z-index: 1;
   }
+  /*--------------------------------------------------------------
+  1.1.4 - Right Slide Drawer
+  --------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  1.1.4.1 - Right Button
+  --------------------------------------------------------------*/
   .right-btn {
     position: absolute;
     height: 55px;
@@ -3633,11 +3590,22 @@ MINIMUM width of 481 pixels (phones and larger)
   body.open-right .right-btn:before {
     opacity: 0.5;
   }
+  /***
+   * If the menu-visible class is present then
+   * shift the #main-wrap 240px from the right edge
+   * via position: absolute to keep it in the
+   * open position. When .animating, .left and
+   * .right classes are not present the CSS
+   * transform does not apply to #main-wrap.
+   */
   .menu-visible-right #main-wrap,
   .menu-visible-right #colophon {
     transform: translate(-240px, 0);
     -webkit-transform: translate(-240px, 0);
   }
+  /*--------------------------------------------------------------
+  1.1.4.2 - Right Menu (Pages) Layout
+  --------------------------------------------------------------*/
   #mobile-right-panel {
     background-color: #333;
     height: 100%;
@@ -3653,6 +3621,7 @@ MINIMUM width of 481 pixels (phones and larger)
   .menu-visible-right #mobile-right-panel {
     opacity: 1;
   }
+  /* Nav Expanding Open Effect */
   body.open-right #mobile-right-panel {
     transition: transform 0.35s ease 0s;
     visibility: visible;
@@ -3701,15 +3670,29 @@ MINIMUM width of 481 pixels (phones and larger)
     width: 40px;
     z-index: 2;
   }
+  /*--------------------------------------------------------------
+  1.1.4.5 - Right Menu (Page) Content
+  --------------------------------------------------------------*/
+  /* Current Page */
   .main-navigation ul {
     margin: 0;
   }
   .main-navigation ul.nav-menu {
     padding-bottom: 30px;
   }
+  /* Bottom padding */
   #site-navigation {
     display: none;
   }
+  /*--------------------------------------------------------------
+  1.2 - Animations
+  --------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  1.2.1 - Left Animation
+  --------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  1.2.1.1 - Left: Menu Open
+  --------------------------------------------------------------*/
   @-webkit-keyframes slideInLeft {
     0% {
       opacity: 0.3;
@@ -3740,6 +3723,12 @@ MINIMUM width of 481 pixels (phones and larger)
       transform: translate3d(0, 0, 0) scale(1);
     }
   }
+  /*--------------------------------------------------------------
+  1.2.2 - Right Animation
+  --------------------------------------------------------------*/
+  /*--------------------------------------------------------------
+  1.2.2.1 - Right: Menu Open
+  --------------------------------------------------------------*/
   @-webkit-keyframes slideInRight {
     0% {
       opacity: 0.3;
@@ -3770,6 +3759,9 @@ MINIMUM width of 481 pixels (phones and larger)
       transform: translate3d(0, 0, 0) scale(1);
     }
   }
+  /*--------------------------------------------------------------
+  1.2.2.2 - Right: Menu Close
+  --------------------------------------------------------------*/
   @-webkit-keyframes slideOutRight {
     0% {
       opacity: 1;
@@ -3800,6 +3792,9 @@ MINIMUM width of 481 pixels (phones and larger)
       transform: translate3d(-30px, 0, 0) scale(0.97);
     }
   }
+  /*--------------------------------------------------------------
+  2.2.3 - Right: Content Open
+  --------------------------------------------------------------*/
   @-webkit-keyframes openRight {
     0% {
       -webkit-transform: translate3d(0, 0, 0);
@@ -3833,6 +3828,9 @@ MINIMUM width of 481 pixels (phones and larger)
       transform: translate3d(-240px, 0, 0);
     }
   }
+  /*--------------------------------------------------------------
+  1.2.2.4 - Right: Content close
+  --------------------------------------------------------------*/
   @-webkit-keyframes closeRight {
     0% {
       -webkit-transform: translate3d(-240px, 0, 0);
@@ -3857,6 +3855,10 @@ MINIMUM width of 481 pixels (phones and larger)
       transform: translate3d(0, 0, 0);
     }
   }
+  /*--------------------------------------------------------------
+  >>>PLUGINS
+  --------------------------------------------------------------*/
+  /* Register Page */
   body.register .page-full-width {
     padding: 50px 25px;
   }
@@ -3888,6 +3890,11 @@ MINIMUM width of 481 pixels (phones and larger)
   #wp-calendar {
     max-width: 500px;
   }
+}
+@media (max-width: 1023px) {
+  /*--------------------------------------------------------------
+  Responsive media queries (mobile styles)
+  --------------------------------------------------------------*/
 }
 @media screen and (max-width: 1023px) and (min-width: 481px) and (max-width: 900px) {
   div.footer-inner.widget-area {
@@ -4109,11 +4116,11 @@ MINIMUM width of 481 pixels (phones and larger)
     overflow: hidden;
     position: relative;
   }
-  .single-post .entry-header.has-image {
-    padding-top: 55px;
-  }
   .single-post .entry-header.has-image h1 {
     font-size: 1.3125rem;
+  }
+  .single-post .entry-header.has-image {
+    padding-top: 55px;
   }
   .single-attachment .entry-header,
   .single-post .entry-header:not(.has-image) {
@@ -4294,10 +4301,10 @@ MINIMUM width of 481 pixels (phones and larger)
   body.template-front-page .site-content, body.single-attachment .site-content, body.full-width .site-content {
     width: 100%;
   }
-  .page-full-width {
+  .page-full-width .site-content {
     width: 100%;
   }
-  .page-full-width .site-content {
+  .page-full-width {
     width: 100%;
   }
   #secondary .widget {
@@ -4429,6 +4436,10 @@ MINIMUM width of 481 pixels (phones and larger)
     display: inline-block;
     position: relative;
   }
+  #header-search form > div {
+    height: 100%;
+    position: relative;
+  }
   #header-search form {
     height: 100%;
     position: absolute;
@@ -4436,10 +4447,6 @@ MINIMUM width of 481 pixels (phones and larger)
     display: none;
     z-index: 32; /* Should be greater than 31 */
     background-color: #fff;
-  }
-  #header-search form > div {
-    height: 100%;
-    position: relative;
   }
   /* GeoDirectory - Directory Plugin */
   .gd-google-maps #header-search form {
@@ -4540,10 +4547,6 @@ MINIMUM width of 481 pixels (phones and larger)
   .main-navigation .nav-inner div > ul.open {
     overflow: visible;
   }
-  .main-navigation li {
-    display: inline-block;
-    text-decoration: none;
-  }
   .main-navigation li a {
     display: inline-block;
     text-decoration: none;
@@ -4554,11 +4557,19 @@ MINIMUM width of 481 pixels (phones and larger)
     text-transform: uppercase;
     font-size: 0.75rem;
   }
+  .main-navigation li {
+    display: inline-block;
+    text-decoration: none;
+  }
   .main-navigation .nav-menu > li > a {
     display: block;
     line-height: 0.75rem;
     margin: 0 15px;
     padding: 32px 0 25px;
+  }
+  .main-navigation li.current_menu_item, .main-navigation li.current_page_item,
+  .main-navigation li a:hover {
+    color: #333;
   }
   .main-navigation li {
     margin: 0;
@@ -4566,10 +4577,6 @@ MINIMUM width of 481 pixels (phones and larger)
     font-size: 0.9375rem;
     line-height: 1;
     position: relative;
-  }
-  .main-navigation li.current_menu_item, .main-navigation li.current_page_item,
-  .main-navigation li a:hover {
-    color: #333;
   }
   .main-navigation li ul {
     display: none;
@@ -5006,9 +5013,6 @@ a:hover {
   font-weight: bold;
   text-wrap: balance;
   max-width: 400px;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  height: auto;
-  line-height: 1;
 }
 .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button:hover, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button:hover {
   color: #fff;
@@ -5016,6 +5020,11 @@ a:hover {
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+}
+.widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  height: auto;
+  line-height: 1;
 }
 .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form div.response, .widget-area .widget.widget_custom_html #mc_embed_signup form div.response {
   line-height: 1.5;
@@ -5604,7 +5613,6 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
   font-weight: bold;
   text-wrap: balance;
   max-width: 400px;
-  float: right;
 }
 body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type=submit]:hover, body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type=submit]:hover, body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type=submit]:hover {
   color: #54ae68;
@@ -5612,6 +5620,9 @@ body.page-template-homepage #main .section.join .section-content .list-item.form
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+}
+body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type=submit], body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type=submit], body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type=submit] {
+  float: right;
 }
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup {
   background: transparent;
@@ -5642,10 +5653,6 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   font-weight: bold;
   text-wrap: balance;
   max-width: 400px;
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  height: auto;
-  line-height: 1;
-  float: right;
 }
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup .button:hover, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup .button:hover {
   color: #54ae68;
@@ -5653,6 +5660,12 @@ body.page-template-homepage #main .section.join.embed .section-content .list-ite
   -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
   box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
+}
+body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup .button, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup .button {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  height: auto;
+  line-height: 1;
+  float: right;
 }
 body.page-template-homepage #main .section.join.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.join.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.newsletter.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.newsletter.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.embed.embed .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error, body.page-template-homepage #main .section.embed.newsletter .section-content .list-item.form #mc_embed_signup #mc-embedded-subscribe-form input.mce_inline_error {
   color: #e85c41;
@@ -5921,10 +5934,10 @@ body #content article {
   background-color: #fff;
 }
 
-.main-navigation li ul {
+.main-navigation li ul ul {
   background-color: #fff;
 }
-.main-navigation li ul ul {
+.main-navigation li ul {
   background-color: #fff;
 }
 
@@ -5937,3 +5950,5 @@ body #content article {
 .footer-inner-bottom {
   background-color: #333;
 }
+
+/*# sourceMappingURL=main.css.map */
