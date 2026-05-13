@@ -1,6 +1,6 @@
 # CCL UK WordPress Theme
 
-A responsive WordPress theme designed specifically for Citizens' Climate Lobby UK website at [citizensclimatelobby.uk](https://citizensclimatelobby.uk/).
+A responsive WordPress theme designed specifically for Citizens' Climate Lobby UK website.
 
 ## Theme Information
 
